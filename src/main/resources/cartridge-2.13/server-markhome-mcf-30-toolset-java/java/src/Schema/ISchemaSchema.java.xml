@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Mark's Code Fractal 2.13 CFKBase - Code Fractal Knowledge Base
+ * 
+ *	Copyright (C) 2016-2025 Mark Stephen Sobkow
+ *
+ *	This file is part of Mark's Code Fractal 2.13, providing the extensible
+ *	knowledge base for starting to customize Mark's Code Fractal with your own
+ *	rules and custom verbs.
+ *
+ *	This program is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+	xmlns="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
+	ToolSet="java"
+	Name="src/Schema/ISchemaSchema.java"
+	Revision="3.0"
+	Descr="Java JPA interface for a $SchemaName$ schema.">
+
+	<GenFile GenDef="SchemaDef" Name="fileSchemaISchemaJava"
+			GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
+		ExpansionClassName="I$SchemaName$SchemaJava"
+		ExpansionKeyName="I$SchemaName$SchemaJava"
+		ExpansionFileName="I$SchemaName$Schema.java"
+>// Description: Java JPA interface for a $SchemaName$ schema.
+
+$MssSourceLicense$
+
+package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower MfgSchemaName$;
+
+import java.io.Serializable;
+import java.math.*;
+import java.time.*;
+import java.util.*;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
+import server.markhome.msscf.v3_1.cflib.*;
+import server.markhome.msscf.v3_1.cflib.dbutil.*;
+import server.markhome.msscf.v3_1.cflib.xml.CFLibXmlUtil;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+
+public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSchemaName each commaNewlinePackageSchemaName empty empty )$
+{$iterate Types( empty empty each declISchemaEnumType )$<!--$iterate SchemaRefs( each empty empty declSchemaAuthorizationAccessors )$$iterate SchemaRefs( first declFileImport each empty empty declFileImport )$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )
+$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$-->}
+</GenFile>
+
+	<GenRule GenDef="EnumDef" Name="declISchemaEnumType"
+		>$switch HasDefSchema yes empty default reallyDeclISchemaEnumType$</GenRule>
+
+	<GenRule GenDef="EnumDef" Name="reallyDeclISchemaEnumType">
+	public enum $Name$ {$iterate Tag( first declISchemaEnumTypeFirstTag each declISchemaEnumTypeEachTag )$
+	};
+</GenRule>
+
+	<GenRule GenDef="EnumTag" Name="declISchemaEnumTypeFirstTag">
+		$Name$</GenRule>
+
+	<GenRule GenDef="EnumTag" Name="declISchemaEnumTypeEachTag">,
+		$Name$</GenRule>
+
+	<GenRule GenDef="Value" Name="declISchemaEnumType"></GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="extendsPackageSchemaName">
+extends I$PackageSchemaName$Schema</GenRule>
+	<GenRule GenDef="SchemaRef" Name="commaNewlinePackageSchemaName">,
+	I$PackageSchemaName$Schema</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="PackageSchemaName"
+		>$reference RefSchema PackageSchemaName$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="PackageSchemaName"
+		>$SchemaName$</GenRule>
+
+
+	<GenRule GenDef="SchemaRef" Name="importJavaPackageSchemaName">
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.jpa.*;
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.svc.*;</GenRule>
+	<GenRule GenDef="SchemaDef" Name="importJavaPackageSchemaName">
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.jpa.*;
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.svc.*;</GenRule>
+	<GenRule GenDef="Table" Name="importJavaPackageSchemaName">
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.jpa.*;
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.svc.*;</GenRule>
+	<GenRule GenDef="Object" Name="importJavaPackageSchemaName">
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.jpa.*;
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.svc.*;</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="declSchemaConfigurationFileAccessors"
+		>$reference RefSchema declSchemaConfigurationFileAccessors$</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="declSchemaConfigurationFileAccessors"
+		>$iterate SchemaRefs( first reallyDeclSchemaConfigurationFileAccessors each empty empty reallyDeclSchemaConfigurationFileAccessors )$</GenRule>
+
+	<GenRule GenDef="Object" Name="declSchemaConfigurationFileAccessors"
+		>$poptop SchemaDef iterate SchemaRefs( first reallyDeclSchemaConfigurationFileAccessors each empty empty reallyDeclSchemaConfigurationFileAccessors )$</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="reallyDeclSchemaConfigurationFileAccessors"
+		>$reference RefSchema reallyDeclSchemaConfiguratonFileAccessors$</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="reallyDeclSchemaConfigurationFileAccessors">
+	$SchemaName$ConfigurationFile getConfigurationFile();
+	void setConfigurationFile( $SchemaName$ConfigurationFile value );
+</GenRule>
+
+	<GenRule GenDef="Object" Name="reallyDeclSchemaConfigurationFileAccessors">
+	$popto SchemaDef SchemaName$ConfigurationFile getConfigurationFile();
+	void setConfigurationFile( $popto SchemaDef SchemaName$ConfigurationFile value );
+</GenRule>
+
+	<GenRule GenDef="Object" Name="declFileImport">
+	/**
+	 *	Import the contents of the specified file name
+	 *	and file contents by applying a SAX Loader parse.
+	 */
+	String fileImport( $SecSchemaName$Authorization auth, String fileName, String fileContent );
+</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="declFileImport">
+	/**
+	 *	Import the contents of the specified file name
+	 *	and file contents by applying a SAX Loader parse.
+	 */
+	String fileImport( $SecSchemaName$Authorization auth, String fileName, String fileContent );
+</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="declNewSchema"
+		>$reference RefSchema declNewSchema$</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="declNewSchema">
+	/**
+	 *	Allocate a new schema instance.
+	 *
+	 *	@return	A new I$SchemaName$Schema instance.
+	 */
+	I$DefSchemaName$Schema newSchema();
+</GenRule>
+
+	<GenRule GenDef="Object" Name="declNewSchema">
+	/**
+	 *	Allocate a new schema instance.
+	 *
+	 *	@return	A new I$SchemaName$Schema instance.
+	 */
+	I$DefSchemaName$Schema newSchema();
+</GenRule>
+
+	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="declNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	short next$Name$();
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="declNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	int next$Name$();
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="declNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	long next$Name$();
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="declNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	UUID next$Name$();
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Uuid6Gen" Name="declNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	CFLibUuid6 next$Name$();
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash128Gen" Name="declNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	CFLibDbKeyHash128 next$Name$();
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash160Gen" Name="declNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	CFLibDbKeyHash160 next$Name$();
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash224Gen" Name="declNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	CFLibDbKeyHash224 next$Name$();
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash256Gen" Name="declNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	CFLibDbKeyHash256 next$Name$();
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash384Gen" Name="declNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	CFLibDbKeyHash384 next$Name$();
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash512Gen" Name="declNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	CFLibDbKeyHash512 next$Name$();
+</GenRule>
+
+	<GenRule GenDef="Table" Name="declTableMethods"
+		>$declSchemaTableTableAccessors$$declSchemaTableFactoryAccessors$</GenRule>
+
+	<GenRule GenDef="Table" Name="declSchemaTableTableAccessors">
+	/**
+	 *	Get the $TableName$ Table interface for the schema.
+	 *
+	 *	@return	The $TableName$ Table interface for the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	I$DefSchemaName$$TableName$Table getTable$TableName$();
+</GenRule>
+
+	<GenRule GenDef="Table" Name="declSchemaTableFactoryAccessors">
+	/**
+	 *	Get the $TableName$ Factory interface for the schema.
+	 *
+	 *	@return	The $TableName$ Factory interface for the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	I$DefSchemaName$$TableName$Factory getFactory$TableName$();
+</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="declSchemaTablePermsAccessors"
+		>$reference RefSchema declSchemaTablePermsAccessors$</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="declSchemaTablePermsAccessors">
+	/**
+	 *	Get the Table Permissions interface for the schema.
+	 *
+	 *	@return	The Table Permissions interface for the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	I$DefSchemaName$TablePerms getTablePerms();
+
+	/**
+	 *	Set the Table Permissions interface for the schema.
+	 *
+	 *	@param	value	The Table Permissions interface to be used by the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	void setTablePerms( I$DefSchemaName$TablePerms value );
+</GenRule>
+
+	<GenRule GenDef="Object" Name="declSchemaAuthorizationAccessors">
+	/**
+	 *	Get the Authorization used by the schema.
+	 *
+	 *	@return	The Authorization used by the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	$SecSchemaName$Authorization getAuthorization();
+
+	/**
+	 *	Set the Authorization used by the schema.
+	 *
+	 *	@param	value	The Authorization to be used by the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	void setAuthorization( $SecSchemaName$Authorization value );
+</GenRule>
+
+</RuleSet>

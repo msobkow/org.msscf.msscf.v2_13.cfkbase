@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Mark's Code Fractal 2.13 CFKBase - Code Fractal Knowledge Base
+ * 
+ *	Copyright (C) 2016-2025 Mark Stephen Sobkow
+ *
+ *	This file is part of Mark's Code Fractal 2.13, providing the extensible
+ *	knowledge base for starting to customize Mark's Code Fractal with your own
+ *	rules and custom verbs.
+ *
+ *	This program is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+	xmlns="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
+	ToolSet="java"
+	Name="src/Schema/svc/SchemaIdGenService.java"
+	Revision="3.0"
+	Descr="Java Spring JPA Id Generator Service for $SchemaName$.">
+
+	<GenFile GenDef="SchemaDef" Name="fileSchemaIdGenServiceJava"
+			GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackage$.svc"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.svc"
+		ExpansionClassName="$SchemaName$IdGenServiceJava"
+		ExpansionKeyName="$SchemaName$IdGenServiceJava"
+		ExpansionFileName="$SchemaName$IdGenService.java"
+>// Description: Java Spring JPA Id Generator Service for $SchemaName$.
+
+$MssSourceLicense$
+
+package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower SchemaName$.svc;
+
+import java.io.Serializable;
+import java.math.*;
+import java.time.*;
+import java.util.*;
+import jakarta.persistence.*;
+import server.markhome.msscf.v3_1.cflib.*;
+import server.markhome.msscf.v3_1.cflib.dbutil.*;
+import server.markhome.msscf.v3_1.cflib.xml.CFLibXmlUtil;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower SchemaName$.*;
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower SchemaName$.jpa.*;
+
+/**
+ *	Service for the $SchemaName$Id generation methods defined in $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$ application model.
+ */
+@Service("$SchemaName$IdGenService")
+public class $SchemaName$IdGenService {
+
+	@Autowired
+	@Qualifier("$lower SchemaName$EntityManagerFactory")
+	private LocalContainerEntityManagerFactoryBean $lower SchemaName$EntityManagerFactory;
+$iterate Types( empty empty each maybeDeclSchemaIdGenServiceGenerator )$
+}
+</GenFile>
+
+<GenRule GenDef="Object" Name="maybeDeclSchemaIdGenServiceGenerator">$switch HasDefSchema yes empty default declSchemaIdGenServiceGenerator$</GenRule>
+
+<GenRule GenDef="BlobDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="BoolDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="EnumDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="Int16Col" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="Int32Col" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="Int64Col" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="UInt16Def" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="UInt32Def" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="UInt64Def" Name="declSchemaIdGenServiceGenerator"></GenRule>
+
+
+<GenRule GenDef="Id16Gen" Name="declSchemaIdGenServiceGenerator">
+	/**
+	*	Generate a $Name$ short id.
+	*
+	*		@return The next short value for the $Name$ type.
+	*/
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SchemaName$TransactionManager")
+	@SequenceGenerator(name = "$effDbName$", allocationSize = 1, initialValue = 0, schema = "$DbSchemaName$")
+	public short generate$Name$() {
+		throw new CFLibNotImplementedYetException( getClass(), "generate$Name$" );
+	}
+</GenRule>
+
+<GenRule GenDef="Id32Gen" Name="declSchemaIdGenServiceGenerator">
+	/**
+	*	Generate a $Name$ integer id.
+	*
+	*		@return The next integer value for the $Name$ type.
+	*/
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SchemaName$TransactionManager")
+	@SequenceGenerator(name = "$effDbName$", allocationSize = 1, initialValue = 0, schema = "$DbSchemaName$")
+	public int generate$Name$() {
+		throw new CFLibNotImplementedYetException( getClass(), "generate$Name$" );
+	}
+</GenRule>
+
+<GenRule GenDef="Id64Gen" Name="declSchemaIdGenServiceGenerator">
+	/**
+	*	Generate a $Name$ long id.
+	*
+	*		@return The next long value for the $Name$ type.
+	*/
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SchemaName$TransactionManager")
+	@SequenceGenerator(name = "$effDbName$", allocationSize = 1, initialValue = 0, schema = "$DbSchemaName$")
+	public long generate$Name$() {
+		throw new CFLibNotImplementedYetException( getClass(), "generate$Name$" );
+	}
+</GenRule>
+
+<GenRule GenDef="FloatDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="DoubleDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="NumberDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="StringDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="TokenDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="NmTokenDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="NmTokensDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="TextDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="DateDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="TimeDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="TimestampDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="TZDateDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="TZTimeDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="TZTimestampDef" Name="declSchemaIdGenServiceGenerator"></GenRule>
+
+<GenRule GenDef="DbKeyHash128Gen" Name="declSchemaIdGenServiceGenerator">
+	/**
+	 *	Generate a $Name$ CFLibDbKeyHash128 id.
+	 *
+	 *		@return A pseudo-randomly generated CFLibDBKeyHash128 value
+	 */
+	public CFLibDbKeyHash128 generate$Name$() {
+		return( new CFLibDbKeyHash128(0) );
+	}
+</GenRule>
+
+<GenRule GenDef="DbKeyHash160Gen" Name="declSchemaIdGenServiceGenerator">
+	/**
+	 *	Generate a $Name$ CFLibDbKeyHash160 id.
+	 *
+	 *		@return A pseudo-randomly generated CFLibDBKeyHash160 value
+	 */
+	public CFLibDbKeyHash160 generate$Name$() {
+		return( new CFLibDbKeyHash160(0) );
+	}
+</GenRule>
+
+<GenRule GenDef="DbKeyHash224Gen" Name="declSchemaIdGenServiceGenerator">
+	/**
+	 *	Generate a $Name$ CFLibDbKeyHash224 id.
+	 *
+	 *		@return A pseudo-randomly generated CFLibDBKeyHash224 value
+	 */
+	public CFLibDbKeyHash224 generate$Name$() {
+		return( new CFLibDbKeyHash224(0) );
+	}
+</GenRule>
+
+<GenRule GenDef="DbKeyHash256Gen" Name="declSchemaIdGenServiceGenerator">
+	/**
+	 *	Generate a $Name$ CFLibDbKeyHash256 id.
+	 *
+	 *		@return A pseudo-randomly generated CFLibDBKeyHash128 value
+	 */
+	public CFLibDbKeyHash256 generate$Name$() {
+		return( new CFLibDbKeyHash256(0) );
+	}
+</GenRule>
+
+<GenRule GenDef="DbKeyHash384Gen" Name="declSchemaIdGenServiceGenerator">
+	/**
+	 *	Generate a $Name$ CFLibDbKeyHash384 id.
+	 *
+	 *		@return A pseudo-randomly generated CFLibDBKeyHash128 value
+	 */
+	public CFLibDbKeyHash384 generate$Name$() {
+		return( new CFLibDbKeyHash384(0) );
+	}
+</GenRule>
+
+<GenRule GenDef="DbKeyHash512Gen" Name="declSchemaIdGenServiceGenerator">
+	/**
+	 *	Generate a $Name$ CFLibDbKeyHash512 id.
+	 *
+	 *		@return A pseudo-randomly generated CFLibDBKeyHash128 value
+	 */
+	public CFLibDbKeyHash512 generate$Name$() {
+		return( new CFLibDbKeyHash512(0) );
+	}
+</GenRule>
+
+<GenRule GenDef="DbKeyHash128Col" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="DbKeyHash160Col" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="DbKeyHash224Col" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="DbKeyHash256Col" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="DbKeyHash384Col" Name="declSchemaIdGenServiceGenerator"></GenRule>
+<GenRule GenDef="DbKeyHash512Col" Name="declSchemaIdGenServiceGenerator"></GenRule>
+
+<GenRule GenDef="Uuid6Gen" Name="declSchemaIdGenServiceGenerator">
+	/**
+	 *	Generate a $Name$ CFLibUuid6 id.
+	 *
+	 *		@return A pseudo-randomly generated CFLibUuid6 value
+	 */
+	public CFLibUuid6 generate$Name$() {
+		return( CFLibUuid6.generateUuid6() );
+	}
+</GenRule>
+
+<GenRule GenDef="Uuid6Col" Name="declSchemaIdGenServiceGenerator"></GenRule>
+
+<GenRule GenDef="UuidGen" Name="declSchemaIdGenServiceGenerator">
+	/**
+	 *	Generate a $Name$ UUID id.
+	 *
+	 *		@return A pseudo-randomly generated UUID value
+	 */
+	public UUID generate$Name$() {
+		return( UUID.randomUUID() );
+	}
+</GenRule>
+
+<GenRule GenDef="UuidCol" Name="declSchemaIdGenServiceGenerator"></GenRule>
+
+<GenRule GenDef="Object" Name="declSchemaIdGenServiceGenerator">$ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+
+</RuleSet>
