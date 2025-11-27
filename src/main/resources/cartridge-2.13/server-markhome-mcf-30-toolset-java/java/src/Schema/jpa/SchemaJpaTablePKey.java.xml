@@ -31,29 +31,29 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/jpa/SchemaTablePKey.java"
+	Name="src/Schema/jpa/SchemaJpaTablePKey.java"
 	Revision="3.0"
 	Descr="Java JPA implementation of a $TableName$ primary key object.">
 
-	<GenRule GenDef="Index" Name="CompactedIndexClass">$switch IsAtomic yes implJavaOptAtomType default JPAIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="JpaCompactedIndexClass">$switch IsAtomic yes implJavaOptAtomType default JPAIndexClassName$</GenRule>
 	<GenRule GenDef="Index" Name="JPAIndexClassName">$reference Table DefSchemaName$$reference Table TableName$By$Suffix$Key</GenRule>
 
-	<GenRule GenDef="Table" Name="CompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex CompactedPrimaryIndexClass$</GenRule>
-	<GenRule GenDef="Index" Name="CompactedPrimaryIndexClass">$switch IsAtomic yes implJavaOptAtomType default JPAPrimaryIndexClassName$</GenRule>
+	<GenRule GenDef="Table" Name="JpaCompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex JpaCompactedPrimaryIndexClass$</GenRule>
+	<GenRule GenDef="Index" Name="JpaCompactedPrimaryIndexClass">$switch IsAtomic yes implJavaOptAtomType default JPAPrimaryIndexClassName$</GenRule>
 
 	<GenRule GenDef="Table" Name="JPAPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex JPAPrimaryIndexClassName$</GenRule>
-	<GenRule GenDef="Index" Name="JPAPrimaryIndexClassName">$reference Table DefSchemaName$$reference Table TableName$PKey</GenRule>
+	<GenRule GenDef="Index" Name="JPAPrimaryIndexClassName">$reference Table DefSchemaName$Jpa$reference Table TableName$PKey</GenRule>
 
-	<GenRule GenDef="Table" Name="fileSchemaTablePKeyJPAJava">$switch IsPrimaryIndexKeyAtomic yes empty default reallyFileSchemaTablePKeyJPAJava$</GenRule>
-	<GenFile GenDef="Table" Name="reallyFileSchemaTablePKeyJPAJava"
+	<GenRule GenDef="Table" Name="fileSchemaJpaTablePKeyJava">$switch IsPrimaryIndexKeyAtomic yes empty default reallyFileSchemaJpaTablePKeyJava$</GenRule>
+	<GenFile GenDef="Table" Name="reallyFileSchemaJpaTablePKeyJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa"
-		ExpansionClassName="$SchemaName$$TableName$PKeyJPAJava"
-		ExpansionKeyName="$SchemaName$$TableName$PKeyJPAJava"
-		ExpansionFileName="$SchemaName$$TableName$PKey.java"
+		ExpansionClassName="$SchemaName$Jpa$TableName$PKeyJava"
+		ExpansionKeyName="$SchemaName$Jpa$TableName$PKeyJava"
+		ExpansionFileName="$SchemaName$Jpa$TableName$PKey.java"
 >// Description: Java JPA implementation of a $TableName$ primary key object.
 
 $MssSourceLicense$
@@ -74,36 +74,36 @@ import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate Schem
 import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
 /**
- *	$SchemaName$$TableName$PKey Primary Key for $TableName$$switch IsBaseTable yes implClassCodeAttrComment default empty$$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )
+ *	$SchemaName$Jpa$TableName$PKey Primary Key for $TableName$$switch IsBaseTable yes implClassCodeAttrComment default empty$$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )
 $
  */
 @Embeddable
-public class $SchemaName$$TableName$PKey$switch HasDefSchema yes SchemaTablePKeyExtendBaseDef default SchemaTablePKeyImplementsComparable$
-{$switch HasDefSchema yes SchemaTablePKeyExtendBaseDefBody default SchemaTablePKeyImplBaseDefBody$}
+public class $SchemaName$Jpa$TableName$PKey$switch HasDefSchema yes SchemaJpaTablePKeyExtendBaseDef default SchemaJpaTablePKeyImplementsComparable$
+{$switch HasDefSchema yes SchemaJpaTablePKeyExtendBaseDefBody default SchemaJpaTablePKeyImplBaseDefBody$}
 </GenFile>
 
 	<GenRule GenDef="Relation" Name="ToIndexIsUnique"
 		>$reference ToIndex IsUnique$</GenRule>
 
-	<GenRule GenDef="Table" Name="SchemaTablePKeyExtendBaseDefBody">
-	$poptop SchemaDef SchemaName$$TableName$PKey() {
+	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyExtendBaseDefBody">
+	$poptop SchemaDef SchemaName$Jpa$TableName$PKey() {
 		super();
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="SchemaTablePKeyImplBaseDefBody">
-$switch IsBaseTable yes implClassCodeColumnAttr default empty$$reference PrimaryKeyIndex iterate Columns(
+	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyImplBaseDefBody">$reference PrimaryKeyIndex iterate Columns(
 	each implColumnJPAAttr )$
-$reference PrimaryKeyIndex implPKeyConstructor$$switch IsBaseTable yes implClassCodeGetterSetter default empty$$reference PrimaryKeyIndex
+$reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex
 		iterate Columns(
 			each implColumnGetterSetter )
-$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
+$$implJpaPKeyEquals$$reference PrimaryKeyIndex implJpaPKeyGetHashCode$$implJpaPKeyCompareTo$$reference PrimaryKeyIndex implJpaPKeyToString$</GenRule>
 
-	<GenRule GenDef="Table" Name="SchemaTablePKeyExtendBaseDef">
-	extends $DefSchemaName$$TableName$PKey</GenRule>
+	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyExtendBaseDef">
+	extends $DefSchemaName$Jpa$TableName$PKey</GenRule>
 
-	<GenRule GenDef="Table" Name="SchemaTablePKeyImplementsComparable">
-	implements Comparable&lt;$poptop SchemaDef SchemaName$$TableName$PKey&gt;,
+	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyImplementsComparable">
+	implements I$poptop SchemaDef DefSchemaName$$TableName$PKey,
+		Comparable&lt;I$poptop SchemaDef DefSchemaName$$TableName$PKey&gt;,
 		Serializable</GenRule>
 
 	<GenRule GenDef="Object" Name="implClassCodeColumnAttr"
@@ -120,8 +120,8 @@ $$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompare
 	<GenRule GenDef="TableCol" Name="InitValue"
 		>$reference DataType InitValue$</GenRule>
 
-	<GenRule GenDef="Index" Name="implPKeyConstructor">
-	public $SchemaName$$TableName$PKey() {$iterate Columns( each implConstructorInitAttr )$
+	<GenRule GenDef="Index" Name="implJpaPKeyConstructor">
+	public $SchemaName$Jpa$TableName$PKey() {$iterate Columns( each implConstructorInitAttr )$
 	}
 </GenRule>
 
@@ -2475,7 +2475,7 @@ $$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompare
 				$DefSchemaName$$TableName$.$upper Name$_MAX_VALUE.toString() );
 		}</GenRule>
 
-	<GenRule GenDef="Table" Name="implPKeyEquals">
+	<GenRule GenDef="Table" Name="implJpaPKeyEquals">
 	@Override
 	public boolean equals( Object obj ) {
 		if (obj == null) {
@@ -2491,7 +2491,7 @@ $$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompare
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implSchemaTablePKeyImplementsComparableHistory">
+	<GenRule GenDef="Table" Name="implSchemaJpaTablePKeyImplementsComparableHistory">
 		else if (obj instanceof $SchemaName$$TableName$HPKey) {
 			$SchemaName$$TableName$HPKey rhs = ($SchemaName$$TableName$HPKey)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr)$
 			return( true );
@@ -3118,7 +3118,7 @@ $$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompare
 				}
 			}</GenRule>
 
-	<GenRule GenDef="Index" Name="implPKeyGetHashCode">
+	<GenRule GenDef="Index" Name="implJpaPKeyGetHashCode">
 	public int hashCode() {
 		int hashCode = 0;$iterate Columns( each implGetHashCodeAttr )$
 		return( hashCode &amp; 0x7fffffff );
@@ -3509,7 +3509,7 @@ $$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompare
 	<GenRule GenDef="Object" Name="implGetHashCodeReqUuidVar">
 		hashCode = hashCode + get$implColumnAttrOptionality$$Name$().hashCode();</GenRule>
 
-	<GenRule GenDef="Table" Name="implPKeyCompareTo">
+	<GenRule GenDef="Table" Name="implJpaPKeyCompareTo">
 	@Override
 	public int compareTo( $poptop SchemaDef SchemaName$$TableName$PKey rhs ) {
 		int retval;
@@ -3522,7 +3522,7 @@ $$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompare
 
 	<GenRule GenDef="Table" Name="emitPKeyHistoryClassNames">, $SchemaName$$TableName$HPKey, $SchemaName$$TableName$H</GenRule>
 
-	<GenRule GenDef="Table" Name="implPKeyCompareToHistory">
+	<GenRule GenDef="Table" Name="implJpaPKeyCompareToHistory">
 		else if (obj instanceof $SchemaName$$TableName$HPKey) {
 			$SchemaName$$TableName$HPKey rhs = ($SchemaName$$TableName$HPKey)obj;$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
 			return( 0 );
@@ -4021,7 +4021,7 @@ $$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompare
 				return( $LTAdjusted$ );
 			}</GenRule>
 
-	<GenRule GenDef="Index" Name="implPKeyToString">
+	<GenRule GenDef="Index" Name="implJpaPKeyToString">
 	public String getXmlAttrFragment() {
 		String ret = "" $iterate Columns( each implToStringEmitXmlAttr )$;
 		return( ret );
