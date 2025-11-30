@@ -33,62 +33,50 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/jpa/SchemaJpaTable.java"
+	Name="src/Schema/ISchemaTable.java"
 	Revision="3.0"
-	Descr="Java JPA implementation of a $TableName$ entity.">
+	Descr="Java interface for a $TableName$ entity or buffer">
 
-	<GenFile GenDef="Table" Name="fileSchemaJpaTableJava"
+	<GenFile GenDef="Table" Name="fileISchemaTableJava"
 			GenerateOnce="false"
-		ModuleName="$reference ManufacturingSchema lower JavaPackage$.jpa"
+		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
-		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa"
-		ExpansionClassName="$SchemaName$Jpa$TableName$Java"
-		ExpansionKeyName="$SchemaName$Jpa$TableName$Java"
-		ExpansionFileName="$SchemaName$Jpa$TableName$.java"
->// Description: Java JPA implementation of a $TableName$ entity definition object.
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
+		ExpansionClassName="I$SchemaName$$TableName$Java"
+		ExpansionKeyName="I$SchemaName$$TableName$Java"
+		ExpansionFileName="I$SchemaName$$TableName$.java"
+>// Description: Java interface for a $TableName$ entity or buffer
 
 $MssSourceLicense$
 
-package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.jpa;
+package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$;
 
 import java.io.Serializable;
 import java.math.*;
 import java.time.*;
 import java.util.*;
-import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 import server.markhome.msscf.v3_1.cflib.*;
 import server.markhome.msscf.v3_1.cflib.dbutil.*;
 import server.markhome.msscf.v3_1.cflib.xml.CFLibXmlUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
-import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
+//import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
-@Entity
-@Table(
-	name = "$DbTableName$", schema = "$reference ManufacturingSchema DbSchemaName$",
-	indexes = {$iterate Index( each commaJpaTableIndexAnnotation first jpaTableIndexAnnotation empty empty )$
-	}
-)$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$jpaPersistenceContext$
-public class $SchemaName$Jpa$TableName$$switch HasDefSchema yes extendSchemaJpaTableJPA default extendSchemaJpaTableJPASuperJPA$$switch HasDefSchema yes empty default maybeImplSchemaJpaTableComparable$
-{$switch HasDefSchema yes empty default declSchemaJpaTableJPAMinValues$$switch HasDefSchema yes empty default declSchemaJpaTableJPAMaxValues$$switch HasDefSchema yes empty default declSchemaJpaTableJPAInitValues$$switch HasDefSchema no implJpaStaticClassCode default empty$$switch HasDefSchema no maybeImplJPAOptDeclInitAuditColumns default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKey default empty$$switch HasDefSchemaOrSuper no implJpaRequiredRevisionAttr default empty$$switch HasDefSchema yes empty default declSchemaJpaTableJPAColumns$
-$switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSchemaJpaTableJPABaseConstruct$$switch HasDefSchema no implJpaGetClassCode default empty$$switch HasDefSchema no maybeImplJPAOptImplAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$implSchemaJpaTableToString$}
+public interface I$SchemaName$$TableName$$switch HasDefSchema yes extendSchemaXfcTableXfc default extendSchemaXfcTableXfcSuperXfc$$switch HasDefSchema yes empty default maybeDeclSchemaXfcTableComparable$
+{$switch HasDefSchema yes empty default declISchemaTableXfcMinValues$$switch HasDefSchema yes empty default declISchemaTableXfcMaxValues$$switch HasDefSchema yes empty default declISchemaTableXfcInitValues$$switch HasDefSchema no declXfcStaticClassCode default empty$
+$switch HasDefSchemaOrSuper yes declSchemaXfcTableXfcInhConstruct default declSchemaXfcTableXfcBaseConstruct$$switch HasDefSchema no declXfcGetClassCode default empty$$switch HasDefSchema no maybeDeclXfcOptImplAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$declSchemaJpaTableToString$}
 </GenFile>
 
-	<GenRule GenDef="Table" Name="declSchemaJpaTableJPAColumns">$switch HasSuperClassRelation no implJpaOptAuditColumnAttr default empty$$iterate Columns( each maybeDeclSchemaJpaTableJPADataColumn )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableXfcColumns">$switch HasSuperClassRelation no implJpaOptAuditColumnAttr default empty$$iterate Columns( each maybeDeclSchemaXfcTableXfcDataColumn )$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="maybeDeclSchemaJpaTableJPADataColumn">$switch ColumnInPrimaryIndex yes empty default implJpaColumnJPAAttr$</GenRule>
-	<GenRule GenDef="TableCol" Name="maybeDeclSchemaJpaTableJPADataColumn">$switch ColumnInPrimaryIndex yes empty default implJpaColumnJPAAttr$</GenRule>
-	<GenRule GenDef="Atom" Name="maybeDeclSchemaJpaTableJPADataColumn">$switch ColumnInPrimaryIndex yes empty default implJpaColumnJPAAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeDeclSchemaXfcTableXfcDataColumn">$switch ColumnInPrimaryIndex yes empty default implJpaColumnJPAAttr$</GenRule>
+	<GenRule GenDef="TableCol" Name="maybeDeclSchemaXfcTableXfcDataColumn">$switch ColumnInPrimaryIndex yes empty default implJpaColumnJPAAttr$</GenRule>
+	<GenRule GenDef="Atom" Name="maybeDeclSchemaXfcTableXfcDataColumn">$switch ColumnInPrimaryIndex yes empty default implJpaColumnJPAAttr$</GenRule>
 
-	<GenRule GenDef="Table" Name="maybeImplSchemaJpaTableComparable">$switch HasSuperClassRelation yes implJpaISchemaTableBuff default implSchemaJpaTableComparable$</GenRule>
-	<GenRule GenDef="Table" Name="implSchemaJpaTableComparable">
-	implements Comparable&lt;Object&gt;,
-		I$DefSchemaName$$TableName$Buff,
-		Serializable</GenRule>
-	<GenRule GenDef="Table" Name="implJpaISchemaTableBuff">
-	implements I$DefSchemaName$$TableName$Buff</GenRule>
+	<GenRule GenDef="Table" Name="maybeDeclSchemaXfcTableComparable">$switch HasSuperClassRelation yes empty default declISchemaXfcTableComparable$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaXfcTableComparable">
+	implements Comparable&lt;Object&gt;, Serializable</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaColumnAttrPKey">$implJpaCompactedPrimaryIndexClassJPAAttr$</GenRule>
 
@@ -177,25 +165,6 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaPKey
 	<GenRule GenDef="Table" Name="jpaPersistenceContext">
 @PersistenceContext(unitName = "$reference ManufacturingSchema SchemaName$PU")</GenRule>
 
-	<GenRule GenDef="Table" Name="jpaInheritanceJoined">
-@Inheritance(strategy = InheritanceType.JOINED)$baseTableJpaDiscriminatorColumn$</GenRule>
-
-	<GenRule GenDef="Table" Name="baseTableJpaDiscriminatorColumn"
-		>$switch HasSuperClassRelation no jpaDiscriminatorColumn default jpaDiscriminatorValue$</GenRule>
-	<GenRule GenDef="Table" Name="jpaDiscriminatorColumn">
-@DiscriminatorColumn(name = "class_code", discriminatorType = DiscriminatorType.INTEGER)$jpaDiscriminatorValue$</GenRule>
-
-	<GenRule GenDef="Table" Name="jpaDiscriminatorValue">
-@DiscriminatorValue("$hexToDecimal ClassCode$")</GenRule>
-
-	<GenRule GenDef="Index" Name="commaJpaTableIndexAnnotation">,$jpaTableIndexAnnotation$</GenRule>
-	<GenRule GenDef="Index" Name="jpaTableIndexAnnotation">$switch IsPrimaryIndex yes jpaTablePrimaryIndexAnnotation default jpaTableOrdinaryIndexAnnotation$</GenRule>
-	<GenRule GenDef="Index" Name="jpaTableOrdinaryIndexAnnotation">
-		@Index(name = "$IndexName$", columnList = "$jpaTableIndexColumnList$", unique = $switch IsUnique yes true default false$)</GenRule>
-	<GenRule GenDef="Index" Name="jpaTablePrimaryIndexAnnotation">
-		@Index(name = "$IndexName$", columnList = "$jpaTableIndexColumnList$", unique = true)</GenRule>
-	<GenRule GenDef="Index" Name="jpaTableIndexColumnList">$iterate Columns( each CommaDbColumnName first DbColumnName empty empty )$</GenRule>
-	
 	<GenRule GenDef="IndexCol" Name="CommaDbColumnName"
 		>, $DbColumnName$</GenRule>
 
@@ -210,40 +179,40 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaPKey
 	<GenRule GenDef="Object" Name="maybeImplEqualsCmpAttr"
 		>$switch ColumnInPrimaryIndex yes empty default implEqualsCmpAttr$</GenRule>
 
-	<GenRule GenDef="Table" Name="declSchemaJpaTableJPAMinValues"
-		>$switch HasSuperClassRelation yes declSchemaJpaTableJPADataMinValues default declSchemaJpaTableJPAAllMinValues$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableXfcMinValues"
+		>$switch HasSuperClassRelation yes declISchemaTableXfcDataMinValues default declISchemaTableXfcAllMinValues$</GenRule>
 	
-	<GenRule GenDef="Table" Name="declSchemaJpaTableJPADataMinValues">$iterate DataColumns( each maybeDeclMinValue empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="declSchemaJpaTableJPAAllMinValues">$iterate Columns( each maybeDeclMinValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableXfcDataMinValues">$iterate DataColumns( each maybeDeclMinValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableXfcAllMinValues">$iterate Columns( each maybeDeclMinValue empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declSchemaJpaTableJPAMaxValues"
-		>$switch HasSuperClassRelation yes declSchemaJpaTableJPADataMaxValues default declSchemaJpaTableJPAAllMaxValues$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableXfcMaxValues"
+		>$switch HasSuperClassRelation yes declISchemaTableXfcDataMaxValues default declISchemaTableXfcAllMaxValues$</GenRule>
 	
-	<GenRule GenDef="Table" Name="declSchemaJpaTableJPADataMaxValues">$iterate DataColumns( each maybeDeclMaxValue empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="declSchemaJpaTableJPAAllMaxValues">$iterate Columns( each maybeDeclMaxValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableXfcDataMaxValues">$iterate DataColumns( each maybeDeclMaxValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableXfcAllMaxValues">$iterate Columns( each maybeDeclMaxValue empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declSchemaJpaTableJPAInitValues"
-		>$switch HasSuperClassRelation yes declSchemaJpaTableJPADataInitValues default declSchemaJpaTableJPAAllInitValues$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableXfcInitValues"
+		>$switch HasSuperClassRelation yes declISchemaTableXfcDataInitValues default declISchemaTableXfcAllInitValues$</GenRule>
 	
-	<GenRule GenDef="Table" Name="declSchemaJpaTableJPADataInitValues">$iterate DataColumns( each maybeDeclInitValue empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="declSchemaJpaTableJPAAllInitValues">$iterate Columns( each maybeDeclInitValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableXfcDataInitValues">$iterate DataColumns( each maybeDeclInitValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableXfcAllInitValues">$iterate Columns( each maybeDeclInitValue empty empty )$</GenRule>
 
-	<GenRule GenDef="Object" Name="declSchemaJpaTableJPAColumns"
-		>$popto Table declSchemaJpaTableJPAColumns$</GenRule>
+	<GenRule GenDef="Object" Name="declISchemaTableXfcColumns"
+		>$popto Table declISchemaTableXfcColumns$</GenRule>
 
-	<GenRule GenDef="Table" Name="extendSchemaJpaTableJPA"> extends $reference DefSchema SchemaName$Jpa$TableName$</GenRule>
+	<GenRule GenDef="Table" Name="extendSchemaXfcTableXfc"> extends $reference DefSchema SchemaName$Jpa$TableName$</GenRule>
 
-	<GenRule GenDef="Index" Name="maybeImplSchemaJpaTableCommaComparableToIndexKey">$switch IsPrimaryIndex yes empty default implSchemaJpaTableCommaComparableToIndexKey$</GenRule>
+	<GenRule GenDef="Index" Name="maybeImplSchemaJpaTableCommaComparableToIndexKey">$switch IsPrimaryIndex yes empty default declSchemaJpaTableCommaComparableToIndexKey$</GenRule>
 
-	<GenRule GenDef="Index" Name="implSchemaJpaTableCommaComparableToIndexKey">,
+	<GenRule GenDef="Index" Name="declSchemaJpaTableCommaComparableToIndexKey">,
 		Comparable&lt;$SchemaName$Jpa$TableName$By$Suffix$Key&gt;</GenRule>
 
-	<GenRule GenDef="Object" Name="extendSchemaJpaTableJPASuperJPA">$popto Table extendSchemaJpaTableJPASuperJPA$</GenRule>
+	<GenRule GenDef="Object" Name="extendSchemaXfcTableXfcSuperXfc">$popto Table extendSchemaXfcTableXfcSuperXfc$</GenRule>
 
-	<GenRule GenDef="Table" Name="extendSchemaJpaTableJPASuperJPA">$switch HasSuperClassRelation yes implJpaInheritSuper default empty$</GenRule>
+	<GenRule GenDef="Table" Name="extendSchemaXfcTableXfcSuperXfc">$switch HasSuperClassRelation yes implXfcInheritSuper default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="maybeImplJPAOptImplAuditColumnAccessors">$switch HasSuperClassRelation no implJpaOptImplAuditColumnAccessors default empty$</GenRule>
-	<GenRule GenDef="Table" Name="implJpaOptImplAuditColumnAccessors">$switch HasAuditColumns yes implJpaColumnOptAuditGetterSetters default empty$</GenRule>
+	<GenRule GenDef="Table" Name="maybeDeclXfcOptImplAuditColumnAccessors">$switch HasSuperClassRelation no declXfcOptDeclAuditColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="declXfcOptDeclAuditColumnAccessors">$switch HasAuditColumns yes declXfcColumnOptAuditGetterSetters default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeImplJPAOptDeclInitAuditColumns">$switch HasSuperClassRelation yes empty default implJpaOptDeclInitAuditColumns$</GenRule>
 	<GenRule GenDef="Table" Name="implJpaOptDeclInitAuditColumns"
@@ -408,14 +377,12 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaPKey
 	<GenRule GenDef="Index" Name="implJpaComparableToIndex">,
 		Comparable&lt;$SchemaName$Jpa$TableName$By$Suffix$Key&gt;</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaStaticClassCode">
+	<GenRule GenDef="Table" Name="declXfcStaticClassCode">
 	public final static int CLASS_CODE = 0x$ClassCode$;
 	public final static String S_CLASS_CODE = "$ClassCode$";</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaGetClassCode">$switch HasSuperClassRelation yes emitOverride default empty$
-	public int getClassCode() {
-		return( CLASS_CODE );
-	}
+	<GenRule GenDef="Table" Name="declXfcGetClassCode">$switch HasSuperClassRelation yes emitOverride default empty$
+	public int getClassCode();
 </GenRule>
 
 	<GenRule GenDef="Object" Name="emitOverride">
@@ -444,70 +411,34 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaPKey
 	<GenRule GenDef="Table" Name="implJpaColumnGetterSetters"
 		>$iterate Columns( each implJpaColumnGetterSetter )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaColumnOptAuditGetterSetters"
-		>$switch HasAuditColumns yes implJpaColumnAuditGetterSetters default empty$</GenRule>
+	<GenRule GenDef="Table" Name="declXfcColumnOptAuditGetterSetters"
+		>$switch HasAuditColumns yes declXfcColumnAuditGetterSetters default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaColumnAuditGetterSetters">
-	public CFLibDbKeyHash256 getCreatedByUserId() {
-		return( createdByUserId );
-	}
-
-	public void setCreatedByUserId( CFLibDbKeyHash256 value ) {
-		if (value == null || value.isNull()) {
-			throw new CFLibNullArgumentException(getClass(), "setCreatedByUserId", 1, "value");
-		}
-		createdByUserId = value;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return( createdAt );
-	}
-
-	public void setCreatedAt( LocalDateTime value ) {
-		if (value == null) {
-			throw new CFLibNullArgumentException(getClass(), "setCreatedAt", 1, "value");
-		}
-		createdAt = value;
-	}
-
-	public CFLibDbKeyHash256 getUpdatedByUserId() {
-		return( updatedByUserId );
-	}
-
-	public void setUpdatedByUserId( CFLibDbKeyHash256 value ) {
-		if (value == null || value.isNull()) {
-			throw new CFLibNullArgumentException(getClass(), "setUpdatedByUserId", 1, "value");
-		}
-		updatedByUserId = value;
-	}
-
-	public LocalDateTime getUpdatedAt() {
-		return( updatedAt );
-	}
-
-	public void setUpdatedAt( LocalDateTime value ) {
-		if (value == null) {
-			throw new CFLibNullArgumentException(getClass(), "setUpdatedAt", 1, "value");
-		}
-		updatedAt = value;
-	}
+	<GenRule GenDef="Table" Name="declXfcColumnAuditGetterSetters">
+	public CFLibDbKeyHash256 getCreatedByUserId();
+	public void setCreatedByUserId( CFLibDbKeyHash256 value );
+	public LocalDateTime getCreatedAt();
+	public void setCreatedAt( LocalDateTime value );
+	public CFLibDbKeyHash256 getUpdatedByUserId();
+	public void setUpdatedByUserId( CFLibDbKeyHash256 value );
+	public LocalDateTime getUpdatedAt();
+	public void setUpdatedAt( LocalDateTime value );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaDataGetterSetters"
 		>$iterate DataColumns( each implJpaColumnGetterSetter empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaInheritSuper"> extends $SchemaName$$reference SuperClassRelation reference ToTable TableName$</GenRule>
+	<GenRule GenDef="Table" Name="implXfcInheritSuper"> extends I$SchemaName$$reference SuperClassRelation reference ToTable TableName$</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaRequiredRevisionAttr">
-	@Version
+	<GenRule GenDef="Table" Name="implXfcRequiredRevisionAttr">
 	protected int requiredRevision;</GenRule>
 
-	<GenRule GenDef="Table" Name="implSchemaJpaTableJPABaseConstruct">
+	<GenRule GenDef="Table" Name="declSchemaXfcTableXfcBaseConstruct">
 	public $poptop SchemaDef SchemaName$Jpa$TableName$() {$implJpaConstructorInitColumns$
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implSchemaJpaTableJPAInhConstruct">
+	<GenRule GenDef="Table" Name="declSchemaXfcTableXfcInhConstruct">
 	public $poptop SchemaDef SchemaName$Jpa$TableName$() {
 		super();$switch HasDefSchema yes empty default implJpaConstructorInitDataColumns$
 	}
@@ -571,8 +502,8 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaPKey
 	<GenRule GenDef="Table" Name="implJpaEqualsPKeyCols">
 			$SchemaName$Jpa$TableName$PKey rhs = ($SchemaName$Jpa$TableName$PKey)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr )$</GenRule>
 
-	<GenRule GenDef="Index" Name="maybeImplSchemaJpaTableEqualsIndexKey">$switch IsPrimaryIndex yes empty default implSchemaJpaTableEqualsIndexKey$</GenRule>
-	<GenRule GenDef="Index" Name="implSchemaJpaTableEqualsIndexKey">
+	<GenRule GenDef="Index" Name="maybeImplSchemaJpaTableEqualsIndexKey">$switch IsPrimaryIndex yes empty default declSchemaJpaTableEqualsIndexKey$</GenRule>
+	<GenRule GenDef="Index" Name="declSchemaJpaTableEqualsIndexKey">
 		else if (obj instanceof $SchemaName$Jpa$TableName$By$Suffix$Key) {
 			$SchemaName$Jpa$TableName$By$Suffix$Key rhs = ($SchemaName$Jpa$TableName$By$Suffix$Key)obj;$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
@@ -826,7 +757,7 @@ $switch BaseHasHistory yes implJpaSetHistory default empty$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implJpaSetCopyPKeyCol">
 		set$implColumnAttrOptionality$$reference Column Name$( src.get$implColumnAttrOptionality$$reference Column Name$() );</GenRule>
 
-	<GenRule GenDef="Table" Name="implSchemaJpaTableToString">
+	<GenRule GenDef="Table" Name="declSchemaJpaTableToString">
 	public String getXmlAttrFragment() {
 		String ret = $switch HasSuperClassRelation yes implJpaToStringEmitSuper default implJpaToStringEmitPKeyXmlAttrFragment$$switch IsBaseTable yes implJpaToStringEmitXmlClassCode default empty$$switch HasSuperClassRelation no implJpaToStringEmitXmlRevision default empty$$iterate Columns( each implJpaToStringEmitXmlAttr )$;
 		return( ret );
