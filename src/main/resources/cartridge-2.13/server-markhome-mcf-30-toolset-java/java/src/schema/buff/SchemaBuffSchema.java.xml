@@ -33,24 +33,24 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/SchemaSchema.java"
+	Name="src/schema/buff/SchemaBuffSchema.java"
 	Revision="2.13"
-	Descr="Java 11 implementation of a $SchemaName$ schema.">
+	Descr="Java 21 buffer implementation of a $SchemaName$ schema.">
 
-	<GenFile GenDef="SchemaDef" Name="fileSchemaSchemaJava"
+	<GenFile GenDef="SchemaDef" Name="fileSchemaBuffSchemaJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$/src/main"
-		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
-		ExpansionClassName="$SchemaName$SchemaJava"
-		ExpansionKeyName="$SchemaName$SchemaJava"
-		ExpansionFileName="$SchemaName$Schema.java"
->// Description: Java 11 implementation of a $SchemaName$ schema.
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.buff"
+		ExpansionClassName="$SchemaName$BuffSchemaJava"
+		ExpansionKeyName="$SchemaName$BuffSchemaJava"
+		ExpansionFileName="$SchemaName$BuffSchema.java"
+>// Description: Java 21 buffer implementation of a $SchemaName$ schema.
 
 $MssSourceLicense$
 
-package $reference ManufacturingSchema lower JavaPackage$.$SchemaName$;
+package $reference ManufacturingSchema lower JavaPackage$.$SchemaName$.buff;
 
 import java.lang.reflect.*;
 import java.net.*;
@@ -58,33 +58,30 @@ import java.rmi.*;
 import java.sql.*;
 import java.text.*;
 import java.util.*;
-import org.msscf.msscf.cflib.CFLib.*;
-import org.msscf.msscf.cflib.CFLib.Tip.CFTipClientHandler;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import server.markhome.mcf.v3_1.cflib.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import server.markhome.mcf.v3_1.cflib.tip.CFTipClientHandler;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 
-public class $SchemaName$Schema
+public class $SchemaName$BuffSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
 {
-	protected $SecSchemaName$Authorization authorization;
+	protected I$SecSchemaName$Authorization authorization;
 	protected I$DefSchemaName$TablePerms tablePerms;
-	protected $DefSchemaName$ConfigurationFile configuration;
-	protected String jndiName;
-	protected String schemaDbName = "$DbSchemaName$";
-	protected String lowerDbSchemaName = schemaDbName.toLowerCase();
-$iterate Types( empty empty each implSchemaParseEnum )$
-$iterate SchemaTables( each declSchemaTableTableMember )$
-$iterate SchemaTables( each declSchemaTableFactoryMember )$
-$implSchemaMoreMethods$$implSchemaCommitControl$$implSchemaTablePermsAccessors$$implSchemaXmlEncodeString$$implSchemaReleasePreparedStatements$$implSchemaSchemaGetSetDbSchemaNameMethods$}
+$iterate Types( empty empty each implSchemaBuffParseEnum )$
+$iterate SchemaTables( each declSchemaBuffTableTableMember )$
+$iterate SchemaTables( each declSchemaBuffTableFactoryMember )$
+$implSchemaMoreMethods$$implSchemaTablePermsAccessors$$implSchemaXmlEncodeString$}
 </GenFile>
 
-	<GenRule GenDef="EnumDef" Name="implSchemaParseEnum"
+	<GenRule GenDef="EnumDef" Name="implSchemaBuffParseEnum"
 		>$switch HasDefSchema yes empty default reallyImplSchemaParseEnum$</GenRule>
 
 	<GenRule GenDef="EnumDef" Name="reallyImplSchemaParseEnum"
-		>$implSchemaParseEnumParse$$implSchemaParseEnumOrdinal$</GenRule>
+		>$implSchemaBuffParseEnumParse$$implSchemaBuffParseEnumOrdinal$</GenRule>
 
-	<GenRule GenDef="Value" Name="implSchemaParseEnum"></GenRule>
+	<GenRule GenDef="Value" Name="implSchemaBuffParseEnum"></GenRule>
 
-	<GenRule GenDef="EnumDef" Name="implSchemaParseEnumParse">
+	<GenRule GenDef="EnumDef" Name="implSchemaBuffParseEnumParse">
 	static HashMap&lt;String,$Name$&gt; lookup$Name$ = null;
 
 	public static $Name$ parse$Name$( String value ) {
@@ -95,7 +92,7 @@ $implSchemaMoreMethods$$implSchemaCommitControl$$implSchemaTablePermsAccessors$$
 	public static $Name$ parse$Name$( String fieldOrClassName, String value ) {
 		final String S_ProcName = "parse$Name$";
 		if( lookup$Name$ == null ) {
-			HashMap&lt;String,$Name$&gt; newMap = new HashMap&lt;String,$Name$&gt;();$iterate Tag( each implSchemaParseEnumAddTagToMap )$
+			HashMap&lt;String,$Name$&gt; newMap = new HashMap&lt;String,$Name$&gt;();$iterate Tag( each implSchemaBuffParseEnumAddTagToMap )$
 			lookup$Name$ = newMap;
 		}
 		$Name$ retval;
@@ -116,10 +113,10 @@ $implSchemaMoreMethods$$implSchemaCommitControl$$implSchemaTablePermsAccessors$$
 	}
 </GenRule>
 
-	<GenRule GenDef="EnumTag" Name="implSchemaParseEnumAddTagToMap">
+	<GenRule GenDef="EnumTag" Name="implSchemaBuffParseEnumAddTagToMap">
 			newMap.put( "$Name$", $popto EnumDef Name$.$Name$ );</GenRule>
 
-	<GenRule GenDef="EnumDef" Name="implSchemaParseEnumOrdinal">
+	<GenRule GenDef="EnumDef" Name="implSchemaBuffParseEnumOrdinal">
 	static HashMap&lt;Integer,$Name$&gt; lookupOrdinal$Name$ = null;
 
 	public static $Name$ ordinalTo$Name$( String fieldOrClassName, Short value ) {
@@ -158,7 +155,7 @@ $implSchemaMoreMethods$$implSchemaCommitControl$$implSchemaTablePermsAccessors$$
 	public static $Name$ ordinalTo$Name$( String fieldOrClassName, Integer value ) {
 		final String S_ProcName = "ordinalTo$Name$";
 		if( lookupOrdinal$Name$ == null ) {
-			HashMap&lt;Integer,$Name$&gt; newMap = new HashMap&lt;Integer,$Name$&gt;();$iterate Tag( each implSchemaParseEnumAddOrdinalTagToMap )$
+			HashMap&lt;Integer,$Name$&gt; newMap = new HashMap&lt;Integer,$Name$&gt;();$iterate Tag( each implSchemaBuffParseEnumAddOrdinalTagToMap )$
 			lookupOrdinal$Name$ = newMap;
 		}
 		$Name$ retval;
@@ -179,7 +176,7 @@ $implSchemaMoreMethods$$implSchemaCommitControl$$implSchemaTablePermsAccessors$$
 	}
 </GenRule>
 
-	<GenRule GenDef="EnumTag" Name="implSchemaParseEnumAddOrdinalTagToMap">
+	<GenRule GenDef="EnumTag" Name="implSchemaBuffParseEnumAddOrdinalTagToMap">
 			newMap.put( Integer.valueOf( $popto EnumDef Name$.$Name$.ordinal() ), $popto EnumDef Name$.$Name$ );</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="commaNewlineSchemaSchemaImplementsInterface">,
@@ -393,11 +390,11 @@ $implSchemaMoreMethods$$implSchemaCommitControl$$implSchemaTablePermsAccessors$$
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declSchemaTableTableMember"
+	<GenRule GenDef="Table" Name="declSchemaBuffTableTableMember"
 >	protected I$DefSchemaName$$TableName$Table table$TableName$;
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declSchemaTableFactoryMember"
+	<GenRule GenDef="Table" Name="declSchemaBuffTableFactoryMember"
 >	protected I$DefSchemaName$$TableName$Factory factory$TableName$;
 </GenRule>
 

@@ -33,7 +33,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/ISchemaTablePKey.java"
+	Name="src/schema/ISchemaTablePKey.java"
 	Revision="3.0"
 	Descr="Java interface for a $TableName$ primary key object.">
 
@@ -87,7 +87,7 @@ public interface I$SchemaName$$TableName$PKey$switch HasDefSchema yes ISchemaTab
 </GenRule>
 
 	<GenRule GenDef="Table" Name="ISchemaTablePKeyImplBaseDefBody">
-$reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declJpaPKeyEquals$$reference PrimaryKeyIndex declJpaPKeyGetHashCode$$declJpaPKeyCompareTo$$reference PrimaryKeyIndex declJpaPKeyToString$</GenRule>
+$reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declXfcPKeyEquals$$reference PrimaryKeyIndex declXfcPKeyGetHashCode$$declXfcPKeyCompareTo$$reference PrimaryKeyIndex declXfcPKeyToString$</GenRule>
 
 	<GenRule GenDef="Table" Name="ISchemaTablePKeyExtendBaseDef">
 	extends I$DefSchemaName$$TableName$PKey</GenRule>
@@ -1069,7 +1069,7 @@ $reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declJ
 	public void set$implColumnAttrOptionality$$Name$( String value );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declJpaPKeyEquals">
+	<GenRule GenDef="Table" Name="declXfcPKeyEquals">
 	@Override
 	public boolean equals( Object obj );
 </GenRule>
@@ -1081,8 +1081,8 @@ $reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declJ
 
 	<GenRule GenDef="Table" Name="emitPKeyHistoryClassNames">, $SchemaName$$TableName$HPKey, $SchemaName$$TableName$H</GenRule>
 
-	<GenRule GenDef="Index" Name="declJpaPKeyToString">
-	public String getXmlAttrFragment() {
+	<GenRule GenDef="Index" Name="declXfcPKeyToString">
+	public String getXmlAttrFragment();
 
 	@Override
 	public String toString();

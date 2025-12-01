@@ -33,11 +33,11 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/ISchemaTableFactory.java"
+	Name="src/schema/ISchemaTableFactory.java"
 	Revision="3.0"
-	Descr="Java JPA Factory interface for $TableName$.">
+	Descr="Java 21 Factory interface for $TableName$.">
 
-	<GenFile GenDef="Table" Name="fileSchemaTableFactoryJava"
+	<GenFile GenDef="Table" Name="fileISchemaTableFactoryJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
@@ -58,10 +58,11 @@ import java.rmi.*;
 import java.sql.*;
 import java.text.*;
 import java.util.*;
-import org.msscf.msscf.cflib.CFLib.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import server.markhome.mcf.v3_1.cflib.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 
 /*
- *	$SchemaName$$TableName$Factory interface for $TableName$
+ *	I$SchemaName$$TableName$Factory interface for $TableName$
  */
 public interface I$SchemaName$$TableName$Factory$switch HasDefSchema yes extendsJavaDefSchemaTableFactory default empty empty empty$
 {$switch HasDefSchema yes declJavaDefSchemaTableFactoryInheritBody default declJavaDefSchemaTableFactoryBaseBody$}
@@ -71,34 +72,43 @@ public interface I$SchemaName$$TableName$Factory$switch HasDefSchema yes extends
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declJavaDefSchemaTableFactoryBaseBody">
-$switch HasSuperClassRelation no declNewPKey default empty$$switch HasSuperClassRelation no declNewHPKey default empty$$iterate Index( each declNewNonPrimaryIndexKey )$$declNewBuff$$declNewHBuff$
+$switch HasSuperClassRelation no declXfcNewPKey default empty$$switch HasSuperClassRelation no declNewHPKey default empty$$iterate Index( each declNewNonPrimaryIndexKey )$$declNewXfc$$declNewHXfc$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="extendsJavaDefSchemaTableFactory">
 extends I$reference DefSchema SchemaName$$TableName$Factory</GenRule>
 
 	<GenRule GenDef="Index" Name="declNewNonPrimaryIndexKey"
-		>$switch IsPrimaryIndex yes empty default declNewIndexKey$</GenRule>
+		>$switch IsPrimaryIndex yes empty default declNewByIndexKey$</GenRule>
 
-	<GenRule GenDef="Index" Name="declNewIndexKey">
+	<GenRule GenDef="Index" Name="declNewByIndexKey">
 	/**
 	 *	Allocate a $Suffix$ key over $TableName$ instances.
 	 *
 	 *	@return	The new instance.
 	 */
-	$DefSchemaName$$TableName$By$Suffix$Key new$Suffix$Key();
+	public I$DefSchemaName$$TableName$By$Suffix$Key newBy$Suffix$Key();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declNewPKey"
-		>$switch HasDefSchema default empty no reallyDeclNewPKey empty empty$</GenRule>
+	<GenRule GenDef="Index" Name="XfcCompactedIndexClass">$switch IsAtomic yes implJavaOptAtomType default XfcIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="XfcIndexClassName">$reference Table DefSchemaName$$reference Table TableName$By$Suffix$Key</GenRule>
 
+	<GenRule GenDef="Table" Name="XfcCompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex XfcCompactedPrimaryIndexClass$</GenRule>
+	<GenRule GenDef="Index" Name="XfcCompactedPrimaryIndexClass">$switch IsAtomic yes implJavaOptAtomType default XfcPrimaryIndexClassName$</GenRule>
+
+	<GenRule GenDef="Table" Name="XfcPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex JPAPrimaryIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="XfcPrimaryIndexClassName">$reference Table DefSchemaName$Jpa$reference Table TableName$PKey</GenRule>
+
+	<GenRule GenDef="Table" Name="declXfcNewPKey"
+		>$switch HasDefSchema no ifNotAtomicDeclNewPKey default empty$</GenRule>
+	<GenRule GenDef="Table" Name="ifNotAtomicDeclNewPKey">$switch IsPrimaryIndexKeyAtomic yes empty default reallyDeclNewPKey$</GenRule>
 	<GenRule GenDef="Table" Name="reallyDeclNewPKey">
 	/**
 	 *	Allocate a primary key for $TableName$ instances.
 	 *
 	 *	@return	The new instance.
 	 */
-	$DefSchemaName$$TableName$PKey newPKey();
+	public I$DefSchemaName$$TableName$PKey newPKey();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declNewHPKey"
@@ -110,25 +120,25 @@ extends I$reference DefSchema SchemaName$$TableName$Factory</GenRule>
 	 *
 	 *	@return	The new instance.
 	 */
-	$DefSchemaName$$TableName$HPKey newHPKey();
+	I$DefSchemaName$$TableName$HPKey newHPKey();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declNewBuff">
+	<GenRule GenDef="Table" Name="declNewXfc">
 	/**
-	 *	Allocate a $TableName$ instance buffer.
+	 *	Allocate a $TableName$ interface implementation.
 	 *
 	 *	@return	The new instance.
 	 */
-	$DefSchemaName$$TableName$Buff newBuff();
+	public I$DefSchemaName$$TableName$ newXfc();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declNewHBuff">
+	<GenRule GenDef="Table" Name="declNewHXfc">
 	/**
-	 *	Allocate a $TableName$ history instance buffer.
+	 *	Allocate a $TableName$ history interface implementation.
 	 *
 	 *	@return	The new instance.
 	 */
-	$DefSchemaName$$TableName$HBuff newHBuff();
+	public I$DefSchemaName$$TableName$H newHXfc();
 </GenRule>
 
 </RuleSet>

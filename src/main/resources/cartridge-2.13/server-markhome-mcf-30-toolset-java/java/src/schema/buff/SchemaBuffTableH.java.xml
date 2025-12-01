@@ -33,24 +33,24 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/SchemaTableHBuff.java"
-	Revision="2.13"
-	Descr="Java 11 implementation of a $TableName$ history buffer object.">
+	Name="src/schema/buff/SchemaBuffTableH.java"
+	Revision="3.0"
+	Descr="Java 21 implementation of a $TableName$ history buffer object">
 
-	<GenFile GenDef="Table" Name="fileSchemaTableHBuffJava"
+	<GenFile GenDef="Table" Name="fileSchemaBuffTableHJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$/src/main"
-		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
-		ExpansionClassName="$SchemaName$$TableName$HBuffJava"
-		ExpansionKeyName="$SchemaName$$TableName$HBuffJava"
-		ExpansionFileName="$SchemaName$$TableName$HBuff.java"
->// Description: Java 11 implementation of a $TableName$ history buffer object.
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.buff"
+		ExpansionClassName="$SchemaName$Buff$TableName$HJava"
+		ExpansionKeyName="$SchemaName$Buff$TableName$HJava"
+		ExpansionFileName="$SchemaName$Buff$TableName$H.java"
+>// Description: Java 21 implementation of a $TableName$ history buffer object
 
 $MssSourceLicense$
 
-package $reference ManufacturingSchema lower JavaPackage$.$SchemaName$;
+package $reference ManufacturingSchema lower JavaPackage$.$SchemaName$.buff;
 
 import java.lang.reflect.*;
 import java.io.*;
@@ -60,20 +60,28 @@ import java.rmi.*;
 import java.sql.*;
 import java.text.*;
 import java.util.*;
-import org.msscf.msscf.cflib.CFLib.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import server.markhome.mcf.v3_1.cflib.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 
-public class $SchemaName$$TableName$HBuff
-$switch HasSuperClassRelation yes implHBuffInheritSuper default implHBuffInheritHKey$	implements Comparable&lt;Object&gt;,
-		Serializable
-{$iterate Columns( each maybeDeclInitValue empty empty )$$iterate Columns( each maybeDeclMinValue empty empty )$$iterate Columns( each maybeDeclMaxValue empty empty )$
-$switch HasSuperClassRelation yes implHBuffDataAttr default implHBuffColumnAttr$$implHBuffConstructor$$implHBuffGetClassCode$$switch HasSuperClassRelation no implHBuffColumnGetterSetters default implHBuffDataGetterSetters$$implHBuffEquals$$implHBuffGetHashCode$$implHBuffCompareTo$$implHBuffSet$}
+public class $SchemaName$Buff$TableName$H$switch HasSuperClassRelation yes implHBuffInheritSuper default implementsBuffISchemaTableH$
+{$switch HasSuperClassRelation no implHBuffPKeyAttr default empty$$switch HasSuperClassRelation yes implHBuffDataAttr default implHBuffColumnAttr$$implHBuffConstructor$$implHBuffGetClassCode$$switch HasSuperClassRelation no implHBuffSetClassCode default empty$$switch HasSuperClassRelation no implHBuffColumnGetterSetters default implHBuffDataGetterSetters$$implHBuffEquals$$implHBuffGetHashCode$$implHBuffCompareTo$$implHBuffSet$}
 </GenFile>
 
-	<GenRule GenDef="Table" Name="implHBuffInheritHKey">
-	extends $SchemaName$HPKey</GenRule>
+	<GenRule GenDef="Table" Name="implHBuffInheritSuper">
+	extends $reference SuperClassRelation reference ToTable DefSchemaName$Buff$reference SuperClassRelation reference ToTable TableName$H
+	implements I$DefSchemaName$$TableName$H</GenRule>
+
+	<GenRule GenDef="Table" Name="implementsBuffISchemaTableH">
+	implements I$DefSchemaName$$TableName$H</GenRule>
+
+	<GenRule GenDef="Table" Name="implHBuffPKeyAttr">$switch HasDefSchemaName yes empty default reallyImplHBuffPKeyAttr$</GenRule>
+	<GenRule GenDef="Table" Name="reallyImplHBuffPKeyAttr">
+	protected $DefSchemaName$Buff$TableName$HPKey pkey;</GenRule>
 
 	<GenRule GenDef="Table" Name="implHBuffColumnGetterSetters"
-		>$iterate Columns( each implColumnGetterSetter )$</GenRule>
+		>$reference BaseClass reference PrimaryIndexKey iterate Columns( each implColumnPKeyGetterSetter empty empty )$$iterate DataColumns( each implColumnGetterSetter )$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implColumnPKeyGetterSetter">
 
 	<GenRule GenDef="Table" Name="implHBuffDataGetterSetters"
 		>$iterate DataColumns( each implColumnGetterSetter empty empty )$</GenRule>
@@ -83,13 +91,15 @@ $switch HasSuperClassRelation yes implHBuffDataAttr default implHBuffColumnAttr$
 	<GenRule GenDef="Table" Name="implHBuffDataAttr"
 		>$iterate DataColumns( each implColumnAttr empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implHBuffInheritSuper"
->	extends $SchemaName$$reference SuperClassRelation reference ToTable TableName$HBuff
+	<GenRule GenDef="Table" Name="implHBuffGetClassCode">
+	public int getClassCode() {
+		return( classCode );
+	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implHBuffGetClassCode">
-	public String getClassCode() {
-		return( $SchemaName$$TableName$Buff.CLASS_CODE );
+	<GenRule GenDef="Table" Name="implHBuffSetClassCode">
+	public void setClassCode( int classCode ) {
+		this.classCode = classCode );
 	}
 </GenRule>
 
