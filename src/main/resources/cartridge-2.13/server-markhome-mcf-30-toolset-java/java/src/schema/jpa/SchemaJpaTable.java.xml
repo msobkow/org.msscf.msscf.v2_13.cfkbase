@@ -125,9 +125,9 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 		}
 		this.pkey = ($reference BaseClass reference PrimaryKeyIndex DefSchemaName$Jpa$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey)pkey;
 	}
-$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaPKeyAttrAccessors )$</GenRule>
+$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAttrAccessors )$</GenRule>
 
-	<GenRule GenDef="Atom" Name="implJpaPKeyAttrAccessors">
+	<GenRule GenDef="Atom" Name="implPKeyAttrAccessors">
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( pkey.get$implColumnAttrOptionality$$Name$() );
 	}
@@ -137,7 +137,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaPKey
 	}
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="implJpaPKeyAttrAccessors">
+	<GenRule GenDef="TableCol" Name="implPKeyAttrAccessors">
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( pkey.get$implColumnAttrOptionality$$Name$() );
 	}
@@ -147,7 +147,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaPKey
 	}
 </GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implJpaPKeyAttrAccessors">
+	<GenRule GenDef="IndexCol" Name="implPKeyAttrAccessors">
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( pkey.get$implColumnAttrOptionality$$Name$() );
 	}
@@ -661,7 +661,7 @@ $switch BaseHasHistory yes implJpaSetHistory default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaJpaTableToString">
 	public String getXmlAttrFragment() {
-		String ret = $switch HasSuperClassRelation yes implJpaToStringEmitSuper default implJpaToStringEmitPKeyXmlAttrFragment$$switch IsBaseTable yes implJpaToStringEmitXmlClassCode default empty$$switch HasSuperClassRelation no implJpaToStringEmitXmlRevision default empty$$iterate Columns( each implToStringEmitXmlAttr )$;
+		String ret = $switch HasSuperClassRelation yes implToStringEmitSuper default implToStringEmitPKeyXmlAttrFragment$$switch IsBaseTable yes implToStringEmitXmlClassCode default empty$$switch HasSuperClassRelation no implToStringEmitXmlRevision default empty$$iterate Columns( each implToStringEmitXmlAttr )$;
 		return( ret );
 	}
 
@@ -671,13 +671,13 @@ $switch BaseHasHistory yes implJpaSetHistory default empty$</GenRule>
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaToStringEmitXmlRevision">
+	<GenRule GenDef="Table" Name="implToStringEmitXmlRevision">
 			+ " RequiredRevision=\\"" + Integer.toString( getRequiredRevision() ) + "\\""</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaToStringEmitSuper">super.getXmlAttrFragment() </GenRule>
+	<GenRule GenDef="Table" Name="implToStringEmitSuper">super.getXmlAttrFragment() </GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaToStringEmitPKeyXmlAttrFragment">$switch IsPrimaryIndexKeyAtomic yes implJpaToStringEmitPKeyAttrXmlAttrFragment default implJpaToStringEmitPKeyObjXmlAttrFragment$</GenRule>
-	<GenRule GenDef="Table" Name="implJpaToStringEmitPKeyObjXmlAttrFragment">pkey.getXmlAttrFragment() </GenRule>
-	<GenRule GenDef="Table" Name="implJpaToStringEmitPKeyAttrXmlAttrFragment">""$reference BaseClass reference PrimaryKeyIndex iterate Columns( first implToStringEmitXmlAttr each empty empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implToStringEmitPKeyXmlAttrFragment">$switch IsPrimaryIndexKeyAtomic yes implToStringEmitPKeyAttrXmlAttrFragment default implToStringEmitPKeyObjXmlAttrFragment$</GenRule>
+	<GenRule GenDef="Table" Name="implToStringEmitPKeyObjXmlAttrFragment">pkey.getXmlAttrFragment() </GenRule>
+	<GenRule GenDef="Table" Name="implToStringEmitPKeyAttrXmlAttrFragment">""$reference BaseClass reference PrimaryKeyIndex iterate Columns( first implToStringEmitXmlAttr each empty empty empty )$</GenRule>
 
 </RuleSet>

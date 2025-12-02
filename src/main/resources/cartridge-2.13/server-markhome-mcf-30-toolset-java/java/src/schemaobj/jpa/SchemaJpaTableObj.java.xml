@@ -33,34 +33,38 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/SchemaObj/SchemaTableObj.java"
+	Name="src/schemaobj/jpa/SchemaJpaTableObj.java"
 	Revision="3.0"
-	Descr="Java Table Object implementation">
+	Descr="Java JPA-focused Table Object implementation">
 
-	<GenFile GenDef="Table" Name="fileSchemaTableObjJava"
+	<GenFile GenDef="Table" Name="fileJpaSchemaTableObjJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
-		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$obj"
-		ExpansionClassName="$SchemaName$$TableName$TableObjJava"
-		ExpansionKeyName="$SchemaName$$TableName$TableObjJava"
-		ExpansionFileName="$SchemaName$$TableName$TableObj.java"
->// Description: Java Table Object implementation for $SchemaName$.
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$obj.jpa"
+		ExpansionClassName="$SchemaName$Jpa$TableName$TableObjJava"
+		ExpansionKeyName="$SchemaName$Jpa$TableName$TableObjJava"
+		ExpansionFileName="$SchemaName$Jpa$TableName$TableObj.java"
+>// Description: Java JPA-focused Table Object implementation for $SchemaName$.
 
 $MssSourceLicense$
 
-package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$obj;
+package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$obj.jpa;
 
 import java.math.*;
 import java.sql.*;
 import java.text.*;
 import java.util.*;
-import org.msscf.msscf.cflib.CFLib.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaTableObjImport$
+import server.markhome.mcf.v3_1.cflib.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$obj.*;$importJavaPackageSchemaName$$JavaTableObjImport$
 $implSchemaTableObjClassBody$</GenFile>
 
 <GenRule GenDef="Table" Name="implSchemaTableObjClassBody">
-public class $SchemaName$$TableName$TableObj
+public class $SchemaName$Jpa$TableName$TableObj
 	implements I$SchemaName$$TableName$TableObj
 {
 	protected I$poptop SchemaDef SchemaName$SchemaObj schema;
@@ -69,13 +73,13 @@ public class $SchemaName$$TableName$TableObj
 	public static String TABLE_NAME = "$TableName$";
 	public static String TABLE_DBNAME = "$lower DbTableName$";$JavaTableObjMembers$
 
-	public $SchemaName$$TableName$TableObj() {
+	public $SchemaName$Jpa$TableName$TableObj() {
 		schema = null;
 		members = new HashMap&lt;$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey, I$DefSchemaName$$TableName$Obj&gt;();
 		all$TableName$ = null;$initTableObjIndexMapByIndexes$
 	}
 
-	public $SchemaName$$TableName$TableObj( I$reference BaseClass DefSchemaName$SchemaObj argSchema ) {
+	public $SchemaName$Jpa$TableName$TableObj( I$reference BaseClass DefSchemaName$SchemaObj argSchema ) {
 		schema = (I$poptop SchemaDef SchemaName$SchemaObj)argSchema;
 		members = new HashMap&lt;$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey, I$reference BaseClass DefSchemaName$$TableName$Obj&gt;();
 		all$TableName$ = null;$initTableObjIndexMapByIndexes$

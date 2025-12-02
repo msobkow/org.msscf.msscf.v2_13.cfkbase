@@ -41,7 +41,7 @@
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
-		BasePackageName="$reference ManufacturingSchema lower JavaPackage$/src/main"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.buff"
 		ExpansionClassName="$SchemaName$Buff$TableName$Java"
 		ExpansionKeyName="$SchemaName$Buff$TableName$Java"
@@ -61,12 +61,48 @@ import java.sql.*;
 import java.text.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
-import $reference ManufacturingSchema lower JavaPackage$.$SchemaName$.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
 public class $SchemaName$Buff$TableName$$switch HasDefSchema yes buffExtendDefSchemaBuffTable default buffExtendDefSchemaBuffTableSuperBuff$$switch HasDefSchemaOrSuper no empty default implementSchemaBuffTableComparable$
 {$switch HasDefSchema yes empty default declSchemaBuffTableColumns$$switch HasDefSchemaOrSuper yes implBuffDataAttr default implBuffColumnAttr$$switch HasDefSchemaOrSuper no implBuffRequiredRevisionAttr default empty$$switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSchemaBuffTableBaseConstruct$$implBuffGetClassCode$$switch HasDefSchemaOrSuper no implBuffColumnGetterSetters default implBuffDataGetterSetters$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$implBuffEquals$$implBuffGetHashCode$$implBuffCompareTo$$implBuffSet$}
 </GenFile>
+
+	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes implBuffColumnAttrPKeyColumnAccessors default implBuffColumnAttrPKeyInstanceAccessors$</GenRule>
+
+	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnAccessors">
+	public $reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ getPKey() {
+		return get$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$();
+	}
+
+	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$) {$switch IsAtomicPrimaryIndexKeyNullable yes implBuffColumnAttrPKeyColumnAccessorsSetAttrDirect default implBuffColumnAttrPKeyColumnAccessorsSetAttrOnlyIfNotNull$
+	}
+	$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnGetterSetter first empty each empty empty empty )$
+	</GenRule>
+
+	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnAccessorsSetAttrOnlyIfNotNull">
+		if ($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$ != null) {
+			set$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each emptyl empty empty )$($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);
+		}</GenRule>
+	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnAccessorsSetAttrDirect">
+		set$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each emptyl empty empty )$($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);</GenRule>
+
+	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyInstanceAccessors">
+	public I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey getPKey() {
+		return pkey;
+	}
+
+	public void setPKey(I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey pkey ) {
+		if (pkey == null) {
+			throw new CFLibNullArgumentException(getClass(), "setPKey", 1, "pkey");
+		}
+		else if (!(pkey instanceof $reference BaseClass reference PrimaryKeyIndex DefSchemaName$Buff$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey)) {
+			throw new CFLibUnsupportedClassException(getClass(), "setPKey", 1, "pkey", "$reference BaseClass Reference PrimaryKeyIndex DefSchemaName$Buff$refference BaseClass reference PrimaryKeyIndex reference TableName$PKey");
+		}
+		this.pkey = ($reference BaseClass reference PrimaryKeyIndex DefSchemaName$Buff$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey)pkey;
+	}
+$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAttrAccessors )$</GenRule>
 
 	<GenRule GenDef="Index" Name="maybeBuffImplEqualsCmpKey"
 		>$switch IsPrimaryIndex yes empty default implBuffEqualsCmpKey$</GenRule>

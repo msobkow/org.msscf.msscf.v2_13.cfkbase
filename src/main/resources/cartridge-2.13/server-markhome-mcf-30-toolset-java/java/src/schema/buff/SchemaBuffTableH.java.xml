@@ -41,7 +41,7 @@
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
-		BasePackageName="$reference ManufacturingSchema lower JavaPackage$/src/main"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.buff"
 		ExpansionClassName="$SchemaName$Buff$TableName$HJava"
 		ExpansionKeyName="$SchemaName$Buff$TableName$HJava"
@@ -61,8 +61,9 @@ import java.sql.*;
 import java.text.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
-import $reference ManufacturingSchema lower JavaPackage$.$SchemaName$.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
 public class $SchemaName$Buff$TableName$H$switch HasSuperClassRelation yes implHBuffInheritSuper default implementsBuffISchemaTableH$
 {$switch HasSuperClassRelation no implHBuffPKeyAttr default empty$$switch HasSuperClassRelation yes implHBuffDataAttr default implHBuffColumnAttr$$implHBuffConstructor$$implHBuffGetClassCode$$switch HasSuperClassRelation no implHBuffSetClassCode default empty$$switch HasSuperClassRelation no implHBuffColumnGetterSetters default implHBuffDataGetterSetters$$implHBuffEquals$$implHBuffGetHashCode$$implHBuffCompareTo$$implHBuffSet$}
@@ -75,12 +76,15 @@ public class $SchemaName$Buff$TableName$H$switch HasSuperClassRelation yes implH
 	<GenRule GenDef="Table" Name="implementsBuffISchemaTableH">
 	implements I$DefSchemaName$$TableName$H</GenRule>
 
-	<GenRule GenDef="Table" Name="implHBuffPKeyAttr">$switch HasDefSchemaName yes empty default reallyImplHBuffPKeyAttr$</GenRule>
+	<GenRule GenDef="Table" Name="implHBuffPKeyAttr">$switch HasDefSchema yes empty default reallyImplHBuffPKeyAttr$</GenRule>
 	<GenRule GenDef="Table" Name="reallyImplHBuffPKeyAttr">
 	protected $DefSchemaName$Buff$TableName$HPKey pkey;</GenRule>
 
 	<GenRule GenDef="Table" Name="implHBuffColumnGetterSetters"
-		>$reference BaseClass reference PrimaryIndexKey iterate Columns( each implColumnPKeyGetterSetter empty empty )$$iterate DataColumns( each implColumnGetterSetter )$</GenRule>
+		>$switch HasSuperClassRelation no implHBuffColumnOptAuditGetterSetters default empty$$iterate Columns( each implColumnGetterSetter )$</GenRule>
+
+	<GenRule GenDef="Table" Name="implHBuffColumnOptAuditGetterSetters"
+		>$switch HasAuditColumns yes implBuffColumnAuditGetterSetters default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implHBuffDataGetterSetters"
 		>$iterate DataColumns( each implColumnGetterSetter empty empty )$</GenRule>
@@ -191,12 +195,22 @@ public class $SchemaName$Buff$TableName$H$switch HasSuperClassRelation yes implH
 		else if( obj instanceof $SchemaName$$TableName$Buff ) {
 			$SchemaName$$TableName$Buff rhs = ($SchemaName$$TableName$Buff)obj;$implBuffCompareInvokeSuperRetVal$
 			return( 0 );
-		}$iterate Index( each maybeImplBuffCompareToIndex )$$implHBuffCompareToHistory$
+		}$iterate Index( each maybeBuffHImplCompareToIndex )$$implHBuffCompareToHistory$
 		else {
 			return( super.compareTo( obj ) );
 		}
 	}
 </GenRule>
+
+	<GenRule GenDef="Index" Name="maybeBuffHImplCompareToIndex"
+		>$switch IsPrimaryIndex yes empty default implBuffHCompareToIndex$</GenRule>
+
+	<GenRule GenDef="Index" Name="implBuffHCompareToIndex">
+		else if( obj instanceof I$DefSchemaName$$TableName$By$Suffix$Key ) {
+			I$DefSchemaName$$TableName$By$Suffix$Key rhs = (I$DefSchemaName$$TableName$By$Suffix$Key)obj;
+$iterate Columns( each implCompareToAttr )
+$			return( 0 );
+		}</GenRule>
 
 	<GenRule GenDef="Table" Name="implHBuffCompareHierarchy"
 		>$switch HasSuperClassRelation yes implHBuffCompareData default implHBuffCompareColumns$</GenRule>
