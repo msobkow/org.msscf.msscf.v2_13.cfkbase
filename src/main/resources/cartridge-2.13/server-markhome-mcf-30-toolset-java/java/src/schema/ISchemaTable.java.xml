@@ -65,8 +65,55 @@ import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate Schem
 
 public interface I$SchemaName$$TableName$$switch HasDefSchema yes extendSchemaXfcTableXfc default extendSchemaXfcTableXfcSuperXfc$$switch HasDefSchema yes empty default maybeDeclSchemaXfcTableComparable$
 {$switch HasDefSchema yes empty default declISchemaTableXfcMinValues$$switch HasDefSchema yes empty default declISchemaTableXfcMaxValues$$switch HasDefSchema yes empty default declISchemaTableXfcInitValues$$switch HasDefSchema no declXfcStaticClassCode default empty$
-$switch HasDefSchemaOrSuper yes declSchemaXfcTableXfcInhConstruct default declSchemaXfcTableXfcBaseConstruct$$switch HasDefSchema no maybeDeclXfcGetClassCode default empty$$switch HasDefSchema no maybeDeclXfcOptImplAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no declXfcColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no declRevisionGetterSetter default empty$$switch HasDefSchema no declDataGetterSetters default empty$$declEqualsObject$$declGetHashCode$$declCompareToObject$$declXfcSet$$declSchemaXfcTableToString$}
+$switch HasDefSchema no maybeDeclXfcGetClassCode default empty$$switch HasDefSchema no maybeDeclXfcOptImplAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no declColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no declRevisionGetterSetter default empty$$switch HasDefSchema no declDataGetterSetters default empty$$declEqualsObject$$declGetHashCode$$declCompareToObject$$declXfcSet$$declSchemaXfcTableToString$}
 </GenFile>
+
+	<GenRule GenDef="Table" Name="declColumnOptAuditGetterSetters"
+		>$switch HasAuditColumns yes declColumnAuditGetterSetters default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="declColumnAuditGetterSetters">
+	public CFLibDbKeyHash256 getCreatedByUserId();
+	public void setCreatedByUserId( CFLibDbKeyHash256 value );
+	public LocalDateTime getCreatedAt();
+	public void setCreatedAt( LocalDateTime value );
+	public CFLibDbKeyHash256 getUpdatedByUserId();
+	public void setUpdatedByUserId( CFLibDbKeyHash256 value );
+	public LocalDateTime getUpdatedAt();
+	public void setUpdatedAt( LocalDateTime value );
+</GenRule>
+
+	<GenRule GenDef="Table" Name="declColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes declColumnAttrPKeyColumnAccessors default declColumnAttrPKeyInstanceAccessors$</GenRule>
+
+	<GenRule GenDef="Table" Name="declColumnAttrPKeyColumnAccessors">
+	public $reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ getPKey();
+	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);
+	$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone declColumnGetterSetter first empty each empty empty empty )$
+	</GenRule>
+
+	<GenRule GenDef="Table" Name="declColumnAttrPKeyInstanceAccessors">
+	public I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey getPKey();
+	public void setPKey(I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey pkey );
+$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declPKeyAttrAccessors )$</GenRule>
+
+	<GenRule GenDef="Atom" Name="declPKeyAttrAccessors">
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
+	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ );
+</GenRule>
+
+	<GenRule GenDef="TableCol" Name="declPKeyAttrAccessors">
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
+	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ );
+</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declPKeyAttrAccessors">
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
+	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ );
+</GenRule>
+
+
+
+
+
 
 	<GenRule GenDef="Table" Name="declISchemaTableXfcColumns">$switch HasSuperClassRelation no maybeDeclXfcOptAuditColumnAttrAccessors default empty$$iterate Columns( each maybeDeclSchemaXfcTableXfcDataColumn )$</GenRule>
 
@@ -148,7 +195,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declXfcPKey
 	<GenRule GenDef="Table" Name="extendSchemaXfcTableXfcSuperXfc">$switch HasSuperClassRelation yes declXfcInheritSuper default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeDeclXfcOptImplAuditColumnAccessors">$switch HasSuperClassRelation no declXfcOptDeclAuditColumnAccessors default empty$</GenRule>
-	<GenRule GenDef="Table" Name="declXfcOptDeclAuditColumnAccessors">$switch HasAuditColumns yes declXfcColumnOptAuditGetterSetters default empty$</GenRule>
+	<GenRule GenDef="Table" Name="declXfcOptDeclAuditColumnAccessors">$switch HasAuditColumns yes declColumnOptAuditGetterSetters default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeImplXfcOptDeclInitAuditColumns">$switch HasSuperClassRelation yes empty default declXfcOptDeclInitAuditColumns$</GenRule>
 	<GenRule GenDef="Table" Name="declXfcOptDeclInitAuditColumns"
