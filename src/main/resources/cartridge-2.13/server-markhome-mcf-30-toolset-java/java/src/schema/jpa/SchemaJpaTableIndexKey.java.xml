@@ -33,22 +33,22 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/jpa/SchemaTableIndexKey.java"
+	Name="src/schema/jpa/SchemaJpaTableIndexKey.java"
 	Revision="3.0"
 	Descr="Java JPA implementation of a $TableName$ $Suffix$ index key object.">
 
-	<GenRule GenDef="Index" Name="fileSchemaTableIndexKeyJPAJava"
-		>$switch IsPrimaryIndex yes empty default implFileSchemaTableIndexKeyJPAJava$</GenRule>
+	<GenRule GenDef="Index" Name="fileSchemaJpaTableIndexKeyJava"
+		>$switch IsPrimaryIndex yes empty default implFileSchemaJpaTableIndexKeyJava$</GenRule>
 
-	<GenFile GenDef="Index" Name="implFileSchemaTableIndexKeyJPAJava"
+	<GenFile GenDef="Index" Name="implFileSchemaJpaTableIndexKeyJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa"
-		ExpansionClassName="$SchemaName$$TableName$By$Suffix$KeyJPAJava"
-		ExpansionKeyName="$SchemaName$$TableName$By$Suffix$KeyJPAJava"
-		ExpansionFileName="$SchemaName$$TableName$By$Suffix$Key.java"
+		ExpansionClassName="$SchemaName$Jpa$TableName$By$Suffix$KeyJava"
+		ExpansionKeyName="$SchemaName$Jpa$TableName$By$Suffix$KeyJava"
+		ExpansionFileName="$SchemaName$Jpa$TableName$By$Suffix$Key.java"
 >// Description: Java JPA implementation of a $TableName$ by $Suffix$ index key object.
 
 $MssSourceLicense$
@@ -68,35 +68,34 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
-public class $SchemaName$$TableName$By$Suffix$Key$switch HasDefSchema yes extendSchemaTableBySuffixKey default implementSchemaTableBySuffixKeyComparable$
-{$switch HasDefSchema yes empty default implSchemaTableBySuffixKeyColumnAttr$$switch HasDefSchema yes implIndexKeyInhConstructor default implIndexKeyBaseConstructor$$switch HasDefSchema yes empty default implIndexKeyBaseColumns$$switch HasDefSchema yes empty default implIndexKeyEquals$$switch HasDefSchema yes empty default implIndexKeyGetHashCode$$switch HasDefSchema yes empty default implIndexKeyCompareTo$$switch HasDefSchema yes empty default implIndexKeyToString$}
+public class $SchemaName$Jpa$TableName$By$Suffix$Key$switch HasDefSchema yes jpaIndexKeyExtendsSchemaTableBySuffixKey default jpaIndexKeyImplementsISchemaTableBySuffixKeyComparable$
+{$switch HasDefSchema yes empty default implSchemaTableBySuffixKeyColumnAttr$$switch HasDefSchema yes implJpaIndexKeyInhConstructor default implJpaIndexKeyBaseConstructor$$switch HasDefSchema yes empty default implJpaIndexKeyBaseColumns$$switch HasDefSchema yes empty default implJpaIndexKeyEquals$$switch HasDefSchema yes empty default implJpaIndexKeyGetHashCode$$switch HasDefSchema yes empty default implJpaIndexKeyCompareTo$$switch HasDefSchema yes empty default implJpaIndexKeyToString$}
 </GenFile>
 
-	<GenRule GenDef="Index" Name="implIndexKeyBaseColumns"
+	<GenRule GenDef="Index" Name="implJpaIndexKeyBaseColumns"
 		>$iterate Columns( each implColumnGetterSetter )$</GenRule>
 
 	<GenRule GenDef="Index" Name="implSchemaTableBySuffixKeyColumnAttr"
 		>$iterate Columns( each implColumnAttr )$</GenRule>
 
-	<GenRule GenDef="Index" Name="extendSchemaTableBySuffixKey">
-	extends $reference DefSchema SchemaName$$TableName$By$Suffix$Key</GenRule>
+	<GenRule GenDef="Index" Name="jpaIndexKeyExtendsSchemaTableBySuffixKey">
+	extends $reference DefSchema SchemaName$Jpa$TableName$By$Suffix$Key</GenRule>
 
-	<GenRule GenDef="Index" Name="implementSchemaTableBySuffixKeyComparable">
-	implements Comparable&lt;Object&gt;,
-		Serializable</GenRule>
+	<GenRule GenDef="Index" Name="jpaIndexKeyImplementsISchemaTableBySuffixKeyComparable">
+	implements I$DefSchemaName$$TableName$By$Suffix$Key, Comparable&lt;Object&gt;, Serializable</GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyInhConstructor">
-	public $SchemaName$$TableName$By$Suffix$Key() {
+	<GenRule GenDef="Index" Name="implJpaIndexKeyInhConstructor">
+	public $SchemaName$Jpa$TableName$By$Suffix$Key() {
 		super();
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyBaseConstructor">
-	public $SchemaName$$TableName$By$Suffix$Key() {$iterate Columns( each implConstructorInitAttr )$
+	<GenRule GenDef="Index" Name="implJpaIndexKeyBaseConstructor">
+	public $SchemaName$Jpa$TableName$By$Suffix$Key() {$iterate Columns( each implConstructorInitAttr )$
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyEquals">
+	<GenRule GenDef="Index" Name="implJpaIndexKeyEquals">
 	@Override
 	public boolean equals( Object obj ) {
 		if (obj == null) {
@@ -109,16 +108,14 @@ public class $SchemaName$$TableName$By$Suffix$Key$switch HasDefSchema yes extend
 		else if (obj instanceof $SchemaName$$TableName$) {
 			$SchemaName$$TableName$ rhs = ($SchemaName$$TableName$)obj;$iterate Columns( each implEqualsCmpAttr empty empty )$
 			return( true );
-		}$switch BaseHasHistory yes implIndexKeyEqualsHistory default empty$
+		}$switch BaseHasHistory yes implJpaIndexKeyEqualsHistory default empty$
 		else {
 			return( false );
 		}
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="BaseHasHistory">$reference Table BaseHasHistory$</GenRule>
-
-	<GenRule GenDef="Index" Name="implIndexKeyEqualsHistory">
+	<GenRule GenDef="Index" Name="implJpaIndexKeyEqualsHistory">
 		else if (obj instanceof $SchemaName$$TableName$H) {
 			$SchemaName$$TableName$H rhs = ($SchemaName$$TableName$H)obj;$iterate Columns( each implEqualsCmpAttr empty empty )$
 			return( true );
@@ -126,7 +123,7 @@ public class $SchemaName$$TableName$By$Suffix$Key$switch HasDefSchema yes extend
 
 	<GenRule GenDef="Table" Name="emitIndexKeyEqualsHistoryClass">, $SchemaName$$TableName$H</GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyGetHashCode">
+	<GenRule GenDef="Index" Name="implJpaIndexKeyGetHashCode">
 	@Override
 	public int hashCode() {
 		int hashCode = 0;$iterate Columns( each implGetHashCodeAttr )$
@@ -134,7 +131,7 @@ public class $SchemaName$$TableName$By$Suffix$Key$switch HasDefSchema yes extend
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyCompareTo">
+	<GenRule GenDef="Index" Name="implJpaIndexKeyCompareTo">
 	@Override
 	public int compareTo( Object obj ) {
 		int retval;
@@ -148,7 +145,7 @@ public class $SchemaName$$TableName$By$Suffix$Key$switch HasDefSchema yes extend
 		else if (obj instanceof $SchemaName$$TableName$) {
 			$SchemaName$$TableName$ rhs = ($SchemaName$$TableName$)obj;$iterate Columns( each implCompareToAttr empty empty )$
 			return( 0 );
-		}$switch BaseHasHistory yes implIndexKeyCompareHistory default empty$
+		}$switch BaseHasHistory yes implJpaIndexKeyCompareHistory default empty$
 		else {
 			throw new CFLibUnsupportedClassException(getClass(),
 				"compareTo",
@@ -159,13 +156,13 @@ public class $SchemaName$$TableName$By$Suffix$Key$switch HasDefSchema yes extend
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyCompareHistory">
+	<GenRule GenDef="Index" Name="implJpaIndexKeyCompareHistory">
 		else if (obj instanceof $SchemaName$$TableName$H) {
 			$SchemaName$$TableName$H rhs = ($SchemaName$$TableName$H)obj;$iterate Columns( each implCompareToAttr empty empty )$
 			return( 0 );
 		}</GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyToString">
+	<GenRule GenDef="Index" Name="implJpaIndexKeyToString">
 	public String getXmlAttrFragment() {
 		String ret = "" $iterate Columns( each implToStringEmitXmlAttr )$;
 		return( ret );

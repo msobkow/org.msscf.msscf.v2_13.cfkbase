@@ -33,27 +33,27 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/SchemaTableIndexKey.java"
-	Revision="2.13"
-	Descr="Java 11 implementation of a $TableName$ $Suffix$ index key object.">
+	Name="src/schema/buff/SchemaBuffTableIndexKey.java"
+	Revision="3.0"
+	Descr="Java 21 implementation of a $TableName$ $Suffix$ index key buffer">
 
-	<GenRule GenDef="Index" Name="fileSchemaTableIndexKeyJava"
-		>$switch IsPrimaryIndex yes empty default implFileSchemaTableIndexKeyJava$</GenRule>
+	<GenRule GenDef="Index" Name="fileSchemaBuffTableIndexKeyJava"
+		>$switch IsPrimaryIndex yes empty default implFileSchemaBuffTableIndexKeyJava$</GenRule>
 
-	<GenFile GenDef="Index" Name="implFileSchemaTableIndexKeyJava"
+	<GenFile GenDef="Index" Name="implFileSchemaBuffTableIndexKeyJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$/src/main"
-		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
-		ExpansionClassName="$SchemaName$$TableName$By$Suffix$KeyJava"
-		ExpansionKeyName="$SchemaName$$TableName$By$Suffix$KeyJava"
-		ExpansionFileName="$SchemaName$$TableName$By$Suffix$Key.java"
->// Description: Java 11 implementation of a $TableName$ by $Suffix$ index key object.
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.buff"
+		ExpansionClassName="$SchemaName$Buff$TableName$By$Suffix$KeyJava"
+		ExpansionKeyName="$SchemaName$Buff$TableName$By$Suffix$KeyJava"
+		ExpansionFileName="$SchemaName$Buff$TableName$By$Suffix$Key.java"
+>// Description: Java 21 implementation of a $TableName$ by $Suffix$ index key buffer
 
 $MssSourceLicense$
 
-package $reference ManufacturingSchema lower JavaPackage$.$SchemaName$;
+package $reference ManufacturingSchema lower JavaPackage$.$SchemaName$.buff;
 
 import java.lang.reflect.*;
 import java.io.*;
@@ -65,36 +65,36 @@ import java.text.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import $reference ManufacturingSchema lower JavaPackage$.$SchemaName$.*;
 
-public class $SchemaName$$TableName$By$Suffix$Key$switch HasDefSchema yes extendSchemaTableBySuffixKey default implementSchemaTableBySuffixKeyComparable$
-{$switch HasDefSchema yes empty default implSchemaTableBySuffixKeyColumnAttr$$switch HasDefSchema yes implIndexKeyInhConstructor default implIndexKeyBaseConstructor$$switch HasDefSchema yes empty default implIndexKeyBaseColumns$$switch HasDefSchema yes empty default implIndexKeyEquals$$switch HasDefSchema yes empty default implIndexKeyGetHashCode$$switch HasDefSchema yes empty default implIndexKeyCompareTo$$switch HasDefSchema yes empty default implIndexKeyToString$}
+public class $SchemaName$Buff$TableName$By$Suffix$Key$switch HasDefSchema yes buffSuffixKeyExtendsDefSchemaTableBySuffixKey default buffSuffixKeyImplementsISchemaTableBySuffixKeyComparable$
+{$switch HasDefSchema yes empty default implBuffSchemaTableBySuffixKeyColumnAttr$$switch HasDefSchema yes implBuffIndexKeyInhConstructor default implBuffIndexKeyBaseConstructor$$switch HasDefSchema yes empty default implBuffIndexKeyBaseColumns$$switch HasDefSchema yes empty default implBuffIndexKeyEquals$$switch HasDefSchema yes empty default implBuffIndexKeyGetHashCode$$switch HasDefSchema yes empty default implBuffIndexKeyCompareTo$$switch HasDefSchema yes empty default implBuffIndexKeyToString$}
 </GenFile>
 
-	<GenRule GenDef="Index" Name="implIndexKeyBaseColumns"
+	<GenRule GenDef="Index" Name="implBuffIndexKeyBaseColumns"
 		>$iterate Columns( each implColumnGetterSetter )$</GenRule>
 
-	<GenRule GenDef="Index" Name="implSchemaTableBySuffixKeyColumnAttr"
+	<GenRule GenDef="Index" Name="implBuffSchemaTableBySuffixKeyColumnAttr"
 		>$iterate Columns( each implColumnAttr )$</GenRule>
 
-	<GenRule GenDef="Index" Name="extendSchemaTableBySuffixKey">
-	extends $reference DefSchema SchemaName$$TableName$By$Suffix$Key</GenRule>
+	<GenRule GenDef="Index" Name="buffSuffixKeyExtendsDefSchemaTableBySuffixKey">
+	extends $reference DefSchema SchemaName$Buff$TableName$By$Suffix$Key</GenRule>
 
-	<GenRule GenDef="Index" Name="implementSchemaTableBySuffixKeyComparable">
-	implements Comparable&lt;Object&gt;,
-		Serializable</GenRule>
+	<GenRule GenDef="Index" Name="buffSuffixKeyImplementsISchemaTableBySuffixKeyComparable">
+	implements I$DefSchemaName$$TableName$By$Suffix$Key, Comparable&lt;Object&gt;, Serializable</GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyInhConstructor">
-	public $SchemaName$$TableName$By$Suffix$Key() {
+	<GenRule GenDef="Index" Name="implBuffIndexKeyInhConstructor">
+	public $SchemaName$Buff$TableName$By$Suffix$Key() {
 		super();
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyBaseConstructor">
-	public $SchemaName$$TableName$By$Suffix$Key() {$iterate Columns( each implConstructorInitAttr )$
+	<GenRule GenDef="Index" Name="implBuffIndexKeyBaseConstructor">
+	public $SchemaName$Buff$TableName$By$Suffix$Key() {$iterate Columns( each implConstructorInitAttr )$
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyEquals">
+	<GenRule GenDef="Index" Name="implBuffIndexKeyEquals">
 	public boolean equals( Object obj ) {
 		if( obj == null ) {
 			return( false );
@@ -113,14 +113,14 @@ public class $SchemaName$$TableName$By$Suffix$Key$switch HasDefSchema yes extend
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyGetHashCode">
+	<GenRule GenDef="Index" Name="implBuffIndexKeyGetHashCode">
 	public int hashCode() {
 		int hashCode = 0;$iterate Columns( each implGetHashCodeAttr )$
 		return( hashCode &amp; 0x7fffffff );
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyCompareTo">
+	<GenRule GenDef="Index" Name="implBuffIndexKeyCompareTo">
 	public int compareTo( Object obj ) {
 		if( obj == null ) {
 			return( 1 );
@@ -143,7 +143,7 @@ public class $SchemaName$$TableName$By$Suffix$Key$switch HasDefSchema yes extend
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implIndexKeyToString">
+	<GenRule GenDef="Index" Name="implBuffIndexKeyToString">
 	public String toString() {
 		String ret = "&lt;$SchemaName$$TableName$By$Suffix$"$iterate Columns( each implToStringEmitXmlAttr )$
 			+ "/&gt;";

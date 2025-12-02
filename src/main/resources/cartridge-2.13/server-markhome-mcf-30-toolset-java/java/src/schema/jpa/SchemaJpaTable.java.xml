@@ -104,7 +104,6 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJpaColumnGetterSetter first empty each empty empty empty )$
 	</GenRule>
 
-	<GenRule GenDef="Table" Name="IsAtomicPrimaryIndexKeyNullable">$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone IsNullable first IsNullable each empty empty no )$</GenRule>
 	<GenRule GenDef="Table" Name="implJpaColumnAttrPKeyColumnAccessorsSetAttrOnlyIfNotNull">
 		if ($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$ != null) {
 			set$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each emptyl empty empty )$($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);
@@ -157,19 +156,6 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaPKey
 		pkey.set$implColumnAttrOptionality$$Name$( $lower implColumnAttrOptionality$$Name$ );
 	}
 </GenRule>
-
-	<GenRule GenDef="Table" Name="MemberOfClassHierarchy"
-		>$switch HasSuperClassRelation yes yes default maybeMemberOfClassHierarchyJoinedBaseTable$</GenRule>
-	<GenRule GenDef="Table" Name="maybeMemberOfClassHierarchyJoinedBaseTable"
-		>$switch HasSubClasses yes yes default no$</GenRule>
-
-	<GenRule GenDef="Table" Name="HasDefSchemaOrSuper"
-		>$switch HasDefSchema yes yes default HasSuperClassRelation$</GenRule>
-
-	<GenRule GenDef="Table" Name="HasDefSchemaButNoSuper"
-		>$switch HasDefSchema yes HasDefSchemaButNoSuperOnlyIfNoSuper default no$</GenRule>
-	<GenRule GenDef="Table" Name="HasDefSchemaButNoSuperOnlyIfNoSuper"
-		>$switch HasSuperClassRelation no yes default no$</GenRule>
 
 	<GenRule GenDef="Table" Name="jpaTransactionalSupports">
 @Transactional(Transactional.TxType.SUPPORTS)</GenRule>
@@ -255,153 +241,6 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaPKey
 	public final static String S_INIT_UPDATEDBY = "654dbba0-eda7-11e1-aff1-0800200c9a66";
 	public final static CFLibDbKeyHash256 INIT_UPDATEDBY = CFLibDbKeyHash256.fromHex( S_INIT_UPDATEDBY );</GenRule>
 
-	<GenRule GenDef="Value" Name="maybeDeclInitValue"
-		>$switch BaseModelAtomClass
-			BlobDef empty
-			BoolDef declInitValueIfSpecified
-			EnumDef declInitValue
-			Id16Gen declInitValue
-			Id32Gen declInitValue 
-			Id64Gen declInitValue
-			Int16Def declInitValue
-			Int32Def declInitValue
-			Int64Def declInitValue
-			UInt16Def declInitValue
-			UInt32Def declInitValue
-			UInt64Def declInitValue
-			FloatDef declInitValueIfSpecified
-			DoubleDef declInitValueIfSpecified
-			NumberDef declInitValue
-			DateDef declInitValueIfSpecified
-			TimeDef declInitValueIfSpecified
-			TimestampDef declInitValueIfSpecified
-			TZDateDef declInitValueIfSpecified
-			TZTimeDef declInitValueIfSpecified
-			TZTimestampDef declInitValueIfSpecified
-			DbKeyHash128Gen declInitValueIfSpecified
-			DbKeyHash160Gen declInitValueIfSpecified
-			DbKeyHash224Gen declInitValueIfSpecified
-			DbKeyHash256Gen declInitValueIfSpecified
-			DbKeyHash384Gen declInitValueIfSpecified
-			DbKeyHash512Gen declInitValueIfSpecified
-			DbKeyHash128Def declInitValueIfSpecified
-			DbKeyHash160Def declInitValueIfSpecified
-			DbKeyHash224Def declInitValueIfSpecified
-			DbKeyHash256Def declInitValueIfSpecified
-			DbKeyHash384Def declInitValueIfSpecified
-			DbKeyHash512Def declInitValueIfSpecified
-			Uuid6Gen declInitValueIfSpecified
-			Uuid6Def declInitValueIfSpecified
-			UuidGen declInitValueIfSpecified
-			UuidDef declInitValueIfSpecified
-			StringDef declInitValueIfSpecified
-			TokenDef declInitValueIfSpecified
-			NmTokenDef declInitValueIfSpecified
-			NmTokensDef declInitValueIfSpecified
-			TextDef declInitValueIfSpecified
-			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
-
-	<GenRule GenDef="Value" Name="declInitValueIfSpecified"
-		>$switch HasInitValue yes declInitValue default empty$</GenRule>
-
-	<GenRule GenDef="Value" Name="maybeDeclMinValue"
-		>$switch BaseModelAtomClass
-			BlobDef empty
-			BoolDef empty
-			EnumDef declMinValue
-			Id16Gen declMinValueIfSpecified
-			Id32Gen declMinValueIfSpecified
-			Id64Gen declMinValueIfSpecified
-			Int16Def declMinValueIfSpecified
-			Int32Def declMinValueIfSpecified
-			Int64Def declMinValueIfSpecified
-			UInt16Def declMinValueIfSpecified
-			UInt32Def declMinValueIfSpecified
-			UInt64Def declMinValueIfSpecified
-			FloatDef declMinValueIfSpecified
-			DoubleDef declMinValueIfSpecified
-			NumberDef declMinValueIfSpecified
-			DateDef empty
-			TimeDef empty
-			TimestampDef empty
-			TZDateDef empty
-			TZTimeDef empty
-			TZTimestampDef empty
-			DbKeyHash128Gen empty
-			DbKeyHash160Gen empty
-			DbKeyHash224Gen empty
-			DbKeyHash256Gen empty
-			DbKeyHash384Gen empty
-			DbKeyHash512Gen empty
-			DbKeyHash128Def empty
-			DbKeyHash160Def empty
-			DbKeyHash224Def empty
-			DbKeyHash256Def empty
-			DbKeyHash384Def empty
-			DbKeyHash512Def empty
-			Uuid6Gen empty
-			Uuid6Def empty
-			UuidGen empty
-			UuidDef empty
-			StringDef empty
-			TokenDef empty
-			NmTokenDef empty
-			NmTokensDef empty
-			TextDef empty
-			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
-
-	<GenRule GenDef="Value" Name="declMinValueIfSpecified"
-		>$switch HasMinValue yes declMinValue default empty$</GenRule>
-
-	<GenRule GenDef="Value" Name="maybeDeclMaxValue"
-		>$switch BaseModelAtomClass
-			BlobDef empty
-			BoolDef empty
-			EnumDef declMaxValue
-			Id16Gen declMaxValueIfSpecified
-			Id32Gen declMaxValueIfSpecified 
-			Id64Gen declMaxValueIfSpecified
-			Int16Def declMaxValueIfSpecified
-			Int32Def declMaxValueIfSpecified
-			Int64Def declMaxValueIfSpecified
-			UInt16Def declMaxValueIfSpecified
-			UInt32Def declMaxValueIfSpecified
-			UInt64Def declMaxValueIfSpecified
-			FloatDef declMaxValueIfSpecified
-			DoubleDef declMaxValueIfSpecified
-			NumberDef declMaxValueIfSpecified
-			DateDef empty
-			TimeDef empty
-			TimestampDef empty
-			TZDateDef empty
-			TZTimeDef empty
-			TZTimestampDef empty
-			DbKeyHash128Gen empty
-			DbKeyHash160Gen empty
-			DbKeyHash224Gen empty
-			DbKeyHash256Gen empty
-			DbKeyHash384Gen empty
-			DbKeyHash512Gen empty
-			DbKeyHash128Def empty
-			DbKeyHash160Def empty
-			DbKeyHash224Def empty
-			DbKeyHash256Def empty
-			DbKeyHash384Def empty
-			DbKeyHash512Def empty
-			Uuid6Gen empty
-			Uuid6Def empty
-			UuidGen empty
-			UuidDef empty
-			StringDef empty
-			TokenDef empty
-			NmTokenDef empty
-			NmTokensDef empty
-			TextDef empty
-			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
-
-	<GenRule GenDef="Value" Name="declMaxValueIfSpecified"
-		>$switch HasMaxValue yes declMaxValue default empty$</GenRule>
-
 	<GenRule GenDef="Index" Name="maybeImplJPAComparableToIndex"
 		>$switch IsPrimaryIndex yes empty default implJpaComparableToIndex$</GenRule>
 
@@ -418,9 +257,6 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaPKey
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="emitOverride">
-	@Override</GenRule>
-	
 	<GenRule GenDef="Table" Name="implJpaOptAuditColumnAttr"
 		>$switch HasAuditColumns yes implJpaAuditColumnAttr default empty$</GenRule>
 

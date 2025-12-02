@@ -74,7 +74,7 @@
 		>$reference Relation reference ToTable HasLookupIndex$</GenRule>
 
 	<GenRule ScopeDef="MinorVersion" GenDef="SchemaDef" Name="schemaFiles"
-		>$validatePageData$$fileSchemaJavaGitIgnore$$fileSchemaBinGitIgnore$$fileSchemaCoreGitIgnore$$fileSchemaJavaPomXml$<!--$fileSchemaIdGenServiceJava$$fileSchemaRamGitIgnore$$fileSchemaNetServerConfig$-->$fileSchemaISchemaJava$$fileSchemaSchemaJava$<!--$fileSchemaSchemaPoolJava$$fileSchemaAuthorizationJava$$fileSchemaITablePermsJava$$fileSchemaClientConfigurationFileJava$$fileSchemaConfigurationFileJava$$fileSchemaNetServerSchemaJava$$fileSchemaAuthNetServerJava$--><!--$fileISchemaSchemaObjJava$$fileSchemaSchemaObjJava$$fileSchemaSchemaPooledObjJava$--><!--$fileSchemaRamSchemaJava$-->$iterate SchemaTables(
+		>$validatePageData$$fileSchemaJavaGitIgnore$$fileSchemaBinGitIgnore$$fileSchemaCoreGitIgnore$$fileSchemaJavaPomXml$<!--$fileSchemaIdGenServiceJava$$fileSchemaRamGitIgnore$$fileSchemaNetServerConfig$-->$fileISchemaSchemaJava$$fileSchemaSchemaJava$<!--$fileSchemaSchemaPoolJava$$fileSchemaAuthorizationJava$-->$fileISchemaTablePermsJava$<!--$fileSchemaClientConfigurationFileJava$$fileSchemaConfigurationFileJava$$fileSchemaNetServerSchemaJava$$fileSchemaAuthNetServerJava$--><!--$fileISchemaSchemaObjJava$$fileSchemaSchemaObjJava$$fileSchemaSchemaPooledObjJava$--><!--$fileSchemaRamSchemaJava$-->$iterate SchemaTables(
 	each tableFiles empty empty )$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="validatePageData"
@@ -91,10 +91,11 @@
 		>$switch IsNullable no empty default FailAssertPageDataNotAllowedForPrimaryKeyWithOptionalColumns$</GenRule>
 
 	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="tableFiles"
-		>$switch HasDefSchema yes empty default tableFilesNoDefSchema$<!--$fileSchemaTableFactoryJava$$fileSchemaTableTableJPAJava$$fileSchemaTableDefaultFactoryJava$$fileSchemaNetServerTableTableJava$--><!--$fileSchemaTableObjJava$$fileISchemaTableObjJava$$fileIObjJava$$fileIEditObjJava$$fileObjJava$$fileEditObjJava$--><!--$fileSchemaRamTableTableJava$-->$iterate Index( each indexFiles )$<!--$iterate DispensedId16Generators( first fileSchemaRamTableId16GenJava each empty empty empty )$$iterate DispensedId32Generators( first fileSchemaRamTableId32GenJava each empty empty empty )$$iterate DispensedId64Generators( first fileSchemaRamTableId64GenJava each empty empty empty )$--></GenRule>
+		>$switch HasDefSchema yes empty default tableFilesNoDefSchema$<!--$fileSchemaTableTableJPAJava$$fileSchemaTableDefaultFactoryJava$$fileSchemaNetServerTableTableJava$--><!--$fileSchemaTableObjJava$$fileISchemaTableObjJava$$fileIObjJava$$fileIEditObjJava$$fileObjJava$$fileEditObjJava$--><!--$fileSchemaRamTableTableJava$-->$iterate Index( each indexFiles )$<!--$iterate DispensedId16Generators( first fileSchemaRamTableId16GenJava each empty empty empty )$$iterate DispensedId32Generators( first fileSchemaRamTableId32GenJava each empty empty empty )$$iterate DispensedId64Generators( first fileSchemaRamTableId64GenJava each empty empty empty )$--></GenRule>
+	<GenRule GenDef="Table" Name="tableHFiles">$fileISchemaTableHJava$$switch HasSuperClassRelation yes empty default fileISchemaTableHPKeyJava$</GenRule>
 
 	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="tableFilesNoDefSchema"
-		>$switch HasSuperClassRelation yes empty default fileSchemaTablePKeyJPAJava$$switch HasSuperClassRelation yes empty default maybeFileSchemaTableHPKeyJPAJava$$fileSchemaTableJPAJava$$switch BaseHasHistory yes fileSchemaTableHJPAJava default empty$$iterate Index( each indexFilesNoDefSchema empty empty )$$fileSchemaTableRepositoryJava$$fileSchemaTableServiceJava$</GenRule>
+		>$fileISchemaTableFactoryJava$$switch HasSuperClassRelation yes empty default fileISchemaTablePKeyJava$$fileISchemaTableJava$$iterate Index( each fileISchemaTableIndexKeyJava )$$fileISchemaTableTableJava$$switch BaseHasHistory yes tableHFiles default empty$$switch HasSuperClassRelation yes empty default fileSchemaTablePKeyJPAJava$$switch HasSuperClassRelation yes empty default maybeFileSchemaTableHPKeyJPAJava$$fileSchemaTableJPAJava$$switch BaseHasHistory yes fileSchemaTableHJPAJava default empty$$iterate Index( each indexFilesNoDefSchema empty empty )$$fileSchemaTableRepositoryJava$$fileSchemaTableServiceJava$</GenRule>
 
 	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="maybeFileSchemaTableHPKeyJPAJava">$switch BaseHasHistory yes fileSchemaTableHPKeyJPAJava default empty$</GenRule>
 

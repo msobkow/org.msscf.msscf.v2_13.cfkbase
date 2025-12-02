@@ -33,7 +33,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/SchemaSchema.java"
+	Name="src/schema/jpa/SchemaJpaSchema.java"
 	Revision="3.0"
 	Descr="Java JPA implementation of a $SchemaName$ schema.">
 
@@ -63,16 +63,17 @@ import server.markhome.msscf.v3_1.cflib.dbutil.*;
 import server.markhome.msscf.v3_1.cflib.xml.CFLibXmlUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower MfgSchemaName$.*;
 
 public class $SchemaName$JpaSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
 {
-//	protected $SecSchemaName$Authorization authorization;
-//	protected I$DefSchemaName$TablePerms tablePerms;
-$iterate Types( empty empty each implJpaSchemaParseEnum )$<!--
+	protected I$SecSchemaName$Authorization authorization;
+	protected I$DefSchemaName$TablePerms tablePerms;
+$iterate Types( empty empty each implJpaSchemaParseEnum )$
 $iterate SchemaTables( each declJpaSchemaTableTableMember )$
 $iterate SchemaTables( each declJpaSchemaTableFactoryMember )$
-$implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$$implJpaSchemaXmlEncodeString$-->}
+$implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXmlEncodeString$-->}
 </GenFile>
 
 	<GenRule GenDef="EnumDef" Name="implJpaSchemaParseEnum"
@@ -189,209 +190,79 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$$implJpaSchemaXmlEnc
 		I$reference RefSchema SchemaName$Schema</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaMoreMethods"
-		>$implJpaSchemaSchemaConstructor$$implJpaSchemaGetCFTipClientHandler$$iterate SchemaRefs( first implJpaSchemaConfigurationFileAccessors each empty empty implJpaSchemaConfigurationFileAccessors )$$implJpaSchemaAuthorizationAccessors$$iterate SchemaRefs( first implJpaSchemaJndiNameAccessors each empty empty implJpaSchemaJndiNameAccessors )$$iterate SchemaRefs( first implJpaSchemaConnectionMethods each empty empty implJpaSchemaConnectionMethods )$$iterate SchemaRefs( first implJpaSchemaNewSchema each empty empty implJpaSchemaNewSchema )$$iterate SchemaRefs( first implJpaSchemaFileImport each empty empty implJpaSchemaFileImport )$$iterate Id16Generators( each implNextIdGen empty empty)$$iterate Id32Generators( each implNextIdGen empty empty)$$iterate Id64Generators( each implNextIdGen empty empty)$$iterate UuidGenerators( each implNextIdGen empty empty )$$iterate SchemaTables(
-						each implJpaTableMethods empty empty )$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaGetCFTipClientHandler">
-	/**
-	 *	The majority of cases do not have a CFTipClientHandler
-	 *	associated with it's persistence implementation.
-	 *	Only the XMsg client implementations overload this
-	 *	to return the actual CFTipClientHandler associated
-	 *	with the connection instance.
-	 */
-	public CFTipClientHandler getCFTipClientHandler() {
-		return( null );
-	}
-
-	public String getServerURL() {
-		return( null );
-	}
-
-	public void setServerURL( String value ) {
-	}
-</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="implJpaSchemaReleasePreparedStatements"
-		>$reference RefSchema implJpaSchemaReleasePreparedStatements$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaReleasePreparedStatements">
-	/**
-	 *	Release any prepared statements bound to this database instance, such
-	 *	that the value of schemaDbName has to be re-evaluated for all future
-	 *	invocations.
-	 */
-	public void releasePreparedStatements() {
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implJpaSchemaReleasePreparedStatements">
-	/**
-	 *	Release any prepared statements bound to this database instance, such
-	 *	that the value of schemaDbName has to be re-evaluated for all future
-	 *	invocations.
-	 */
-	public void releasePreparedStatements() {
-	}
-</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="implJpaSchemaSchemaGetSetDbSchemaNameMethods"
-		>$reference RefSchema implJpaSchemaSchemaGetSetDbSchemaNameMethods$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaSchemaGetSetDbSchemaNameMethods">
-	/**
-	 *	When you first connect to a database, you can opt to specify a database
-	 *	schema name to be used by the session.  The implementation code must always
-	 *	be dynamically based on the invocation of &lt;tt&gt;String getDbSchemaName()&lt;/tt&gt;
-	 *	at runtime.
-	 *	&lt;p&gt;
-	 *	The initial value is defined by the implementing schema model which has inherited
-	 *	the expression of the current schema model being expanded.  That is, it is specified
-	 *	in the DbSchemaName attribute of a SchemaDef instance.
-	 */
-	public String getDbSchemaName() {
-		return( schemaDbName );
-	}
-
-	public String getLowerDbSchemaName() {
-		return( lowerDbSchemaName );
-	}
-
-	/**
-	 *	The database is expected to override this implementation and invoke the
-	 *	&lt;tt&gt;super.setDbSchemaName( String argDbSchemaName )&lt;/tt&gt; early
-	 *	on in the implementation of the cust body.  You should let the exceptions
-	 *	which can be thrown by this implementation pass unimpeded.
-	 *	&lt;pg&gt;
-	 *	When you set the database schema name, the database-specific implementation
-	 *	of this method does a "commit; use database"-type sequence to change
-	 *	to the target database.  This should be specified globally for all
-	 *	database connections in a given cluster, so that all of
-	 *	the application implementation clients are using the same database instance
-	 *	regardless of what's been provided by the cust client implementation,
-	 *	be it as a Java application or a web interface written using JEE.
-	 */
-	public void setDbSchemaName( String argDbSchemaName ) {
-		final String S_ProcName = "setDbSchemaName";
-		if( ( argDbSchemaName == null ) || ( argDbSchemaName.length() &lt;= 0 ) ) {
-			throw new CFLibNullArgumentException( getClass(),
-				S_ProcName,
-				1,
-				"argDbSchemaName" );
-		}
-		schemaDbName = argDbSchemaName;
-		lowerDbSchemaName = schemaDbName.toLowerCase();
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implJpaSchemaSchemaGetSetDbSchemaNameMethods">
-	/**
-	 *	When you first connect to a database, you can opt to specify a database
-	 *	schema name to be used by the session.  The implementation code must always
-	 *	be dynamically based on the invocation of &lt;tt&gt;String getDbSchemaName()&lt;/tt&gt;
-	 *	at runtime.
-	 *	&lt;p&gt;
-	 *	The initial value is defined by the implementing schema model which has inherited
-	 *	the expression of the current schema model being expanded.  That is, it is specified
-	 *	in the DbSchemaName attribute of a SchemaDef instance.
-	 */
-	public String getDbSchemaName() {
-		return( schemaDbName );
-	}
-
-	public String getLowerDbSchemaName() {
-		return( lowerDbSchemaName );
-	}
-
-	/**
-	 *	The database is expected to override this implementation and invoke the
-	 *	&lt;tt&gt;super.setDbSchemaName( String argDbSchemaName )&lt;/tt&gt; early
-	 *	on in the implementation of the cust body.  You should let the exceptions
-	 *	which can be thrown by this implementation pass unimpeded.
-	 *	&lt;pg&gt;
-	 *	When you set the database schema name, the database-specific implementation
-	 *	of this method does a "commit; use database"-type sequence to change
-	 *	to the target database.  This should be specified globally for all
-	 *	database connections in a given cluster, so that all of
-	 *	the application implementation clients are using the same database instance
-	 *	regardless of what's been provided by the cust client implementation,
-	 *	be it as a Java application or a web interface written using JEE.
-	 */
-	public void setDbSchemaName( String argDbSchemaName ) {
-		final String S_ProcName = "setDbSchemaName";
-		if( ( argDbSchemaName == null ) || ( argDbSchemaName.length() &lt;= 0 ) ) {
-			throw new CFLibNullArgumentException( getClass(),
-				S_ProcName,
-				1,
-				"argDbSchemaName" );
-		}
-		schemaDbName = argDbSchemaName;
-		lowerDbSchemaName = schemaDbName.toLowerCase();
-	}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="implJpaSchemaInvokeReleasePreparedStatements">
-		if( table$TableName$ != null ) {
-			table$TableName$.releasePreparedStatements();
-		}</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="implJpaSchemaCommitControl"
-		>$reference RefSchema implJpaSchemaCommitControl$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaCommitControl">
-	public boolean isTransactionOpen() {
-		throw new CFLibMustOverrideException( getClass(), "isTransactionOpen" );
-	}
-
-	public boolean beginTransaction() {
-		throw new CFLibMustOverrideException( getClass(), "beginTransaction" );
-	}
-
-	public void commit() {
-		throw new CFLibMustOverrideException( getClass(), "commit" );
-	}
-
-	public void rollback() {
-		throw new CFLibMustOverrideException( getClass(), "rollback" );
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implJpaSchemaCommitControl">
-	public boolean isTransactionOpen() {
-		throw new CFLibMustOverrideException( getClass(), "isTransactionOpen" );
-	}
-
-	public boolean beginTransaction() {
-		throw new CFLibMustOverrideException( getClass(), "beginTransaction" );
-	}
-
-	public void commit() {
-		throw new CFLibMustOverrideException( getClass(), "commit" );
-	}
-
-	public void rollback() {
-		throw new CFLibMustOverrideException( getClass(), "rollback" );
-	}
-</GenRule>
+		>$implJpaSchemaSchemaConstructor$$implJpaSchemaAuthorizationAccessors$$iterate SchemaRefs( first implJpaSchemaNewSchema each empty empty implJpaSchemaNewSchema )$$iterate SchemaRefs( first implJpaSchemaFileImport each empty empty implJpaSchemaFileImport )$$iterate Id16Generators( each implNextIdGen empty empty)$$iterate Id32Generators( each implNextIdGen empty empty)$$iterate Id64Generators( each implNextIdGen empty empty)$$iterate DbKeyHash128Generators( each implNextIdGen empty empty )$$iterate DbKeyHash160Generators( each implNextIdGen empty empty )$$iterate DbKeyHash224Generators( each implNextIdGen empty empty )$$iterate DbKeyHash256Generators( each implNextIdGen empty empty )$$iterate DbKeyHash384Generators( each implNextIdGen empty empty )$$iterate DbKeyHash512Generators( each implNextIdGen empty empty )$$iterate UuidGenerators( each implNextIdGen empty empty )$$iterate Uuid6Generators( each implNextIdGen empty empty )$$iterate SchemaTables( each implJpaTableMethods empty empty )$</GenRule>
 
 	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="implNextIdGen">
+	@Override
 	public short next$Name$() {
 		throw new CFLibNotImplementedYetException( getClass(), "next$Name$" );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="implNextIdGen">
+	@Override
 	public int next$Name$() {
 		throw new CFLibNotImplementedYetException( getClass(), "next$Name$" );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="implNextIdGen">
+	@Override
 	public long next$Name$() {
 		throw new CFLibNotImplementedYetException( getClass(), "next$Name$" );
 	}
 </GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash128Gen" Name="implNextIdGen">
+	@Override
+	public CFLibDbKeyHash128 next$Name$() {
+		CFLibDbKeyHash128 retval = new CFLibDbKeyHash128(0);
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash160Gen" Name="implNextIdGen">
+	@Override
+	public CFLibDbKeyHash160 next$Name$() {
+		CFLibDbKeyHash160 retval = new CFLibDbKeyHash160(0);
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash224Gen" Name="implNextIdGen">
+	@Override
+	public CFLibDbKeyHash224 next$Name$() {
+		CFLibDbKeyHash224 retval = new CFLibDbKeyHash224(0);
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash256Gen" Name="implNextIdGen">
+	@Override
+	public CFLibDbKeyHash256 next$Name$() {
+		CFLibDbKeyHash256 retval = new CFLibDbKeyHash256(0);
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash384Gen" Name="implNextIdGen">
+	@Override
+	public CFLibDbKeyHash384 next$Name$() {
+		CFLibDbKeyHash384 retval = new CFLibDbKeyHash384(0);
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash512Gen" Name="implNextIdGen">
+	@Override
+	public CFLibDbKeyHash512 next$Name$() {
+		CFLibDbKeyHash512 retval = new CFLibDbKeyHash512(0);
+		return( retval );
+	}
+</GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="implNextIdGen">
+	@Override
 	public UUID next$Name$() {
 		UUID retval = UUID.randomUUID();
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Uuid6Gen" Name="implNextIdGen">
+	@Override
+	public CFLibUuid6 next$Name$() {
+		CFLibUuid6 retval = CFLibUuid6.generate();
 		return( retval );
 	}
 </GenRule>
@@ -480,174 +351,25 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$$implJpaSchemaXmlEnc
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implJpaSchemaSchemaConstructor">
-	public $poptop SchemaDef SchemaName$Schema() {
-		configuration = null;
-		jndiName = null;
+	public $poptop SchemaDef SchemaName$JpaSchema() {
 $poptop SchemaDef iterate SchemaTables( each initSchemaTableTableMember )$
-$poptop SchemaDef iterate SchemaTables( each initSchemaTableFactoryMember )
-$	}
-
-	public $poptop SchemaDef SchemaName$Schema( $poptop SchemaDef DefSchemaName$ConfigurationFile conf ) {
-		if( conf == null ) {
-			throw new CFLibNullArgumentException( getClass(),
-				"$poptop SchemaDef SchemaName$Schema-constructor",
-				1,
-				"conf" );
-		}
-		configuration = conf;
-		jndiName = null;
-$poptop SchemaDef iterate SchemaTables( each initSchemaTableTableMember )$
-$poptop SchemaDef iterate SchemaTables( each initSchemaTableFactoryMember )
-$	}
-
-	public $poptop SchemaDef SchemaName$Schema( String argJndiName ) {
-		if( ( argJndiName == null ) || ( argJndiName.length() &lt;= 0 ) ) {
-			throw new CFLibEmptyArgumentException( getClass(),
-				"$poptop SchemaDef SchemaName$Schema-constructor",
-				1,
-				"argJndiName" );
-		}
-		configuration = null;
-		jndiName = argJndiName;
-$poptop SchemaDef iterate SchemaTables( each initSchemaTableTableMember )$
-$poptop SchemaDef iterate SchemaTables( each initSchemaTableFactoryMember )
-$	}
+$poptop SchemaDef iterate SchemaTables( each initSchemaTableFactoryMember )$	}
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="implJpaSchemaNewSchema"
 		>$reference RefSchema implJpaSchemaNewSchema$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaNewSchema">
+	@Override
 	public I$poptop SchemaDef SchemaName$Schema newSchema() {
 		throw new CFLibMustOverrideException( getClass(), "newSchema" );
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implJpaSchemaNewSchema">
+	@Override
 	public I$poptop SchemaDef SchemaName$Schema newSchema() {
 		throw new CFLibMustOverrideException( getClass(), "newSchema" );
-	}
-</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaJndiNameAccessors">
-	public String getJndiName() {
-		return( jndiName );
-	}
-
-	public void setJndiName( String value ) {
-		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
-			jndiName = null;
-		}
-		else {
-			configuration = null;
-			jndiName = value;
-		}
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implJpaSchemaJndiNameAccessors">
-	public String getJndiName() {
-		return( jndiName );
-	}
-
-	public void setJndiName( String value ) {
-		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
-			jndiName = null;
-		}
-		else {
-			configuration = null;
-			jndiName = value;
-		}
-	}
-</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="implJpaSchemaConnectionMethods"
-		>$reference RefSchema implJpaSchemaConnectionMethods$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaConnectionMethods">
-	public boolean isConnected() {
-		throw new CFLibMustOverrideException( getClass(), "isConnected" );
-	}
-
-	public boolean connect() {
-		throw new CFLibMustOverrideException( getClass(), "connect" );
-	}
-
-	public boolean connect( String username, String password ) {
-		throw new CFLibMustOverrideException( getClass(), "connect-userpw" );
-	}
-
-	public boolean connect( String loginId, String password, String clusterName, String tenantName ) {
-		throw new CFLibMustOverrideException( getClass(), "connect-full" );
-	}
-
-	public void disconnect( boolean doCommit ) {
-		throw new CFLibMustOverrideException( getClass(), "disconnect" );
-	}
-
-	public void logout( $SecSchemaName$Authorization auth ) {
-		throw new CFLibMustOverrideException( getClass(), "logout" );
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implJpaSchemaConnectionMethods">
-	public boolean isConnected() {
-		throw new CFLibMustOverrideException( getClass(), "isConnected" );
-	}
-
-	public boolean connect() {
-		throw new CFLibMustOverrideException( getClass(), "connect" );
-	}
-
-	public boolean connect( String username, String password ) {
-		throw new CFLibMustOverrideException( getClass(), "connect-userpw" );
-	}
-
-	public boolean connect( String loginId, String password, String clusterName, String tenantName ) {
-		throw new CFLibMustOverrideException( getClass(), "connect-full" );
-	}
-
-	public void disconnect( boolean doCommit ) {
-		throw new CFLibMustOverrideException( getClass(), "disconnect" );
-	}
-
-	public void logout( $SecSchemaName$Authorization auth ) {
-		throw new CFLibMustOverrideException( getClass(), "logout" );
-	}
-</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="implJpaSchemaConfigurationFileAccessors"
-		>$reference RefSchema implJpaSchemaConfigurationFileAccessors$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaConfigurationFileAccessors">
-	public $DefSchemaName$ConfigurationFile getConfigurationFile() {
-		return( configuration );
-	}
-
-	public void setConfigurationFile( $DefSchemaName$ConfigurationFile value ) {
-		if( value == null ) {
-			configuration = null;
-		}
-		else {
-			configuration = value;
-			jndiName = null;
-		}
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implJpaSchemaConfigurationFileAccessors">
-	public $popto SchemaDef DefSchemaName$ConfigurationFile getConfigurationFile() {
-		return( configuration );
-	}
-
-	public void setConfigurationFile( $popto SchemaDef DefSchemaName$ConfigurationFile value ) {
-		if( value == null ) {
-			configuration = null;
-		}
-		else {
-			configuration = value;
-			jndiName = null;
-		}
 	}
 </GenRule>
 
