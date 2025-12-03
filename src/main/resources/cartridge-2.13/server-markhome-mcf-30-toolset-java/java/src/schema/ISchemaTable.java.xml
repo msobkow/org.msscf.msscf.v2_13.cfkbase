@@ -63,7 +63,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 //import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
-public interface I$SchemaName$$TableName$$switch HasDefSchema yes extendSchemaXfcTableXfc default extendSchemaXfcTableXfcSuperXfc$$switch HasDefSchema yes empty default maybeDeclSchemaXfcTableComparable$
+public interface I$SchemaName$$TableName$$switch HasDefSchema yes extendSchemaXfcTableXfc default extendSchemaXfcTableXfcSuperXfc$
 {$switch HasDefSchema yes empty default declISchemaTableXfcMinValues$$switch HasDefSchema yes empty default declISchemaTableXfcMaxValues$$switch HasDefSchema yes empty default declISchemaTableXfcInitValues$$switch HasDefSchema no declXfcStaticClassCode default empty$
 $switch HasDefSchema no maybeDeclXfcGetClassCode default empty$$switch HasDefSchema no maybeDeclXfcOptImplAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no declColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no declRevisionGetterSetter default empty$$switch HasDefSchema no declDataGetterSetters default empty$$declEqualsObject$$declGetHashCode$$declCompareToObject$$declXfcSet$$declSchemaXfcTableToString$}
 </GenFile>
@@ -110,20 +110,11 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declPKeyAtt
 	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ );
 </GenRule>
 
-
-
-
-
-
 	<GenRule GenDef="Table" Name="declISchemaTableXfcColumns">$switch HasSuperClassRelation no maybeDeclXfcOptAuditColumnAttrAccessors default empty$$iterate Columns( each maybeDeclSchemaXfcTableXfcDataColumn )$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="maybeDeclSchemaXfcTableXfcDataColumn">$switch ColumnInPrimaryIndex yes empty default declXfcColumnXfcAttr$</GenRule>
 	<GenRule GenDef="TableCol" Name="maybeDeclSchemaXfcTableXfcDataColumn">$switch ColumnInPrimaryIndex yes empty default declXfcColumnXfcAttr$</GenRule>
 	<GenRule GenDef="Atom" Name="maybeDeclSchemaXfcTableXfcDataColumn">$switch ColumnInPrimaryIndex yes empty default declXfcColumnXfcAttr$</GenRule>
-
-	<GenRule GenDef="Table" Name="maybeDeclSchemaXfcTableComparable">$switch HasSuperClassRelation yes empty default declISchemaXfcTableComparable$</GenRule>
-	<GenRule GenDef="Table" Name="declISchemaXfcTableComparable">
-	implements Comparable&lt;Object&gt;, Serializable</GenRule>
 
 	<GenRule GenDef="Table" Name="declXfcColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes declXfcColumnAttrPKeyColumnAccessors default declXfcColumnAttrPKeyInstanceAccessors$</GenRule>
 

@@ -76,7 +76,7 @@ import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate Schem
  *	I$SchemaName$$TableName$PKey primary key interface for $TableName$$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )
 $
  */
-public interface I$SchemaName$$TableName$PKey$switch HasDefSchema yes ISchemaTablePKeyExtendBaseDef default ISchemaTablePKeyImplementsComparable$
+public interface I$SchemaName$$TableName$PKey$switch HasDefSchema yes ISchemaTablePKeyExtendBaseDef default empty$
 {$switch HasDefSchema yes ISchemaTablePKeyExtendBaseDefBody default ISchemaTablePKeyImplBaseDefBody$}
 </GenFile>
 
@@ -87,14 +87,11 @@ public interface I$SchemaName$$TableName$PKey$switch HasDefSchema yes ISchemaTab
 </GenRule>
 
 	<GenRule GenDef="Table" Name="ISchemaTablePKeyImplBaseDefBody">
-$reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declXfcPKeyEquals$$reference PrimaryKeyIndex declXfcPKeyGetHashCode$$declXfcPKeyCompareTo$$reference PrimaryKeyIndex declXfcPKeyToString$</GenRule>
+$reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declXfcPKeyEquals$$declXfcPKeyHashCode$$declXfcPKeyCompareTo$$reference PrimaryKeyIndex declXfcPKeyToString$</GenRule>
 
 	<GenRule GenDef="Table" Name="ISchemaTablePKeyExtendBaseDef">
 	extends I$DefSchemaName$$TableName$PKey</GenRule>
 
-	<GenRule GenDef="Table" Name="ISchemaTablePKeyImplementsComparable">
-	implements Comparable&lt;I$poptop SchemaDef DefSchemaName$$TableName$PKey&gt;,
-		Serializable</GenRule>
 
 	<GenRule GenDef="TableCol" Name="HasInitValue"
 		>$reference DataType HasInitValue$</GenRule>
@@ -1074,7 +1071,12 @@ $reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declX
 	public boolean equals( Object obj );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declIPKeyCompareTo">
+	<GenRule GenDef="Table" Name="declXfcPKeyHashCode">
+	@Override
+	public int hashCode();
+</GenRule>
+
+	<GenRule GenDef="Table" Name="declXfcPKeyCompareTo">
 	@Override
 	public int compareTo( I$poptop SchemaDef SchemaName$$TableName$PKey rhs );
 </GenRule>

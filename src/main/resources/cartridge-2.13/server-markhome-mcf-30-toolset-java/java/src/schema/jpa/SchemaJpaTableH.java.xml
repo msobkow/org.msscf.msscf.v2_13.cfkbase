@@ -82,11 +82,13 @@ $implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAcces
 	<GenRule GenDef="Table" Name="jpaInheritanceTablePerClass">
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)$baseTableJpaDiscriminatorColumn$</GenRule>
 
-	<GenRule GenDef="Table" Name="maybeImplSchemaTableHComparable">$switch HasSuperClassRelation yes empty default implJpaSchemaTableHComparable$</GenRule>
+	<GenRule GenDef="Table" Name="maybeImplSchemaTableHComparable">$switch HasSuperClassRelation yes implJpaSchemaTableHComparableTable default implJpaSchemaTableHComparable$</GenRule>
+
+	<GenRule GenDef="Table" Name="implJpaSchemaTableHComparableTable">
+	implements I$DefSchemaName$$TableName$H</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaSchemaTableHComparable">
-	implements Comparable&lt;Object&gt;,
-		Serializable</GenRule>
+	implements I$DefSchemaName$$TableName$H, Comparable&lt;Object&gt;, Serializable</GenRule>
 
 	<GenRule GenDef="Index" Name="commaJpaTableHIndexAnnotation">,$jpaTableHIndexAnnotation$</GenRule>
 	<GenRule GenDef="Index" Name="jpaTableHIndexAnnotation">$switch IsPrimaryIndex yes jpaTableHPrimaryIndexAnnotation default jpaTableHOrdinaryIndexAnnotation$</GenRule>

@@ -68,7 +68,7 @@ import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$l
 /**
  *	$SchemaName$$TableName$HPKey History Primary Key for $TableName$$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )
 $ */
-public class $poptop SchemaDef SchemaName$$TableName$HPKey$SchemaTableImplementsComparable$
+public class $poptop SchemaDef SchemaName$$TableName$HPKey$switch HasDefSchema yes implSchemaTableHPKeyInheritDef default SchemaTableHPKeyImplementsComparable$
 {$SchemaTableHPKeyImplDefBody$}
 </GenFile>
 
@@ -92,18 +92,14 @@ public class $poptop SchemaDef SchemaName$$TableName$HPKey$SchemaTableImplements
 $switch IsBaseTable yes implClassCodeColumnJPAAttr default empty$$reference PrimaryKeyIndex iterate Columns( each implJpaColumnAttr )$
 $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClusterIdGetterSetter$$poptop SchemaDef implAuditStampGetterSetter$$poptop SchemaDef implAuditActionIdGetterSetter$$poptop SchemaDef implRevisionGetterSetter$$poptop SchemaDef implAuditSessionIdGetterSetter$$switch IsBaseTable yes implClassCodeGetterSetter default empty$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$reference PrimaryKeyIndex implHPKeyEquals$$reference PrimaryKeyIndex implHPKeyGetHashCode$$reference PrimaryKeyIndex implHPKeyCompareTo$$reference PrimaryKeyIndex implHPKeyToString$</GenRule>
 
-	<GenRule GenDef="Table" Name="SchemaTableImplementsComparable">
-	implements Comparable&lt;Object&gt;,
-		Serializable</GenRule>
+	<GenRule GenDef="Table" Name="SchemaTableHPKeyInheritDef">
+	extends $DefSchemaName$Jpa$TableName$HPKey</GenRule>
 
-	<GenRule GenDef="Table" Name="implHPKeyImplementsComparableHistoryObjects">,
-		Comparable&lt;$SchemaName$$TableName$H&gt;$switch HasSuperClassRelation yes empty default implHPKeyImplementsComparableHPKey$</GenRule>
-
-	<GenRule GenDef="Table" Name="implHPKeyImplementsComparableHPKey">,
-		Comparable&lt;$reference BaseClass SchemaName$$reference BaseClass TableName$HPKey&gt;</GenRule>
+	<GenRule GenDef="Table" Name="SchemaTableHPKeyImplementsComparable">
+	implements I$DefSchemaName$$TableName$HPKey, Comparable&lt;Object&gt;, Serializable</GenRule>
 
 	<GenRule GenDef="Index" Name="implHPKeyConstructor">
-	public $SchemaName$$TableName$HPKey() {
+	public $SchemaName$Jpa$TableName$HPKey() {
 		auditClusterId = CFLibDbKeyHash256.nullGet();
 		auditStamp = LocalDateTime.now();
 		auditActionId = 0;
