@@ -33,9 +33,9 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/SchemaAuthorization.java"
+	Name="src/schema/SchemaAuthorization.java"
 	Revision="3.0"
-	Descr="Java JPA $SchemaName$ Authorization Implementation.">
+	Descr="Java SchemaName Authorization Implementation">
 
 	<GenFile GenDef="SchemaDef" Name="fileSchemaAuthorizationJava"
 			GenerateOnce="false"
@@ -46,11 +46,11 @@
 		ExpansionClassName="$SchemaName$AuthorizationJava"
 		ExpansionKeyName="$SchemaName$AuthorizationJava"
 		ExpansionFileName="$SchemaName$Authorization.java"
->// Description: Java JPA $SchemaName$ Authorization Interface.
+>// Description: Java $SchemaName$ Authorization Implementation
 
 $MssSourceLicense$
 
-package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$;
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$;
 
 import java.lang.reflect.*;
 import java.io.*;
@@ -60,16 +60,14 @@ import java.text.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
-import $lower JavaPackage$.$SchemaName$Obj.I$SchemaName$ClusterObj;
-import $lower JavaPackage$.$SchemaName$Obj.I$SchemaName$TenantObj;
-import $lower JavaPackage$.$SchemaName$Obj.I$SchemaName$SecSessionObj;
+import $lower JavaPackage$.$lower SchemaName$obj.I$SchemaName$ClusterObj;
+import $lower JavaPackage$.$lower SchemaName$obj.I$SchemaName$TenantObj;
+import $lower JavaPackage$.$lower SchemaName$obj.I$SchemaName$SecSessionObj;
 
 /*
  *	A $SchemaName$Authorization is an authorization ticket
- *	for the system providing services.  For example, a
- *	database layer implements an Authorization that
- *	resolves a database connection (which may be under the
- *	control of an active cursor).
+ *	for the system providing services.  Most modern authorizations
+ *      are based on OAuth2 tickets, but I haven't gotten there yet...
  */
 public class $SchemaName$Authorization$iterate SchemaRefs( first SchemaAuthorizationInheritAuthorization each empty empty empty )$
 	implements Serializable
@@ -80,27 +78,27 @@ public class $SchemaName$Authorization$iterate SchemaRefs( first SchemaAuthoriza
 		>$implAuthorizationInheritConstructor$</GenRule>
 
 	<GenRule GenDef="Object" Name="SchemaAuthorizationImplBody"
-		>$poptop SchemaDef implAuthorizationAttrUUID$$poptop SchemaDef implAuthorizationAttrSecId$$poptop SchemaDef implAuthorizationConstructor$$poptop SchemaDef implAuthorizationUUIDAccessors$$poptop SchemaDef implAuthorizationSecIdAccessors$</GenRule>
+		>$poptop SchemaDef implAuthorizationAttrCFLibUuid6$$poptop SchemaDef implAuthorizationAttrSecId$$poptop SchemaDef implAuthorizationConstructor$$poptop SchemaDef implAuthorizationCFLibUuid6Accessors$$poptop SchemaDef implAuthorizationSecIdAccessors$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implAuthorizationAttrSecId">
 	protected long secClusterId = 0L;
-	protected long secTenantId = 0L;
-	protected UUID secSessionId = UUID.randomUUID();
-	protected UUID secUserId = UUID.randomUUID();
+	protected CFLibDbKeyHash256 secTenantId = new CFLibDbKeyHash256(0);
+	protected CFLibDbKeyHash256 secSessionId = new CFLibDbKeyHash256(0);
+	protected CFLibDbKeyHash256 secUserId = new CFLibDbKeyHash256(0);
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="SchemaAuthorizationInheritAuthorization">
 	extends $SecSchemaName$Authorization</GenRule>
 
-	<GenRule GenDef="SchemaDef" Name="implAuthorizationAttrUUID">
-	protected UUID authUUID;
-	protected String authUUIDStr;
+	<GenRule GenDef="SchemaDef" Name="implAuthorizationAttrCFLibUuid6">
+	protected CFLibUuid6 authUuid6;
+	protected String authUuid6Str;
 </GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implAuthorizationConstructor">
 	public $SchemaName$Authorization() {
-		authUUID = UUID.randomUUID();
-		authUUIDStr = authUUID.toString();
+		authUuid6 = CFLibUuid6.generateUuid6();
+		authUuid6Str = authUuid6.toString();
 	}
 </GenRule>
 
@@ -126,11 +124,11 @@ public class $SchemaName$Authorization$iterate SchemaRefs( first SchemaAuthoriza
 		}
 	}
 
-	public long getSecTenantId() {
+	public CFLibDbKeyHash256 getSecTenantId() {
 		return( secTenantId );
 	}
 
-	public void setSecTenantId( long tenantId ) {
+	public void setSecTenantId( CFLibDbKeyHash256 tenantId ) {
 		secTenantId = tenantId;
 	}
 
@@ -141,11 +139,11 @@ public class $SchemaName$Authorization$iterate SchemaRefs( first SchemaAuthoriza
 		}
 	}
 
-	public UUID getSecSessionId() {
+	public CFLibDbKeyHash256 getSecSessionId() {
 		return( secSessionId );
 	}
 
-	public void setSecSessionId( UUID sessionId ) {
+	public void setSecSessionId( CFLibDbKeyHash256 sessionId ) {
 		secSessionId = sessionId;
 	}
 
@@ -158,27 +156,27 @@ public class $SchemaName$Authorization$iterate SchemaRefs( first SchemaAuthoriza
 		}
 	}
 
-	public UUID getSecUserId() {
+	public CFLibDbKeyHash256 getSecUserId() {
 		return( secUserId );
 	}
 
-	public void setSecUserId( UUID userId ) {
+	public void setSecUserId( CFLibDbKeyHash256 userId ) {
 		secUserId = userId;
 	}
 </GenRule>
 
-	<GenRule GenDef="SchemaDef" Name="implAuthorizationUUIDAccessors">
-	public UUID getAuthUUID() {
-		return( authUUID );
+	<GenRule GenDef="SchemaDef" Name="implAuthorizationCFLibUuid6Accessors">
+	public CFLibUuid6 getAuthUuid6() {
+		return( authUuid6 );
 	}
 
-	public void setAuthUUID( UUID value ) {
-		authUUID = value;
-		authUUIDStr = authUUID.toString();
+	public void setAuthUuid6( CFLibUuid6 value ) {
+		authUuid6 = value;
+		authUuid6Str = authUuid6.toString();
 	}
 
-	public String getAuthUUIDStr() {
-		return( authUUIDStr );
+	public String getAuthUuid6Str() {
+		return( authUuid6Str );
 	}
 </GenRule>
 

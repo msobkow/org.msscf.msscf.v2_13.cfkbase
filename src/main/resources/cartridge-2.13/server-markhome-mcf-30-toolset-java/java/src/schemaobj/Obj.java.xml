@@ -50,7 +50,7 @@
 
 $MssSourceLicense$
 
-package $lower TopProjectName$.$VUnderVersion$.$lower SubProjectName$.$lower SchemaName$obj;
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$obj;
 
 import java.math.*;
 import java.sql.*;
@@ -58,9 +58,9 @@ import java.text.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import org.apache.commons.text.StringEscapeUtils;import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$
-import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$obj.*;$importJavaPackageSchemaName$$JavaObjImport$
+//import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$obj.*;$importJavaPackageSchemaName$$JavaObjImport$
 
 public class $SchemaName$$TableName$Obj
 $switch HasSuperClassRelation yes implObjExtendSuperClassImplements default implObjTabImplementsSpace$I$SchemaName$$TableName$Obj
@@ -115,7 +115,7 @@ $implSchemaTableObjAllTheMethods$}
 	<GenRule GenDef="Table" Name="implObjGetAuditColumns">
 	public I$SecSchemaName$SecUserObj getCreatedBy() {
 		if( createdBy == null ) {
-			$reference BaseClass DefSchemaName$$reference BaseClass TableName$Buff buff = getBuff();
+			I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ buff = getBuff();
 			createdBy = ((I$SchemaName$SchemaObj)getSchema()).getSecUserTableObj().readSecUserByIdIdx( buff.getCreatedByUserId() );
 		}
 		return( createdBy );
@@ -127,7 +127,7 @@ $implSchemaTableObjAllTheMethods$}
 
 	public I$SecSchemaName$SecUserObj getUpdatedBy() {
 		if( updatedBy == null ) {
-			$reference BaseClass DefSchemaName$$reference BaseClass TableName$Buff buff = getBuff();
+			I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ buff = getBuff();
 			updatedBy = ((I$SchemaName$SchemaObj)getSchema()).getSecUserTableObj().readSecUserByIdIdx( buff.getUpdatedByUserId() );
 		}
 		return( updatedBy );
@@ -985,20 +985,20 @@ $			if( ! anyMissing ) {
 		super( argSchema );</GenRule>
 
 	<GenRule GenDef="Table" Name="implObjPKeyAttr">
-	protected $DefSchemaName$$TableName$PKey pKey;</GenRule>
+	protected I$DefSchemaName$$TableName$PKey pKey;</GenRule>
 
 	<GenRule GenDef="Table" Name="implObjBuffAttr">
-	protected $DefSchemaName$$TableName$Buff buff;</GenRule>
+	protected I$DefSchemaName$$TableName$ buff;</GenRule>
 
 	<GenRule GenDef="Table" Name="implObjPKeyAccessors">
-	public $DefSchemaName$$TableName$PKey getPKey() {
+	public I$DefSchemaName$$TableName$PKey getPKey() {
 		if( pKey == null ) {
 			pKey = ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$TableName$().newPKey();
 		}
 		return( pKey );
 	}
 
-	public void setPKey( $DefSchemaName$$TableName$PKey value ) {
+	public void setPKey( I$DefSchemaName$$TableName$PKey value ) {
 		if( pKey != value ) {
 			pKey = value;
 			copyPKeyToBuff();
@@ -1102,7 +1102,7 @@ $			if( ! anyMissing ) {
 		getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implObjTableGetBuff">
-	public $reference BaseClass DefSchemaName$$reference BaseClass TableName$Buff getBuff() {
+	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ getBuff() {
 		if( buff == null ) {
 			if( isNew ) {
 				buff = ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$TableName$().newBuff();
@@ -1118,8 +1118,8 @@ $			if( ! anyMissing ) {
 		return( buff );
 	}
 
-	public void setBuff( $reference BaseClass DefSchemaName$$reference BaseClass TableName$Buff value ) {
-		if( ! ( ( value == null ) || ( value instanceof $DefSchemaName$$TableName$Buff ) ) ) {
+	public void setBuff( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ value ) {
+		if( ! ( ( value == null ) || ! ( value instanceof I$DefSchemaName$$TableName$ ) ) ) {
 			throw new CFLibUnsupportedClassException( getClass(),
 				"setBuff",
 				"value",
@@ -1141,8 +1141,8 @@ $			if( ! anyMissing ) {
 		>$iterate Relation( each implObjConstructorInitRelationAttr empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implObjTableBuffAccessors">
-	public $DefSchemaName$$TableName$Buff get$TableName$Buff() {
-		return( ($DefSchemaName$$TableName$Buff)getBuff() );
+	public I$DefSchemaName$$TableName$ get$TableName$Buff() {
+		return( (I$DefSchemaName$$TableName$)getBuff() );
 	}
 </GenRule>
 

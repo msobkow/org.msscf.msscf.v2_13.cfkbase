@@ -33,76 +33,69 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/ISchemaTablePerms.java"
+	Name="src/Schema/ISchemaAuthorization.java"
 	Revision="3.0"
-	Descr="Java 21 $SchemaName$ Table Permissions Interface.">
+	Descr="Java $SchemaName$ Authorization Interface">
 
-	<GenFile GenDef="SchemaDef" Name="fileSchemaITablePermsJava"
+	<GenFile GenDef="SchemaDef" Name="fileISchemaAuthorizationJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
-		ExpansionClassName="I$SchemaName$TablePermsJava"
-		ExpansionKeyName="I$SchemaName$TablePermsJava"
-		ExpansionFileName="I$SchemaName$TablePerms.java"
->// Description: Java 21 $SchemaName$ Table Permissions Interface.
+		ExpansionClassName="I$SchemaName$AuthorizationJava"
+		ExpansionKeyName="I$SchemaName$AuthorizationJava"
+		ExpansionFileName="I$SchemaName$Authorization.java"
+>// Description: Java Authorization Interface.
 
 $MssSourceLicense$
 
 package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$;
 
 import java.lang.reflect.*;
+import java.io.*;
 import java.net.*;
-import java.rmi.*;
 import java.sql.*;
 import java.text.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import $lower JavaPackage$.$lower SchemaName$obj.I$SchemaName$ClusterObj;
+import $lower JavaPackage$.$lower SchemaName$obj.I$SchemaName$TenantObj;
+import $lower JavaPackage$.$lower SchemaName$obj.I$SchemaName$SecSessionObj;
 
-public interface I$SchemaName$TablePerms$iterate SchemaRefs( first extendsJavaDefSchemaTablePerms each commaNewlineJavaDefSchemaTablePerms empty empty )$
-{$iterate SchemaTables( each implITablePermsAllowAccessors )$}
+/*
+ *	An I$SchemaName$Authorization is an authorization ticket
+ *	for the system providing services.
+ */
+public interface I$SchemaName$Authorization$iterate SchemaRefs( first ISchemaAuthorizationInheritAuthorization each empty empty empty )$
+{$iterate SchemaRefs( each empty empty ISchemaAuthorizationImplBody )$}
 </GenFile>
 
-	<GenRule GenDef="SchemaRef" Name="extendsJavaDefSchemaTablePerms">
-extends I$reference RefSchema SchemaName$TablePerms</GenRule>
+	<GenRule GenDef="Object" Name="ISchemaAuthorizationImplBody"
+		>$poptop SchemaDef declIAuthorizationCFLibUuid6Accessors$$poptop SchemaDef declIAuthorizationSecIdAccessors$</GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="commaNewlineJavaDefSchemaTablePerms">,
-	I$reference RefSchema SchemaName$TablePerms</GenRule>
+	<GenRule GenDef="SchemaRef" Name="ISchemaAuthorizationInheritAuthorization">
+	extends I$SecSchemaName$Authorization</GenRule>
 
-	<GenRule GenDef="Table" Name="implITablePermsAllowAccessors"
-		>$switch HasDefSchema default empty no reallyImplITablePermsAllowAccessors empty empty$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declIAuthorizationSecIdAccessors">
+	public long getSecClusterId();
+	public void setSecClusterId( long clusterId );
+	public void setSecCluster( I$SchemaName$ClusterObj value );
+	public CFLibDbKeyHash256 getSecTenantId();
+	public void setSecTenantId( CFLibDbKeyHash256 tenantId );
+	public void setSecTenant( I$SchemaName$TenantObj value );
+	public CFLibDbKeyHash256 getSecSessionId();
+	public void setSecSessionId( CFLibDbKeyHash256 sessionId );
+	public void setSecSession( I$SchemaName$SecSessionObj value );
+	public CFLibDbKeyHash256 getSecUserId();
+	public void setSecUserId( CFLibDbKeyHash256 userId );
+</GenRule>
 
-	<GenRule GenDef="Table" Name="reallyImplITablePermsAllowAccessors">
-	/**
-	 *	Is the session allowed to create $TableName$ instances?
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 */
-	boolean allowCreate$TableName$( $SecSchemaName$Authorization Authorization );
-
-	/**
-	 *	Is the session allowed to read $TableName$ instances?
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 */
-	boolean allowRead$TableName$( $SecSchemaName$Authorization Authorization );
-
-	/**
-	 *	Is the session allowed to update $TableName$ instances?
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 */
-	boolean allowUpdate$TableName$( $SecSchemaName$Authorization Authorization );
-
-	/**
-	 *	Is the session allowed to delete $TableName$ instances?
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 */
-	boolean allowDelete$TableName$( $SecSchemaName$Authorization Authorization );
+	<GenRule GenDef="SchemaDef" Name="declIAuthorizationCFLibUuid6Accessors">
+	public CFLibUuid6 getAuthUuid6();
+	public void setAuthUuid6( CFLibUuid6 value );
+	public String getAuthUuid6Str();
 </GenRule>
 
 </RuleSet>

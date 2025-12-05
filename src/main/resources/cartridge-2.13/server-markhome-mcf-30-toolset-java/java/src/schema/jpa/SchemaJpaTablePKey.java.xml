@@ -60,7 +60,7 @@
 
 $MssSourceLicense$
 
-package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.jpa;
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa;
 
 import java.io.Serializable;
 import java.math.*;
@@ -68,9 +68,9 @@ import java.time.*;
 import java.util.*;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-import server.markhome.msscf.v3_1.cflib.*;
-import server.markhome.msscf.v3_1.cflib.dbutil.*;
-import server.markhome.msscf.v3_1.cflib.xml.CFLibXmlUtil;
+import server.markhome.mcf.v3_1.cflib.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
@@ -95,7 +95,7 @@ public class $SchemaName$Jpa$TableName$PKey$switch HasDefSchema yes SchemaJpaTab
 $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex
 		iterate Columns(
 			each implColumnGetterSetter )
-$$implJpaPKeyEquals$$reference PrimaryKeyIndex implJpaPKeyGetHashCode$$implJpaPKeyCompareTo$$reference PrimaryKeyIndex implJpaPKeyToString$</GenRule>
+$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyExtendBaseDef">
 	extends $DefSchemaName$Jpa$TableName$PKey</GenRule>
@@ -1926,14 +1926,14 @@ $$implJpaPKeyEquals$$reference PrimaryKeyIndex implJpaPKeyGetHashCode$$implJpaPK
 				$DefSchemaName$$TableName$.$upper Name$_MAX_VALUE.toString() );
 		}</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaPKeyEquals">
+	<GenRule GenDef="Table" Name="implPKeyEquals">
 	@Override
 	public boolean equals( Object obj ) {
 		if (obj == null) {
 			return( false );
 		}
-		else if (obj instanceof $reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey) {
-			$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey rhs = ($reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr)$
+		else if (obj instanceof I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey) {
+			I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey rhs = (I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr)$
 			return( true );
 		}
 		else {
@@ -1943,12 +1943,12 @@ $$implJpaPKeyEquals$$reference PrimaryKeyIndex implJpaPKeyGetHashCode$$implJpaPK
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaJpaTablePKeyImplementsComparableHistory">
-		else if (obj instanceof $SchemaName$$TableName$HPKey) {
-			$SchemaName$$TableName$HPKey rhs = ($SchemaName$$TableName$HPKey)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr)$
+		else if (obj instanceof I$SchemaName$$TableName$HPKey) {
+			I$SchemaName$$TableName$HPKey rhs = (I$SchemaName$$TableName$HPKey)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr)$
 			return( true );
 		}
-		else if (obj instanceof $SchemaName$$TableName$H) {
-			$SchemaName$$TableName$H rhs = ($SchemaName$$TableName$H)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr)$
+		else if (obj instanceof I$SchemaName$$TableName$H) {
+			I$SchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr)$
 			return( true );
 		}</GenRule>
 
@@ -2569,7 +2569,7 @@ $$implJpaPKeyEquals$$reference PrimaryKeyIndex implJpaPKeyGetHashCode$$implJpaPK
 				}
 			}</GenRule>
 
-	<GenRule GenDef="Index" Name="implJpaPKeyGetHashCode">
+	<GenRule GenDef="Index" Name="implPKeyGetHashCode">
 	public int hashCode() {
 		int hashCode = 0;$iterate Columns( each implGetHashCodeAttr )$
 		return( hashCode &amp; 0x7fffffff );
@@ -2960,7 +2960,7 @@ $$implJpaPKeyEquals$$reference PrimaryKeyIndex implJpaPKeyGetHashCode$$implJpaPK
 	<GenRule GenDef="Object" Name="implGetHashCodeReqUuidVar">
 		hashCode = hashCode + get$implColumnAttrOptionality$$Name$().hashCode();</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaPKeyCompareTo">
+	<GenRule GenDef="Table" Name="implPKeyCompareTo">
 	@Override
 	public int compareTo( $poptop SchemaDef SchemaName$$TableName$PKey rhs ) {
 		int retval;
@@ -2971,7 +2971,7 @@ $$implJpaPKeyEquals$$reference PrimaryKeyIndex implJpaPKeyGetHashCode$$implJpaPK
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaPKeyCompareToHistory">
+	<GenRule GenDef="Table" Name="implPKeyCompareToHistory">
 		else if (obj instanceof $SchemaName$$TableName$HPKey) {
 			$SchemaName$$TableName$HPKey rhs = ($SchemaName$$TableName$HPKey)obj;$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
 			return( 0 );
@@ -3470,7 +3470,7 @@ $$implJpaPKeyEquals$$reference PrimaryKeyIndex implJpaPKeyGetHashCode$$implJpaPK
 				return( $LTAdjusted$ );
 			}</GenRule>
 
-	<GenRule GenDef="Index" Name="implJpaPKeyToString">
+	<GenRule GenDef="Index" Name="implPKeyToString">
 	public String getXmlAttrFragment() {
 		String ret = "" $iterate Columns( each implToStringEmitXmlAttr )$;
 		return( ret );

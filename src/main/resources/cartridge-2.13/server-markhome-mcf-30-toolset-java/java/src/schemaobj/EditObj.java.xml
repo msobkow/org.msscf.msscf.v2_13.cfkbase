@@ -50,7 +50,7 @@
 
 $MssSourceLicense$
 
-package $lower TopProjectName$.$VUnderVersion$.$lower SubProjectName$.$lower SchemaName$obj;
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$obj;
 
 import java.math.*;
 import java.sql.*;
@@ -58,9 +58,9 @@ import java.text.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import org.apache.commons.text.StringEscapeUtils;import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$
-import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$obj.*;$importJavaPackageSchemaName$$JavaEditObjImport$
+//import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$obj.*;$importJavaPackageSchemaName$$JavaEditObjImport$
 
 public class $SchemaName$$TableName$EditObj$switch HasSuperClassRelation yes implEditObjInheritSuperClass default empty$
 	implements I$SchemaName$$TableName$EditObj
@@ -82,7 +82,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 		}
 	}
 
-	public void setCreatedAt( Calendar value ) {
+	public void setCreatedAt( LocalDateTime value ) {
 		getBuff().setCreatedAt( value );
 	}
 
@@ -93,7 +93,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 		}
 	}
 
-	public void setUpdatedAt( Calendar value ) {
+	public void setUpdatedAt( LocalDateTime value ) {
 		getBuff().setUpdatedAt( value );
 	}
 </GenRule>
@@ -159,11 +159,11 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 
 	<GenRule GenDef="Table" Name="implEditObjConstructorInitAndCopyBuff">
 		buff = getBuff();
-		$DefSchemaName$$TableName$Buff origBuff = argOrig.get$TableName$Buff();
+		I$DefSchemaName$$TableName$ origBuff = argOrig.get$TableName$Buff();
 		buff.set( origBuff );</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjConstructorInitBuff">$switch HasSuperClassRelation yes implEditObjConstructorInitAndCopyBuff default empty$
-		$DefSchemaName$$TableName$Buff origBuff = argOrig.get$TableName$Buff();$iterate Columns( each implEditObjConstructorCopyAttrFromArgOrig )$
+		I$DefSchemaName$$TableName$Buff origBuff = argOrig.get$TableName$Buff();$iterate Columns( each implEditObjConstructorCopyAttrFromArgOrig )$
 		buff.setRequiredRevision( origBuff.getRequiredRevision() );</GenRule>
 
 	<GenRule GenDef="Atom" Name="implEditObjConstructorCopyAttrFromArgOrig">
@@ -177,7 +177,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 	<GenRule GenDef="Table" Name="implEditObjConstructorInitOrigAndCopy">
 		orig = argOrig;
 		getBuff();
-		$DefSchemaName$$TableName$Buff origBuff = orig.getBuff();
+		I$DefSchemaName$$TableName$ origBuff = orig.getBuff();
 		buff.set( origBuff );</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjOrigAccessors">
@@ -622,14 +622,14 @@ $		}
 		super( argOrig );</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjTableBuffAttr">
-	protected $DefSchemaName$$TableName$Buff buff;</GenRule>
+	protected I$DefSchemaName$$TableName$ buff;</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjPKeyAccessors">
-	public $reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey getPKey() {
+	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey getPKey() {
 		return( orig.getPKey() );
 	}
 
-	public void setPKey( $reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey value ) {
+	public void setPKey( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey value ) {
 		orig.setPKey( value );
 		copyPKeyToBuff();
 	}
@@ -692,16 +692,16 @@ $		}
 
 	<GenRule GenDef="Table" Name="implEditObjCopyBuffToOrig">
 	public void copyBuffToOrig() {
-		$DefSchemaName$$TableName$Buff origBuff = getOrigAs$TableName$().get$TableName$Buff();
-		$DefSchemaName$$TableName$Buff myBuff = get$TableName$Buff();
+		I$DefSchemaName$$TableName$ origBuff = getOrigAs$TableName$().get$TableName$Buff();
+		I$DefSchemaName$$TableName$ myBuff = get$TableName$Buff();
 		origBuff.set( myBuff );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjCopyOrigToBuff">
 	public void copyOrigToBuff() {
-		$DefSchemaName$$TableName$Buff origBuff = getOrigAs$TableName$().get$TableName$Buff();
-		$DefSchemaName$$TableName$Buff myBuff = get$TableName$Buff();
+		I$DefSchemaName$$TableName$ origBuff = getOrigAs$TableName$().get$TableName$Buff();
+		I$DefSchemaName$$TableName$ myBuff = get$TableName$Buff();
 		myBuff.set( origBuff );
 	}
 </GenRule>
@@ -750,7 +750,7 @@ $		}
 		buff.set$implColumnAttrOptionality$$Name$( getPKey().get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjBuffAccessors">
-	public $DefSchemaName$$reference BaseClass TableName$Buff getBuff() {
+	public I$DefSchemaName$$reference BaseClass TableName$ getBuff() {
 		if( buff == null ) {
 			buff = ((I$SchemaName$Schema)getOrigAs$TableName$().getSchema().getBackingStore()).getFactory$TableName$().newBuff();
 			buff.set( orig.getBuff() );
@@ -758,7 +758,7 @@ $		}
 		return( buff );
 	}
 
-	public void setBuff( $DefSchemaName$$reference BaseClass TableName$Buff value ) {
+	public void setBuff( I$DefSchemaName$$reference BaseClass TableName$ value ) {
 		if( buff != value ) {$switch HasSuperClassRelation yes invokeEditObjSuperSetBuff default invokeEditObjBaseSetBuff$
 $iterate Relation( each implEditObjTableDataAccessorsClearRelationMember empty empty )
 $		}
@@ -772,8 +772,8 @@ $		}
 			buff = value;</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjTableBuffAccessors">
-	public $DefSchemaName$$TableName$Buff get$TableName$Buff() {
-		return( ($DefSchemaName$$TableName$Buff)getBuff() );
+	public I$DefSchemaName$$TableName$ get$TableName$Buff() {
+		return( (I$DefSchemaName$$TableName$)getBuff() );
 	}
 </GenRule>
 
