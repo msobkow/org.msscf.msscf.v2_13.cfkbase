@@ -121,7 +121,7 @@ $implSchemaTableObjAllTheMethods$}
 		return( createdBy );
 	}
 
-	public Calendar getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return( getBuff().getCreatedAt() );
 	}
 
@@ -133,7 +133,7 @@ $implSchemaTableObjAllTheMethods$}
 		return( updatedBy );
 	}
 
-	public Calendar getUpdatedAt() {
+	public LocalDateTime getUpdatedAt() {
 		return( getBuff().getUpdatedAt() );
 	}
 </GenRule>
@@ -410,15 +410,30 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			BlobDef ErrorUnsupportedBaseModelAtomClass
 			BoolDef implGetObjNameCalcBoolReqName
 			EnumDef implGetObjNameCalcInt16ReqName
+			Id16Gen implGetObjNameCalcInt16ReqName
+			Id32Gen implGetObjNameCalcInt32ReqName
+			Id64Gen implGetObjNameCalcInt64ReqName
+			DbKeyHash128Gen implGetObjNameCalcDbKeyHash128ReqName
+			DbKeyHash160Gen implGetObjNameCalcDbKeyHash160ReqName
+			DbKeyHash224Gen implGetObjNameCalcDbKeyHash224ReqName
+			DbKeyHash256Gen implGetObjNameCalcDbKeyHash256ReqName
+			DbKeyHash384Gen implGetObjNameCalcDbKeyHash384ReqName
+			DbKeyHash512Gen implGetObjNameCalcDbKeyHash512ReqName
+			DbKeyHash128Def implGetObjNameCalcDbKeyHash128ReqName
+			DbKeyHash160Def implGetObjNameCalcDbKeyHash160ReqName
+			DbKeyHash224Def implGetObjNameCalcDbKeyHash224ReqName
+			DbKeyHash256Def implGetObjNameCalcDbKeyHash256ReqName
+			DbKeyHash384Def implGetObjNameCalcDbKeyHash384ReqName
+			DbKeyHash512Def implGetObjNameCalcDbKeyHash512ReqName
+			UuidGen implGetObjNameCalcUuidReqName
+			Uuid6Gen implGetObjNameCalcUuid6ReqName
+			Uuid6Def implGetObjNameCalcUuid6ReqName
 			Int16Def implGetObjNameCalcInt16ReqName
 			Int32Def implGetObjNameCalcInt32ReqName
 			Int64Def implGetObjNameCalcInt64ReqName
 			UInt16Def implGetObjNameCalcUInt16ReqName
 			UInt32Def implGetObjNameCalcUInt32ReqName
 			UInt64Def implGetObjNameCalcUInt64ReqName
-			Id16Gen implGetObjNameCalcInt16ReqName
-			Id32Gen implGetObjNameCalcInt32ReqName
-			Id64Gen implGetObjNameCalcInt64ReqName
 			FloatDef ErrorUnsupportedBaseModelAtomClass
 			DoubleDef ErrorUnsupportedBaseModelAtomClass
 			NumberDef ErrorUnsupportedBaseModelAtomClass
@@ -433,7 +448,6 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			TZDateDef ErrorUnsupportedBaseModelAtomClass
 			TZTimeDef ErrorUnsupportedBaseModelAtomClass
 			TZTimestampDef ErrorUnsupportedBaseModelAtomClass
-			UuidGen implGetObjNameCalcUuidReqName
 			UuidDef implGetObjNameCalcUuidReqName
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
@@ -441,6 +455,23 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		>$switch BaseModelAtomClass
 			BlobDef ErrorUnsupportedBaseModelAtomClass
 			BoolDef implGetObjNameCalcBoolOptName
+			Id16Gen implGetObjNameCalcInt16OptName
+			Id32Gen implGetObjNameCalcInt32OptName
+			Id64Gen implGetObjNameCalcInt64OptName
+			DbKeyHash128Gen implGetObjNameCalcDbKeyHash128OptName
+			DbKeyHash160Gen implGetObjNameCalcDbKeyHash160OptName
+			DbKeyHash224Gen implGetObjNameCalcDbKeyHash224OptName
+			DbKeyHash256Gen implGetObjNameCalcDbKeyHash256OptName
+			DbKeyHash384Gen implGetObjNameCalcDbKeyHash384OptName
+			DbKeyHash512Gen implGetObjNameCalcDbKeyHash512OptName
+			DbKeyHash128Def implGetObjNameCalcDbKeyHash128OptName
+			DbKeyHash160Def implGetObjNameCalcDbKeyHash160OptName
+			DbKeyHash224Def implGetObjNameCalcDbKeyHash224OptName
+			DbKeyHash256Def implGetObjNameCalcDbKeyHash256OptName
+			DbKeyHash384Def implGetObjNameCalcDbKeyHash384OptName
+			DbKeyHash512Def implGetObjNameCalcDbKeyHash512OptName
+			UuidGen implGetObjNameCalcUuidOptName
+			Uuid6Gen implGetObjNameCalcUuid6OptName
 			EnumDef implGetObjNameCalcInt16OptName
 			Int16Def implGetObjNameCalcInt16OptName
 			Int32Def implGetObjNameCalcInt32OptName
@@ -448,9 +479,6 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			UInt16Def implGetObjNameCalcUInt16OptName
 			UInt32Def implGetObjNameCalcUInt32OptName
 			UInt64Def implGetObjNameCalcUInt64OptName
-			Id16Gen implGetObjNameCalcInt16OptName
-			Id32Gen implGetObjNameCalcInt32OptName
-			Id64Gen implGetObjNameCalcInt64OptName
 			FloatDef ErrorUnsupportedBaseModelAtomClass
 			DoubleDef ErrorUnsupportedBaseModelAtomClass
 			NumberDef ErrorUnsupportedBaseModelAtomClass
@@ -465,7 +493,6 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			TZDateDef ErrorUnsupportedBaseModelAtomClass
 			TZTimeDef ErrorUnsupportedBaseModelAtomClass
 			TZTimestampDef ErrorUnsupportedBaseModelAtomClass
-			UuidGen implGetObjNameCalcUuidOptName
 			UuidDef implGetObjNameCalcUuidOptName
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
@@ -502,6 +529,119 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		short val = get$OptionalOrRequired$$Name$();
 		objName = Short.toString( val );</GenRule>
 
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash128ReqName">
+		CFLibDbKeyHash128 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash160ReqName">
+		CFLibDbKeyHash128 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash224ReqName">
+		CFLibDbKeyHash224 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash256ReqName">
+		CFLibDbKeyHash256 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash384ReqName">
+		CFLibDbKeyHash384 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash512ReqName">
+		CFLibDbKeyHash512 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcUuid6ReqName">
+		CFLibUuid6 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash128OptName">
+		CFLibDbKeyHash128 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash160OptName">
+		CFLibDbKeyHash128 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash224OptName">
+		CFLibDbKeyHash224 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash256OptName">
+		CFLibDbKeyHash256 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash384OptName">
+		CFLibDbKeyHash384 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash512OptName">
+		CFLibDbKeyHash512 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcUuid6OptName">
+		CFLibUuid6 val = get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = val.toString();
+		}
+		else {
+			objName = "";
+		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcInt16OptName">
 		Short val = get$OptionalOrRequired$$Name$();
 		if( val == null ) {
