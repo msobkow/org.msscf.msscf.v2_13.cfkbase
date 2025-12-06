@@ -41,7 +41,7 @@
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
-		BasePackageName="$reference ManufacturingSchema lower JavaPackage$/src/main"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.buff"
 		ExpansionClassName="$SchemaName$BuffSchemaJava"
 		ExpansionKeyName="$SchemaName$BuffSchemaJava"
@@ -61,7 +61,7 @@ import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
-import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
+import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;
 
 public class $SchemaName$BuffSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
@@ -180,224 +180,21 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 	<GenRule GenDef="EnumTag" Name="implBuffSchemaBuffParseEnumAddOrdinalTagToMap">
 			newMap.put( Integer.valueOf( $popto EnumDef Name$.$Name$.ordinal() ), $popto EnumDef Name$.$Name$ );</GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="commaNewlineSchemaSchemaImplementsInterface">,
-		I$reference RefSchema SchemaName$Schema</GenRule>
-
 	<GenRule GenDef="SchemaDef" Name="implBuffSchemaMoreMethods"
-		>$implBuffSchemaSchemaConstructor$$implBuffSchemaGetCFTipClientHandler$$iterate SchemaRefs( first implBuffSchemaConfigurationFileAccessors each empty empty implBuffSchemaConfigurationFileAccessors )$$implBuffSchemaAuthorizationAccessors$$iterate SchemaRefs( first implBuffSchemaJndiNameAccessors each empty empty implBuffSchemaJndiNameAccessors )$$iterate SchemaRefs( first implBuffSchemaConnectionMethods each empty empty implBuffSchemaConnectionMethods )$$iterate SchemaRefs( first implBuffSchemaNewSchema each empty empty implBuffSchemaNewSchema )$$iterate SchemaRefs( first implBuffSchemaFileImport each empty empty implBuffSchemaFileImport )$$iterate Id16Generators( each implNextIdGen empty empty)$$iterate Id32Generators( each implNextIdGen empty empty)$$iterate Id64Generators( each implNextIdGen empty empty)$$iterate UuidGenerators( each implNextIdGen empty empty )$$iterate SchemaTables(
+		>$implBuffSchemaSchemaConstructor$$implBuffSchemaAuthorizationAccessors$$iterate SchemaRefs( first implBuffSchemaNewSchema each empty empty implBuffSchemaNewSchema )$$iterate SchemaRefs( first implBuffSchemaFileImport each empty empty implBuffSchemaFileImport )$$iterate Id16Generators( each implNextIdGen empty empty)$$iterate Id32Generators( each implNextIdGen empty empty)$$iterate Id64Generators( each implNextIdGen empty empty)$$iterate UuidGenerators( each implNextIdGen empty empty )$$iterate SchemaTables(
 						each implTableMethods empty empty )$</GenRule>
 
-	<GenRule GenDef="SchemaDef" Name="implBuffSchemaGetCFTipClientHandler">
-	/**
-	 *	The majority of cases do not have a CFTipClientHandler
-	 *	associated with it's persistence implementation.
-	 *	Only the XMsg client implementations overload this
-	 *	to return the actual CFTipClientHandler associated
-	 *	with the connection instance.
-	 */
-	public CFTipClientHandler getCFTipClientHandler() {
-		return( null );
-	}
+	<GenRule GenDef="Table" Name="declSchemaBuffTableTableMember">
+	protected I$DefSchemaName$$TableName$Table table$TableName$;</GenRule>
 
-	public String getServerURL() {
-		return( null );
-	}
+	<GenRule GenDef="Table" Name="declSchemaBuffTableFactoryMember">
+	protected I$DefSchemaName$$TableName$Factory factory$TableName$;</GenRule>
 
-	public void setServerURL( String value ) {
-	}
-</GenRule>
+	<GenRule GenDef="Table" Name="initSchemaBuffTableTableMember">
+	table$TableName$ = new $DefSchemaName$Buff$TableName$Table();</GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="implBuffSchemaReleasePreparedStatements"
-		>$reference RefSchema implBuffSchemaReleasePreparedStatements$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implBuffSchemaReleasePreparedStatements">
-	/**
-	 *	Release any prepared statements bound to this database instance, such
-	 *	that the value of schemaDbName has to be re-evaluated for all future
-	 *	invocations.
-	 */
-	public void releasePreparedStatements() {
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffSchemaReleasePreparedStatements">
-	/**
-	 *	Release any prepared statements bound to this database instance, such
-	 *	that the value of schemaDbName has to be re-evaluated for all future
-	 *	invocations.
-	 */
-	public void releasePreparedStatements() {
-	}
-</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="implBuffSchemaSchemaGetSetDbSchemaNameMethods"
-		>$reference RefSchema implBuffSchemaSchemaGetSetDbSchemaNameMethods$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implBuffSchemaSchemaGetSetDbSchemaNameMethods">
-	/**
-	 *	When you first connect to a database, you can opt to specify a database
-	 *	schema name to be used by the session.  The implementation code must always
-	 *	be dynamically based on the invocation of &lt;tt&gt;String getDbSchemaName()&lt;/tt&gt;
-	 *	at runtime.
-	 *	&lt;p&gt;
-	 *	The initial value is defined by the implementing schema model which has inherited
-	 *	the expression of the current schema model being expanded.  That is, it is specified
-	 *	in the DbSchemaName attribute of a SchemaDef instance.
-	 */
-	public String getDbSchemaName() {
-		return( schemaDbName );
-	}
-
-	public String getLowerDbSchemaName() {
-		return( lowerDbSchemaName );
-	}
-
-	/**
-	 *	The database is expected to override this implementation and invoke the
-	 *	&lt;tt&gt;super.setDbSchemaName( String argDbSchemaName )&lt;/tt&gt; early
-	 *	on in the implementation of the cust body.  You should let the exceptions
-	 *	which can be thrown by this implementation pass unimpeded.
-	 *	&lt;pg&gt;
-	 *	When you set the database schema name, the database-specific implementation
-	 *	of this method does a "commit; use database"-type sequence to change
-	 *	to the target database.  This should be specified globally for all
-	 *	database connections in a given cluster, so that all of
-	 *	the application implementation clients are using the same database instance
-	 *	regardless of what's been provided by the cust client implementation,
-	 *	be it as a Java application or a web interface written using JEE.
-	 */
-	public void setDbSchemaName( String argDbSchemaName ) {
-		final String S_ProcName = "setDbSchemaName";
-		if( ( argDbSchemaName == null ) || ( argDbSchemaName.length() &lt;= 0 ) ) {
-			throw new CFLibNullArgumentException( getClass(),
-				S_ProcName,
-				1,
-				"argDbSchemaName" );
-		}
-		schemaDbName = argDbSchemaName;
-		lowerDbSchemaName = schemaDbName.toLowerCase();
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffSchemaSchemaGetSetDbSchemaNameMethods">
-	/**
-	 *	When you first connect to a database, you can opt to specify a database
-	 *	schema name to be used by the session.  The implementation code must always
-	 *	be dynamically based on the invocation of &lt;tt&gt;String getDbSchemaName()&lt;/tt&gt;
-	 *	at runtime.
-	 *	&lt;p&gt;
-	 *	The initial value is defined by the implementing schema model which has inherited
-	 *	the expression of the current schema model being expanded.  That is, it is specified
-	 *	in the DbSchemaName attribute of a SchemaDef instance.
-	 */
-	public String getDbSchemaName() {
-		return( schemaDbName );
-	}
-
-	public String getLowerDbSchemaName() {
-		return( lowerDbSchemaName );
-	}
-
-	/**
-	 *	The database is expected to override this implementation and invoke the
-	 *	&lt;tt&gt;super.setDbSchemaName( String argDbSchemaName )&lt;/tt&gt; early
-	 *	on in the implementation of the cust body.  You should let the exceptions
-	 *	which can be thrown by this implementation pass unimpeded.
-	 *	&lt;pg&gt;
-	 *	When you set the database schema name, the database-specific implementation
-	 *	of this method does a "commit; use database"-type sequence to change
-	 *	to the target database.  This should be specified globally for all
-	 *	database connections in a given cluster, so that all of
-	 *	the application implementation clients are using the same database instance
-	 *	regardless of what's been provided by the cust client implementation,
-	 *	be it as a Java application or a web interface written using JEE.
-	 */
-	public void setDbSchemaName( String argDbSchemaName ) {
-		final String S_ProcName = "setDbSchemaName";
-		if( ( argDbSchemaName == null ) || ( argDbSchemaName.length() &lt;= 0 ) ) {
-			throw new CFLibNullArgumentException( getClass(),
-				S_ProcName,
-				1,
-				"argDbSchemaName" );
-		}
-		schemaDbName = argDbSchemaName;
-		lowerDbSchemaName = schemaDbName.toLowerCase();
-	}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="implBuffSchemaInvokeReleasePreparedStatements">
-		if( table$TableName$ != null ) {
-			table$TableName$.releasePreparedStatements();
-		}</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="implBuffSchemaCommitControl"
-		>$reference RefSchema implBuffSchemaCommitControl$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implBuffSchemaCommitControl">
-	public boolean isTransactionOpen() {
-		throw new CFLibMustOverrideException( getClass(), "isTransactionOpen" );
-	}
-
-	public boolean beginTransaction() {
-		throw new CFLibMustOverrideException( getClass(), "beginTransaction" );
-	}
-
-	public void commit() {
-		throw new CFLibMustOverrideException( getClass(), "commit" );
-	}
-
-	public void rollback() {
-		throw new CFLibMustOverrideException( getClass(), "rollback" );
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffSchemaCommitControl">
-	public boolean isTransactionOpen() {
-		throw new CFLibMustOverrideException( getClass(), "isTransactionOpen" );
-	}
-
-	public boolean beginTransaction() {
-		throw new CFLibMustOverrideException( getClass(), "beginTransaction" );
-	}
-
-	public void commit() {
-		throw new CFLibMustOverrideException( getClass(), "commit" );
-	}
-
-	public void rollback() {
-		throw new CFLibMustOverrideException( getClass(), "rollback" );
-	}
-</GenRule>
-
-	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="implNextIdGen">
-	public short next$Name$() {
-		throw new CFLibNotImplementedYetException( getClass(), "next$Name$" );
-	}
-</GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="implNextIdGen">
-	public int next$Name$() {
-		throw new CFLibNotImplementedYetException( getClass(), "next$Name$" );
-	}
-</GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="implNextIdGen">
-	public long next$Name$() {
-		throw new CFLibNotImplementedYetException( getClass(), "next$Name$" );
-	}
-</GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="implNextIdGen">
-	public UUID next$Name$() {
-		UUID retval = UUID.randomUUID();
-		return( retval );
-	}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="declSchemaBuffTableTableMember"
->	protected I$DefSchemaName$$TableName$Table table$TableName$;
-</GenRule>
-
-	<GenRule GenDef="Table" Name="declSchemaBuffTableFactoryMember"
->	protected I$DefSchemaName$$TableName$Factory factory$TableName$;
-</GenRule>
+	<GenRule GenDef="Table" Name="initSchemaBuffTableFactoryMember">
+	factory$TableName$ = new $DefSchemaName$Buff$TableName$Factory();</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableMethods"
 		>$implBuffSchemaTableTableAccessors$$implBuffSchemaTableFactoryAccessors$</GenRule>
@@ -406,11 +203,11 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 		>$popto SchemaDef implBuffSchemaAuthorizationAccessors$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implBuffSchemaAuthorizationAccessors">
-	public $SecSchemaName$Authorization getAuthorization() {
+	public I$SecSchemaName$Authorization getAuthorization() {
 		return( authorization );
 	}
 
-	public void setAuthorization( $SecSchemaName$Authorization value ) {
+	public void setAuthorization( I$SecSchemaName$Authorization value ) {
 		authorization = value;
 	}
 </GenRule>
@@ -443,7 +240,7 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 	 *	Import the contents of the specified file name
 	 *	and file contents by applying a SAX Loader parse.
 	 */
-	public String fileImport( $SecSchemaName$Authorization auth, String fileName, String fileContent ) {
+	public String fileImport( I$SecSchemaName$Authorization auth, String fileName, String fileContent ) {
 		final String S_ProcName = "fileImport";
 		throw new CFLibNotImplementedYetException( getClass(),
 			S_ProcName,
@@ -456,7 +253,7 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 	 *	Import the contents of the specified file name
 	 *	and file contents by applying a SAX Loader parse.
 	 */
-	public String fileImport( $popto SchemaDef SecSchemaName$Authorization auth, String fileName, String fileContent ) {
+	public String fileImport( I$popto SchemaDef SecSchemaName$Authorization auth, String fileName, String fileContent ) {
 		final String S_ProcName = "fileImport";
 		throw new CFLibNotImplementedYetException( getClass(),
 			S_ProcName,
@@ -476,8 +273,8 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 
 	<GenRule GenDef="Object" Name="implBuffSchemaSchemaConstructor">
 	public $poptop SchemaDef SchemaName$BuffSchema() {
-$poptop SchemaDef iterate SchemaTables( each initSchemaTableTableMember )$
-$poptop SchemaDef iterate SchemaTables( each initSchemaTableFactoryMember )
+$poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
+$poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableFactoryMember )
 $	}
 </GenRule>
 
@@ -495,134 +292,6 @@ $	}
 		throw new CFLibMustOverrideException( getClass(), "newSchema" );
 	}
 </GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implBuffSchemaJndiNameAccessors">
-	public String getJndiName() {
-		return( jndiName );
-	}
-
-	public void setJndiName( String value ) {
-		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
-			jndiName = null;
-		}
-		else {
-			configuration = null;
-			jndiName = value;
-		}
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffSchemaJndiNameAccessors">
-	public String getJndiName() {
-		return( jndiName );
-	}
-
-	public void setJndiName( String value ) {
-		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
-			jndiName = null;
-		}
-		else {
-			configuration = null;
-			jndiName = value;
-		}
-	}
-</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="implBuffSchemaConnectionMethods"
-		>$reference RefSchema implBuffSchemaConnectionMethods$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implBuffSchemaConnectionMethods">
-	public boolean isConnected() {
-		throw new CFLibMustOverrideException( getClass(), "isConnected" );
-	}
-
-	public boolean connect() {
-		throw new CFLibMustOverrideException( getClass(), "connect" );
-	}
-
-	public boolean connect( String username, String password ) {
-		throw new CFLibMustOverrideException( getClass(), "connect-userpw" );
-	}
-
-	public boolean connect( String loginId, String password, String clusterName, String tenantName ) {
-		throw new CFLibMustOverrideException( getClass(), "connect-full" );
-	}
-
-	public void disconnect( boolean doCommit ) {
-		throw new CFLibMustOverrideException( getClass(), "disconnect" );
-	}
-
-	public void logout( $SecSchemaName$Authorization auth ) {
-		throw new CFLibMustOverrideException( getClass(), "logout" );
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffSchemaConnectionMethods">
-	public boolean isConnected() {
-		throw new CFLibMustOverrideException( getClass(), "isConnected" );
-	}
-
-	public boolean connect() {
-		throw new CFLibMustOverrideException( getClass(), "connect" );
-	}
-
-	public boolean connect( String username, String password ) {
-		throw new CFLibMustOverrideException( getClass(), "connect-userpw" );
-	}
-
-	public boolean connect( String loginId, String password, String clusterName, String tenantName ) {
-		throw new CFLibMustOverrideException( getClass(), "connect-full" );
-	}
-
-	public void disconnect( boolean doCommit ) {
-		throw new CFLibMustOverrideException( getClass(), "disconnect" );
-	}
-
-	public void logout( $SecSchemaName$Authorization auth ) {
-		throw new CFLibMustOverrideException( getClass(), "logout" );
-	}
-</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="implBuffSchemaConfigurationFileAccessors"
-		>$reference RefSchema implBuffSchemaConfigurationFileAccessors$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implBuffSchemaConfigurationFileAccessors">
-	public $DefSchemaName$ConfigurationFile getConfigurationFile() {
-		return( configuration );
-	}
-
-	public void setConfigurationFile( $DefSchemaName$ConfigurationFile value ) {
-		if( value == null ) {
-			configuration = null;
-		}
-		else {
-			configuration = value;
-			jndiName = null;
-		}
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffSchemaConfigurationFileAccessors">
-	public $popto SchemaDef DefSchemaName$ConfigurationFile getConfigurationFile() {
-		return( configuration );
-	}
-
-	public void setConfigurationFile( $popto SchemaDef DefSchemaName$ConfigurationFile value ) {
-		if( value == null ) {
-			configuration = null;
-		}
-		else {
-			configuration = value;
-			jndiName = null;
-		}
-	}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="initSchemaTableTableMember">
-		table$TableName$ = null;</GenRule>
-
-	<GenRule GenDef="Table" Name="initSchemaTableFactoryMember">
-		factory$TableName$ = new $SchemaName$$TableName$DefaultFactory();</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implBuffSchemaXmlEncodeString">
 	public static String xmlEncodeString( String val ) {

@@ -59,26 +59,22 @@ import java.sql.*;
 import java.text.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
-import $lower JavaPackage$.$lower SchemaName$obj.I$SchemaName$ClusterObj;
-import $lower JavaPackage$.$lower SchemaName$obj.I$SchemaName$TenantObj;
-import $lower JavaPackage$.$lower SchemaName$obj.I$SchemaName$SecSessionObj;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import $lower reference ManufacturingSchema JavaPackage$.$lower reference ManufacturingSchema SchemaName$obj.I$reference ManufacturingSchema SchemaName$ClusterObj;
+import $lower reference ManufacturingSchema JavaPackage$.$lower reference ManufacturingSchema SchemaName$obj.I$reference ManufacturingSchema SchemaName$TenantObj;
+import $lower reference ManufacturingSchema JavaPackage$.$lower reference ManufacturingSchema SchemaName$obj.I$reference ManufacturingSchema SchemaName$SecSessionObj;
 
 /*
  *	A $SchemaName$Authorization is an authorization ticket
  *	for the system providing services.  Most modern authorizations
  *      are based on OAuth2 tickets, but I haven't gotten there yet...
  */
-public class $SchemaName$Authorization$iterate SchemaRefs( first SchemaAuthorizationInheritAuthorization each empty empty empty )$
-	implements Serializable
-{$iterate SchemaRefs( first SchemaAuthorizationInheritBody each empty empty SchemaAuthorizationImplBody )$}
+public class $SchemaName$Authorization implements I$SchemaName$Authorization, Serializable
+{$SchemaAuthorizationImplBody$}
 </GenFile>
 
-	<GenRule GenDef="SchemaRef" Name="SchemaAuthorizationInheritBody"
-		>$implAuthorizationInheritConstructor$</GenRule>
-
-	<GenRule GenDef="Object" Name="SchemaAuthorizationImplBody"
-		>$poptop SchemaDef implAuthorizationAttrCFLibUuid6$$poptop SchemaDef implAuthorizationAttrSecId$$poptop SchemaDef implAuthorizationConstructor$$poptop SchemaDef implAuthorizationCFLibUuid6Accessors$$poptop SchemaDef implAuthorizationSecIdAccessors$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="SchemaAuthorizationImplBody"
+		>$implAuthorizationAttrCFLibUuid6$$implAuthorizationAttrSecId$$implAuthorizationConstructor$$implAuthorizationCFLibUuid6Accessors$$implAuthorizationSecIdAccessors$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implAuthorizationAttrSecId">
 	protected long secClusterId = 0L;
@@ -86,9 +82,6 @@ public class $SchemaName$Authorization$iterate SchemaRefs( first SchemaAuthoriza
 	protected CFLibDbKeyHash256 secSessionId = new CFLibDbKeyHash256(0);
 	protected CFLibDbKeyHash256 secUserId = new CFLibDbKeyHash256(0);
 </GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="SchemaAuthorizationInheritAuthorization">
-	extends $SecSchemaName$Authorization</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implAuthorizationAttrCFLibUuid6">
 	protected CFLibUuid6 authUuid6;
@@ -99,12 +92,6 @@ public class $SchemaName$Authorization$iterate SchemaRefs( first SchemaAuthoriza
 	public $SchemaName$Authorization() {
 		authUuid6 = CFLibUuid6.generateUuid6();
 		authUuid6Str = authUuid6.toString();
-	}
-</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="implAuthorizationInheritConstructor">
-	public $SchemaName$Authorization() {
-		super();
 	}
 </GenRule>
 
