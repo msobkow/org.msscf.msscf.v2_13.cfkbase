@@ -174,7 +174,13 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declRecPKey
 		>$switch HasSuperClassRelation yes declISchemaTableRecDataInitValues default declISchemaTableRecAllInitValues$</GenRule>
 	
 	<GenRule GenDef="Table" Name="declISchemaTableRecDataInitValues">$iterate DataColumns( each maybeDeclInitValue empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="declISchemaTableRecAllInitValues">$iterate Columns( each maybeDeclInitValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableRecAllInitValues">$switch HasAuditColumns yes declAuditColumnInitValues default empty$$iterate Columns( each maybeDeclInitValue empty empty )$</GenRule>
+
+        <GenRule GenDef="Table" Name="declAuditColumnInitValues">
+        public static final String S_INIT_CREATED_BY = "0000000000000000000000000000000000000000000000000000000000000000";
+        public static final CFLibDbKeyHash256 INIT_CREATED_BY = CFLibDbKeyHash256.fromHex(S_INIT_CREATED_BY);
+        public static final String S_INIT_UPDATED_BY = "0000000000000000000000000000000000000000000000000000000000000000";
+        public static final CFLibDbKeyHash256 INIT_UPDATED_BY = CFLibDbKeyHash256.fromHex(S_INIT_UPDATED_BY);</GenRule>
 
 	<GenRule GenDef="Object" Name="declISchemaTableRecColumns"
 		>$popto Table declISchemaTableRecColumns$</GenRule>
@@ -187,16 +193,6 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declRecPKey
 
 	<GenRule GenDef="Table" Name="maybeDeclRecOptImplAuditColumnAccessors">$switch HasSuperClassRelation no declRecOptDeclAuditColumnAccessors default empty$</GenRule>
 	<GenRule GenDef="Table" Name="declRecOptDeclAuditColumnAccessors">$switch HasAuditColumns yes declColumnOptAuditGetterSetters default empty$</GenRule>
-
-	<GenRule GenDef="Table" Name="maybeImplRecOptDeclInitAuditColumns">$switch HasSuperClassRelation yes empty default declRecOptDeclInitAuditColumns$</GenRule>
-	<GenRule GenDef="Table" Name="declRecOptDeclInitAuditColumns"
-		>$switch HasAuditColumns yes declRecDeclInitAuditColumns default empty$</GenRule>
-
-	<GenRule GenDef="Table" Name="declRecDeclInitAuditColumns">
-	public final static String S_INIT_CREATEDBY = "0000000000000000000000000000000000000000000000000000000000000001";
-	public final static CFLibDbKeyHash256 INIT_CREATEDBY = CFLibDbKeyHash256.fromHex( S_INIT_CREATEDBY );
-	public final static String S_INIT_UPDATEDBY = "0000000000000000000000000000000000000000000000000000000000000001";
-	public final static CFLibDbKeyHash256 INIT_UPDATEDBY = CFLibDbKeyHash256.fromHex( S_INIT_UPDATEDBY );</GenRule>
 
 	<GenRule GenDef="Value" Name="maybeDeclInitValue"
 		>$switch BaseModelAtomClass

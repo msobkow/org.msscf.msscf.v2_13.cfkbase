@@ -72,7 +72,7 @@ import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$l
 	}
 )$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$jpaPersistenceContext$
 public class $SchemaName$Jpa$TableName$$switch HasDefSchema yes extendSchemaJpaTableJPA default extendSchemaJpaTableJPASuperJPA$$switch HasDefSchema yes empty default maybeImplSchemaJpaTableComparable$
-{$switch HasDefSchema yes empty default declSchemaJpaTableJPAMinValues$$switch HasDefSchema yes empty default declSchemaJpaTableJPAMaxValues$$switch HasDefSchema yes empty default declSchemaJpaTableJPAInitValues$$switch HasDefSchema no implJpaStaticClassCode default empty$$switch HasDefSchema no maybeImplJPAOptDeclInitAuditColumns default empty$$switch HasDefSchemaOrSuper no implCompactedPrimaryIndexClassJPAAttr default empty$$switch HasDefSchemaOrSuper no implJpaRequiredRevisionAttr default empty$$switch HasDefSchema yes empty default declSchemaJpaTableJPAColumns$
+{$switch HasDefSchemaOrSuper no implCompactedPrimaryIndexClassJPAAttr default empty$$switch HasDefSchemaOrSuper no implJpaRequiredRevisionAttr default empty$$switch HasDefSchema yes empty default declSchemaJpaTableJPAColumns$
 $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSchemaJpaTableJPABaseConstruct$$switch HasDefSchema no implJpaGetClassCode default empty$$switch HasDefSchema no maybeImplOptAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$implSchemaJpaTableToString$}
 </GenFile>
 
@@ -187,8 +187,8 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 	<GenRule GenDef="Index" Name="maybeImplEqualsCmpKey"
 		>$switch IsPrimaryIndex yes empty default implEqualsCmpKey$</GenRule>
 	<GenRule GenDef="Index" Name="implEqualsCmpKey">
-		else if( obj instanceof $SchemaName$Jpa$TableName$By$Suffix$Key ) {
-			$SchemaName$Jpa$TableName$By$Suffix$Key rhs = ($SchemaName$Jpa$TableName$By$Suffix$Key)obj;$iterate Columns( each implEqualsCmpAttr )$
+		else if( obj instanceof I$SchemaName$\$TableName$By$Suffix$Key ) {
+			I$SchemaName$$TableName$By$Suffix$Key rhs = (I$SchemaName$$TableName$By$Suffix$Key)obj;$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
 		}</GenRule>
 
@@ -230,16 +230,6 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 	<GenRule GenDef="Table" Name="maybeImplOptAuditColumnAccessors">$switch HasSuperClassRelation no implOptAuditColumnAccessors default empty$</GenRule>
 	<GenRule GenDef="Table" Name="implOptAuditColumnAccessors">$switch HasAuditColumns yes implColumnOptAuditGetterSetters default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="maybeImplJPAOptDeclInitAuditColumns">$switch HasSuperClassRelation yes empty default implJpaOptDeclInitAuditColumns$</GenRule>
-	<GenRule GenDef="Table" Name="implJpaOptDeclInitAuditColumns"
-		>$switch HasAuditColumns yes implJpaDeclInitAuditColumns default empty$</GenRule>
-
-	<GenRule GenDef="Table" Name="implJpaDeclInitAuditColumns">
-	public final static String S_INIT_CREATEDBY = "654dbba0-eda7-11e1-aff1-0800200c9a66";
-	public final static CFLibDbKeyHash256 INIT_CREATEDBY = CFLibDbKeyHash256.fromHex( S_INIT_CREATEDBY );
-	public final static String S_INIT_UPDATEDBY = "654dbba0-eda7-11e1-aff1-0800200c9a66";
-	public final static CFLibDbKeyHash256 INIT_UPDATEDBY = CFLibDbKeyHash256.fromHex( S_INIT_UPDATEDBY );</GenRule>
-
 	<GenRule GenDef="Index" Name="maybeImplJPAComparableToIndex"
 		>$switch IsPrimaryIndex yes empty default implJpaComparableToIndex$</GenRule>
 
@@ -263,7 +253,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 	@AttributeOverrides({
 		@AttributeOverride( name="bytes", column = @Column( name="CreatedByUserId", nullable=false, length=CFLibDbKeyHash256.HASH_LENGTH ) )
 	})
-	protected CFLibDbKeyHash256 createdByUserId = $SchemaName$Jpa$TableName$.INIT_CREATEDBY;
+	protected CFLibDbKeyHash256 createdByUserId = CFLibDbKeyHash256.fromHex(I$SchemaName$$TableName$.S_INIT_CREATED_BY);
 
 	@Column(name="CreatedAt", nullable=false)
 	protected LocalDateTime createdAt = LocalDateTime.now();
@@ -271,7 +261,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 	@AttributeOverrides({
 		@AttributeOverride( name="bytes", column= @Column( name="UpdatedByUserId", nullable=false, length=CFLibDbKeyHash256.HASH_LENGTH ) )
 	})
-	protected CFLibDbKeyHash256 updatedByUserId = $SchemaName$Jpa$TableName$.INIT_UPDATEDBY;
+	protected CFLibDbKeyHash256 updatedByUserId = CFLibDbKeyHash256.fromHex(I$SchemaName$$TableName$.S_INIT_UPDATED_BY);
 
 	@Column(name="UpdatedAt", nullable=false)
 	protected LocalDateTime updatedAt = LocalDateTime.now();</GenRule>
@@ -366,8 +356,8 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 		if (obj == null) {
 			return( false );
 		}
-		else if (obj instanceof $SchemaName$Jpa$TableName$) {$switch HasSuperClassRelation yes implJpaEqualsSuper default empty$
-			$SchemaName$Jpa$TableName$ rhs = ($SchemaName$Jpa$TableName$)obj;$switch HasSuperClassRelation yes implJpaEqualsDataCols default implJpaEqualsAllCols$
+		else if (obj instanceof I$SchemaName$$TableName$) {$switch HasSuperClassRelation yes implJpaEqualsSuper default empty$
+			I$SchemaName$$TableName$ rhs = (I$SchemaName$$TableName$)obj;$switch HasSuperClassRelation yes implJpaEqualsDataCols default implJpaEqualsAllCols$
 			return( true );
 		}$switch BaseHasHistory yes implJpaEqualsHistoryObjects default empty$$iterate Index( each maybeImplSchemaJpaTableEqualsIndexKey empty empty )$
 		else {$switch HasSuperClassRelation yes implJpaEqualsReturnSuperEquals default implJpaEqualsReturnFalse$
@@ -384,11 +374,11 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 	<GenRule GenDef="Table" Name="implJpaEqualsAllCols">$implJpaEqualsOptAuditColumns$$iterate Columns( each implEqualsCmpAttr )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaEqualsHistoryObjects">
-		else if (obj instanceof $SchemaName$Jpa$TableName$H) {$switch HasSuperClassRelation yes implJpaEqualsSuper default empty$
-			$SchemaName$Jpa$TableName$H rhs = ($SchemaName$Jpa$TableName$H)obj;$switch HasSuperClassRelation yes implJpaEqualsDataCols default implJpaEqualsAllCols$
+		else if (obj instanceof I$DefSchemaName$$TableName$H) {$switch HasSuperClassRelation yes implJpaEqualsSuper default empty$
+			I$DefSchemaName$$TableName$H rhs = (I$DefSchemaName$$TableName$H)obj;$switch HasSuperClassRelation yes implJpaEqualsDataCols default implJpaEqualsAllCols$
 			return( true );
 		}
-		else if (obj instanceof $reference BaseClass SchemaName$$reference BaseClass TableName$HPKey) {$switch HasSuperClassRelation yes implJpaEqualsReturnSuperEquals default implJpaEqualsHPKeyCols$
+		else if (obj instanceof I$reference BaseClass DefSchemaName$$reference BaseClass TableName$HPKey) {$switch HasSuperClassRelation yes implJpaEqualsReturnSuperEquals default implJpaEqualsHPKeyCols$
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaEqualsSuper">
@@ -397,16 +387,16 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaEqualsHPKeyCols">
-			$SchemaName$Jpa$TableName$HPKey rhs = ($SchemaName$Jpa$TableName$HPKey)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr )$
+			I$SchemaName$$TableName$HPKey rhs = (I$SchemaName$$TableName$HPKey)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr )$
 			return( true );</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaEqualsPKeyCols">
-			$SchemaName$Jpa$TableName$PKey rhs = ($SchemaName$Jpa$TableName$PKey)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr )$</GenRule>
+			I$SchemaName$$TableName$PKey rhs = (I$SchemaName$$TableName$PKey)obj;$reference PrimaryKeyIndex iterate Columns( each implEqualsCmpAttr )$</GenRule>
 
 	<GenRule GenDef="Index" Name="maybeImplSchemaJpaTableEqualsIndexKey">$switch IsPrimaryIndex yes empty default implSchemaJpaTableEqualsIndexKey$</GenRule>
 	<GenRule GenDef="Index" Name="implSchemaJpaTableEqualsIndexKey">
-		else if (obj instanceof $SchemaName$Jpa$TableName$By$Suffix$Key) {
-			$SchemaName$Jpa$TableName$By$Suffix$Key rhs = ($SchemaName$Jpa$TableName$By$Suffix$Key)obj;$iterate Columns( each implEqualsCmpAttr )$
+		else if (obj instanceof I$SchemaName$$TableName$By$Suffix$Key) {
+			I$SchemaName$$TableName$By$Suffix$Key rhs = (I$SchemaName$$TableName$By$Suffix$Key)obj;$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
 		}</GenRule>
 
@@ -472,7 +462,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 		if (obj == null) {
 			return( 1 );
 		}
-		else if (obj instanceof $SchemaName$Jpa$TableName$) {$switch HasSuperClassRelation yes implJpaCompareToSuper default implJpaComparePKeys$$switch HasSuperClassRelation no implJpaCompareOptAuditColumns default empty$$iterate DataColumns( each implCompareToAttr empty empty )$
+		else if (obj instanceof I$SchemaName$$TableName$) {$switch HasSuperClassRelation yes implJpaCompareToSuper default implJpaComparePKeys$$switch HasSuperClassRelation no implJpaCompareOptAuditColumns default empty$$iterate DataColumns( each implCompareToAttr empty empty )$
 			return( 0 );
 		}$switch BaseHasHistory yes implJpaCompareToHistory default empty$$iterate Index( each maybeImplSchemaJpaTableCompareToIndexKey)$
 		else {$switch HasSuperClassRelation yes implJpaCompareToSuperAndRetCmp default implJpaCompareToThrowUnsupportedClass$
@@ -496,15 +486,15 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 			if (retval != 0) {
 				return( retval );
 			}
-			$SchemaName$Jpa$TableName$ rhs = ($SchemaName$Jpa$TableName$)obj;</GenRule>
+			I$SchemaName$$TableName$ rhs = (I$SchemaName$$TableName$)obj;</GenRule>
 	<GenRule GenDef="Table" Name="implJpaCompareToSuperH">
 			retval = super.compareTo(obj);
 			if (retval != 0) {
 				return( retval );
 			}
-			$SchemaName$Jpa$TableName$H rhs = ($SchemaName$Jpa$TableName$H)obj;</GenRule>
+			$ISchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;</GenRule>
 	<GenRule GenDef="Table" Name="implJpaComparePKeys">
-			$SchemaName$Jpa$TableName$ rhs = ($SchemaName$Jpa$TableName$)obj;
+			I$SchemaName$$TableName$ rhs = (I$SchemaName$$TableName$)obj;
 			if (getPKey() == null) {
 				if (rhs.getPKey() != null) {
 					return( -1 );
@@ -522,22 +512,22 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 				}
 			}</GenRule>
 	<GenRule GenDef="Table" Name="implJpaComparePKeysH">
-			$SchemaName$Jpa$TableName$H rhs = ($SchemaName$Jpa$TableName$H)obj;$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$</GenRule>
+			I$SchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$</GenRule>
 	<GenRule GenDef="Table" Name="implJpaCompareToSchemaJpaTableHPKey">
-		else if (obj instanceof $reference BaseClass SchemaName$$reference BaseClass TableName$HPKey) {
-			$reference BaseClass SchemaName$$reference BaseClass TableName$HPKey rhs = ($reference BaseClass SchemaName$$reference BaseClass TableName$HPKey)obj;$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
+		else if (obj instanceof I$reference BaseClass SchemaName$$reference BaseClass TableName$HPKey) {
+			I$reference BaseClass SchemaName$$reference BaseClass TableName$HPKey rhs = (I$reference BaseClass SchemaName$$reference BaseClass TableName$HPKey)obj;$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
 			return( 0 );
 		}</GenRule>
 	<GenRule GenDef="Table" Name="implJpaCompareToSchemaJpaTableH">
-		else if( obj instanceof $SchemaName$Jpa$TableName$H ) {$switch HasSuperClassRelation yes implJpaCompareToSuperH default implJpaComparePKeysH$$switch HasSuperClassRelation no implJpaCompareOptAuditColumns default empty$$iterate DataColumns( each implCompareToAttr empty empty )$
+		else if( obj instanceof I$SchemaName$$TableName$H ) {$switch HasSuperClassRelation yes implJpaCompareToSuperH default implJpaComparePKeysH$$switch HasSuperClassRelation no implJpaCompareOptAuditColumns default empty$$iterate DataColumns( each implCompareToAttr empty empty )$
 			return( 0 );
 		}</GenRule>
 
 	<GenRule GenDef="Index" Name="maybeImplSchemaJpaTableCompareToIndexKey">$switch IsPrimaryIndex yes empty default implJpaCompareToIndexKey$</GenRule>
 
 	<GenRule GenDef="Index" Name="implJpaCompareToIndexKey">
-		else if (obj instanceof $SchemaName$Jpa$TableName$By$Suffix$Key) {
-			$SchemaName$Jpa$TableName$By$Suffix$Key rhs = ($SchemaName$Jpa$TableName$By$Suffix$Key)obj;$iterate Columns( each implCompareToAttr empty empty )$
+		else if (obj instanceof I$SchemaName$$TableName$By$Suffix$Key) {
+			I$SchemaName$$TableName$By$Suffix$Key rhs = (I$SchemaName$$TableName$By$Suffix$Key)obj;$iterate Columns( each implCompareToAttr empty empty )$
 			return( 0 );
 		}</GenRule>
 
@@ -594,15 +584,15 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 		>$switch IsPrimaryIndex yes empty default implJpaCompareToIndex$</GenRule>
 
 	<GenRule GenDef="Index" Name="implJpaCompareToIndex">
-		else if( obj instanceof $SchemaName$Jpa$TableName$By$Suffix$Key ) {
+		else if( obj instanceof I$SchemaName$$TableName$By$Suffix$Key ) {
 			$SchemaName$Jpa$TableName$By$Suffix$Key rhs = ($SchemaName$Jpa$TableName$By$Suffix$Key)obj;
 $iterate Columns( each implCompareToAttr )
 $			return( 0 );
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaSetWithCast">
-		if( src instanceof $DefSchemaName$Jpa$TableName$ ) {
-			set$TableName$( ($DefSchemaName$Jpa$TableName$)src );
+		if( src instanceof I$DefSchemaName$$TableName$ ) {
+			set$TableName$( (I$DefSchemaName$$TableName$)src );
 		}
 		else {
 			throw new CFLibUnsupportedClassException( getClass(),
@@ -616,18 +606,18 @@ $			return( 0 );
 		set$TableName$( src );</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaSet">
-	public void set( $reference BaseClass DefSchemaName$$reference BaseClass TableName$ src ) {$switch HasSuperClassRelation yes implJpaSetWithCast default implJpaSetDirect$
+	public void set( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ src ) {$switch HasSuperClassRelation yes implJpaSetWithCast default implJpaSetDirect$
 	}
 
-	public void set$TableName$( $DefSchemaName$Jpa$TableName$ src ) {$switch HasSuperClassRelation yes implJpaSetInvokeSuper default implJpaSetCopyPKey$$switch HasSuperClassRelation no implJpaSetOptAuditColumns default empty$$iterate Columns( each implJpaSetCopyDataCol )$$switch HasSuperClassRelation no implJpaSetCopyRevision default empty$
+	public void set$TableName$( I$DefSchemaName$$TableName$ src ) {$switch HasSuperClassRelation yes implJpaSetInvokeSuper default implJpaSetCopyPKey$$switch HasSuperClassRelation no implJpaSetOptAuditColumns default empty$$iterate Columns( each implJpaSetCopyDataCol )$$switch HasSuperClassRelation no implJpaSetCopyRevision default empty$
 	}
 $switch BaseHasHistory yes implJpaSetHistory default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaSetHistory">
-	public void set( $reference BaseClass DefSchemaName$$reference BaseClass TableName$H src ) {$switch HasSuperClassRelation yes implHJPASetWithCast default implJpaSetDirect$
+	public void set( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$H src ) {$switch HasSuperClassRelation yes implHJPASetWithCast default implJpaSetDirect$
 	}
 
-	public void set$TableName$( $DefSchemaName$Jpa$TableName$H src ) {$switch HasSuperClassRelation yes implJpaSetInvokeSuper default implJpaSetCopyPKey$$iterate Columns( each implJpaSetCopyDataCol )$
+	public void set$TableName$( I$DefSchemaName$$TableName$H src ) {$switch HasSuperClassRelation yes implJpaSetInvokeSuper default implJpaSetCopyPKey$$iterate Columns( each implJpaSetCopyDataCol )$
 	}
 </GenRule>
 
