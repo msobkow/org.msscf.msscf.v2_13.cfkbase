@@ -35,7 +35,7 @@
 	ToolSet="java"
 	Name="src/schema/ISchemaTable.java"
 	Revision="3.0"
-	Descr="Java interface for a $TableName$ entity or buffer">
+	Descr="Java interface for a $TableName$ record implementation">
 
 	<GenFile GenDef="Table" Name="fileISchemaTableJava"
 			GenerateOnce="false"
@@ -46,7 +46,7 @@
 		ExpansionClassName="I$SchemaName$$TableName$Java"
 		ExpansionKeyName="I$SchemaName$$TableName$Java"
 		ExpansionFileName="I$SchemaName$$TableName$.java"
->// Description: Java interface for a $TableName$ entity or buffer
+>// Description: Java interface for a $TableName$ record implementation
 
 $MssSourceLicense$
 
@@ -63,9 +63,9 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 //import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
-public interface I$SchemaName$$TableName$$switch HasDefSchema yes extendSchemaXfcTableXfc default extendSchemaXfcTableXfcSuperXfc$
-{$switch HasDefSchema yes empty default declISchemaTableXfcMinValues$$switch HasDefSchema yes empty default declISchemaTableXfcMaxValues$$switch HasDefSchema yes empty default declISchemaTableXfcInitValues$$switch HasDefSchema no declXfcStaticClassCode default empty$
-$switch HasDefSchema no maybeDeclXfcGetClassCode default empty$$switch HasDefSchema no maybeDeclXfcOptImplAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no declColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no declRevisionGetterSetter default empty$$switch HasDefSchema no declDataGetterSetters default empty$$declEqualsObject$$declGetHashCode$$declCompareToObject$$declXfcSet$$declSchemaXfcTableToString$}
+public interface I$SchemaName$$TableName$$switch HasDefSchema yes extendSchemaRecTableRec default extendSchemaRecTableRecSuperRec$
+{$switch HasDefSchema yes empty default declISchemaTableRecMinValues$$switch HasDefSchema yes empty default declISchemaTableRecMaxValues$$switch HasDefSchema yes empty default declISchemaTableRecInitValues$$switch HasDefSchema no declRecStaticClassCode default empty$
+$switch HasDefSchema no maybeDeclRecGetClassCode default empty$$switch HasDefSchema no maybeDeclRecOptImplAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no declColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no declRevisionGetterSetter default empty$$switch HasDefSchema no declDataGetterSetters default empty$$declEqualsObject$$declGetHashCode$$declCompareToObject$$declRecSet$$declSchemaRecTableToString$}
 </GenFile>
 
 	<GenRule GenDef="Table" Name="declColumnOptAuditGetterSetters"
@@ -110,37 +110,37 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declPKeyAtt
 	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declISchemaTableXfcColumns">$switch HasSuperClassRelation no maybeDeclXfcOptAuditColumnAttrAccessors default empty$$iterate Columns( each maybeDeclSchemaXfcTableXfcDataColumn )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableRecColumns">$switch HasSuperClassRelation no maybeDeclRecOptAuditColumnAttrAccessors default empty$$iterate Columns( each maybeDeclSchemaRecTableRecDataColumn )$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="maybeDeclSchemaXfcTableXfcDataColumn">$switch ColumnInPrimaryIndex yes empty default declXfcColumnXfcAttr$</GenRule>
-	<GenRule GenDef="TableCol" Name="maybeDeclSchemaXfcTableXfcDataColumn">$switch ColumnInPrimaryIndex yes empty default declXfcColumnXfcAttr$</GenRule>
-	<GenRule GenDef="Atom" Name="maybeDeclSchemaXfcTableXfcDataColumn">$switch ColumnInPrimaryIndex yes empty default declXfcColumnXfcAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeDeclSchemaRecTableRecDataColumn">$switch ColumnInPrimaryIndex yes empty default declRecColumnRecAttr$</GenRule>
+	<GenRule GenDef="TableCol" Name="maybeDeclSchemaRecTableRecDataColumn">$switch ColumnInPrimaryIndex yes empty default declRecColumnRecAttr$</GenRule>
+	<GenRule GenDef="Atom" Name="maybeDeclSchemaRecTableRecDataColumn">$switch ColumnInPrimaryIndex yes empty default declRecColumnRecAttr$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes declXfcColumnAttrPKeyColumnAccessors default declXfcColumnAttrPKeyInstanceAccessors$</GenRule>
+	<GenRule GenDef="Table" Name="declRecColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes declRecColumnAttrPKeyColumnAccessors default declRecColumnAttrPKeyInstanceAccessors$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcColumnAttrPKeyColumnAccessors">
+	<GenRule GenDef="Table" Name="declRecColumnAttrPKeyColumnAccessors">
 	public $reference BaseClass reference PrimaryKeyIndex iterate Columns( lone declJavaOptAtomType first empty each empty empty empty )$ getPKey();
 	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone declJavaOptAtomType first empty each empty empty empty )$;
 	$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone declColumnGetterSetter first empty each empty empty empty )$
 	</GenRule>
 
 	<GenRule GenDef="Table" Name="IsAtomicPrimaryIndexKeyNullable">$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone IsNullable first IsNullable each empty empty no )$</GenRule>
-	<GenRule GenDef="Table" Name="declXfcColumnAttrPKeyInstanceAccessors">
+	<GenRule GenDef="Table" Name="declRecColumnAttrPKeyInstanceAccessors">
 	public I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey getPKey();
 	public void setPKey(I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey pkey );
-$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declXfcPKeyAttrAccessors )$</GenRule>
+$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declRecPKeyAttrAccessors )$</GenRule>
 
-	<GenRule GenDef="Atom" Name="declXfcPKeyAttrAccessors">
+	<GenRule GenDef="Atom" Name="declRecPKeyAttrAccessors">
 	public $declJavaAtomType$ get$declColumnAttrOptionality$$Name$();
 	public void set$declColumnAttrOptionality$$Name$( $declJavaAtomType$ $lower declColumnAttrOptionality$$Name$ );
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declXfcPKeyAttrAccessors">
+	<GenRule GenDef="TableCol" Name="declRecPKeyAttrAccessors">
 	public $declJavaAtomType$ get$declColumnAttrOptionality$$Name$();
 	public void set$declColumnAttrOptionality$$Name$( $declJavaAtomType$ $lower declColumnAttrOptionality$$Name$ );
 </GenRule>
 
-	<GenRule GenDef="IndexCol" Name="declXfcPKeyAttrAccessors">
+	<GenRule GenDef="IndexCol" Name="declRecPKeyAttrAccessors">
 	public $declJavaAtomType$ get$declColumnAttrOptionality$$Name$();
 	public void set$declColumnAttrOptionality$$Name$( $declJavaAtomType$ $lower declColumnAttrOptionality$$Name$ );
 </GenRule>
@@ -158,41 +158,41 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declXfcPKey
 	<GenRule GenDef="Table" Name="HasDefSchemaButNoSuperOnlyIfNoSuper"
 		>$switch HasSuperClassRelation no yes default no$</GenRule>
 
-	<GenRule GenDef="Table" Name="declISchemaTableXfcMinValues"
-		>$switch HasSuperClassRelation yes declISchemaTableXfcDataMinValues default declISchemaTableXfcAllMinValues$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableRecMinValues"
+		>$switch HasSuperClassRelation yes declISchemaTableRecDataMinValues default declISchemaTableRecAllMinValues$</GenRule>
 	
-	<GenRule GenDef="Table" Name="declISchemaTableXfcDataMinValues">$iterate DataColumns( each maybeDeclMinValue empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="declISchemaTableXfcAllMinValues">$iterate Columns( each maybeDeclMinValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableRecDataMinValues">$iterate DataColumns( each maybeDeclMinValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableRecAllMinValues">$iterate Columns( each maybeDeclMinValue empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declISchemaTableXfcMaxValues"
-		>$switch HasSuperClassRelation yes declISchemaTableXfcDataMaxValues default declISchemaTableXfcAllMaxValues$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableRecMaxValues"
+		>$switch HasSuperClassRelation yes declISchemaTableRecDataMaxValues default declISchemaTableRecAllMaxValues$</GenRule>
 	
-	<GenRule GenDef="Table" Name="declISchemaTableXfcDataMaxValues">$iterate DataColumns( each maybeDeclMaxValue empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="declISchemaTableXfcAllMaxValues">$iterate Columns( each maybeDeclMaxValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableRecDataMaxValues">$iterate DataColumns( each maybeDeclMaxValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableRecAllMaxValues">$iterate Columns( each maybeDeclMaxValue empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declISchemaTableXfcInitValues"
-		>$switch HasSuperClassRelation yes declISchemaTableXfcDataInitValues default declISchemaTableXfcAllInitValues$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableRecInitValues"
+		>$switch HasSuperClassRelation yes declISchemaTableRecDataInitValues default declISchemaTableRecAllInitValues$</GenRule>
 	
-	<GenRule GenDef="Table" Name="declISchemaTableXfcDataInitValues">$iterate DataColumns( each maybeDeclInitValue empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="declISchemaTableXfcAllInitValues">$iterate Columns( each maybeDeclInitValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableRecDataInitValues">$iterate DataColumns( each maybeDeclInitValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableRecAllInitValues">$iterate Columns( each maybeDeclInitValue empty empty )$</GenRule>
 
-	<GenRule GenDef="Object" Name="declISchemaTableXfcColumns"
-		>$popto Table declISchemaTableXfcColumns$</GenRule>
+	<GenRule GenDef="Object" Name="declISchemaTableRecColumns"
+		>$popto Table declISchemaTableRecColumns$</GenRule>
 
-	<GenRule GenDef="Table" Name="extendSchemaXfcTableXfc"> extends I$reference DefSchema SchemaName$$TableName$</GenRule>
+	<GenRule GenDef="Table" Name="extendSchemaRecTableRec"> extends I$reference DefSchema SchemaName$$TableName$</GenRule>
 
-	<GenRule GenDef="Object" Name="extendSchemaXfcTableXfcSuperXfc">$popto Table extendSchemaXfcTableXfcSuperXfc$</GenRule>
+	<GenRule GenDef="Object" Name="extendSchemaRecTableRecSuperRec">$popto Table extendSchemaRecTableRecSuperRec$</GenRule>
 
-	<GenRule GenDef="Table" Name="extendSchemaXfcTableXfcSuperXfc">$switch HasSuperClassRelation yes declXfcInheritSuper default empty$</GenRule>
+	<GenRule GenDef="Table" Name="extendSchemaRecTableRecSuperRec">$switch HasSuperClassRelation yes declRecInheritSuper default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="maybeDeclXfcOptImplAuditColumnAccessors">$switch HasSuperClassRelation no declXfcOptDeclAuditColumnAccessors default empty$</GenRule>
-	<GenRule GenDef="Table" Name="declXfcOptDeclAuditColumnAccessors">$switch HasAuditColumns yes declColumnOptAuditGetterSetters default empty$</GenRule>
+	<GenRule GenDef="Table" Name="maybeDeclRecOptImplAuditColumnAccessors">$switch HasSuperClassRelation no declRecOptDeclAuditColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="declRecOptDeclAuditColumnAccessors">$switch HasAuditColumns yes declColumnOptAuditGetterSetters default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="maybeImplXfcOptDeclInitAuditColumns">$switch HasSuperClassRelation yes empty default declXfcOptDeclInitAuditColumns$</GenRule>
-	<GenRule GenDef="Table" Name="declXfcOptDeclInitAuditColumns"
-		>$switch HasAuditColumns yes declXfcDeclInitAuditColumns default empty$</GenRule>
+	<GenRule GenDef="Table" Name="maybeImplRecOptDeclInitAuditColumns">$switch HasSuperClassRelation yes empty default declRecOptDeclInitAuditColumns$</GenRule>
+	<GenRule GenDef="Table" Name="declRecOptDeclInitAuditColumns"
+		>$switch HasAuditColumns yes declRecDeclInitAuditColumns default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcDeclInitAuditColumns">
+	<GenRule GenDef="Table" Name="declRecDeclInitAuditColumns">
 	public final static String S_INIT_CREATEDBY = "0000000000000000000000000000000000000000000000000000000000000001";
 	public final static CFLibDbKeyHash256 INIT_CREATEDBY = CFLibDbKeyHash256.fromHex( S_INIT_CREATEDBY );
 	public final static String S_INIT_UPDATEDBY = "0000000000000000000000000000000000000000000000000000000000000001";
@@ -345,22 +345,22 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declXfcPKey
 	<GenRule GenDef="Value" Name="declMaxValueIfSpecified"
 		>$switch HasMaxValue yes declMaxValue default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcStaticClassCode">
+	<GenRule GenDef="Table" Name="declRecStaticClassCode">
 	public final static int CLASS_CODE = 0x$ClassCode$;
 	public final static String S_CLASS_CODE = "$ClassCode$";</GenRule>
 
-	<GenRule GenDef="Table" Name="maybeDeclXfcGetClassCode">$switch HasSuperClassRelation yes empty default declXfcGetClassCode$</GenRule>
-	<GenRule GenDef="Table" Name="declXfcGetClassCode">
+	<GenRule GenDef="Table" Name="maybeDeclRecGetClassCode">$switch HasSuperClassRelation yes empty default declRecGetClassCode$</GenRule>
+	<GenRule GenDef="Table" Name="declRecGetClassCode">
 	public int getClassCode();
 </GenRule>
 
 	<GenRule GenDef="Object" Name="emitOverride">
 	@Override</GenRule>
 	
-	<GenRule GenDef="Table" Name="maybeDeclXfcOptAuditColumnAttrAccessors"
-		>$switch HasAuditColumns yes declXfcAuditColumnAttrIfNoSchemaDefOrSuper default empty$</GenRule>
+	<GenRule GenDef="Table" Name="maybeDeclRecOptAuditColumnAttrAccessors"
+		>$switch HasAuditColumns yes declRecAuditColumnAttrIfNoSchemaDefOrSuper default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcAuditColumnAttrIfNoSchemaDefOrSuper">$switch HasSuperClassRelation yes empty default declAuditColumnAttrAccessorsIfNoDefSchema$</GenRule>
+	<GenRule GenDef="Table" Name="declRecAuditColumnAttrIfNoSchemaDefOrSuper">$switch HasSuperClassRelation yes empty default declAuditColumnAttrAccessorsIfNoDefSchema$</GenRule>
 	<GenRule GenDef="Table" Name="declAuditColumnAttrAccessorsIfNoDefSchema">$switch HasDefSchema yes empty default declAuditColumnAttrAccessors$</GenRule>
 
 	<GenRule GenDef="Table" Name="declColumnGetterSetters"
@@ -380,7 +380,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declXfcPKey
 	<GenRule GenDef="Table" Name="declDataGetterSetters"
 		>$iterate DataColumns( each declColumnGetterSetter empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcInheritSuper"> extends I$reference SuperClassRelation reference ToTable DefSchemaName$$reference SuperClassRelation reference ToTable TableName$</GenRule>
+	<GenRule GenDef="Table" Name="declRecInheritSuper"> extends I$reference SuperClassRelation reference ToTable DefSchemaName$$reference SuperClassRelation reference ToTable TableName$</GenRule>
 
 	<GenRule GenDef="Table" Name="declEqualsObject">
 	@Override
@@ -393,20 +393,20 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declXfcPKey
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declCompareToObject">
-	@Override
+	//@Override not necessary because interfaces aren't able to implement Comparable, but they can double-team on the requirement
 	public int compareTo( Object obj );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcSet">
+	<GenRule GenDef="Table" Name="declRecSet">
 	public void set( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ src );
-	public void set$TableName$( I$DefSchemaName$$TableName$ src );$switch BaseHasHistory yes declXfcSetHistory default empty$</GenRule>
+	public void set$TableName$( I$DefSchemaName$$TableName$ src );$switch BaseHasHistory yes declRecSetHistory default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcSetHistory">
+	<GenRule GenDef="Table" Name="declRecSetHistory">
 	public void set( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$H src );
-	public void set$TableName$( I$DefSchemaName$Xfc$TableName$H src );
+	public void set$TableName$( I$DefSchemaName$$TableName$H src );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declSchemaXfcTableToString">$switch HasSuperClassRelation yes empty default declGetXmlAttrFragmentIfNoDefSchema$</GenRule>
+	<GenRule GenDef="Table" Name="declSchemaRecTableToString">$switch HasSuperClassRelation yes empty default declGetXmlAttrFragmentIfNoDefSchema$</GenRule>
 	<GenRule GenDef="Table" Name="declGetXmlAttrFragmentIfNoDefSchema">$switch HasDefSchema yes empty default declGetXmlAttrFragment$</GenRule>
 	<GenRule GenDef="Table" Name="declGetXmlAttrFragment">
 	public String getXmlAttrFragment();

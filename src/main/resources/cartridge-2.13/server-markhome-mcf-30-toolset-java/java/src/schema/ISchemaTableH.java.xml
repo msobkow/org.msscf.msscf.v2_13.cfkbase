@@ -66,16 +66,16 @@ import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate Schem
 /**
  *	I$SchemaName$$TableName$H provides access to history records matching the $SchemaName$$TableName$ object change history.
  */
-public interface I$SchemaName$$TableName$H$switch HasSuperClassRelation yes declXfcHInheritSuper default empty$
-{$maybeDeclXfcHGetClassCode$$maybeDeclXfcHOptImplAuditColumnAccessors$$switch HasSuperClassRelation no declXfcHColumnGetterSetters default declXfcHDataGetterSetters$$declXfcHEquals$$declXfcHGetHashCode$$declXfcHCompareTo$$declXfcHSet$$maybeDeclISchemaTableHToString$}
+public interface I$SchemaName$$TableName$H$switch HasSuperClassRelation yes declRecHInheritSuper default empty$
+{$maybeDeclRecHGetClassCode$$maybeDeclRecHOptImplAuditColumnAccessors$$switch HasSuperClassRelation no declRecHColumnGetterSetters default declRecHDataGetterSetters$$declRecHEquals$$declRecHGetHashCode$$declRecHCompareTo$$declRecHSet$$maybeDeclISchemaTableHToString$}
 </GenFile>
 
-	<GenRule GenDef="Table" Name="maybeDeclXfcHOptImplAuditColumnAccessors">$switch HasSuperClassRelation no declXfcHOptImplAuditColumnAccessors default empty$</GenRule>
-	<GenRule GenDef="Table" Name="declXfcHOptImplAuditColumnAccessors">$switch HasAuditColumns yes declXfcHColumnOptAuditGetterSetters default empty$</GenRule>
+	<GenRule GenDef="Table" Name="maybeDeclRecHOptImplAuditColumnAccessors">$switch HasSuperClassRelation no declRecHOptImplAuditColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="declRecHOptImplAuditColumnAccessors">$switch HasAuditColumns yes declRecHColumnOptAuditGetterSetters default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHPKeyAccessors">
-	public $reference BaseClass SchemaName$$reference BaseClass TableName$HPKey getPKey();
-	public void setPKey( $reference BaseClass SchemaName$$reference BaseClass TableName$HPKey pkey );
+	<GenRule GenDef="Table" Name="declRecHPKeyAccessors">
+	public I$reference BaseClass SchemaName$$reference BaseClass TableName$HPKey getPKey();
+	public void setPKey( I$reference BaseClass SchemaName$$reference BaseClass TableName$HPKey pkey );
 	public CFLibDbKeyHash256 getAuditClusterId();
 	public void setAuditClusterId(CFLibDbKeyHash256 auditClusterId);
 	public LocalDateTime getAuditStamp();
@@ -88,11 +88,11 @@ public interface I$SchemaName$$TableName$H$switch HasSuperClassRelation yes decl
 	public void setAuditSessionId(CFLibDbKeyHash256 auditSessionId);
 </GenRule>
 
-	<GenRule GenDef="Table" Name="maybeDeclHJPAColumnOptAuditGetterSetters">$switch HasSuperClassRelation yes empty default declXfcHColumnOptAuditGetterSetters$</GenRule>
-	<GenRule GenDef="Table" Name="declXfcHColumnOptAuditGetterSetters"
-		>$switch HasAuditColumns yes declXfcHColumnAuditGetterSetters default empty$</GenRule>
+	<GenRule GenDef="Table" Name="maybeDeclHJPAColumnOptAuditGetterSetters">$switch HasSuperClassRelation yes empty default declRecHColumnOptAuditGetterSetters$</GenRule>
+	<GenRule GenDef="Table" Name="declRecHColumnOptAuditGetterSetters"
+		>$switch HasAuditColumns yes declRecHColumnAuditGetterSetters default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHColumnAuditGetterSetters">
+	<GenRule GenDef="Table" Name="declRecHColumnAuditGetterSetters">
 	public CFLibDbKeyHash256 getCreatedByUserId();
 	public void setCreatedByUserId( CFLibDbKeyHash256 value );
 	public LocalDateTime getCreatedAt();
@@ -103,59 +103,59 @@ public interface I$SchemaName$$TableName$H$switch HasSuperClassRelation yes decl
 	public void setUpdatedAt( LocalDateTime value );
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declXfcHPKeyAttrAccessors">
+	<GenRule GenDef="Atom" Name="declRecHPKeyAttrAccessors">
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ );
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declXfcHPKeyAttrAccessors">
+	<GenRule GenDef="TableCol" Name="declRecHPKeyAttrAccessors">
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ );
 </GenRule>
 
-	<GenRule GenDef="IndexCol" Name="declXfcHPKeyAttrAccessors">
+	<GenRule GenDef="IndexCol" Name="declRecHPKeyAttrAccessors">
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHColumnGetterSetters"
-		>$declXfcHPKeyAccessors$$reference PrimaryKeyIndex iterate Columns( each declXfcHPKeyAttrAccessors empty empty )$$declXfcHDataGetterSetters$</GenRule>
+	<GenRule GenDef="Table" Name="declRecHColumnGetterSetters"
+		>$declRecHPKeyAccessors$$reference PrimaryKeyIndex iterate Columns( each declRecHPKeyAttrAccessors empty empty )$$declRecHDataGetterSetters$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHDataGetterSetters"
+	<GenRule GenDef="Table" Name="declRecHDataGetterSetters"
 		>$iterate DataColumns( each declColumnGetterSetter empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHInheritSuper"> extends I$reference SuperClassRelation reference ToTable DefSchemaName$$reference SuperClassRelation reference ToTable TableName$H</GenRule>
+	<GenRule GenDef="Table" Name="declRecHInheritSuper"> extends I$reference SuperClassRelation reference ToTable DefSchemaName$$reference SuperClassRelation reference ToTable TableName$H</GenRule>
 
-	<GenRule GenDef="Table" Name="maybeDeclXfcHGetClassCode">$switch HasSuperClassRelation yes empty default declXfcHGetClassCode$</GenRule>
-	<GenRule GenDef="Table" Name="declXfcHGetClassCode">
+	<GenRule GenDef="Table" Name="maybeDeclRecHGetClassCode">$switch HasSuperClassRelation yes empty default declRecHGetClassCode$</GenRule>
+	<GenRule GenDef="Table" Name="declRecHGetClassCode">
 	public int getClassCode();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHEquals">
+	<GenRule GenDef="Table" Name="declRecHEquals">
 	@Override
 	public boolean equals( Object obj );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHGetHashCode">
+	<GenRule GenDef="Table" Name="declRecHGetHashCode">
 	@Override
 	public int hashCode();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHCompareTo">
-	@Override
+	<GenRule GenDef="Table" Name="declRecHCompareTo">
+	//@Override
 	public int compareTo( Object obj );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHSetXfc">
-	public void set( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ src );$switch BaseHasHistory yes declXfcHSetXfcH default empty$</GenRule>
+	<GenRule GenDef="Table" Name="declRecHSetRec">
+	public void set( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ src );$switch BaseHasHistory yes declRecHSetRecH default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHSetXfcH">
+	<GenRule GenDef="Table" Name="declRecHSetRecH">
 	public void set( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$H src );</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHSet">$switch HasSuperClassRelation yes empty default declXfcHSetXfc$
-	public void set$TableName$( I$DefSchemaName$$TableName$ src );$switch BaseHasHistory yes declXfcHSetDefXfcH default empty$</GenRule>
+	<GenRule GenDef="Table" Name="declRecHSet">$switch HasSuperClassRelation yes empty default declRecHSetRec$
+	public void set$TableName$( I$DefSchemaName$$TableName$ src );$switch BaseHasHistory yes declRecHSetDefRecH default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcHSetDefXfcH">
+	<GenRule GenDef="Table" Name="declRecHSetDefRecH">
 	public void set$TableName$( I$DefSchemaName$$TableName$H src );</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeDeclISchemaTableHToString">$switch HasDefSchemaOrSuper yes empty default declISchemaTableHToString$</GenRule>

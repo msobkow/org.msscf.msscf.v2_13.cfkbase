@@ -70,7 +70,7 @@ public interface I$SchemaName$$TableName$Table$iterate TableRefs( first extendsJ
 $declCreateTable$
 $declUpdateTable$
 $declDeleteTable$
-$declReadTableDerivedByPKey$$declLockTableDerivedByPKey$$declReadAllTableDerived$$declReadTableDerivedByIndexes$$declReadTableBuffByPKey$$declLockTableBuffByPKey$$declReadAllTableBuff$$switch PageData yes declPageAllTableBuff default empty$$declReadTableBuffByIndexes$$switch PageData yes declPageTableBuffByIndexes default empty$$switch HasChain yes declMoveUpTableBuff default empty$$switch HasChain yes declMoveDownTableBuff default empty$$declReleasePreparedStatements$$iterate ServerMethods( each declServerMethod empty empty )$$JavaTableInterface$}
+$declReadTableDerivedByPKey$$declLockTableDerivedByPKey$$declReadAllTableDerived$$declReadTableDerivedByIndexes$$declReadTableRecByPKey$$declLockTableRecByPKey$$declReadAllTableRec$$switch PageData yes declPageAllTableRec default empty$$declReadTableRecByIndexes$$switch PageData yes declPageTableRecByIndexes default empty$$switch HasChain yes declMoveUpTableRec default empty$$switch HasChain yes declMoveDownTableRec default empty$$declReleasePreparedStatements$$iterate ServerMethods( each declServerMethod empty empty )$$JavaTableInterface$}
 </GenFile>
 
 	<GenRule GenDef="Table" Name="extendsJavaSchemaTableNameTable">
@@ -101,11 +101,11 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 		>$switch IsInstanceMethod yes declInstServerObjFunc default declClassServerObjFunc$</GenRule>
 
 	<GenRule GenDef="ServerObjFunc" Name="declClassServerObjFunc">
-	$reference RetTable DefSchemaName$$reference RetTable Name$Buff $leadlower Name$( I$reference RetTable DefSchemaName$SchemaObj schemaObj$iterate Params( each declServerMethodParam empty empty )$ );
+	*$reference RetTable DefSchemaName$$reference RetTable Name$ $leadlower Name$( I$reference RetTable DefSchemaName$SchemaObj schemaObj$iterate Params( each declServerMethodParam empty empty )$ );
 </GenRule>
 
 	<GenRule GenDef="ServerObjFunc" Name="declInstServerObjFunc">
-	$reference RetTable DefSchemaName$$reference RetTable Name$Buff $leadlower Name$( I$reference RetTable DefSchemaName$SchemaObj schemaObj,
+	I$reference RetTable DefSchemaName$$reference RetTable Name$ $leadlower Name$( I$reference RetTable DefSchemaName$SchemaObj schemaObj,
 		I$DefSchemaName$$TableName$Obj obj$iterate Params( each declServerMethodParam empty empty )$ );
 </GenRule>
 
@@ -113,11 +113,11 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 		>$switch IsInstanceMethod yes declInstServerListFunc default declClassServerListFunc$</GenRule>
 
 	<GenRule GenDef="ServerListFunc" Name="declClassServerListFunc">
-	$reference RetTable DefSchemaName$$reference RetTable Name$Buff[] $leadlower Name$( I$reference RetTable DefSchemaName$SchemaObj schemaObj$iterate Params( each declServerMethodParam empty empty )$ );
+	I$reference RetTable DefSchemaName$$reference RetTable Name$[] $leadlower Name$( I$reference RetTable DefSchemaName$SchemaObj schemaObj$iterate Params( each declServerMethodParam empty empty )$ );
 </GenRule>
 
 	<GenRule GenDef="ServerListFunc" Name="declInstServerListFunc">
-	$reference RetTable DefSchemaName$$reference RetTable Name$Buff[] $leadlower Name$( I$reference RetTable DefSchemaName$SchemaObj schemaObj,
+	I$reference RetTable DefSchemaName$$reference RetTable Name$[] $leadlower Name$( I$reference RetTable DefSchemaName$SchemaObj schemaObj,
 		I$DefSchemaName$$TableName$Obj obj$iterate Params( each declServerMethodParam empty empty )$ );
 </GenRule>
 
@@ -132,32 +132,32 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 
 	<GenRule GenDef="Table" Name="declReadTableDerivedByPKey">
 	/**
-	 *	Read the derived $TableName$ buffer instance by primary key.
+	 *	Read the derived $TableName$ record instance by primary key.
 	 *
 	 *	@param	Authorization	The session authorization information.
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance to be read.
 	 *
-	 *	@return The buffer instance for the specified primary key, or null if there is
+	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 */
-	$poptop Table DefSchemaName$$poptop Table TableName$Buff readDerived( $SecSchemaName$Authorization Authorization,
-		$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey PKey );
+	I$poptop Table DefSchemaName$$poptop Table TableName$ readDerived( I$SecSchemaName$Authorization Authorization,
+		$ICompactedPrimaryIndexClass$ PKey );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declLockTableDerivedByPKey">
 	/**
-	 *	Lock the derived $TableName$ buffer instance by primary key.
+	 *	Lock the derived $TableName$ record instance by primary key.
 	 *
 	 *	@param	Authorization	The session authorization information.
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance to be locked.
 	 *
-	 *	@return The buffer instance for the specified primary key, or null if there is
+	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 */
-	$poptop Table DefSchemaName$$poptop Table TableName$Buff lockDerived( $SecSchemaName$Authorization Authorization,
-		$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey PKey );
+	I$poptop Table DefSchemaName$$poptop Table TableName$ lockDerived( I$SecSchemaName$Authorization Authorization,
+		$ICompactedPrimaryIndexClass$ PKey );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declReadAllTableDerived">
@@ -166,9 +166,9 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@param	Authorization	The session authorization information.
 	 *
-	 *	@return An array of derived buffer instances, potentially with 0 elements in the set.
+	 *	@return An array of derived record instances, potentially with 0 elements in the set.
 	 */
-	$DefSchemaName$$TableName$Buff[] readAllDerived( $SecSchemaName$Authorization Authorization );
+	I$DefSchemaName$$TableName$[] readAllDerived( I$SecSchemaName$Authorization Authorization );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declReadTableDerivedByIndexes"
@@ -195,173 +195,173 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 
 	<GenRule GenDef="Index" Name="declReadTableDerivedByUniqueIndex">
 	/**
-	 *	Read the derived $poptop Table TableName$ buffer instance identified by the unique key $Suffix$.
+	 *	Read the derived $poptop Table TableName$ record instance identified by the unique key $Suffix$.
 	 *
 	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
 	 *
-	 *	@return The buffer instance for the specified key, or null if there is
+	 *	@return The record instance for the specified key, or null if there is
 	 *		no such existing key value.
 	 */
-	$poptop Table DefSchemaName$$poptop Table TableName$Buff readDerivedBy$declReadTableSuffix$( $SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ );
+	I$poptop Table DefSchemaName$$poptop Table TableName$ readDerivedBy$declReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ );
 </GenRule>
 
 	<GenRule GenDef="Index" Name="declReadTableDerivedByDuplicateIndex">
 	/**
-	 *	Read an array of the derived $poptop Table TableName$ buffer instances identified by the duplicate key $Suffix$.
+	 *	Read an array of the derived $poptop Table TableName$ record instances identified by the duplicate key $Suffix$.
 	 *
 	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
 	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
+	 *	@return An array of derived instances for the specified key, potentially with 0 elements in the set.
 	 */
-	$DefSchemaName$$poptop Table TableName$Buff[] readDerivedBy$declReadTableSuffix$( $SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ );
+	I$DefSchemaName$$poptop Table TableName$[] readDerivedBy$declReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declReadTableBuffByPKey">
+	<GenRule GenDef="Table" Name="declReadTableRecByPKey">
 	/**
-	 *	Read the specific $TableName$ buffer instance identified by the primary key.
+	 *	Read the specific $TableName$ record instance identified by the primary key.
 	 *
 	 *	@param	Authorization	The session authorization information.
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance to be locked.
 	 *
-	 *	@return The buffer instance for the specified primary key, or null if there is
+	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	$DefSchemaName$$TableName$Buff readBuff( $SecSchemaName$Authorization Authorization,
-		$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey PKey );
+	I$DefSchemaName$$TableName$ readRec( I$SecSchemaName$Authorization Authorization,
+		$ICompactedPrimaryIndexClass$ PKey );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declLockTableBuffByPKey">
+	<GenRule GenDef="Table" Name="declLockTableRecByPKey">
 	/**
-	 *	Lock the specific $TableName$ buffer instance identified by the primary key.
+	 *	Lock the specific $TableName$ record instance identified by the primary key.
 	 *
 	 *	@param	Authorization	The session authorization information.
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance to be locked.
 	 *
-	 *	@return The buffer instance for the specified primary key, or null if there is
+	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	$DefSchemaName$$TableName$Buff lockBuff( $SecSchemaName$Authorization Authorization,
-		$DefSchemaName$$reference BaseClass TableName$PKey PKey );
+	I$DefSchemaName$$TableName$ lockRec( I$SecSchemaName$Authorization Authorization,
+		$ICompactedPrimaryIndexClass$ PKey );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declReadAllTableBuff">
+	<GenRule GenDef="Table" Name="declReadAllTableRec">
 	/**
-	 *	Read all the specific $TableName$ buffer instances.
+	 *	Read all the specific $TableName$ record instances.
 	 *
 	 *	@param	Authorization	The session authorization information.
 	 *
 	 *	@return All the specific $TableName$ instances in the database accessible for the Authorization.
 	 */
-	$DefSchemaName$$TableName$Buff[] readAllBuff( $SecSchemaName$Authorization Authorization );
+	I$DefSchemaName$$TableName$[] readAllRec( I$SecSchemaName$Authorization Authorization );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declReadTableBuffByIndexes"
-		>$switch HasSuperClassRelation yes declReadTableBuffByInhIndexes default declReadTableBuffByBaseIndexes$</GenRule>
+	<GenRule GenDef="Table" Name="declReadTableRecByIndexes"
+		>$switch HasSuperClassRelation yes declReadTableRecByInhIndexes default declReadTableRecByBaseIndexes$</GenRule>
 
-	<GenRule GenDef="Table" Name="declReadTableBuffByInhIndexes"
-		>$reference SuperClassRelation reference ToTable declReadTableBuffByIndexes$$iterate Index( each declReadTableBuffByNonPrimaryIndex )$</GenRule>
+	<GenRule GenDef="Table" Name="declReadTableRecByInhIndexes"
+		>$reference SuperClassRelation reference ToTable declReadTableRecByIndexes$$iterate Index( each declReadTableRecByNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declReadTableBuffByBaseIndexes"
-		>$iterate Index( each declReadTableBuffByIndex )$</GenRule>
+	<GenRule GenDef="Table" Name="declReadTableRecByBaseIndexes"
+		>$iterate Index( each declReadTableRecByIndex )$</GenRule>
 
-	<GenRule GenDef="Index" Name="declReadTableBuffByNonPrimaryIndex"
-		>$switch IsPrimaryIndex yes empty default declReadTableBuffSPs$</GenRule>
+	<GenRule GenDef="Index" Name="declReadTableRecByNonPrimaryIndex"
+		>$switch IsPrimaryIndex yes empty default declReadTableRecSPs$</GenRule>
 
-	<GenRule GenDef="Index" Name="declReadTableBuffSPs"
-		>$declReadTableBuffByIndex$</GenRule>
+	<GenRule GenDef="Index" Name="declReadTableRecSPs"
+		>$declReadTableRecByIndex$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPageTableBuffByIndexes"
-		>$switch HasSuperClassRelation yes declPageTableBuffByInhIndexes default declPageTableBuffByBaseIndexes$</GenRule>
+	<GenRule GenDef="Table" Name="declPageTableRecByIndexes"
+		>$switch HasSuperClassRelation yes declPageTableRecByInhIndexes default declPageTableRecByBaseIndexes$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPageTableBuffByInhIndexes"
-		>$reference SuperClassRelation reference ToTable declPageTableBuffByIndexes$$iterate Index( each declPageTableBuffByNonPrimaryIndex )$</GenRule>
+	<GenRule GenDef="Table" Name="declPageTableRecByInhIndexes"
+		>$reference SuperClassRelation reference ToTable declPageTableRecByIndexes$$iterate Index( each declPageTableRecByNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPageTableBuffByBaseIndexes"
-		>$iterate Index( each declPageTableBuffByIndex )$</GenRule>
+	<GenRule GenDef="Table" Name="declPageTableRecByBaseIndexes"
+		>$iterate Index( each declPageTableRecByIndex )$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPageTableBuffByNonPrimaryIndex"
-		>$switch IsPrimaryIndex yes empty default declPageTableBuffSPs$</GenRule>
+	<GenRule GenDef="Index" Name="declPageTableRecByNonPrimaryIndex"
+		>$switch IsPrimaryIndex yes empty default declPageTableRecSPs$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPageTableBuffSPs"
-		>$switch PageData yes maybe_declPageTableBuffByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="declPageTableRecSPs"
+		>$switch PageData yes maybe_declPageTableRecByIndex default empty$</GenRule>
 
-	<GenRule GenDef="Index" Name="maybe_declPageTableBuffByIndex"
-		>$switch IsUnique yes empty default declPageTableBuffByDuplicateIndex$</GenRule>
+	<GenRule GenDef="Index" Name="maybe_declPageTableRecByIndex"
+		>$switch IsUnique yes empty default declPageTableRecByDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declReadTableBuffByUniqueIndex">
+	<GenRule GenDef="Index" Name="declReadTableRecByUniqueIndex">
 	/**
-	 *	Read the specific $poptop Table TableName$ buffer instance identified by the unique key $Suffix$.
+	 *	Read the specific $poptop Table TableName$ record instance identified by the unique key $Suffix$.
 	 *
 	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
 	 *
-	 *	@return The buffer instance for the specified key, or null if there is
+	 *	@return The record instance for the specified key, or null if there is
 	 *		no such existing key value.
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	$DefSchemaName$$poptop Table TableName$Buff readBuffBy$declReadTableSuffix$( $SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ );
+	I$DefSchemaName$$poptop Table TableName$ readRecBy$declReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declReadTableBuffByDuplicateIndex">
+	<GenRule GenDef="Index" Name="declReadTableRecByDuplicateIndex">
 	/**
-	 *	Read an array of the specific $poptop Table TableName$ buffer instances identified by the duplicate key $Suffix$.
+	 *	Read an array of the specific $poptop Table TableName$ record instances identified by the duplicate key $Suffix$.
 	 *
 	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
 	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
+	 *	@return An array of derived record instances for the specified key, potentially with 0 elements in the set.
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	$DefSchemaName$$poptop Table TableName$Buff[] readBuffBy$declReadTableSuffix$( $SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ );
+	I$DefSchemaName$$poptop Table TableName$[] readRecBy$declReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declPageAllTableBuff">
+	<GenRule GenDef="Table" Name="declPageAllTableRec">
 	/**
-	 *	Read a page of all the specific $TableName$ buffer instances.
+	 *	Read a page of all the specific $TableName$ record instances.
 	 *
 	 *	@param	Authorization	The session authorization information.
 	 *
 	 *	@return All the specific $TableName$ instances in the database accessible for the Authorization.
 	 */
-	$DefSchemaName$$TableName$Buff[] pageAllBuff( $SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ );
+	I$DefSchemaName$$TableName$[] pageAllRec( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPageTableBuffByDuplicateIndex">
+	<GenRule GenDef="Index" Name="declPageTableRecByDuplicateIndex">
 	/**
-	 *	Read a page array of the specific $poptop Table TableName$ buffer instances identified by the duplicate key $Suffix$.
+	 *	Read a page array of the specific $poptop Table TableName$ record instances identified by the duplicate key $Suffix$.
 	 *
 	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
 	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
+	 *	@return An array of derived record instances for the specified key, potentially with 0 elements in the set.
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	$DefSchemaName$$poptop Table TableName$Buff[] pageBuffBy$declReadTableSuffix$( $SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ );
+	I$DefSchemaName$$poptop Table TableName$[] pageRecBy$declReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declMoveUpTableBuff">
+	<GenRule GenDef="Table" Name="declMoveUpTableRec">
 	/**
-	 *	Move the specified buffer up in the chain (i.e. to the previous position.)
+	 *	Move the specified record up in the chain (i.e. to the previous position.)
 	 *
-	 *	@return	The refreshed buffer after it has been moved
+	 *	@return	The refreshed record after it has been moved
 	 */
-	$poptop Table DefSchemaName$$poptop Table TableName$Buff moveBuffUp( $SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
+	I$poptop Table DefSchemaName$$poptop Table TableName$ moveRecUp( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
 		int revision );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declMoveDownTableBuff">
+	<GenRule GenDef="Table" Name="declMoveDownTableRec">
 	/**
-	 *	Move the specified buffer down in the chain (i.e. to the next position.)
+	 *	Move the specified record down in the chain (i.e. to the next position.)
 	 *
-	 *	@return	The refreshed buffer after it has been moved
+	 *	@return	The refreshed record after it has been moved
 	 */
-	$poptop Table DefSchemaName$$poptop Table TableName$Buff moveBuffDown( $SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
+	I$poptop Table DefSchemaName$$poptop Table TableName$ moveRecDown( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
 		int revision );
 </GenRule>
 
@@ -385,15 +385,15 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	<GenRule GenDef="IndexCol" Name="declOptPriorArg"
 		>$reference Column declOptPriorArg$</GenRule>
 
-	<GenRule GenDef="Index" Name="declReadTableBuffByIndex"
+	<GenRule GenDef="Index" Name="declReadTableRecByIndex"
 		>$switch IsUnique
-			yes declReadTableBuffByUniqueIndex
-			default declReadTableBuffByDuplicateIndex$</GenRule>
+			yes declReadTableRecByUniqueIndex
+			default declReadTableRecByDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPageTableBuffByIndex"
+	<GenRule GenDef="Index" Name="declPageTableRecByIndex"
 		>$switch IsUnique
 			yes empty
-			default declPageTableBuffByDuplicateIndex$</GenRule>
+			default declPageTableRecByDuplicateIndex$</GenRule>
 
 	<GenRule ScopeDef="Table" GenDef="Id16Gen" Name="declNextIdGen">
 	/**
@@ -405,8 +405,8 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	short next$Name$( $SecSchemaName$Authorization Authorization,
-		$poptop Table reference BaseClass DefSchemaName$$popto Table reference BaseClass TableName$PKey PKey );
+	short next$Name$( I$SecSchemaName$Authorization Authorization,
+		$ICompactedPrimaryIndexClass$ PKey );
 
 	/**
 	 *	Get the next $Name$ id generator value.$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCommentKeyAttr empty empty )$
@@ -415,12 +415,12 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	short next$Name$( $SecSchemaName$Authorization Authorization$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implNextIdGenDeclAttr )$ );
+	short next$Name$( I$SecSchemaName$Authorization Authorization$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implNextIdGenDeclAttr )$ );
 </GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implCommentKeyAttr">
 	 *
-	 *	@param	arg$Name$	The $poptop Table TableName$ key attribute of the instance generating the id.</GenRule>
+	 *	@param	$Name$	The $poptop Table TableName$ key attribute of the instance generating the id.</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implNextIdGenDeclAttr">,
 		$implJavaAtomType$ arg$Name$</GenRule>
@@ -435,8 +435,8 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	int next$Name$( $SecSchemaName$Authorization Authorization,
-		$popto Table reference BaseClass DefSchemaName$$popto Table reference BaseClass TableName$PKey PKey );
+	int next$Name$( I$SecSchemaName$Authorization Authorization,
+		$ICompactedPrimaryIndexClass$ PKey );
 
 	/**
 	 *	Get the next $Name$ id generator value.$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCommentKeyAttr empty empty )$
@@ -458,8 +458,8 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	long next$Name$( $SecSchemaName$Authorization Authorization,
-		$popto Table reference BaseClass DefSchemaName$$popto Table reference BaseClass TableName$PKey PKey );
+	long next$Name$( I$SecSchemaName$Authorization Authorization,
+		$ICompactedPrimaryIndexClass$ PKey );
 
 	/**
 	 *	Get the next $Name$ id generator value.$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCommentKeyAttr empty empty )$
@@ -468,7 +468,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	long next$Name$( $SecSchemaName$Authorization Authorization$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implNextIdGenDeclAttr )$ );
+	long next$Name$( I$SecSchemaName$Authorization Authorization$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implNextIdGenDeclAttr )$ );
 </GenRule>
 
 	<GenRule ScopeDef="Table" GenDef="UuidGen" Name="declNextIdGen">
@@ -481,21 +481,21 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	UUID next$Name$( $SecSchemaName$Authorization Authorization,
-		$popto Table reference BaseClass DefSchemaName$$popto Table reference BaseClass TableName$PKey PKey );
+	UUID next$Name$( I$SecSchemaName$Authorization Authorization,
+		$ICompactedPrimaryIndexClass$ PKey );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declCreateTable">
 	/**
-	 *	Create the instance in the database, and update the specified buffer
+	 *	Create the instance in the database, and update the specified record
 	 *	with the assigned primary key.
 	 *
 	 *	@param	Authorization	The session authorization information.
 	 *
-	 *	@param	Buff	The buffer to be created.
+	 *	@param	rec	The instance interface to be created.
 	 */
-	void create$TableName$( $SecSchemaName$Authorization Authorization,
-		$DefSchemaName$$TableName$Buff Buff );
+	void create$TableName$( I$SecSchemaName$Authorization Authorization,
+		I$DefSchemaName$$TableName$ rec );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declReadAllTable">
@@ -506,20 +506,20 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@return	An array of the $TableName$ instances visible to the Authorization.
 	 */
-	$DefSchemaName$$TableName$Buff[] readAll$TableName$( $SecSchemaName$Authorization Authorization );
+	I$DefSchemaName$$TableName$[] readAll$TableName$( I$SecSchemaName$Authorization Authorization );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declUpdateTable">
 	/**
-	 *	Update the instance in the database, and update the specified buffer
+	 *	Update the instance in the database, and update the specified record
 	 *	with any calculated changes imposed by the associated stored procedure.
 	 *
 	 *	@param	Authorization	The session authorization information.
 	 *
-	 *	@param	Buff	The buffer to be updated.
+	 *	@param	rec	The instance interface to be updated
 	 */
-	void update$TableName$( $SecSchemaName$Authorization Authorization,
-		$DefSchemaName$$TableName$Buff Buff );
+	void update$TableName$( I$SecSchemaName$Authorization Authorization,
+		I$DefSchemaName$$TableName$ rec );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declDeleteTable">
@@ -528,10 +528,10 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@param	Authorization	The session authorization information.
 	 *
-	 *	@param	Buff	The buffer to be deleted.
+	 *	@param	rec	The instance interface to be deleted.
 	 */
 	void delete$TableName$( $SecSchemaName$Authorization Authorization,
-		$DefSchemaName$$TableName$Buff Buff );$declDeleteTableByInheritedIndexes$
+		I$DefSchemaName$$TableName$ rec );$declDeleteTableByInheritedIndexes$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declDeleteTableByInheritedIndexes"
@@ -555,7 +555,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
 	 */
-	void delete$poptop Table TableName$By$Suffix$( $SecSchemaName$Authorization Authorization$iterate Columns( each implNextIdGenDeclAttr )$ );
+	void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implNextIdGenDeclAttr )$ );
 
 	/**
 	 *	Delete the $poptop Table TableName$ instances identified by the key $Suffix$.
@@ -564,17 +564,10 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@param	argKey	The key identifying the instances to be deleted.
 	 */
-	void delete$poptop Table TableName$By$Suffix$( $SecSchemaName$Authorization Authorization,
-		$DefSchemaName$$TableName$By$Suffix$Key argKey );</GenRule>
+	void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization,
+		I$DefSchemaName$$TableName$By$Suffix$Key argKey );</GenRule>
 
-	<GenRule GenDef="Index" Name="declDeleteTableByPrimaryIndex">
-	/**
-	 *	Delete the $poptop Table TableName$ instance identified by the primary key attributes.
-	 *
-	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
-	 */
-	void delete$poptop Table TableName$By$Suffix$( $SecSchemaName$Authorization Authorization$iterate Columns( each implNextIdGenDeclAttr )$ );
-
+	<GenRule GenDef="Index" Name="declDeleteTableByPrimaryIndex">$switch IsPrimaryIndexKeyAtomic yes empty default declDeleteTableByPrimaryIndexAttrs$
 	/**
 	 *	Delete the $poptop Table TableName$ instance identified by the primary key.
 	 *
@@ -582,7 +575,15 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@param	argKey	The primary key identifying the instance to be deleted.
 	 */
-	void delete$poptop Table TableName$By$Suffix$( $SecSchemaName$Authorization Authorization,
-		$poptop Table reference BaseClass DefSchemaName$$poptop Table reference BaseClass TableName$PKey argKey );</GenRule>
+	void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization,
+		$ICompactedPrimaryIndexClass$ argKey );</GenRule>
+
+	<GenRule GenDef="Index" Name="declDeleteTableByPrimaryIndexAttrs">
+	/**
+	 *	Delete the $poptop Table TableName$ instance identified by the primary key attributes.
+	 *
+	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
+	 */
+	void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implNextIdGenDeclAttr )$ );</GenRule>
 
 </RuleSet>

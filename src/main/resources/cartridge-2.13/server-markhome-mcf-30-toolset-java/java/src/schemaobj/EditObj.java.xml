@@ -55,6 +55,7 @@ package $reference ManufacturingSchema lower JavaPackage$.$reference Manufacturi
 import java.math.*;
 import java.sql.*;
 import java.text.*;
+import java.time.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
@@ -64,7 +65,7 @@ import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$l
 
 public class $SchemaName$$TableName$EditObj$switch HasSuperClassRelation yes implEditObjInheritSuperClass default empty$
 	implements I$SchemaName$$TableName$EditObj
-{$switch HasSuperClassRelation no declEditObjAttrOrig default empty$$switch HasSuperClassRelation no implEditObjTableBuffAttr default empty$$switch HasSuperClassRelation no declObjAttrOptAuditColumns default empty$$iterate Relation( each implEditObjRelationAttr empty empty )$$JavaEditObjMembers$
+{$switch HasSuperClassRelation no declEditObjAttrOrig default empty$$switch HasSuperClassRelation no implEditObjTableRecAttr default empty$$switch HasSuperClassRelation no declObjAttrOptAuditColumns default empty$$iterate Relation( each implEditObjRelationAttr empty empty )$$JavaEditObjMembers$
 
 	public $SchemaName$$TableName$EditObj( I$DefSchemaName$$TableName$Obj argOrig ) {$switch HasSuperClassRelation yes implEditObjConstructorInvokeSuperOrig default empty$$switch HasSuperClassRelation no implEditObjConstructorInitOrigAndCopy default empty$$iterate Relation( each implEditObjConstructorInitRelationAttr empty empty )$
 	}
@@ -78,28 +79,28 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 	public void setCreatedBy( I$SecSchemaName$SecUserObj value ) {
 		createdBy = value;
 		if( value != null ) {
-			getBuff().setCreatedByUserId( value.getRequiredSecUserId() );
+			getRec().setCreatedByUserId( value.getRequiredSecUserId() );
 		}
 	}
 
 	public void setCreatedAt( LocalDateTime value ) {
-		getBuff().setCreatedAt( value );
+		getRec().setCreatedAt( value );
 	}
 
 	public void setUpdatedBy( I$SecSchemaName$SecUserObj value ) {
 		updatedBy = value;
 		if( value != null ) {
-			getBuff().setUpdatedByUserId( value.getRequiredSecUserId() );
+			getRec().setUpdatedByUserId( value.getRequiredSecUserId() );
 		}
 	}
 
 	public void setUpdatedAt( LocalDateTime value ) {
-		getBuff().setUpdatedAt( value );
+		getRec().setUpdatedAt( value );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjMethods"
-		>$implEditObjGetClassCode$$implGetGenDefName$$maybeImplGetScope$$implGetObjName$$maybeImplGetObjQualifier$$maybeImplGetQualNamedObject$$implGetNamedObject$$maybeImplGetObjQualifiedName$$maybeImplGetObjFullName$$implEditObjRealise$$implEditObjForget$$switch HasSuperClassRelation no implEditObjRead default empty$$switch HasChain yes implEditObjMoveUp default empty$$switch HasChain yes implEditObjMoveDown default empty$$implEditObjCreate$$implEditObjUpdate$$implEditObjDelete$$implEditObjTableAccessors$$switch HasSuperClassRelation no implEditObjEditAccessors default empty$$implEditObjEditAsAccessors$$switch HasSuperClassRelation no implEditObjBeginEdit default empty$$switch HasSuperClassRelation no implEditObjEndEdit default empty$$switch HasSuperClassRelation no implEditObjOrigAccessors default empty$$implEditObjOrigAsCast$$switch HasSuperClassRelation no implEditObjSchemaAccessors default empty$$implEditObjBuffAccessors$$implEditObjTableBuffAccessors$$switch HasSuperClassRelation no implEditObjPKeyAccessors default empty$$switch HasSuperClassRelation no implEditObjIsNewAccessors default empty$$implEditObjColumnAccessors$$maybeImplEditObjNarrowedContainerAccessors$$iterate Relation( each implEditObjRelationAccessors empty empty )$$switch HasSuperClassRelation no implEditObjCopyPKeyToBuff default empty$$switch HasSuperClassRelation no implEditObjCopyBuffToPKey default empty$$implEditObjCopyBuffToOrig$$implEditObjCopyOrigToBuff$$iterate ServerMethods( each implJavaObjServerMethod empty empty )$</GenRule>
+		>$implEditObjGetClassCode$$implGetGenDefName$$maybeImplGetScope$$implGetObjName$$maybeImplGetObjQualifier$$maybeImplGetQualNamedObject$$implGetNamedObject$$maybeImplGetObjQualifiedName$$maybeImplGetObjFullName$$implEditObjRealise$$implEditObjForget$$switch HasSuperClassRelation no implEditObjRead default empty$$switch HasChain yes implEditObjMoveUp default empty$$switch HasChain yes implEditObjMoveDown default empty$$implEditObjCreate$$implEditObjUpdate$$implEditObjDelete$$implEditObjTableAccessors$$switch HasSuperClassRelation no implEditObjEditAccessors default empty$$implEditObjEditAsAccessors$$switch HasSuperClassRelation no implEditObjBeginEdit default empty$$switch HasSuperClassRelation no implEditObjEndEdit default empty$$switch HasSuperClassRelation no implEditObjOrigAccessors default empty$$implEditObjOrigAsCast$$switch HasSuperClassRelation no implEditObjSchemaAccessors default empty$$implEditObjRecAccessors$$implEditObjTableRecAccessors$$switch HasSuperClassRelation no implEditObjPKeyAccessors default empty$$switch HasSuperClassRelation no implEditObjIsNewAccessors default empty$$implEditObjColumnAccessors$$maybeImplEditObjNarrowedContainerAccessors$$iterate Relation( each implEditObjRelationAccessors empty empty )$$switch HasSuperClassRelation no implEditObjCopyPKeyToRec default empty$$switch HasSuperClassRelation no implEditObjCopyRecToPKey default empty$$implEditObjCopyRecToOrig$$implEditObjCopyOrigToRec$$iterate ServerMethods( each implJavaObjServerMethod empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjMoveUp">
 	public I$reference BaseClass DefSchemaName$$reference Chain reference Table TableName$Obj moveUp() {
@@ -157,28 +158,28 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implEditObjConstructorInitAndCopyBuff">
-		buff = getBuff();
-		I$DefSchemaName$$TableName$ origBuff = argOrig.get$TableName$Buff();
-		buff.set( origBuff );</GenRule>
+	<GenRule GenDef="Table" Name="implEditObjConstructorInitAndCopyRec">
+		rec = getRec();
+		I$DefSchemaName$$TableName$ origRec = argOrig.get$TableName$Rec();
+		rec.set( origRec );</GenRule>
 
-	<GenRule GenDef="Table" Name="implEditObjConstructorInitBuff">$switch HasSuperClassRelation yes implEditObjConstructorInitAndCopyBuff default empty$
-		I$DefSchemaName$$TableName$Buff origBuff = argOrig.get$TableName$Buff();$iterate Columns( each implEditObjConstructorCopyAttrFromArgOrig )$
-		buff.setRequiredRevision( origBuff.getRequiredRevision() );</GenRule>
+	<GenRule GenDef="Table" Name="implEditObjConstructorInitRec">$switch HasSuperClassRelation yes implEditObjConstructorInitAndCopyRec default empty$
+		I$DefSchemaName$$TableName$Rec origRec = argOrig.get$TableName$Rec();$iterate Columns( each implEditObjConstructorCopyAttrFromArgOrig )$
+		rec.setRequiredRevision( origRec.getRequiredRevision() );</GenRule>
 
 	<GenRule GenDef="Atom" Name="implEditObjConstructorCopyAttrFromArgOrig">
-		buff.set$OptionalOrRequired$$Name$( origBuff.get$OptionalOrRequired$$Name$() );</GenRule>
+		rec.set$OptionalOrRequired$$Name$( origRec.get$OptionalOrRequired$$Name$() );</GenRule>
 	<GenRule GenDef="TableCol" Name="implEditObjConstructorCopyAttrFromArgOrig">
-		buff.set$OptionalOrRequired$$Name$( origBuff.get$OptionalOrRequired$$Name$() );</GenRule>
+		rec.set$OptionalOrRequired$$Name$( origRec.get$OptionalOrRequired$$Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="declEditObjAttrOrig">
 	protected I$DefSchemaName$$TableName$Obj orig;</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjConstructorInitOrigAndCopy">
 		orig = argOrig;
-		getBuff();
-		I$DefSchemaName$$TableName$ origBuff = orig.getBuff();
-		buff.set( origBuff );</GenRule>
+		getRec();
+		I$DefSchemaName$$TableName$ origRec = orig.getRec();
+		rec.set( origRec );</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjOrigAccessors">
 	public I$DefSchemaName$$TableName$Obj getOrig() {
@@ -313,13 +314,13 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 		>$iterate ContainerRelations( each implEditObjClearRelationMember empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implEditObjClearRelationMember">
-			$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = null;$iterate Columns( each implEditObjClearRelationMemberSetBuffOptionalAttrNull )$</GenRule>
+			$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = null;$iterate Columns( each implEditObjClearRelationMemberSetRecOptionalAttrNull )$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implEditObjClearRelationMemberSetBuffOptionalAttrNull"
-		>$switch FromColDefIsNullable yes implEditObjClearRelationMemberSetBuffAttrNull default empty$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implEditObjClearRelationMemberSetRecOptionalAttrNull"
+		>$switch FromColDefIsNullable yes implEditObjClearRelationMemberSetRecAttrNull default empty$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implEditObjClearRelationMemberSetBuffAttrNull">
-			get$reference Relation reference FromTable TableName$Buff().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( null );</GenRule>
+	<GenRule GenDef="RelationCol" Name="implEditObjClearRelationMemberSetRecAttrNull">
+			get$reference Relation reference FromTable TableName$Rec().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( null );</GenRule>
 
 	<GenRule GenDef="Relation" Name="implEditObjInvokeNarrowestSingletonAccessor">
 			set$OptionalOrRequired$$RelationTypeTag$$Suffix$( (I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj)value );</GenRule>
@@ -372,10 +373,10 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 		>$switch FromColDefIsNullable yes implEditObjClearRelationSingletonContainerAttr default empty$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implEditObjClearRelationSingletonContainerAttr">
-				get$reference Relation reference FromTable TableName$Buff().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( null );</GenRule>
+				get$reference Relation reference FromTable TableName$Rec().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( null );</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsGetRestoreBuffAttr">
-					get$reference Relation reference FromTable TableName$Buff().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( obj.get$reference ToCol switch IsNullable yes implOptional default implRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsGetRestoreRecAttr">
+					get$reference Relation reference FromTable TableName$Rec().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( obj.get$reference ToCol switch IsNullable yes implOptional default implRequired$$reference ToCol Name$() );</GenRule>
 
 
 	<GenRule GenDef="Relation" Name="implEditObjRelationSetSingletonClearNull"
@@ -388,13 +389,13 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 		>$switch FromColDefIsNullable yes implEditObjClearRelationSetSingletonContainerAttr default empty$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implEditObjClearRelationSetSingletonContainerAttr">
-			get$reference Relation reference FromTable TableName$Buff().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( null );</GenRule>
+			get$reference Relation reference FromTable TableName$Rec().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( null );</GenRule>
 
 	<GenRule GenDef="Relation" Name="implEditObjRelationSinglettonGetClearAllContainers"
 		>$poptop Table iterate Relation( each implEditObjRelationSingletonGetClearNull )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implEditObjRelationSingletonGetRestoreObj">
-				if( obj != null ) {$iterate Columns( each implEditObjRelationSingletonAccessorsGetRestoreBuffAttr )$
+				if( obj != null ) {$iterate Columns( each implEditObjRelationSingletonAccessorsGetRestoreRecAttr )$
 					$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = obj;
 				}</GenRule>
 
@@ -416,11 +417,11 @@ $			if( ! anyMissing ) {
 	}
 
 	public void set$OptionalOrRequired$$RelationTypeTag$$Suffix$( I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj value ) {
-			if( buff == null ) {
-				get$reference FromTable TableName$Buff();
+			if( rec == null ) {
+				get$reference FromTable TableName$Rec();
 			}
 			if( value != null ) {
-$iterate Columns( each implEditObjRelationSingletonAccessorsSetBuffAttr )
+$iterate Columns( each implEditObjRelationSingletonAccessorsSetRecAttr )
 $			}$switch RelationTypeTag Container empty Owner empty default implEditObjRelationSetSingletonElseClearNull$
 			$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = value;$switch HasNarrowed yes implEditObjRelationSetSingletonInvokeSuperNarrowed default empty$
 	}
@@ -428,7 +429,7 @@ $			}$switch RelationTypeTag Container empty Owner empty default implEditObjRela
 
 	<GenRule GenDef="Relation" Name="implEditObjRelationSetSingletonElseClearNull">
 			else {
-$iterate Columns( each implEditObjRelationSingletonAccessorsSetBuffOptionalAttrNull )
+$iterate Columns( each implEditObjRelationSingletonAccessorsSetRecOptionalAttrNull )
 $			}</GenRule>
 
 	<GenRule GenDef="Relation" Name="implEditObjRelationSetSingletonClearAllContainers"
@@ -440,27 +441,27 @@ $			}</GenRule>
 	<GenRule GenDef="RelationCol" Name="FromColInPrimaryIndex"
 		>$reference FromCol ColumnInPrimaryIndex$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsSetBuffAttr"
-		>$switch FromColInPrimaryIndex yes implEditObjRelationSingletonAccessorsSetBuffAndPKeyAttr default implEditObjRelationSingletonAccessorsSetBuffOnlyAttr$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsSetRecAttr"
+		>$switch FromColInPrimaryIndex yes implEditObjRelationSingletonAccessorsSetRecAndPKeyAttr default implEditObjRelationSingletonAccessorsSetRecOnlyAttr$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsSetBuffAndPKeyAttr"
+	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsSetRecAndPKeyAttr"
 >				getPKey().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( value.get$reference ToCol switch IsNullable yes implOptional default implRequired$$reference ToCol Name$() );
-				get$reference Relation reference FromTable TableName$Buff().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( value.get$reference ToCol switch IsNullable yes implOptional default implRequired$$reference ToCol Name$() );
+				get$reference Relation reference FromTable TableName$Rec().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( value.get$reference ToCol switch IsNullable yes implOptional default implRequired$$reference ToCol Name$() );
 </GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsSetBuffOnlyAttr"
->				get$reference Relation reference FromTable TableName$Buff().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( value.get$reference ToCol switch IsNullable yes implOptional default implRequired$$reference ToCol Name$() );
+	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsSetRecOnlyAttr"
+>				get$reference Relation reference FromTable TableName$Rec().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( value.get$reference ToCol switch IsNullable yes implOptional default implRequired$$reference ToCol Name$() );
 </GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsSetBuffOptionalAttrNull"
-		>$switch FromColDefIsNullable yes implEditObjRelationSingletonAccessorsSetBuffAttrNull default empty$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsSetRecOptionalAttrNull"
+		>$switch FromColDefIsNullable yes implEditObjRelationSingletonAccessorsSetRecAttrNull default empty$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsSetBuffAttrNull"
->				get$reference Relation reference FromTable TableName$Buff().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( null );
+	<GenRule GenDef="RelationCol" Name="implEditObjRelationSingletonAccessorsSetRecAttrNull"
+>				get$reference Relation reference FromTable TableName$Rec().set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( null );
 </GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implEditObjRelationAccessorsPassArg"
-		>$reference FromCol switch ColumnInPrimaryIndex yes implEditObjRelationAccessorsPKey default implEditObjRelationAccessorsBuff$.get$reference FromCol OptionalOrRequired$$reference FromCol Name$()</GenRule>
+		>$reference FromCol switch ColumnInPrimaryIndex yes implEditObjRelationAccessorsPKey default implEditObjRelationAccessorsRec$.get$reference FromCol OptionalOrRequired$$reference FromCol Name$()</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implEditObjRelationAccessorsToColIsNullable"
 		>$reference ToCol IsNullable$</GenRule>
@@ -472,9 +473,9 @@ $			}</GenRule>
 
 	<GenRule GenDef="Object" Name="implEditObjRelationAccessorsPKey">getPKey()</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implEditObjRelationAccessorsBuff">get$reference Relation reference FromTable TableName$Buff()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implEditObjRelationAccessorsRec">get$reference Relation reference FromTable TableName$Rec()</GenRule>
 
-	<GenRule GenDef="Object" Name="implEditObjRelationAccessorsBuff">get$popto Table TableName$Buff()</GenRule>
+	<GenRule GenDef="Object" Name="implEditObjRelationAccessorsRec">get$popto Table TableName$Rec()</GenRule>
 
 	<GenRule GenDef="Object" Name="implEditObjRelationAccessorInitDataAttr"
 		>$switch ColumnInPrimaryIndex yes empty default implEditObjRelationAccessorInitDataAttrValue$</GenRule>
@@ -489,7 +490,7 @@ $			}</GenRule>
 		>$switch IsNullable yes implEditObjRelationAccessorCheckIfNullableNull default empty$</GenRule>
 
 	<GenRule GenDef="Object" Name="implEditObjRelationAccessorCheckIfNullableNull"
->			if( get$TableName$Buff().get$switch IsNullable yes implOptional default implRequired$$Name$() == null ) {
+>			if( get$TableName$Rec().get$switch IsNullable yes implOptional default implRequired$$Name$() == null ) {
 				anyMissing = true;
 			}
 </GenRule>
@@ -561,8 +562,8 @@ $			}</GenRule>
 		if( getPKey().get$implColumnAttrOptionality$$Name$() != value ) {
 			getPKey().set$implColumnAttrOptionality$$Name$( value );
 		}
-		if( get$TableName$Buff().get$implColumnAttrOptionality$$Name$() != value ) {
-			get$TableName$Buff().set$implColumnAttrOptionality$$Name$( value );
+		if( get$TableName$Rec().get$implColumnAttrOptionality$$Name$() != value ) {
+			get$TableName$Rec().set$implColumnAttrOptionality$$Name$( value );
 		}
 	}
 </GenRule>
@@ -576,26 +577,26 @@ $			}</GenRule>
 		if( getPKey().get$implColumnAttrOptionality$$Name$() != value ) {
 			getPKey().set$implColumnAttrOptionality$$Name$( value );
 		}
-		if( get$TableName$Buff().get$implColumnAttrOptionality$$Name$() != value ) {
-			get$TableName$Buff().set$implColumnAttrOptionality$$Name$( value );
+		if( get$TableName$Rec().get$implColumnAttrOptionality$$Name$() != value ) {
+			get$TableName$Rec().set$implColumnAttrOptionality$$Name$( value );
 		}
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implEditObjColumnRODataAccessor">
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
-		return( get$TableName$Buff().get$implColumnAttrOptionality$$Name$() );
+		return( get$TableName$Rec().get$implColumnAttrOptionality$$Name$() );
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implEditObjColumnRWDataAccessor">
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
-		return( get$TableName$Buff().get$implColumnAttrOptionality$$Name$() );
+		return( get$TableName$Rec().get$implColumnAttrOptionality$$Name$() );
 	}
 
 	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ value ) {
-		if( get$TableName$Buff().get$implColumnAttrOptionality$$Name$() != value ) {
-			get$TableName$Buff().set$implColumnAttrOptionality$$Name$( value );
+		if( get$TableName$Rec().get$implColumnAttrOptionality$$Name$() != value ) {
+			get$TableName$Rec().set$implColumnAttrOptionality$$Name$( value );
 $switch ColumnInAnyRelation yes implEditObjColumnRWDataAccessorClearRelations default empty
 $		}
 	}
@@ -621,8 +622,8 @@ $		}
 	<GenRule GenDef="Table" Name="implEditObjConstructorInvokeSuperOrig">
 		super( argOrig );</GenRule>
 
-	<GenRule GenDef="Table" Name="implEditObjTableBuffAttr">
-	protected I$DefSchemaName$$TableName$ buff;</GenRule>
+	<GenRule GenDef="Table" Name="implEditObjTableRecAttr">
+	protected I$DefSchemaName$$TableName$ rec;</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjPKeyAccessors">
 	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey getPKey() {
@@ -631,13 +632,13 @@ $		}
 
 	public void setPKey( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey value ) {
 		orig.setPKey( value );
-		copyPKeyToBuff();
+		copyPKeyToRec();
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjRealise">
 	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$Obj realise() {
-		// We realise this so that it's buffer will get copied to orig during realization
+		// We realise this so that it's record will get copied to orig during realization
 		I$DefSchemaName$$TableName$Obj retobj = getSchema().get$TableName$TableObj().realise$TableName$( (I$SchemaName$$TableName$Obj)this );
 		return( retobj );
 	}
@@ -657,7 +658,7 @@ $		}
 				"read",
 				"retval != orig" );
 		}
-		copyOrigToBuff();
+		copyOrigToRec();
 		return( retval );
 	}
 
@@ -668,41 +669,41 @@ $		}
 				"read",
 				"retval != orig" );
 		}
-		copyOrigToBuff();
+		copyOrigToRec();
 		return( retval );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjCreateCopyPKey">
-		copyPKeyToBuff();</GenRule>
+		copyPKeyToRec();</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjCreateCopyOrigPKey">
-		orig.copyBuffToPKey();</GenRule>
+		orig.copyRecToPKey();</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjCreate">
 	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$Obj create() {$switch PrimaryKeyIsConstEnum yes implEditObjCreateCopyPKey default empty $
-		copyBuffToOrig();$switch PrimaryKeyIsConstEnum yes implEditObjCreateCopyOrigPKey default empty$
+		copyRecToOrig();$switch PrimaryKeyIsConstEnum yes implEditObjCreateCopyOrigPKey default empty$
 		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)getOrigAs$TableName$().getSchema()).get$TableName$TableObj().create$TableName$( getOrigAs$TableName$() );
 		if( retobj == getOrigAs$TableName$() ) {
-			copyOrigToBuff();
+			copyOrigToRec();
 		}
 		return( retobj );
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implEditObjCopyBuffToOrig">
-	public void copyBuffToOrig() {
-		I$DefSchemaName$$TableName$ origBuff = getOrigAs$TableName$().get$TableName$Buff();
-		I$DefSchemaName$$TableName$ myBuff = get$TableName$Buff();
-		origBuff.set( myBuff );
+	<GenRule GenDef="Table" Name="implEditObjCopyRecToOrig">
+	public void copyRecToOrig() {
+		I$DefSchemaName$$TableName$ origRec = getOrigAs$TableName$().get$TableName$Rec();
+		I$DefSchemaName$$TableName$ myRec = get$TableName$Rec();
+		origRec.set( myRec );
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implEditObjCopyOrigToBuff">
-	public void copyOrigToBuff() {
-		I$DefSchemaName$$TableName$ origBuff = getOrigAs$TableName$().get$TableName$Buff();
-		I$DefSchemaName$$TableName$ myBuff = get$TableName$Buff();
-		myBuff.set( origBuff );
+	<GenRule GenDef="Table" Name="implEditObjCopyOrigToRec">
+	public void copyOrigToRec() {
+		I$DefSchemaName$$TableName$ origRec = getOrigAs$TableName$().get$TableName$Rec();
+		I$DefSchemaName$$TableName$ myRec = get$TableName$Rec();
+		myRec.set( origRec );
 	}
 </GenRule>
 
@@ -730,50 +731,50 @@ $		}
 			throw new CFLibUsageException( getClass(), "delete", "Cannot delete a new instance" );
 		}</GenRule>
 
-	<GenRule GenDef="Table" Name="implEditObjCopyPKeyToBuff">
-	public void copyPKeyToBuff() {$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implEditObjCopyPKeyAttrToBuff empty empty )$
+	<GenRule GenDef="Table" Name="implEditObjCopyPKeyToRec">
+	public void copyPKeyToRec() {$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implEditObjCopyPKeyAttrToRec empty empty )$
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implEditObjCopyBuffClassCodeToPKey">
-		getPKey().setClassCode( buff.getClassCode() );</GenRule>
+	<GenRule GenDef="Table" Name="implEditObjCopyRecClassCodeToPKey">
+		getPKey().setClassCode( rec.getClassCode() );</GenRule>
 
-	<GenRule GenDef="Table" Name="implEditObjCopyBuffToPKey">
-	public void copyBuffToPKey() {$switch HasClassCode yes implEditObjCopyBuffClassCodeToPKey default empty$$reference PrimaryKeyIndex iterate Columns( each implObjCopyBuffAttrToPKey empty empty )$
+	<GenRule GenDef="Table" Name="implEditObjCopyRecToPKey">
+	public void copyRecToPKey() {$switch HasClassCode yes implEditObjCopyRecClassCodeToPKey default empty$$reference PrimaryKeyIndex iterate Columns( each implObjCopyRecAttrToPKey empty empty )$
 	}
 </GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implEditObjCopyBuffAttrToPKey">
-		getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+	<GenRule GenDef="IndexCol" Name="implEditObjCopyRecAttrToPKey">
+		getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implEditObjCopyPKeyAttrToBuff">
-		buff.set$implColumnAttrOptionality$$Name$( getPKey().get$implColumnAttrOptionality$$Name$() );</GenRule>
+	<GenRule GenDef="IndexCol" Name="implEditObjCopyPKeyAttrToRec">
+		rec.set$implColumnAttrOptionality$$Name$( getPKey().get$implColumnAttrOptionality$$Name$() );</GenRule>
 
-	<GenRule GenDef="Table" Name="implEditObjBuffAccessors">
-	public I$DefSchemaName$$reference BaseClass TableName$ getBuff() {
-		if( buff == null ) {
-			buff = ((I$SchemaName$Schema)getOrigAs$TableName$().getSchema().getBackingStore()).getFactory$TableName$().newBuff();
-			buff.set( orig.getBuff() );
+	<GenRule GenDef="Table" Name="implEditObjRecAccessors">
+	public I$DefSchemaName$$reference BaseClass TableName$ getRec() {
+		if( rec == null ) {
+			rec = ((I$SchemaName$Schema)getOrigAs$TableName$().getSchema().getBackingStore()).getFactory$TableName$().newRec();
+			rec.set( orig.getRec() );
 		}
-		return( buff );
+		return( rec );
 	}
 
-	public void setBuff( I$DefSchemaName$$reference BaseClass TableName$ value ) {
-		if( buff != value ) {$switch HasSuperClassRelation yes invokeEditObjSuperSetBuff default invokeEditObjBaseSetBuff$
+	public void setRec( I$DefSchemaName$$reference BaseClass TableName$ value ) {
+		if( rec != value ) {$switch HasSuperClassRelation yes invokeEditObjSuperSetRec default invokeEditObjBaseSetRec$
 $iterate Relation( each implEditObjTableDataAccessorsClearRelationMember empty empty )
 $		}
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="invokeEditObjSuperSetBuff">
-			super.setBuff( value );</GenRule>
+	<GenRule GenDef="Table" Name="invokeEditObjSuperSetRec">
+			super.setRec( value );</GenRule>
 
-	<GenRule GenDef="Table" Name="invokeEditObjBaseSetBuff">
-			buff = value;</GenRule>
+	<GenRule GenDef="Table" Name="invokeEditObjBaseSetRec">
+			rec = value;</GenRule>
 
-	<GenRule GenDef="Table" Name="implEditObjTableBuffAccessors">
-	public I$DefSchemaName$$TableName$ get$TableName$Buff() {
-		return( (I$DefSchemaName$$TableName$)getBuff() );
+	<GenRule GenDef="Table" Name="implEditObjTableRecAccessors">
+	public I$DefSchemaName$$TableName$ get$TableName$Rec() {
+		return( (I$DefSchemaName$$TableName$)getRec() );
 	}
 </GenRule>
 
@@ -782,7 +783,7 @@ $		}
 
 	<GenRule GenDef="IndexCol" Name="implEditObjTableDataAccessorsPKey">getPKey()</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implEditObjTableDataAccessorsBuff">$leadlower reference Table TableName$Buff</GenRule>
+	<GenRule GenDef="IndexCol" Name="implEditObjTableDataAccessorsRec">$leadlower reference Table TableName$Rec</GenRule>
 
 	<GenRule GenDef="Relation" Name="implEditObjTableDataAccessorsClearRelationMember"
 		>$switch RelationTypeTag

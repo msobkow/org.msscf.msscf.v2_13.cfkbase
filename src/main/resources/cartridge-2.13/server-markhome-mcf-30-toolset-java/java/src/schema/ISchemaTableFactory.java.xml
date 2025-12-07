@@ -73,7 +73,7 @@ public interface I$SchemaName$$TableName$Factory$switch HasDefSchema yes extends
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declJavaDefSchemaTableFactoryBaseBody">
-$switch HasSuperClassRelation no declXfcNewPKey default empty$$switch HasSuperClassRelation no declNewHPKey default empty$$iterate Index( each declNewNonPrimaryIndexKey )$$declNewXfc$$declNewHXfc$
+$switch HasSuperClassRelation no declRecNewPKey default empty$$switch HasSuperClassRelation no declNewHPKey default empty$$iterate Index( each declNewNonPrimaryIndexKey )$$declNewRec$$declNewHRec$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="extendsJavaDefSchemaTableFactory">
@@ -91,16 +91,16 @@ extends I$reference DefSchema SchemaName$$TableName$Factory</GenRule>
 	public I$DefSchemaName$$TableName$By$Suffix$Key newBy$Suffix$Key();
 </GenRule>
 
-	<GenRule GenDef="Index" Name="XfcCompactedIndexClass">$switch IsAtomic yes implJavaOptAtomType default XfcIndexClassName$</GenRule>
-	<GenRule GenDef="Index" Name="XfcIndexClassName">$reference Table DefSchemaName$$reference Table TableName$By$Suffix$Key</GenRule>
+	<GenRule GenDef="Index" Name="RecCompactedIndexClass">$switch IsAtomic yes implJavaOptAtomType default RecIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="RecIndexClassName">$reference Table DefSchemaName$$reference Table TableName$By$Suffix$Key</GenRule>
 
-	<GenRule GenDef="Table" Name="XfcCompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex XfcCompactedPrimaryIndexClass$</GenRule>
-	<GenRule GenDef="Index" Name="XfcCompactedPrimaryIndexClass">$switch IsAtomic yes implJavaOptAtomType default XfcPrimaryIndexClassName$</GenRule>
+	<GenRule GenDef="Table" Name="RecCompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex RecCompactedPrimaryIndexClass$</GenRule>
+	<GenRule GenDef="Index" Name="RecCompactedPrimaryIndexClass">$switch IsAtomic yes implJavaOptAtomType default RecPrimaryIndexClassName$</GenRule>
 
-	<GenRule GenDef="Table" Name="XfcPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex JPAPrimaryIndexClassName$</GenRule>
-	<GenRule GenDef="Index" Name="XfcPrimaryIndexClassName">$reference Table DefSchemaName$Jpa$reference Table TableName$PKey</GenRule>
+	<GenRule GenDef="Table" Name="RecPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex JPAPrimaryIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="RecPrimaryIndexClassName">$reference Table DefSchemaName$Jpa$reference Table TableName$PKey</GenRule>
 
-	<GenRule GenDef="Table" Name="declXfcNewPKey"
+	<GenRule GenDef="Table" Name="declRecNewPKey"
 		>$switch HasDefSchema no ifNotAtomicDeclNewPKey default empty$</GenRule>
 	<GenRule GenDef="Table" Name="ifNotAtomicDeclNewPKey">$switch IsPrimaryIndexKeyAtomic yes empty default reallyDeclNewPKey$</GenRule>
 	<GenRule GenDef="Table" Name="reallyDeclNewPKey">
@@ -113,7 +113,9 @@ extends I$reference DefSchema SchemaName$$TableName$Factory</GenRule>
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declNewHPKey"
-		>$switch HasDefSchema default empty no reallyDeclNewHPKey empty empty$</GenRule>
+		>$switch HasDefSchema default empty no reallyDeclNewHPKeyIfHasHistory empty empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="reallyDeclNewHPKeyIfHasHistory">$switch BaseHasHistory yes reallyDeclNewHPKey default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="reallyDeclNewHPKey">
 	/**
@@ -124,22 +126,27 @@ extends I$reference DefSchema SchemaName$$TableName$Factory</GenRule>
 	I$DefSchemaName$$TableName$HPKey newHPKey();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declNewXfc">
+	<GenRule GenDef="Table" Name="declNewRec">
 	/**
 	 *	Allocate a $TableName$ interface implementation.
 	 *
 	 *	@return	The new instance.
 	 */
-	public I$DefSchemaName$$TableName$ newXfc();
+	public I$DefSchemaName$$TableName$ newRec();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declNewHXfc">
+	<GenRule GenDef="Table" Name="declNewHRec"
+		>$switch HasDefSchema default empty no reallyDeclNewHRecIfHasHistory empty empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="reallyDeclNewHRecIfHasHistory">$switch BaseHasHistory yes reallyDeclNewHRec default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="reallyDeclNewHRec">
 	/**
 	 *	Allocate a $TableName$ history interface implementation.
 	 *
 	 *	@return	The new instance.
 	 */
-	public I$DefSchemaName$$TableName$H newHXfc();
+	public I$DefSchemaName$$TableName$H newHRec();
 </GenRule>
 
 </RuleSet>

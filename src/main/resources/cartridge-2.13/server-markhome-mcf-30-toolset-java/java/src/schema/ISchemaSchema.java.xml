@@ -66,7 +66,11 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 {$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( each empty empty declSchemaAuthorizationAccessors )$<!--$iterate SchemaRefs( first declFileImport each empty empty declFileImport )$-->$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$}
 </GenFile>
 
-<GenRule GenDef="EnumDef" Name="declISchemaEnumType"
+        <GenRule GenDef="Object" Name="SecSchemaName">$poptop SchemaDef iterate SchemaRefs( first emitSecSchemaName each empty empty emitOnlySchemaName )$</GenRule>
+        <GenRule GenDef="SchemaRef" Name="emitSecSchemaName">$reference RefSchema SchemaName$</GenRule>
+        <GenRule GenDef="Object" Name="emitOnlySchemaName">$poptop SchemaDef SchemaName$</GenRule>
+        
+	<GenRule GenDef="EnumDef" Name="declISchemaEnumType"
 		>$switch HasDefSchema yes empty default reallyDeclISchemaEnumType$</GenRule>
 
 	<GenRule GenDef="EnumDef" Name="reallyDeclISchemaEnumType">

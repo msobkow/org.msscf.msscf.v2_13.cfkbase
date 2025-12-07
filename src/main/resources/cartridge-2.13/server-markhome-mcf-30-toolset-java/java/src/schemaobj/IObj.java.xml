@@ -55,6 +55,7 @@ package $reference ManufacturingSchema lower JavaPackage$.$reference Manufacturi
 import java.math.*;
 import java.sql.*;
 import java.text.*;
+import java.time.*;
 import java.util.*;
 import $lower JavaPackage$.$SchemaName$.*;
 import server.markhome.mcf.v3_1.cflib.*;
@@ -69,7 +70,7 @@ public interface I$SchemaName$$TableName$Obj$iterate TableRefs( first declIObjIn
 </GenFile>
 
 	<GenRule GenDef="Table" Name="declIObjMethods"
-		>$switch HasSuperClassRelation yes empty default declIObjGetClassCode$$switch HasSuperClassRelation yes empty default declIObjRealise$$switch HasSuperClassRelation yes empty default declIObjForget$$switch HasSuperClassRelation yes empty default declIObjRead$$switch ThisHasChain yes declIObjMoveUp default empty$$switch ThisHasChain yes declIObjMoveDown default empty$$switch HasSuperClassRelation yes empty default declIObjBeginEdit$$switch HasSuperClassRelation yes empty default declIObjEndEdit$$switch HasSuperClassRelation yes empty default declIObjEditAccessors$$declIObjEditAsAccessors$$declIObjTableAccessors$$switch HasSuperClassRelation no declIObjSchemaAccessors default empty$$switch HasSuperClassRelation no declIObjBuffAccessors default empty$$declIObjTableBuffAccessors$$switch HasDefSchemaOrSuper no declIObjPKeyAccessors default empty$$switch HasSuperClassRelation no declIObjIsNewAccessors default empty$$iterate Columns( each declIObjColumnAccessors empty empty )$$iterate Relation( each declIObjRelationAccessors empty empty )$$switch HasSuperClassRelation yes empty default declIObjCopyPKeyToBuff$$switch HasSuperClassRelation yes empty default declIObjCopyBuffToPKey$$iterate ServerMethods( each declJavaObjServerMethod empty empty )$$JavaObjInterface$</GenRule>
+		>$switch HasSuperClassRelation yes empty default declIObjGetClassCode$$switch HasSuperClassRelation yes empty default declIObjRealise$$switch HasSuperClassRelation yes empty default declIObjForget$$switch HasSuperClassRelation yes empty default declIObjRead$$switch ThisHasChain yes declIObjMoveUp default empty$$switch ThisHasChain yes declIObjMoveDown default empty$$switch HasSuperClassRelation yes empty default declIObjBeginEdit$$switch HasSuperClassRelation yes empty default declIObjEndEdit$$switch HasSuperClassRelation yes empty default declIObjEditAccessors$$declIObjEditAsAccessors$$declIObjTableAccessors$$switch HasSuperClassRelation no declIObjSchemaAccessors default empty$$switch HasSuperClassRelation no declIObjRecAccessors default empty$$declIObjTableRecAccessors$$switch HasDefSchemaOrSuper no declIObjPKeyAccessors default empty$$switch HasSuperClassRelation no declIObjIsNewAccessors default empty$$iterate Columns( each declIObjColumnAccessors empty empty )$$iterate Relation( each declIObjRelationAccessors empty empty )$$switch HasSuperClassRelation yes empty default declIObjCopyPKeyToRec$$switch HasSuperClassRelation yes empty default declIObjCopyRecToPKey$$iterate ServerMethods( each declJavaObjServerMethod empty empty )$$JavaObjInterface$</GenRule>
 
 	<GenRule GenDef="Table" Name="declIObjInheritSchemaTableObjAndSuperclass">
 	extends I$reference SchemaDef SchemaName$$TableName$Obj$poptop Table switch HasSuperClassRelation yes alsoIObjInheritSuperClass default empty$</GenRule>
@@ -321,18 +322,18 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	/**
 	 *	Get the primary key of this instance.
 	 *
-	 *	@return	I$DefSchemaName$$TableName$PKey primary key for this instance.
+	 *	@return	$ICompactedPrimaryIndexClass$ primary key for this instance.
 	 */
-	I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey getPKey();
+	$ICompactedPrimaryIndexClass$ getPKey();
 
 	/**
 	 *	Set the primary key of this instance.
 	 *	&lt;p&gt;
 	 *	This method should only be invoked by implementation internals.
 	 *
-	 *	@param I$DefSchemaName$$TableName$PKey primary key value for this instance.
+	 *	@param $ICompactedPrimaryIndexClass$ primary key value for this instance.
 	 */
-	void setPKey( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey value );
+	void setPKey( $ICompactedPrimaryIndexClass$ value );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIObjRealise">
@@ -418,21 +419,21 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	void deleteInstance();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declIObjCopyPKeyToBuff">
+	<GenRule GenDef="Table" Name="declIObjCopyPKeyToRec">
 	/**
 	 *	Internal use only.
 	 */
-	void copyPKeyToBuff();
+	void copyPKeyToRec();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declIObjCopyBuffToPKey">
+	<GenRule GenDef="Table" Name="declIObjCopyRecToPKey">
 	/**
 	 *	Internal use only.
 	 */
-	void copyBuffToPKey();
+	void copyRecToPKey();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declIObjBuffAccessors">
+	<GenRule GenDef="Table" Name="declIObjRecAccessors">
 	/**
 	 *	Get the I$DefSchemaName$$TableName$ instance which currently backs this instance.
 	 *	&lt;p&gt;
@@ -441,15 +442,15 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	 *
 	 *	@return	I$DefSchemaName$$TableName$ instance which currently backs this object.
 	 */
-	I$DefSchemaName$$TableName$ getBuff();
+	I$DefSchemaName$$TableName$ getRec();
 
 	/**
 	 *	Internal use only.
 	 */
-	void setBuff( I$DefSchemaName$$TableName$ value );
+	void setRec( I$DefSchemaName$$TableName$ value );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declIObjTableBuffAccessors">
+	<GenRule GenDef="Table" Name="declIObjTableRecAccessors">
 	/**
 	 *	Get the I$DefSchemaName$$TableName$ instance which currently backs this instance.
 	 *	&lt;p&gt;
@@ -458,7 +459,7 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	 *
 	 *	@return	I$DefSchemaName$$TableName$ instance which currently backs this object.
 	 */
-	I$DefSchemaName$$TableName$ get$TableName$Buff();
+	I$DefSchemaName$$TableName$ get$TableName$Rec();
 </GenRule>
 
 </RuleSet>

@@ -55,6 +55,7 @@ package $reference ManufacturingSchema lower JavaPackage$.$reference Manufacturi
 import java.math.*;
 import java.sql.*;
 import java.text.*;
+import java.time.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
@@ -97,15 +98,15 @@ $implSchemaTableObjMethods$$implNewInstance$$implNewEditInstance$$switch IsBaseT
 	{
 		final String S_ProcName = "pageAll$poptop Table TableName$";
 		Map&lt;I$DefSchemaName$$poptop Table reference BaseClass TableName$PKey, I$DefSchemaName$$TableName$Obj&gt; map = new HashMap&lt;I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey,I$DefSchemaName$$TableName$Obj&gt;();
-		I$DefSchemaName$$TableName$[] buffList = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().pageAllBuff( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( each passCommaOptPriorArg )$ );
-		I$DefSchemaName$$TableName$ buff;
+		I$DefSchemaName$$TableName$[] recList = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().pageAllRec( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( each passCommaOptPriorArg )$ );
+		I$DefSchemaName$$TableName$ rec;
 		I$DefSchemaName$$TableName$Obj obj;
 		I$DefSchemaName$$TableName$Obj realised;
-		ArrayList&lt;I$DefSchemaName$$TableName$Obj&gt; arrayList = new ArrayList&lt;I$DefSchemaName$$TableName$Obj&gt;( buffList.length );
-		for( int idx = 0; idx &lt; buffList.length; idx ++ ) {
-			buff = buffList[ idx ];$switch HasClassCode yes implReadAllObjConsObjByClassCode default implReadAllObjConsObj$
+		ArrayList&lt;I$DefSchemaName$$TableName$Obj&gt; arrayList = new ArrayList&lt;I$DefSchemaName$$TableName$Obj&gt;( recList.length );
+		for( int idx = 0; idx &lt; recList.length; idx ++ ) {
+			rec = recList[ idx ];$switch HasClassCode yes implReadAllObjConsObjByClassCode default implReadAllObjConsObj$
 			obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
-			obj.setBuff( buff );
+			obj.setRec( rec );
 			realised = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			arrayList.add( realised );
 		}
@@ -215,10 +216,10 @@ $implReadAllObjComparator$
 	public I$reference RetTable DefSchemaName$$reference RetTable Name$Obj $leadlower Name$($iterate Params( first declServerMethodParamNoComma each declServerMethodParam empty empty )$ )
 	{
 		I$reference RetTable DefSchemaName$$reference RetTable Name$Obj retobj = null;
-		$reference RetTable DefSchemaName$$reference RetTable Name$Buff readBuff = ((I$poptop SchemaDef SchemaName$$TableName$Table)((I$poptop SchemaDef SchemaName$Schema)(schema.getBackingStore())).getTable$TableName$()).$leadlower Name$( ((I$poptop SchemaDef SchemaName$SchemaObj)schema)$iterate Params( each passServerMethodParam empty empty )$ );
-		if( readBuff != null ) {$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
+		$reference RetTable DefSchemaName$$reference RetTable Name$Rec readRec = ((I$poptop SchemaDef SchemaName$$TableName$Table)((I$poptop SchemaDef SchemaName$Schema)(schema.getBackingStore())).getTable$TableName$()).$leadlower Name$( ((I$poptop SchemaDef SchemaName$SchemaObj)schema)$iterate Params( each passServerMethodParam empty empty )$ );
+		if( readRec != null ) {$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
 			retobj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference RetTable reference BaseClass TableName$().newPKey() );
-			retobj.setBuff( readBuff );
+			retobj.setRec( readRec );
 			retobj = (I$DefSchemaName$$reference RetTable TableName$Obj)retobj.realise();
 		}
 		return( retobj );
@@ -226,7 +227,7 @@ $implReadAllObjComparator$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implJavaTableObjServerMethodConsObjByClassCode">
-			retobj = (I$popto ServerMethod reference RetTable DefSchemaName$$popto ServerMethod reference RetTable TableName$Obj)((I$SchemaName$SchemaObj)schema).get$reference BaseClass TableName$TableObj().constructByClassCode( readBuff.getClassCode() );</GenRule>
+			retobj = (I$popto ServerMethod reference RetTable DefSchemaName$$popto ServerMethod reference RetTable TableName$Obj)((I$SchemaName$SchemaObj)schema).get$reference BaseClass TableName$TableObj().constructByClassCode( readRec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implJavaTableObjServerMethodConsObj">
 			retobj = (I$popto ServerMethod reference RetTable DefSchemaName$$popto ServerMethod reference RetTable TableName$Obj)((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().newInstance();</GenRule>
@@ -235,11 +236,11 @@ $implReadAllObjComparator$
 	public I$reference RetTable DefSchemaName$$reference RetTable Name$Obj $leadlower Name$( I$DefSchemaName$$TableName$Obj obj$iterate Params( each declServerMethodParam empty empty )$ )
 	{
 		I$DefSchemaName$$reference RetTable Name$Obj retobj = null;
-		$DefSchemaName$$reference RetTable Name$Buff readBuff = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().$leadlower Name$( schema,
+		$DefSchemaName$$reference RetTable Name$Rec readRec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().$leadlower Name$( schema,
 			obj$iterate Params( each passServerMethodParam empty empty )$ );
-		if( readBuff != null ) {$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
+		if( readRec != null ) {$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
 			retobj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference RetTable reference BaseClass TableName$().newPKey() );
-			retobj.setBuff( readBuff );
+			retobj.setRec( readRec );
 			retobj = (I$DefSchemaName$$reference RetTable TableName$Obj)retobj.realise();
 		}
 		return( retobj );
@@ -254,16 +255,16 @@ $implReadAllObjComparator$
 	{
 		LinkedList&lt;I$reference RetTable DefSchemaName$$reference RetTable Name$Obj&gt; list = new LinkedList&lt;I$reference RetTable DefSchemaName$$reference RetTable Name$Obj&gt;();
 		I$reference RetTable DefSchemaName$$reference RetTable Name$Obj retobj = null;
-		$reference RetTable DefSchemaName$$reference RetTable Name$Buff readBuff;
-		$reference RetTable DefSchemaName$$reference RetTable Name$Buff readArray[] = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().$leadlower Name$( schema$iterate Params( each passServerMethodParam empty empty )$ );
+		$reference RetTable DefSchemaName$$reference RetTable Name$Rec readRec;
+		$reference RetTable DefSchemaName$$reference RetTable Name$Rec readArray[] = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().$leadlower Name$( schema$iterate Params( each passServerMethodParam empty empty )$ );
 		if( readArray == null ) {
 			return( list );
 		}
 		int sz = readArray.length;
 		for( int i = 0; i &lt; sz; i ++ ) {
-			readBuff = readArray[i];$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
+			readRec = readArray[i];$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
 			retobj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference RetTable reference BaseClass TableName$().newPKey() );
-			retobj.setBuff( readBuff );
+			retobj.setRec( readRec );
 			retobj = (I$DefSchemaName$$reference RetTable TableName$Obj)retobj.realise();
 			list.add( retobj );
 		}
@@ -276,17 +277,17 @@ $implReadAllObjComparator$
 	{
 		LinkedList&lt;I$reference RetTable DefSchemaName$$reference RetTable Name$Obj&gt; list = new LinkedList&lt;I$reference RetTable DefSchemaName$$reference RetTable Name$Obj&gt;();
 		I$reference RetTable DefSchemaName$$reference RetTable Name$Obj retobj = null;
-		$reference RetTable DefSchemaName$$reference RetTable Name$Buff readBuff;
-		$reference RetTable DefSchemaName$$reference RetTable Name$Buff readArray[] = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().$leadlower Name$( schema,
+		$reference RetTable DefSchemaName$$reference RetTable Name$Rec readRec;
+		$reference RetTable DefSchemaName$$reference RetTable Name$Rec readArray[] = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().$leadlower Name$( schema,
 			obj$iterate Params( each passServerMethodParam empty empty )$ );
 		if( readArray == null ) {
 			return( list );
 		}
 		int sz = readArray.length;
 		for( int i = 0; i &lt; sz; i ++ ) {
-			readBuff = readArray[i];$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
+			readRec = readArray[i];$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
 			retobj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference RetTable reference BaseClass TableName$().newPKey() );
-			retobj.setBuff( readBuff );
+			retobj.setRec( readRec );
 			retobj = (I$reference RetTable DefSchemaName$$reference RetTable TableName$Obj)retobj.realise();
 			list.add( retobj );
 		}
@@ -538,8 +539,8 @@ $switch HasSubClasses yes implConstructByClassCodeIterSubClasses default empty$<
 	<GenRule GenDef="Table" Name="SchemaTableObjPKeyT"
 		>I$SchemaName$$TableName$PKey</GenRule>
 
-	<GenRule GenDef="Table" Name="implRealiseObjReplaceBuff">
-			keepObj.setBuff( Obj.getBuff() );</GenRule>
+	<GenRule GenDef="Table" Name="implRealiseObjReplaceRec">
+			keepObj.setRec( Obj.getRec() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implRealiseObj">
 	public I$DefSchemaName$$TableName$Obj realise$TableName$( I$DefSchemaName$$TableName$Obj Obj ) {
@@ -556,7 +557,7 @@ $switch HasSubClasses yes implConstructByClassCodeIterSubClasses default empty$<
 			 */
 
 			// Detach object from alternate and duplicate indexes, leave PKey alone
-$implTableObjIndexDetachFromIndexes$$switch HasSuperClassRelation yes implRealiseObjInvokeBase default implRealiseObjReplaceBuff$
+$implTableObjIndexDetachFromIndexes$$switch HasSuperClassRelation yes implRealiseObjInvokeBase default implRealiseObjReplaceRec$
 			// Attach new object to alternate and duplicate indexes -- PKey stay stable
 $implTableObjIndexAddToIndexes$
 			if( all$TableName$ != null ) {
@@ -724,7 +725,7 @@ $implTableObjIndexAddToIndexes$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implRealiseObjInvokeBase"
->			// Keep passing the new object because it's the one with the buffer
+>			// Keep passing the new object because it's the one with the record
 			// that the base table needs to copy to the existing object from
 			// the cache.
 			keepObj = (I$DefSchemaName$$TableName$Obj)schema.get$reference SuperClassRelation reference ToTable TableName$TableObj().realise$reference SuperClassRelation reference ToTable TableName$( Obj );
@@ -734,8 +735,8 @@ $implTableObjIndexAddToIndexes$
 >			keepObj = (I$DefSchemaName$$TableName$Obj)schema.get$reference SuperClassRelation reference ToTable TableName$TableObj().realise$reference SuperClassRelation reference ToTable TableName$( keepObj );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implCreateObjCopyBuffToPKey">
-		obj.copyBuffToPKey();</GenRule>
+	<GenRule GenDef="Table" Name="implCreateObjCopyRecToPKey">
+		obj.copyRecToPKey();</GenRule>
 
 	<GenRule GenDef="Table" Name="implCreateObjInvokeSuper">
 		I$DefSchemaName$$TableName$Obj obj = (I$DefSchemaName$$TableName$Obj)schema.get$reference SuperClassRelation reference ToTable TableName$TableObj().create$reference SuperClassRelation reference ToTable TableName$( Obj );</GenRule>
@@ -745,10 +746,10 @@ $implTableObjIndexAddToIndexes$
 
 	<GenRule GenDef="Table" Name="implCreateObj">
 	public I$DefSchemaName$$TableName$Obj create$TableName$( I$DefSchemaName$$TableName$Obj Obj ) {<!--$switch HasSuperClassRelation yes implCreateObjInvokeSuper default implCreateObjAssignObj$-->$implCreateObjAssignObj$
-		I$DefSchemaName$$TableName$ buff = obj.get$TableName$Buff();
+		I$DefSchemaName$$TableName$ rec = obj.get$TableName$Rec();
 		((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().create$TableName$(
 			schema.getAuthorization(),
-			buff );$implCreateObjCopyBuffToPKey$$switch HasClassCode no implCreateObjRealise default implCreateObjRealiseIfMatches$$switch HasChain yes implCreateObjRefreshChainPrev default empty$
+			rec );$implCreateObjCopyRecToPKey$$switch HasClassCode no implCreateObjRealise default implCreateObjRealiseIfMatches$$switch HasChain yes implCreateObjRefreshChainPrev default empty$
 		obj.endEdit();
 		return( obj );
 	}
@@ -761,10 +762,10 @@ $implTableObjIndexAddToIndexes$
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="implCreateObjCopyClassCodeToPKey">
-		pkey.setClassCode( buff.getClassCode() );</GenRule>
+		pkey.setClassCode( rec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implCreateObjCopyPKeyAttr">
-		pkey.set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+		pkey.set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implCreateObjRealiseIfMatches">
 		if( obj.getPKey().getClassCode().equals( "$ClassCode$" ) ) {
@@ -814,13 +815,13 @@ $implTableObjIndexAddToIndexes$
 		if( ( all$TableName$ == null ) || forceRead ) {
 			Map&lt;I$DefSchemaName$$poptop Table reference BaseClass TableName$PKey, I$DefSchemaName$$TableName$Obj&gt; map = new HashMap&lt;$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey,I$DefSchemaName$$TableName$Obj&gt;();
 			all$TableName$ = map;
-			I$DefSchemaName$$TableName$[] buffList = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readAllDerived( schema.getAuthorization() );
-			I$DefSchemaName$$TableName$ buff;
+			I$DefSchemaName$$TableName$[] recList = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readAllDerived( schema.getAuthorization() );
+			I$DefSchemaName$$TableName$ rec;
 			I$DefSchemaName$$TableName$Obj obj;
-			for( int idx = 0; idx &lt; buffList.length; idx ++ ) {
-				buff = buffList[ idx ];$switch HasClassCode yes implReadAllObjConsObjByClassCode default implReadAllObjConsObj$
+			for( int idx = 0; idx &lt; recList.length; idx ++ ) {
+				rec = recList[ idx ];$switch HasClassCode yes implReadAllObjConsObjByClassCode default implReadAllObjConsObj$
 				obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
-				obj.setBuff( buff );
+				obj.setRec( rec );
 				I$DefSchemaName$$TableName$Obj realised = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			}
 		}$implReadAllReturnSortedArray$
@@ -887,16 +888,16 @@ $implReadAllObjComparator$
 		return( sortedList );</GenRule>
 
 	<GenRule GenDef="Table" Name="implReadAllObjConsObjByClassCode">
-				obj = (I$DefSchemaName$$TableName$Obj)schema.get$reference BaseClass TableName$TableObj().constructByClassCode( buff.getClassCode() );</GenRule>
+				obj = (I$DefSchemaName$$TableName$Obj)schema.get$reference BaseClass TableName$TableObj().constructByClassCode( rec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implReadAllObjConsObj">
 				obj = newInstance();</GenRule>
 
 	<GenRule GenDef="Table" Name="implReadAllObjCopyPKeyClassCode">
-				obj.getPKey().setClassCode( buff.getClassCode() );</GenRule>
+				obj.getPKey().setClassCode( rec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadAllObjCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implReadObjByPKey">
 	public I$DefSchemaName$$TableName$Obj read$TableName$( I$DefSchemaName$$reference BaseClass TableName$PKey pkey ) {
@@ -909,10 +910,10 @@ $implReadAllObjComparator$
 			obj = members.get( pkey );
 		}
 		else {
-			I$DefSchemaName$$TableName$ readBuff = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implReadObjByPKeyCommaPassArg empty empty )$ );
-			if( readBuff != null ) {$switch HasClassCode yes implReadObjByPKeyConsObjByClassCode default implReadObjByPKeyConsObj$
+			I$DefSchemaName$$TableName$ readRec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implReadObjByPKeyCommaPassArg empty empty )$ );
+			if( readRec != null ) {$switch HasClassCode yes implReadObjByPKeyConsObjByClassCode default implReadObjByPKeyConsObj$
 				obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
-				obj.setBuff( readBuff );
+				obj.setRec( readRec );
 				obj = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			}
 		}
@@ -923,10 +924,10 @@ $implReadAllObjComparator$
 	<GenRule GenDef="Table" Name="implLockObjByPKey">
 	public I$DefSchemaName$$TableName$Obj lock$TableName$( I$DefSchemaName$$reference BaseClass TableName$PKey pkey ) {
 		I$DefSchemaName$$TableName$Obj locked = null;
-		I$DefSchemaName$$TableName$ lockBuff = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().lockDerived( schema.getAuthorization(), pkey );
-		if( lockBuff != null ) {$switch HasClassCode yes implLockObjByPKeyConsLockedByClassCode default implLockObjByPKeyConsLocked$
+		I$DefSchemaName$$TableName$ lockRec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().lockDerived( schema.getAuthorization(), pkey );
+		if( lockRec != null ) {$switch HasClassCode yes implLockObjByPKeyConsLockedByClassCode default implLockObjByPKeyConsLocked$
 			locked.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
-			locked.setBuff( lockBuff );
+			locked.setRec( lockRec );
 			locked = (I$DefSchemaName$$TableName$Obj)locked.realise();
 		}
 		else {
@@ -937,16 +938,16 @@ $implReadAllObjComparator$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implReadObjByPKeyCopyPKeyClassCode">
-				obj.getPKey().setClassCode( readBuff.getClassCode() );</GenRule>
+				obj.getPKey().setClassCode( readRec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implReadObjByPKeyConsObjByClassCode">
-				obj = (I$DefSchemaName$$TableName$Obj)schema.get$reference BaseClass TableName$TableObj().constructByClassCode( readBuff.getClassCode() );</GenRule>
+				obj = (I$DefSchemaName$$TableName$Obj)schema.get$reference BaseClass TableName$TableObj().constructByClassCode( readRec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implReadObjByPKeyConsObj">
 				obj = schema.get$TableName$TableObj().newInstance();</GenRule>
 
 	<GenRule GenDef="Table" Name="implLockObjByPKeyConsLockedByClassCode">
-				locked = (I$DefSchemaName$$TableName$Obj)schema.get$reference BaseClass TableName$TableObj().constructByClassCode( lockBuff.getClassCode() );</GenRule>
+				locked = (I$DefSchemaName$$TableName$Obj)schema.get$reference BaseClass TableName$TableObj().constructByClassCode( lockRec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implLockObjByPKeyConsLocked">
 				locked = schema.get$TableName$TableObj().newInstance();</GenRule>
@@ -955,7 +956,7 @@ $implReadAllObjComparator$
 				pkey.get$implColumnAttrOptionality$$Name$()</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadObjByPKeyCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( readBuff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( readRec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implDataCopyObjColumnToData"
 		>$reference Column implDataCopyObjColumnToData$</GenRule>
@@ -1035,10 +1036,10 @@ $implReadAllObjComparator$
 			obj = indexBy$Suffix$.get( key );
 		}
 		else {
-			I$DefSchemaName$$TableName$ buff = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$Suffix$( schema.getAuthorization()$iterate Columns( each implReadObjByIndexCommaPassArg empty empty )$ );
-			if( buff != null ) {$switch HasClassCode yes implReadObjByAltIdxConsObjByClassCode default implReadObjByAltIdxConsObj$
+			I$DefSchemaName$$TableName$ rec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$Suffix$( schema.getAuthorization()$iterate Columns( each implReadObjByIndexCommaPassArg empty empty )$ );
+			if( rec != null ) {$switch HasClassCode yes implReadObjByAltIdxConsObjByClassCode default implReadObjByAltIdxConsObj$
 				obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference Table reference BaseClass TableName$().newPKey() );
-				obj.setBuff( buff );
+				obj.setRec( rec );
 				obj = (I$DefSchemaName$$poptop Table TableName$Obj)obj.realise();
 			}
 		}</GenRule>
@@ -1129,12 +1130,12 @@ $implReadAllObjComparator$
 		else {
 			dict = new HashMap&lt;I$reference Table reference BaseClass DefSchemaName$$reference Table reference BaseClass TableName$PKey, I$DefSchemaName$$poptop Table TableName$Obj&gt;();
 			I$DefSchemaName$$TableName$Obj obj;
-			I$DefSchemaName$$TableName$[] buffList = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$Suffix$( schema.getAuthorization()$iterate Columns( each implReadObjByIndexCommaPassArg empty empty )$ );
-			I$DefSchemaName$$TableName$ buff;
-			for( int idx = 0; idx &lt; buffList.length; idx ++ ) {
-				buff = buffList[ idx ];$switch HasClassCode yes implReadObjByDupIdxConsObjByClassCode default implReadObjByDupIdxConsObj$
+			I$DefSchemaName$$TableName$[] recList = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$Suffix$( schema.getAuthorization()$iterate Columns( each implReadObjByIndexCommaPassArg empty empty )$ );
+			I$DefSchemaName$$TableName$ rec;
+			for( int idx = 0; idx &lt; recList.length; idx ++ ) {
+				rec = recList[ idx ];$switch HasClassCode yes implReadObjByDupIdxConsObjByClassCode default implReadObjByDupIdxConsObj$
 				obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference Table reference BaseClass TableName$().newPKey() );
-				obj.setBuff( buff );
+				obj.setRec( rec );
 				I$DefSchemaName$$poptop Table TableName$Obj realised = (I$DefSchemaName$$poptop Table TableName$Obj)obj.realise();
 				dict.put( realised.getPKey(), realised );
 			}
@@ -1144,12 +1145,12 @@ $implReadAllObjComparator$
 	<GenRule GenDef="Index" Name="implTableObjPageByIndexCalcList">
 		List&lt;I$DefSchemaName$$TableName$Obj&gt; retList = new LinkedList&lt;I$DefSchemaName$$TableName$Obj&gt;();
 		I$DefSchemaName$$TableName$Obj obj;
-		I$DefSchemaName$$TableName$[] buffList = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().pageBuffBy$declReadTableSuffix$( schema.getAuthorization()$iterate Columns( each implReadObjByIndexCommaPassArg empty empty )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each passCommaOptPriorArg )$ );
-		I$DefSchemaName$$TableName$ buff;
-		for( int idx = 0; idx &lt; buffList.length; idx ++ ) {
-			buff = buffList[ idx ];$switch HasClassCode yes implReadObjByDupIdxConsObjByClassCode default implReadObjByDupIdxConsObj$
+		I$DefSchemaName$$TableName$[] recList = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().pageRecBy$declReadTableSuffix$( schema.getAuthorization()$iterate Columns( each implReadObjByIndexCommaPassArg empty empty )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each passCommaOptPriorArg )$ );
+		I$DefSchemaName$$TableName$ rec;
+		for( int idx = 0; idx &lt; recList.length; idx ++ ) {
+			rec = recList[ idx ];$switch HasClassCode yes implReadObjByDupIdxConsObjByClassCode default implReadObjByDupIdxConsObj$
 			obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference Table reference BaseClass TableName$().newPKey() );
-			obj.setBuff( buff );
+			obj.setRec( rec );
 			I$DefSchemaName$$poptop Table TableName$Obj realised = (I$DefSchemaName$$poptop Table TableName$Obj)obj.realise();
 			retList.add( realised );
 		}</GenRule>
@@ -1165,23 +1166,23 @@ $implReadAllObjComparator$
 		pkey.set$implColumnAttrOptionality$$Name$( $Name$ );</GenRule>
 
 	<GenRule GenDef="Index" Name="implReadObjByAltIdxCopyPKeyClassCode">
-				obj.getPKey().setClassCode( buff.getClassCode() );</GenRule>
+				obj.getPKey().setClassCode( rec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="Index" Name="implReadObjByAltIdxConsObjByClassCode">
-				obj = (I$DefSchemaName$$poptop Table TableName$Obj)schema.get$reference Table reference BaseClass TableName$TableObj().constructByClassCode( buff.getClassCode() );</GenRule>
+				obj = (I$DefSchemaName$$poptop Table TableName$Obj)schema.get$reference Table reference BaseClass TableName$TableObj().constructByClassCode( rec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="Index" Name="implReadObjByAltIdxConsObj">
 				obj = schema.get$TableName$TableObj().newInstance();</GenRule>
 
 
 	<GenRule GenDef="IndexCol" Name="implReadObjByAltIdxCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implReadObjByUniqueIndexCopyBuffToPKey">
-				pkey.set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+	<GenRule GenDef="IndexCol" Name="implReadObjByUniqueIndexCopyRecToPKey">
+				pkey.set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadObjByUniqueIndexCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadObjByIndexPassArg"
 		>$Name$</GenRule>
@@ -1276,27 +1277,27 @@ $implReadAllObjComparator$
 			// Allow other threads to dirty-read while we're loading
 			indexBy$Suffix$.put( key, dict );
 			I$DefSchemaName$$TableName$Obj obj;
-			I$DefSchemaName$$TableName$[] buffList = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$Suffix$( schema.getAuthorization()$iterate Columns( each implReadObjByIndexCommaPassArg empty empty )$ );
-			I$DefSchemaName$$TableName$ buff;
-			for( int idx = 0; idx &lt; buffList.length; idx ++ ) {
-				buff = buffList[ idx ];$switch HasClassCode yes implReadObjByDupIdxConsObjByClassCode default implReadObjByDupIdxConsObj$
+			I$DefSchemaName$$TableName$[] recList = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$Suffix$( schema.getAuthorization()$iterate Columns( each implReadObjByIndexCommaPassArg empty empty )$ );
+			I$DefSchemaName$$TableName$ rec;
+			for( int idx = 0; idx &lt; recList.length; idx ++ ) {
+				rec = recList[ idx ];$switch HasClassCode yes implReadObjByDupIdxConsObjByClassCode default implReadObjByDupIdxConsObj$
 				obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference Table reference BaseClass TableName$().newPKey() );
-				obj.setBuff( buff );
+				obj.setRec( rec );
 				I$DefSchemaName$$TableName$Obj realised = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			}
 		}</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadObjByDupIdxCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadObjByDuplicateIndexAssignKey">
 		key.set$implColumnAttrOptionality$$Name$( $Name$ );</GenRule>
 
 	<GenRule GenDef="Index" Name="implReadObjByDupIdxCopyPKeyClassCode">
-				obj.getPKey().setClassCode( buff.getClassCode() );</GenRule>
+				obj.getPKey().setClassCode( rec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="Index" Name="implReadObjByDupIdxConsObjByClassCode">
-				obj = (I$DefSchemaName$$poptop Table TableName$Obj)schema.get$reference Table reference BaseClass TableName$TableObj().constructByClassCode( buff.getClassCode() );</GenRule>
+				obj = (I$DefSchemaName$$poptop Table TableName$Obj)schema.get$reference Table reference BaseClass TableName$TableObj().constructByClassCode( rec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="Index" Name="implReadObjByDupIdxConsObj">
 				obj = schema.get$TableName$TableObj().newInstance();</GenRule>
@@ -1321,12 +1322,12 @@ $implReadAllObjComparator$
 				"moveUp$TableName$",
 				"You cannot move an object that is being edited" );
 		}
-		I$DefSchemaName$$TableName$ buff = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().moveBuffUp( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implMoveBuffPassCommaPKeyArg )$,
-			Obj.getBuff().getRequiredRevision() );
-		if( buff != null ) {
+		I$DefSchemaName$$TableName$ rec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().moveRecUp( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implMoveRecPassCommaPKeyArg )$,
+			Obj.getRec().getRequiredRevision() );
+		if( rec != null ) {
 			obj = schema.get$TableName$TableObj().newInstance();
 			obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
-			obj.setBuff( buff );
+			obj.setRec( rec );
 			obj = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$Obj prev = obj.get$reference Chain reference PrevRel OptionalOrRequired$$reference Chain reference PrevRel RelationTypeTag$$reference Chain reference PrevRel Suffix$( true );
 			I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$Obj next = obj.get$reference Chain reference NextRel OptionalOrRequired$$reference Chain reference NextRel RelationTypeTag$$reference Chain reference NextRel Suffix$( true );
@@ -1351,12 +1352,12 @@ $implReadAllObjComparator$
 				"moveDown$TableName$",
 				"You cannot move an object that is being edited" );
 		}
-		I$DefSchemaName$$TableName$ buff = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().moveBuffDown( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implMoveBuffPassCommaPKeyArg )$,
-			Obj.getBuff().getRequiredRevision() );
-		if( buff != null ) {
+		I$DefSchemaName$$TableName$ rec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().moveRecDown( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implMoveRecPassCommaPKeyArg )$,
+			Obj.getRec().getRequiredRevision() );
+		if( rec != null ) {
 			obj = schema.get$TableName$TableObj().newInstance();
 			obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
-			obj.setBuff( buff );
+			obj.setRec( rec );
 			obj = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$Obj prev = obj.get$reference Chain reference PrevRel OptionalOrRequired$$reference Chain reference PrevRel RelationTypeTag$$reference Chain reference PrevRel Suffix$( true );
 			if( prev != null ) {
@@ -1368,13 +1369,13 @@ $implReadAllObjComparator$
 	}
 </GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implMoveBuffPassCommaPKeyArg">,
+	<GenRule GenDef="IndexCol" Name="implMoveRecPassCommaPKeyArg">,
 			Obj.get$OptionalOrRequired$$Name$()</GenRule>
 
 	<GenRule GenDef="Table" Name="implUpdateObj">
 	public I$DefSchemaName$$TableName$Obj update$TableName$( I$DefSchemaName$$TableName$Obj Obj ) {<!--$switch HasSuperClassRelation yes implUpdateObjInvokeSuper default implUpdateObjInitObj$-->$implUpdateObjInitObj$
 		((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().update$TableName$( schema.getAuthorization(),
-			Obj.get$TableName$Buff() );$switch HasClassCode no implUpdateObjAlwaysRealise default implUpdateObjMaybeRealise$
+			Obj.get$TableName$Rec() );$switch HasClassCode no implUpdateObjAlwaysRealise default implUpdateObjMaybeRealise$
 		obj.endEdit();
 		return( obj );
 	}
@@ -1395,7 +1396,7 @@ $implReadAllObjComparator$
 	public void delete$TableName$( I$DefSchemaName$$TableName$Obj Obj ) {
 		I$DefSchemaName$$TableName$Obj obj = Obj;$switch HasChain yes implDeleteObjChainGetPrevNext default empty$
 		((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().delete$TableName$( schema.getAuthorization(),
-			obj.get$TableName$Buff() );<!--$switch HasSuperClassRelation yes implDeleteObjInvokeSuper default empty$ -->
+			obj.get$TableName$Rec() );<!--$switch HasSuperClassRelation yes implDeleteObjInvokeSuper default empty$ -->
 		Obj.forget();$switch HasChain yes implDeleteObjChainRefreshPrevNext default empty$
 	}
 </GenRule>
@@ -1597,7 +1598,7 @@ $implDeleteObjByDuplicateIndexPart1$
 		}</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implDeleteObjByDupIdxCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implDeleteObjByDuplicateIndexAssignKey">
 		key.set$implColumnAttrOptionality$$Name$( $Name$ );</GenRule>
@@ -1661,10 +1662,10 @@ $implDeleteObjByDuplicateIndexPart1$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implReadCachedAllObjCopyPKeyClassCode">
-				obj.getPKey().setClassCode( buff.getClassCode() );</GenRule>
+				obj.getPKey().setClassCode( rec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadCachedAllObjCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implReadCachedObjByPKey">
 	public I$DefSchemaName$$TableName$Obj readCached$TableName$( I$DefSchemaName$$reference BaseClass TableName$PKey pkey ) {
@@ -1677,13 +1678,13 @@ $implDeleteObjByDuplicateIndexPart1$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implReadCachedObjByPKeyCopyPKeyClassCode">
-				obj.getPKey().setClassCode( readCachedBuff.getClassCode() );</GenRule>
+				obj.getPKey().setClassCode( readCachedRec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadCachedObjByPKeyCommaPassArg">,
 				pkey.get$implColumnAttrOptionality$$Name$()</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadCachedObjByPKeyCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( readCachedBuff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( readCachedRec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="Index" Name="implReadCachedObjByIndex"
 		>$switch IsUnique
@@ -1746,7 +1747,7 @@ $implDeleteObjByDuplicateIndexPart1$
 				while( ( obj == null ) &amp;&amp; valIter.hasNext() ) {
 					obj = valIter.next();
 					if( obj != null ) {
-						if( obj.getBuff().compareTo( key ) != 0 ) {
+						if( obj.getRec().compareTo( key ) != 0 ) {
 							obj = null;
 						}
 					}
@@ -1758,7 +1759,7 @@ $implDeleteObjByDuplicateIndexPart1$
 			while( valIter.hasNext() ) {
 				obj = valIter.next();
 				if( obj != null ) {
-					if( obj.getBuff().compareTo( key ) != 0 ) {
+					if( obj.getRec().compareTo( key ) != 0 ) {
 						obj = null;
 					}
 				}
@@ -1812,7 +1813,7 @@ $implDeleteObjByDuplicateIndexPart1$
 			while( valIter.hasNext() ) {
 				obj = valIter.next();
 				if( obj != null ) {
-					if( obj.getBuff().compareTo( key ) == 0 ) {
+					if( obj.getRec().compareTo( key ) == 0 ) {
 						arrayList.add( obj );
 					}
 				}
@@ -1851,16 +1852,16 @@ $implDeleteObjByDuplicateIndexPart1$
 		pkey.set$implColumnAttrOptionality$$Name$( $Name$ );</GenRule>
 
 	<GenRule GenDef="Index" Name="implReadCachedObjByAltIdxCopyPKeyClassCode">
-				obj.getPKey().setClassCode( buff.getClassCode() );</GenRule>
+				obj.getPKey().setClassCode( rec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadCachedObjByAltIdxCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implReadCachedObjByUniqueIndexCopyBuffToPKey">
-				pkey.set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+	<GenRule GenDef="IndexCol" Name="implReadCachedObjByUniqueIndexCopyRecToPKey">
+				pkey.set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadCachedObjByUniqueIndexCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadCachedObjByIndexPassArg"
 		>$Name$</GenRule>
@@ -1910,7 +1911,7 @@ $implDeleteObjByDuplicateIndexPart1$
 			while( valIter.hasNext() ) {
 				obj = valIter.next();
 				if( obj != null ) {
-					if( obj.getBuff().compareTo( key ) == 0 ) {
+					if( obj.getRec().compareTo( key ) == 0 ) {
 						arrayList.add( obj );
 					}
 				}
@@ -1943,19 +1944,19 @@ $implDeleteObjByDuplicateIndexPart1$
 </GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadCachedObjByDupIdxCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implReadCachedObjByDuplicateIndexAssignKey">
 		key.set$implColumnAttrOptionality$$Name$( $Name$ );</GenRule>
 
 	<GenRule GenDef="Index" Name="implReadCachedObjByDupIdxCopyPKeyClassCode">
-				obj.getPKey().setClassCode( buff.getClassCode() );</GenRule>
+				obj.getPKey().setClassCode( rec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implDeepDisposeAllObjCopyPKeyClassCode">
-				obj.getPKey().setClassCode( buff.getClassCode() );</GenRule>
+				obj.getPKey().setClassCode( rec.getClassCode() );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implDeepDisposeAllObjCopyPKeyAttribute">
-				obj.getPKey().set$implColumnAttrOptionality$$Name$( buff.get$implColumnAttrOptionality$$Name$() );</GenRule>
+				obj.getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implDeepDisposeObjByPKey">
 	public void deepDispose$TableName$( I$DefSchemaName$$reference BaseClass TableName$PKey pkey ) {
@@ -2213,7 +2214,7 @@ $switch HasSuperClassRelation yes implReallyDeepDisposeTableInvokeSuper default 
 
 	<GenRule GenDef="DelSubDep2" Name="implReallyDeepDisposeTableDelUniqueDepChaseDown">
 			I$reference Relation reference ToTable EffSchemaName$$reference Relation reference ToTable TableName$Obj obj$Name$ = schema.get$reference Relation reference ToTable TableName$TableObj().readCached$reference Relation reference ToTable TableName$By$reference Relation reference FromIndex Suffix$( $reference Relation iterate Columns( first implReallyDeepDisposeTableDelSubDep1PassArg each implReallyDeepDisposeTableDelSubDep1CommaPassArg )$ );
-			if( buff$Name$ != null ) {$reference DelSubDep implReallyDeepDisposeTableDelDep$
+			if( rec$Name$ != null ) {$reference DelSubDep implReallyDeepDisposeTableDelDep$
 			}</GenRule>
 
 	<GenRule GenDef="DelSubDep2" Name="implReallyDeepDisposeTableDelDupDepChaseDown">
@@ -2244,7 +2245,7 @@ $switch HasSuperClassRelation yes implReallyDeepDisposeTableInvokeSuper default 
 
 	<GenRule GenDef="DelSubDep3" Name="implReallyDeepDisposeTableDelUniqueDepChaseDown">
 			I$reference Relation reference ToTable EffSchemaName$$reference Relation reference ToTable TableName$Obj obj$Name$ = schema.get$reference Relation reference ToTable TableName$TableObj().readCached$reference Relation reference ToTable TableName$By$reference Relation reference FromIndex Suffix$( $reference Relation iterate Columns( first implReallyDeepDisposeTableDelSubDep2PassArg each implReallyDeepDisposeTableDelSubDep2CommaPassArg )$ );
-			if( buff$Name$ != null ) {$reference DelSubDep implReallyDeepDisposeTableDelDep$
+			if( rec$Name$ != null ) {$reference DelSubDep implReallyDeepDisposeTableDelDep$
 			}</GenRule>
 
 	<GenRule GenDef="DelSubDep3" Name="implReallyDeepDisposeTableDelDupDepChaseDown">
