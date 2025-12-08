@@ -67,9 +67,8 @@ import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate Schem
 import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
 /*
- *	$SchemaName$Buff$TableName$HPKey History Primary Key for $TableName$
-$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )
-$ */
+ *	$SchemaName$Buff$TableName$HPKey History Primary Key for $TableName$$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )$
+ */
 public class $poptop SchemaDef SchemaName$Buff$TableName$HPKey$switch HasDefSchema yes SchemaBuffTableHPKeyExtendDefSchemaNameHPKey default SchemaBuffTableImplementsISchemaTableHPKeyComparable$
 {$switch HasDefSchema yes SchemaBuffTableHPKeyExtendDefBody default SchemaBuffTableHPKeyImplDefBody$}
 </GenFile>
@@ -81,8 +80,14 @@ public class $poptop SchemaDef SchemaName$Buff$TableName$HPKey$switch HasDefSche
 </GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaBuffTableHPKeyImplDefBody">
-$switch IsBaseTable yes implClassCodeColumnAttr default empty$$reference PrimaryKeyIndex iterate Columns( each implColumnAttr )$$reference PrimaryKeyIndex implBuffHPKeyConstructor$$switch IsBaseTable yes implClassCodeGetterSetter default empty$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$reference PrimaryKeyIndex implBuffHPKeyEquals$$reference PrimaryKeyIndex implBuffHPKeyGetHashCode$$reference PrimaryKeyIndex implBuffHPKeyCompareTo$$reference PrimaryKeyIndex implBuffHPKeyToString$
-</GenRule>
+	protected long auditClusterId;
+	protected LocalDateTime auditStamp;
+	protected short auditActionId;
+	protected int requiredRevision;
+	protected CFLibDbKeyHash256 auditSessionId;
+$switch IsBaseTable yes implClassCodeColumnAttr default empty$$reference PrimaryKeyIndex iterate Columns( each implColumnAttr )$
+$reference PrimaryKeyIndex implBuffHPKeyConstructor$$poptop SchemaDef implAuditClusterIdGetterSetter$$poptop SchemaDef implAuditStampGetterSetter$$poptop SchemaDef implAuditActionIdGetterSetter$$poptop SchemaDef implRevisionGetterSetter$$poptop SchemaDef implAuditSessionIdGetterSetter$$switch IsBaseTable yes implClassCodeGetterSetter default empty$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$reference PrimaryKeyIndex implHPKeyEquals$$reference PrimaryKeyIndex implHPKeyGetHashCode$$reference PrimaryKeyIndex implHPKeyCompareTo$$reference PrimaryKeyIndex implBuffHPKeyToString$</GenRule>
+
 
 	<GenRule GenDef="Table" Name="SchemaBuffTableImplementsISchemaTableHPKeyComparable">
 	implements I$DefSchemaName$$TableName$HPKey, Comparable&lt;Object&gt;, Serializable</GenRule>

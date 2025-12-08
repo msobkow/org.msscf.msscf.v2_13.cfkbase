@@ -62,72 +62,82 @@ import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
-	/*
-	 *	$SchemaName$$TableName$Factory JPA implementation for $TableName$
-	 */
+/*
+ *	$SchemaName$$TableName$Factory JPA implementation for $TableName$
+ */
 public class $SchemaName$Jpa$TableName$DefaultFactory$switch HasDefSchema yes extendSchemaJpaTableDefaultFactory default empty$
-	implements I$SchemaName$$TableName$Factory
+    implements I$SchemaName$$TableName$Factory
 {$switch HasDefSchema yes implJpaDefaultFactoryInhConstruct default implJpaDefaultFactoryConstruct$$implJpaDefaultFactoryMethods$}
 </GenFile>
 
 	<GenRule GenDef="Table" Name="implJpaDefaultFactoryMethods"
-		>$switch HasSuperClassRelation no implJpaNewPKey default empty$$switch HasSuperClassRelation no implJpaNewHPKey default empty$$iterate Index( each implJpaNewNonPrimaryIndexKey )$$implJpaNewBuff$$implJpaNewHBuff$</GenRule>
+            >$switch HasSuperClassRelation no implJpaNewPKey default empty$$switch HasSuperClassRelation no maybeImplJpaNewHPKey default empty$$iterate Index( each implJpaNewNonPrimaryIndexKey )$$implJpaNewRec$$switch BaseHasHistory yes implJpaNewHRec default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="extendSchemaJpaTableDefaultFactory">
-	extends $reference DefSchema SchemaName$Jpa$TableName$DefaultFactory</GenRule>
+    extends $reference DefSchema SchemaName$Jpa$TableName$DefaultFactory</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaDefaultFactoryConstruct">
-	public $poptop SchemaDef SchemaName$Jpa$TableName$DefaultFactory() {
-	}
+    public $poptop SchemaDef SchemaName$Jpa$TableName$DefaultFactory() {
+    }
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaDefaultFactoryInhConstruct">
-	public $poptop SchemaDef SchemaName$Jpa$TableName$DefaultFactory() {
-		super();
-	}
+    <GenRule GenDef="Table" Name="implJpaDefaultFactoryInhConstruct">
+    public $poptop SchemaDef SchemaName$Jpa$TableName$DefaultFactory() {
+    	super();
+    }
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implJpaNewNonPrimaryIndexKey"
-		>$switch IsPrimaryIndex yes empty default implJpaNewIndexKey$</GenRule>
+    <GenRule GenDef="Index" Name="implJpaNewNonPrimaryIndexKey"
+	>$switch IsPrimaryIndex yes empty default implJpaNewIndexKey$</GenRule>
 
-	<GenRule GenDef="Index" Name="implJpaNewIndexKey">
-	public I$DefSchemaName$$TableName$By$Suffix$Key new$Suffix$Key() {
-		I$DefSchemaName$$TableName$By$Suffix$Key key =
-			new $DefSchemaName$Jpa$TableName$By$Suffix$Key();
-		return( key );
-	}
+    <GenRule GenDef="Index" Name="implJpaNewIndexKey">
+    @Override
+    public I$DefSchemaName$$TableName$By$Suffix$Key newBy$Suffix$Key() {
+	I$DefSchemaName$$TableName$By$Suffix$Key key =
+            new $DefSchemaName$Jpa$TableName$By$Suffix$Key();
+	return( key );
+    }
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaNewPKey">
-	public I$DefSchemaName$$reference BaseClass TableName$PKey newPKey() {
-		I$DefSchemaName$$reference BaseClass TableName$PKey pkey =
-			new $DefSchemaName$Jpa$reference BaseClass TableName$PKey();
-		return( pkey );
-	}
+    <GenRule GenDef="Table" Name="implJpaNewPKey"
+            >$switch HasDefSchema no ifNotAtomicJpaImplNewPKey default empty$</GenRule>
+    <GenRule GenDef="Table" Name="ifNotAtomicJpaImplNewPKey">$switch IsPrimaryIndexKeyAtomic yes empty default reallyJpaImplNewPKey$</GenRule>
+    <GenRule GenDef="Table" Name="reallyJpaImplNewPKey">
+    @Override
+    public I$DefSchemaName$$reference BaseClass TableName$PKey newPKey() {
+        I$DefSchemaName$$reference BaseClass TableName$PKey pkey =
+            new $DefSchemaName$Jpa$reference BaseClass TableName$PKey();
+        return( pkey );
+    }
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaNewHPKey">
-	public I$DefSchemaName$$reference BaseClass TableName$HPKey newHPKey() {
-		I$DefSchemaName$$reference BaseClass TableName$HPKey hpkey =
-			new $DefSchemaName$Jpa$reference BaseClass TableName$HPKey();
-		return( hpkey );
-	}
+    <GenRule GenDef="Table" Name="maybeImplJpaNewHPKey">$switch BaseHasHistory yes implJpaNewHPKey default empty$</GenRule>
+
+    <GenRule GenDef="Table" Name="implJpaNewHPKey">
+    @Override
+    public I$DefSchemaName$$reference BaseClass TableName$HPKey newHPKey() {
+        I$DefSchemaName$$reference BaseClass TableName$HPKey hpkey =
+            new $DefSchemaName$Jpa$reference BaseClass TableName$HPKey();
+        return( hpkey );
+    }
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaNewBuff">
-	public I$DefSchemaName$$TableName$Buff newBuff() {
-		I$DefSchemaName$$TableName$Buff buff =
-			new $DefSchemaName$$TableName$();
-		return( buff );
-	}
+    <GenRule GenDef="Table" Name="implJpaNewRec">
+    @Override
+    public I$DefSchemaName$$TableName$ newRec() {
+        I$DefSchemaName$$TableName$ rec =
+            new $DefSchemaName$Jpa$TableName$();
+        return( rec );
+    }
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaNewHBuff">
-	public I$DefSchemaName$$TableName$HBuff newHBuff() {
-		I$DefSchemaName$$TableName$HBuff hbuff =
-			new $DefSchemaName$$TableName$H();
-		return( hbuff );
-	}
+    <GenRule GenDef="Table" Name="implJpaNewHRec">
+    @Override
+    public I$DefSchemaName$$TableName$H newHRec() {
+        I$DefSchemaName$$TableName$H hrec =
+            new $DefSchemaName$Jpa$TableName$H();
+        return( hrec );
+    }
 </GenRule>
 
 </RuleSet>

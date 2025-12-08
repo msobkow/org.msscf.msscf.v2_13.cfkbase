@@ -94,10 +94,12 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	<GenRule GenDef="Table" Name="implJpaColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes implJpaColumnAttrPKeyColumnAccessors default implJpaColumnAttrPKeyInstanceAccessors$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaColumnAttrPKeyColumnAccessors">
+	@Override
 	public $reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ getPKey() {
 		return get$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$();
 	}
 
+	@Override
 	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$) {$switch IsAtomicPrimaryIndexKeyNullable yes implJpaColumnAttrPKeyColumnAccessorsSetAttrDirect default implJpaColumnAttrPKeyColumnAccessorsSetAttrOnlyIfNotNull$
 	}
 	$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnGetterSetter first empty each empty empty empty )$
@@ -111,46 +113,54 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 		set$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each emptyl empty empty )$($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaColumnAttrPKeyInstanceAccessors">
+	@Override
 	public I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey getPKey() {
 		return pkey;
 	}
 
+	@Override
 	public void setPKey(I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey pkey ) {
 		if (pkey == null) {
 			throw new CFLibNullArgumentException(getClass(), "setPKey", 1, "pkey");
 		}
 		else if (!(pkey instanceof $reference BaseClass reference PrimaryKeyIndex DefSchemaName$Jpa$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey)) {
-			throw new CFLibUnsupportedClassException(getClass(), "setPKey", 1, "pkey", "$reference BaseClass Reference PrimaryKeyIndex DefSchemaName$Jpa$refference BaseClass reference PrimaryKeyIndex reference TableName$PKey");
+			throw new CFLibUnsupportedClassException(getClass(), "setPKey", "pkey", pkey, "$reference BaseClass reference PrimaryKeyIndex DefSchemaName$Jpa$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey");
 		}
 		this.pkey = ($reference BaseClass reference PrimaryKeyIndex DefSchemaName$Jpa$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey)pkey;
 	}
 $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAttrAccessors )$</GenRule>
 
 	<GenRule GenDef="Atom" Name="implPKeyAttrAccessors">
+	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( pkey.get$implColumnAttrOptionality$$Name$() );
 	}
 
+	@Override
 	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ ) {
 		pkey.set$implColumnAttrOptionality$$Name$( $lower implColumnAttrOptionality$$Name$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="TableCol" Name="implPKeyAttrAccessors">
+	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( pkey.get$implColumnAttrOptionality$$Name$() );
 	}
 
+	@Override
 	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ ) {
 		pkey.set$implColumnAttrOptionality$$Name$( $lower implColumnAttrOptionality$$Name$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implPKeyAttrAccessors">
+	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( pkey.get$implColumnAttrOptionality$$Name$() );
 	}
 
+	@Override
 	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ ) {
 		pkey.set$implColumnAttrOptionality$$Name$( $lower implColumnAttrOptionality$$Name$ );
 	}
@@ -187,8 +197,8 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 	<GenRule GenDef="Index" Name="maybeImplEqualsCmpKey"
 		>$switch IsPrimaryIndex yes empty default implEqualsCmpKey$</GenRule>
 	<GenRule GenDef="Index" Name="implEqualsCmpKey">
-		else if( obj instanceof I$SchemaName$\$TableName$By$Suffix$Key ) {
-			I$SchemaName$$TableName$By$Suffix$Key rhs = (I$SchemaName$$TableName$By$Suffix$Key)obj;$iterate Columns( each implEqualsCmpAttr )$
+		else if( obj instanceof I$DefSchemaName$$TableName$By$Suffix$Key ) {
+			I$DefSchemaName$$TableName$By$Suffix$Key rhs = (I$DefSchemaName$$TableName$By$Suffix$Key)obj;$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
 		}</GenRule>
 
@@ -241,6 +251,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 	public final static String S_CLASS_CODE = "$ClassCode$";</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaGetClassCode">$switch HasSuperClassRelation yes emitOverride default empty$
+	@Override
 	public int getClassCode() {
 		return( CLASS_CODE );
 	}
@@ -270,10 +281,12 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 		>$switch HasAuditColumns yes implColumnAuditGetterSetters default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implColumnAuditGetterSetters">
+	@Override
 	public CFLibDbKeyHash256 getCreatedByUserId() {
 		return( createdByUserId );
 	}
 
+	@Override
 	public void setCreatedByUserId( CFLibDbKeyHash256 value ) {
 		if (value == null || value.isNull()) {
 			throw new CFLibNullArgumentException(getClass(), "setCreatedByUserId", 1, "value");
@@ -281,10 +294,12 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 		createdByUserId = value;
 	}
 
+	@Override
 	public LocalDateTime getCreatedAt() {
 		return( createdAt );
 	}
 
+	@Override
 	public void setCreatedAt( LocalDateTime value ) {
 		if (value == null) {
 			throw new CFLibNullArgumentException(getClass(), "setCreatedAt", 1, "value");
@@ -292,10 +307,12 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 		createdAt = value;
 	}
 
+	@Override
 	public CFLibDbKeyHash256 getUpdatedByUserId() {
 		return( updatedByUserId );
 	}
 
+	@Override
 	public void setUpdatedByUserId( CFLibDbKeyHash256 value ) {
 		if (value == null || value.isNull()) {
 			throw new CFLibNullArgumentException(getClass(), "setUpdatedByUserId", 1, "value");
@@ -303,10 +320,12 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 		updatedByUserId = value;
 	}
 
+	@Override
 	public LocalDateTime getUpdatedAt() {
 		return( updatedAt );
 	}
 
+	@Override
 	public void setUpdatedAt( LocalDateTime value ) {
 		if (value == null) {
 			throw new CFLibNullArgumentException(getClass(), "setUpdatedAt", 1, "value");
@@ -337,7 +356,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 
 	<GenRule GenDef="Table" Name="implJpaConstructorInitDataColumns"
 		>$iterate DataColumns( each implConstructorInitAttr empty empty )$</GenRule>
-<![CDATA[]]>
+
 	<GenRule GenDef="Table" Name="implJpaConstructorInitColumns">$switch IsPrimaryIndexKeyAtomic yes implJpaConstructorInitPKeyAttr default implJpaConstructorInitPKey$$iterate Columns( each implConstructorMaybeInitAttr empty empty )$</GenRule>
 	<GenRule GenDef="Table" Name="implJpaConstructorInitPKey">
 		pkey = new $SchemaName$Jpa$TableName$PKey();</GenRule>
@@ -606,17 +625,21 @@ $			return( 0 );
 		set$TableName$( src );</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaSet">
+	@Override
 	public void set( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ src ) {$switch HasSuperClassRelation yes implJpaSetWithCast default implJpaSetDirect$
 	}
 
+	@Override
 	public void set$TableName$( I$DefSchemaName$$TableName$ src ) {$switch HasSuperClassRelation yes implJpaSetInvokeSuper default implJpaSetCopyPKey$$switch HasSuperClassRelation no implJpaSetOptAuditColumns default empty$$iterate Columns( each implJpaSetCopyDataCol )$$switch HasSuperClassRelation no implJpaSetCopyRevision default empty$
 	}
 $switch BaseHasHistory yes implJpaSetHistory default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaSetHistory">
+	@Override
 	public void set( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$H src ) {$switch HasSuperClassRelation yes implHJPASetWithCast default implJpaSetDirect$
 	}
 
+	@Override
 	public void set$TableName$( I$DefSchemaName$$TableName$H src ) {$switch HasSuperClassRelation yes implJpaSetInvokeSuper default implJpaSetCopyPKey$$iterate Columns( each implJpaSetCopyDataCol )$
 	}
 </GenRule>
@@ -649,11 +672,13 @@ $switch BaseHasHistory yes implJpaSetHistory default empty$</GenRule>
 		set$implColumnAttrOptionality$$reference Column Name$( src.get$implColumnAttrOptionality$$reference Column Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaJpaTableToString">
+	@Override
 	public String getXmlAttrFragment() {
 		String ret = $switch HasSuperClassRelation yes implToStringEmitSuper default implToStringEmitPKeyXmlAttrFragment$$switch IsBaseTable yes implToStringEmitXmlClassCode default empty$$switch HasSuperClassRelation no implToStringEmitXmlRevision default empty$$iterate Columns( each implToStringEmitXmlAttr )$;
 		return( ret );
 	}
 
+	@Override
 	public String toString() {
 		String ret = "&lt;$SchemaName$Jpa$TableName$" + getXmlAttrFragment() + "/&gt;";
 		return( ret );

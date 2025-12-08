@@ -66,15 +66,15 @@ import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate Schem
 import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
 /**
- *	$SchemaName$$TableName$HPKey History Primary Key for $TableName$$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )
-$ */
+ *	$SchemaName$Jpa$TableName$HPKey History Primary Key for $TableName$$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )$
+ */
 public class $poptop SchemaDef SchemaName$Jpa$TableName$HPKey$switch HasDefSchema yes implSchemaTableHPKeyInheritDef default SchemaTableHPKeyImplementsComparable$
 {$SchemaTableHPKeyImplDefBody$}
 </GenFile>
 
 	<GenRule GenDef="Table" Name="SchemaTableHPKeyImplDefBody">
 	@Column(name="auditClusterId", nullable=false)
-	protected CFLibDbKeyHash256 auditClusterId;
+	protected long auditClusterId;
 
 	@Column(name="auditStamp", nullable=false)
 	protected LocalDateTime auditStamp;
@@ -89,7 +89,7 @@ public class $poptop SchemaDef SchemaName$Jpa$TableName$HPKey$switch HasDefSchem
 		@AttributeOverride(name="bytes", column=@Column(name="auditSessionId", nullable=false, length=CFLibDbKeyHash256.HASH_LENGTH) )
 	})
 	protected CFLibDbKeyHash256 auditSessionId;
-$switch IsBaseTable yes implClassCodeColumnJPAAttr default empty$$reference PrimaryKeyIndex iterate Columns( each implJpaColumnAttr )$
+$reference PrimaryKeyIndex iterate Columns( each implJpaColumnAttr )$
 $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClusterIdGetterSetter$$poptop SchemaDef implAuditStampGetterSetter$$poptop SchemaDef implAuditActionIdGetterSetter$$poptop SchemaDef implRevisionGetterSetter$$poptop SchemaDef implAuditSessionIdGetterSetter$$switch IsBaseTable yes implClassCodeGetterSetter default empty$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$reference PrimaryKeyIndex implHPKeyEquals$$reference PrimaryKeyIndex implHPKeyGetHashCode$$reference PrimaryKeyIndex implHPKeyCompareTo$$reference PrimaryKeyIndex implHPKeyToString$</GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaTableHPKeyInheritDef">
@@ -100,7 +100,7 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 
 	<GenRule GenDef="Index" Name="implHPKeyConstructor">
 	public $SchemaName$Jpa$TableName$HPKey() {
-		auditClusterId = CFLibDbKeyHash256.nullGet();
+		auditClusterId = I$SecSchemaName$Cluster.ID_INIT_VALUE;
 		auditStamp = LocalDateTime.now();
 		auditActionId = 0;
 		requiredRevision = 1;
@@ -109,9 +109,10 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 </GenRule>
 
 	<GenRule GenDef="Index" Name="implHPKeyGetHashCode">
+	@Override
 	public int hashCode() {
 		int hashCode = 0;
-		hashCode = hashCode + (int)( (auditClusterId != null ? auditClusterId.hashCode() : 0) &amp; 0x7fffffff );
+		hashCode = hashCode + (int)( auditClusterId ) &amp; 0x7fffffff;
 		if( auditStamp != null ) {
 			hashCode = hashCode + auditStamp.hashCode();
 		}
@@ -131,16 +132,16 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 		if (obj == null) {
 			return( 1 );
 		}
-		else if (obj instanceof $SchemaName$$TableName$) {
-			$SchemaName$$TableName$ rhs = ($SchemaName$$TableName$)obj;$iterate Columns(each implCompareToAttr empty empty )$
+		else if (obj instanceof I$SchemaName$$TableName$) {
+			I$SchemaName$$TableName$ rhs = (I$SchemaName$$TableName$)obj;$iterate Columns(each implCompareToAttr empty empty )$
 			return( 0 );
 		}
-		else if (obj instanceof $reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey) {
-			$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey rhs = ($reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey)obj;$implHPKeyCompareToAuditClusterId$$implHPKeyCompareToAuditStamp$$implHPKeyCompareToAuditActionId$$implHPKeyCompareToRequiredRevision$$implHPKeyCompareToAuditSessionId$$iterate Columns( each implCompareToAttr )$
+		else if (obj instanceof I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey) {
+			I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey rhs = (I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey)obj;$implHPKeyCompareToAuditClusterId$$implHPKeyCompareToAuditStamp$$implHPKeyCompareToAuditActionId$$implHPKeyCompareToRequiredRevision$$implHPKeyCompareToAuditSessionId$$iterate Columns( each implCompareToAttr )$
 			return( 0 );
 		}
-		else if (obj instanceof $SchemaName$$TableName$H) {
-			$SchemaName$$TableName$H rhs = ($SchemaName$$TableName$H)obj;$iterate Columns(each implCompareToAttr empty empty )$$implHPKeyCompareToAuditClusterId$$implHPKeyCompareToAuditStamp$$implHPKeyCompareToAuditActionId$$implHPKeyCompareToRequiredRevision$$implHPKeyCompareToAuditSessionId$$iterate Columns( each implCompareToAttr )$
+		else if (obj instanceof I$SchemaName$$TableName$H) {
+			I$SchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;$implHPKeyCompareToAuditClusterId$$implHPKeyCompareToAuditStamp$$implHPKeyCompareToAuditActionId$$implHPKeyCompareToRequiredRevision$$implHPKeyCompareToAuditSessionId$$iterate Columns( each implCompareToAttr )$
 			return( 0 );
 		}
 		else {
@@ -148,27 +149,19 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 				"compareTo",
 				"obj",
 				obj,
-				"$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$PKey, $reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$$reference Table switch BaseHasHistory yes emitHPKeyHistoryClassNames default empty$" );
+				"I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$PKey, I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$$reference Table switch BaseHasHistory yes emitHPKeyHistoryClassNames default empty$" );
 		}
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="emitHPKeyHistoryClassNames">, $reference BaseClass SchemaName$$reference BaseClass TableName$HPKey, $SchemaName$$TableName$H</GenRule>
+	<GenRule GenDef="Table" Name="emitHPKeyHistoryClassNames">, I$reference BaseClass SchemaName$$reference BaseClass TableName$HPKey, I$SchemaName$$TableName$H</GenRule>
 
 	<GenRule GenDef="Object" Name="implHPKeyCompareToAuditClusterId">
-			if (getAuditClusterId() == null || getAuditClusterId().isNull()) {
-				if (rhs.getAuditClusterId() != null &amp;&amp; !rhs.getAuditClusterId().isNull()) {
-					return( -1 );
-				}
+			if (getAuditClusterId() &lt; rhs.getAuditClusterId()) {
+				return( -1 );
 			}
-			else if (rhs.getAuditClusterId() == null || rhs.getAuditClusterId().isNull()) {
+			else if (getAuditClusterId() &gt; rhs.getAuditClusterId()) {
 				return( 1 );
-			}
-			else {
-				retval = getAuditClusterId().compareTo(rhs.getAuditClusterId());
-				if (retval != 0) {
-					return( retval );
-				}
 			}</GenRule>
 
 	<GenRule GenDef="Object" Name="implHPKeyCompareToAuditStamp">
@@ -225,16 +218,16 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 		if (obj == null) {
 			return( false );
 		}
-		else if (obj instanceof $SchemaName$$TableName$) {
-			$SchemaName$$TableName$ rhs = ($SchemaName$$TableName$)obj;$iterate Columns(each implEqualsCmpAttr empty empty )$
+		else if (obj instanceof I$SchemaName$$TableName$) {
+			I$SchemaName$$TableName$ rhs = (I$SchemaName$$TableName$)obj;$iterate Columns(each implEqualsCmpAttr empty empty )$
 			return( true );
 		}
-		else if (obj instanceof $reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey) {
-			$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey rhs = ($reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey)obj;$implHPKeyEqualsAuditClusterId$$implHPKeyEqualsAuditStamp$$implHPKeyEqualsAuditActionId$$implHPKeyEqualsRequiredRevision$$implHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr )$
+		else if (obj instanceof I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey) {
+			I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey rhs = (I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey)obj;$implHPKeyEqualsAuditClusterId$$implHPKeyEqualsAuditStamp$$implHPKeyEqualsAuditActionId$$implHPKeyEqualsRequiredRevision$$implHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
 		}
-		else if (obj instanceof $SchemaName$$TableName$H) {
-			$SchemaName$$TableName$H rhs = ($SchemaName$$TableName$H)obj;$implHPKeyEqualsAuditClusterId$$implHPKeyEqualsAuditStamp$$implHPKeyEqualsAuditActionId$$implHPKeyEqualsRequiredRevision$$implHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr )$
+		else if (obj instanceof I$SchemaName$$TableName$H) {
+			I$SchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;$implHPKeyEqualsAuditClusterId$$implHPKeyEqualsAuditStamp$$implHPKeyEqualsAuditActionId$$implHPKeyEqualsRequiredRevision$$implHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
 		}
 		else {
@@ -244,20 +237,8 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implHPKeyEqualsAuditClusterId">
-			if (getAuditClusterId() == null || getAuditClusterId().isNull()) {
-				if (rhs.getAuditClusterId() != null &amp;&amp; !rhs.getAuditClusterId().isNull()) {
-					return( false );
-				}
-			}
-			else {
-				if (rhs.getAuditClusterId() == null || rhs.getAuditClusterId().isNull()) {
-					return( false );
-				}
-				else {
-					if (!getAuditClusterId().equals(rhs.getAuditClusterId())) {
-						return( false );
-					}
-				}
+			if (getAuditClusterId() != rhs.getAuditClusterId()) {
+				return( false );
 			}</GenRule>
 
 	<GenRule GenDef="Object" Name="implHPKeyEqualsAuditStamp">
@@ -301,15 +282,17 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 			}</GenRule>
 
 	<GenRule GenDef="Index" Name="implHPKeyToString">
+	@Override
 	public String getXmlAttrFragment() {
-		String ret = " auditClusterId=\"" + (auditClusterId == null ? "null" : auditClusterId.toString()) + "\\""
+		String ret = " auditClusterId=\"" + auditClusterId + "\\""
 			+ " auditStamp=\\"" + (auditStamp != null ? CFLibXmlUtil.formatTimestamp(auditStamp) : "null") + "\\""
 			+ " auditAction=\\"" + auditActionId + "\\""
 			+ " revision=\\"" + requiredRevision + "\\""
-			+ " auditSessionId=\\"" + (getAuditSessionId() != null ? getAuditSessionId().toString() : "null") + "\\""$reference Table switch IsBaseTable yes implToStringEmitXmlClassCode default empty$$iterate Columns( each implToStringEmitXmlAttr )$;
+			+ " auditSessionId=\\"" + (getAuditSessionId() != null ? getAuditSessionId().toString() : "null") + "\\""$iterate Columns( each implToStringEmitXmlAttr )$;
 		return( ret );
 	}
 
+	@Override
 	public String toString() {
 		String ret = "&lt;$SchemaName$$TableName$HPKey" + getXmlAttrFragment() + "/&gt;";
 		return( ret );
@@ -317,40 +300,48 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implAuditClusterIdGetterSetter">
-	public CFLibDbKeyHash256 getAuditClusterId() {
+	@Override
+	public long getAuditClusterId() {
 		return( auditClusterId );
 	}
 
-	public void setAuditClusterId( CFLibDbKeyHash256 value ) {
+	@Override
+	public void setAuditClusterId( long value ) {
 		auditClusterId = value;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implAuditStampGetterSetter">
+	@Override
 	public LocalDateTime getAuditStamp() {
 		return( auditStamp );
 	}
 
+	@Override
 	public void setAuditStamp( LocalDateTime value ) {
 		auditStamp = value;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implAuditActionIdGetterSetter">
+	@Override
 	public short getAuditActionId() {
 		return( auditActionId );
 	}
 
+	@Override
 	public void setAuditActionId( short value ) {
 		auditActionId = value;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implAuditSessionIdGetterSetter">
+	@Override
 	public CFLibDbKeyHash256 getAuditSessionId() {
 		return( auditSessionId );
 	}
 
+	@Override
 	public void setAuditSessionId( CFLibDbKeyHash256 value ) {
 		auditSessionId = value;
 	}

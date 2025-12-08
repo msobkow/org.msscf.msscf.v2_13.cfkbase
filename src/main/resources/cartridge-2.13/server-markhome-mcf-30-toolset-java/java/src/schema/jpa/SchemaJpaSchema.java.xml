@@ -69,7 +69,6 @@ import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$l
 public class $SchemaName$JpaSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
 {
-	protected I$SecSchemaName$Authorization authorization;
 	protected I$DefSchemaName$TablePerms tablePerms;
 $iterate Types( empty empty each implJpaSchemaParseEnum )$
 $iterate SchemaTables( each declJpaSchemaTableTableMember )$
@@ -89,7 +88,7 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 	static HashMap&lt;String,$Name$&gt; lookup$Name$ = null;
 
 	public static $Name$ parse$Name$( String value ) {
-		$Name$ retval = parse$Name$( $SchemaName$Schema.class.getName(), value );
+		$Name$ retval = parse$Name$( I$DefSchemaName$Schema.$Name$.class.getName(), value );
 		return( retval );
 	}
 
@@ -153,7 +152,7 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 			retval = null;
 		}
 		else {
-			retval = ordinalTo$Name$( $SchemaName$Schema.class.getName(), Integer.valueOf( value.shortValue() ) );
+			retval = ordinalTo$Name$( I$DefSchemaName$Schema.$Name$.class.getName(), Integer.valueOf( value.shortValue() ) );
 		}
 		return( retval );
 	}
@@ -191,7 +190,7 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 		I$reference RefSchema SchemaName$Schema</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaMoreMethods"
-		>$implJpaSchemaSchemaConstructor$$implJpaSchemaAuthorizationAccessors$$iterate SchemaRefs( first implJpaSchemaNewSchema each empty empty implJpaSchemaNewSchema )$$iterate SchemaRefs( first implJpaSchemaFileImport each empty empty implJpaSchemaFileImport )$$iterate Id16Generators( each implNextIdGen empty empty)$$iterate Id32Generators( each implNextIdGen empty empty)$$iterate Id64Generators( each implNextIdGen empty empty)$$iterate DbKeyHash128Generators( each implNextIdGen empty empty )$$iterate DbKeyHash160Generators( each implNextIdGen empty empty )$$iterate DbKeyHash224Generators( each implNextIdGen empty empty )$$iterate DbKeyHash256Generators( each implNextIdGen empty empty )$$iterate DbKeyHash384Generators( each implNextIdGen empty empty )$$iterate DbKeyHash512Generators( each implNextIdGen empty empty )$$iterate UuidGenerators( each implNextIdGen empty empty )$$iterate Uuid6Generators( each implNextIdGen empty empty )$$iterate SchemaTables( each implJpaTableMethods empty empty )$</GenRule>
+		>$implJpaSchemaSchemaConstructor$$iterate SchemaRefs( first implJpaSchemaNewSchema each empty empty implJpaSchemaNewSchema )$$iterate SchemaRefs( first implJpaSchemaFileImport each empty empty implJpaSchemaFileImport )$$iterate Id16Generators( each implNextIdGen empty empty)$$iterate Id32Generators( each implNextIdGen empty empty)$$iterate Id64Generators( each implNextIdGen empty empty)$$iterate DbKeyHash128Generators( each implNextIdGen empty empty )$$iterate DbKeyHash160Generators( each implNextIdGen empty empty )$$iterate DbKeyHash224Generators( each implNextIdGen empty empty )$$iterate DbKeyHash256Generators( each implNextIdGen empty empty )$$iterate DbKeyHash384Generators( each implNextIdGen empty empty )$$iterate DbKeyHash512Generators( each implNextIdGen empty empty )$$iterate UuidGenerators( each implNextIdGen empty empty )$$iterate Uuid6Generators( each implNextIdGen empty empty )$$iterate SchemaTables( each implJpaTableMethods empty empty )$</GenRule>
 
 	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="implNextIdGen">
 	@Override
@@ -279,19 +278,6 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 	<GenRule GenDef="Table" Name="implJpaTableMethods"
 		>$implJpaSchemaTableTableAccessors$$implJpaSchemaTableFactoryAccessors$</GenRule>
 
-	<GenRule GenDef="Object" Name="implJpaSchemaAuthorizationAccessors"
-		>$popto SchemaDef implJpaSchemaAuthorizationAccessors$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaAuthorizationAccessors">
-	public $SecSchemaName$Authorization getAuthorization() {
-		return( authorization );
-	}
-
-	public void setAuthorization( $SecSchemaName$Authorization value ) {
-		authorization = value;
-	}
-</GenRule>
-
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaTablePermsAccessors">
 	public I$DefSchemaName$TablePerms getTablePerms() {
 		return( tablePerms );
@@ -320,11 +306,10 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 	 *	Import the contents of the specified file name
 	 *	and file contents by applying a SAX Loader parse.
 	 */
-	public String fileImport( $SecSchemaName$Authorization auth, String fileName, String fileContent ) {
+	@Override
+	public String fileImport( I$SecSchemaName$Authorization auth, String fileName, String fileContent ) {
 		final String S_ProcName = "fileImport";
-		throw new CFLibNotImplementedYetException( getClass(),
-			S_ProcName,
-			"You must overload this method to apply a SAX Parser to the file contents" );
+		throw new CFLibNotImplementedYetException(getClass(), S_ProcName);
 	}
 </GenRule>
 
@@ -333,11 +318,9 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 	 *	Import the contents of the specified file name
 	 *	and file contents by applying a SAX Loader parse.
 	 */
-	public String fileImport( $popto SchemaDef SecSchemaName$Authorization auth, String fileName, String fileContent ) {
+	public String fileImport( I$popto SchemaDef SecSchemaName$Authorization auth, String fileName, String fileContent ) {
 		final String S_ProcName = "fileImport";
-		throw new CFLibNotImplementedYetException( getClass(),
-			S_ProcName,
-			"You must overload this method to apply a SAX Parser to the file contents" );
+		throw new CFLibNotImplementedYetException(getClass(), S_ProcName);
 	}
 </GenRule>
 
@@ -378,7 +361,7 @@ $poptop SchemaDef iterate SchemaTables( each initJpaSchemaTableFactoryMember )$	
 		table$TableName$ = null;</GenRule>
 
 	<GenRule GenDef="Table" Name="initJpaSchemaTableFactoryMember">
-		factory$TableName$ = new $SchemaName$$TableName$DefaultFactory();</GenRule>
+		factory$TableName$ = new $SchemaName$Jpa$TableName$DefaultFactory();</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaXmlEncodeString">
 	public static String xmlEncodeString( String val ) {
