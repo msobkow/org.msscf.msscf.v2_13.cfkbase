@@ -85,7 +85,7 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 	static HashMap&lt;String,$Name$&gt; lookup$Name$ = null;
 
 	public static $Name$ parse$Name$( String value ) {
-		$Name$ retval = parse$Name$( $SchemaName$Schema.class.getName(), value );
+		$Name$ retval = parse$Name$( I$DefSchemaName$Schema.class.getName(), value );
 		return( retval );
 	}
 
@@ -103,10 +103,12 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 			retval = lookup$Name$.get( value );
 			if( retval == null ) {
 				throw new CFLibInvalidArgumentException( fieldOrClassName,
+					fieldOrClassName,
 					S_ProcName,
-					1,
+					2,
 					"value",
-					"Invalid enum limb argument " + value );
+					"Invalid enum limb argument " + value,
+					"Invalid enum limb argument " + value);
 			}
 		}
 		return( retval );
@@ -147,7 +149,7 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 			retval = null;
 		}
 		else {
-			retval = ordinalTo$Name$( $SchemaName$Schema.class.getName(), Integer.valueOf( value.shortValue() ) );
+			retval = ordinalTo$Name$( I$SchemaName$Schema.class.getName(), Integer.valueOf( value.shortValue() ) );
 		}
 		return( retval );
 	}
@@ -166,10 +168,12 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 			retval = lookupOrdinal$Name$.get( value );
 			if( retval == null ) {
 				throw new CFLibInvalidArgumentException( fieldOrClassName,
+					fieldOrClassName,
 					S_ProcName,
-					1,
+					2,
 					"value",
-					"Invalid enum ordinal argument " + value.toString() );
+					"Invalid enum limb argument " + value,
+					"Invalid enum limb argument " + value);
 			}
 		}
 		return( retval );
@@ -180,8 +184,8 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 			newMap.put( Integer.valueOf( $popto EnumDef Name$.$Name$.ordinal() ), $popto EnumDef Name$.$Name$ );</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implBuffSchemaMoreMethods"
-		>$implBuffSchemaSchemaConstructor$$iterate SchemaRefs( first implBuffSchemaNewSchema each empty empty implBuffSchemaNewSchema )$$iterate SchemaRefs( first implBuffSchemaFileImport each empty empty implBuffSchemaFileImport )$$iterate Id16Generators( each implNextIdGen empty empty)$$iterate Id32Generators( each implNextIdGen empty empty)$$iterate Id64Generators( each implNextIdGen empty empty)$$iterate UuidGenerators( each implNextIdGen empty empty )$$iterate SchemaTables(
-						each implTableMethods empty empty )$</GenRule>
+		>$implBuffSchemaSchemaConstructor$$iterate SchemaRefs( first implBuffSchemaNewSchema each empty empty implBuffSchemaNewSchema )$$iterate SchemaRefs( first implBuffSchemaFileImport each empty empty implBuffSchemaFileImport )$$iterate Id16Generators( each implBuffNextIdGen empty empty)$$iterate Id32Generators( each implBuffNextIdGen empty empty)$$iterate Id64Generators( each implBuffNextIdGen empty empty)$$iterate DbKeyHash128Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash160Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash224Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash256Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash384Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash512Generators( each implBuffNextIdGen empty empty )$$iterate UuidGenerators( each implBuffNextIdGen empty empty )$$iterate Uuid6Generators( each implBuffNextIdGen empty empty )$$iterate SchemaTables(
+			each implTableMethods empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="declSchemaBuffTableTableMember">
 	protected I$DefSchemaName$$TableName$Table table$TableName$;</GenRule>
@@ -190,10 +194,10 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 	protected I$DefSchemaName$$TableName$Factory factory$TableName$;</GenRule>
 
 	<GenRule GenDef="Table" Name="initSchemaBuffTableTableMember">
-	table$TableName$ = new $DefSchemaName$Buff$TableName$Table();</GenRule>
+	table$TableName$ = null; // new $DefSchemaName$Buff$TableName$Table();</GenRule>
 
 	<GenRule GenDef="Table" Name="initSchemaBuffTableFactoryMember">
-	factory$TableName$ = new $DefSchemaName$Buff$TableName$Factory();</GenRule>
+	factory$TableName$ = new $DefSchemaName$Buff$TableName$DefaultFactory();</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableMethods"
 		>$implBuffSchemaTableTableAccessors$$implBuffSchemaTableFactoryAccessors$</GenRule>
@@ -228,9 +232,7 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 	 */
 	public String fileImport( I$SecSchemaName$Authorization auth, String fileName, String fileContent ) {
 		final String S_ProcName = "fileImport";
-		throw new CFLibNotImplementedYetException( getClass(),
-			S_ProcName,
-			"You must overload this method to apply a SAX Parser to the file contents" );
+		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 </GenRule>
 
@@ -241,9 +243,7 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 	 */
 	public String fileImport( I$popto SchemaDef SecSchemaName$Authorization auth, String fileName, String fileContent ) {
 		final String S_ProcName = "fileImport";
-		throw new CFLibNotImplementedYetException( getClass(),
-			S_ProcName,
-			"You must overload this method to apply a SAX Parser to the file contents" );
+		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 </GenRule>
 
@@ -307,6 +307,139 @@ $	}
 			}
 		}
 		return( buff.toString() );
+	}
+</GenRule>
+
+	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="implBuffNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public short next$Name$() {
+		throw new CFLibMustOverrideException(getClass(), "next$Name$");
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="implBuffNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public int next$Name$() {
+		throw new CFLibMustOverrideException(getClass(), "next$Name$");
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="implBuffNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public long next$Name$() {
+		throw new CFLibMustOverrideException(getClass(), "next$Name$");
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="implBuffNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public UUID next$Name$() {
+		throw new CFLibMustOverrideException(getClass(), "next$Name$");
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Uuid6Gen" Name="implBuffNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public CFLibUuid6 next$Name$() {
+		throw new CFLibMustOverrideException(getClass(), "next$Name$");
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash128Gen" Name="implBuffNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public CFLibDbKeyHash128 next$Name$() {
+		return( new CFLibDbKeyHash128(0) );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash160Gen" Name="implBuffNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public CFLibDbKeyHash160 next$Name$() {
+		return( new CFLibDbKeyHash160(0) );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash224Gen" Name="implBuffNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public CFLibDbKeyHash224 next$Name$() {
+		return( new CFLibDbKeyHash224(0) );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash256Gen" Name="implBuffNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public CFLibDbKeyHash256 next$Name$() {
+		return( new CFLibDbKeyHash256(0) );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash384Gen" Name="implBuffNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public CFLibDbKeyHash384 next$Name$() {
+		return( new CFLibDbKeyHash384(0) );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash512Gen" Name="implBuffNextIdGen">
+	/**
+	 *	Get the next $Name$ identifier.
+	 *
+	 *	@return	The next $Name$ identifier.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public CFLibDbKeyHash512 next$Name$() {
+		return( new CFLibDbKeyHash512(0) );
 	}
 </GenRule>
 

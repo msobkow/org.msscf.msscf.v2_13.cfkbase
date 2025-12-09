@@ -52,267 +52,65 @@ $MssSourceLicense$
 
 package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.buff;
 
-import java.lang.reflect.*;
-import java.io.*;
+import java.io.Serializable;
 import java.math.*;
-import java.net.*;
-import java.rmi.*;
-import java.sql.*;
-import java.text.*;
+import java.time.*;
 import java.util.*;
-import org.apache.commons.codec.binary.Base64;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
-/*
+/**
  *	$SchemaName$Buff$TableName$HPKey History Primary Key for $TableName$$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )$
  */
-public class $poptop SchemaDef SchemaName$Buff$TableName$HPKey$switch HasDefSchema yes SchemaBuffTableHPKeyExtendDefSchemaNameHPKey default SchemaBuffTableImplementsISchemaTableHPKeyComparable$
-{$switch HasDefSchema yes SchemaBuffTableHPKeyExtendDefBody default SchemaBuffTableHPKeyImplDefBody$}
+public class $poptop SchemaDef SchemaName$Buff$TableName$HPKey$switch HasDefSchema yes implSchemaTableBuffHPKeyInheritDef default SchemaTableBuffHPKeyImplementsComparable$
+{$SchemaTableBuffHPKeyImplDefBody$}
 </GenFile>
 
-	<GenRule GenDef="Table" Name="SchemaBuffTableHPKeyExtendDefBody">
-	public $poptop SchemaDef SchemaName$$TableName$HPKey() {
-		super();
-	}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="SchemaBuffTableHPKeyImplDefBody">
+	<GenRule GenDef="Table" Name="SchemaTableBuffHPKeyImplDefBody">
 	protected long auditClusterId;
 	protected LocalDateTime auditStamp;
 	protected short auditActionId;
 	protected int requiredRevision;
 	protected CFLibDbKeyHash256 auditSessionId;
-$switch IsBaseTable yes implClassCodeColumnAttr default empty$$reference PrimaryKeyIndex iterate Columns( each implColumnAttr )$
+$reference PrimaryKeyIndex iterate Columns( each implColumnAttr )$
 $reference PrimaryKeyIndex implBuffHPKeyConstructor$$poptop SchemaDef implAuditClusterIdGetterSetter$$poptop SchemaDef implAuditStampGetterSetter$$poptop SchemaDef implAuditActionIdGetterSetter$$poptop SchemaDef implRevisionGetterSetter$$poptop SchemaDef implAuditSessionIdGetterSetter$$switch IsBaseTable yes implClassCodeGetterSetter default empty$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$reference PrimaryKeyIndex implHPKeyEquals$$reference PrimaryKeyIndex implHPKeyGetHashCode$$reference PrimaryKeyIndex implHPKeyCompareTo$$reference PrimaryKeyIndex implBuffHPKeyToString$</GenRule>
 
-
-	<GenRule GenDef="Table" Name="SchemaBuffTableImplementsISchemaTableHPKeyComparable">
-	implements I$DefSchemaName$$TableName$HPKey, Comparable&lt;Object&gt;, Serializable</GenRule>
-
-	<GenRule GenDef="Table" Name="SchemaBuffTableHPKeyExtendDefSchemaNameHPKey">
+	<GenRule GenDef="Table" Name="SchemaTableBuffHPKeyInheritDef">
 	extends $DefSchemaName$Buff$TableName$HPKey</GenRule>
 
+	<GenRule GenDef="Table" Name="SchemaTableBuffHPKeyImplementsComparable">
+	implements I$DefSchemaName$$TableName$HPKey, Comparable&lt;Object&gt;, Serializable</GenRule>
+
 	<GenRule GenDef="Index" Name="implBuffHPKeyConstructor">
-	public $SchemaName$Buff$TableName$HPKey()
-	{
-		super();$iterate Columns( each implConstructorInitAttr )$
+	public $SchemaName$Buff$TableName$HPKey() {
+		auditClusterId = I$SecSchemaName$Cluster.ID_INIT_VALUE;
+		auditStamp = LocalDateTime.now();
+		auditActionId = 0;
+		requiredRevision = 1;
+		auditSessionId = CFLibDbKeyHash256.nullGet();$iterate Columns( each implConstructorInitAttr )$
 	}
 </GenRule>
-
-	<GenRule GenDef="Index" Name="implBuffHPKeyGetHashCode">
-	public int hashCode() {
-		int hashCode = super.hashCode();$iterate Columns( each implGetHashCodeAttr )$
-		return( hashCode &amp; 0x7fffffff );
-	}
-</GenRule>
-
-	<GenRule GenDef="Index" Name="implBuffHPKeyCompareTo">
-	public int compareTo( Object obj ) {
-		if( obj == null ) {
-			return( -1 );
-		}$implBuffHPKeyCompareToHistoryObjects$
-		else if( obj instanceof I$SchemaName$$TableName$ ) {
-			I$SchemaName$$TableName$ rhs = (I$SchemaName$$TableName$)obj;$iterate Columns( each implCompareToAttr )$
-			return( 0 );
-		}
-		else {
-			throw new CFLibUnsupportedClassException( getClass(),
-				"compareTo",
-				"obj",
-				obj,
-				"$SchemaName$$TableName$HPKey, $SchemaName$$TableName$PKey, $SchemaName$$TableName$Buff" );
-		}
-	}
-</GenRule>
-
-	<GenRule GenDef="Index" Name="implBuffHPKeyCompareToHistoryObjects">
-		else if( obj instanceof I$SchemaName$$TableName$H ) {
-			I$SchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;$reference Table switch HasSuperClassRelation yes implBuffCompareInvokeSuperRetVal default implBuffCompareInitRetVal$$implBuffHPKeyCompareToAuditClusterId$$implBuffHPKeyCompareToAuditStamp$$implBuffHPKeyCompareToAuditActionId$$implBuffHPKeyCompareToRequiredRevision$$implBuffHPKeyCompareToAuditSessionId$$iterate Columns( each implCompareToAttr )$
-			return( 0 );
-		}$switch HasSuperClassRelation no implBuffHPKeyCompareToHPKey default empty$</GenRule>
-
-	<GenRule GenDef="Index" Name="implBuffHPKeyCompareToHPKey">
-		else if( obj instanceof I$SchemaName$$TableName$HPKey ) {
-			I$SchemaName$$TableName$HPKey rhs = (I$SchemaName$$TableName$HPKey)obj;$implBuffHPKeyCompareToAuditClusterId$$implBuffHPKeyCompareToAuditStamp$$implBuffHPKeyCompareToAuditActionId$$implBuffHPKeyCompareToRequiredRevision$$implBuffHPKeyCompareToAuditSessionId$$iterate Columns( each implCompareToAttr )$
-			return( 0 );
-		}</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffHPKeyCompareToAuditClusterId">
-			{
-				long lhsClusterId = getAuditClusterId();
-				long rhsClusterId = rhs.getAuditClusterId();
-				if( lhsClusterId &lt; rhsClusterId ) {
-					return( -1 );
-				}
-				else if (lhsClusterId &gt; rhsClusterId) {
-					return( 1 );
-				}
-			}</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffHPKeyCompareToAuditStamp">
-			{
-				LocalDateTime lhsAuditStamp = getAuditStamp();
-				LocalDateTime rhsAuditStamp = rhs.getAuditStamp();
-				if( lhsAuditStamp != null ) {
-					if( rhsAuditStamp != null ) {
-						int v = lhsAuditStamp.compareTo(rhsAuditStamp);
-						if (v != 0 ) {
-							return( v );
-						}
-					}
-					else {
-						return( 1 );
-					}
-				}
-				else {
-					if ( rhsAuditStamp != null ) {
-						return( -1 );
-					}
-				}
-			}</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffHPKeyCompareToAuditActionId">
-			{
-				short lhsActionId = getAuditActionId();
-				short rhsActionId = rhs.getAuditActionId();
-				if( lhsActionId &lt; rhsActionId ) {
-					return( -1 );
-				}
-				else if( lhsActionId &gt; rhsActionId ) {
-					return( 1 );
-				}
-			}</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffHPKeyCompareToRequiredRevision">
-			{
-				int lhsRevision = getRequiredRevision();
-				int rhsRevision = rhs.getRequiredRevision();
-				if( lhsRevision &lt; rhsRevision ) {
-					return( -1 );
-				}
-				else if ( lhsRevision &gt; rhsRevision ) {
-					return( 1 );
-				}
-			}</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffHPKeyCompareToAuditSessionId">
-			{
-				CFLibDbKeyHash256 lhsAuditSessionId = getAuditSessionId();
-				CFLibDbKeyHash256 rhsAuditSessionId = rhs.getAuditSessionId();
-				if( lhsAuditSessionId != null ) {
-					if( rhsAuditSessionId != null ) {
-						int v = lhsAuditSessionId.compareTo(rhsAuditStamp);
-						if (v != 0 ) {
-							return( v );
-						}
-					}
-					else {
-						return( 1 );
-					}
-				}
-				else {
-					if ( rhsAuditSessionId != null ) {
-						return( -1 );
-					}
-				}
-			}</GenRule>
-
-	<GenRule GenDef="Index" Name="implBuffHPKeyEquals">
-	public boolean equals( Object obj ) {
-		if( obj == null ) {
-			return( false );
-		}
-		else if( obj instanceof I$SchemaName$$TableName$HPKey ) {
-			I$SchemaName$$TableName$HPKey rhs = (I$SchemaName$$TableName$HPKey)obj;$implBuffHPKeyEqualsAuditClusterId$$implBuffHPKeyEqualsAuditStamp$$implBuffHPKeyEqualsAuditActionId$$implBuffHPKeyEqualsRequiredRevision$$implBuffHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr)$
-			return( true );
-		}
-		else if( obj instanceof I$SchemaName$$TableName$H ) {
-			I$SchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;$implBuffHPKeyEqualsAuditClusterId$$implBuffHPKeyEqualsAuditStamp$$implBuffHPKeyEqualsAuditActionId$$implBuffHPKeyEqualsRequiredRevision$$implBuffHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr)$$iterate Columns( each implEqualsCmpAttr)$
-			return( true );
-		}
-		else if( obj instanceof I$SchemaName$$TableName$ ) {
-			I$SchemaName$$TableName$ rhs = (I$SchemaName$$TableName$)obj;$iterate Columns( each implEqualsCmpAttr)$
-			return( true );
-		}
-		else {
-			return( false );
-		}
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffHPKeyEqualsAuditClusterId">
-			{
-				long lhsClusterId = getAuditClusterId();
-				long rhsClusterId = rhs.getAuditClusterId();
-				if( lhsClusterId != rhsClusterId ) {
-					return( false );
-				}
-			}</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffHPKeyEqualsAuditStamp">
-			{
-				LocalDateTime lhsAuditStamp = getAuditStamp();
-				LocalDateTime rhsAuditStamp = rhs.getAuditStamp();
-				if( lhsAuditStamp != null ) {
-					if( rhsAuditStamp != null ) {
-						if( ! lhsAuditStamp.equals( rhsAuditStamp ) ) {
-							return( false );
-						}
-					}
-					else {
-						return( false );
-					}
-				}
-				else {
-					return( false );
-				}
-			}</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffHPKeyEqualsAuditActionId">
-			{
-				short lhsActionId = getAuditActionId();
-				short rhsActionId = rhs.getAuditActionId();
-				if( lhsActionId != rhsActionId ) {
-					return( false );
-				}
-			}</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffHPKeyEqualsRequiredRevision">
-			{
-				int lhsRevision = getRequiredRevision();
-				int rhsRevision = rhs.getRequiredRevision();
-				if( lhsRevision != rhsRevision ) {
-					return( false );
-				}
-			}</GenRule>
-
-	<GenRule GenDef="Object" Name="implBuffHPKeyEqualsAuditSessionId">
-			{
-				CFLibDbKeyHash256 lhsAuditSessionId = getAuditSessionId();
-				CFLibDbKeyHash256 rhsAuditSessionId = rhs.getAuditSessionId();
-				if( lhsAuditSessionId != null ) {
-					if( rhsAuditSessionId != null ) {
-						if( ! lhsAuditSessionId.equals( rhsAuditSessionId ) ) {
-							return( false );
-						}
-					}
-					else {
-						return( false );
-					}
-				}
-				else {
-					return( false );
-				}
-			}</GenRule>
 
 	<GenRule GenDef="Index" Name="implBuffHPKeyToString">
+	@Override
+	public String getXmlAttrFragment() {
+		String ret = " auditClusterId=\"" + auditClusterId + "\\""
+			+ " auditStamp=\\"" + (auditStamp != null ? CFLibXmlUtil.formatTimestamp(auditStamp) : "null") + "\\""
+			+ " auditAction=\\"" + auditActionId + "\\""
+			+ " revision=\\"" + requiredRevision + "\\""
+			+ " auditSessionId=\\"" + (getAuditSessionId() != null ? getAuditSessionId().toString() : "null") + "\\""$iterate Columns( each implToStringEmitXmlAttr )$;
+		return( ret );
+	}
+
+	@Override
 	public String toString() {
-		String ret = "&lt;$SchemaName$$TableName$HPKey"$iterate Columns( each implToStringEmitXmlAttr )$
-			+ " RequiredRevision=\\"" + Integer.toString( getRequiredRevision() ) + "\\""
-			+ "/&gt;";
+		String ret = "&lt;$SchemaName$Buff$TableName$HPKey" + getXmlAttrFragment() + "/&gt;";
 		return( ret );
 	}
 </GenRule>

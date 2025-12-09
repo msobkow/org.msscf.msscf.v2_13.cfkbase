@@ -60,6 +60,7 @@ import java.text.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
@@ -72,7 +73,7 @@ public class $SchemaName$Buff$TableName$DefaultFactory$switch HasDefSchema yes e
 </GenFile>
 
 	<GenRule GenDef="Table" Name="implBuffDefaultFactoryMethods"
-		>$switch HasSuperClassRelation no implBuffNewPKey default empty$$switch HasSuperClassRelation no implBuffNewHPKey default empty$$iterate Index( each implBuffNewNonPrimaryIndexKey )$$implBuffNewXfc$$implBuffNewHXfc$</GenRule>
+		>$switch HasSuperClassRelation no implBuffNewPKey default empty$$switch HasSuperClassRelation no maybeImplBuffNewHPKey default empty$$iterate Index( each implBuffNewNonPrimaryIndexKey )$$implBuffNewRec$$switch BaseHasHistory yes implBuffNewHRec default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="extendSchemaBuffTableDefaultFactory">
 	extends $reference DefSchema SchemaName$Buff$TableName$DefaultFactory</GenRule>
@@ -100,15 +101,20 @@ public class $SchemaName$Buff$TableName$DefaultFactory$switch HasDefSchema yes e
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implBuffNewPKey">
-	@Override
-	public I$DefSchemaName$$reference BaseClass TableName$PKey newPKey() {
-		I$DefSchemaName$$reference BaseClass TableName$PKey pkey =
-			new $DefSchemaName$Buff$reference BaseClass TableName$PKey();
-		return( pkey );
-	}
+    <GenRule GenDef="Table" Name="implBuffNewPKey"
+            >$switch HasDefSchema no ifNotAtomicBuffImplNewPKey default empty$</GenRule>
+    <GenRule GenDef="Table" Name="ifNotAtomicBuffImplNewPKey">$switch IsPrimaryIndexKeyAtomic yes empty default reallyBuffImplNewPKey$</GenRule>
+    <GenRule GenDef="Table" Name="reallyBuffImplNewPKey">
+    @Override
+    public I$DefSchemaName$$reference BaseClass TableName$PKey newPKey() {
+        I$DefSchemaName$$reference BaseClass TableName$PKey pkey =
+            new $DefSchemaName$Buff$reference BaseClass TableName$PKey();
+        return( pkey );
+    }
 </GenRule>
 
+	<GenRule GenDef="Table" Name="maybeImplBuffNewHPKey">$switch BaseHasHistory yes implBuffNewHPKey default empty$</GenRule>
+	
 	<GenRule GenDef="Table" Name="implBuffNewHPKey">
 	@Override
 	public I$DefSchemaName$$reference BaseClass TableName$HPKey newHPKey() {
@@ -118,21 +124,21 @@ public class $SchemaName$Buff$TableName$DefaultFactory$switch HasDefSchema yes e
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implBuffNewXfc">
+	<GenRule GenDef="Table" Name="implBuffNewRec">
 	@Override
-	public I$DefSchemaName$$TableName$ newXfc() {
-		I$DefSchemaName$$TableName$ xfc =
+	public I$DefSchemaName$$TableName$ newRec() {
+		I$DefSchemaName$$TableName$ rec =
 			new $DefSchemaName$Buff$TableName$();
-		return( xfc );
+		return( rec );
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implBuffNewHXfc">
+	<GenRule GenDef="Table" Name="implBuffNewHRec">
 	@Override
-	public I$DefSchemaName$$TableName$HBuff newHXfc() {
-		I$DefSchemaName$$TableName$H hxfc =
+	public I$DefSchemaName$$TableName$H newHRec() {
+		I$DefSchemaName$$TableName$H hrec =
 			new $DefSchemaName$Buff$TableName$H();
-		return( hxfc );
+		return( hrec );
 	}
 </GenRule>
 

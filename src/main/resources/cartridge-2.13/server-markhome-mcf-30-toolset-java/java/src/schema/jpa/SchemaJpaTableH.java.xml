@@ -63,7 +63,7 @@ import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
-import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.*;
 
 /**
  *  $SchemaName$Jpa$TableName$H provides history objects matching the $SchemaName$$TableName$ change history.
@@ -381,7 +381,7 @@ $implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAcces
     <GenRule GenDef="Table" Name="implHJPACompareTo">
     @Override
     public int compareTo( Object obj ) {
-        int retval;
+        int cmp;
         if (obj == null) {
             return( 1 );
         }
@@ -424,16 +424,16 @@ $implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAcces
         }</GenRule>
 
     <GenRule GenDef="Table" Name="implHJPACompareToCheckSuperCompareToObj">
-        retval = super.compareTo(obj);
-        if (retval != 0) {
-            return( retval );
+        cmp = super.compareTo(obj);
+        if (cmp != 0) {
+            return( cmp );
         }
         I$SchemaName$$TableName$ rhs = (I$SchemaName$$TableName$)obj;</GenRule>
 
     <GenRule GenDef="Table" Name="implHJPACompareToCheckSuperCompareToHObj">
-        retval = super.compareTo(obj);
-        if (retval != 0) {
-            return( retval );
+        cmp = super.compareTo(obj);
+        if (cmp != 0) {
+            return( cmp );
         }
         I$SchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;</GenRule>
 
@@ -444,9 +444,9 @@ $implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAcces
 				return( 1 );
 			}
 			else {
-				retval = getPKey().compareTo(rhs.getPKey());
-				if (retval != 0) {
-					return( retval );
+				cmp = getPKey().compareTo(rhs.getPKey());
+				if (cmp != 0) {
+					return( cmp );
 				}
 			}
 		}
@@ -463,9 +463,9 @@ $implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAcces
 				return( 1 );
 			}
 			else {
-				retval = getPKey().compareTo(rhs.getPKey());
-				if (retval != 0) {
-					return( retval );
+				cmp = getPKey().compareTo(rhs.getPKey());
+				if (cmp != 0) {
+					return( cmp );
 				}
 			}
 		}
@@ -486,9 +486,9 @@ $implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAcces
 				return( 1 );
 			}
 			else {
-				retval = getPKey().compareTo(rhs.getPKey());
-				if (retval != 0) {
-					return( retval );
+				cmp = getPKey().compareTo(rhs.getPKey());
+				if (cmp != 0) {
+					return( cmp );
 				}
 			}
 		}</GenRule>
@@ -511,15 +511,19 @@ $		return( 0 );
 </GenRule>
 
     <GenRule GenDef="Table" Name="implHJPASet">
+	@Override
     public void set( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ src ) {$switch HasSuperClassRelation yes implJpaSetWithCast default implJpaSetDirect$
     }
 
+	@Override
     public void set$TableName$( I$DefSchemaName$$TableName$ src ) {$switch HasSuperClassRelation yes implHJPASetInvokeSuper default implHJPASetCopyPKey$$iterate Columns( each implJpaSetCopyDataCol )$$switch HasSuperClassRelation no implJpaSetCopyRevision default empty$
     }
 
+	@Override
     public void set( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$H src ) {$switch HasSuperClassRelation yes implHJPASetWithCast default implJpaSetDirect$
     }
 
+	@Override
     public void set$TableName$( I$DefSchemaName$$TableName$H src ) {$switch HasSuperClassRelation yes implHJPASetInvokeSuper default implHJPASetCopyPKey$$iterate Columns( each implJpaSetCopyDataCol )$$switch HasSuperClassRelation no implJpaSetCopyRevision default empty$
     }
 </GenRule>

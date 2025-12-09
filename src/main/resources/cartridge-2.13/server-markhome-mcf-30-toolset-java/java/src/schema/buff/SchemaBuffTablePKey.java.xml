@@ -73,6 +73,7 @@ import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
 
@@ -89,13 +90,14 @@ public class $SchemaName$Buff$TableName$PKey$switch HasDefSchema yes SchemaBuffT
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="SchemaBuffTablePKeyImplBaseDefBody">$reference PrimaryKeyIndex iterate Columns( each implColumnAttr )$$reference PrimaryKeyIndex implBuffPKeyConstructor$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
+	<GenRule GenDef="Table" Name="SchemaBuffTablePKeyImplBaseDefBody">$reference PrimaryKeyIndex iterate Columns( each implColumnAttr )$
+$reference PrimaryKeyIndex implBuffPKeyConstructor$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaBuffTablePKeyExtendBaseDef">
 	extends $DefSchemaName$$TableName$PKey</GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaBuffTablePKeyImplementsComparable">
-	implements Comparable&lt;I$DefSchemaName$$TableName$PKey&gt;, Serializable</GenRule>
+	implements I$DefSchemaName$$TableName$PKey, Comparable&lt;I$DefSchemaName$$TableName$PKey&gt;, Serializable</GenRule>
 
 	<GenRule GenDef="Index" Name="implBuffPKeyConstructor">
 	public $SchemaName$Buff$TableName$PKey() {$iterate Columns( each implConstructorInitAttr )$

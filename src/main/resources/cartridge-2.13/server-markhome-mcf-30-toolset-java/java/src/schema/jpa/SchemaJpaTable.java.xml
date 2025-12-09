@@ -90,7 +90,6 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	<GenRule GenDef="Table" Name="implJpaISchemaTableBuff">
 	implements I$DefSchemaName$$TableName$</GenRule>
 
-
 	<GenRule GenDef="Table" Name="implJpaColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes implJpaColumnAttrPKeyColumnAccessors default implJpaColumnAttrPKeyInstanceAccessors$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaColumnAttrPKeyColumnAccessors">
@@ -341,7 +340,8 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 
 	<GenRule GenDef="Table" Name="implJpaRequiredRevisionAttr">
 	@Version
-	protected int requiredRevision;</GenRule>
+	protected int requiredRevision;
+</GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaJpaTableJPABaseConstruct">
 	public $poptop SchemaDef SchemaName$Jpa$TableName$() {$implJpaConstructorInitColumns$
@@ -477,7 +477,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 	<GenRule GenDef="Table" Name="implJpaCompareTo">
 	@Override
 	public int compareTo( Object obj ) {
-		int retval;
+		int cmp;
 		if (obj == null) {
 			return( 1 );
 		}
@@ -492,8 +492,8 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 	<GenRule GenDef="Table" Name="implJpaCompareToHistory">$switch HasSuperClassRelation yes empty default implJpaCompareToSchemaJpaTableHPKey$$implJpaCompareToSchemaJpaTableH$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaCompareToSuperAndRetCmp">
-			retval = super.compareTo(obj);
-			return( retval );</GenRule>
+			cmp = super.compareTo(obj);
+			return( cmp );</GenRule>
 	<GenRule GenDef="Table" Name="implJpaCompareToThrowUnsupportedClass">
 			throw new CFLibUnsupportedClassException( getClass(),
 				"compareTo",
@@ -501,15 +501,15 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 				obj,
 				null );</GenRule>
 	<GenRule GenDef="Table" Name="implJpaCompareToSuper">
-			retval = super.compareTo(obj);
-			if (retval != 0) {
-				return( retval );
+			cmp = super.compareTo(obj);
+			if (cmp != 0) {
+				return( cmp );
 			}
 			I$SchemaName$$TableName$ rhs = (I$SchemaName$$TableName$)obj;</GenRule>
 	<GenRule GenDef="Table" Name="implJpaCompareToSuperH">
-			retval = super.compareTo(obj);
-			if (retval != 0) {
-				return( retval );
+			cmp = super.compareTo(obj);
+			if (cmp != 0) {
+				return( cmp );
 			}
 			$ISchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;</GenRule>
 	<GenRule GenDef="Table" Name="implJpaComparePKeys">
@@ -524,9 +524,9 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 					return( 1 );
 				}
 				else {
-					retval = getPKey().compareTo(rhs.getPKey());
-					if (retval != 0) {
-						return( retval );
+					cmp = getPKey().compareTo(rhs.getPKey());
+					if (cmp != 0) {
+						return( cmp );
 					}
 				}
 			}</GenRule>
@@ -554,21 +554,21 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 		>$reference BaseClass switch HasAuditColumns yes implJpaCompareAuditColumns default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaCompareAuditColumns">
-			retval = getCreatedByUserId().compareTo( rhs.getCreatedByUserId() );
-			if( retval != 0 ) {
-				return( retval );
+			cmp = getCreatedByUserId().compareTo( rhs.getCreatedByUserId() );
+			if( cmp != 0 ) {
+				return( cmp );
 			}
-			retval = getCreatedAt().compareTo( rhs.getCreatedAt() );
-			if( retval != 0 ) {
-				return( retval );
+			cmp = getCreatedAt().compareTo( rhs.getCreatedAt() );
+			if( cmp != 0 ) {
+				return( cmp );
 			}
-			retval = getUpdatedByUserId().compareTo( rhs.getUpdatedByUserId() );
-			if( retval != 0 ) {
-				return( retval );
+			cmp = getUpdatedByUserId().compareTo( rhs.getUpdatedByUserId() );
+			if( cmp != 0 ) {
+				return( cmp );
 			}
-			retval = getUpdatedAt().compareTo( rhs.getUpdatedAt() );
-			if( retval != 0 ) {
-				return( retval );
+			cmp = getUpdatedAt().compareTo( rhs.getUpdatedAt() );
+			if( cmp != 0 ) {
+				return( cmp );
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaCompareHierarchy"
@@ -587,17 +587,17 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 				obj,
 				null );</GenRule>
 	<GenRule GenDef="Table" Name="implJpaCompareInvokeSuperRetVal">
-			int retval = super.compareTo( rhs );
-			if( retval != 0 ) {
-				return( retval );
+			int cmp = super.compareTo( rhs );
+			if( cmp != 0 ) {
+				return( cmp );
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaCompareInitRetVal">
-			int retval = 0;</GenRule>
+			int cmp = 0;</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaCompareInvokeSuper">
-			int retval = super.compareTo( obj );
-			return( retval );</GenRule>
+			int cmp = super.compareTo( obj );
+			return( cmp );</GenRule>
 
 	<GenRule GenDef="Index" Name="maybeImplJPACompareToIndex"
 		>$switch IsPrimaryIndex yes empty default implJpaCompareToIndex$</GenRule>
