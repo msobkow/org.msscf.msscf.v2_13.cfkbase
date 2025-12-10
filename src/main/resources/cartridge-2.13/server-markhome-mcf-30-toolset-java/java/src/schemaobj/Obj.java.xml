@@ -63,17 +63,15 @@ import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate Schem
 
 public class $SchemaName$$TableName$Obj
 $switch HasSuperClassRelation yes implObjExtendSuperClassImplements default implObjTabImplementsSpace$I$SchemaName$$TableName$Obj
-{$switch HasSuperClassRelation no declObjClassCode default empty$$switch HasSuperClassRelation no declObjAttrOptAuditColumns default empty$$switch HasSuperClassRelation no declObjAttrIsNew default empty$$switch HasSuperClassRelation no declObjEditAttr default empty$$switch HasSuperClassRelation no declObjSchemaAttr default empty$$switch HasSuperClassRelation no implObjPKeyAttr default empty$$switch HasSuperClassRelation no implObjRecAttr default empty$$iterate Relation( each implObjRelationAttr empty empty )$$JavaObjMembers$
+{$switch HasSuperClassRelation no declObjAttrOptAuditColumns default empty$$switch HasSuperClassRelation no declObjAttrIsNew default empty$$switch HasSuperClassRelation no declObjEditAttr default empty$$switch HasSuperClassRelation no declObjSchemaAttr default empty$$switch HasSuperClassRelation no implObjPKeyAttr default empty$$switch HasSuperClassRelation no implObjRecAttr default empty$$iterate Relation( each implObjRelationAttr empty empty )$$JavaObjMembers$
 $implSchemaTableObjAllTheMethods$}
 </GenFile>
-
-	<GenRule GenDef="Table" Name="declObjClassCode">
-		protected int classCode = I$DefSchemaName$$TableName$.CLASS_CODE;</GenRule>
 
 	<GenRule GenDef="ServerProc" Name="implJavaObjServerMethod"
 		>$switch IsInstanceMethod yes implJavaObjInstServerProc default empty$</GenRule>
 
 	<GenRule GenDef="ServerProc" Name="implJavaObjInstServerProc">
+	@Override
 	public boolean $leadlower Name$($iterate Params( first declServerMethodParamNoComma each declServerMethodParam empty empty )$ )
 	{
 		boolean retval = ((I$poptop SchemaDef SchemaName$$TableName$TableObj)((I$poptop SchemaDef SchemaName$SchemaObj)getSchema()).get$TableName$TableObj()).$leadlower Name$( this$iterate Params( each passServerMethodParam empty empty )$ );
@@ -85,6 +83,7 @@ $implSchemaTableObjAllTheMethods$}
 		>$switch IsInstanceMethod yes implJavaObjInstServerObjFunc default empty$</GenRule>
 
 	<GenRule GenDef="ServerObjFunc" Name="implJavaObjInstServerObjFunc">
+	@Override
 	public I$DefSchemaName$$reference RetTable Name$Obj $leadlower Name$($iterate Params( first declServerMethodParamNoComma each declServerMethodParam empty empty )$ )
 	{
 		I$DefSchemaName$$reference RetTable Name$Obj retval = ((I$poptop SchemaDef SchemaName$$TableName$TableObj)((I$poptop SchemaDef SchemaName$SchemaObj)getSchema()).get$TableName$TableObj()).$leadlower Name$( this$iterate Params( each passServerMethodParam empty empty )$ );
@@ -96,6 +95,7 @@ $implSchemaTableObjAllTheMethods$}
 		>$switch IsInstanceMethod yes implJavaObjInstServerListFunc default empty$</GenRule>
 
 	<GenRule GenDef="ServerListFunc" Name="implJavaObjInstServerListFunc">
+	@Override
 	public List&lt;I$DefSchemaName$$reference RetTable Name$Obj&gt; $leadlower Name$($iterate Params( first declServerMethodParamNoComma each declServerMethodParam empty empty )$ )
 	{
 		List&lt;I$DefSchemaName$$reference RetTable Name$Obj&gt; retval = ((I$poptop SchemaDef SchemaName$$TableName$TableObj)((I$poptop SchemaDef SchemaName$SchemaObj)getSchema()).get$TableName$TableObj()).$leadlower Name$( this$iterate Params( each passServerMethodParam empty empty )$ );
@@ -114,6 +114,7 @@ $implSchemaTableObjAllTheMethods$}
 		>$switch BaseHasAuditColumns yes implObjGetAuditColumns default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implObjGetAuditColumns">
+	@Override
 	public I$SecSchemaName$SecUserObj getCreatedBy() {
 		if( createdBy == null ) {
 			I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ rec = getRec();
@@ -122,10 +123,12 @@ $implSchemaTableObjAllTheMethods$}
 		return( createdBy );
 	}
 
+	@Override
 	public LocalDateTime getCreatedAt() {
 		return( getRec().getCreatedAt() );
 	}
 
+	@Override
 	public I$SecSchemaName$SecUserObj getUpdatedBy() {
 		if( updatedBy == null ) {
 			I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ rec = getRec();
@@ -134,6 +137,7 @@ $implSchemaTableObjAllTheMethods$}
 		return( updatedBy );
 	}
 
+	@Override
 	public LocalDateTime getUpdatedAt() {
 		return( getRec().getUpdatedAt() );
 	}
@@ -153,17 +157,12 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Table" Name="implGetClassCode">
 	@Override
 	public int getClassCode() {
-		return( I$DefSchemaName$$TableName$.CLASS_CODE );
-	}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="implSetClassCode">
-	public void setClassCode(int classCode) {
-		this.classCode = classCode;
+		return( get$TableName$Table().getClassCode() );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implGetGenDefName">
+	@Override
 	public String getGenDefName() {
 		return( "$TableName$" );
 	}
@@ -173,6 +172,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		>$switch HasSuperClassRelation no implGetQualNamedObject default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetQualNamedObject">
+	@Override
 	public ICFLibAnyObj getNamedObject( Class qualifyingClass, String objName ) {
 		ICFLibAnyObj topContainer = getObjQualifier( qualifyingClass );
 		if( topContainer == null ) {
@@ -184,6 +184,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implGetNamedObject">
+	@Override
 	public ICFLibAnyObj getNamedObject( String objName ) {
 		String nextName;
 		String remainingName;
@@ -317,6 +318,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		>$implGetObjQualifier$</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetObjQualifier">
+	@Override
 	public ICFLibAnyObj getObjQualifier( Class qualifyingClass ) {
 		ICFLibAnyObj container = this;
 		if( qualifyingClass != null ) {
@@ -352,6 +354,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		>$implGetObjQualifiedName$</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetObjQualifiedName">
+	@Override
 	public String getObjQualifiedName() {
 		String qualName = getObjName();
 		ICFLibAnyObj container = getObjScope();
@@ -382,6 +385,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		>$switch HasSuperClassRelation no implGetObjFullName default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetObjFullName">
+	@Override
 	public String getObjFullName() {
 		String fullName = getObjName();
 		ICFLibAnyObj container = getObjScope();
@@ -404,6 +408,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implGetObjName">
+	@Override
 	public String getObjName() {
 		String objName;$reference ObjNameColumn implGetObjNameCalcName$
 		return( objName );
@@ -744,13 +749,10 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			default maybeImplGetScopeNull$</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeImplGetScopeNull"
-		>$switch HasSuperClassRelation no implGetScopeNull default empty$</GenRule>
+		>$switch HasSuperClassRelation no implGetObjScopeNull default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="implGetScopeNull">
-	public ICFLibAnyObj getScope() {
-		return( null );
-	}
-
+	<GenRule GenDef="Table" Name="implGetObjScopeNull">
+	@Override
 	public ICFLibAnyObj getObjScope() {
 		return( null );
 	}
@@ -760,19 +762,14 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		>$switch TableName Tld implGetScopeViaSingleContainerTld default implGetScopeViaSingleContainerNormal$</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetScopeViaSingleContainerTld">
-	public ICFLibAnyObj getScope() {
-		return( getRequiredContainerTenant() );
-	}
-
+	@Override
 	public ICFLibAnyObj getObjScope() {
 		return( getRequiredContainerTenant() );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implGetScopeViaSingleContainerNormal">
-	public ICFLibAnyObj getScope() {$iterate ContainerRelations( first implGetScopeViaSingleContainerBody each empty empty maybeImplGetScopeViaSingleInheritedContainerBody )$
-	}
-
+	@Override
 	public ICFLibAnyObj getObjScope() {$iterate ContainerRelations( first implGetScopeViaSingleContainerBody each empty empty maybeImplGetObjScopeViaSingleInheritedContainerBody )$
 	}
 </GenRule>
@@ -797,6 +794,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		return( scope );</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetScopeViaMultipleContainer">
+	@Override
 	public ICFLibAnyObj getObjScope() {$iterate ContainerRelations( first implGetScopeViaMultipleContainerBody each empty empty empty )$
 	}
 </GenRule>
@@ -823,6 +821,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	protected I$DefSchemaName$$TableName$EditObj edit;</GenRule>
 
 	<GenRule GenDef="Table" Name="implObjBeginEdit">
+	@Override
 	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$EditObj beginEdit() {
 		if( edit != null ) {
 			throw new CFLibEditAlreadyOpenException( getClass(), "beginEdit" );
@@ -840,18 +839,21 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implObjEndEdit">
+	@Override
 	public void endEdit() {
 		edit = null;
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implObjEditAccessors">
+	@Override
 	public I$DefSchemaName$$TableName$EditObj getEdit() {
 		return( edit );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implObjEditAsAccessors">
+	@Override
 	public I$DefSchemaName$$TableName$EditObj getEditAs$TableName$() {
 		return( (I$DefSchemaName$$TableName$EditObj)edit );
 	}
@@ -876,26 +878,31 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		schema = argSchema;</GenRule>
 
 	<GenRule GenDef="Table" Name="implObjIsNewAccessors">
+	@Override
 	public boolean getIsNew() {
 		return( isNew );
 	}
 
+	@Override
 	public void setIsNew( boolean value ) {
 		isNew = value;
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implObjSchemaAccessors">
+	@Override
 	public I$DefSchemaName$SchemaObj getSchema() {
 		return( schema );
 	}
 
+	@Override
 	public void setSchema( I$DefSchemaName$SchemaObj value ) {
 		schema = value;
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implObjTableAccessors">
+	@Override
 	public I$DefSchemaName$$TableName$TableObj get$TableName$Table() {
 		return( ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj() );
 	}

@@ -106,6 +106,12 @@ public interface I$SchemaName$$TableName$Obj$iterate TableRefs( first declIObjIn
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIObjGetClassCode">
+	/**
+	 *	Initially, the class code for an object is I$DefSchemaName$$TableName$.CLASS_CODE, but the Obj layer relies on class code translation to map those
+	 *	backing store entities to a runtime set of front-facing classcodes that the clients download and use when talking to the server implementing this code base.
+	 *
+	 *	@return The runtime class code used by this object. Only after the system is fully booted are these values stable and reliable.
+	 */
 	int getClassCode();$switch HasAuditColumns yes declIObjGetAuditColumns default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="declIObjGetAuditColumns">
@@ -207,6 +213,15 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	 *	@return	I$DefSchemaName$SchemaObj schema cache which manages this instance.
 	 */
 	I$DefSchemaName$SchemaObj getSchema();
+
+	/**
+	 *	Set the I$DefSchemaName$SchemaObj schema cache which manages this instance.
+	 *	Should only be used to install overloads of the buff implementation wired specifically to a transport implementation
+	 *	that eventually hits a server running a JPA backend.
+	 *
+	 *	@param schema	I$DefSchemaName$SchemaObj schema cache which manages this instance.
+	 */
+	void setSchema(I$DefSchemaName$SchemaObj schema);
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIObjTableAccessors">
