@@ -62,24 +62,17 @@ import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import org.apache.commons.text.StringEscapeUtils;import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaEditObjImport$
 
 public interface I$SchemaName$$TableName$EditObj
-	extends I$SchemaName$$TableName$Obj$iterate TableRefs( each alsoExtendISchemaTableEditObj empty empty )$$switch HasSuperClassRelation yes alsoIEditObjInheritSuperClass default empty$
-{$switch HasSuperClassRelation yes empty default declIEditObjOrigIfNoDefSchema$$declIEditObjOrigAsCast$$switch HasSuperClassRelation yes empty default declIEditObjCreate$$switch HasSuperClassRelation yes empty default declIEditObjUpdate$$switch HasSuperClassRelation yes empty default declIEditObjDelete$$switch HasDefSchema yes empty default declIEditObjColumnAccessors$$iterate Relation( each declIEditObjRelationAccessors empty empty )$$JavaEditObjInterface$$switch HasSuperClassRelation yes empty default declIEditObjOptAuditAccessors$}
+	extends $switch HasSuperClassRelation yes emitEditObjSuperAndSchemaTableObj default emitEditObjSchemaTableObj$$iterate TableRefs( each alsoExtendReferenceIEditObj empty empty )$
+{$switch HasSuperClassRelation yes empty default declIEditObjOrigIfNoDefSchema$$declIEditObjOrigAsCast$$switch HasSuperClassRelation yes empty default declIEditObjCreate$$switch HasSuperClassRelation yes empty default declIEditObjUpdate$$switch HasSuperClassRelation yes empty default declIEditObjDelete$$switch HasSuperClassRelation yes empty default declIEditObjOptAuditAccessors$$switch HasDefSchema yes empty default declIEditObjColumnAccessors$$iterate Relation( each declIEditObjRelationAccessors empty empty )$$JavaEditObjInterface$
+}
 </GenFile>
 
-	<GenRule GenDef="Table" Name="alsoExtendISchemaTableEditObj">,
-		I$reference SchemaDef SchemaName$$TableName$EditObj</GenRule>
+	<GenRule GenDef="Table" Name="emitEditObjSuperAndSchemaTableObj">I$reference SuperClassRelation reference ToTable SchemaName$$reference SuperClassRelation reference ToTable TableName$EditObj, I$SchemaName$$TableName$Obj</GenRule>
+	<GenRule GenDef="Table" Name="emitEditObjSchemaTableObj">I$SchemaName$$TableName$Obj</GenRule>
+	<GenRule GenDef="Table" Name="emitEditObjAlsoExtendBaseIEditObj">, I$DefSchemaName$$TableName$EditObj</GenRule>
+	<GenRule GenDef="Table" Name="alsoExtendReferenceIEditObj">, I$reference DefSchema SchemaName$$TableName$EditObj</GenRule>
 
-	<GenRule GenDef="Table" Name="extendISchemaTableEditObj">
-	extends I$reference DefSchema SchemaName$$TableName$EditObj$switch HasSuperClassRelation yes alsoIEditObjInheritSuperClass default empty$</GenRule>
-
-	<GenRule GenDef="Table" Name="alsoIEditObjInheritSuperClass">,
-		I$reference SuperClassRelation reference ToTable SchemaName$$reference SuperClassRelation reference ToTable TableName$EditObj</GenRule>
-
-	<GenRule GenDef="Table" Name="declIEditObjInheritSuperClass">,
-		I$reference SuperClassRelation reference ToTable DefSchemaName$$reference SuperClassRelation reference ToTable TableName$EditObj</GenRule>
-
-	<GenRule GenDef="Table" Name="declIEditObjOptAuditAccessors"
-		>$switch HasDefSchema yes empty default reallyDeclIEditObjOptAuditAccessors$</GenRule>
+	<GenRule GenDef="Table" Name="declIEditObjOptAuditAccessors">$reallyDeclIEditObjOptAuditAccessors$</GenRule>
 
 	<GenRule GenDef="Table" Name="reallyDeclIEditObjOptAuditAccessors"
 		>$switch HasAuditColumns yes declIEditObjAuditAccessors default empty$</GenRule>
@@ -97,7 +90,7 @@ public interface I$SchemaName$$TableName$EditObj
 	 *
 	 *	@param	value	The Calendar value for the create time of the instance.
 	 */
-	void setCreatedAt( Calendar value );
+	void setCreatedAt( LocalDateTime value );
 
 	/**
 	 *	Set the user who updated this instance.
@@ -111,7 +104,8 @@ public interface I$SchemaName$$TableName$EditObj
 	 *
 	 *	@param	value	The Calendar value for the create time of the instance.
 	 */
-	void setUpdatedAt( Calendar value );</GenRule>
+	void setUpdatedAt( LocalDateTime value );
+</GenRule>
 
 	<GenRule GenDef="Table" Name="declIEditObjColumnAccessors"
 		>$switch HasSuperClassRelation yes declIEditObjInhColumnAccessors default declIEditObjBaseColumnAccessors$</GenRule>
