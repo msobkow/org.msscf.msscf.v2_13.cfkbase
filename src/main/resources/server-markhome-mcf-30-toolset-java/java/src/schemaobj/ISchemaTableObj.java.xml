@@ -83,21 +83,19 @@ public interface I$SchemaName$$TableName$TableObj$iterate TableRefs( first exten
 	public String getTableName();
 	public String getTableDbName();
 
-	protected static int runtimeClassCode = I$DefSchemaName$$TableName$.CLASS_CODE;
+	/**
+	 *	Get class code always returns the runtime class code for the objects, which is not stable until the application is done initializing and registering its objects.
+	 *
+	 *	@return runtime classcode
+	 */ 
+	public int getClassCode();
 
 	/**
-	 *	Get class code always returns the 
-	default public int getClassCode() {
-		return I$DefSchemaName$$TableName$TableObj.runtimeClassCode;
-	}
-
-	default public int getBackingClassCode() {
-		return( I$DefSchemaName$$TableName$.CLASS_CODE );
-	}
-
-	default protected setRuntimeClassCode(int runtimeClassCode) {
-		I$DefSchemaName$$TableName$TableObj.runtimeClassCode = runtimeClassCode;
-	}
+	 *	Get the backing store schema's class code, which is hard-coded into the object hierarchy.
+	 *
+	 *	@return The hardcoded backing store class code for this object, which is only valid in that schema.
+	 */
+	public int getBackingClassCode();
 $declGetObjQualifyingClass$$declNewInstance$$declNewEditInstance$$switch IsBaseTable yes declConstructByClassCode default empty$$declRealiseObj$$declCreateObj$$declReadObjByPKey$$declReadCachedObjByPKey$$declReallyDeepDisposeTable$$declDeepDisposeObjByPKey$$declLockObjByPKey$$declReadAllObj$$declReadCachedAllObj$$switch PageData yes declPageAllObj default empty$$declTableObjReadByIndexes$$declTableObjReadCachedByIndexes$$declTableObjDeepDisposeByIndexes$$switch PageData yes declTableObjPageByIndex default empty$$declUpdateObj$$declDeleteObj$$declTableObjDeleteByIndexes$$switch HasChain yes declTableObjMoveUp default empty$$switch HasChain yes declTableObjMoveDown default empty$$iterate ServerMethods( each declJavaTableObjServerMethod empty empty )$$JavaTableObjInterface$</GenRule>
 
 	<GenRule GenDef="ServerProc" Name="declJavaTableObjServerMethod"
