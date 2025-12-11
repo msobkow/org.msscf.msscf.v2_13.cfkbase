@@ -831,9 +831,9 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			lockobj = (I$DefSchemaName$$TableName$Obj)this;
 		}
 		else {
-			lockobj = ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().lock$TableName$( getPKey() );
+			lockobj = ((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().lock$TableName$( getPKey() );
 		}
-		edit = ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().newEditInstance( lockobj );
+		edit = ((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().newEditInstance( lockobj );
 		return( (I$reference BaseClass DefSchemaName$$reference BaseClass TableName$EditObj)edit );
 	}
 </GenRule>
@@ -898,7 +898,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Table" Name="implObjTableAccessors">
 	@Override
 	public I$DefSchemaName$$TableName$TableObj get$TableName$Table() {
-		return( ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj() );
+		return( ((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj() );
 	}
 </GenRule>
 
@@ -919,13 +919,19 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = null;</GenRule>
 
 	<GenRule GenDef="Relation" Name="implObjRelationAttr"
-		>$switch RelationToIndexIsUnique yes maybeImplObjRelationSingletonAttr default empty$</GenRule>
+		>$switch RelationToIndexIsUnique yes maybeImplObjRelationSingletonAttr default maybeImplObjRelationMultipleAttr$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeImplObjRelationSingletonAttr"
 		>$switch RelationTypeTag Superclass empty default implObjRelationSingletonAttr$</GenRule>
 
+	<GenRule GenDef="Relation" Name="maybeImplObjRelationMultipleAttr"
+		>$switch RelationTypeTag Superclass empty default implObjRelationMultipleAttr$</GenRule>
+
 	<GenRule GenDef="Relation" Name="implObjRelationSingletonAttr">
 	protected I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj $leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$;</GenRule>
+
+	<GenRule GenDef="Relation" Name="implObjRelationMultipleAttr">
+	protected List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj&gt; $leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$;</GenRule>
 
 	<GenRule GenDef="Relation" Name="RelationToIndexIsUnique"
 		>$reference ToIndex IsUnique$</GenRule>
@@ -978,7 +984,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			boolean anyMissing = false;
 $iterate Columns( each implObjRelationAccessorCheckIfColumnProvided empty empty )
 $			if( ! anyMissing ) {
-				$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = ((I$SchemaName$SchemaObj)schema).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$implToIndexSuffix$( $iterate Columns( first implObjRelationAccessorsPassArg each implObjRelationAccessorsCommaPassArg empty empty )$, forceRead );
+				$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = ((I$SchemaName$SchemaObj)getSchema()).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$implToIndexSuffix$( $iterate Columns( first implObjRelationAccessorsPassArg each implObjRelationAccessorsCommaPassArg empty empty )$, forceRead );
 			}
 		}
 		return( $leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ );
@@ -1047,7 +1053,7 @@ $			if( ! anyMissing ) {
 	@Override
 	public List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj&gt; get$OptionalOrRequired$$RelationTypeTag$$Suffix$() {
 		List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj&gt; retval;
-		retval = ((I$SchemaName$SchemaObj)schema).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToIndex Suffix$( $iterate Columns( first implObjRelationAccessorsPassArg each implObjRelationAccessorsCommaPassArg empty empty )$,
+		retval = ((I$SchemaName$SchemaObj)getSchema()).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToIndex Suffix$( $iterate Columns( first implObjRelationAccessorsPassArg each implObjRelationAccessorsCommaPassArg empty empty )$,
 			false );
 		return( retval );
 	}
@@ -1055,7 +1061,7 @@ $			if( ! anyMissing ) {
 	@Override
 	public List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj&gt; get$OptionalOrRequired$$RelationTypeTag$$Suffix$( boolean forceRead ) {
 		List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj&gt; retval;
-		retval = ((I$SchemaName$SchemaObj)schema).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToIndex Suffix$( $iterate Columns( first implObjRelationAccessorsPassArg each implObjRelationAccessorsCommaPassArg empty empty )$,
+		retval = ((I$SchemaName$SchemaObj)getSchema()).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToIndex Suffix$( $iterate Columns( first implObjRelationAccessorsPassArg each implObjRelationAccessorsCommaPassArg empty empty )$,
 			forceRead );
 		return( retval );
 	}
@@ -1065,7 +1071,7 @@ $			if( ! anyMissing ) {
 	@Override
 	public List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj&gt; get$OptionalOrRequired$$RelationTypeTag$$Suffix$() {
 		List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj&gt; retval;
-		retval = ((I$SchemaName$SchemaObj)schema).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToIndex Suffix$( $reference FromTable reference PrimaryKeyIndex iterate Columns( lone implObjRelationAccessorsPassPKeyDirect first implObjRelationAccessorsPassPKeyArg each implObjRelationAccessorsCommaPassPKeyArg empty empty )$,
+		retval = ((I$SchemaName$SchemaObj)getSchema()).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToIndex Suffix$( $reference FromTable reference PrimaryKeyIndex iterate Columns( lone implObjRelationAccessorsPassPKeyDirect first implObjRelationAccessorsPassPKeyArg each implObjRelationAccessorsCommaPassPKeyArg empty empty )$,
 			false );
 		return( retval );
 	}
@@ -1073,7 +1079,7 @@ $			if( ! anyMissing ) {
 	@Override
 	public List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj&gt; get$OptionalOrRequired$$RelationTypeTag$$Suffix$( boolean forceRead ) {
 		List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj&gt; retval;
-		retval = ((I$SchemaName$SchemaObj)schema).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToIndex Suffix$( $reference FromTable reference PrimaryKeyIndex iterate Columns( lone implObjRelationAccessorsPassPKeyDirect first implObjRelationAccessorsPassPKeyArg each implObjRelationAccessorsCommaPassPKeyArg empty empty )$,
+		retval = ((I$SchemaName$SchemaObj)getSchema()).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToIndex Suffix$( $reference FromTable reference PrimaryKeyIndex iterate Columns( lone implObjRelationAccessorsPassPKeyDirect first implObjRelationAccessorsPassPKeyArg each implObjRelationAccessorsCommaPassPKeyArg empty empty )$,
 			forceRead );
 		return( retval );
 	}
@@ -1217,7 +1223,7 @@ $			if( ! anyMissing ) {
 	@Override
 	public $ICompactedPrimaryIndexClass$ getPKey() {
 		if( pKey == null ) {
-			pKey = ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$TableName$().newPKey();
+			pKey = ((I$DefSchemaName$Schema)(getSchema().getBackingStore())).getFactory$TableName$().newPKey();
 		}
 		return( pKey );
 	}
@@ -1234,7 +1240,7 @@ $			if( ! anyMissing ) {
 	<GenRule GenDef="Table" Name="implObjRealise">
 	@Override
 	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$Obj realise() {
-		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().realise$TableName$(
+		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().realise$TableName$(
 			(I$DefSchemaName$$TableName$Obj)this );
 		return( (I$reference BaseClass DefSchemaName$$reference BaseClass TableName$Obj)retobj );
 	}
@@ -1243,7 +1249,7 @@ $			if( ! anyMissing ) {
 	<GenRule GenDef="Table" Name="implObjForget">
 	@Override
 	public void forget() {
-		((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().reallyDeepDispose$TableName$( (I$DefSchemaName$$TableName$Obj)this );
+		((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().reallyDeepDispose$TableName$( (I$DefSchemaName$$TableName$Obj)this );
 	}
 </GenRule>
 
@@ -1257,7 +1263,7 @@ $			if( ! anyMissing ) {
 	 */
 	@Override
 	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$Obj create() {
-		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().create$TableName$( this );
+		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().create$TableName$( this );
 		return( retobj );
 	}
 </GenRule>
@@ -1265,13 +1271,13 @@ $			if( ! anyMissing ) {
 	<GenRule GenDef="Table" Name="implObjRead">
 	@Override
 	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$Obj read() {
-		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().read$TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$( $reference PrimaryKeyIndex iterate Columns( lone implObjReadPassPKeyDirect first implObjReadPassPKeyArg each implObjReadCommaPassPKeyArg )$, false );
+		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().read$TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$( $reference PrimaryKeyIndex iterate Columns( lone implObjReadPassPKeyDirect first implObjReadPassPKeyArg each implObjReadCommaPassPKeyArg )$, false );
 		return( (I$reference BaseClass DefSchemaName$$reference BaseClass TableName$Obj)retobj );
 	}
 
 	@Override
 	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$Obj read( boolean forceRead ) {
-		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().read$TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$( $reference PrimaryKeyIndex iterate Columns( lone implObjReadPassPKeyDirect first implObjReadPassPKeyArg each implObjReadCommaPassPKeyArg )$, forceRead );
+		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().read$TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$( $reference PrimaryKeyIndex iterate Columns( lone implObjReadPassPKeyDirect first implObjReadPassPKeyArg each implObjReadCommaPassPKeyArg )$, forceRead );
 		return( (I$reference BaseClass DefSchemaName$$reference BaseClass TableName$Obj)retobj );
 	}
 </GenRule>
@@ -1281,7 +1287,7 @@ $			if( ! anyMissing ) {
 	<GenRule GenDef="Table" Name="implObjMoveUp">
 	@Override
 	public I$reference BaseClass DefSchemaName$$reference Chain reference Table TableName$Obj moveUp() {
-		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().moveUp$TableName$( this );
+		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().moveUp$TableName$( this );
 		return( (I$DefSchemaName$$reference Chain reference Table TableName$Obj)retobj );
 	}
 </GenRule>
@@ -1289,7 +1295,7 @@ $			if( ! anyMissing ) {
 	<GenRule GenDef="Table" Name="implObjMoveDown">
 	@Override
 	public I$reference BaseClass DefSchemaName$$reference Chain reference Table TableName$Obj moveDown() {
-		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().moveDown$TableName$( this );
+		I$DefSchemaName$$TableName$Obj retobj = ((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().moveDown$TableName$( this );
 		return( (I$DefSchemaName$$reference Chain reference Table TableName$Obj)retobj );
 	}
 </GenRule>
@@ -1302,14 +1308,14 @@ $			if( ! anyMissing ) {
 	<GenRule GenDef="Table" Name="implObjUpdate">
 	@Override
 	public void update() {
-		((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().update$TableName$( this );
+		((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().update$TableName$( this );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implObjDelete">
 	@Override
 	public void deleteInstance() {
-		((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().delete$TableName$( this );
+		((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().delete$TableName$( this );
 	}
 </GenRule>
 
@@ -1350,11 +1356,11 @@ $			if( ! anyMissing ) {
 	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ getRec() {
 		if( rec == null ) {
 			if( isNew ) {
-				rec = ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$TableName$().newRec();
+				rec = ((I$DefSchemaName$Schema)(getSchema().getBackingStore())).getFactory$TableName$().newRec();
 			}
 			else {
 				// Read the data rec via the backing store
-				rec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$( ((I$SchemaName$SchemaObj)schema).getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implObjTableDataAccessorsCommaPassPKeyDirect each implObjTableDataAccessorsCommaPassArg empty empty )$ );
+				rec = ((I$DefSchemaName$Schema)(getSchema().getBackingStore())).getTable$TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$( ((I$SchemaName$SchemaObj)getSchema()).getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implObjTableDataAccessorsCommaPassPKeyDirect each implObjTableDataAccessorsCommaPassArg empty empty )$ );
 				if( rec != null ) {
 					copyRecToPKey();
 				}

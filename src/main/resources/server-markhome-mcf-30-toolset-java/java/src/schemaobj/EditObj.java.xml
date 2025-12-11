@@ -63,12 +63,24 @@ import org.apache.commons.text.StringEscapeUtils;import org.apache.commons.text.
 
 public class $SchemaName$$TableName$EditObj$switch HasSuperClassRelation yes implEditObjInheritSuperClass default empty$
 	implements I$SchemaName$$TableName$EditObj
-{$switch HasSuperClassRelation no declEditObjAttrOrig default empty$$switch HasSuperClassRelation no implEditObjTableRecAttr default empty$$switch HasSuperClassRelation no declObjAttrOptAuditColumns default empty$$iterate Relation( each implEditObjRelationAttr empty empty )$$JavaEditObjMembers$
+{$switch HasSuperClassRelation no declEditObjAttrOrig default empty$$switch HasSuperClassRelation no implEditObjTableRecAttr default empty$$switch HasSuperClassRelation no declObjAttrOptAuditColumns default empty$$iterate Relation( each implObjRelationAttr empty empty )$$JavaEditObjMembers$
 
 	public $SchemaName$$TableName$EditObj( I$DefSchemaName$$TableName$Obj argOrig ) {$switch HasSuperClassRelation yes implEditObjConstructorInvokeSuperOrig default empty$$switch HasSuperClassRelation no implEditObjConstructorInitOrigAndCopy default empty$$iterate Relation( each implEditObjConstructorInitRelationAttr empty empty )$
 	}
 $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$implEditObjMethods$$JavaEditObjImplementation$}
 </GenFile>
+
+	<GenRule GenDef="Table" Name="implEditObjSchemaAccessors">
+	@Override
+	public I$DefSchemaName$SchemaObj getSchema() {
+		return( orig.getSchema() );
+	}
+
+	@Override
+	public void setSchema( I$DefSchemaName$SchemaObj value ) {
+		orig.setSchema(value);
+	}
+</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjOptSetAuditColumns"
 		>$switch HasAuditColumns yes implEditObjSetAuditColumns default empty$</GenRule>
@@ -212,13 +224,6 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implEditObjSchemaAccessors">
-	@Override
-	public I$DefSchemaName$SchemaObj getSchema() {
-		return( orig.getSchema() );
-	}
-</GenRule>
-
 	<GenRule GenDef="Table" Name="implEditObjTableAccessors">
 	@Override
 	public I$DefSchemaName$$TableName$TableObj get$TableName$Table() {
@@ -258,7 +263,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 		>$switch RelationTypeTag Superclass empty default implEditObjRelationSingletonAccessors$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeImplEditObjRelationCollectionAccessors"
-		>$switch RelationTypeTag Superclass empty default implEditObjRelationCollectionAccessors$</GenRule>
+		>$switch RelationTypeTag Superclass empty default implObjRelationCollectionAccessors$</GenRule>
 
 	<GenRule GenDef="Object" Name="implEditObjRelationJavaOptional">?</GenRule>
 
@@ -424,7 +429,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 			boolean anyMissing = false;
 $iterate Columns( each implEditObjRelationAccessorCheckIfColumnProvided empty empty )
 $			if( ! anyMissing ) {
-				I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj obj = ((I$SchemaName$SchemaObj)getOrigAs$TableName$().getSchema()).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToIndex Suffix$( $iterate Columns( first implEditObjRelationAccessorsPassArg each implEditObjRelationAccessorsCommaPassArg empty empty )$ );
+				I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj obj = ((I$SchemaName$SchemaObj)getOrigAs$TableName$().getSchema()).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToIndex Suffix$( $iterate Columns( first implObjRelationAccessorsPassArg each implObjRelationAccessorsCommaPassArg empty empty )$ );
 				$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = obj;$switch RelationTypeTag Container implEditObjRelationSingletonGetRestoreObj default empty$
 			}
 		}
@@ -555,6 +560,7 @@ $			}</GenRule>
 			setPKey($leadlower Name$);
 $switch ColumnInAnyRelation yes implEditObjColumnRWDataAccessorClearRelations default empty
 $		}
+	}
 </GenRule>
 
 	<GenRule GenDef="Atom" Name="implPKeyEditObjColumnAccessorsDirect">
@@ -771,7 +777,9 @@ $		}
 
 	<GenRule GenDef="Table" Name="implEditObjCopyPKeyToRec">
 	@Override
-	public void copyPKeyToRec() {$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implEditObjCopyPKeyAttrToRec empty empty )$
+	public void copyPKeyToRec() {
+		if( rec != null ) {$reference PrimaryKeyIndex iterate Columns( lone implCopyPKeyDirectToRec each implObjCopyPKeyAttrToRec empty empty )$
+		}
 	}
 </GenRule>
 
@@ -780,7 +788,7 @@ $		}
 
 	<GenRule GenDef="Table" Name="implEditObjCopyRecToPKey">
 	@Override
-	public void copyRecToPKey() {$switch HasClassCode yes implEditObjCopyRecClassCodeToPKey default empty$$reference PrimaryKeyIndex iterate Columns( each implObjCopyRecAttrToPKey empty empty )$
+	public void copyRecToPKey() {$switch HasClassCode yes implObjCopyRecClassCodeToPKey default empty$$reference PrimaryKeyIndex iterate Columns( lone implObjCopyRecAttrDirectToPKey each implObjCopyRecAttrToPKey empty empty )$
 	}
 </GenRule>
 

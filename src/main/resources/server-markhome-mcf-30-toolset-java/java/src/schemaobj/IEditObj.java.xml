@@ -63,10 +63,15 @@ import org.apache.commons.text.StringEscapeUtils;import org.apache.commons.text.
 
 public interface I$SchemaName$$TableName$EditObj
 	extends $switch HasSuperClassRelation yes emitEditObjSuperAndSchemaTableObj default emitEditObjSchemaTableObj$$iterate TableRefs( each alsoExtendReferenceIEditObj empty empty )$
-{$switch HasSuperClassRelation yes empty default declIEditObjOrigIfNoDefSchema$$declIEditObjOrigAsCast$$switch HasSuperClassRelation yes empty default declIEditObjCreate$$switch HasSuperClassRelation yes empty default declIEditObjUpdate$$switch HasSuperClassRelation yes empty default declIEditObjDelete$$switch HasSuperClassRelation yes empty default declIEditObjOptAuditAccessors$$switch HasDefSchema yes empty default declIEditObjColumnAccessors$$iterate Relation( each declIEditObjRelationAccessors empty empty )$$JavaEditObjInterface$
+{$switch HasSuperClassRelation yes empty default declIEditObjOrigIfNoDefSchema$$declIEditObjOrigAsCast$$switch HasSuperClassRelation yes empty default declIEditObjCreate$$switch HasSuperClassRelation yes empty default declIEditObjUpdate$$switch HasSuperClassRelation yes empty default declIEditObjDelete$$switch HasSuperClassRelation yes empty default declIEditObjOptAuditAccessors$$switch HasDefSchema yes empty default declIEditObjColumnAccessors$$iterate Relation( each declIEditObjRelationAccessors empty empty )$$switch HasSuperClassRelation yes empty default declCopyRecsAround$$JavaEditObjInterface$
 }
 </GenFile>
 
+	<GenRule GenDef="Table" Name="declCopyRecsAround">
+	public void copyRecToOrig();
+	public void copyOrigToRec();
+</GenRule>
+	
 	<GenRule GenDef="Table" Name="emitEditObjSuperAndSchemaTableObj">I$reference SuperClassRelation reference ToTable SchemaName$$reference SuperClassRelation reference ToTable TableName$EditObj, I$SchemaName$$TableName$Obj</GenRule>
 	<GenRule GenDef="Table" Name="emitEditObjSchemaTableObj">I$SchemaName$$TableName$Obj</GenRule>
 	<GenRule GenDef="Table" Name="emitEditObjAlsoExtendBaseIEditObj">, I$DefSchemaName$$TableName$EditObj</GenRule>
@@ -139,9 +144,9 @@ public interface I$SchemaName$$TableName$EditObj
 </GenRule>
 
 	<GenRule GenDef="TableCol" Name="declIEditObjBaseColumnAccessors"
-		>$switch ColumnInPrimaryIndex yes declIEditObjPKeyAccessors default declIEditObjColumnDataAccessor$</GenRule>
+		>$switch ColumnInPrimaryIndex yes declIEditObjColumnRWDataAccessor default declIEditObjColumnDataAccessor$</GenRule>
 	<GenRule GenDef="Atom" Name="declIEditObjBaseColumnAccessors"
-		>$switch ColumnInPrimaryIndex yes declIEditObjPKeyAccessors default declIEditObjColumnDataAccessor$</GenRule>
+		>$switch ColumnInPrimaryIndex yes declIEditObjColumnRWDataAccessor default declIEditObjColumnDataAccessor$</GenRule>
 
 	<GenRule GenDef="TableCol" Name="declIEditObjPKeyAccessors"
 		>$switch ColumnInAnyRelation yes empty default declIEditObjPKeyNonGenAccessors$</GenRule>
