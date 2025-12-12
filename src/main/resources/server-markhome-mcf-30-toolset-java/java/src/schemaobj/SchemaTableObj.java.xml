@@ -104,7 +104,13 @@ public class $SchemaName$$TableName$TableObj
 		return $DefSchemaName$$TableName$TableObj.backingClassCode;
 	}
 
-	public static int setRuntimeClassCode(int runtimeClassCode ) {
+	/**
+	 *	Set the runtime class code for this table; this is done only during application initialization, one schema at a time.
+	 *	Application programmers should never invoke this method.
+	 *
+	 *	@param	runtimeClassCode	The runtime class code to be used by clients and integrated application logic to identify this table of this schema.
+	 */
+	public static void setRuntimeClassCode(int runtimeClassCode ) {
 		$DefSchemaName$$TableName$TableObj.runtimeClassCode = runtimeClassCode;
 	}
 $implSchemaTableObjMethods$$implNewInstance$$implNewEditInstance$$switch IsBaseTable yes implConstructByClassCode default empty$$implRealiseObj$$implCreateObj$$implReadObjByPKey$$implReadCachedObjByPKey$$implReallyDeepDisposeTable$$implDeepDisposeObjByPKey$$implLockObjByPKey$$implReadAllObj$$implReadCachedAllObj$$switch PageData yes implPageAllObj default empty$$implTableObjReadByIndexes$$implTableObjReadCachedByIndexes$$implTableObjDeepDisposeByIndexes$$switch PageData yes implTableObjPageByIndex default empty$$implUpdateObj$$implDeleteObj$$implTableObjDeleteByIndexes$$switch HasChain yes implTableObjMoveUp default empty$$switch HasChain yes implTableObjMoveDown default empty$$iterate ServerMethods( each implJavaTableObjServerMethod empty empty )$$JavaTableObjImplementation$}</GenRule>
@@ -128,7 +134,7 @@ $implSchemaTableObjMethods$$implNewInstance$$implNewEditInstance$$switch IsBaseT
 		ArrayList&lt;I$DefSchemaName$$TableName$Obj&gt; arrayList = new ArrayList&lt;I$DefSchemaName$$TableName$Obj&gt;( recList.length );
 		for( int idx = 0; idx &lt; recList.length; idx ++ ) {
 			rec = recList[ idx ];$switch HasClassCode yes implReadAllObjConsObjByClassCode default implReadAllObjConsObj$
-			obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
+			obj.setPKey( rec.getPKey() );
 			obj.setRec( rec );
 			realised = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			arrayList.add( realised );
@@ -245,7 +251,7 @@ $implReadAllObjComparator$
 		I$reference RetTable DefSchemaName$$reference RetTable Name$Obj retobj = null;
 		$reference RetTable DefSchemaName$$reference RetTable Name$Rec readRec = ((I$poptop SchemaDef SchemaName$$TableName$Table)((I$poptop SchemaDef SchemaName$Schema)(schema.getBackingStore())).getTable$TableName$()).$leadlower Name$( ((I$poptop SchemaDef SchemaName$SchemaObj)schema)$iterate Params( each passServerMethodParam empty empty )$ );
 		if( readRec != null ) {$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
-			retobj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference RetTable reference BaseClass TableName$().newPKey() );
+			retobj.setPKey( readRec.getPKey() );
 			retobj.setRec( readRec );
 			retobj = (I$DefSchemaName$$reference RetTable TableName$Obj)retobj.realise();
 		}
@@ -267,7 +273,7 @@ $implReadAllObjComparator$
 		$DefSchemaName$$reference RetTable Name$Rec readRec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().$leadlower Name$( schema,
 			obj$iterate Params( each passServerMethodParam empty empty )$ );
 		if( readRec != null ) {$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
-			retobj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference RetTable reference BaseClass TableName$().newPKey() );
+			retobj.setPKey( readRec.getPKey() );
 			retobj.setRec( readRec );
 			retobj = (I$DefSchemaName$$reference RetTable TableName$Obj)retobj.realise();
 		}
@@ -292,7 +298,7 @@ $implReadAllObjComparator$
 		int sz = readArray.length;
 		for( int i = 0; i &lt; sz; i ++ ) {
 			readRec = readArray[i];$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
-			retobj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference RetTable reference BaseClass TableName$().newPKey() );
+			retobj.setPKey( readRec.getPKey() );
 			retobj.setRec( readRec );
 			retobj = (I$DefSchemaName$$reference RetTable TableName$Obj)retobj.realise();
 			list.add( retobj );
@@ -316,7 +322,7 @@ $implReadAllObjComparator$
 		int sz = readArray.length;
 		for( int i = 0; i &lt; sz; i ++ ) {
 			readRec = readArray[i];$reference RetTable switch HasClassCode yes implJavaTableObjServerMethodConsObjByClassCode default implJavaTableObjServerMethodConsObj$
-			retobj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference RetTable reference BaseClass TableName$().newPKey() );
+			retobj.setPKey( readRec.getPKey() );
 			retobj.setRec( readRec );
 			retobj = (I$reference RetTable DefSchemaName$$reference RetTable TableName$Obj)retobj.realise();
 			list.add( retobj );
@@ -863,7 +869,7 @@ $implTableObjIndexAddToIndexes$
 			I$DefSchemaName$$TableName$Obj obj;
 			for( int idx = 0; idx &lt; recList.length; idx ++ ) {
 				rec = recList[ idx ];$switch HasClassCode yes implReadAllObjConsObjByClassCode default implReadAllObjConsObj$
-				obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
+				obj.setPKey( rec.getPKey() );
 				obj.setRec( rec );
 				I$DefSchemaName$$TableName$Obj realised = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			}
@@ -961,9 +967,9 @@ $implReadAllObjComparator$
 			obj = members.get( pkey );
 		}
 		else {
-			I$DefSchemaName$$TableName$ readRec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implReadObjByPKeyCommaPassArg empty empty )$ );
+			I$DefSchemaName$$TableName$ readRec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implTableObjTableDataAccessorsCommaPassPKeyDirect each implTableObjTableDataAccessorsCommaPassArg empty empty )$ );
 			if( readRec != null ) {$switch HasClassCode yes implReadObjByPKeyConsObjByClassCode default implReadObjByPKeyConsObj$
-				obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
+				obj.setPKey( readRec.getPKey() );
 				obj.setRec( readRec );
 				obj = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			}
@@ -972,14 +978,26 @@ $implReadAllObjComparator$
 	}
 </GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implTableObjTableDataAccessorsCommaPassPKeyDirect">$switch ColumnInPrimaryIndex yes implTableObjTableDataAccessorsPKeyDirect default implTableObjTableDataAccessorsCommaPassArg$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implTableObjTableDataAccessorsPKeyDirect">,
+						pkey</GenRule>
+	
+	<GenRule GenDef="IndexCol" Name="implTableObjTableDataAccessorsCommaPassArg">,
+						$switch ColumnInPrimaryIndex yes implTableObjTableDataAccessorsPKey default implTableObjTableDataAccessorsData$.get$OptionalOrRequired$$Name$()</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implTableObjTableDataAccessorsPKey">pkey</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implTableObjTableDataAccessorsRec">rec</GenRule>
+
 	<GenRule GenDef="Table" Name="implLockObjByPKey">
 	@Override
 	public I$DefSchemaName$$TableName$Obj lock$TableName$( $ICompactedPrimaryIndexClass$ pkey ) {
 		I$DefSchemaName$$TableName$Obj locked = null;
 		I$DefSchemaName$$TableName$ lockRec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().lockDerived( schema.getAuthorization(), pkey );
 		if( lockRec != null ) {$switch HasClassCode yes implLockObjByPKeyConsLockedByClassCode default implLockObjByPKeyConsLocked$
-			locked.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
 			locked.setRec( lockRec );
+			locked.setPKey( lockRec.getPKey() );
 			locked = (I$DefSchemaName$$TableName$Obj)locked.realise();
 		}
 		else {
@@ -1098,8 +1116,8 @@ $implReadAllObjComparator$
 		else {
 			I$DefSchemaName$$TableName$ rec = ((I$SchemaName$Schema)schema.getBackingStore()).getTable$TableName$().readDerivedBy$Suffix$( schema.getAuthorization()$iterate Columns( each implReadObjByIndexCommaPassArg empty empty )$ );
 			if( rec != null ) {$switch HasClassCode yes implReadObjByAltIdxConsObjByClassCode default implReadObjByAltIdxConsObj$
-				obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference Table reference BaseClass TableName$().newPKey() );
 				obj.setRec( rec );
+				obj.setPKey( rec.getPKey() );
 				obj = (I$DefSchemaName$$poptop Table TableName$Obj)obj.realise();
 			}
 		}</GenRule>
@@ -1197,7 +1215,7 @@ $implReadAllObjComparator$
 			I$DefSchemaName$$TableName$ rec;
 			for( int idx = 0; idx &lt; recList.length; idx ++ ) {
 				rec = recList[ idx ];$switch HasClassCode yes implReadObjByDupIdxConsObjByClassCode default implReadObjByDupIdxConsObj$
-				obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference Table reference BaseClass TableName$().newPKey() );
+				obj.setPKey( rec.getPKey() );
 				obj.setRec( rec );
 				I$DefSchemaName$$poptop Table TableName$Obj realised = (I$DefSchemaName$$poptop Table TableName$Obj)obj.realise();
 				dict.put( realised.getPKey(), realised );
@@ -1212,7 +1230,7 @@ $implReadAllObjComparator$
 		I$DefSchemaName$$TableName$ rec;
 		for( int idx = 0; idx &lt; recList.length; idx ++ ) {
 			rec = recList[ idx ];$switch HasClassCode yes implReadObjByDupIdxConsObjByClassCode default implReadObjByDupIdxConsObj$
-			obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference Table reference BaseClass TableName$().newPKey() );
+			obj.setPKey( rec.getPKey() );
 			obj.setRec( rec );
 			I$DefSchemaName$$poptop Table TableName$Obj realised = (I$DefSchemaName$$poptop Table TableName$Obj)obj.realise();
 			retList.add( realised );
@@ -1352,7 +1370,7 @@ $implReadAllObjComparator$
 			I$DefSchemaName$$TableName$ rec;
 			for( int idx = 0; idx &lt; recList.length; idx ++ ) {
 				rec = recList[ idx ];$switch HasClassCode yes implReadObjByDupIdxConsObjByClassCode default implReadObjByDupIdxConsObj$
-				obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference Table reference BaseClass TableName$().newPKey() );
+				obj.setPKey( rec.getPKey() );
 				obj.setRec( rec );
 				I$DefSchemaName$$TableName$Obj realised = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			}
@@ -1398,7 +1416,7 @@ $implReadAllObjComparator$
 			Obj.getRec().getRequiredRevision() );
 		if( rec != null ) {
 			obj = schema.get$TableName$TableObj().newInstance();
-			obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
+			obj.setPKey( rec.getPKey() );
 			obj.setRec( rec );
 			obj = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$Obj prev = obj.get$reference Chain reference PrevRel OptionalOrRequired$$reference Chain reference PrevRel RelationTypeTag$$reference Chain reference PrevRel Suffix$( true );
@@ -1429,7 +1447,7 @@ $implReadAllObjComparator$
 			Obj.getRec().getRequiredRevision() );
 		if( rec != null ) {
 			obj = schema.get$TableName$TableObj().newInstance();
-			obj.setPKey( ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$reference BaseClass TableName$().newPKey() );
+			obj.setPKey( rec.getPKey() );
 			obj.setRec( rec );
 			obj = (I$DefSchemaName$$TableName$Obj)obj.realise();
 			I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$Obj prev = obj.get$reference Chain reference PrevRel OptionalOrRequired$$reference Chain reference PrevRel RelationTypeTag$$reference Chain reference PrevRel Suffix$( true );
@@ -1529,10 +1547,8 @@ $implReadAllObjComparator$
 	}
 </GenRule>
 
-<GenRule GenDef="Index" Name="implTableObjDeleteByUniqueIndexPKey">$switch IsPrimaryIndexKeyAtomic yes implTableObjDeleteByUniqueIndexDirectPKey default implTableObjDeleteByUniqueIndexDerefPKey$</GenRule>
-<GenRule GenDef="Index" Name="implTableObjDeleteByUniqueIndexDerefPKey">
-		I$reference Table reference BaseClass DefSchemaName$$poptop Table reference BaseClass TableName$PKey pkey = ((I$SchemaName$Schema)schema.getBackingStore()).getFactory$poptop Table reference BaseClass TableName$().newPKey();$iterate Columns( each implReadObjByUniqueIndexCopyArgToPKey )$
-		I$poptop Table DefSchemaName$$poptop Table TableName$Obj obj = read$poptop Table TableName$( pkey );
+	<GenRule GenDef="Index" Name="implTableObjDeleteByUniqueIndexPKey">
+		I$poptop Table DefSchemaName$$poptop Table TableName$Obj obj = read$poptop Table TableName$($iterate Columns( first implReadObjByIndexPassArg each implReadObjByIndexCommaPassArg )$);
 		if( obj != null ) {
 			I$poptop Table DefSchemaName$$poptop Table TableName$EditObj editObj = (I$poptop Table DefSchemaName$$poptop Table TableName$EditObj)obj.getEdit();
 			boolean editStarted;
@@ -1557,7 +1573,7 @@ $implReadAllObjComparator$
 			obj.forget();
 		}</GenRule>
 <GenRule GenDef="Index" Name="implTableObjDeleteByUniqueIndexDirectPKey">
-		I$poptop Table DefSchemaName$$poptop Table TableName$Obj obj = read$poptop Table TableName$( pkey );
+		I$poptop Table DefSchemaName$$poptop Table TableName$Obj obj = read$poptop Table TableName$($iterate Columns( first implReadObjByIndexPassArg each implReadObjByIndexCommaPassArg )$);
 		if( obj != null ) {
 			I$poptop Table DefSchemaName$$poptop Table TableName$EditObj editObj = (I$poptop Table DefSchemaName$$poptop Table TableName$EditObj)obj.getEdit();
 			boolean editStarted;

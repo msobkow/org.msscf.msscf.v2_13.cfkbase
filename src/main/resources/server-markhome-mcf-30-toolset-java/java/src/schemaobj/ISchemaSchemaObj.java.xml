@@ -63,7 +63,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$importJavaPackageSchemaName$$JavaSchemaObjImport$$ReferencedJavaSchemaObjImport$
 
 public interface I$SchemaName$SchemaObj$iterate SchemaRefs( first extendISchemaSchemaObj each commaNewlineISchemaSchemaObj empty empty )$
-{$iterate SchemaRefs( each empty empty declISchemaSchemaObj )$$iterate SchemaRefs( each empty empty declISchemaSchemaObjGetSetDbSchemaNameMethods )$$iterate SchemaRefs( each empty empty declISchemaSchemaObjTransactionMethods )$$iterate SchemaRefs( each empty empty declISchemaSchemaObjReleasePreparedStatements )$$iterate SchemaTables( each declISchemaSchemaObjTableObjAccessors empty empty )$$JavaSchemaObjInterface$$ReferencedJavaSchemaObjInterface$}
+{$iterate SchemaRefs( each empty empty declISchemaSchemaObj )$$iterate SchemaTables( each declISchemaSchemaObjTableObjAccessors empty empty )$$JavaSchemaObjInterface$$ReferencedJavaSchemaObjInterface$}
 </GenFile>
 
 	<GenRule GenDef="SchemaRef" Name="extendISchemaSchemaObj">
@@ -135,30 +135,6 @@ public interface I$SchemaName$SchemaObj$iterate SchemaRefs( first extendISchemaS
 	 *	&lt;tt&gt;setDbSchemaName()&lt;/tt&gt;.
 	 */
 	void releasePreparedStatements();</GenRule>
-
-	<GenRule GenDef="Object" Name="declISchemaSchemaObjGetSetDbSchemaNameMethods">
-	/**
-	 *	When you first connect to a database, you can opt to specify a database
-	 *	name to be used by the session.
-	 */
-	String getDbSchemaName();
-
-	/**
-	 *	PostgreSQL coerces database schema names to lowercase for consistency.
-	 */
-	String getLowerDbSchemaName();
-
-	/**
-	 *	When you set the database name, the database-specific implementation
-	 *	of this method does a "commit; use database"-type sequence to change
-	 *	to the target database.  This should be specified globally for all
-	 *	database connections in a given cluster, so that all of
-	 *	the application implementation clients are using the same database instance
-	 *	regardless of what's been provided by the cust client implementation,
-	 *	be it as a Java application or a web interface written using JEE.
-	 */
-	void setDbSchemaName( String argDbSchemaName );
-</GenRule>
 
 	<GenRule GenDef="Object" Name="declISchemaSchemaObjTransactionMethods">
 	/**
