@@ -76,7 +76,7 @@ $implSchemaObjGetSetSecCluster$$implSchemaObjGetSetSecTenant$$implSchemaObjGetSe
 	public static String SCHEMA_DBNAME = "$lower DbSchemaName$";</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="declSchemaObjMembers">
-	protected $SecSchemaName$Authorization authorization = null;
+	protected I$SecSchemaName$Authorization authorization = null;
 	protected I$SecSchemaName$Schema backingStore = null;
 	protected String secClusterName = "system";
 	protected String secTenantName = "system";
@@ -318,178 +318,24 @@ $iterate SchemaTables( each declSchemaSchemaObjTableObjMember empty empty )$$Jav
 </GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSchemaObjMethods">
-	public $SecSchemaName$Authorization getAuthorization() {
+	public I$SecSchemaName$Authorization getAuthorization() {
 		return( authorization );
 	}
 
-	public void setAuthorization( $SecSchemaName$Authorization value ) {
+	public void setAuthorization( I$SecSchemaName$Authorization value ) {
 		authorization = value;
 	}
 
-	public I$SecSchemaName$Schema getBackingStore() {
+	public I$DefSchemaName$Schema getBackingStore() {
 		return( backingStore );
 	}
 
-	public void setBackingStore( I$SecSchemaName$Schema value ) {
+	public void setBackingStore( I$DefSchemaName$Schema value ) {
 		backingStore = value;
 	}
 
 	public String getSchemaName() {
 		return( SCHEMA_NAME );
-	}
-
-	public boolean isConnected() {
-		if( backingStore == null ) {
-			return( false );
-		}
-		else {
-			return( backingStore.isConnected() );
-		}
-	}
-
-	public boolean connect() {
-		return( backingStore.connect() );
-	}
-
-	public boolean connect( String username, String password ) {
-		return( backingStore.connect( username, password ) );
-	}
-
-	public boolean connect( String clusterName, String tenantName, String secUserName, String password ) {
-		final String S_ProcName = "connect-full";$implSchemaSchemaConnectAuthUserPWCheckArgs$
-		if( ! backingStore.connect( secUserName, password, clusterName, tenantName ) ) {
-			authorization = null;
-			return( false );
-		}
-		if( authorization != null ) {
-			// The login was established as an XMsg client, which automatically sets the Authorization
-			// information based on the return message.  You only need to do the remaining SecSession
-			// and authorization creation if you're using a direct client-server model instead of
-			// an XMsg client-server model.
-			setSecClusterName( clusterName );
-			setSecTenantName( tenantName );
-			setSecUserName( secUserName );
-			return( true );
-		}
-
-		if( clusterName.equals( "system" )
-		 &amp;&amp; tenantName.equals( "system" )
-		 &amp;&amp; secUserName.equals( "system" ) )
-		{
-			if( secCluster == null ) {
-				secCluster = getClusterTableObj().newInstance();
-				I$SecSchemaName$ClusterEditObj editCluster = secCluster.getEdit();
-				if( editCluster == null ) {
-					editCluster = secCluster.beginEdit();
-					editCluster.setRequiredDescription( "system" );
-					editCluster.setRequiredFullDomName( "system" );
-					secCluster = editCluster.create();
-					editCluster = null;
-				}
-			}
-			if( secTenant == null ) {
-				secTenant = getTenantTableObj().newInstance();
-				I$SecSchemaName$TenantEditObj editTenant = secTenant.getEdit();
-				if( editTenant == null ) {
-					editTenant = secTenant.beginEdit();
-					editTenant.setRequiredContainerCluster( secCluster);
-					editTenant.setRequiredTenantName( "system" );
-					secTenant = editTenant.create();
-					editTenant = null;
-				}
-			}
-			if( secUser == null ) {
-				secUser = getSecUserTableObj().newInstance();
-				I$SecSchemaName$SecUserEditObj editSecUser = secUser.getEdit();
-				if( editSecUser == null ) {
-					editSecUser = secUser.beginEdit();
-					editSecUser.setRequiredEMailAddress( "system" );
-					editSecUser.setRequiredLoginId( "system" );
-					secUser = editSecUser.create();
-					editSecUser = null;
-				}
-			}
-			setSecClusterName( clusterName );
-			setSecTenantName( tenantName );
-			setSecUserName( secUserName );
-			secCluster = null;
-			secTenant = null;
-			secUser = null;
-			secSession = null;
-			I$SecSchemaName$ClusterObj cluster = getSecCluster();
-			I$SecSchemaName$TenantObj tenant = getSecTenant();
-			I$SecSchemaName$SecUserObj user = getSecUser();
-			I$SecSchemaName$SecSessionObj session;
-			if( ( cluster != null ) &amp;&amp; ( tenant != null ) &amp;&amp; ( user != null ) ) {
-				session = getSecSessionTableObj().newInstance();
-				I$SecSchemaName$SecSessionEditObj sessionEdit = session.beginEdit();
-				sessionEdit.setRequiredContainerSecUser( user );
-				sessionEdit.setRequiredStart( Calendar.getInstance() );
-				sessionEdit.setOptionalFinish( null );
-				session = sessionEdit.create();
-				sessionEdit = null;
-				setSecSession( session );
-			}
-			else {
-				session = null;
-			}
-			if( ( cluster == null ) || ( tenant == null ) || ( user == null ) || ( session == null ) ) {
-				disconnect( false );
-				authorization = null;
-				throw new CFLibRuntimeException( getClass(),
-					S_ProcName,
-					"Could not resolve cluster name, tenant name, user name, or session.  Login cancelled" );
-			}
-			if( authorization == null ) {
-				authorization = new $SecSchemaName$Authorization();
-			}
-			authorization.setSecCluster( cluster );
-			authorization.setSecTenant( tenant );
-			authorization.setSecSession( session );
-			return( true );
-		}
-		setSecClusterName( clusterName );
-		setSecTenantName( tenantName );
-		setSecUserName( secUserName );
-		boolean transactionStarted = beginTransaction();
-		secCluster = null;
-		secTenant = null;
-		secUser = null;
-		secSession = null;
-		I$SecSchemaName$ClusterObj cluster = getSecCluster();
-		I$SecSchemaName$TenantObj tenant = getSecTenant();
-		I$SecSchemaName$SecUserObj user = getSecUser();
-		I$SecSchemaName$SecSessionObj session;
-		if( ( cluster != null ) &amp;&amp; ( tenant != null ) &amp;&amp; ( user != null ) ) {
-			session = getSecSessionTableObj().newInstance();
-			I$SecSchemaName$SecSessionEditObj sessionEdit = session.beginEdit();
-			sessionEdit.setRequiredContainerSecUser( user );
-			sessionEdit.setRequiredStart( Calendar.getInstance() );
-			sessionEdit.setOptionalFinish( null );
-			session = sessionEdit.create();
-			sessionEdit = null;
-			setSecSession( session );
-		}
-		else {
-			session = null;
-		}
-		if( transactionStarted ) {
-			commit();
-		}
-		if( ( cluster == null ) || ( tenant == null ) || ( user == null ) || ( session == null ) ) {
-			disconnect( false );
-			authorization = null;
-			throw new CFLibRuntimeException( getClass(),
-				S_ProcName,
-				"Could not resolve cluster name, tenant name, user name, or session.  Login cancelled" );
-		}
-		if( authorization == null ) {
-			authorization = new $SecSchemaName$Authorization();
-		}
-		authorization.setSecCluster( cluster );
-		authorization.setSecTenant( tenant );
-		authorization.setSecSession( session );
-		return( true );
 	}
 $implSchemaSchemaObjMethodsPart8$</GenRule>
 
@@ -520,73 +366,28 @@ $implSchemaSchemaObjMethodsPart8$</GenRule>
 		}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSchemaObjMethodsPart8">
-	public void disconnect( boolean doCommit ) {
-		backingStore.disconnect( doCommit );
+	public void minimizeMemory() {$iterate SchemaTables( each implInvokeTableMinimizeMemory empty empty )$
 	}
 
 	public void logout() {
 		if( authorization == null ) {
-			if( isConnected() ) {
-				disconnect( false );
-			}
 			return;
 		}
-		if( isConnected() ) {
-			try {
-				boolean transactionStarted = beginTransaction();
-				if( ! transactionStarted ) {
-					rollback();
-					transactionStarted = beginTransaction();
-					if( ! transactionStarted ) {
-						setAuthorization( null );
-						return;
-					}
-				}
-				UUID secSessionId = authorization.getSecSessionId();
-				if( secSessionId != null ) {
-					I$SecSchemaName$SecSessionObj secSession = getSecSessionTableObj().readSecSessionByIdIdx( secSessionId );
-					if( secSession != null ) {
-						if( secSession.getOptionalFinish() == null ) {
-							I$SecSchemaName$SecSessionEditObj editSecSession = secSession.beginEdit();
-							editSecSession.setOptionalFinish( Calendar.getInstance() );
-							editSecSession.update();
-							editSecSession = null;
-						}
-					}
-				}
-				commit();
-			}
-			finally {
-				setAuthorization( null );
-				try {
-					disconnect( false );
-				}
-				catch( RuntimeException e ) {
+		setAuthorization( null );
+		CFLibDbKeyHash256 secSessionId = authorization.getSecSessionId();
+		if( secSessionId != null ) {
+			I$SecSchemaName$SecSessionObj secSession = getSecSessionTableObj().readSecSessionByIdIdx( secSessionId );
+			if( secSession != null ) {
+				if( secSession.getOptionalFinish() == null ) {
+					I$SecSchemaName$SecSessionEditObj editSecSession = secSession.beginEdit();
+					editSecSession.setOptionalFinish( LocalDateTime.now() );
+					editSecSession.update();
+					editSecSession = null;
 				}
 			}
 		}
 	}
-
-	public void minimizeMemory() {$iterate SchemaTables( each implInvokeTableMinimizeMemory empty empty )$
-	}
-
-	public boolean isTransactionOpen() {
-		boolean txnOpen = backingStore.isTransactionOpen();
-		return( txnOpen );
-	}
-
-	public boolean beginTransaction() {
-		boolean txnInitiated = backingStore.beginTransaction();
-		return( txnInitiated );
-	}
-
-	public void commit() {
-		backingStore.commit();
-	}
-
-	public void rollback() {
-		backingStore.rollback();
-	}</GenRule>
+</GenRule>
 
 	<GenRule GenDef="Table" Name="declSchemaSchemaObjTableObjMember"
 >	protected I$SchemaName$$TableName$TableObj $leadlower TableName$TableObj;
