@@ -63,8 +63,14 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$importJavaPackageSchemaName$$JavaSchemaObjImport$$ReferencedJavaSchemaObjImport$
 
 public interface I$SchemaName$SchemaObj$iterate SchemaRefs( first extendISchemaSchemaObj each commaNewlineISchemaSchemaObj empty empty )$
-{$iterate SchemaRefs( each empty empty declISchemaSchemaObj )$$iterate SchemaTables( each declISchemaSchemaObjTableObjAccessors empty empty )$$JavaSchemaObjInterface$$ReferencedJavaSchemaObjInterface$}
+{$iterate SchemaRefs( each empty empty declISchemaSchemaObj )$$iterate SchemaRefs( each declISchemaSchemaObjBSAccessors empty empty )$$declISchemaSchemaObjBSAccessors$$iterate SchemaTables( each declISchemaSchemaObjTableObjAccessors empty empty )$$JavaSchemaObjInterface$$ReferencedJavaSchemaObjInterface$}
 </GenFile>
+
+	<GenRule GenDef="SchemaRef" Name="declISchemaSchemaObjBSAccessors">$reference RefSchema declISchemaSchemaObjBSAccessors$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declISchemaSchemaObjBSAccessors">
+	public I$SchemaName$Schema get$SchemaName$BackingStore();
+	public void set$SchemaName$BackingStore(I$SchemaName$Schema $lower SchemaName$BackingStore);
+</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="extendISchemaSchemaObj">
 	extends I$reference RefSchema SchemaName$SchemaObj</GenRule>
@@ -75,9 +81,6 @@ public interface I$SchemaName$SchemaObj$iterate SchemaRefs( first extendISchemaS
 	<GenRule GenDef="Object" Name="declISchemaSchemaObj">
 	I$SecSchemaName$Authorization getAuthorization();
 	void setAuthorization( I$SecSchemaName$Authorization value );
-
-	I$DefSchemaName$Schema getBackingStore();
-	void setBackingStore( I$DefSchemaName$Schema value );
 
 	String getSchemaName();
 
@@ -100,8 +103,6 @@ public interface I$SchemaName$SchemaObj$iterate SchemaRefs( first extendISchemaS
 	void logout();
 
 	void minimizeMemory();
-
-	String fileImport( String fileName, String fileContent );
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="extendSchemaSchemaObj">

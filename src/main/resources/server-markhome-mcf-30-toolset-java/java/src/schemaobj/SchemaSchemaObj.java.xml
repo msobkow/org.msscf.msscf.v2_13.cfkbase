@@ -67,8 +67,9 @@ public class $SchemaName$SchemaObj
 	implements I$SchemaName$SchemaObj
 {$declSchemaObjStaticMembers$$declSchemaObjMembers$
 	public $SchemaName$SchemaObj() {
+$iterate SchemaRefs( each initNullSchemaSchemaObjBackingStore empty empty )$$initNullSchemaSchemaObjBackingStore$
 $iterate SchemaTables( each initSchemaSchemaObjConstructorTableObjMember empty empty )$		}
-$implSchemaObjGetSetSecCluster$$implSchemaObjGetSetSecTenant$$implSchemaObjGetSetSecUser$$implSchemaObjGetSetSecSession$$implSchemaFileImportMethod$$implSchemaSchemaObjReleasePreparedStatements$$implSchemaSchemaObjMethods$$iterate SchemaTables( each implSchemaSchemaObjTableObjAccessors empty empty )$$JavaSchemaObjImplementation$$ReferencedJavaSchemaObjImplementation$}
+$implSchemaObjGetSetSecCluster$$implSchemaObjGetSetSecTenant$$implSchemaObjGetSetSecUser$$implSchemaObjGetSetSecSession$$implSchemaSchemaObjMethods$$iterate SchemaTables( each implSchemaSchemaObjTableObjAccessors empty empty )$$JavaSchemaObjImplementation$$ReferencedJavaSchemaObjImplementation$}
 </GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="declSchemaObjStaticMembers">
@@ -77,7 +78,6 @@ $implSchemaObjGetSetSecCluster$$implSchemaObjGetSetSecTenant$$implSchemaObjGetSe
 
 	<GenRule GenDef="SchemaDef" Name="declSchemaObjMembers">
 	protected I$SecSchemaName$Authorization authorization = null;
-	protected I$SecSchemaName$Schema backingStore = null;
 	protected String secClusterName = "system";
 	protected String secTenantName = "system";
 	protected String secUserName = "system";
@@ -91,12 +91,30 @@ $implSchemaObjGetSetSecCluster$$implSchemaObjGetSetSecTenant$$implSchemaObjGetSe
 	protected CFLibDbKeyHash256 secSessionSessionId = null;
 	protected String schemaDbName = SCHEMA_DBNAME;
 	protected String lowerDbSchemaName = SCHEMA_DBNAME.toLowerCase();
+$iterate SchemaRefs( each declSchemaSchemaObjBackingStore empty empty )$$declSchemaSchemaObjBackingStore$
 $iterate SchemaTables( each declSchemaSchemaObjTableObjMember empty empty )$$JavaSchemaObjMembers$$ReferencedJavaSchemaObjMembers$</GenRule>
 
-	<GenRule GenDef="SchemaDef" Name="implSchemaFileImportMethod">
-	public String fileImport( String fileName, String fileContent ) {
-		String logContent = backingStore.fileImport( getAuthorization(), fileName, fileContent );
-		return( logContent );
+	<GenRule GenDef="SchemaRef" Name="declSchemaSchemaObjBackingStore">$reference RefSchema declSchemaSchemaObjBackingStore$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declSchemaSchemaObjBackingStore">
+	protected I$SchemaName$Schema $lower SchemaName$BackingStore;</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="initNullSchemaSchemaObjBackingStore">$reference RefSchema initNullSchemaSchemaObjBackingStore$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="initNullSchemaSchemaObjBackingStore">
+		$lower SchemaName$BackingStore = null;</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="implSchemaSchemaObjBSAccessors">$reference RefSchema implSchemaSchemaObjBSAccessors$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="implSchemaSchemaObjBSAccessors">
+	@Override
+	public I$SchemaName$Schema get$SchemaName$BackingStore() {
+		return( $lower SchemaName$BackingStore );
+	}
+
+	@Override
+	public void set$SchemaName$BackingStore(I$SchemaName$Schema $lower SchemaName$BackingStore) {
+		if ($lower SchemaName$BackingStore == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$SchemaName$BackingStore", 1, "$lower SchemaName$BackingStore");
+		}
+		this.$lower SchemaName$BackingStore = $lower SchemaName$BackingStore;
 	}
 </GenRule>
 
@@ -325,15 +343,7 @@ $iterate SchemaTables( each declSchemaSchemaObjTableObjMember empty empty )$$Jav
 	public void setAuthorization( I$SecSchemaName$Authorization value ) {
 		authorization = value;
 	}
-
-	public I$DefSchemaName$Schema getBackingStore() {
-		return( backingStore );
-	}
-
-	public void setBackingStore( I$DefSchemaName$Schema value ) {
-		backingStore = value;
-	}
-
+$iterate SchemaRefs( each implSchemaSchemaObjBSAccessors empty empty )$$implSchemaSchemaObjBSAccessors$
 	public String getSchemaName() {
 		return( SCHEMA_NAME );
 	}
