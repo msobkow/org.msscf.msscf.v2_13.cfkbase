@@ -96,7 +96,7 @@ public interface I$SchemaName$$TableName$TableObj$iterate TableRefs( first exten
 	 *	@return The hardcoded backing store class code for this object, which is only valid in that schema.
 	 */
 	public int getBackingClassCode();
-$declGetObjQualifyingClass$$declNewInstance$$declNewEditInstance$$switch IsBaseTable yes declConstructByClassCode default empty$$declRealiseObj$$declCreateObj$$declReadObjByPKey$$declReadCachedObjByPKey$$declReallyDeepDisposeTable$$declDeepDisposeObjByPKey$$declLockObjByPKey$$declReadAllObj$$declReadCachedAllObj$$switch PageData yes declPageAllObj default empty$$declTableObjReadByIndexes$$declTableObjReadCachedByIndexes$$declTableObjDeepDisposeByIndexes$$switch PageData yes declTableObjPageByIndex default empty$$declUpdateObj$$declDeleteObj$$declTableObjDeleteByIndexes$$switch HasChain yes declTableObjMoveUp default empty$$switch HasChain yes declTableObjMoveDown default empty$$iterate ServerMethods( each declJavaTableObjServerMethod empty empty )$$JavaTableObjInterface$</GenRule>
+$declGetObjQualifyingClass$$declNewInstance$$declNewEditInstance$$switch IsBaseTable yes declConstructByClassCode default empty$$declRealiseObj$$declCreateObj$$declReadObjByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declReadObjByPKeyArgs$$declReadCachedObjByPKey$$declReallyDeepDisposeTable$$declDeepDisposeObjByPKey$$declLockObjByPKey$$declReadAllObj$$declReadCachedAllObj$$switch PageData yes declPageAllObj default empty$$declTableObjReadByIndexes$$declTableObjReadCachedByIndexes$$declTableObjDeepDisposeByIndexes$$switch PageData yes declTableObjPageByIndex default empty$$declUpdateObj$$declDeleteObj$$declTableObjDeleteByIndexes$$switch HasChain yes declTableObjMoveUp default empty$$switch HasChain yes declTableObjMoveDown default empty$$iterate ServerMethods( each declJavaTableObjServerMethod empty empty )$$JavaTableObjInterface$</GenRule>
 
 	<GenRule GenDef="ServerProc" Name="declJavaTableObjServerMethod"
 		>$switch IsInstanceMethod yes declJavaTableObjInstServerProc default declJavaTableObjClassServerProc$</GenRule>
@@ -372,6 +372,25 @@ $declGetObjQualifyingClass$$declNewInstance$$declNewEditInstance$$switch IsBaseT
 	 *		or null if no such key value exists.
 	 */
 	I$DefSchemaName$$TableName$Obj read$TableName$( $ICompactedPrimaryIndexClass$ pkey,
+		boolean forceRead );
+</GenRule>
+
+	<GenRule GenDef="Table" Name="declReadObjByPKeyArgs">
+	/**
+	 *	Read a $TableName$-derived instance by it's primary key.
+	 *
+	 *	@return	The $TableName$-derived instance identified by the primary key,
+	 *		or null if no such key value exists.
+	 */
+	I$DefSchemaName$$TableName$Obj read$TableName$( $reference PrimaryKeyIndex iterate Columns( first declColumnArg each declCommaColumnArg )$ );
+
+	/**
+	 *	Read a $TableName$-derived instance by it's primary key.
+	 *
+	 *	@return	The $TableName$-derived instance identified by the primary key,
+	 *		or null if no such key value exists.
+	 */
+	I$DefSchemaName$$TableName$Obj read$TableName$( $reference PrimaryKeyIndex iterate Columns( first declColumnArg each declCommaColumnArg )$,
 		boolean forceRead );
 </GenRule>
 

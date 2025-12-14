@@ -71,7 +71,7 @@ public interface I$SchemaName$$TableName$Table$iterate TableRefs( first extendsJ
 $declCreateTable$
 $declUpdateTable$
 $declDeleteTable$
-$declReadTableDerivedByPKey$$declLockTableDerivedByPKey$$declReadAllTableDerived$$declReadTableDerivedByIndexes$$declReadTableRecByPKey$$declLockTableRecByPKey$$declReadAllTableRec$$switch PageData yes declPageAllTableRec default empty$$declReadTableRecByIndexes$$switch PageData yes declPageTableRecByIndexes default empty$$switch HasChain yes declMoveUpTableRec default empty$$switch HasChain yes declMoveDownTableRec default empty$$declReleasePreparedStatements$$iterate ServerMethods( each declServerMethod empty empty )$$JavaTableInterface$}
+$declReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declReadTableDerivedByPKeyArgs$$declLockTableDerivedByPKey$$declReadAllTableDerived$$declReadTableDerivedByIndexes$$declReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declReadTableRecByPKeyArgs$$declLockTableRecByPKey$$declReadAllTableRec$$switch PageData yes declPageAllTableRec default empty$$declReadTableRecByIndexes$$switch PageData yes declPageTableRecByIndexes default empty$$switch HasChain yes declMoveUpTableRec default empty$$switch HasChain yes declMoveDownTableRec default empty$$iterate ServerMethods( each declServerMethod empty empty )$$JavaTableInterface$}
 </GenFile>
 
 	<GenRule GenDef="Table" Name="extendsJavaSchemaTableNameTable">
@@ -146,6 +146,18 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 		$ICompactedPrimaryIndexClass$ PKey );
 </GenRule>
 
+	<GenRule GenDef="Table" Name="declReadTableDerivedByPKeyArgs">
+	/**
+	 *	Read the derived $TableName$ record instance by primary key.
+	 *
+	 *	@param	Authorization	The session authorization information.
+	 *
+	 *	@return The record instance for the specified primary key, or null if there is
+	 *		no such existing key value.
+	 */
+	I$poptop Table DefSchemaName$$poptop Table TableName$ readDerived( I$SecSchemaName$Authorization Authorization$reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$ );
+</GenRule>
+
 	<GenRule GenDef="Table" Name="declLockTableDerivedByPKey">
 	/**
 	 *	Lock the derived $TableName$ record instance by primary key.
@@ -165,7 +177,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	/**
 	 *	Read all $TableName$ instances.
 	 *
-	 *	@param	Authorization	The session authorization information.
+	 *	@param	Authorization	The session authorization information.	
 	 *
 	 *	@return An array of derived record instances, potentially with 0 elements in the set.
 	 */
@@ -232,6 +244,22 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 */
 	I$DefSchemaName$$TableName$ readRec( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey );
+</GenRule>
+
+	<GenRule GenDef="Table" Name="declReadTableRecByPKeyArgs">
+	/**
+	 *	Read the specific $TableName$ record instance identified by the primary key.
+	 *
+	 *	@param	Authorization	The session authorization information.
+	 *
+	 *	@param	PKey	The primary key of the $TableName$ instance to be locked.
+	 *
+	 *	@return The record instance for the specified primary key, or null if there is
+	 *		no such existing key value.
+	 *
+	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	I$DefSchemaName$$TableName$ readRec( I$SecSchemaName$Authorization Authorization$reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$ );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declLockTableRecByPKey">
