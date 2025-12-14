@@ -66,9 +66,7 @@ $implSchemaTableObjClassBody$</GenFile>
 public class $SchemaName$$TableName$TableObj
 	implements I$SchemaName$$TableName$TableObj
 {
-	protected I$poptop SchemaDef SchemaName$SchemaObj schema;
-	protected static int runtimeClassCode = I$DefSchemaName$$TableName$.CLASS_CODE;
-	protected static final int backingClassCode = I$DefSchemaName$$TableName$.CLASS_CODE;
+	protected I$poptop SchemaDef SchemaName$SchemaObj schema;$switch HasDefSchema yes empty default declSchemaTableTableObjClassCodeVars$
 	private Map&lt;$ICompactedPrimaryIndexClass$, I$DefSchemaName$$TableName$Obj&gt; members;
 	private Map&lt;$ICompactedPrimaryIndexClass$, I$DefSchemaName$$TableName$Obj&gt; all$TableName$;$declTableObjIndexMapByIndexes$
 	public static String TABLE_NAME = "$TableName$";
@@ -91,8 +89,9 @@ public class $SchemaName$$TableName$TableObj
 	 *
 	 *	@return runtime classcode
 	 */ 
+	@Override
 	public int getClassCode() {
-		return $DefSchemaName$$TableName$TableObj.runtimeClassCode;
+		return $DefSchemaName$$TableName$TableObj.getRuntimeClassCode();
 	}	
 
 	/**
@@ -100,20 +99,47 @@ public class $SchemaName$$TableName$TableObj
 	 *
 	 *	@return The hardcoded backing store class code for this object, which is only valid in that schema.
 	 */
-	public int getBackingClassCode() {
-		return $DefSchemaName$$TableName$TableObj.backingClassCode;
+	@Override
+	public static int getBackingClassCode() {
+		return( $switch HasDefSchema yes implGetBackingClassCodeFromDefSchema default implGetBackingClassCodeFromLocalArg$ );
 	}
 
 	/**
-	 *	Set the runtime class code for this table; this is done only during application initialization, one schema at a time.
-	 *	Application programmers should never invoke this method.
+	 *	Get the runtime class code for this table; this value is only stable after the application is fully initialized.
 	 *
-	 *	@param	runtimeClassCode	The runtime class code to be used by clients and integrated application logic to identify this table of this schema.
+	 *	@return runtimeClassCode
 	 */
-	public static void setRuntimeClassCode(int runtimeClassCode ) {
-		$DefSchemaName$$TableName$TableObj.runtimeClassCode = runtimeClassCode;
+	public static int getRuntimeClassCode() {
+		return( $switch HasDefSchema yes implGetRuntimeClassCodeFromDefSchema default implGetRuntimeClassCodeFromLocalArg$ );
 	}
-$implSchemaTableObjMethods$$implNewInstance$$implNewEditInstance$$switch IsBaseTable yes implConstructByClassCode default empty$$implRealiseObj$$implCreateObj$$implReadObjByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default implReadObjByPKeyArgs$$implReadCachedObjByPKey$$implReallyDeepDisposeTable$$implDeepDisposeObjByPKey$$implLockObjByPKey$$implReadAllObj$$implReadCachedAllObj$$switch PageData yes implPageAllObj default empty$$implTableObjReadByIndexes$$implTableObjReadCachedByIndexes$$implTableObjDeepDisposeByIndexes$$switch PageData yes implTableObjPageByIndex default empty$$implUpdateObj$$implDeleteObj$$implTableObjDeleteByIndexes$$switch HasChain yes implTableObjMoveUp default empty$$switch HasChain yes implTableObjMoveDown default empty$$iterate ServerMethods( each implJavaTableObjServerMethod empty empty )$$JavaTableObjImplementation$}</GenRule>
+$switch HasDefSchema yes empty default implSetRuntimeClassCodeViaLocalArg$$implSchemaTableObjMethods$$implNewInstance$$implNewEditInstance$$switch IsBaseTable yes implConstructByClassCode default empty$$implRealiseObj$$implCreateObj$$implReadObjByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default implReadObjByPKeyArgs$$implReadCachedObjByPKey$$implReallyDeepDisposeTable$$implDeepDisposeObjByPKey$$implLockObjByPKey$$implReadAllObj$$implReadCachedAllObj$$switch PageData yes implPageAllObj default empty$$implTableObjReadByIndexes$$implTableObjReadCachedByIndexes$$implTableObjDeepDisposeByIndexes$$switch PageData yes implTableObjPageByIndex default empty$$implUpdateObj$$implDeleteObj$$implTableObjDeleteByIndexes$$switch HasChain yes implTableObjMoveUp default empty$$switch HasChain yes implTableObjMoveDown default empty$$iterate ServerMethods( each implJavaTableObjServerMethod empty empty )$$JavaTableObjImplementation$}</GenRule>
+
+	<GenRule GenDef="Table" Name="declSchemaTableTableObjClassCodeVars">
+	protected static int runtimeClassCode = I$DefSchemaName$$TableName$.CLASS_CODE;
+	protected static final int backingClassCode = I$DefSchemaName$$TableName$.CLASS_CODE;</GenRule>
+
+
+	<GenRule GenDef="Table" Name="implSetRuntimeClassCodeViaLocalArg">
+	/**
+	 *	Set the runtime class code for this table; this is done only during application initialization by the SchemaObj's &lt;tt&gt;initClassCodes()&lt;/tt&gt; static method,
+	 *	which will only set the class codes once and never again.  Once set, the class codes are immutable within the application.
+	 *	Application programmers should never invoke this method, so it has package access only.
+	 *
+	 *	@param	argNewClassCode	The runtime class code to be used by clients and integrated application logic to identify this table of this schema.
+	 */
+	static void setRuntimeClassCode(int argNewClassCode ) {
+		if (argNewClassCode &lt;= 0) {
+			throw new CFLibArgumentUnderflowException($DefSchemaName$$TableName$TableObj.class, "setRuntimeClassCode", 1, "argNewClassCode", argNewClassCode, 1);
+		}
+		runtimeClassCode = argNewClassCode;
+	}
+</GenRule>
+
+
+	<GenRule GenDef="Table" Name="implGetBackingClassCodeFromDefSchema">$DefSchemaName$$TableName$TableObj.getBackingClassCode()</GenRule>
+	<GenRule GenDef="Table" Name="implGetBackingClassCodeFromLocalArg">backingClassCode</GenRule>
+	<GenRule GenDef="Table" Name="implGetRuntimeClassCodeFromDefSchema">$DefSchemaName$$TableName$TableObj.getRuntimeClassCode()</GenRule>
+	<GenRule GenDef="Table" Name="implGetRuntimeClassCodeFromLocalArg">runtimeClassCode</GenRule>
 
 	<GenRule GenDef="Table" Name="implPageAllObj">
 	/**
