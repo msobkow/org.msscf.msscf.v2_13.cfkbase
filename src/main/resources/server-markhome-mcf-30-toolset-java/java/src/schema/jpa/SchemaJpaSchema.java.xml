@@ -68,8 +68,7 @@ import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$l
 
 public class $SchemaName$JpaSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
-{
-	protected I$DefSchemaName$TablePerms tablePerms;
+{$iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate Types( empty empty each implJpaSchemaParseEnum )$
 $iterate SchemaTables( each declJpaSchemaTableTableMember )$
 $iterate SchemaTables( each declJpaSchemaTableFactoryMember )$
@@ -275,18 +274,69 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 >	protected I$DefSchemaName$$TableName$Factory factory$TableName$;
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaTableMethods"
-		>$implJpaSchemaTableTableAccessors$$implJpaSchemaTableFactoryAccessors$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaTablePermsAccessors">
-	public I$DefSchemaName$TablePerms getTablePerms() {
-		return( tablePerms );
+	<GenRule GenDef="Table" Name="implJpaTableMethods">
+	public I$DefSchemaName$$TableName$Table getTable$TableName$() {
+		return( table$TableName$ );
 	}
 
-	public void setTablePerms( I$DefSchemaName$TablePerms value ) {
-		tablePerms = value;
+	public void setTable$TableName$( I$DefSchemaName$$TableName$Table value ) {
+		table$TableName$ = value;
+	}
+
+	public I$DefSchemaName$$TableName$Factory getFactory$TableName$() {
+		return( factory$TableName$ );
+	}
+
+	public void setFactory$TableName$( I$DefSchemaName$$TableName$Factory value ) {
+		factory$TableName$ = value;
 	}
 </GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="implJpaSchemaTablePermsAccessors">
+	/**
+	 *	Get the Table Permissions interface for the schema.
+	 *
+	 *	@return	The Table Permissions interface for the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public static I$SecSchemaName$TablePerms getTablePerms() {
+		return($poptop SchemaDef iterate SchemaRefs(first implJpaReturnThisSchemaRefGetTablePerms each empty empty implJpaReturnLocalGetTablePerms)$);
+	}
+
+	/**
+	 *	Get the Table Permissions interface cast to this schema's implementation.
+	 *
+	 *	@return The Table Permissions interface for this schema.
+	 */
+	public static I$SchemaName$TablePerms get$SchemaName$TablePerms() {
+		return (I$SchemaName$TablePerms)getTablePerms();
+	}
+
+	/**
+	 *	Set the Table Permissions interface for the schema.  All fractal subclasses of
+	 *	the I$SecSchemaName$TablePerms implement at least that interface plus their own
+	 *	accessors.
+	 *
+	 *	@param	value	The Table Permissions interface to be used by the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public static void setTablePerms( I$SecSchemaName$TablePerms value ) {$poptop SchemaDef iterate SchemaRefs(first implJpaThisSchemaRefSetTablePerms each empty empty implJpaLocalSetTablePerms)$
+	}
+</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="implJpaReturnThisSchemaRefGetTablePerms">$reference RefSchema SchemaName$JpaSchema.getTablePerms()</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="implJpaThisSchemaRefSetTablePerms">
+		$reference RefSchema SchemaName$JpaSchema.setTablePerms(value);</GenRule>
+	
+	<GenRule GenDef="Object" Name="implJpaReturnLocalGetTablePerms">tablePerms</GenRule>
+	<GenRule GenDef="Object" Name="implJpaLocalSetTablePerms">
+		if(value == null) {
+			throw new CFLibNullArgumentException($DefSchemaName$JpaSchema.class, "setTablePerms", 1, "value");
+		}
+		tablePerms = value;</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaSchemaTableTableAccessors">
 	public I$DefSchemaName$$TableName$Table getTable$TableName$() {
@@ -295,16 +345,6 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 
 	public void setTable$TableName$( I$DefSchemaName$$TableName$Table value ) {
 		table$TableName$ = value;
-	}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="implJpaSchemaTableFactoryAccessors">
-	public I$DefSchemaName$$TableName$Factory getFactory$TableName$() {
-		return( factory$TableName$ );
-	}
-
-	public void setFactory$TableName$( I$DefSchemaName$$TableName$Factory value ) {
-		factory$TableName$ = value;
 	}
 </GenRule>
 

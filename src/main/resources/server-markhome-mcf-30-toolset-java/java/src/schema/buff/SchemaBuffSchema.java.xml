@@ -61,17 +61,19 @@ import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
-import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;
+import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameBuff empty empty )$
 
 public class $SchemaName$BuffSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
-{
-	protected I$DefSchemaName$TablePerms tablePerms;
+{$iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate Types( empty empty each implBuffSchemaBuffParseEnum )$
 $iterate SchemaTables( each declSchemaBuffTableTableMember )$
 $iterate SchemaTables( each declSchemaBuffTableFactoryMember )$
 $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXmlEncodeString$}
 </GenFile>
+
+	<GenRule GenDef="Object" Name="declTablePerms">
+	protected static I$SecSchemaName$TablePerms tablePerms;</GenRule>
 
 	<GenRule GenDef="EnumDef" Name="implBuffSchemaBuffParseEnum"
 		>$switch HasDefSchema yes empty default reallyImplSchemaParseEnum$</GenRule>
@@ -203,14 +205,50 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 		>$implBuffSchemaTableTableAccessors$$implBuffSchemaTableFactoryAccessors$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implBuffSchemaTablePermsAccessors">
-	public I$DefSchemaName$TablePerms getTablePerms() {
-		return( tablePerms );
+	/**
+	 *	Get the Table Permissions interface for the schema.
+	 *
+	 *	@return	The Table Permissions interface for the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public static I$SecSchemaName$TablePerms getTablePerms() {
+		return($poptop SchemaDef iterate SchemaRefs(first implBuffReturnThisSchemaRefGetTablePerms each empty empty implBuffReturnLocalGetTablePerms)$);
 	}
 
-	public void setTablePerms( I$DefSchemaName$TablePerms value ) {
-		tablePerms = value;
+	/**
+	 *	Get the Table Permissions interface cast to this schema's implementation.
+	 *
+	 *	@return The Table Permissions interface for this schema.
+	 */
+	public static I$SchemaName$TablePerms get$SchemaName$TablePerms() {
+		return (I$SchemaName$TablePerms)getTablePerms();
+	}
+
+	/**
+	 *	Set the Table Permissions interface for the schema.  All fractal subclasses of
+	 *	the I$SecSchemaName$TablePerms implement at least that interface plus their own
+	 *	accessors.
+	 *
+	 *	@param	value	The Table Permissions interface to be used by the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	public static void setTablePerms( I$SecSchemaName$TablePerms value ) {$poptop SchemaDef iterate SchemaRefs(first implBuffThisSchemaRefSetTablePerms each empty empty implBuffLocalSetTablePerms)$
 	}
 </GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="implBuffReturnThisSchemaRefGetTablePerms">$reference RefSchema SchemaName$BuffSchema.getTablePerms()</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="implBuffThisSchemaRefSetTablePerms">
+		$reference RefSchema SchemaName$BuffSchema.setTablePerms(value);</GenRule>
+	
+	<GenRule GenDef="Object" Name="implBuffReturnLocalGetTablePerms">tablePerms</GenRule>
+	<GenRule GenDef="Object" Name="implBuffLocalSetTablePerms">
+		if(value == null) {
+			throw new CFLibNullArgumentException($DefSchemaName$BuffSchema.class, "setTablePerms", 1, "value");
+		}
+		tablePerms = value;</GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffSchemaTableTableAccessors">
 	public I$DefSchemaName$$TableName$Table getTable$TableName$() {
