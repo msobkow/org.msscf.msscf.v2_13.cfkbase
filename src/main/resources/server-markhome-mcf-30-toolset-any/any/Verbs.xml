@@ -112,7 +112,16 @@
 		>$reference DefSchema SchemaName$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="DefSchemaName"
 		>$SchemaName$</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="DefDbSchemaName">$reference RefSchema DbSchemaName$</GenRule>
 	
+	<GenRule GenDef="Object" Name="DefDbSchemaName"
+		>$switch HasDefSchema yes DerefDefDbSchemaName default DbSchemaName$</GenRule>
+	<GenRule GenDef="Object" Name="DerefDefDbSchemaName"
+		>$reference DefSchema DbSchemaName$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="DefDbSchemaName"
+		>$DbSchemaName$</GenRule>
+
 	<GenRule GenDef="SchemaDef" Name="SchemaName">$Name$</GenRule>
 	<GenRule GenDef="Table" Name="SchemaName">$reference SchemaDef Name$</GenRule>
 	<GenRule GenDef="Index" Name="SchemaName">$reference Table reference SchemaDef Name$</GenRule>
