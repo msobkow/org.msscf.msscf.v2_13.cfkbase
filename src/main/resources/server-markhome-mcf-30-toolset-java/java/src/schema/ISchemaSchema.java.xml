@@ -76,7 +76,113 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 	<GenRule GenDef="EnumDef" Name="reallyDeclISchemaEnumType">
 	public enum $Name$ {$iterate Tag( first declISchemaEnumTypeFirstTag each declISchemaEnumTypeEachTag )$
 	};
+$reallyImplSchemaParseEnum$</GenRule>
+
+	<GenRule GenDef="EnumDef" Name="implSchemaParseEnum"
+		>$switch HasDefSchema yes empty default reallyImplSchemaParseEnum$</GenRule>
+
+	<GenRule GenDef="EnumDef" Name="reallyImplSchemaParseEnum"
+		>$implSchemaParseEnumParse$$implSchemaParseEnumOrdinal$</GenRule>
+
+	<GenRule GenDef="Value" Name="implSchemaParseEnum"></GenRule>
+
+	<GenRule GenDef="EnumDef" Name="implSchemaParseEnumParse">
+	static HashMap&lt;String,$Name$&gt; lookup$Name$ = new HashMap&lt;String,$Name$&gt;();
+
+	public static $Name$ parse$Name$( String value ) {
+		$Name$ retval = parse$Name$( I$DefSchemaName$Schema.class.getName(), value );
+		return( retval );
+	}
+
+	public static $Name$ parse$Name$( String fieldOrClassName, String value ) {
+		final String S_ProcName = "parse$Name$";
+		if( lookup$Name$.isEmpty() ) {$iterate Tag( each implSchemaParseEnumAddTagToMap )$
+		}
+		$Name$ retval;
+		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
+			retval = null;
+		}
+		else {
+			retval = lookup$Name$.get( value );
+			if( retval == null ) {
+				throw new CFLibInvalidArgumentException( fieldOrClassName,
+					fieldOrClassName,
+					S_ProcName,
+					2,
+					"value",
+					"Invalid enum limb argument " + value,
+					"Invalid enum limb argument " + value);
+			}
+		}
+		return( retval );
+	}
 </GenRule>
+
+	<GenRule GenDef="EnumTag" Name="implSchemaParseEnumAddTagToMap">
+			lookup$popto EnumDef Name$.put( "$Name$", $popto EnumDef Name$.$Name$ );</GenRule>
+
+	<GenRule GenDef="EnumDef" Name="implSchemaParseEnumOrdinal">
+	static HashMap&lt;Integer,$Name$&gt; lookupOrdinal$Name$ = new HashMap&lt;Integer,$Name$&gt;();
+
+	public static $Name$ ordinalTo$Name$( String fieldOrClassName, Short value ) {
+		$Name$ retval;
+		if( value == null ) {
+			retval = null;
+		}
+		else {
+			retval = ordinalTo$Name$( fieldOrClassName, Integer.valueOf( value.shortValue() ) );
+		}
+		return( retval );
+	}
+
+	public static $Name$ ordinalTo$Name$( Short value ) {
+		$Name$ retval;
+		if( value == null ) {
+			retval = null;
+		}
+		else {
+			retval = ordinalTo$Name$( Integer.valueOf( value.shortValue() ) );
+		}
+		return( retval );
+	}
+
+	public static $Name$ ordinalTo$Name$( Integer value ) {
+		$Name$ retval;
+		if( value == null ) {
+			retval = null;
+		}
+		else {
+			retval = ordinalTo$Name$( I$SchemaName$Schema.class.getName(), Integer.valueOf( value.shortValue() ) );
+		}
+		return( retval );
+	}
+
+	public static $Name$ ordinalTo$Name$( String fieldOrClassName, Integer value ) {
+		final String S_ProcName = "ordinalTo$Name$";
+		if( lookupOrdinal$Name$.isEmpty() ) {$iterate Tag( each implSchemaParseEnumAddOrdinalTagToMap )$
+		}
+		$Name$ retval;
+		if( value == null ) {
+			retval = null;
+		}
+		else {
+			retval = lookupOrdinal$Name$.get( value );
+			if( retval == null ) {
+				throw new CFLibInvalidArgumentException( fieldOrClassName,
+					fieldOrClassName,
+					S_ProcName,
+					2,
+					"value",
+					"Invalid enum limb argument " + value,
+					"Invalid enum limb argument " + value);
+			}
+		}
+		return( retval );
+	}
+</GenRule>
+
+	<GenRule GenDef="EnumTag" Name="implSchemaParseEnumAddOrdinalTagToMap">
+			lookupOrdinal$popto EnumDef Name$.put( Integer.valueOf( $popto EnumDef Name$.$Name$.ordinal() ), $popto EnumDef Name$.$Name$ );</GenRule>
 
 	<GenRule GenDef="EnumTag" Name="declISchemaEnumTypeFirstTag">
 		$Name$</GenRule>

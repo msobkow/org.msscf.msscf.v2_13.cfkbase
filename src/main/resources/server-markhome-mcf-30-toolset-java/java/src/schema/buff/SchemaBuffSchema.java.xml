@@ -66,7 +66,6 @@ import $reference ManufacturingSchema lower JavaPackage$.$lower reference Manufa
 public class $SchemaName$BuffSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
 {$iterate SchemaRefs( each empty empty declTablePerms )$
-$iterate Types( empty empty each implBuffSchemaBuffParseEnum )$
 $iterate SchemaTables( each declSchemaBuffTableTableMember )$
 $iterate SchemaTables( each declSchemaBuffTableFactoryMember )$
 $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXmlEncodeString$}
@@ -74,116 +73,6 @@ $implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXml
 
 	<GenRule GenDef="Object" Name="declTablePerms">
 	protected static I$SecSchemaName$TablePerms tablePerms;</GenRule>
-
-	<GenRule GenDef="EnumDef" Name="implBuffSchemaBuffParseEnum"
-		>$switch HasDefSchema yes empty default reallyImplSchemaParseEnum$</GenRule>
-
-	<GenRule GenDef="EnumDef" Name="reallyImplSchemaParseEnum"
-		>$implBuffSchemaBuffParseEnumParse$$implBuffSchemaBuffParseEnumOrdinal$</GenRule>
-
-	<GenRule GenDef="Value" Name="implBuffSchemaBuffParseEnum"></GenRule>
-
-	<GenRule GenDef="EnumDef" Name="implBuffSchemaBuffParseEnumParse">
-	static HashMap&lt;String,$Name$&gt; lookup$Name$ = null;
-
-	public static $Name$ parse$Name$( String value ) {
-		$Name$ retval = parse$Name$( I$DefSchemaName$Schema.class.getName(), value );
-		return( retval );
-	}
-
-	public static $Name$ parse$Name$( String fieldOrClassName, String value ) {
-		final String S_ProcName = "parse$Name$";
-		if( lookup$Name$ == null ) {
-			HashMap&lt;String,$Name$&gt; newMap = new HashMap&lt;String,$Name$&gt;();$iterate Tag( each implBuffSchemaBuffParseEnumAddTagToMap )$
-			lookup$Name$ = newMap;
-		}
-		$Name$ retval;
-		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
-			retval = null;
-		}
-		else {
-			retval = lookup$Name$.get( value );
-			if( retval == null ) {
-				throw new CFLibInvalidArgumentException( fieldOrClassName,
-					fieldOrClassName,
-					S_ProcName,
-					2,
-					"value",
-					"Invalid enum limb argument " + value,
-					"Invalid enum limb argument " + value);
-			}
-		}
-		return( retval );
-	}
-</GenRule>
-
-	<GenRule GenDef="EnumTag" Name="implBuffSchemaBuffParseEnumAddTagToMap">
-			newMap.put( "$Name$", $popto EnumDef Name$.$Name$ );</GenRule>
-
-	<GenRule GenDef="EnumDef" Name="implBuffSchemaBuffParseEnumOrdinal">
-	static HashMap&lt;Integer,$Name$&gt; lookupOrdinal$Name$ = null;
-
-	public static $Name$ ordinalTo$Name$( String fieldOrClassName, Short value ) {
-		$Name$ retval;
-		if( value == null ) {
-			retval = null;
-		}
-		else {
-			retval = ordinalTo$Name$( fieldOrClassName, Integer.valueOf( value.shortValue() ) );
-		}
-		return( retval );
-	}
-
-	public static $Name$ ordinalTo$Name$( Short value ) {
-		$Name$ retval;
-		if( value == null ) {
-			retval = null;
-		}
-		else {
-			retval = ordinalTo$Name$( Integer.valueOf( value.shortValue() ) );
-		}
-		return( retval );
-	}
-
-	public static $Name$ ordinalTo$Name$( Integer value ) {
-		$Name$ retval;
-		if( value == null ) {
-			retval = null;
-		}
-		else {
-			retval = ordinalTo$Name$( I$SchemaName$Schema.class.getName(), Integer.valueOf( value.shortValue() ) );
-		}
-		return( retval );
-	}
-
-	public static $Name$ ordinalTo$Name$( String fieldOrClassName, Integer value ) {
-		final String S_ProcName = "ordinalTo$Name$";
-		if( lookupOrdinal$Name$ == null ) {
-			HashMap&lt;Integer,$Name$&gt; newMap = new HashMap&lt;Integer,$Name$&gt;();$iterate Tag( each implBuffSchemaBuffParseEnumAddOrdinalTagToMap )$
-			lookupOrdinal$Name$ = newMap;
-		}
-		$Name$ retval;
-		if( value == null ) {
-			retval = null;
-		}
-		else {
-			retval = lookupOrdinal$Name$.get( value );
-			if( retval == null ) {
-				throw new CFLibInvalidArgumentException( fieldOrClassName,
-					fieldOrClassName,
-					S_ProcName,
-					2,
-					"value",
-					"Invalid enum limb argument " + value,
-					"Invalid enum limb argument " + value);
-			}
-		}
-		return( retval );
-	}
-</GenRule>
-
-	<GenRule GenDef="EnumTag" Name="implBuffSchemaBuffParseEnumAddOrdinalTagToMap">
-			newMap.put( Integer.valueOf( $popto EnumDef Name$.$Name$.ordinal() ), $popto EnumDef Name$.$Name$ );</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implBuffSchemaMoreMethods"
 		>$implBuffSchemaSchemaConstructor$$iterate SchemaRefs( first implBuffSchemaNewSchema each empty empty implBuffSchemaNewSchema )$$iterate Id16Generators( each implBuffNextIdGen empty empty)$$iterate Id32Generators( each implBuffNextIdGen empty empty)$$iterate Id64Generators( each implBuffNextIdGen empty empty)$$iterate DbKeyHash128Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash160Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash224Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash256Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash384Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash512Generators( each implBuffNextIdGen empty empty )$$iterate UuidGenerators( each implBuffNextIdGen empty empty )$$iterate Uuid6Generators( each implBuffNextIdGen empty empty )$$iterate SchemaTables(

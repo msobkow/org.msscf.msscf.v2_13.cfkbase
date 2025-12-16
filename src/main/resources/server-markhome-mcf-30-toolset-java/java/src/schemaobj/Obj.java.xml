@@ -57,9 +57,10 @@ import java.sql.*;
 import java.text.*;
 import java.time.*;
 import java.util.*;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaObjImport$
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaObjImport$
 
 public class $SchemaName$$TableName$Obj
 $switch HasSuperClassRelation yes implObjExtendSuperClassImplements default implObjTabImplementsSpace$I$SchemaName$$TableName$Obj
@@ -157,7 +158,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Table" Name="implGetClassCode">
 	@Override
 	public int getClassCode() {
-		return( get$TableName$Table().getClassCode() );
+		return( ((I$DefSchemaName$SchemaObj)schema).get$TableName$TableObj().getClassCode() );
 	}
 </GenRule>
 
@@ -1371,12 +1372,9 @@ $			if( ! anyMissing ) {
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implObjCopyRecClassCodeToPKey">
-		setClassCode( rec.getClassCode() );</GenRule>
-
 	<GenRule GenDef="Table" Name="implObjCopyRecToPKey">
 	@Override
-	public void copyRecToPKey() {$switch HasClassCode yes implObjCopyRecClassCodeToPKey default empty$$reference PrimaryKeyIndex iterate Columns( lone implObjCopyRecAttrDirectToPKey each implObjCopyRecAttrToPKey empty empty )$
+	public void copyRecToPKey() {$reference PrimaryKeyIndex iterate Columns( lone implObjCopyRecAttrDirectToPKey each implObjCopyRecAttrToPKey empty empty )$
 	}
 </GenRule>
 

@@ -66,11 +66,11 @@ import java.io.Serializable;
 import java.math.*;
 import java.time.*;
 import java.util.*;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 
 /**
  *	I$SchemaName$$TableName$PKey primary key interface for $TableName$$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )
@@ -548,7 +548,7 @@ $reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declR
 		>$switch HasInitValue yes declEnumInitValueConvertOrdinal default declEnumInitValueUseFirst$</GenRule>
 
 	<GenRule GenDef="Value" Name="declEnumInitValueConvertOrdinal"
-		>$reference DataType EffSchemaName$Schema.ordinalTo$reference DataType Name$( $InitValue$ )</GenRule>
+		>I$reference DataType EffSchemaName$Schema.ordinalTo$reference DataType Name$( $InitValue$ )</GenRule>
 
 	<GenRule GenDef="Value" Name="declEnumInitValueUseFirst"
 		>I$reference DataType EffSchemaName$Schema.$reference DataType Name$.$reference DataType iterate Tag( first declEnumInitValueUseFirstTagName each empty )$</GenRule>

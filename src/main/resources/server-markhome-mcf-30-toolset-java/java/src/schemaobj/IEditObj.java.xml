@@ -57,12 +57,13 @@ import java.sql.*;
 import java.text.*;
 import java.time.*;
 import java.util.*;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import org.apache.commons.text.StringEscapeUtils;import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaEditObjImport$
+import server.markhome.mcf.v3_1.cflib.dbutil.*;import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaEditObjImport$
 
 public interface I$SchemaName$$TableName$EditObj
-	extends $switch HasSuperClassRelation yes emitEditObjSuperAndSchemaTableObj default emitEditObjSchemaTableObj$$iterate TableRefs( each alsoExtendReferenceIEditObj empty empty )$$switch HasDefSchema yes alsoExtendCurSchemaTableObj default empty$
+	extends I$SchemaName$$TableName$Obj$switch HasSuperClassRelation yes emitEditObjSuperObj default empty$$iterate TableRefs( each alsoExtendReferenceIEditObj empty empty )$
 {$switch HasSuperClassRelation yes empty default declIEditObjOrigIfNoDefSchema$$declIEditObjOrigAsCast$$switch HasSuperClassRelation yes empty default declIEditObjCreate$$switch HasSuperClassRelation yes empty default declIEditObjUpdate$$switch HasSuperClassRelation yes empty default declIEditObjDelete$$switch HasSuperClassRelation yes empty default declIEditObjOptAuditAccessors$$switch HasDefSchema yes empty default declIEditObjColumnAccessors$$iterate Relation( each declIEditObjRelationAccessors empty empty )$$switch HasSuperClassRelation yes empty default declCopyRecsAround$$JavaEditObjInterface$
 }
 </GenFile>
@@ -72,12 +73,10 @@ public interface I$SchemaName$$TableName$EditObj
 	public void copyOrigToRec();
 </GenRule>
 
-	<GenRule GenDef="Object" Name="alsoExtendCurSchemaTableObj">, I$poptop Table SchemaName$$poptop Table TableName$Obj</GenRule>
-
-	<GenRule GenDef="Table" Name="emitEditObjSuperAndSchemaTableObj">I$reference SuperClassRelation reference ToTable SchemaName$$reference SuperClassRelation reference ToTable TableName$EditObj, I$SchemaName$$TableName$Obj</GenRule>
+	<GenRule GenDef="Table" Name="emitEditObjSuperObj">, I$reference SuperClassRelation reference ToTable SchemaName$$reference SuperClassRelation reference ToTable TableName$EditObj</GenRule>
 	<GenRule GenDef="Table" Name="emitEditObjSchemaTableObj">I$DefSchemaName$$TableName$Obj</GenRule>
 	<GenRule GenDef="Table" Name="emitEditObjAlsoExtendBaseIEditObj">, I$DefSchemaName$$TableName$EditObj</GenRule>
-	<GenRule GenDef="Table" Name="alsoExtendReferenceIEditObj">, I$DefSchemaName$$TableName$EditObj</GenRule>
+	<GenRule GenDef="Table" Name="alsoExtendReferenceIEditObj">, I$reference SchemaDef SchemaName$$TableName$EditObj</GenRule>
 
 	<GenRule GenDef="Table" Name="declIEditObjOptAuditAccessors">$reallyDeclIEditObjOptAuditAccessors$</GenRule>
 

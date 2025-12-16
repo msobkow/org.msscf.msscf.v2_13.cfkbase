@@ -58,11 +58,11 @@ import java.time.*;
 import java.util.*;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameJpa empty empty )$
 
 @Entity
@@ -249,10 +249,10 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 	public final static int CLASS_CODE = 0x$ClassCode$;
 	public final static String S_CLASS_CODE = "$ClassCode$";</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaGetClassCode">$switch HasSuperClassRelation yes emitOverride default empty$
+	<GenRule GenDef="Table" Name="implJpaGetClassCode">
 	@Override
 	public int getClassCode() {
-		return( CLASS_CODE );
+		return( I$DefSchemaName$$TableName$.CLASS_CODE );
 	}
 </GenRule>
 
@@ -336,7 +336,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 	<GenRule GenDef="Table" Name="implJpaDataGetterSetters"
 		>$iterate DataColumns( each implColumnGetterSetter empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaInheritSuper"> extends $SchemaName$$reference SuperClassRelation reference ToTable TableName$</GenRule>
+	<GenRule GenDef="Table" Name="implJpaInheritSuper"> extends $SchemaName$Jpa$reference SuperClassRelation reference ToTable TableName$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaRequiredRevisionAttr">
 	@Version
@@ -511,7 +511,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyAtt
 			if (cmp != 0) {
 				return( cmp );
 			}
-			$ISchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;</GenRule>
+			I$SchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;</GenRule>
 	<GenRule GenDef="Table" Name="implJpaComparePKeys">
 			I$SchemaName$$TableName$ rhs = (I$SchemaName$$TableName$)obj;
 			if (getPKey() == null) {

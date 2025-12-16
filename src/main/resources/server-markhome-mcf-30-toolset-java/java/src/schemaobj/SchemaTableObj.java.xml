@@ -57,9 +57,10 @@ import java.sql.*;
 import java.text.*;
 import java.time.*;
 import java.util.*;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaTableObjImport$
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaTableObjImport$
 $implSchemaTableObjClassBody$</GenFile>
 
 <GenRule GenDef="Table" Name="implSchemaTableObjClassBody">
@@ -78,9 +79,9 @@ public class $SchemaName$$TableName$TableObj
 		all$TableName$ = null;$initTableObjIndexMapByIndexes$
 	}
 
-	public $SchemaName$$TableName$TableObj( I$reference BaseClass DefSchemaName$SchemaObj argSchema ) {
+	public $SchemaName$$TableName$TableObj( I$DefSchemaName$SchemaObj argSchema ) {
 		schema = (I$poptop SchemaDef SchemaName$SchemaObj)argSchema;
-		members = new HashMap&lt;$ICompactedPrimaryIndexClass$, I$reference BaseClass DefSchemaName$$TableName$Obj&gt;();
+		members = new HashMap&lt;$ICompactedPrimaryIndexClass$, I$DefSchemaName$$TableName$Obj&gt;();
 		all$TableName$ = null;$initTableObjIndexMapByIndexes$
 	}
 	
@@ -580,9 +581,9 @@ $implReadAllObjComparator$
 
 	<GenRule GenDef="Table" Name="implConstructByClassCode">
 	@Override
-	public I$DefSchemaName$$TableName$Obj constructByClassCode( String argClassCode ) {
+	public I$DefSchemaName$$TableName$Obj constructByClassCode( int backingClassCode ) {
 		I$DefSchemaName$$TableName$Obj obj = null;
-		if( argClassCode.equals( "$ClassCode$" ) ) {
+		if( backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE) {
 			obj = ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().newInstance();
 		}
 $switch HasSubClasses yes implConstructByClassCodeIterSubClasses default empty
@@ -594,7 +595,7 @@ $		return( obj );
 		>$iterate TableSubClasses( each implConstructByClassCodeConstructAndIterate empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implConstructByClassCodeConstructAndIterate"
->		else if( argClassCode.equals( "$ClassCode$" ) ) {
+>		else if( backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 			obj = ((I$SchemaName$SchemaObj)schema).get$TableName$TableObj().newInstance();
 		}
 $switch HasSubClasses yes implConstructByClassCodeIterSubClasses default empty$</GenRule>
@@ -833,14 +834,11 @@ $implTableObjIndexAddToIndexes$
 			prev.read( true );
 		}</GenRule>
 
-	<GenRule GenDef="Table" Name="implCreateObjCopyClassCodeToPKey">
-		setClassCode( rec.getClassCode() );</GenRule>
-
 	<GenRule GenDef="IndexCol" Name="implCreateObjCopyPKeyAttr">
 		$maybeDerefPKey$set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implCreateObjRealiseIfMatches">
-		if( obj.getClassCode().equals( I$DefSchemaName$$TableName$.CLASS_CODE ) ) {
+		if( obj.getClassCode() == runtimeClassCode ) {
 			obj = (I$DefSchemaName$$TableName$Obj)(obj.realise());
 		}</GenRule>
 
@@ -1185,7 +1183,7 @@ $implReadAllObjComparator$
 		I$DefSchemaName$$TableName$By$Suffix$Key key = schema.get$DefSchemaName$BackingStore().getFactory$TableName$().newBy$Suffix$Key();$iterate Columns( each implReadObjByDuplicateIndexAssignKey )$
 		Map&lt;$poptop Table ICompactedPrimaryIndexClass$, I$poptop Table DefSchemaName$$poptop Table TableName$Obj&gt; dict;
 		if( indexBy$Suffix$ == null ) {
-			indexBy$Suffix$ = new HashMap&lt; I$poptop Table DefSchemaName$$poptop Table TableName$By$Suffix$Key,
+			indexBy$Suffix$ = new HashMap&lt; I$reference Table DefSchemaName$$reference Table TableName$By$Suffix$Key,
 				Map&lt; $poptop Table ICompactedPrimaryIndexClass$, I$poptop Table DefSchemaName$$poptop Table TableName$Obj &gt; &gt;();
 		}$implTableObjReadByInhDupIndexCalcDict$$implTableObjReadByThisDuplicateIndexReturnSortedList$
 	}
@@ -1452,9 +1450,7 @@ $implReadAllObjComparator$
 	public I$DefSchemaName$$TableName$Obj moveUp$TableName$( I$DefSchemaName$$TableName$Obj Obj ) {
 		I$DefSchemaName$$TableName$Obj obj = null;
 		if( null != Obj.getEdit() ) {
-			throw new CFLibUsageException( getClass(),
-				"moveUp$TableName$",
-				"You cannot move an object that is being edited" );
+			throw new CFLibCannotMoveEditedObjectException( getClass(),	"moveUp$TableName$" );
 		}
 		I$DefSchemaName$$TableName$ rec = schema.get$DefSchemaName$BackingStore().getTable$TableName$().moveRecUp( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implMoveRecPassCommaPKeyArg )$,
 			Obj.getRec().getRequiredRevision() );
@@ -1483,9 +1479,7 @@ $implReadAllObjComparator$
 	public I$DefSchemaName$$TableName$Obj moveDown$TableName$( I$DefSchemaName$$TableName$Obj Obj ) {
 		I$DefSchemaName$$TableName$Obj obj = null;
 		if( null != Obj.getEdit() ) {
-			throw new CFLibUsageException( getClass(),
-				"moveDown$TableName$",
-				"You cannot move an object that is being edited" );
+			throw new CFLibCannotMoveEditedObjectException( getClass(),	"moveDown$TableName$" );
 		}
 		I$DefSchemaName$$TableName$ rec = schema.get$DefSchemaName$BackingStore().getTable$TableName$().moveRecDown( schema.getAuthorization()$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implMoveRecPassCommaPKeyArg )$,
 			Obj.getRec().getRequiredRevision() );
@@ -1521,7 +1515,7 @@ $implReadAllObjComparator$
 		obj = (I$DefSchemaName$$TableName$Obj)Obj.realise();</GenRule>
 
 	<GenRule GenDef="Table" Name="implUpdateObjMaybeRealise">
-		if( Obj.getClassCode().equals( "$ClassCode$" ) ) {
+		if( Obj.getClassCode() == ((I$SchemaName$SchemaObj)getSchema()).get$TableName$TableObj().getClassCode() ) {
 			obj = (I$DefSchemaName$$TableName$Obj)Obj.realise();
 		}</GenRule>
 

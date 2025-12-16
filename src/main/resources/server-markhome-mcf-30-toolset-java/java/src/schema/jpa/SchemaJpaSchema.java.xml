@@ -59,131 +59,20 @@ import java.time.*;
 import java.util.*;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameJpa empty empty )$
 
 public class $SchemaName$JpaSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
 {$iterate SchemaRefs( each empty empty declTablePerms )$
-$iterate Types( empty empty each implJpaSchemaParseEnum )$
 $iterate SchemaTables( each declJpaSchemaTableTableMember )$
 $iterate SchemaTables( each declJpaSchemaTableFactoryMember )$
 $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXmlEncodeString$-->}
 </GenFile>
-
-	<GenRule GenDef="EnumDef" Name="implJpaSchemaParseEnum"
-		>$switch HasDefSchema yes empty default reallyImplJpaSchemaParseEnum$</GenRule>
-
-	<GenRule GenDef="EnumDef" Name="reallyImplJpaSchemaParseEnum"
-		>$implJpaSchemaParseEnumParse$$implJpaSchemaParseEnumOrdinal$</GenRule>
-
-	<GenRule GenDef="Value" Name="implJpaSchemaParseEnum"></GenRule>
-
-	<GenRule GenDef="EnumDef" Name="implJpaSchemaParseEnumParse">
-	static HashMap&lt;String,$Name$&gt; lookup$Name$ = null;
-
-	public static $Name$ parse$Name$( String value ) {
-		$Name$ retval = parse$Name$( I$DefSchemaName$Schema.$Name$.class.getName(), value );
-		return( retval );
-	}
-
-	public static $Name$ parse$Name$( String fieldOrClassName, String value ) {
-		final String S_ProcName = "parse$Name$";
-		if( lookup$Name$ == null ) {
-			HashMap&lt;String,$Name$&gt; newMap = new HashMap&lt;String,$Name$&gt;();$iterate Tag( each implJpaSchemaParseEnumAddTagToMap )$
-			lookup$Name$ = newMap;
-		}
-		$Name$ retval;
-		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
-			retval = null;
-		}
-		else {
-			retval = lookup$Name$.get( value );
-			if( retval == null ) {
-				throw new CFLibInvalidArgumentException ( fieldOrClassName,
-					fieldOrClassName,
-					S_ProcName,
-					1,
-					"value",
-					"Invalid enum limb argument " + value,
-					"Invalid enum limb argument " + value );
-			}
-		}
-		return( retval );
-	}
-</GenRule>
-
-	<GenRule GenDef="EnumTag" Name="implJpaSchemaParseEnumAddTagToMap">
-			newMap.put( "$Name$", $popto EnumDef Name$.$Name$ );</GenRule>
-
-	<GenRule GenDef="EnumDef" Name="implJpaSchemaParseEnumOrdinal">
-	static HashMap&lt;Integer,$Name$&gt; lookupOrdinal$Name$ = null;
-
-	public static $Name$ ordinalTo$Name$( String fieldOrClassName, Short value ) {
-		$Name$ retval;
-		if( value == null ) {
-			retval = null;
-		}
-		else {
-			retval = ordinalTo$Name$( fieldOrClassName, Integer.valueOf( value.shortValue() ) );
-		}
-		return( retval );
-	}
-
-	public static $Name$ ordinalTo$Name$( Short value ) {
-		$Name$ retval;
-		if( value == null ) {
-			retval = null;
-		}
-		else {
-			retval = ordinalTo$Name$( Integer.valueOf( value.shortValue() ) );
-		}
-		return( retval );
-	}
-
-	public static $Name$ ordinalTo$Name$( Integer value ) {
-		$Name$ retval;
-		if( value == null ) {
-			retval = null;
-		}
-		else {
-			retval = ordinalTo$Name$( I$DefSchemaName$Schema.$Name$.class.getName(), Integer.valueOf( value.shortValue() ) );
-		}
-		return( retval );
-	}
-
-	public static $Name$ ordinalTo$Name$( String fieldOrClassName, Integer value ) {
-		final String S_ProcName = "ordinalTo$Name$";
-		if( lookupOrdinal$Name$ == null ) {
-			HashMap&lt;Integer,$Name$&gt; newMap = new HashMap&lt;Integer,$Name$&gt;();$iterate Tag( each implJpaSchemaParseEnumAddOrdinalTagToMap )$
-			lookupOrdinal$Name$ = newMap;
-		}
-		$Name$ retval;
-		if( value == null ) {
-			retval = null;
-		}
-		else {
-			retval = lookupOrdinal$Name$.get( value );
-			if( retval == null ) {
-				throw new CFLibInvalidArgumentException ( fieldOrClassName,
-					fieldOrClassName,
-					S_ProcName,
-					1,
-					"value",
-					"Invalid enum ordinal argument " + value.toString(),
-					"Invalid enum ordinal argument " + value.toString() );
-			}
-		}
-		return( retval );
-	}
-</GenRule>
-
-	<GenRule GenDef="EnumTag" Name="implJpaSchemaParseEnumAddOrdinalTagToMap">
-			newMap.put( Integer.valueOf( $popto EnumDef Name$.$Name$.ordinal() ), $popto EnumDef Name$.$Name$ );</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="commaNewlineSchemaSchemaImplementsInterface">,
 		I$reference RefSchema SchemaName$Schema</GenRule>

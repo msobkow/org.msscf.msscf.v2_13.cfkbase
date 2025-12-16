@@ -57,9 +57,10 @@ import java.sql.*;
 import java.text.*;
 import java.time.*;
 import java.util.*;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import org.apache.commons.text.StringEscapeUtils;import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaEditObjImport$
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaEditObjImport$
 
 public class $SchemaName$$TableName$EditObj$switch HasSuperClassRelation yes implEditObjInheritSuperClass default empty$
 	implements I$SchemaName$$TableName$EditObj
@@ -142,7 +143,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 	<GenRule GenDef="Table" Name="implEditObjGetClassCode">
 	@Override
 	public int getClassCode() {
-		return( get$TableName$Table().getClassCode() );
+		return( ((I$DefSchemaName$SchemaObj)orig.getSchema()).get$TableName$TableObj().getClassCode() );
 	}
 </GenRule>
 
@@ -788,7 +789,7 @@ $		}
 
 	<GenRule GenDef="Table" Name="implEditObjCopyRecToPKey">
 	@Override
-	public void copyRecToPKey() {$switch HasClassCode yes implObjCopyRecClassCodeToPKey default empty$$reference PrimaryKeyIndex iterate Columns( lone implObjCopyRecAttrDirectToPKey each implObjCopyRecAttrToPKey empty empty )$
+	public void copyRecToPKey() {$reference PrimaryKeyIndex iterate Columns( lone implObjCopyRecAttrDirectToPKey each implObjCopyRecAttrToPKey empty empty )$
 	}
 </GenRule>
 
