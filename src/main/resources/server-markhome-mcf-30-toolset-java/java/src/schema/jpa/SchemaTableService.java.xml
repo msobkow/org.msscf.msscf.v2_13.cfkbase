@@ -99,7 +99,17 @@ $declServiceCreate$$declServiceUpdate$$declServiceTableFinders$$declServiceTable
 	public $poptop Table SchemaName$Jpa$poptop Table TableName$ find($reference BaseClass reference PrimaryKeyIndex iterate Columns(first declJpaServiceArgument each commaDeclJpaServiceArgument)$) {
 		return( $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.get($reference BaseClass reference PrimaryKeyIndex iterate Columns(first passArgDirect each commaPassArgDirect)$));
 	}
-$switch IsPrimaryIndexKeyAtomic yes empty default declJpaServiceFindByPKey$</GenRule>
+$switch IsPrimaryIndexKeyAtomic yes empty default declJpaServiceFindByPKey$
+	/**
+	 *	Retrieve all entities from the repository
+	 *
+	 *		@return The list of retrieved entities, which may be empty
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	public List&lt;$poptop Table SchemaName$Jpa$poptop Table TableName$&gt; findAll() {
+		return( $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.findAll() );
+	}
+</GenRule>
 
 	<GenRule GenDef="Table" Name="declJpaServiceFindByPKey">
 	/**
