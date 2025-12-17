@@ -33,24 +33,24 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="resources/application.properties"
+	Name="resources/user-default.properties"
 	Revision="3.0"
-	Descr="Application properties defaults">
+	Descr="User default properties">
 
-	<GenFile GenDef="SchemaDef" Name="fileResourcesApplicationProperties"
+	<GenFile GenDef="SchemaDef" Name="fileResourcesUserDefaultProperties"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/resources"
 		SubPackageName=""
-		ExpansionClassName="$SchemaName$ApplicationProperties"
-		ExpansionKeyName="$SchemaName$ApplicationProperties"
-		ExpansionFileName="application.properties"
->#application.properties for $SchemaName$$declApplicationPropertiesUserSettings$$iterate SchemaRefs( each declApplicationPropertiesDbSettings empty empty)$$declApplicationPropertiesDbSettings$$declApplicationPropertiesGlobalDefaults$$iterate SchemaRefs( each declApplicationPropertiesDbCompiledInMappings empty empty )$$declApplicationPropertiesDbCompiledInMappings$</GenFile>
+		ExpansionClassName="$SchemaName$UserDefaultProperties"
+		ExpansionKeyName="$SchemaName$UserDefaultProperties"
+		ExpansionFileName="user-default.properties"
+>#user-default.properties for $SchemaName$$declUserDefaultPropertiesUserSettings$$iterate SchemaRefs( each declUserDefaultPropertiesDbSettings empty empty)$$declUserDefaultPropertiesDbSettings$</GenFile>
 
-<GenRule GenDef="SchemaRef" Name="declApplicationPropertiesDbSettings">$reference RefSchema declApplicationPropertiesDbSettings$</GenRule>
+<GenRule GenDef="SchemaRef" Name="declUserDefaultPropertiesDbSettings">$reference RefSchema declUserDefaultPropertiesDbSettings$</GenRule>
 
-<GenRule GenDef="SchemaDef" Name="declApplicationPropertiesUserSettings">
+<GenRule GenDef="SchemaDef" Name="declUserDefaultPropertiesUserSettings">
 # user configuration options
 jakarta.persistence.jdbc.url=jdbc:postgresql://127.0.0.1:5432/myappdb
 jakarta.persistence.jdbc.user=postgres
@@ -58,7 +58,7 @@ jakarta.persistence.jdbc.password=mypgpassword
 hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 </GenRule>
 
-<GenRule GenDef="SchemaDef" Name="declApplicationPropertiesDbSettings">
+<GenRule GenDef="SchemaDef" Name="declUserDefaultPropertiesDbSettings">
 # $lower DbSchemaName$ specific user configuration options
 #$lower DbSchemaName$.jakarta.persistence.jdbc.url=jdbc:postgresql://127.0.0.1:5432/$lower DbSchemaName$
 #$lower DbSchemaName$.jakarta.persistence.jdbc.user=postgres
@@ -69,30 +69,8 @@ $lower DbSchemaName$.hibernate.hbm2ddl.auto=update
 $lower DbSchemaName$.hibernate.show_sql=false
 $lower DbSchemaName$.hibernate.format_sql=false
 $lower DbSchemaName$.hibernate.use_sql_comments=false
-$lower DbSchemaName$.hikari.maximum-pool-size=10
-$lower DbSchemaName$.hikari.minimum-idle=2
-</GenRule>
-
-<GenRule GenDef="SchemaDef" Name="declApplicationPropertiesGlobalDefaults">
-# Global defaults
-jakarta.persistence.create-database-schemas=true
-
-hibernate.hbm2ddl.auto=update
-hibernate.show_sql=false
-hibernate.format_sql=false
-hibernate.use_sql_comments=false
-
-hikari.auto-commit=false
-hikari.maximum-pool-size=10
-hikari.minimum-idle=2
-</GenRule>
-
-<GenRule GenDef="SchemaRef" Name="declApplicationPropertiesDbCompiledInMappings">$reference RefSchema declApplicationPropertiesDbCompiledInMappings$</GenRule>
-
-<GenRule GenDef="SchemaDef" Name="declApplicationPropertiesDbCompiledInMappings">
-# $DbSchemaName$ compiled-in mappings; do not change!
-$lower DbSchemaName$.hibernate.default_schema=$lower DbSchemaName$
-$lower DbSchemaName$.hikari.pool-name=$DbSchemaName$HikariCP
+#$lower DbSchemaName$.hikari.maximum-pool-size=10
+#$lower DbSchemaName$.hikari.minimum-idle=2
 </GenRule>
 
 </RuleSet>
