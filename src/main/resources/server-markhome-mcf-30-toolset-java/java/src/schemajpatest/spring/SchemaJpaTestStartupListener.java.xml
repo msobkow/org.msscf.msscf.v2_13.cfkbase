@@ -78,23 +78,23 @@ $iterate SchemaRefs( each execJpaTestTestRunner empty empty )$$execJpaTestTestRu
 	<GenRule GenDef="SchemaDef" Name="autowireJpaTestStartupListenerTestRunner">
     @Autowired
     // @Qualifier("Test$SchemaName$")
-    private $poptop SchemaDef SchemaName$JpaTest$DefSchemaName$ test$DefSchemaName$;
+    private $SchemaName$JpaTestTestSchema test$SchemaName$;
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="execJpaTestTestRunner">$reference RefSchema execJpaTestTestRunner$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="execJpaTestTestRunner">
-        System.err.println("Executing test$DefSchemaName$.performTests()");
+        System.err.println("Executing test$SchemaName$.performTests()");
         try {
-            String response = test$DefSchemaName$.performTests(null);
+            String response = test$SchemaName$.performTests(null);
             if (response != null) {
-                System.err.println("Test$DefSchemaName$.performTests() responded: " + response);
+                System.err.println("$SchemaName$JpaTestTestSchema.performTests() responded: " + response);
             }
             else {
-                System.err.println("Test$DefSchemaName$.performTests() did not return a response");
+                System.err.println("$SchemaName$JpaTestTestSchema.performTests() did not return a response");
             }
         }
         catch (Throwable th) {
-            System.err.println("test$DefSchemaName$.performTests() threw " + th.getClass().getCanonicalName() + " - " + th.getMessage());
+            System.err.println("test$SchemaName$.performTests() threw " + th.getClass().getCanonicalName() + " - " + th.getMessage());
             th.printStackTrace(System.err);
         }
 </GenRule>
