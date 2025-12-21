@@ -107,40 +107,58 @@ $iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaCla
 		final static HashMap&lt;Integer,I$SecSchemaName$Schema.ClassMapEntry&gt; mapRuntimeClassCodeToEntry = new HashMap&lt;&gt;();</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implISchemaClassMapAccessors">
-		public static int initClassMapEntries(int value) {$iterate SchemaRefs( each invokeSuperISchemaInitClassMapEntries empty empty )$
-			if (entries.isEmpty()) {
+		public static int doInitClassMapEntries(int value) {$iterate SchemaRefs( each invokeSuperISchemaInitClassMapEntries empty empty )$
+			if (I$SchemaName$Schema.entries.isEmpty()) {
 				I$SecSchemaName$Schema.ClassMapEntry entry;$iterate Tables( each maybeWireToISchemaEntries )$
-				for( I$SecSchemaName$Schema.ClassMapEntry cur: entries) {
+				for( I$SecSchemaName$Schema.ClassMapEntry cur: I$SchemaName$Schema.entries) {
 					cur.setRuntimeClassCode(value++);
 				}
-				mapBackingClassCodeToEntry.clear();
-				mapRuntimeClassCodeToEntry.clear();
-				for( I$SecSchemaName$Schema.ClassMapEntry cur: entries) {
-					mapBackingClassCodeToEntry.put(cur.getBackingClassCode(), cur);
-					mapRuntimeClassCodeToEntry.put(cur.getRuntimeClassCode(), cur);
+				I$SchemaName$Schema.mapBackingClassCodeToEntry.clear();
+				I$SchemaName$Schema.mapRuntimeClassCodeToEntry.clear();
+				for( I$SecSchemaName$Schema.ClassMapEntry cur: I$SchemaName$Schema.entries) {
+					I$SchemaName$Schema.mapBackingClassCodeToEntry.put(cur.getBackingClassCode(), cur);
+					I$SchemaName$Schema.mapRuntimeClassCodeToEntry.put(cur.getRuntimeClassCode(), cur);
 				}
 			}
 			return(value);
 		}
 		
 		public static I$SecSchemaName$Schema.ClassMapEntry getClassMapByBackingClassCode(int code) {
-			return(mapBackingClassCodeToEntry.get(code));
+			I$SecSchemaName$Schema.ClassMapEntry entry;$iterate SchemaRefs( each tryGetClassMapByBackingClassCode empty empty )$$tryGetClassMapByBackingClassCode$
+			return( null );
 		}
 		
 		public static I$SecSchemaName$Schema.ClassMapEntry getClassMapByRuntimeClassCode(int code) {
-			return(mapRuntimeClassCodeToEntry.get(code));
+			I$SecSchemaName$Schema.ClassMapEntry entry;$iterate SchemaRefs( each tryGetClassMapByRuntimeClassCode empty empty )$$tryGetClassMapByRuntimeClassCode$
+			return( null );
 		}
 		
+		public int initClassMapEntries(int value);
 		public void wireRecConstructors();
 </GenRule>
 
+	<GenRule GenDef="SchemaRef" Name="tryGetClassMapByBackingClassCode">$reference RefSchema tryGetClassMapByBackingClassCode$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="tryGetClassMapByBackingClassCode">
+			entry = I$SchemaName$Schema.mapBackingClassCodeToEntry.get(code);
+			if (entry != null) {
+				return( entry );
+			}</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="tryGetClassMapByRuntimeClassCode">$reference RefSchema tryGetClassMapByRuntimeClassCode$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="tryGetClassMapByRuntimeClassCode">
+			entry = I$SchemaName$Schema.mapRuntimeClassCodeToEntry.get(code);
+			if (entry != null) {
+				return( entry );
+			}</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="invokeSuperISchemaInitClassMapEntries">$reference RefSchema invokeSuperISchemaInitClassMapEntries$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="invokeSuperISchemaInitClassMapEntries">
-			value = I$SchemaName$Schema.initClassMapEntries(value);</GenRule>
+			value = I$SchemaName$Schema.doInitClassMapEntries(value);</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeWireToISchemaEntries">$switch HasDefSchema yes empty default wireToISchemaEntries$</GenRule>
 	<GenRule GenDef="Table" Name="wireToISchemaEntries">
 				entry = new I$SecSchemaName$Schema.ClassMapEntry(I$SchemaName$Schema.SCHEMA_NAME, "$TableName$", I$DefSchemaName$$TableName$.CLASS_CODE);
-				entries.add(entry);</GenRule>
+				I$SchemaName$Schema.entries.add(entry);</GenRule>
 
         <GenRule GenDef="Object" Name="SecSchemaName">$poptop SchemaDef iterate SchemaRefs( first emitSecSchemaName each empty empty emitOnlySchemaName )$</GenRule>
         <GenRule GenDef="SchemaRef" Name="emitSecSchemaName">$reference RefSchema SchemaName$</GenRule>
