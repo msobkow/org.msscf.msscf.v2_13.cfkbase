@@ -71,8 +71,32 @@ public class $SchemaName$JpaSchema
 {$iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate SchemaTables( each declJpaSchemaTableTableMember )$
 $iterate SchemaTables( each declJpaSchemaTableFactoryMember )$
-$implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXmlEncodeString$-->}
+$implJpaSchemaClassMapInitializers$$implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXmlEncodeString$-->}
 </GenFile>
+
+	<GenRule GenDef="SchemaDef" Name="implJpaSchemaClassMapInitializers">
+		@Override
+		public void wireRecConstructors() {
+			I$SecSchemaName$Schema.ClassMapEntry entry;$iterate Tables( each maybeWireJpaSchemaClassMapRecConstructor empty empty)$
+		}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="maybeWireJpaSchemaClassMapRecConstructor">$switch HasDefSchema yes empty default wireJpaSchemaClassMapRecConstructor$</GenRule>
+	<GenRule GenDef="Table" Name="wireJpaSchemaClassMapRecConstructor">
+			entry = I$SchemaName$Schema.getClassMapByBackingClassCode(I$DefSchemaName$$TableName$.CLASS_CODE);
+			if (entry != null) {
+				entry.setBackingRecConstructor( new BackingRecConstructor() {
+					@Override
+					public Object instantiate() {
+						I$DefSchemaName$$TableName$ ret = new $DefSchemaName$Jpa$TableName$();
+						return(ret);
+					}
+				});
+			}
+			else {
+				throw new CFLibNullArgumentException($SchemaName$JpaSchema.class, "wireRecConstructors", 0, "I$SchemaName$Schema.getClassMapByBackingClassCode(I$DefSchemaName$$TableName$.CLASS_CODE)[" + I$DefSchemaName$$TableName$.CLASS_CODE + "]");
+			}
+	</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="commaNewlineSchemaSchemaImplementsInterface">,
 		I$reference RefSchema SchemaName$Schema</GenRule>

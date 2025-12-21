@@ -68,8 +68,32 @@ public class $SchemaName$BuffSchema
 {$iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate SchemaTables( each declSchemaBuffTableTableMember )$
 $iterate SchemaTables( each declSchemaBuffTableFactoryMember )$
-$implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXmlEncodeString$}
+$implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXmlEncodeString$}
 </GenFile>
+
+	<GenRule GenDef="SchemaDef" Name="implBuffSchemaClassMapInitializers">
+		@Override
+		public void wireRecConstructors() {
+			I$SecSchemaName$Schema.ClassMapEntry entry;$iterate Tables( each maybeWireBuffSchemaClassMapRecConstructor empty empty)$
+		}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="maybeWireBuffSchemaClassMapRecConstructor">$switch HasDefSchema yes empty default wireBuffSchemaClassMapRecConstructor$</GenRule>
+	<GenRule GenDef="Table" Name="wireBuffSchemaClassMapRecConstructor">
+			entry = I$SchemaName$Schema.getClassMapByBackingClassCode(I$DefSchemaName$$TableName$.CLASS_CODE);
+			if (entry != null) {
+				entry.setBackingRecConstructor( new BackingRecConstructor() {
+					@Override
+					public Object instantiate() {
+						I$DefSchemaName$$TableName$ ret = new $DefSchemaName$Buff$TableName$();
+						return(ret);
+					}
+				});
+			}
+			else {
+				throw new CFLibNullArgumentException($SchemaName$BuffSchema.class, "wireRecConstructors", 0, "I$SchemaName$Schema.getClassMapByBackingClassCode(I$DefSchemaName$$TableName$.CLASS_CODE)[" + I$DefSchemaName$$TableName$.CLASS_CODE + "]");
+			}
+	</GenRule>
 
 	<GenRule GenDef="Object" Name="declTablePerms">
 	protected static I$SecSchemaName$TablePerms tablePerms;</GenRule>

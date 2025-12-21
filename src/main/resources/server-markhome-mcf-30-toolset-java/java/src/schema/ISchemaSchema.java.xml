@@ -63,8 +63,84 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 
 public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSchemaName each commaNewlinePackageSchemaName empty empty )$
-{$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$}
+{
+	public static final String SCHEMA_NAME = "$SchemaName$";
+	public static final String DBSCHEMA_NAME = "$DbSchemaName$";
+$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate Types( empty empty each declISchemaEnumType )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$}
 </GenFile>
+
+<GenRule GenDef="Object" Name="declISchemaClassMapEntry">
+	public static interface BackingRecConstructor {
+		public Object instantiate();
+	}
+	
+	public static class ClassMapEntry {
+		final String schemaName;
+		final String tableName;
+		final int backingClassCode;
+		int runtimeClassCode;
+		BackingRecConstructor cbRecConstructor;
+		
+		public ClassMapEntry(String schemaName, String tableName, int backingClassCode) {
+			this.schemaName = schemaName;
+			this.tableName = tableName;
+			this.backingClassCode = backingClassCode;
+			runtimeClassCode = 0;
+			cbRecConstructor = null;
+		}
+		
+		public String getSchemaName() { return schemaName; }
+		public String getTableName() { return tableName; }
+		public int getBackingClassCode() { return backingClassCode; }
+
+		public int getRuntimeClassCode() { return runtimeClassCode; }
+		public void setRuntimeClassCode(int runtimeClassCode) { this.runtimeClassCode = runtimeClassCode; }
+		
+		public BackingRecConstructor getBackingRecConstructor() { return cbRecConstructor; }
+		public void setBackingRecConstructor(BackingRecConstructor backingRecConstructor) { this.cbRecConstructor = backingRecConstructor; }
+	}
+</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="declISchemaClassMapData">
+		final static ArrayList&lt;I$SecSchemaName$Schema.ClassMapEntry&gt; entries = new ArrayList&lt;&gt;();
+		final static HashMap&lt;Integer,I$SecSchemaName$Schema.ClassMapEntry&gt; mapBackingClassCodeToEntry = new HashMap&lt;&gt;();
+		final static HashMap&lt;Integer,I$SecSchemaName$Schema.ClassMapEntry&gt; mapRuntimeClassCodeToEntry = new HashMap&lt;&gt;();</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="implISchemaClassMapAccessors">
+		public static int initClassMapEntries(int value) {$iterate SchemaRefs( each invokeSuperISchemaInitClassMapEntries empty empty )$
+			if (entries.isEmpty()) {
+				I$SecSchemaName$Schema.ClassMapEntry entry;$iterate Tables( each maybeWireToISchemaEntries )$
+				for( I$SecSchemaName$Schema.ClassMapEntry cur: entries) {
+					cur.setRuntimeClassCode(value++);
+				}
+				mapBackingClassCodeToEntry.clear();
+				mapRuntimeClassCodeToEntry.clear();
+				for( I$SecSchemaName$Schema.ClassMapEntry cur: entries) {
+					mapBackingClassCodeToEntry.put(cur.getBackingClassCode(), cur);
+					mapRuntimeClassCodeToEntry.put(cur.getRuntimeClassCode(), cur);
+				}
+			}
+			return(value);
+		}
+		
+		public static I$SecSchemaName$Schema.ClassMapEntry getClassMapByBackingClassCode(int code) {
+			return(mapBackingClassCodeToEntry.get(code));
+		}
+		
+		public static I$SecSchemaName$Schema.ClassMapEntry getClassMapByRuntimeClassCode(int code) {
+			return(mapRuntimeClassCodeToEntry.get(code));
+		}
+		
+		public void wireRecConstructors();
+</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="invokeSuperISchemaInitClassMapEntries">
+			value = I$SchemaName$Schema.initClassMapEntries(value);</GenRule>
+
+	<GenRule GenDef="Table" Name="maybeWireToISchemaEntries">$switch HasDefSchema yes empty default wireToISchemaEntries$</GenRule>
+	<GenRule GenDef="Table" Name="wireToISchemaEntries">
+				entry = new I$SecSchemaName$Schema.ClassMapEntry(I$SchemaName$Schema.SCHEMA_NAME, "$TableName$", I$DefSchemaName$$TableName$.CLASS_CODE);
+				entries.add(entry);</GenRule>
 
         <GenRule GenDef="Object" Name="SecSchemaName">$poptop SchemaDef iterate SchemaRefs( first emitSecSchemaName each empty empty emitOnlySchemaName )$</GenRule>
         <GenRule GenDef="SchemaRef" Name="emitSecSchemaName">$reference RefSchema SchemaName$</GenRule>
