@@ -96,7 +96,7 @@ $declTableReaders$$declTableLockers$$declTableDeleters$
 	 *
 	 *		@return The retrieved entity, usually from the JPA cache, or null if no such entity exists.
 	 */
-	@Query("select r from $poptop Table SchemaName$Jpa$poptop Table TableName$ r where $reference BaseClass reference PrimaryKeyIndex iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
+	@Query("select r from $poptop Table DefSchemaName$Jpa$TableName$ r where $reference BaseClass reference PrimaryKeyIndex iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
 	$poptop Table SchemaName$Jpa$poptop Table TableName$ get($reference BaseClass reference PrimaryKeyIndex iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
 $switch IsPrimaryIndexKeyAtomic yes empty default declJpaRepositoryGetByPKeyObj$</GenRule>
 
@@ -132,7 +132,7 @@ $iterate Index(each maybeDeclJpaRepositoryLocker empty empty)$</GenRule>
 	 */
 	@Transactional
 	@Lock(LockModeType.WRITE)
-	@Query("select r from $poptop Table SchemaName$Jpa$poptop Table TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
+	@Query("select r from $poptop Table DefSchemaName$Jpa$TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
 	$poptop Table SchemaName$Jpa$poptop Table TableName$ lockBy$Suffix$($iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
 $switch IsPrimaryIndexKeyAtomic yes empty default declJpaRepositoryLockPKeyByObj$</GenRule>
 
@@ -160,7 +160,7 @@ $switch IsPrimaryIndexKeyAtomic yes empty default declJpaRepositoryLockPKeyByObj
 	 */
 	@Transactional
 	@Lock(LockModeType.WRITE)
-	@Query("select r from $poptop Table SchemaName$Jpa$poptop Table TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
+	@Query("select r from $poptop Table DefSchemaName$Jpa$TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
 	$poptop Table SchemaName$Jpa$poptop Table TableName$ lockBy$Suffix$($iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
 
 	/**
@@ -184,7 +184,7 @@ $switch IsPrimaryIndexKeyAtomic yes empty default declJpaRepositoryLockPKeyByObj
 	 */
 	@Transactional
 	@Lock(LockModeType.WRITE)
-	@Query("select r from $poptop Table SchemaName$Jpa$poptop Table TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
+	@Query("select r from $poptop Table DefSchemaName$Jpa$TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
 	List&lt;$poptop Table SchemaName$Jpa$poptop Table TableName$&gt; lockBy$Suffix$($iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
 
 	/**
@@ -215,7 +215,7 @@ $iterate Index(each maybeDeclJpaRepositoryDeleter empty empty)$</GenRule>
 	 */
 	@Transactional
 	@Modifying
-	@Query("delete from $poptop Table SchemaName$Jpa$poptop Table TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
+	@Query("delete from $poptop Table DefSchemaName$Jpa$TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
 	void deleteBy$IndexName$($iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
 $switch IsPrimaryIndexKeyAtomic yes empty default declJpaRepositoryDeleteByPKeyObj$</GenRule>
 
@@ -237,7 +237,7 @@ $switch IsPrimaryIndexKeyAtomic yes empty default declJpaRepositoryDeleteByPKeyO
 	 */
 	@Transactional
 	@Modifying
-	@Query("delete from $poptop Table SchemaName$Jpa$poptop Table TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
+	@Query("delete from $poptop Table DefSchemaName$Jpa$TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
 	void deleteBy$IndexName$($iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
 
 	/**
@@ -275,7 +275,7 @@ $iterate Index(each maybeDeclJpaRepositoryReader empty empty)$</GenRule>
 	 *
 	 *		@return The found entity, typically from the JPA cache, or null if no such entity exists.
 	 */
-	@Query("select r from $poptop Table SchemaName$Jpa$poptop Table TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
+	@Query("select r from $poptop Table DefSchemaName$Jpa$TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
 	$poptop Table SchemaName$Jpa$poptop Table TableName$ findBy$Suffix$($iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
 
 	/**
@@ -291,7 +291,8 @@ $iterate Index(each maybeDeclJpaRepositoryReader empty empty)$</GenRule>
 </GenRule>
 
 	<GenRule GenDef="IndexCol" Name="commaDeclJpaRepositoryQueryColumnArg"> and $declJpaRepositoryQueryColumnArg$</GenRule>
-	<GenRule GenDef="IndexCol" Name="declJpaRepositoryQueryColumnArg">r.$effDbColName$ = :$leadlower reference Column Name$</GenRule>
+	<!--GenRule GenDef="IndexCol" Name="declJpaRepositoryQueryColumnArg">r.$effDbColName$ = :$leadlower reference Column Name$</GenRule-->
+	<GenRule GenDef="IndexCol" Name="declJpaRepositoryQueryColumnArg">r.$leadlower reference Column implColumnAttrOptionality$$reference Column Name$ = :$leadlower reference Column Name$</GenRule>
 
 	<GenRule GenDef="Index" Name="declJpaRepositoryReadList">
 	/**
@@ -300,7 +301,7 @@ $iterate Index(each maybeDeclJpaRepositoryReader empty empty)$</GenRule>
 	 *
 	 *		@return List&amp;lt;$poptop Table SchemaName$Jpa$poptop Table TableName$&amp;gt; of the found entities, typically from the JPA cache, or an empty list if no such entities exist.
 	 */
-	@Query("select r from $poptop Table SchemaName$Jpa$poptop Table TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
+	@Query("select r from $poptop Table DefSchemaName$Jpa$TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
 	List&lt;$poptop Table SchemaName$Jpa$poptop Table TableName$&gt; findBy$Suffix$($iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
 
 	/**
