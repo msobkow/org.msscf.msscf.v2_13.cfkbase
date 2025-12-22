@@ -82,7 +82,7 @@ public class $poptop SchemaDef SchemaName$Jpa$TableName$HPKey$switch HasDefSchem
 	@Column(name="auditAction", nullable=false)
 	protected short auditActionId;
 
-	@Column(name="revision", nullable=false)
+	@Column(name="requiredRevision", nullable=false)
 	protected int requiredRevision;
 
 	@AttributeOverrides({
@@ -94,6 +94,15 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 
 	<GenRule GenDef="Table" Name="SchemaTableHPKeyInheritDef">
 	extends $DefSchemaName$Jpa$TableName$HPKey</GenRule>
+
+	<GenRule GenDef="Index" Name="implJpaHPKeyAttributeOverrides">
+	@AttributeOverrides({
+		@AttributeOverride(name="auditClusterId", column = @Column( name="auditClusterId", nullable=false ) ),
+		@AttributeOverride(name="auditStamp", column = @Column( name="auditStamp", nullable=false ) ),
+		@AttributeOverride(name="auditAction", column = @Column( name="auditAction", nullable=false ) ),
+		@AttributeOverride(name="requiredRevision", column = @Column( name="requiredRevision", nullable=false ) ),
+		@AttributeOverride(name="auditSessionId", column = @Column( name="auditSessionId", nullable=false, length=CFLibDbKeyHash256.HASH_LENGTH ) )$iterate Columns( each implJpaAttributeCommaColumnOverride )$
+	})</GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaTableHPKeyImplementsComparable">
 	implements I$DefSchemaName$$TableName$HPKey, Comparable&lt;Object&gt;, Serializable</GenRule>
@@ -287,7 +296,7 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 		String ret = " auditClusterId=\"" + auditClusterId + "\\""
 			+ " auditStamp=\\"" + (auditStamp != null ? CFLibXmlUtil.formatTimestamp(auditStamp) : "null") + "\\""
 			+ " auditAction=\\"" + auditActionId + "\\""
-			+ " revision=\\"" + requiredRevision + "\\""
+			+ " requiredRevision=\\"" + requiredRevision + "\\""
 			+ " auditSessionId=\\"" + (getAuditSessionId() != null ? getAuditSessionId().toString() : "null") + "\\""$iterate Columns( each implToStringEmitXmlAttr )$;
 		return( ret );
 	}

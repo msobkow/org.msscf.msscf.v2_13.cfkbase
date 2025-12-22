@@ -95,11 +95,11 @@ $implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAcces
     <GenRule GenDef="Index" Name="jpaTableHOrdinaryIndexAnnotation">
         @Index(name = "$IndexName$_h", columnList = "$jpaTableHIndexColumnList$", unique = $switch IsUnique yes true default false$)</GenRule>
     <GenRule GenDef="Index" Name="jpaTableHPrimaryIndexAnnotation">
-        @Index(name = "$IndexName$_h", columnList = "auditClusterId, auditStamp, auditAction, revision, auditSessionId, $jpaTableHIndexColumnList$", unique = true)</GenRule>
+        @Index(name = "$IndexName$_h", columnList = "auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, $jpaTableHIndexColumnList$", unique = true)</GenRule>
     <GenRule GenDef="Index" Name="jpaTableHIndexColumnList">$iterate Columns( each CommaDbColumnName first DbColumnName empty empty )$</GenRule>
 
-    <GenRule GenDef="Table" Name="implHJPAPKeyAttribute">
-    @Id
+    <GenRule GenDef="Table" Name="implHJPAPKeyAttribute">$reference PrimaryKeyIndex implJpaHPKeyAttributeOverrides$
+    @EmbeddedId
     protected $reference BaseClass DefSchemaName$Jpa$reference BaseClass TableName$HPKey pkey;</GenRule>
 
     <GenRule GenDef="Table" Name="maybeImplHJPAOptImplAuditColumnAccessors">$switch HasSuperClassRelation no implHJPAOptImplAuditColumnAccessors default empty$</GenRule>

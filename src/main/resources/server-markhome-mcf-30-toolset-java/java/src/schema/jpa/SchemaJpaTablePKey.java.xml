@@ -343,7 +343,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	protected $reference Column implJavaAtomType$ $lower reference Column implColumnAttrOptionality$$reference Column Name$;</GenRule>
 
 	<GenRule GenDef="Index" Name="implColumnJPAEmbeddedIdAttr">
-	// Embedded id's are package-accessible so that the Repository can dereference the attributes of the primary key
+	// Embedded id's are package-accessible so that the Repository can dereference the attributes of the primary key$implJpaIndexAttributeOverrides$
 	@EmbeddedId
 	$reference Table reference BaseClass DefSchemaName$Jpa$reference Table reference BaseClass TableName$PKey pkey = new $reference Table reference BaseClass DefSchemaName$Jpa$reference Table reference BaseClass TableName$PKey();</GenRule>
 
@@ -368,6 +368,133 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 
 	<GenRule GenDef="Atom" Name="implJpaColumnAttr">$implColumnAttrJpaBinding$
 	protected $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$;</GenRule>
+
+	<GenRule GenDef="Index" Name="implJpaIndexAttributeOverrides">
+	@AttributeOverrides({$iterate Columns( first implJpaAttributeColumnOverride each implJpaAttributeCommaColumnOverride )$
+	})</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implJpaAttributeCommaColumnOverride">,$implJpaAttributeColumnOverride$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implJpaAttributeColumnOverride"
+		>$switch BaseModelAtomClass
+			BlobDef implJpaAttrColumnOverrideBlob
+			BoolDef implJpaAttrColumnOverrideBool
+			EnumDef implJpaAttrColumnOverrideEnum
+			Int16Def implJpaAttrColumnOverrideInt16
+			Int32Def implJpaAttrColumnOverrideInt32
+			Int64Def implJpaAttrColumnOverrideInt64
+			UInt16Def implJpaAttrColumnOverrideUInt16
+			UInt32Def implJpaAttrColumnOverrideUInt32
+			UInt64Def implJpaAttrColumnOverrideUInt64
+			Id16Gen implJpaAttrColumnOverrideInt16
+			Id32Gen implJpaAttrColumnOverrideInt32
+			Id64Gen implJpaAttrColumnOverrideInt64
+			FloatDef implJpaAttrColumnOverrideFloat
+			DoubleDef implJpaAttrColumnOverrideDouble
+			NumberDef implJpaAttrColumnOverrideNumber
+			StringDef implJpaAttrColumnOverrideString
+			TokenDef implJpaAttrColumnOverrideToken
+			NmTokenDef implJpaAttrColumnOverrideNmToken
+			NmTokensDef implJpaAttrColumnOverrideNmTokens
+			TextDef implJpaAttrColumnOverrideText
+			DateDef implJpaAttrColumnOverrideDate
+			TimeDef implJpaAttrColumnOverrideTime
+			TimestampDef implJpaAttrColumnOverrideTimestamp
+			TZDateDef implJpaAttrColumnOverrideTZDate
+			TZTimeDef implJpaAttrColumnOverrideTZTime
+			TZTimestampDef implJpaAttrColumnOverrideTZTimestamp
+			DbKeyHash128Gen implJpaAttrColumnOverrideDbKeyHash128
+			DbKeyHash160Gen implJpaAttrColumnOverrideDbKeyHash160
+			DbKeyHash224Gen implJpaAttrColumnOverrideDbKeyHash224
+			DbKeyHash256Gen implJpaAttrColumnOverrideDbKeyHash256
+			DbKeyHash384Gen implJpaAttrColumnOverrideDbKeyHash384
+			DbKeyHash512Gen implJpaAttrColumnOverrideDbKeyHash512
+			DbKeyHash128Def implJpaAttrColumnOverrideDbKeyHash128
+			DbKeyHash160Def implJpaAttrColumnOverrideDbKeyHash160
+			DbKeyHash224Def implJpaAttrColumnOverrideDbKeyHash224
+			DbKeyHash256Def implJpaAttrColumnOverrideDbKeyHash256
+			DbKeyHash384Def implJpaAttrColumnOverrideDbKeyHash384
+			DbKeyHash512Def implJpaAttrColumnOverrideDbKeyHash512
+			Uuid6Gen implJpaAttrColumnOverrideUuid6
+			Uuid6Def implJpaAttrColumnOverrideUuid6
+			UuidGen implJpaAttrColumnOverrideUuid
+			UuidDef implJpaAttrColumnOverrideUuid
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideBlob">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=$MaxLen$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideBool">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideEnum">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideInt16">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideInt32">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideInt64">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideUInt16">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideUInt32">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideUInt64">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideFloat">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDouble">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideNumber">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, scale=$Digits$, precision=$Precis$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideString">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=$MaxLen$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideToken">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=$MaxLen$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideNmToken">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=$MaxLen$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideNmTokens">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=$MaxLen$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideText">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=$MaxLen$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDate">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideTime">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideTimestamp">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideTZDate">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideTZTime">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideTZTimestamp">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
+	<!-- The DbKeyHash overrides might need to override name="bytes" instead of name="$DbColumnName$" -->
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash128">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash128.HASH_LENGTH ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash160">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash160.HASH_LENGTH ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash224">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash224.HASH_LENGTH ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash256">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash256.HASH_LENGTH ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash384">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash384.HASH_LENGTH ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash512">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash512.HASH_LENGTH ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideUuid6">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibUuid6.TOTAL_BYTES ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideUuid">
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=16 ) )</GenRule>
+
+
+
+
+
+
+
+
+
+
+
 
 	<GenRule GenDef="IndexCol" Name="implColumnAttrJpaBinding"
 		>$switch BaseModelAtomClass
