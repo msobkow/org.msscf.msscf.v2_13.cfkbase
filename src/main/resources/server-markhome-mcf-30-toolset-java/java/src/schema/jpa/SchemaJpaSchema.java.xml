@@ -84,6 +84,20 @@ $implJpaSchemaClassMapInitializers$$implJpaSchemaMoreMethods$$implJpaSchemaTable
 		public void wireRecConstructors() {
 			I$SecSchemaName$Schema.ClassMapEntry entry;$iterate Tables( each maybeWireJpaSchemaClassMapRecConstructor empty empty)$
 		}
+		$iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJpaSchemaGetSchemaNameSchema$</GenRule>
+
+		<GenRule GenDef="SchemaRef" Name="implJpaSchemaGetSchemaNameSchema">$reference RefSchema implJpaSchemaGetSchemaNameSchema$</GenRule>
+		<GenRule GenDef="SchemaDef" Name="implJpaSchemaGetSchemaNameSchema">
+		@Override		
+		public I$SchemaName$Schema get$SchemaName$Schema() {
+			return( I$SchemaName$Schema.getBacking$SchemaName$() );
+		}
+		
+		@Override
+		public void set$SchemaName$Schema(I$SchemaName$Schema schema) {
+			I$SchemaName$Schema.setBacking$SchemaName$(schema);
+			schema.wireRecConstructors();
+		}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="maybeWireJpaSchemaClassMapRecConstructor">$switch HasDefSchema yes empty default wireJpaSchemaClassMapRecConstructor$</GenRule>

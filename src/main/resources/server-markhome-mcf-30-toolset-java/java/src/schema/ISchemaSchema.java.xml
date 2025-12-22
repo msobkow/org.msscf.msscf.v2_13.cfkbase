@@ -56,6 +56,7 @@ import java.io.Serializable;
 import java.math.*;
 import java.time.*;
 import java.util.*;
+import java.util.concurrent.atomic.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
@@ -104,9 +105,21 @@ $iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaCla
 	<GenRule GenDef="SchemaDef" Name="declISchemaClassMapData">
 		final static ArrayList&lt;I$SecSchemaName$Schema.ClassMapEntry&gt; entries = new ArrayList&lt;&gt;();
 		final static HashMap&lt;Integer,I$SecSchemaName$Schema.ClassMapEntry&gt; mapBackingClassCodeToEntry = new HashMap&lt;&gt;();
-		final static HashMap&lt;Integer,I$SecSchemaName$Schema.ClassMapEntry&gt; mapRuntimeClassCodeToEntry = new HashMap&lt;&gt;();</GenRule>
+		final static HashMap&lt;Integer,I$SecSchemaName$Schema.ClassMapEntry&gt; mapRuntimeClassCodeToEntry = new HashMap&lt;&gt;();
+		final static AtomicReference&lt;I$SchemaName$Schema&gt; backing$SchemaName$ = new AtomicReference&lt;&gt;();</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implISchemaClassMapAccessors">
+		public static I$SchemaName$Schema getBacking$SchemaName$() {
+			return( I$SchemaName$Schema.backing$SchemaName$.get() );
+		}
+		
+		public static void setBacking$SchemaName$(I$SchemaName$Schema backingSchema) {
+			I$SchemaName$Schema.backing$SchemaName$.set(backingSchema);
+		}
+		
+		public I$SchemaName$Schema get$SchemaName$Schema();
+		public void set$SchemaName$Schema(I$SchemaName$Schema schema);
+		
 		public static int doInitClassMapEntries(int value) {$iterate SchemaRefs( each invokeSuperISchemaInitClassMapEntries empty empty )$
 			if (I$SchemaName$Schema.entries.isEmpty()) {
 				I$SecSchemaName$Schema.ClassMapEntry entry;$iterate Tables( each maybeWireToISchemaEntries )$
