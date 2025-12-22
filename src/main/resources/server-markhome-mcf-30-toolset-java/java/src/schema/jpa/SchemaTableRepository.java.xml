@@ -292,7 +292,10 @@ $iterate Index(each maybeDeclJpaRepositoryReader empty empty)$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="commaDeclJpaRepositoryQueryColumnArg"> and $declJpaRepositoryQueryColumnArg$</GenRule>
 	<!--GenRule GenDef="IndexCol" Name="declJpaRepositoryQueryColumnArg">r.$effDbColName$ = :$leadlower reference Column Name$</GenRule-->
-	<GenRule GenDef="IndexCol" Name="declJpaRepositoryQueryColumnArg">r.$leadlower reference Column implColumnAttrOptionality$$reference Column Name$ = :$leadlower reference Column Name$</GenRule>
+	<GenRule GenDef="IndexCol" Name="declJpaRepositoryQueryColumnArg">$switch ColumnInPrimaryIndex yes maybeDerefJpaRepositoryQueryColumnArg default simpleJpaRepositoryQueryColumnArg$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeDerefJpaRepositoryQueryColumnArg">$switch IsPrimaryIndexKeyAtomic yes simpleJpaRepositoryQueryColumnArg default derefJpaRepositoryQueryColumnArg$</GenRule>
+	<GenRule GenDef="IndexCol" Name="simpleJpaRepositoryQueryColumnArg">r.$leadlower reference Column implColumnAttrOptionality$$reference Column Name$ = :$leadlower reference Column Name$</GenRule>
+	<GenRule GenDef="IndexCol" Name="derefJpaRepositoryQueryColumnArg">r.pkey.$leadlower reference Column implColumnAttrOptionality$$reference Column Name$ = :$leadlower reference Column Name$</GenRule>
 
 	<GenRule GenDef="Index" Name="declJpaRepositoryReadList">
 	/**
