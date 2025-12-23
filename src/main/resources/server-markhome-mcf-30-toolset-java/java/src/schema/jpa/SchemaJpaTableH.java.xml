@@ -73,14 +73,14 @@ import $reference ManufacturingSchema lower JavaPackage$.$lower reference Manufa
     name = "$DbTableName$_h", schema = "$reference ManufacturingSchema DbSchemaName$",
     indexes = {$iterate Index( each commaJpaTableHIndexAnnotation first jpaTableHIndexAnnotation empty empty )$
     }
-)$switch MemberOfClassHierarchy yes jpaInheritanceTablePerClass default empty$$jpaTransactionalSupports$$jpaPersistenceContext$
+)$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$jpaPersistenceContext$
 public class $SchemaName$Jpa$TableName$H$switch HasSuperClassRelation yes implHJPAInheritSuper default empty$$switch HasDefSchema yes empty default maybeImplSchemaTableHComparable$
 {$switch HasSuperClassRelation yes empty default implHJPAPKeyAttribute$$switch HasSuperClassRelation yes empty default implJpaOptAuditColumnAttr$$implHJPADataAttr$
 $implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAccessors$$switch HasSuperClassRelation no implHJPAColumnGetterSetters default implHJPADataGetterSetters$$implHJPAEquals$$implHJPAGetHashCode$$implHJPACompareTo$$implHJPASet$$implSchemaJpaTableHToString$}
 </GenFile>
 
-    <GenRule GenDef="Table" Name="jpaInheritanceTablePerClass">
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)$baseTableJpaDiscriminatorColumn$</GenRule>
+    <!--GenRule GenDef="Table" Name="jpaInheritanceJoined">
+@Inheritance(strategy = InheritanceType.JOINED)$baseTableJpaDiscriminatorColumn$</GenRule-->
 
     <GenRule GenDef="Table" Name="maybeImplSchemaTableHComparable">$switch HasSuperClassRelation yes implJpaSchemaTableHComparableTable default implJpaSchemaTableHComparable$</GenRule>
 
