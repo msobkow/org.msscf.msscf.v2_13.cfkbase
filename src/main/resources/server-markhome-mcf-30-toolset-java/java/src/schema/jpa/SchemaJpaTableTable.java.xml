@@ -61,6 +61,19 @@ import java.time.*;
 import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$$JavaTableImport$
 
@@ -70,12 +83,17 @@ import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaR
 public class $SchemaName$Jpa$TableName$Table implements I$SchemaName$$TableName$Table
 {
 	protected $SchemaName$JpaSchema schema;
-$implJpaConstructTable$
-$implJpaCreateTable$
-$implJpaUpdateTable$
-$implJpaDeleteTable$
-$implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default implJpaReadTableDerivedByPKeyArgs$$implJpaLockTableDerivedByPKey$$implJpaReadAllTableDerived$$implJpaReadTableDerivedByIndexes$$implJpaReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default implJpaReadTableRecByPKeyArgs$$implJpaLockTableRecByPKey$$implJpaReadAllTableRec$$switch PageData yes implJpaPageAllTableRec default empty$$implJpaReadTableRecByIndexes$$switch PageData yes implJpaPageTableRecByIndexes default empty$$switch HasChain yes implJpaMoveUpTableRec default empty$$switch HasChain yes implJpaMoveDownTableRec default empty$$iterate ServerMethods( each implJpaServerMethod empty empty )$$JavaTableInterface$}
+    @Autowired
+    @Qualifier("$lower DbSchemaName$EntityManagerFactory")
+    private LocalContainerEntityManagerFactoryBean $lower SchemaName$EntityManagerFactory;$reference SchemaDef iterate Tables( each maybeAutowireSchemaJpaTableTableService empty empty )$
+$implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTable$$implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default implJpaReadTableDerivedByPKeyArgs$$implJpaLockTableDerivedByPKey$$implJpaReadAllTableDerived$$implJpaReadTableDerivedByIndexes$$implJpaReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default implJpaReadTableRecByPKeyArgs$$implJpaLockTableRecByPKey$$implJpaReadAllTableRec$$switch PageData yes implJpaPageAllTableRec default empty$$implJpaReadTableRecByIndexes$$switch PageData yes implJpaPageTableRecByIndexes default empty$$switch HasChain yes implJpaMoveUpTableRec default empty$$switch HasChain yes implJpaMoveDownTableRec default empty$$iterate ServerMethods( each implJpaServerMethod empty empty )$$JavaTableInterface$}
 </GenFile>
+
+<GenRule GenDef="Table" Name="maybeAutowireSchemaJpaTableTableService">$switch HasDefSchema yes empty default autowireSchemaJpaTableTableService$</GenRule>
+<GenRule GenDef="Table" Name="autowireSchemaJpaTableTableService">
+	@Autowired
+	private $SchemaName$Jpa$TableName$Service $lower TableName$Service;
+</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaConstructTable">
 	public $SchemaName$Jpa$TableName$Table(I$DefSchemaName$Schema schema) {
@@ -165,7 +183,7 @@ $implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default
 	public I$poptop Table DefSchemaName$$poptop Table TableName$ readDerived( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "readDerived");
+		return( $lower poptop Table TableName$Service.find(PKey) );
 	}
 </GenRule>
 
@@ -181,7 +199,7 @@ $implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default
 	@Override
 	public I$poptop Table DefSchemaName$$poptop Table TableName$ readDerived( I$SecSchemaName$Authorization Authorization$reference PrimaryKeyIndex iterate Columns( each implJpaCommaColumnArg )$ )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "readDerived");
+		return( $lower poptop Table TableName$Service.find($reference PrimaryKeyIndex iterate Columns( first implJpaPassColumnArg each implJpaCommaPassColumnArg )$) );
 	}
 </GenRule>
 
@@ -200,7 +218,7 @@ $implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default
 	public I$poptop Table DefSchemaName$$poptop Table TableName$ lockDerived( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "lockDerived");
+		return( $lower poptop Table TableName$Service.lockBy$reference BaseClass reference PrimaryKeyIndex Suffix$(PKey) );
 	}
 </GenRule>
 
@@ -214,7 +232,13 @@ $implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default
 	 */
 	@Override
 	public I$DefSchemaName$$TableName$[] readAllDerived( I$SecSchemaName$Authorization Authorization ) {
-		throw new CFLibNotImplementedYetException(getClass(), "readAllDerived");
+		List&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; results = $lower poptop Table TableName$Service.findAll();
+		I$DefSchemaName$$poptop Table TableName$[] retset = new I$DefSchemaName$$poptop Table TableName$[results.size()];
+		int idx = 0;
+		for ($DefSchemaName$Jpa$poptop Table TableName$ cur: results) {
+			retset[idx++] = cur;
+		}
+		return( retset );
 	}
 </GenRule>
 
@@ -252,10 +276,13 @@ $implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default
 	@Override
 	public I$poptop Table DefSchemaName$$poptop Table TableName$ readDerivedBy$implJpaReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "readDerivedBy$implJpaReadTableSuffix$");
+		return( $lower poptop Table TableName$Service.$switch IsPrimaryIndex yes implReadTableDerivedByUniquePKeyIndex default implReadTableDerivedByUniqueOtherIndex$($iterate Columns( first implJpaPassColumnArg each implJpaCommaPassColumnArg )$) );
 	}
 </GenRule>
 
+	<GenRule GenDef="Index" Name="implReadTableDerivedByUniquePKeyIndex">find</GenRule>
+	<GenRule GenDef="Index" Name="implReadTableDerivedByUniqueOtherIndex">findBy$implJpaReadTableSuffix$</GenRule>
+	
 	<GenRule GenDef="Index" Name="implJpaReadTableDerivedByDuplicateIndex">
 	/**
 	 *	Read an array of the derived $poptop Table TableName$ record instances identified by the duplicate key $Suffix$.
@@ -267,7 +294,13 @@ $implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default
 	@Override
 	public I$DefSchemaName$$poptop Table TableName$[] readDerivedBy$implJpaReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "readDerivedBy$implJpaReadTableSuffix$");
+		List&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; results = $lower poptop Table TableName$Service.findBy$implJpaReadTableSuffix$($iterate Columns( first implJpaPassColumnArg each implJpaCommaPassColumnArg )$);
+		I$DefSchemaName$$poptop Table TableName$[] retset = new I$DefSchemaName$$poptop Table TableName$[results.size()];
+		int idx = 0;
+		for ($DefSchemaName$Jpa$poptop Table TableName$ cur: results) {
+			retset[idx++] = cur;
+		}
+		return( retset );
 	}
 </GenRule>
 
@@ -480,11 +513,21 @@ $implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default
 		$implJpaColumnArg$</GenRule>
 
 	<GenRule GenDef="TableCol" Name="implJpaColumnArg"
-		>$implJavaAtomType$ $Name$</GenRule>
+		>$implJavaAtomType$ arg$Name$</GenRule>
 	<GenRule GenDef="Atom" Name="implJpaColumnArg"
-		>$implJavaAtomType$ $Name$</GenRule>
+		>$implJavaAtomType$ arg$Name$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implJpaColumnArg"
 		>$reference Column implJpaColumnArg$</GenRule>
+
+	<GenRule GenDef="Object" Name="implJpaCommaPassColumnArg">,
+		$implJpaPassColumnArg$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="implJpaPassColumnArg"
+		>arg$Name$</GenRule>
+	<GenRule GenDef="Atom" Name="implJpaPassColumnArg"
+		>arg$Name$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaPassColumnArg"
+		>$reference Column implJpaPassColumnArg$</GenRule>
 
 	<GenRule GenDef="Object" Name="implJpaCommaOptPriorArg">,
 		$implJpaOptPriorArg$</GenRule>
@@ -516,10 +559,20 @@ $implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default
 	 *	@param	rec	The instance interface to be created.
 	 */
 	@Override
-	public void create$TableName$( I$SecSchemaName$Authorization Authorization,
+	public I$DefSchemaName$$TableName$ create$TableName$( I$SecSchemaName$Authorization Authorization,
 		I$DefSchemaName$$TableName$ rec )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "create$TableName$");
+		if (rec == null) {
+			throw new CFLibNullArgumentException(getClass(), "create$TableName$", 1, "rec");
+		}
+		else if (rec instanceof $DefSchemaName$Jpa$TableName$) {
+			$DefSchemaName$Jpa$TableName$ jparec = ($DefSchemaName$Jpa$TableName$)rec;
+			$DefSchemaName$Jpa$TableName$ created = $lower poptop Table TableName$Service.create(jparec);
+			return( created );
+		}
+		else {
+			throw new CFLibUnsupportedClassException(getClass(), "create$TableName$", "rec", rec, "$DefSchemaName$Jpa$TableName$");
+		}
 	}
 </GenRule>
 
@@ -548,10 +601,20 @@ $implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default
 	 *	@param	rec	The instance interface to be updated
 	 */
 	@Override
-	public void update$TableName$( I$SecSchemaName$Authorization Authorization,
+	public I$DefSchemaName$$TableName$ update$TableName$( I$SecSchemaName$Authorization Authorization,
 		I$DefSchemaName$$TableName$ rec )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "update$TableName$");
+		if (rec == null) {
+			throw new CFLibNullArgumentException(getClass(), "update$TableName$", 1, "rec");
+		}
+		else if (rec instanceof $DefSchemaName$Jpa$TableName$) {
+			$DefSchemaName$Jpa$TableName$ jparec = ($DefSchemaName$Jpa$TableName$)rec;
+			$DefSchemaName$Jpa$TableName$ updated = $lower poptop Table TableName$Service.update(jparec);
+			return( updated );
+		}
+		else {
+			throw new CFLibUnsupportedClassException(getClass(), "update$TableName$", "rec", rec, "$DefSchemaName$Jpa$TableName$");
+		}
 	}
 </GenRule>
 
@@ -567,6 +630,17 @@ $implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default
 	public void delete$TableName$( I$SecSchemaName$Authorization Authorization,
 		I$DefSchemaName$$TableName$ rec )
 	{
+		if (rec == null) {
+			return;
+		}
+		if (rec instanceof $DefSchemaName$Jpa$TableName$) {
+			$DefSchemaName$Jpa$TableName$ jparec = ($DefSchemaName$Jpa$TableName$)rec;
+			$lower poptop Table TableName$Service.deleteBy$reference BaseClass reference PrimaryKeyIndex Suffix$(jparec.getPKey());
+		}
+		else {
+			throw new CFLibUnsupportedClassException(getClass(), "delete$TableName$", "rec", rec, "$DefSchemaName$Jpa$TableName$");
+		}
+
 		throw new CFLibNotImplementedYetException(getClass(), "delete$TableName$");
 	}
 $implJpaDeleteTableByInheritedIndexes$
@@ -594,9 +668,9 @@ $implJpaDeleteTableByInheritedIndexes$
 	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
 	 */
 	@Override
-	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implNextIdGenDeclAttr )$ )
+	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "delete$poptop Table TableName$By$Suffix$-args");
+		$lower poptop Table TableName$Service.deleteBy$Suffix$($iterate Columns( first implJpaPassColumnArg each implJpaCommaPassColumnArg )$);
 	}
 
 
@@ -611,9 +685,14 @@ $implJpaDeleteTableByInheritedIndexes$
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization,
 		I$DefSchemaName$$TableName$By$Suffix$Key argKey )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "delete$poptop Table TableName$By$Suffix$-key");
+		$lower poptop Table TableName$Service.deleteBy$Suffix$($iterate Columns( first implJpaPassKeyColumnArg each implJpaCommaPassKeyColumnArg )$);
 	}
 </GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implJpaCommaPassKeyColumnArg">,
+			$implJpaPassKeyColumnArg$</GenRule>
+			
+	<GenRule GenDef="IndexCol" Name="implJpaPassKeyColumnArg">argKey.get$reference Column implColumnAttrOptionality$$reference Column Name$()</GenRule>
 
 	<GenRule GenDef="Index" Name="implJpaDeleteTableByPrimaryIndex">$switch IsPrimaryIndexKeyAtomic yes empty default implJpaDeleteTableByPrimaryIndexAttrs$
 	/**
@@ -627,9 +706,12 @@ $implJpaDeleteTableByInheritedIndexes$
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ argKey )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "delete$poptop Table TableName$By$Suffix$-key");
+		$lower poptop Table TableName$Service.deleteBy$Suffix$($switch IsPrimaryIndexKeyAtomic yes implJpaDeleteTableByDirectPrimaryIndex default implJpaDeleteTableByDerefPrimaryIndex$);
 	}
 </GenRule>
+
+	<GenRule GenDef="Index" Name="implJpaDeleteTableByDerefPrimaryIndex">$iterate Columns( first implJpaPassKeyColumnArg each implJpaCommaPassKeyColumnArg )$</GenRule>
+	<GenRule GenDef="Index" Name="implJpaDeleteTableByDirectPrimaryIndex">argKey</GenRule>
 
 	<GenRule GenDef="Index" Name="implJpaDeleteTableByPrimaryIndexAttrs">
 	/**
@@ -638,9 +720,9 @@ $implJpaDeleteTableByInheritedIndexes$
 	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
 	 */
 	@Override
-	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implNextIdGenDeclAttr )$ )
+	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "delete$poptop Table TableName$By$Suffix$-args");
+		$lower poptop Table TableName$Service.deleteBy$Suffix$($iterate Columns( first implJpaPassColumnArg each implJpaCommaPassColumnArg )$);
 	}
 </GenRule>
 

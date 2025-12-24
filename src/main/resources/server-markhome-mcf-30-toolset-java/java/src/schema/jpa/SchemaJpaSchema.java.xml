@@ -84,7 +84,17 @@ $implJpaSchemaClassMapInitializers$$implJpaSchemaMoreMethods$$implJpaSchemaTable
 	public void wireRecConstructors() {
 		I$SecSchemaName$Schema.ClassMapEntry entry;$iterate Tables( each maybeWireJpaSchemaClassMapRecConstructor empty empty)$
 	}
+
+	@Override
+	public void wireTableTableInstances() {$iterate Tables( each maybeWireJpaSchemaTableTableInstance empty empty )$
+	}
 $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJpaSchemaGetSchemaNameSchema$</GenRule>
+
+	<GenRule GenDef="Table" Name="maybeWireJpaSchemaTableTableInstance">$switch HasDefSchema yes empty default wireJpaSchemaTableTableInstance$</GenRule>
+	<GenRule GenDef="Table" Name="wireJpaSchemaTableTableInstance">
+		if (table$TableName$ == null) {
+			table$TableName$ = new $DefSchemaName$Jpa$TableName$Table(this);
+		}</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="implJpaSchemaGetSchemaNameSchema">$reference RefSchema implJpaSchemaGetSchemaNameSchema$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaGetSchemaNameSchema">
@@ -304,7 +314,7 @@ $poptop SchemaDef iterate SchemaTables( each initJpaSchemaTableFactoryMember )$	
 </GenRule>
 
 	<GenRule GenDef="Table" Name="initJpaSchemaTableTableMember">
-		table$TableName$ = new $DefSchemaName$Jpa$TableName$Table(this);</GenRule>
+		table$TableName$ = null;</GenRule>
 
 	<GenRule GenDef="Table" Name="initJpaSchemaTableFactoryMember">
 		factory$TableName$ = new $DefSchemaName$Jpa$TableName$DefaultFactory();</GenRule>

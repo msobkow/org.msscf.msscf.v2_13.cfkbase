@@ -216,7 +216,7 @@ $iterate Index(each maybeDeclJpaRepositoryDeleter empty empty)$</GenRule>
 	@Transactional
 	@Modifying
 	@Query("delete from $poptop Table DefSchemaName$Jpa$TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
-	void deleteBy$IndexName$($iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
+	void deleteBy$Suffix$($iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
 $switch IsPrimaryIndexKeyAtomic yes empty default declJpaRepositoryDeleteByPKeyObj$</GenRule>
 
 	<GenRule GenDef="Index" Name="declJpaRepositoryDeleteByPKeyObj">
@@ -225,8 +225,8 @@ $switch IsPrimaryIndexKeyAtomic yes empty default declJpaRepositoryDeleteByPKeyO
 	 *
 	 *		@param key The $SchemaName$$TableName$By$Suffix$Key of the entity to be locked.
 	 */
-	default void deleteBy$IndexName$(I$SchemaName$$TableName$PKey key) {
-		deleteBy$IndexName$($iterate Columns(first declJpaRepositoryPassKeyAttr each commaDeclJpaRepositoryPassKeyAttr)$);
+	default void deleteBy$Suffix$(I$SchemaName$$TableName$PKey key) {
+		deleteBy$Suffix$($iterate Columns(first declJpaRepositoryPassKeyAttr each commaDeclJpaRepositoryPassKeyAttr)$);
 	}
 </GenRule>
 
@@ -238,15 +238,15 @@ $switch IsPrimaryIndexKeyAtomic yes empty default declJpaRepositoryDeleteByPKeyO
 	@Transactional
 	@Modifying
 	@Query("delete from $poptop Table DefSchemaName$Jpa$TableName$ r where $iterate Columns( first declJpaRepositoryQueryColumnArg each commaDeclJpaRepositoryQueryColumnArg)$")
-	void deleteBy$IndexName$($iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
+	void deleteBy$Suffix$($iterate Columns(first declJpaRepositoryArgument each commaDeclJpaRepositoryArgument)$);
 
 	/**
 	 *	$SchemaName$$TableName$By$Suffix$Key based lock method for object-based access.
 	 *
 	 *		@param key The $SchemaName$$TableName$By$Suffix$Key of the entity to be locked.
 	 */
-	default void deleteBy$IndexName$(I$SchemaName$$TableName$By$Suffix$Key key) {
-		deleteBy$IndexName$($iterate Columns(first declJpaRepositoryPassKeyAttr each commaDeclJpaRepositoryPassKeyAttr)$);
+	default void deleteBy$Suffix$(I$SchemaName$$TableName$By$Suffix$Key key) {
+		deleteBy$Suffix$($iterate Columns(first declJpaRepositoryPassKeyAttr each commaDeclJpaRepositoryPassKeyAttr)$);
 	}
 </GenRule>
 

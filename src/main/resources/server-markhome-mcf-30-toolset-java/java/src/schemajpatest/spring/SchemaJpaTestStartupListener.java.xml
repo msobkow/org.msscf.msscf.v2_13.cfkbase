@@ -67,11 +67,16 @@ public class $SchemaName$JpaTestStartupListener {$iterate SchemaRefs( each autow
     @EventListener
     public void onApplicationReady(ApplicationReadyEvent event) {
         System.err.println("$SchemaName$JpaTest StartupListener tests beginning...");
+$iterate SchemaRefs( each JpaTestWireTableTableInstances empty empty )$$JpaTestWireTableTableInstances$
 $iterate SchemaRefs( each execJpaTestTestRunner empty empty )$$execJpaTestTestRunner$
         System.err.println("$SchemaName$JpaTest StartupListener tests complete.");
     }
 }
 </GenFile>
+
+	<GenRule GenDef="SchemaRef" Name="JpaTestWireTableTableInstances">$reference RefSchema JpaTestWireTableTableInstances$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="JpaTestWireTableTableInstances">
+		I$SchemaName$Schema.getBacking$SchemaName$().wireTableTableInstances();</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="autowireJpaTestStartupListenerTestRunner">$reference RefSchema autowireJpaTestStartupListenerTestRunner$</GenRule>
 
