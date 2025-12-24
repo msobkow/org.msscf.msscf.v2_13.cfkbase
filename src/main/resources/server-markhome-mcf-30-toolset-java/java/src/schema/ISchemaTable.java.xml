@@ -65,8 +65,14 @@ import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate
 
 public interface I$SchemaName$$TableName$$switch HasDefSchema yes extendSchemaRecTableRec default extendSchemaRecTableRecSuperRec$
 {$switch HasDefSchema yes empty default declISchemaTableRecMinValues$$switch HasDefSchema yes empty default declISchemaTableRecMaxValues$$switch HasDefSchema yes empty default declISchemaTableRecInitValues$$switch HasDefSchema no declRecStaticClassCode default empty$
-$switch HasDefSchema no maybeDeclRecGetClassCode default empty$$switch HasDefSchema no maybeDeclRecOptImplAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no declColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no declRevisionGetterSetter default empty$$switch HasDefSchema no declDataGetterSetters default empty$$declEqualsObject$$declGetHashCode$$declCompareToObject$$declRecSet$$declSchemaRecTableToString$}
+$switch HasDefSchema no maybeDeclRecGetClassCode default empty$$switch HasDefSchema no maybeDeclRecOptImplAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no declColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no declRevisionGetterSetter default empty$$iterate Relation( each maybeDeclISchemaTableRelationSetter empty empty )$$switch HasDefSchema no declDataGetterSetters default empty$$declEqualsObject$$declGetHashCode$$declCompareToObject$$declRecSet$$declSchemaRecTableToString$}
 </GenFile>
+
+	<GenRule GenDef="Relation" Name="maybeDeclISchemaTableRelationSetter">$switch HasDefSchema yes empty default declSuperiorISchemaTableRelationSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declSuperiorISchemaTableRelationSetter">$switch IsSuperiorRelation yes declNotInPrimaryISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declNotInPrimaryISchemaTableRelationSetter">$switch IsRelationInPrimaryIndex yes empty default declISchemaTableRelationSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declISchemaTableRelationSetter">
+	public void set$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$);</GenRule>
 
 	<GenRule GenDef="Table" Name="declColumnOptAuditGetterSetters"
 		>$switch HasAuditColumns yes declColumnAuditGetterSetters default empty$</GenRule>
