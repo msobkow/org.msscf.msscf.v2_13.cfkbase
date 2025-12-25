@@ -87,12 +87,15 @@ public interface I$SchemaName$$TableName$PKey$switch HasDefSchema yes ISchemaTab
 </GenRule>
 
 	<GenRule GenDef="Table" Name="ISchemaTablePKeyImplBaseDefBody">
-$iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declRecPKeyEquals$$declRecPKeyHashCode$$declRecPKeyCompareTo$$reference PrimaryKeyIndex declRecPKeyToString$</GenRule>
+$iterate Relation(each maybeDeclISchemaTablePKeyRelationGetterSetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each declColumnGetterMaybeSetter )$$declRecPKeyEquals$$declRecPKeyHashCode$$declRecPKeyCompareTo$$reference PrimaryKeyIndex declRecPKeyToString$</GenRule>
 
-	<GenRule GenDef="Relation" Name="maybeDeclISchemaTablePKeyRelationSetter">$switch HasDefSchema yes empty default declSuperiorISchemaTablePKeyRelationSetter$</GenRule>
-	<GenRule GenDef="Relation" Name="declSuperiorISchemaTablePKeyRelationSetter">$switch IsSuperiorRelation yes declInPrimaryISchemaTablePKeyRelationSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="declInPrimaryISchemaTablePKeyRelationSetter">$switch IsRelationInPrimaryIndex yes declISchemaTablePKeyRelationSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="declISchemaTablePKeyRelationSetter">
+	<GenRule GenDef="IndexCol" Name="declColumnGetterMaybeSetter">$switch InSuperiorCandidateRelation yes declColumnGetter default declColumnGetterSetter$</GenRule>
+	
+	<GenRule GenDef="Relation" Name="maybeDeclISchemaTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default declSuperiorISchemaTablePKeyRelationGetterSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declSuperiorISchemaTablePKeyRelationGetterSetter">$switch IsSuperiorRelation yes declInPrimaryISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declInPrimaryISchemaTablePKeyRelationGetterSetter">$switch IsRelationInPrimaryIndex yes declISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declISchemaTablePKeyRelationGetterSetter">
+	public $emitMappingDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();
 	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj);
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$);</GenRule>
 
@@ -258,6 +261,8 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="UuidDef" Name="implJavaOptAtomType">UUID</GenRule>
 	<GenRule GenDef="UuidGen" Name="implJavaOptAtomType">UUID</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="declColumnGetter">$reference Column declColumnGetter$</GenRule>
+
 	<GenRule GenDef="IndexCol" Name="declColumnGetterSetter">$reference Column declColumnGetterSetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="declRevisionGetterSetter">
@@ -270,98 +275,192 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	public void setClassCode( int value );
 </GenRule>
 
-	<GenRule GenDef="Value" Name="declColumnGetterSetter">$switch IsNullable yes declOptGetterSetter default declReqGetterSetter$</GenRule>
+	<GenRule GenDef="Value" Name="declColumnGetter">$switch IsNullable yes declOptGetter default declReqGetter$</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqGetterSetter"
+	<GenRule GenDef="Value" Name="declColumnGetterSetter">$switch IsNullable yes declOptGetter default declReqGetter$$switch IsNullable yes declOptSetter default declReqSetter$</GenRule>
+
+	<GenRule GenDef="Value" Name="declReqGetter"
 		>$switch BaseModelAtomClass
-			BlobDef declReqBlobGetterSetter
-			BoolDef declReqBoolGetterSetter
-			EnumDef declReqEnumGetterSetter
-			Id16Gen declReqInt16GetterSetter
-			Id32Gen declReqInt32GetterSetter
-			Id64Gen declReqInt64GetterSetter
-			Int16Def declReqInt16GetterSetter
-			Int32Def declReqInt32GetterSetter
-			Int64Def declReqInt64GetterSetter
-			UInt16Def declReqUInt16GetterSetter
-			UInt32Def declReqUInt32GetterSetter
-			UInt64Def declReqUInt64GetterSetter
-			FloatDef declReqFloatGetterSetter
-			DoubleDef declReqDoubleGetterSetter
-			NumberDef declReqNumberGetterSetter
-			DateDef declReqDateGetterSetter
-			TimeDef declReqTimeGetterSetter
-			TimestampDef declReqTimestampGetterSetter
-			TZDateDef declReqTZDateGetterSetter
-			TZTimeDef declReqTZTimeGetterSetter
-			TZTimestampDef declReqTZTimestampGetterSetter
-			DbKeyHash128Gen declReqDbKeyHash128GetterSetter
-			DbKeyHash160Gen declReqDbKeyHash160GetterSetter
-			DbKeyHash224Gen declReqDbKeyHash224GetterSetter
-			DbKeyHash256Gen declReqDbKeyHash256GetterSetter
-			DbKeyHash384Gen declReqDbKeyHash384GetterSetter
-			DbKeyHash512Gen declReqDbKeyHash512GetterSetter
-			DbKeyHash128Def declReqDbKeyHash128GetterSetter
-			DbKeyHash160Def declReqDbKeyHash160GetterSetter
-			DbKeyHash224Def declReqDbKeyHash224GetterSetter
-			DbKeyHash256Def declReqDbKeyHash256GetterSetter
-			DbKeyHash384Def declReqDbKeyHash384GetterSetter
-			DbKeyHash512Def declReqDbKeyHash512GetterSetter
-			Uuid6Gen declReqUuid6GetterSetter
-			Uuid6Def declReqUuid6GetterSetter
-			UuidGen declReqUuidGetterSetter
-			UuidDef declReqUuidGetterSetter
-			StringDef declReqStringGetterSetter
-			TokenDef declReqTokenGetterSetter
-			NmTokenDef declReqNmTokenGetterSetter
-			NmTokensDef declReqNmTokensGetterSetter
-			TextDef declReqTextGetterSetter
+			BlobDef declReqBlobGetter
+			BoolDef declReqBoolGetter
+			EnumDef declReqEnumGetter
+			Id16Gen declReqInt16Getter
+			Id32Gen declReqInt32Getter
+			Id64Gen declReqInt64Getter
+			Int16Def declReqInt16Getter
+			Int32Def declReqInt32Getter
+			Int64Def declReqInt64Getter
+			UInt16Def declReqUInt16Getter
+			UInt32Def declReqUInt32Getter
+			UInt64Def declReqUInt64Getter
+			FloatDef declReqFloatGetter
+			DoubleDef declReqDoubleGetter
+			NumberDef declReqNumberGetter
+			DateDef declReqDateGetter
+			TimeDef declReqTimeGetter
+			TimestampDef declReqTimestampGetter
+			TZDateDef declReqTZDateGetter
+			TZTimeDef declReqTZTimeGetter
+			TZTimestampDef declReqTZTimestampGetter
+			DbKeyHash128Gen declReqDbKeyHash128Getter
+			DbKeyHash160Gen declReqDbKeyHash160Getter
+			DbKeyHash224Gen declReqDbKeyHash224Getter
+			DbKeyHash256Gen declReqDbKeyHash256Getter
+			DbKeyHash384Gen declReqDbKeyHash384Getter
+			DbKeyHash512Gen declReqDbKeyHash512Getter
+			DbKeyHash128Def declReqDbKeyHash128Getter
+			DbKeyHash160Def declReqDbKeyHash160Getter
+			DbKeyHash224Def declReqDbKeyHash224Getter
+			DbKeyHash256Def declReqDbKeyHash256Getter
+			DbKeyHash384Def declReqDbKeyHash384Getter
+			DbKeyHash512Def declReqDbKeyHash512Getter
+			Uuid6Gen declReqUuid6Getter
+			Uuid6Def declReqUuid6Getter
+			UuidGen declReqUuidGetter
+			UuidDef declReqUuidGetter
+			StringDef declReqStringGetter
+			TokenDef declReqTokenGetter
+			NmTokenDef declReqNmTokenGetter
+			NmTokensDef declReqNmTokensGetter
+			TextDef declReqTextGetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptGetterSetter"
+	<GenRule GenDef="Value" Name="declOptGetter"
 		>$switch BaseModelAtomClass
-			BlobDef declOptBlobGetterSetter
-			BoolDef declOptBoolGetterSetter
-			EnumDef declOptEnumGetterSetter
-			Id16Gen declOptInt16GetterSetter
-			Id32Gen declOptInt32GetterSetter
-			Id64Gen declOptInt64GetterSetter
-			Int16Def declOptInt16GetterSetter
-			Int32Def declOptInt32GetterSetter
-			Int64Def declOptInt64GetterSetter
-			UInt16Def declOptUInt16GetterSetter
-			UInt32Def declOptUInt32GetterSetter
-			UInt64Def declOptUInt64GetterSetter
-			FloatDef declOptFloatGetterSetter
-			DoubleDef declOptDoubleGetterSetter
-			NumberDef declOptNumberGetterSetter
-			DateDef declOptDateGetterSetter
-			TimeDef declOptTimeGetterSetter
-			TimestampDef declOptTimestampGetterSetter
-			TZDateDef declOptTZDateGetterSetter
-			TZTimeDef declOptTZTimeGetterSetter
-			TZTimestampDef declOptTZTimestampGetterSetter
-			DbKeyHash128Gen declOptDbKeyHash128GetterSetter
-			DbKeyHash160Gen declOptDbKeyHash160GetterSetter
-			DbKeyHash224Gen declOptDbKeyHash224GetterSetter
-			DbKeyHash256Gen declOptDbKeyHash256GetterSetter
-			DbKeyHash384Gen declOptDbKeyHash384GetterSetter
-			DbKeyHash512Gen declOptDbKeyHash512GetterSetter
-			DbKeyHash128Def declOptDbKeyHash128GetterSetter
-			DbKeyHash160Def declOptDbKeyHash160GetterSetter
-			DbKeyHash224Def declOptDbKeyHash224GetterSetter
-			DbKeyHash256Def declOptDbKeyHash256GetterSetter
-			DbKeyHash384Def declOptDbKeyHash384GetterSetter
-			DbKeyHash512Def declOptDbKeyHash512GetterSetter
-			Uuid6Gen declOptUuid6GetterSetter
-			Uuid6Def declOptUuid6GetterSetter
-			UuidGen declOptUuidGetterSetter
-			UuidDef declOptUuidGetterSetter
-			StringDef declOptStringGetterSetter
-			TokenDef declOptTokenGetterSetter
-			NmTokenDef declOptNmTokenGetterSetter
-			NmTokensDef declOptNmTokensGetterSetter
-			TextDef declOptTextGetterSetter
+			BlobDef declOptBlobGetter
+			BoolDef declOptBoolGetter
+			EnumDef declOptEnumGetter
+			Id16Gen declOptInt16Getter
+			Id32Gen declOptInt32Getter
+			Id64Gen declOptInt64Getter
+			Int16Def declOptInt16Getter
+			Int32Def declOptInt32Getter
+			Int64Def declOptInt64Getter
+			UInt16Def declOptUInt16Getter
+			UInt32Def declOptUInt32Getter
+			UInt64Def declOptUInt64Getter
+			FloatDef declOptFloatGetter
+			DoubleDef declOptDoubleGetter
+			NumberDef declOptNumberGetter
+			DateDef declOptDateGetter
+			TimeDef declOptTimeGetter
+			TimestampDef declOptTimestampGetter
+			TZDateDef declOptTZDateGetter
+			TZTimeDef declOptTZTimeGetter
+			TZTimestampDef declOptTZTimestampGetter
+			DbKeyHash128Gen declOptDbKeyHash128Getter
+			DbKeyHash160Gen declOptDbKeyHash160Getter
+			DbKeyHash224Gen declOptDbKeyHash224Getter
+			DbKeyHash256Gen declOptDbKeyHash256Getter
+			DbKeyHash384Gen declOptDbKeyHash384Getter
+			DbKeyHash512Gen declOptDbKeyHash512Getter
+			DbKeyHash128Def declOptDbKeyHash128Getter
+			DbKeyHash160Def declOptDbKeyHash160Getter
+			DbKeyHash224Def declOptDbKeyHash224Getter
+			DbKeyHash256Def declOptDbKeyHash256Getter
+			DbKeyHash384Def declOptDbKeyHash384Getter
+			DbKeyHash512Def declOptDbKeyHash512Getter
+			Uuid6Gen declOptUuid6Getter
+			Uuid6Def declOptUuid6Getter
+			UuidGen declOptUuidGetter
+			UuidDef declOptUuidGetter
+			StringDef declOptStringGetter
+			TokenDef declOptTokenGetter
+			NmTokenDef declOptNmTokenGetter
+			NmTokensDef declOptNmTokensGetter
+			TextDef declOptTextGetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declReqSetter"
+		>$switch BaseModelAtomClass
+			BlobDef declReqBlobSetter
+			BoolDef declReqBoolSetter
+			EnumDef declReqEnumSetter
+			Id16Gen declReqInt16Setter
+			Id32Gen declReqInt32Setter
+			Id64Gen declReqInt64Setter
+			Int16Def declReqInt16Setter
+			Int32Def declReqInt32Setter
+			Int64Def declReqInt64Setter
+			UInt16Def declReqUInt16Setter
+			UInt32Def declReqUInt32Setter
+			UInt64Def declReqUInt64Setter
+			FloatDef declReqFloatSetter
+			DoubleDef declReqDoubleSetter
+			NumberDef declReqNumberSetter
+			DateDef declReqDateSetter
+			TimeDef declReqTimeSetter
+			TimestampDef declReqTimestampSetter
+			TZDateDef declReqTZDateSetter
+			TZTimeDef declReqTZTimeSetter
+			TZTimestampDef declReqTZTimestampSetter
+			DbKeyHash128Gen declReqDbKeyHash128Setter
+			DbKeyHash160Gen declReqDbKeyHash160Setter
+			DbKeyHash224Gen declReqDbKeyHash224Setter
+			DbKeyHash256Gen declReqDbKeyHash256Setter
+			DbKeyHash384Gen declReqDbKeyHash384Setter
+			DbKeyHash512Gen declReqDbKeyHash512Setter
+			DbKeyHash128Def declReqDbKeyHash128Setter
+			DbKeyHash160Def declReqDbKeyHash160Setter
+			DbKeyHash224Def declReqDbKeyHash224Setter
+			DbKeyHash256Def declReqDbKeyHash256Setter
+			DbKeyHash384Def declReqDbKeyHash384Setter
+			DbKeyHash512Def declReqDbKeyHash512Setter
+			Uuid6Gen declReqUuid6Setter
+			Uuid6Def declReqUuid6Setter
+			UuidGen declReqUuidSetter
+			UuidDef declReqUuidSetter
+			StringDef declReqStringSetter
+			TokenDef declReqTokenSetter
+			NmTokenDef declReqNmTokenSetter
+			NmTokensDef declReqNmTokensSetter
+			TextDef declReqTextSetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declOptSetter"
+		>$switch BaseModelAtomClass
+			BlobDef declOptBlobSetter
+			BoolDef declOptBoolSetter
+			EnumDef declOptEnumSetter
+			Id16Gen declOptInt16Setter
+			Id32Gen declOptInt32Setter
+			Id64Gen declOptInt64Setter
+			Int16Def declOptInt16Setter
+			Int32Def declOptInt32Setter
+			Int64Def declOptInt64Setter
+			UInt16Def declOptUInt16Setter
+			UInt32Def declOptUInt32Setter
+			UInt64Def declOptUInt64Setter
+			FloatDef declOptFloatSetter
+			DoubleDef declOptDoubleSetter
+			NumberDef declOptNumberSetter
+			DateDef declOptDateSetter
+			TimeDef declOptTimeSetter
+			TimestampDef declOptTimestampSetter
+			TZDateDef declOptTZDateSetter
+			TZTimeDef declOptTZTimeSetter
+			TZTimestampDef declOptTZTimestampSetter
+			DbKeyHash128Gen declOptDbKeyHash128Setter
+			DbKeyHash160Gen declOptDbKeyHash160Setter
+			DbKeyHash224Gen declOptDbKeyHash224Setter
+			DbKeyHash256Gen declOptDbKeyHash256Setter
+			DbKeyHash384Gen declOptDbKeyHash384Setter
+			DbKeyHash512Gen declOptDbKeyHash512Setter
+			DbKeyHash128Def declOptDbKeyHash128Setter
+			DbKeyHash160Def declOptDbKeyHash160Setter
+			DbKeyHash224Def declOptDbKeyHash224Setter
+			DbKeyHash256Def declOptDbKeyHash256Setter
+			DbKeyHash384Def declOptDbKeyHash384Setter
+			DbKeyHash512Def declOptDbKeyHash512Setter
+			Uuid6Gen declOptUuid6Setter
+			Uuid6Def declOptUuid6Setter
+			UuidGen declOptUuidSetter
+			UuidDef declOptUuidSetter
+			StringDef declOptStringSetter
+			TokenDef declOptTokenSetter
+			NmTokenDef declOptNmTokenSetter
+			NmTokensDef declOptNmTokensSetter
+			TextDef declOptTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="declMinValue"
@@ -508,15 +607,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 
 	<GenRule GenDef="Value" Name="declBlobInitValue"></GenRule>
 
-	<GenRule GenDef="Value" Name="declReqBlobGetterSetter">
-	public byte[] get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( byte[] value );
-</GenRule>
-
-	<GenRule GenDef="Value" Name="declOptBlobGetterSetter">
-	public byte[] get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( byte[] value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqBlobGetter">
+	public byte[] get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqBlobSetter">
+	public void set$implColumnAttrOptionality$$Name$( byte[] value );</GenRule>
+	
+	<GenRule GenDef="Value" Name="declOptBlobGetter">
+	public byte[] get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptBlobSetter">
+	public void set$implColumnAttrOptionality$$Name$( byte[] value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declBoolMinValue"></GenRule>
 
@@ -525,15 +624,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declBoolInitValue">
 	public final static boolean $upper Name$_INIT_VALUE = $switch InitValue yes true default false$;</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqBoolGetterSetter">
-	public boolean get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( boolean value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqBoolGetter">
+	public boolean get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqBoolSetter">
+	public void set$implColumnAttrOptionality$$Name$( boolean value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptBoolGetterSetter">
-	public Boolean get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( Boolean value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptBoolGetter">
+	public Boolean get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptBoolSetter">
+	public void set$implColumnAttrOptionality$$Name$( Boolean value );</GenRule>
 
 	<GenRule GenDef="Value" Name="Zero">0</GenRule>
 
@@ -567,15 +666,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="EnumTag" Name="declEnumInitValueUseFirstTagName"
 		>$Name$</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqEnumGetterSetter">
-	public I$reference DataType EffSchemaName$Schema.$reference DataType Name$ get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$Schema.$reference DataType Name$ value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqEnumGetter">
+	public I$reference DataType EffSchemaName$Schema.$reference DataType Name$ get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqEnumSetter">
+	public void set$implColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$Schema.$reference DataType Name$ value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptEnumGetterSetter">
-	public I$reference DataType EffSchemaName$Schema.$reference DataType Name$ get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$Schema.$reference DataType Name$ value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptEnumGetter">
+	public I$reference DataType EffSchemaName$Schema.$reference DataType Name$ get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptEnumSetter">
+	public void set$implColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$Schema.$reference DataType Name$ value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declInt16MinValue">
 	public static final short $upper Name$_MIN_VALUE = (short)$MinValue$;</GenRule>
@@ -586,15 +685,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declInt16InitValue">
 	public static final short $upper Name$_INIT_VALUE = (short)$switch HasInitValue yes InitValue default Zero$;</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqInt16GetterSetter">
-	public short get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( short value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqInt16Getter">
+	public short get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqInt16Setter">
+	public void set$implColumnAttrOptionality$$Name$( short value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptInt16GetterSetter">
-	public Short get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( Short value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptInt16Getter">
+	public Short get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptInt16Setter">
+	public void set$implColumnAttrOptionality$$Name$( Short value );</GenRule>
 
 	<GenRule GenDef="Value" Name="maybeAddLForLong">$switch BaseModelAtomClass
 			Int64Def emitLForLong
@@ -613,15 +712,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declInt32InitValue">
 	public static final int $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqInt32GetterSetter">
-	public int get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( int value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqInt32Getter">
+	public int get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqInt32Setter">
+	public void set$implColumnAttrOptionality$$Name$( int value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptInt32GetterSetter">
-	public Integer get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( Integer value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptInt32Getter">
+	public Integer get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptInt32Setter">
+	public void set$implColumnAttrOptionality$$Name$( Integer value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declInt64MinValue">
 	public static final long $upper Name$_MIN_VALUE = $MinValue$L;</GenRule>
@@ -632,15 +731,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declInt64InitValue">
 	public static final long $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$L;</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqInt64GetterSetter">
-	public long get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( long value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqInt64Getter">
+	public long get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqInt64Setter">
+	public void set$implColumnAttrOptionality$$Name$( long value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptInt64GetterSetter">
-	public Long get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( Long value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptInt64Getter">
+	public Long get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptInt64Setter">
+	public void set$implColumnAttrOptionality$$Name$( Long value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declUInt16MinValue">
 	public static final int $upper Name$_MIN_VALUE = $MinValue$;</GenRule>
@@ -651,15 +750,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declUInt16InitValue">
 	public static final int $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqUInt16GetterSetter">
-	public int get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( int value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqUInt16Getter">
+	public int get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqUInt16Setter">
+	public void set$implColumnAttrOptionality$$Name$( int value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptUInt16GetterSetter">
-	public Integer get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( Integer value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptUInt16Getter">
+	public Integer get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptUInt16Setter">
+	public void set$implColumnAttrOptionality$$Name$( Integer value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declUInt32MinValue">
 	public static final long $upper Name$_MIN_VALUE = $MinValue$L;</GenRule>
@@ -670,15 +769,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declUInt32InitValue">
 	public static final long $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$L;</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqUInt32GetterSetter">
-	public long get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( long value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqUInt32Getter">
+	public long get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqUInt32Setter">
+	public void set$implColumnAttrOptionality$$Name$( long value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptUInt32GetterSetter">
-	public Long get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( Long value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptUInt32Getter">
+	public Long get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptUInt32Setter">
+	public void set$implColumnAttrOptionality$$Name$( Long value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declUInt64MinValue">
 	public static final BigDecimal $upper Name$_MIN_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", 19, 0, "$MinValue$" );</GenRule>
@@ -689,15 +788,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declUInt64InitValue">
 	public static final BigDecimal $upper Name$_INIT_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", 19, 0, "$switch HasInitValue yes InitValue default Zero$" );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqUInt64GetterSetter">
-	public BigDecimal get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqUInt64Getter">
+	public BigDecimal get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqUInt64Setter">
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptUInt64GetterSetter">
-	public BigDecimal get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptUInt64Getter">
+	public BigDecimal get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptUInt64Setter">
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declFloatMinValue">
 	public static final float $upper Name$_MIN_VALUE = (float)$MinValue$;</GenRule>
@@ -708,15 +807,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declFloatInitValue">
 	public static final float $upper Name$_INIT_VALUE = (float)$switch HasInitValue yes InitValue default Zero$;</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqFloatGetterSetter">
-	public float get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( float value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqFloatGetter">
+	public float get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqFloatSetter">
+	public void set$implColumnAttrOptionality$$Name$( float value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptFloatGetterSetter">
-	public Float get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( Float value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptFloatGetter">
+	public Float get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptFloatSetter">
+	public void set$implColumnAttrOptionality$$Name$( Float value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declDoubleMinValue">
 	public static final double $upper Name$_MIN_VALUE = $MinValue$;</GenRule>
@@ -727,15 +826,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declDoubleInitValue">
 	public static final double $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqDoubleGetterSetter">
-	public double get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( double value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqDoubleGetter">
+	public double get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqDoubleSetter">
+	public void set$implColumnAttrOptionality$$Name$( double value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptDoubleGetterSetter">
-	public Double get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( Double value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptDoubleGetter">
+	public Double get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptDoubleSetter">
+	public void set$implColumnAttrOptionality$$Name$( Double value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declNumberMinValue">
 	public static final BigDecimal $upper Name$_MIN_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", $Digits$, $Precis$, "$MinValue$" );</GenRule>
@@ -746,15 +845,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declNumberInitValue">
 	public static final BigDecimal $upper Name$_INIT_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", $Digits$, $Precis$, "$InitValue$" );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqNumberGetterSetter">
-	public BigDecimal get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqNumberGetter">
+	public BigDecimal get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqNumberSetter">
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptNumberGetterSetter">
-	public BigDecimal get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptNumberGetter">
+	public BigDecimal get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptNumberSetter">
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declDateMinValue"></GenRule>
 
@@ -763,15 +862,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declDateInitValue">
 	public static final LocalDate $upper Name$_INIT_VALUE = CFLib.getUTCLocalDate( 1970, 0, 1, 0, 0, 0 );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqDateGetterSetter">
-	public LocalDate get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalDate value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqDateGetter">
+	public LocalDate get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqDateSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptDateGetterSetter">
-	public LocalDate get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalDate value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptDateGetter">
+	public LocalDate get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptDateSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declTimeMinValue"></GenRule>
 
@@ -780,15 +879,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declTimeInitValue">
 	public static final LocalTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTime("00:00:00");</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqTimeGetterSetter">
-	public LocalTime get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalTime value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqTimeGetter">
+	public LocalTime get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqTimeSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptTimeGetterSetter">
-	public LocalTime get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalTime value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptTimeGetter">
+	public LocalTime get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptTimeSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declTimestampMinValue"></GenRule>
 
@@ -797,15 +896,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declTimestampInitValue">
 	public static final LocalDateTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTimestamp("2020-01-01T00:00:00");</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqTimestampGetterSetter">
-	public LocalDateTime get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqTimestampGetter">
+	public LocalDateTime get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqTimestampSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptTimestampGetterSetter">
-	public LocalDateTime get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptTimestampGetter">
+	public LocalDateTime get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptTimestampSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declTZDateMinValue"></GenRule>
 
@@ -814,15 +913,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declTZDateInitValue">
 	public static final LocalDate $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZDate("2020-01-01+00:00");</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqTZDateGetterSetter">
-	public LocalDate get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalDate value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqTZDateGetter">
+	public LocalDate get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqTZDateSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptTZDateGetterSetter">
-	public LocalDate get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalDate value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptTZDateGetter">
+	public LocalDate get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptTZDateSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declTZTimeMinValue"></GenRule>
 
@@ -831,15 +930,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declTZTimeInitValue">
 	public static final LocalTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZTime("00:00:00+00:00");</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqTZTimeGetterSetter">
-	public LocalTime get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalTime value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqTZTimeGetter">
+	public LocalTime get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqTZTimeSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptTZTimeGetterSetter">
-	public LocalTime get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalTime value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptTZTimeGetter">
+	public LocalTime get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptTZTimeSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declTZTimestampMinValue"></GenRule>
 
@@ -848,15 +947,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declTZTimestampInitValue">
 	public static final LocalDateTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZTimestamp("2020-01-01T00:00:00+00:00");</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqTZTimestampGetterSetter">
-	public LocalDateTime get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqTZTimestampGetter">
+	public LocalDateTime get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqTZTimestampSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptTZTimestampGetterSetter">
-	public LocalDateTime get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptTZTimestampGetter">
+	public LocalDateTime get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptTZTimestampSetter">
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declDbKeyHash128MinValue"></GenRule>
 	<GenRule GenDef="Value" Name="declDbKeyHash160MinValue"></GenRule>
@@ -898,65 +997,65 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="Zero384bits">000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</GenRule>
 	<GenRule GenDef="Value" Name="Zero512bits">00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqDbKeyHash128GetterSetter">
-	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash128Getter">
+	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash128Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptDbKeyHash128GetterSetter">
-	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash128Getter">
+	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash128Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqDbKeyHash160GetterSetter">
-	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash160Getter">
+	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash160Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptDbKeyHash160GetterSetter">
-	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash160Getter">
+	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash160Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqDbKeyHash224GetterSetter">
-	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash224Getter">
+	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash224Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptDbKeyHash224GetterSetter">
-	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash224Getter">
+	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash224Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqDbKeyHash256GetterSetter">
-	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash256Getter">
+	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash256Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptDbKeyHash256GetterSetter">
-	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash256Getter">
+	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash256Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqDbKeyHash384GetterSetter">
-	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash384Getter">
+	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash384Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptDbKeyHash384GetterSetter">
-	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash384Getter">
+	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash384Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqDbKeyHash512GetterSetter">
-	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash512Getter">
+	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqDbKeyHash512Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptDbKeyHash512GetterSetter">
-	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash512Getter">
+	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptDbKeyHash512Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declUuid6MinValue"></GenRule>
 
@@ -966,15 +1065,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	public static final String S_$upper Name$_INIT_VALUE = "$InitValue$";
 	public static final CFLibUuid6 $upper Name$_INIT_VALUE = CFLibUuid6.fromString( S_$upper Name$_INIT_VALUE );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqUuid6GetterSetter">
-	public CFLibUuid6 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibUuid6 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqUuid6Getter">
+	public CFLibUuid6 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqUuid6Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibUuid6 value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptUuid6GetterSetter">
-	public CFLibUuid6 get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( CFLibUuid6 value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptUuid6Getter">
+	public CFLibUuid6 get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptUuid6Setter">
+	public void set$implColumnAttrOptionality$$Name$( CFLibUuid6 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declUuidMinValue"></GenRule>
 
@@ -983,15 +1082,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declUuidInitValue">
 	public static final UUID $upper Name$_INIT_VALUE = UUID.fromString( "$InitValue$" );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqUuidGetterSetter">
-	public UUID get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( UUID value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqUuidGetter">
+	public UUID get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqUuidSetter">
+	public void set$implColumnAttrOptionality$$Name$( UUID value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptUuidGetterSetter">
-	public UUID get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( UUID value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptUuidGetter">
+	public UUID get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptUuidSetter">
+	public void set$implColumnAttrOptionality$$Name$( UUID value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declStringMinValue"></GenRule>
 
@@ -1000,15 +1099,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declStringInitValue">
 	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqStringGetterSetter">
-	public String get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( String value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqStringGetter">
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqStringSetter">
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptStringGetterSetter">
-	public String get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( String value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptStringGetter">
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptStringSetter">
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declTokenMinValue"></GenRule>
 
@@ -1017,15 +1116,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declTokenInitValue">
 	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqTokenGetterSetter">
-	public String get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( String value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqTokenGetter">
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqTokenSetter">
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptTokenGetterSetter">
-	public String get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( String value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptTokenGetter">
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptTokenSetter">
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declNmTokenMinValue"></GenRule>
 
@@ -1034,15 +1133,16 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declNmTokenInitValue">
 	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqNmTokenGetterSetter">
-	public String get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( String value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqNmTokenGetter">
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqNmTokenSetter">
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptNmTokenGetterSetter">
-	public String get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( String value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptNmTokenGetter">
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptNmTokenSetter">
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
+
 	<GenRule GenDef="Value" Name="declNmTokensMinValue"></GenRule>
 
 	<GenRule GenDef="Value" Name="declNmTokensMaxValue"></GenRule>
@@ -1050,15 +1150,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declNmTokensInitValue">
 	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqNmTokensGetterSetter">
-	public String get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( String value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqNmTokensGetter">
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqNmTokensSetter">
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptNmTokensGetterSetter">
-	public String get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( String value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptNmTokensGetter">
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptNmTokensSetter">
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declTextMinValue"></GenRule>
 
@@ -1067,15 +1167,15 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Value" Name="declTextInitValue">
 	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
 
-	<GenRule GenDef="Value" Name="declReqTextGetterSetter">
-	public String get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( String value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declReqTextGetter">
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declReqTextSetter">
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
-	<GenRule GenDef="Value" Name="declOptTextGetterSetter">
-	public String get$implColumnAttrOptionality$$Name$();
-	public void set$implColumnAttrOptionality$$Name$( String value );
-</GenRule>
+	<GenRule GenDef="Value" Name="declOptTextGetter">
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declOptTextSetter">
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Table" Name="declRecPKeyEquals">
 	@Override

@@ -72,7 +72,7 @@ import $reference ManufacturingSchema lower JavaPackage$.$lower reference Manufa
 	}
 )$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$jpaPersistenceContext$
 public class $SchemaName$Jpa$TableName$$switch HasDefSchema yes extendSchemaJpaTableJPA default extendSchemaJpaTableJPASuperJPA$$switch HasDefSchema yes empty default maybeImplSchemaJpaTableComparable$
-{$switch HasDefSchemaOrSuper no implCompactedPrimaryIndexClassJPAAttr default empty$$switch HasDefSchemaOrSuper no implJpaRequiredRevisionAttr default empty$$switch HasDefSchema yes empty default declSchemaJpaTableJPAColumns$
+{$switch HasDefSchemaOrSuper no implCompactedPrimaryIndexClassJPAAttr default empty$$switch HasDefSchemaOrSuper no implJpaRequiredRevisionAttr default empty$$iterate SuperiorCandidateDataRelations(each declSchemaJpaRelationMember empty empty)$$switch HasDefSchema yes empty default declSchemaJpaTableJPAColumns$
 $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSchemaJpaTableJPABaseConstruct$$switch HasDefSchema no implJpaGetClassCode default empty$$iterate Relation(each maybeImplSchemaJpaTableRelationSetter empty empty)$$switch HasDefSchema no maybeImplOptAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$implSchemaJpaTableToString$}
 </GenFile>
 
@@ -107,11 +107,16 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 		}
 	</GenRule>
 
-	<GenRule GenDef="Table" Name="declSchemaJpaTableJPAColumns">$switch HasSuperClassRelation no implJpaOptAuditColumnAttr default empty$$iterate Columns( each maybeDeclSchemaJpaTableJPADataColumn )$</GenRule>
+	<GenRule GenDef="Table" Name="declSchemaJpaTableJPAColumns">
+$switch HasSuperClassRelation no implJpaOptAuditColumnAttr default empty$$iterate Columns( each maybeDeclSchemaJpaTableJPADataColumn )$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="maybeDeclSchemaJpaTableJPADataColumn">$switch ColumnInPrimaryIndex yes empty default implJpaColumnAttr$</GenRule>
-	<GenRule GenDef="TableCol" Name="maybeDeclSchemaJpaTableJPADataColumn">$switch ColumnInPrimaryIndex yes empty default implJpaColumnAttr$</GenRule>
-	<GenRule GenDef="Atom" Name="maybeDeclSchemaJpaTableJPADataColumn">$switch ColumnInPrimaryIndex yes empty default implJpaColumnAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeDeclSchemaJpaTableJPADataColumn">$switch ColumnInPrimaryIndex yes empty default maybeJpaTableDeclJpaColumnAttr$</GenRule>
+	<GenRule GenDef="TableCol" Name="maybeDeclSchemaJpaTableJPADataColumn">$switch ColumnInPrimaryIndex yes empty default maybeJpaTableDeclJpaColumnAttr$</GenRule>
+	<GenRule GenDef="Atom" Name="maybeDeclSchemaJpaTableJPADataColumn">$switch ColumnInPrimaryIndex yes empty default maybeJpaTableDeclJpaColumnAttr$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="maybeJpaTableDeclJpaColumnAttr">$switch InSuperiorCandidateDataRelation yes empty default implJpaColumnAttr$</GenRule>
+	<GenRule GenDef="TableCol" Name="maybeJpaTableDeclJpaColumnAttr">$switch InSuperiorCandidateDataRelation yes empty default implJpaColumnAttr$</GenRule>
+	<GenRule GenDef="Atom" Name="maybeJpaTableDeclJpaColumnAttr">$switch InSuperiorCandidateDataRelation yes empty default implJpaColumnAttr$</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeImplSchemaJpaTableComparable">$switch HasSuperClassRelation yes implJpaISchemaTableBuff default implSchemaJpaTableComparable$</GenRule>
 	<GenRule GenDef="Table" Name="implSchemaJpaTableComparable">
