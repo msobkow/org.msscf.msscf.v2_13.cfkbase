@@ -93,7 +93,8 @@ $iterate Relation(each maybeDeclISchemaTablePKeyRelationSetter empty empty)$$ref
 	<GenRule GenDef="Relation" Name="declSuperiorISchemaTablePKeyRelationSetter">$switch IsSuperiorRelation yes declInPrimaryISchemaTablePKeyRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declInPrimaryISchemaTablePKeyRelationSetter">$switch IsRelationInPrimaryIndex yes declISchemaTablePKeyRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declISchemaTablePKeyRelationSetter">
-	public void set$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$);</GenRule>
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj);
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$);</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="declSetArgColumn">$reference FromCol reference Column implJavaAtomType$ arg$reference FromCol reference Column Name$</GenRule>
 	<GenRule GenDef="RelationCol" Name="declCommaSetArgColumn">,

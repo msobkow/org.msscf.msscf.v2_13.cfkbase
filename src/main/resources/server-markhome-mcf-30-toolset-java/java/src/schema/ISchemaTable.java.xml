@@ -72,7 +72,8 @@ $switch HasDefSchema no maybeDeclRecGetClassCode default empty$$switch HasDefSch
 	<GenRule GenDef="Relation" Name="declSuperiorISchemaTableRelationSetter">$switch IsSuperiorRelation yes declNotInPrimaryISchemaTableRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declNotInPrimaryISchemaTableRelationSetter">$switch IsRelationInPrimaryIndex yes empty default declISchemaTableRelationSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="declISchemaTableRelationSetter">
-	public void set$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$);</GenRule>
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj);
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$);</GenRule>
 
 	<GenRule GenDef="Table" Name="declColumnOptAuditGetterSetters"
 		>$switch HasAuditColumns yes declColumnAuditGetterSetters default empty$</GenRule>

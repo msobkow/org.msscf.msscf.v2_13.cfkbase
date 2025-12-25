@@ -91,7 +91,43 @@ public class $SchemaName$Jpa$TableName$PKey$switch HasDefSchema yes SchemaJpaTab
 
 	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyImplBaseDefBody">$reference PrimaryKeyIndex iterate Columns(
 	each implJpaColumnAttr )$
-$reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
+$reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate Relation(each maybeImplSchemaJpaTablePKeyRelationSetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
+
+	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTablePKeyRelationSetter">$switch HasDefSchema yes empty default implSuperiorSchemaJpaTablePKeyRelationSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="implSuperiorSchemaJpaTablePKeyRelationSetter">$switch IsSuperiorRelation yes implInPrimarySchemaJpaTablePKeyRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implInPrimarySchemaJpaTablePKeyRelationSetter">$switch IsRelationInPrimaryIndex yes implSchemaJpaTablePKeyRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyRelationSetter">
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj) {$switch IsRequired yes implSchemaJpaTablePKeyRelationSetterRequired default implSchemaJpaTablePKeyRelationSetterOptional$
+	}
+
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {$iterate Columns(each implSchemaJpaTableSetAttrArgColumn)$
+	}</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableSetAttrArgColumn">
+		$reference FromCol reference Column leadlower implColumnAttrOptionality$$reference FromCol reference Column Name$ = arg$reference FromCol reference Column Name$;</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyRelationSetterRequired">
+		if(argObj == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$RelationType$$Suffix$", 1, "argObj");
+		}
+		else {$iterate Columns(each implSchemaJpaTableRelationSetterCopyToAttr)$
+		}
+	</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyRelationSetterOptional">
+		if(argObj == null) {$iterate Columns(each implSchemaJpaTableRelationSetterClearAttr)$
+		}
+		else {$iterate Columns(each implSchemaJpaTableRelationSetterCopyToAttr)$
+		}
+	</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableRelationSetterCopyToAttr">
+			$reference FromCol reference Column leadlower implColumnAttrOptionality$$reference FromCol reference Column Name$ = argObj.get$reference ToCol reference Column implColumnAttrOptionality$$reference ToCol reference Column Name$();</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableRelationSetterClearAttr">
+			$reference FromCol reference Column leadlower implColumnAttrOptionality$$reference FromCol reference Column Name$ = null;</GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyExtendBaseDef">
 	extends $DefSchemaName$Jpa$TableName$PKey</GenRule>

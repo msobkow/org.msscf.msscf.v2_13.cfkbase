@@ -91,7 +91,43 @@ public class $SchemaName$Buff$TableName$PKey$switch HasDefSchema yes SchemaBuffT
 </GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaBuffTablePKeyImplBaseDefBody">$reference PrimaryKeyIndex iterate Columns( each implColumnAttr )$
-$reference PrimaryKeyIndex implBuffPKeyConstructor$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
+$reference PrimaryKeyIndex implBuffPKeyConstructor$$iterate Relation(each maybeImplSchemaBuffTablePKeyRelationSetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
+
+	<GenRule GenDef="Relation" Name="maybeImplSchemaBuffTablePKeyRelationSetter">$switch HasDefSchema yes empty default implSuperiorSchemaBuffTablePKeyRelationSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="implSuperiorSchemaBuffTablePKeyRelationSetter">$switch IsSuperiorRelation yes implInPrimarySchemaBuffTablePKeyRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implInPrimarySchemaBuffTablePKeyRelationSetter">$switch IsRelationInPrimaryIndex yes implSchemaBuffTablePKeyRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyRelationSetter">
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj) {$switch IsRequired yes implSchemaBuffTablePKeyRelationSetterRequired default implSchemaBuffTablePKeyRelationSetterOptional$
+	}
+
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {$iterate Columns(each implSchemaBuffTableSetAttrArgColumn)$
+	}</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableSetAttrArgColumn">
+		$reference FromCol reference Column leadlower implColumnAttrOptionality$$reference FromCol reference Column Name$ = arg$reference FromCol reference Column Name$;</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyRelationSetterRequired">
+		if(argObj == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$RelationType$$Suffix$", 1, "argObj");
+		}
+		else {$iterate Columns(each implSchemaBuffTableRelationSetterCopyToAttr)$
+		}
+	</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyRelationSetterOptional">
+		if(argObj == null) {$iterate Columns(each implSchemaBuffTableRelationSetterClearAttr)$
+		}
+		else {$iterate Columns(each implSchemaBuffTableRelationSetterCopyToAttr)$
+		}
+	</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterCopyToAttr">
+			$reference FromCol reference Column leadlower implColumnAttrOptionality$$reference FromCol reference Column Name$ = argObj.get$reference ToCol reference Column implColumnAttrOptionality$$reference ToCol reference Column Name$();</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterClearAttr">
+			$reference FromCol reference Column leadlower implColumnAttrOptionality$$reference FromCol reference Column Name$ = null;</GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaBuffTablePKeyExtendBaseDef">
 	extends $DefSchemaName$$TableName$PKey</GenRule>

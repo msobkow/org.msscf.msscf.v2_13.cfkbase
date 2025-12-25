@@ -73,8 +73,39 @@ import $reference ManufacturingSchema lower JavaPackage$.$lower reference Manufa
 )$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$jpaPersistenceContext$
 public class $SchemaName$Jpa$TableName$$switch HasDefSchema yes extendSchemaJpaTableJPA default extendSchemaJpaTableJPASuperJPA$$switch HasDefSchema yes empty default maybeImplSchemaJpaTableComparable$
 {$switch HasDefSchemaOrSuper no implCompactedPrimaryIndexClassJPAAttr default empty$$switch HasDefSchemaOrSuper no implJpaRequiredRevisionAttr default empty$$switch HasDefSchema yes empty default declSchemaJpaTableJPAColumns$
-$switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSchemaJpaTableJPABaseConstruct$$switch HasDefSchema no implJpaGetClassCode default empty$$switch HasDefSchema no maybeImplOptAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$implSchemaJpaTableToString$}
+$switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSchemaJpaTableJPABaseConstruct$$switch HasDefSchema no implJpaGetClassCode default empty$$iterate Relation(each maybeImplSchemaJpaTableRelationSetter empty empty)$$switch HasDefSchema no maybeImplOptAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$implSchemaJpaTableToString$}
 </GenFile>
+
+	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTableRelationSetter">$switch HasDefSchema yes empty default implSuperiorSchemaJpaTableRelationSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="implSuperiorSchemaJpaTableRelationSetter">$switch IsSuperiorRelation yes implNotInPrimarySchemaJpaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implNotInPrimarySchemaJpaTableRelationSetter">$switch IsRelationInPrimaryIndex yes empty default implSchemaJpaTableRelationSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableRelationSetter">
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj) {$switch IsRequired yes implSchemaJpaTableRelationSetterRequired default implSchemaJpaTableRelationSetterOptional$
+	}
+
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {
+		// WORKING TODO In future this needs to resolve local schema objects and apply the instance to the relationship member when added, but stay as is for out-of-schema relationships$iterate Columns(each implSchemaJpaTableSetAttrArgColumn)$
+	}</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableRelationSetterRequired">
+		if(argObj == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$RelationType$$Suffix$", 1, "argObj");
+		}
+		else {
+			// WORKING TODO This needs to directly set the relationship member when they're added$iterate Columns(each implSchemaJpaTableRelationSetterCopyToAttr)$
+		}
+	</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableRelationSetterOptional">
+		if(argObj == null) {
+			// WORKING TODO This needs to directly clear the relationship member when they're added$iterate Columns(each implSchemaJpaTableRelationSetterClearAttr)$
+		}
+		else {
+			// WORKING TODO This needs to directly set the relationship member when they're added$iterate Columns(each implSchemaJpaTableRelationSetterCopyToAttr)$
+		}
+	</GenRule>
 
 	<GenRule GenDef="Table" Name="declSchemaJpaTableJPAColumns">$switch HasSuperClassRelation no implJpaOptAuditColumnAttr default empty$$iterate Columns( each maybeDeclSchemaJpaTableJPADataColumn )$</GenRule>
 
