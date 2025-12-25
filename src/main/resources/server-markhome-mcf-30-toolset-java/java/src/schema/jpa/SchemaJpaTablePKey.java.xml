@@ -89,10 +89,21 @@ public class $SchemaName$Jpa$TableName$PKey$switch HasDefSchema yes SchemaJpaTab
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyImplBaseDefBody">$reference PrimaryKeyIndex iterate Columns(
-	each implJpaColumnAttr )$
+	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyImplBaseDefBody">$iterate Relation(each maybeDeclSchemaJpaTablePKeyRelationMember empty empty)$$reference PrimaryKeyIndex iterate Columns(
+	each maybeJpaTablePKeyImplJpaColumnAttr )$
 $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate Relation(each maybeImplSchemaJpaTablePKeyRelationSetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
 
+	<GenRule GenDef="Relation" Name="maybeDeclSchemaJpaTablePKeyRelationMember">$switch HasDefSchema yes empty default declSuperiorSchemaJpaTablePKeyRelationMember$</GenRule>
+	<GenRule GenDef="Relation" Name="declSuperiorSchemaJpaTablePKeyRelationMember">$switch IsSuperiorRelation yes declInPrimarySchemaJpaTablePKeyRelationMember default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declInPrimarySchemaJpaTablePKeyRelationMember">$switch IsRelationInPrimaryIndex yes declSchemaJpaTablePKeyRelationMember default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declSchemaJpaTablePKeyRelationMember">
+	private $reference ToTable DefSchemaName$Jpa$reference ToTable TableName$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="InSuperiorPrimaryKeyRelation">$reference Column InSuperiorPrimaryKeyRelation$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="maybeJpaTablePKeyImplJpaColumnAttr">$switch InSuperiorPrimaryKeyRelation yes empty default implJpaColumnAttr$</GenRule>
+	
+	
 	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTablePKeyRelationSetter">$switch HasDefSchema yes empty default implSuperiorSchemaJpaTablePKeyRelationSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implSuperiorSchemaJpaTablePKeyRelationSetter">$switch IsSuperiorRelation yes implInPrimarySchemaJpaTablePKeyRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="implInPrimarySchemaJpaTablePKeyRelationSetter">$switch IsRelationInPrimaryIndex yes implSchemaJpaTablePKeyRelationSetter default empty$</GenRule>
