@@ -89,9 +89,9 @@ public class $SchemaName$Jpa$TableName$PKey$switch HasDefSchema yes SchemaJpaTab
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyImplBaseDefBody">$iterate SuperiorCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$$reference PrimaryKeyIndex iterate Columns(
+	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyImplBaseDefBody">$iterate SuperiorCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$$reference PrimaryKeyIndex iterate Columns(
 	each maybeJpaTablePKeyImplJpaColumnAttr )$
-$reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetterSetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
+$reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetterSetter empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetterSetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each implJpaPKeyColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMember">
 	$emitJpaMappingAnnotation$(fetch=FetchType.LAZY, optional=$RelationRequiredAsReverseBoolString$$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)
@@ -981,6 +981,16 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="IndexCol" Name="implColumnAttrJpaBindingUuid">
 	@Column( name="$DbColumnName$", emptyable=$IsNullaBool$, length=16 )</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implJpaPKeyColumnGetterSetter">$reference Column implJpaPKeyColumnGetterSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implJpaPKeyColumnGetterSetter">$switch InSuperiorCandidatePrimaryKeyRelation yes implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter default implColumnGetterSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implJpaPKeyColumnGetterSetter">$switch InSuperiorCandidatePrimaryKeyRelation yes implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter default implColumnGetterSetter$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter">$reference Column implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter">
+	// TBD WORKING NOT IMPLEMENTED YET column getter dereferencing SuperiorCandidatePrimaryKeyRelationColColumnGetter not implemented yet</GenRule>
+	<GenRule GenDef="Atom" Name="implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter">
+	// TBD WORKING NOT IMPLEMENTED YET column getter dereferencing SuperiorCandidatePrimaryKeyRelationColColumnGetter not implemented yet</GenRule>
+	
 	<GenRule GenDef="IndexCol" Name="implColumnGetterSetter">$reference Column implColumnGetterSetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="implRevisionGetterSetter">
@@ -1007,6 +1017,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
+	<GenRule GenDef="Value" Name="implColumnGetter">$switch IsNullable yes implOptGetter default implReqGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implColumnSetter">$switch IsNullable yes implOptSetter default implReqSetter$</GenRule>
 	<GenRule GenDef="Value" Name="implColumnGetterSetter">$switch IsNullable yes implOptGetterSetter default implReqGetterSetter$</GenRule>
 
 	<GenRule GenDef="Value" Name="implReqGetterSetter"
