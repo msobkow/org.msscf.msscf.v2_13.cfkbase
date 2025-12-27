@@ -129,12 +129,12 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 
 	<GenRule GenDef="IndexCol" Name="maybeJpaTablePKeyImplJpaColumnAttr">$switch InSuperiorCandidatePrimaryKeyRelation yes empty default implJpaColumnAttr$</GenRule>
 	
-	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default implSuperiorSchemaJpaTablePKeyRelationGetterSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default implInPrimarySchemaJpaTablePKeyRelationGetterSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implSuperiorSchemaJpaTablePKeyRelationGetterSetter">$switch IsSuperiorRelation yes implInPrimarySchemaJpaTablePKeyRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="implInPrimarySchemaJpaTablePKeyRelationGetterSetter">$switch IsRelationInPrimaryIndex yes implSchemaJpaTablePKeyRelationGetterSetter default empty$</GenRule>
 	
 	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyRelationGetterSetter">$switch IsCandidateRelation yes implSchemaJpaTablePKeyRelationCandidateGetterSetter default implSchemaJpaTablePKeyRelationNonCandidateGetterSetter$</GenRule>
-	
+
 	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyRelationCandidateGetterSetter">
 	@Override
 	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {
@@ -984,7 +984,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 		@AttributeOverride(name="bytes", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibUuid6.TOTAL_BYTES ) )
 	})</GenRule>
 	<GenRule GenDef="IndexCol" Name="implColumnAttrJpaBindingUuid">
-	@Column( name="$DbColumnName$", emptyable=$IsNullaBool$, length=16 )</GenRule>
+	@Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=16 )</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implJpaPKeyColumnGetterSetter">$reference Column implJpaPKeyColumnGetterSetter$</GenRule>
 	<GenRule GenDef="TableCol" Name="implJpaPKeyColumnGetterSetter">$switch InSuperiorCandidatePrimaryKeyRelation yes implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter default implColumnGetterSetter$</GenRule>

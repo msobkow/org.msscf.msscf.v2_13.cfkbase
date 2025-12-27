@@ -72,6 +72,7 @@ $switch HasDefSchema no maybeDeclRecGetClassCode default empty$$switch HasDefSch
 	<GenRule GenDef="Relation" Name="declSuperiorISchemaTableRelationSetter">$switch IsSuperiorRelation yes declNotInPrimaryISchemaTableRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declNotInPrimaryISchemaTableRelationSetter">$switch IsRelationInPrimaryIndex yes empty default declISchemaTableRelationSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="declISchemaTableRelationSetter">
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();
 	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj);
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$);</GenRule>
 
@@ -381,7 +382,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declRecPKey
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declDataGetterSetters"
-		>$iterate DataColumns( each declColumnGetterSetter empty empty )$</GenRule>
+		>$iterate DataColumns( each declColumnGetterMaybeSetter empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="declRecInheritSuper"> extends I$reference SuperClassRelation reference ToTable DefSchemaName$$reference SuperClassRelation reference ToTable TableName$</GenRule>
 
