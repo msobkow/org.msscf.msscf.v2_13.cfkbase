@@ -89,11 +89,11 @@ public interface I$SchemaName$$TableName$PKey$switch HasDefSchema yes ISchemaTab
 	<GenRule GenDef="Table" Name="ISchemaTablePKeyImplBaseDefBody">
 $iterate Relation(each maybeDeclISchemaTablePKeyRelationGetterSetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each declColumnGetterMaybeSetter )$$declRecPKeyEquals$$declRecPKeyHashCode$$declRecPKeyCompareTo$$reference PrimaryKeyIndex declRecPKeyToString$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="declColumnGetterMaybeSetter">$reference Column declColumnGetterMaybeSetter$$</GenRule>
+	<GenRule GenDef="IndexCol" Name="declColumnGetterMaybeSetter">$reference Column declColumnGetterMaybeSetter$</GenRule>
 	<GenRule GenDef="TableCol" Name="declColumnGetterMaybeSetter">$switch InSuperiorCandidateRelation yes declColumnGetter default declColumnGetterSetter$</GenRule>
 	<GenRule GenDef="Atom" Name="declColumnGetterMaybeSetter">$switch InSuperiorCandidateRelation yes declColumnGetter default declColumnGetterSetter$</GenRule>
 
-	<GenRule GenDef="Relation" Name="maybeDeclISchemaTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default declSuperiorISchemaTablePKeyRelationGetterSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="maybeDeclISchemaTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default declInPrimaryISchemaTablePKeyRelationGetterSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="declSuperiorISchemaTablePKeyRelationGetterSetter">$switch IsSuperiorRelation yes declInPrimaryISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declInPrimaryISchemaTablePKeyRelationGetterSetter">$switch IsRelationInPrimaryIndex yes declISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declISchemaTablePKeyRelationGetterSetter">
