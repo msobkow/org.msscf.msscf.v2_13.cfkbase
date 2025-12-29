@@ -94,9 +94,10 @@ public class $SchemaName$Jpa$TableName$PKey$switch HasDefSchema yes SchemaJpaTab
 $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetterSetter empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each implJpaPKeyColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMember">
-	$emitJpaMappingAnnotation$(fetch=FetchType.LAZY, optional=$RelationRequiredAsReverseBoolString$$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)
+	$emitJpaMappingAnnotation$(fetch=FetchType.LAZY$switch IsToIndexUnique yes declSchemaJpaRelationMemberOptionalClause default empty$$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)
 	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 
+	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOptionalClause">, optional=$RelationRequiredAsReverseBoolString$</GenRule>
 	<GenRule GenDef="Relation" Name="RelationRequiredAsReverseBoolString">$switch IsRequired yes false default true$</GenRule>
 
 	<GenRule GenDef="Relation" Name="JpaRequiresMappedBy">$switch RelationType
@@ -113,7 +114,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 
 	<GenRule GenDef="Relation" Name="emitInterfaceDataType">$switch IsToIndexUnique yes emitInterfaceDataTypeSingleton default emitInterfaceDataTypeSet$</GenRule>
 	<GenRule GenDef="Relation" Name="emitInterfaceDataTypeSingleton">I$reference ToTable DefSchemaName$$reference ToTable TableName$</GenRule>
-	<GenRule GenDef="Relation" Name="emitInterfaceDataTypeSet">Set&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$&gt;</GenRule>
+	<GenRule GenDef="Relation" Name="emitInterfaceDataTypeSet">List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$&gt;</GenRule>
 
 	<GenRule GenDef="Relation" Name="emitMappingDataType">$switch IsToIndexUnique yes emitMappingDataTypeSingleton default emitMappingDataTypeSet$</GenRule>
 	<GenRule GenDef="Relation" Name="emitMappingDataTypeSingleton">$reference ToTable DefSchemaName$Jpa$reference ToTable TableName$</GenRule>
@@ -137,10 +138,19 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 
 	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyRelationCandidateGetterSetter">
 	@Override
-	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {
-		return( $leadlower OptionalOrRequired$$RelationType$$Suffix$ );
-	}
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique no implSchemaJpaTablePKeyReturnWrapListRelationMember default implSchemaJpaTablePKeyReturnDirectRelationMember$
+	}$switch IsToIndexUnique yes implSchemaJpaTablePKeyRelationCandidateSetter default empty$</GenRule>
 
+	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyReturnDirectRelationMember">
+		return( $leadlower OptionalOrRequired$$RelationType$$Suffix$ );</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyReturnWrapListRelationMember">
+		$emitInterfaceDataTypeSet$ retlist = new ArrayList&lt;&gt;($leadlower OptionalOrRequired$$RelationType$$Suffix$.size());
+		for ($emitMappingDataTypeSingleton$ cur: $leadlower OptionalOrRequired$$RelationType$$Suffix$) {
+			retlist.add(cur);
+		}
+		return( retlist );</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyRelationCandidateSetter">
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaJpaTablePKeyCandidateRelationSetterRequired default implSchemaJpaTablePKeyCandidateRelationSetterOptional$
 	}
@@ -154,8 +164,9 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	@Override
 	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {
 		throw new CFLibNotImplementedYetException( getClass(), "get$OptionalOrRequired$$RelationType$$Suffix$-for-non-candidates" );
-	}
+	}$switch IsToIndexUnique yes implSchemaJpaTablePKeyRelationNonCandidateSetter default empty$</GenRule>
 
+	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyRelationNonCandidateSetter">
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaJpaTablePKeyNonCandidateRelationSetterRequired default implSchemaJpaTablePKeyNonCandidateRelationSetterOptional$
 	}
@@ -168,8 +179,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 
 	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyRelationCandidateGetter">
 	@Override
-	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {
-		return( $leadlower OptionalOrRequired$$RelationType$$Suffix$ );
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique no implSchemaJpaTablePKeyReturnWrapListRelationMember default implSchemaJpaTablePKeyReturnDirectRelationMember$
 	}</GenRule>
 	
 	<GenRule GenDef="Relation" Name="implSchemaJpaTablePKeyRelationNonCandidateGetter">
