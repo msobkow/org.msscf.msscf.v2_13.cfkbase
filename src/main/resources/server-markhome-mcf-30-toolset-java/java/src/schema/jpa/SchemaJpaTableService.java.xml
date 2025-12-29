@@ -413,10 +413,23 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 </GenRule>
 
 	<GenRule GenDef="Table" Name="serviceUpdateApplyDataToExisting">$switch HasSuperClassRelation yes superServiceUpdateApplyDataToExisting default empty$
+		// Apply superior data relationships of $SchemaName$$TableName$ to existing object$iterate SuperiorDataRelations( each serviceUpdateApplyRelationship empty empty)$
 		// Apply data columns of $SchemaName$$TableName$ to existing object$iterate DataColumns( each serviceUpdateApplyDataColToExistingCol empty empty )$</GenRule>
 	<GenRule GenDef="Table" Name="superServiceUpdateApplyDataToExisting">$reference SuperClassRelation reference ToTable serviceUpdateApplyDataToExisting$</GenRule>
-	<GenRule GenDef="Value" Name="serviceUpdateApplyDataColToExistingCol">
+	<GenRule GenDef="Value" Name="serviceUpdateApplyDataColToExistingCol">$switch InSuperiorDataRelation yes empty default serviceUpdateReallyApplyDataColToExistingCol$</GenRule>
+	<GenRule GenDef="Value" Name="serviceUpdateReallyApplyDataColToExistingCol">
 		existing.set$implColumnAttrOptionality$$Name$(data.get$implColumnAttrOptionality$$Name$());</GenRule>
+
+	<GenRule GenDef="Relation" Name="serviceUpdateApplyRelationship">$switch ToTableHasDefSchema yes serviceUpdateApplyNonCandidateRelationship default serviceUpdateApplyCandidateRelationship$</GenRule>
+	<GenRule GenDef="Relation" Name="serviceUpdateApplyNonCandidateRelationship">$switch IsToIndexUnique yes serviceUpdateApplyNonCandidateSingleton default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="serviceUpdateApplyCandidateRelationship">$switch IsToIndexUnique yes serviceUpdateApplyCandidateSingleton default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="serviceUpdateApplyCandidateSingleton">
+		existing.set$OptionalOrRequired$$RelationType$$Suffix$(data.get$OptionalOrRequired$$RelationType$$Suffix$());</GenRule>
+	<GenRule GenDef="Relation" Name="serviceUpdateApplyNonCandidateSingleton">
+		existing.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Column(first passDataFromCol each commaPassDataFromCol)$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="passDataFromCol">data.get$reference FromCol implColumnAttrOptionality$$reference FromCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="commaPassDataFromCol">,
+			$passDataFromCol$</GenRule>
 
 	<GenRule GenDef="Table" Name="serviceUpdateInitAuditColumns">
 		// Update the audit columns
