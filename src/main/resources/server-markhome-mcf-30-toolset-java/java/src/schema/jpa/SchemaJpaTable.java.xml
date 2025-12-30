@@ -163,20 +163,27 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {
-		throw new CFLibNotImplementedYetException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$-by-cols-for-candidate-relations");
+		I$reference ToTable DefSchemaName$Schema targetBackingSchema = I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$();
+		if (targetBackingSchema == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$()");
+		}
+		I$reference ToTable DefSchemaName$$reference ToTable TableName$Table targetTable = targetBackingSchema.getTable$reference ToTable TableName$();
+		if (targetTable == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$().getTable$reference ToTable TableName$()");
+		}
+		I$reference ToTable DefSchemaName$$reference ToTable TableName$ targetRec = targetTable.$switch IsToIndexPrimaryKeyIndex yes derefJpaTableRelationPKeyReadDerived default derefJpaTableRelationDataReadDerived$;
+		set$OptionalOrRequired$$RelationType$$Suffix$(targetRec);
 	}
 </GenRule>
 
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableRelationNonCandidateGetter">
 	@Override
-	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {
-		throw new CFLibNotImplementedYetException( getClass(), "get$OptionalOrRequired$$RelationType$$Suffix$-for-non-candidates" );
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique yes implSchemaJpaTablePKeyRelationNonCandidateSingletonGetter default implSchemaJpaTablePKeyRelationNonCandidateDuplicateGetter$
 	}</GenRule>
 
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableRelationNonCandidateGetterSetter">
 	@Override
-	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {
-		throw new CFLibNotImplementedYetException( getClass(), "get$OptionalOrRequired$$RelationType$$Suffix$-for-non-candidates" );
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique yes implSchemaJpaTablePKeyRelationNonCandidateSingletonGetter default implSchemaJpaTablePKeyRelationNonCandidateDuplicateGetter$
 	}$switch IsToIndexUnique yes implSchemaJpaTableRelationNonCandidateSetter default empty$</GenRule>
 	
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableRelationNonCandidateSetter">
