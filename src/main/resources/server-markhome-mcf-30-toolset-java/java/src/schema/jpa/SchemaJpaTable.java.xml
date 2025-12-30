@@ -139,7 +139,7 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTableDataRelationGetterSetter">$switch HasDefSchema yes implSchemaJpaTableRelationNonCandidateGetterSetter default implSuperiorSchemaJpaTableDataRelationGetterSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implSuperiorSchemaJpaTableDataRelationGetterSetter">$switch IsSuperiorRelation yes implInDataSchemaJpaTableDataRelationGetterSetter default implInDataSchemaJpaTableDataRelationGetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implInDataSchemaJpaTableDataRelationGetterSetter">$switch IsRelationInPrimaryIndex no implSchemaJpaTableRelationGetterSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="implInDataSchemaJpaTableDataRelationGetter">$switch IsRelationInPrimaryIndex no implSchemaJpaTableRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableDataRelationGetter">$switch IsRelationInPrimaryIndex no implSchemaJpaTableRelationGetter default empty$</GenRule>
 	
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableRelationGetterSetter">$switch IsCandidateRelation yes implSchemaJpaTableRelationCandidateGetterSetter default implSchemaJpaTableRelationNonCandidateGetterSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableRelationGetter">$switch IsCandidateRelation yes implSchemaJpaTableRelationCandidateGetter default implSchemaJpaTableRelationNonCandidateGetter$</GenRule>
@@ -838,7 +838,7 @@ $switch BaseHasHistory yes implJpaSetHistory default empty$</GenRule>
 	}
 
 	@Override
-	public void set$TableName$( I$DefSchemaName$$TableName$H src ) {$switch HasSuperClassRelation yes implJpaSetInvokeSuper default implJpaSetCopyPKey$$iterate Relation(each maybeCopySetSchemaTableDataRelation empty empty)$$iterate DataColumns( each maybeSetCopyDataAttr )$
+	public void set$TableName$( I$DefSchemaName$$TableName$H src ) {$switch HasSuperClassRelation yes implJpaSetInvokeSuper default implJpaSetHCopyPKey$$iterate Relation(each maybeCopySetSchemaTableHDataRelation empty empty)$$iterate DataColumns( each maybeSetCopyDataAttr )$
 	}
 </GenRule>
 
@@ -854,30 +854,42 @@ $switch BaseHasHistory yes implJpaSetHistory default empty$</GenRule>
 	<GenRule GenDef="Table" Name="implJpaSetCopyPKey"
 		>$reference BaseClass iterate Relation(each maybeSetCopySchemaTablePKeyRelation empty empty)$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeSetCopyPKeyAttr )$</GenRule>
 
+	<GenRule GenDef="Table" Name="implJpaSetHCopyPKey"
+		>$reference BaseClass iterate Relation(each maybeSetHCopySchemaTablePKeyRelation empty empty)$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeSetCopyPKeyAttr )$</GenRule>
+
 	<GenRule GenDef="Relation" Name="maybeSetCopySchemaTablePKeyRelation">$switch HasDefSchema yes empty default setCopySchemaTablePrimaryKeyRelation$</GenRule>
 	<GenRule GenDef="Relation" Name="setCopySchemaTablePrimaryKeyRelation">$switch IsSuperiorPrimaryKeyRelation yes setCopySchemaTablePKeyRelation default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="setCopySchemaTablePKeyRelation">
-		set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first passSrcArgColumn each passCommaSrcArgColumn)$);</GenRule>
-	<GenRule GenDef="RelationCol" Name="passSrcArgColumn">src.get$reference FromCol implColumnAttrOptionality$$reference FromCol Name$()</GenRule>
-	<GenRule GenDef="RelationCol" Name="passCommaSrcArgColumn">,
-			$passSrcArgColumn$</GenRule>
+	<GenRule GenDef="Relation" Name="setCopySchemaTablePKeyRelation">$switch ToTableHasDefSchema yes setCopySchemaTableNonCandidateRelationship default setCopySchemaTableCandidateRelationship$</GenRule>
+
+	<GenRule GenDef="Relation" Name="maybeSetHCopySchemaTablePKeyRelation">$switch HasDefSchema yes empty default setHCopySchemaTablePrimaryKeyRelation$</GenRule>
+	<GenRule GenDef="Relation" Name="setHCopySchemaTablePrimaryKeyRelation">$switch IsSuperiorPrimaryKeyRelation yes setCopySchemaTableNonCandidateRelationship default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="setCopySchemaTableNonCandidateRelationship">$switch IsToIndexUnique yes setCopySchemaTableNonCandidateSingleton default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="setCopySchemaTableCandidateRelationship">$switch IsToIndexUnique yes setCopySchemaTableCandidateSingleton default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="setCopySchemaTableCandidateSingleton">
+		set$OptionalOrRequired$$RelationType$$Suffix$(src.get$OptionalOrRequired$$RelationType$$Suffix$());</GenRule>
+	<GenRule GenDef="Relation" Name="setCopySchemaTableNonCandidateSingleton">
+		set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first passSrcFromCol each commaPassSrcFromCol)$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="passSrcFromCol">src.get$reference FromCol implColumnAttrOptionality$$reference FromCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="commaPassSrcFromCol">,
+			$passSrcFromCol$</GenRule>
+
 	<GenRule GenDef="IndexCol" Name="maybeSetCopyPKeyAttr">$switch HasDefSchema yes empty default setCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setCopyPKeyAttrIfNotInSuperiorRelationship">$switch InSuperiorPrimaryKeyRelation yes empty default setCopyPKeyAttr$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setCopyPKeyAttr">
 		set$reference Column implColumnAttrOptionality$$reference Column Name$(src.get$reference Column implColumnAttrOptionality$$reference Column Name$());</GenRule>
 
+	<GenRule GenDef="Relation" Name="maybeCopySetSchemaTableHDataRelation">$switch HasDefSchema yes empty default setCopySchemaTableInSuperiorHDataRelation$</GenRule>
+	<GenRule GenDef="Relation" Name="setCopySchemaTableInSuperiorHDataRelation">$switch IsSuperiorDataRelation yes setCopySchemaTableNonCandidateRelationship default empty$</GenRule>
+
 	<GenRule GenDef="Relation" Name="maybeCopySetSchemaTableDataRelation">$switch HasDefSchema yes empty default setCopySchemaTableInSuperiorDataRelation$</GenRule>
 	<GenRule GenDef="Relation" Name="setCopySchemaTableInSuperiorDataRelation">$switch IsSuperiorDataRelation yes setCopySchemaTableDataRelation default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="setCopySchemaTableDataRelation">
-		set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first passDataSrcArgColumn each passCommaDataSrcArgColumn)$);</GenRule>
+	<GenRule GenDef="Relation" Name="setCopySchemaTableDataRelation">$switch ToTableHasDefSchema yes setCopySchemaTableNonCandidateRelationship default setCopySchemaTableCandidateRelationship$</GenRule>
 	<GenRule GenDef="Value" Name="maybeSetCopyDataAttr">$switch HasDefSchema yes empty default setCopyDataAttrIfNotInPrimaryKeyRelation$</GenRule>
 	<GenRule GenDef="Value" Name="setCopyDataAttrIfNotInPrimaryKeyRelation">$switch InPrimaryKeyRelation yes empty default setCopyNonSuperiorDataAttr$</GenRule>
 	<GenRule GenDef="Value" Name="setCopyNonSuperiorDataAttr">$switch InSuperiorRelation yes empty default setCopyDataAttr$</GenRule>
 	<GenRule GenDef="Value" Name="setCopyDataAttr">
 		set$implColumnAttrOptionality$$Name$(src.get$implColumnAttrOptionality$$Name$());</GenRule>
-	<GenRule GenDef="RelationCol" Name="passDataSrcArgColumn">src.get$reference FromCol implColumnAttrOptionality$$reference FromCol Name$()</GenRule>
-	<GenRule GenDef="RelationCol" Name="passCommaDataSrcArgColumn">,
-			$passDataSrcArgColumn$</GenRule>
 	
 	<GenRule GenDef="Table" Name="implJpaSetCopyRevision">
 		setRequiredRevision( src.getRequiredRevision() );</GenRule>
