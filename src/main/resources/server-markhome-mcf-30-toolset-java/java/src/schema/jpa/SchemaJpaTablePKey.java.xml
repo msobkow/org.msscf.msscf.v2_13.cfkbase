@@ -94,9 +94,19 @@ public class $SchemaName$Jpa$TableName$PKey$switch HasDefSchema yes SchemaJpaTab
 $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetterSetter empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each implJpaPKeyColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMember">
-	$emitJpaMappingAnnotation$(fetch=FetchType.LAZY$switch IsToIndexUnique yes declSchemaJpaRelationMemberOptionalClause default empty$$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)
+	$emitJpaMappingAnnotation$(fetch=FetchType.LAZY$switch IsToIndexUnique yes declSchemaJpaRelationMemberOptionalClause default empty$$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)$declSchemaJpaRelationMemberJoinColumns$
 	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 
+	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberJoinColumns">$switch IsToIndexAtomic yes declSchemaJpaRelationMemberJoinAColumn default declSchemaJpaRelationMemberJoinMultiColumn$</GenRule>
+	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberJoinAColumn">$iterate Columns( first declSchemaJpaRelationMemberAJoinColumn each empty)$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSchemaJpaRelationMemberAJoinColumn">
+	@JoinColumn( name="$reference FromCol DbColumnName$", referencedColumnName="$reference ToCol DbColumnName$" )</GenRule>
+	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberJoinMultiColumn">
+	@JoinColumns({$iterate Columns( first declSchemaJpaRelationMemberJoinColumn each declCommaSchemaJpaRelationMemberJoinColumn)$
+	})</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSchemaJpaRelationMemberJoinColumn">
+		@JoinColumn( name="$reference FromCol DbColumnName$", referencedColumnName="$reference ToCol DbColumnName$" )</GenRule>
+	<GenRule GenDef="RelationCol" Name="declCommaSchemaJpaRelationMemberJoinColumn">,$declSchemaJpaRelationMemberJoinColumn$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOptionalClause">, optional=$RelationRequiredAsReverseBoolString$</GenRule>
 	<GenRule GenDef="Relation" Name="RelationRequiredAsReverseBoolString">$switch IsRequired yes false default true$</GenRule>
 
