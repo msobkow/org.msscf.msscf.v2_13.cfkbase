@@ -139,7 +139,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="Object" Name="emitJpaMappingAnnotationManyToMany">@ManyToMany</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="maybeJpaTablePKeyImplJpaColumnAttr">$switch InSuperiorCandidatePrimaryKeyRelation yes empty default implJpaColumnAttr$</GenRule>
-	
+
 	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default implInPrimarySchemaJpaTablePKeyRelationGetterSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implSuperiorSchemaJpaTablePKeyRelationGetterSetter">$switch IsSuperiorRelation yes implInPrimarySchemaJpaTablePKeyRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="implInPrimarySchemaJpaTablePKeyRelationGetterSetter">$switch IsRelationInPrimaryIndex yes implSchemaJpaTablePKeyRelationGetterSetter default empty$</GenRule>
@@ -1129,106 +1129,201 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 
 	<GenRule GenDef="Value" Name="implColumnGetter">$switch IsNullable yes implOptGetter default implReqGetter$</GenRule>
 	<GenRule GenDef="Value" Name="implColumnSetter">$switch IsNullable yes implOptSetter default implReqSetter$</GenRule>
-	<GenRule GenDef="Value" Name="implColumnGetterSetter">$switch IsNullable yes implOptGetterSetter default implReqGetterSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implColumnGetterSetter">$switch IsNullable yes implOptGetter default implReqGetter$$switch IsNullable yes implOptSetter default implReqSetter$</GenRule>
 
-	<GenRule GenDef="Value" Name="implReqGetterSetter"
+	<GenRule GenDef="Value" Name="implReqSetter"
 		>$switch BaseModelAtomClass
-			BlobDef implReqBlobGetterSetter
-			BoolDef implReqBoolGetterSetter
-			EnumDef implReqEnumGetterSetter
-			Id16Gen implReqInt16GetterSetter
-			Id32Gen implReqInt32GetterSetter
-			Id64Gen implReqInt64GetterSetter
-			Int16Def implReqInt16GetterSetter
-			Int32Def implReqInt32GetterSetter
-			Int64Def implReqInt64GetterSetter
-			UInt16Def implReqUInt16GetterSetter
-			UInt32Def implReqUInt32GetterSetter
-			UInt64Def implReqUInt64GetterSetter
-			FloatDef implReqFloatGetterSetter
-			DoubleDef implReqDoubleGetterSetter
-			NumberDef implReqNumberGetterSetter
-			DateDef implReqDateGetterSetter
-			TimeDef implReqTimeGetterSetter
-			TimestampDef implReqTimestampGetterSetter
-			TZDateDef implReqTZDateGetterSetter
-			TZTimeDef implReqTZTimeGetterSetter
-			TZTimestampDef implReqTZTimestampGetterSetter
-			DbKeyHash128Gen implReqDbKeyHash128GetterSetter
-			DbKeyHash160Gen implReqDbKeyHash160GetterSetter
-			DbKeyHash224Gen implReqDbKeyHash224GetterSetter
-			DbKeyHash256Gen implReqDbKeyHash256GetterSetter
-			DbKeyHash384Gen implReqDbKeyHash384GetterSetter
-			DbKeyHash512Gen implReqDbKeyHash512GetterSetter
-			DbKeyHash128Def implReqDbKeyHash128GetterSetter
-			DbKeyHash160Def implReqDbKeyHash160GetterSetter
-			DbKeyHash224Def implReqDbKeyHash224GetterSetter
-			DbKeyHash256Def implReqDbKeyHash256GetterSetter
-			DbKeyHash384Def implReqDbKeyHash384GetterSetter
-			DbKeyHash512Def implReqDbKeyHash512GetterSetter
-			Uuid6Gen implReqUuid6GetterSetter
-			Uuid6Def implReqUuid6GetterSetter
-			UuidGen implReqUuidGetterSetter
-			UuidDef implReqUuidGetterSetter
-			StringDef implReqStringGetterSetter
-			TokenDef implReqTokenGetterSetter
-			NmTokenDef implReqNmTokenGetterSetter
-			NmTokensDef implReqNmTokensGetterSetter
-			TextDef implReqTextGetterSetter
+			BlobDef implReqBlobSetter
+			BoolDef implReqBoolSetter
+			EnumDef implReqEnumSetter
+			Id16Gen implReqInt16Setter
+			Id32Gen implReqInt32Setter
+			Id64Gen implReqInt64Setter
+			Int16Def implReqInt16Setter
+			Int32Def implReqInt32Setter
+			Int64Def implReqInt64Setter
+			UInt16Def implReqUInt16Setter
+			UInt32Def implReqUInt32Setter
+			UInt64Def implReqUInt64Setter
+			FloatDef implReqFloatSetter
+			DoubleDef implReqDoubleSetter
+			NumberDef implReqNumberSetter
+			DateDef implReqDateSetter
+			TimeDef implReqTimeSetter
+			TimestampDef implReqTimestampSetter
+			TZDateDef implReqTZDateSetter
+			TZTimeDef implReqTZTimeSetter
+			TZTimestampDef implReqTZTimestampSetter
+			DbKeyHash128Gen implReqDbKeyHash128Setter
+			DbKeyHash160Gen implReqDbKeyHash160Setter
+			DbKeyHash224Gen implReqDbKeyHash224Setter
+			DbKeyHash256Gen implReqDbKeyHash256Setter
+			DbKeyHash384Gen implReqDbKeyHash384Setter
+			DbKeyHash512Gen implReqDbKeyHash512Setter
+			DbKeyHash128Def implReqDbKeyHash128Setter
+			DbKeyHash160Def implReqDbKeyHash160Setter
+			DbKeyHash224Def implReqDbKeyHash224Setter
+			DbKeyHash256Def implReqDbKeyHash256Setter
+			DbKeyHash384Def implReqDbKeyHash384Setter
+			DbKeyHash512Def implReqDbKeyHash512Setter
+			Uuid6Gen implReqUuid6Setter
+			Uuid6Def implReqUuid6Setter
+			UuidGen implReqUuidSetter
+			UuidDef implReqUuidSetter
+			StringDef implReqStringSetter
+			TokenDef implReqTokenSetter
+			NmTokenDef implReqNmTokenSetter
+			NmTokensDef implReqNmTokensSetter
+			TextDef implReqTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
-	<GenRule GenDef="Value" Name="implOptGetterSetter"
+	<GenRule GenDef="Value" Name="implOptSetter"
 		>$switch BaseModelAtomClass
-			BlobDef implOptBlobGetterSetter
-			BoolDef implOptBoolGetterSetter
-			EnumDef implOptEnumGetterSetter
-			Id16Gen implOptInt16GetterSetter
-			Id32Gen implOptInt32GetterSetter
-			Id64Gen implOptInt64GetterSetter
-			Int16Def implOptInt16GetterSetter
-			Int32Def implOptInt32GetterSetter
-			Int64Def implOptInt64GetterSetter
-			UInt16Def implOptUInt16GetterSetter
-			UInt32Def implOptUInt32GetterSetter
-			UInt64Def implOptUInt64GetterSetter
-			FloatDef implOptFloatGetterSetter
-			DoubleDef implOptDoubleGetterSetter
-			NumberDef implOptNumberGetterSetter
-			DateDef implOptDateGetterSetter
-			TimeDef implOptTimeGetterSetter
-			TimestampDef implOptTimestampGetterSetter
-			TZDateDef implOptTZDateGetterSetter
-			TZTimeDef implOptTZTimeGetterSetter
-			TZTimestampDef implOptTZTimestampGetterSetter
-			DbKeyHash128Gen implOptDbKeyHash128GetterSetter
-			DbKeyHash160Gen implOptDbKeyHash160GetterSetter
-			DbKeyHash224Gen implOptDbKeyHash224GetterSetter
-			DbKeyHash256Gen implOptDbKeyHash256GetterSetter
-			DbKeyHash384Gen implOptDbKeyHash384GetterSetter
-			DbKeyHash512Gen implOptDbKeyHash512GetterSetter
-			DbKeyHash128Def implOptDbKeyHash128GetterSetter
-			DbKeyHash160Def implOptDbKeyHash160GetterSetter
-			DbKeyHash224Def implOptDbKeyHash224GetterSetter
-			DbKeyHash256Def implOptDbKeyHash256GetterSetter
-			DbKeyHash384Def implOptDbKeyHash384GetterSetter
-			DbKeyHash512Def implOptDbKeyHash512GetterSetter
-			Uuid6Gen implOptUuid6GetterSetter
-			Uuid6Def implOptUuid6GetterSetter
-			UuidGen implOptUuidGetterSetter
-			UuidDef implOptUuidGetterSetter
-			StringDef implOptStringGetterSetter
-			TokenDef implOptTokenGetterSetter
-			NmTokenDef implOptNmTokenGetterSetter
-			NmTokensDef implOptNmTokensGetterSetter
-			TextDef implOptTextGetterSetter
+			BlobDef implOptBlobSetter
+			BoolDef implOptBoolSetter
+			EnumDef implOptEnumSetter
+			Id16Gen implOptInt16Setter
+			Id32Gen implOptInt32Setter
+			Id64Gen implOptInt64Setter
+			Int16Def implOptInt16Setter
+			Int32Def implOptInt32Setter
+			Int64Def implOptInt64Setter
+			UInt16Def implOptUInt16Setter
+			UInt32Def implOptUInt32Setter
+			UInt64Def implOptUInt64Setter
+			FloatDef implOptFloatSetter
+			DoubleDef implOptDoubleSetter
+			NumberDef implOptNumberSetter
+			DateDef implOptDateSetter
+			TimeDef implOptTimeSetter
+			TimestampDef implOptTimestampSetter
+			TZDateDef implOptTZDateSetter
+			TZTimeDef implOptTZTimeSetter
+			TZTimestampDef implOptTZTimestampSetter
+			DbKeyHash128Gen implOptDbKeyHash128Setter
+			DbKeyHash160Gen implOptDbKeyHash160Setter
+			DbKeyHash224Gen implOptDbKeyHash224Setter
+			DbKeyHash256Gen implOptDbKeyHash256Setter
+			DbKeyHash384Gen implOptDbKeyHash384Setter
+			DbKeyHash512Gen implOptDbKeyHash512Setter
+			DbKeyHash128Def implOptDbKeyHash128Setter
+			DbKeyHash160Def implOptDbKeyHash160Setter
+			DbKeyHash224Def implOptDbKeyHash224Setter
+			DbKeyHash256Def implOptDbKeyHash256Setter
+			DbKeyHash384Def implOptDbKeyHash384Setter
+			DbKeyHash512Def implOptDbKeyHash512Setter
+			Uuid6Gen implOptUuid6Setter
+			Uuid6Def implOptUuid6Setter
+			UuidGen implOptUuidSetter
+			UuidDef implOptUuidSetter
+			StringDef implOptStringSetter
+			TokenDef implOptTokenSetter
+			NmTokenDef implOptNmTokenSetter
+			NmTokensDef implOptNmTokensSetter
+			TextDef implOptTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
-	<GenRule GenDef="Value" Name="implReqBlobGetterSetter">
+	<GenRule GenDef="Value" Name="implReqGetter"
+		>$switch BaseModelAtomClass
+			BlobDef implReqBlobGetter
+			BoolDef implReqBoolGetter
+			EnumDef implReqEnumGetter
+			Id16Gen implReqInt16Getter
+			Id32Gen implReqInt32Getter
+			Id64Gen implReqInt64Getter
+			Int16Def implReqInt16Getter
+			Int32Def implReqInt32Getter
+			Int64Def implReqInt64Getter
+			UInt16Def implReqUInt16Getter
+			UInt32Def implReqUInt32Getter
+			UInt64Def implReqUInt64Getter
+			FloatDef implReqFloatGetter
+			DoubleDef implReqDoubleGetter
+			NumberDef implReqNumberGetter
+			DateDef implReqDateGetter
+			TimeDef implReqTimeGetter
+			TimestampDef implReqTimestampGetter
+			TZDateDef implReqTZDateGetter
+			TZTimeDef implReqTZTimeGetter
+			TZTimestampDef implReqTZTimestampGetter
+			DbKeyHash128Gen implReqDbKeyHash128Getter
+			DbKeyHash160Gen implReqDbKeyHash160Getter
+			DbKeyHash224Gen implReqDbKeyHash224Getter
+			DbKeyHash256Gen implReqDbKeyHash256Getter
+			DbKeyHash384Gen implReqDbKeyHash384Getter
+			DbKeyHash512Gen implReqDbKeyHash512Getter
+			DbKeyHash128Def implReqDbKeyHash128Getter
+			DbKeyHash160Def implReqDbKeyHash160Getter
+			DbKeyHash224Def implReqDbKeyHash224Getter
+			DbKeyHash256Def implReqDbKeyHash256Getter
+			DbKeyHash384Def implReqDbKeyHash384Getter
+			DbKeyHash512Def implReqDbKeyHash512Getter
+			Uuid6Gen implReqUuid6Getter
+			Uuid6Def implReqUuid6Getter
+			UuidGen implReqUuidGetter
+			UuidDef implReqUuidGetter
+			StringDef implReqStringGetter
+			TokenDef implReqTokenGetter
+			NmTokenDef implReqNmTokenGetter
+			NmTokensDef implReqNmTokensGetter
+			TextDef implReqTextGetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptGetter"
+		>$switch BaseModelAtomClass
+			BlobDef implOptBlobGetter
+			BoolDef implOptBoolGetter
+			EnumDef implOptEnumGetter
+			Id16Gen implOptInt16Getter
+			Id32Gen implOptInt32Getter
+			Id64Gen implOptInt64Getter
+			Int16Def implOptInt16Getter
+			Int32Def implOptInt32Getter
+			Int64Def implOptInt64Getter
+			UInt16Def implOptUInt16Getter
+			UInt32Def implOptUInt32Getter
+			UInt64Def implOptUInt64Getter
+			FloatDef implOptFloatGetter
+			DoubleDef implOptDoubleGetter
+			NumberDef implOptNumberGetter
+			DateDef implOptDateGetter
+			TimeDef implOptTimeGetter
+			TimestampDef implOptTimestampGetter
+			TZDateDef implOptTZDateGetter
+			TZTimeDef implOptTZTimeGetter
+			TZTimestampDef implOptTZTimestampGetter
+			DbKeyHash128Gen implOptDbKeyHash128Getter
+			DbKeyHash160Gen implOptDbKeyHash160Getter
+			DbKeyHash224Gen implOptDbKeyHash224Getter
+			DbKeyHash256Gen implOptDbKeyHash256Getter
+			DbKeyHash384Gen implOptDbKeyHash384Getter
+			DbKeyHash512Gen implOptDbKeyHash512Getter
+			DbKeyHash128Def implOptDbKeyHash128Getter
+			DbKeyHash160Def implOptDbKeyHash160Getter
+			DbKeyHash224Def implOptDbKeyHash224Getter
+			DbKeyHash256Def implOptDbKeyHash256Getter
+			DbKeyHash384Def implOptDbKeyHash384Getter
+			DbKeyHash512Def implOptDbKeyHash512Getter
+			Uuid6Gen implOptUuid6Getter
+			Uuid6Def implOptUuid6Getter
+			UuidGen implOptUuidGetter
+			UuidDef implOptUuidGetter
+			StringDef implOptStringGetter
+			TokenDef implOptTokenGetter
+			NmTokenDef implOptNmTokenGetter
+			NmTokensDef implOptNmTokensGetter
+			TextDef implOptTextGetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+
+	<GenRule GenDef="Value" Name="implReqBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqBlobSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( byte[] value ) {
 		if( value == null ) {
@@ -1249,12 +1344,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptBlobGetterSetter">
+	<GenRule GenDef="Value" Name="implOptBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptBlobSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( byte[] value ) {
 		if( value != null &amp;&amp; value.length &gt; $MaxLen$ ) {
@@ -1269,36 +1366,42 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqBoolGetterSetter">
+	<GenRule GenDef="Value" Name="implReqBoolGetter">
 	@Override
 	public boolean get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqBoolSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( boolean value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptBoolGetterSetter">
+	<GenRule GenDef="Value" Name="implOptBoolGetter">
 	@Override
 	public Boolean get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptBoolSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Boolean value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqEnumGetterSetter">
+	<GenRule GenDef="Value" Name="implReqEnumGetter">
 	@Override
 	public I$reference DataType EffSchemaName$Schema.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqEnumSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$Schema.$reference DataType Name$ value ) {
 		if( value == null ) {
@@ -1311,144 +1414,168 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptEnumGetterSetter">
+	<GenRule GenDef="Value" Name="implOptEnumGetter">
 	@Override
 	public I$reference DataType EffSchemaName$Schema.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptEnumSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$Schema.$reference DataType Name$ value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqInt16GetterSetter">
+	<GenRule GenDef="Value" Name="implReqInt16Getter">
 	@Override
 	public short get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqInt16Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( short value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptInt16GetterSetter">
+	<GenRule GenDef="Value" Name="implOptInt16Getter">
 	@Override
 	public Short get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptInt16Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Short value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqInt32GetterSetter">
+	<GenRule GenDef="Value" Name="implReqInt32Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqInt32Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( int value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptInt32GetterSetter">
+	<GenRule GenDef="Value" Name="implOptInt32Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptInt32Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Integer value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqInt64GetterSetter">
+	<GenRule GenDef="Value" Name="implReqInt64Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqInt64Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( long value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptInt64GetterSetter">
+	<GenRule GenDef="Value" Name="implOptInt64Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptInt64Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Long value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqUInt16GetterSetter">
+	<GenRule GenDef="Value" Name="implReqUInt16Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqUInt16Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( int value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptUInt16GetterSetter">
+	<GenRule GenDef="Value" Name="implOptUInt16Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptUInt16Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Integer value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqUInt32GetterSetter">
+	<GenRule GenDef="Value" Name="implReqUInt32Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqUInt32Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( long value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptUInt32GetterSetter">
+	<GenRule GenDef="Value" Name="implOptUInt32Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptUInt32Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Long value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqUInt64GetterSetter">
+	<GenRule GenDef="Value" Name="implReqUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqUInt64Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( BigDecimal value ) {
 		if( value == null ) {
@@ -1461,72 +1588,84 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptUInt64GetterSetter">
+	<GenRule GenDef="Value" Name="implOptUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptUInt64Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( BigDecimal value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqFloatGetterSetter">
+	<GenRule GenDef="Value" Name="implReqFloatGetter">
 	@Override
 	public float get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqFloatSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( float value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptFloatGetterSetter">
+	<GenRule GenDef="Value" Name="implOptFloatGetter">
 	@Override
 	public Float get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptFloatSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Float value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqDoubleGetterSetter">
+	<GenRule GenDef="Value" Name="implReqDoubleGetter">
 	@Override
 	public double get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqDoubleSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( double value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptDoubleGetterSetter">
+	<GenRule GenDef="Value" Name="implOptDoubleGetter">
 	@Override
 	public Double get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptDoubleSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Double value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqNumberGetterSetter">
+	<GenRule GenDef="Value" Name="implReqNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqNumberSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( BigDecimal value ) {
 		if( value == null ) {
@@ -1539,24 +1678,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptNumberGetterSetter">
+	<GenRule GenDef="Value" Name="implOptNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptNumberSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( BigDecimal value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqDateGetterSetter">
+	<GenRule GenDef="Value" Name="implReqDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqDateSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDate value ) {
 		if( value == null ) {
@@ -1569,24 +1712,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptDateGetterSetter">
+	<GenRule GenDef="Value" Name="implOptDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptDateSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDate value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqTimeGetterSetter">
+	<GenRule GenDef="Value" Name="implReqTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqTimeSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalTime value ) {
 		if( value == null ) {
@@ -1599,24 +1746,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptTimeGetterSetter">
+	<GenRule GenDef="Value" Name="implOptTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptTimeSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalTime value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqTimestampGetterSetter">
+	<GenRule GenDef="Value" Name="implReqTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqTimestampSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value ) {
 		if( value == null ) {
@@ -1629,24 +1780,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptTimestampGetterSetter">
+	<GenRule GenDef="Value" Name="implOptTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptTimestampSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqTZDateGetterSetter">
+	<GenRule GenDef="Value" Name="implReqTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqTZDateSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDate value ) {
 		if( value == null ) {
@@ -1659,24 +1814,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptTZDateGetterSetter">
+	<GenRule GenDef="Value" Name="implOptTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptTZDateSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDate value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqTZTimeGetterSetter">
+	<GenRule GenDef="Value" Name="implReqTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqTZTimeSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalTime value ) {
 		if( value == null ) {
@@ -1689,24 +1848,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptTZTimeGetterSetter">
+	<GenRule GenDef="Value" Name="implOptTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptTZTimeSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalTime value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqTZTimestampGetterSetter">
+	<GenRule GenDef="Value" Name="implReqTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqTZTimestampSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value ) {
 		if( value == null ) {
@@ -1719,24 +1882,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptTZTimestampGetterSetter">
+	<GenRule GenDef="Value" Name="implOptTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptTZTimestampSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqDbKeyHash128GetterSetter">
+	<GenRule GenDef="Value" Name="implReqDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqDbKeyHash128Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value ) {
 		if( value == null || value.isNull() ) {
@@ -1749,24 +1916,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptDbKeyHash128GetterSetter">
+	<GenRule GenDef="Value" Name="implOptDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptDbKeyHash128Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqDbKeyHash160GetterSetter">
+	<GenRule GenDef="Value" Name="implReqDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqDbKeyHash160Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value ) {
 		if( value == null || value.isNull() ) {
@@ -1779,12 +1950,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptDbKeyHash160GetterSetter">
+	<GenRule GenDef="Value" Name="implOptDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptDbKeyHash160Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value ) {
 		if( value == null || value.isNull() ) {
@@ -1797,12 +1970,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqDbKeyHash224GetterSetter">
+	<GenRule GenDef="Value" Name="implReqDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqDbKeyHash224Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value ) {
 		if( value == null || value.isNull() ) {
@@ -1815,24 +1990,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptDbKeyHash224GetterSetter">
+	<GenRule GenDef="Value" Name="implOptDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptDbKeyHash224Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqDbKeyHash256GetterSetter">
+	<GenRule GenDef="Value" Name="implReqDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqDbKeyHash256Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value ) {
 		if( value == null || value.isNull() ) {
@@ -1845,24 +2024,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptDbKeyHash256GetterSetter">
+	<GenRule GenDef="Value" Name="implOptDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptDbKeyHash256Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqDbKeyHash384GetterSetter">
+	<GenRule GenDef="Value" Name="implReqDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqDbKeyHash384Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value ) {
 		if( value == null || value.isNull() ) {
@@ -1875,24 +2058,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptDbKeyHash384GetterSetter">
+	<GenRule GenDef="Value" Name="implOptDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptDbKeyHash384Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqDbKeyHash512GetterSetter">
+	<GenRule GenDef="Value" Name="implReqDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqDbKeyHash512Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value ) {
 		if( value == null || value.isNull() ) {
@@ -1905,24 +2092,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptDbKeyHash512GetterSetter">
+	<GenRule GenDef="Value" Name="implOptDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptDbKeyHash512Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqUuid6GetterSetter">
+	<GenRule GenDef="Value" Name="implReqUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqUuid6Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibUuid6 value ) {
 		if( value == null ) {
@@ -1935,24 +2126,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptUuid6GetterSetter">
+	<GenRule GenDef="Value" Name="implOptUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptUuid6Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibUuid6 value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqUuidGetterSetter">
+	<GenRule GenDef="Value" Name="implReqUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqUuidSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( UUID value ) {
 		if( value == null ) {
@@ -1965,24 +2160,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptUuidGetterSetter">
+	<GenRule GenDef="Value" Name="implOptUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptUuidSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( UUID value ) {
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqStringGetterSetter">
+	<GenRule GenDef="Value" Name="implReqStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqStringSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {
 		if( value == null ) {
@@ -1995,24 +2194,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptStringGetterSetter">
+	<GenRule GenDef="Value" Name="implOptStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptStringSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqTokenGetterSetter">
+	<GenRule GenDef="Value" Name="implReqTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqTokenSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {
 		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
@@ -2025,24 +2228,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptTokenGetterSetter">
+	<GenRule GenDef="Value" Name="implOptTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptTokenSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqNmTokenGetterSetter">
+	<GenRule GenDef="Value" Name="implReqNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqNmTokenSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {
 		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
@@ -2055,24 +2262,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptNmTokenGetterSetter">
+	<GenRule GenDef="Value" Name="implOptNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptNmTokenSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqNmTokensGetterSetter">
+	<GenRule GenDef="Value" Name="implReqNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqNmTokensSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {
 		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
@@ -2085,24 +2296,28 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptNmTokensGetterSetter">
+	<GenRule GenDef="Value" Name="implOptNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptNmTokensSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
 		$lower implColumnAttrOptionality$$Name$ = value;
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implReqTextGetterSetter">
+	<GenRule GenDef="Value" Name="implReqTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqTextSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {
 		if( value == null ) {
@@ -2115,12 +2330,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	}
 </GenRule>
 
-	<GenRule GenDef="Value" Name="implOptTextGetterSetter">
+	<GenRule GenDef="Value" Name="implOptTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
 		return( $lower implColumnAttrOptionality$$Name$ );
 	}
+</GenRule>
 
+	<GenRule GenDef="Value" Name="implOptTextSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
 		$lower implColumnAttrOptionality$$Name$ = value;
