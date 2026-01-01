@@ -68,7 +68,7 @@ public interface I$SchemaName$$TableName$Obj$iterate TableRefs( first declIObjIn
 </GenFile>
 
 	<GenRule GenDef="Table" Name="declIObjMethods"
-		>$switch HasSuperClassRelation yes empty default declIObjGetClassCode$$switch HasSuperClassRelation yes empty default declIObjRealise$$switch HasSuperClassRelation yes empty default declIObjForget$$switch HasSuperClassRelation yes empty default declIObjRead$$switch ThisHasChain yes declIObjMoveUp default empty$$switch ThisHasChain yes declIObjMoveDown default empty$$switch HasSuperClassRelation yes empty default declIObjBeginEdit$$switch HasSuperClassRelation yes empty default declIObjEndEdit$$switch HasSuperClassRelation yes empty default declIObjEditAccessors$$declIObjEditAsAccessors$$declIObjTableAccessors$$switch HasSuperClassRelation no declIObjSchemaAccessors default empty$$switch HasSuperClassRelation no declIObjRecAccessors default empty$$declIObjTableRecAccessors$$switch HasDefSchemaOrSuper no declIObjPKeyAccessors default empty$$switch HasSuperClassRelation no declIObjIsNewAccessors default empty$$iterate Columns( each declIObjColumnAccessors empty empty )$$iterate Relation( each declIObjRelationAccessors empty empty )$$switch HasSuperClassRelation yes empty default declIObjCopyPKeyToRec$$switch HasSuperClassRelation yes empty default declIObjCopyRecToPKey$$iterate ServerMethods( each declJavaObjServerMethod empty empty )$$JavaObjInterface$</GenRule>
+		>$switch HasSuperClassRelation yes empty default declIObjGetClassCode$$switch HasSuperClassRelation yes empty default declIObjRealise$$switch HasSuperClassRelation yes empty default declIObjForget$$switch HasSuperClassRelation yes empty default declIObjRead$$switch ThisHasChain yes declIObjMoveUp default empty$$switch ThisHasChain yes declIObjMoveDown default empty$$switch HasSuperClassRelation yes empty default declIObjBeginEdit$$switch HasSuperClassRelation yes empty default declIObjEndEdit$$switch HasSuperClassRelation yes empty default declIObjEditAccessors$$declIObjEditAsAccessors$$declIObjTableAccessors$$switch HasSuperClassRelation no declIObjSchemaAccessors default empty$$switch HasSuperClassRelation no declIObjRecAccessors default empty$$declIObjTableRecAccessors$$switch HasDefSchemaOrSuper no declIObjPKeyAccessors default empty$$switch HasSuperClassRelation no declIObjIsNewAccessors default empty$$iterate Relation( each declIObjRelationAccessors empty empty )$$iterate Columns( each declIObjColumnAccessors empty empty )$$switch HasSuperClassRelation yes empty default declIObjCopyPKeyToRec$$switch HasSuperClassRelation yes empty default declIObjCopyRecToPKey$$iterate ServerMethods( each declJavaObjServerMethod empty empty )$$JavaObjInterface$</GenRule>
 
 	<GenRule GenDef="Table" Name="declIObjInheritSchemaTableObjAndSuperclass">
 	extends I$reference SchemaDef SchemaName$$TableName$Obj$poptop Table switch HasSuperClassRelation yes alsoIObjInheritSuperClass default empty$</GenRule>
@@ -276,26 +276,16 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 </GenRule>
 
 	<GenRule GenDef="TableCol" Name="declIObjColumnAccessors"
-		>$switch ColumnInPrimaryIndex yes declIObjColumnBaseRWPKeyAccessor default declIObjColumnDataAccessor$</GenRule>
+		>$switch InSuperiorRelation yes declIObjColumnGetter default declIObjColumnGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="declIObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIObjColumnBasePKeyGetter default declIObjColumnBaseDataGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="declIObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIObjColumnBasePKeyGetter default declIObjColumnBaseDataGetter$$switch ColumnInPrimaryIndex yes declIObjColumnBasePKeySetter default declIObjColumnBaseDataSetter$</GenRule>
+
 	<GenRule GenDef="Atom" Name="declIObjColumnAccessors"
-		>$switch ColumnInPrimaryIndex yes declIObjColumnBaseRWPKeyAccessor default declIObjColumnDataAccessor$</GenRule>
+		>$switch InSuperiorRelation yes declIObjColumnGetter default declIObjColumnGetter$</GenRule>
+	<GenRule GenDef="Atom" Name="declIObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIObjColumnBasePKeyGetter default declIObjColumnBaseDataGetter$</GenRule>
+	<GenRule GenDef="Atom" Name="declIObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIObjColumnBasePKeyGetter default declIObjColumnBaseDataGetter$$switch ColumnInPrimaryIndex yes declIObjColumnBasePKeySetter default declIObjColumnBaseDataSetter$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIObjColumnDataAccessor"
-		>$switch ColumnInAnyRelation yes declIObjColumnRODataAccessor default declIObjColumnRODataAccessor$</GenRule>
-	<GenRule GenDef="Atom" Name="declIObjColumnDataAccessor"
-		>$switch ColumnInAnyRelation yes declIObjColumnRODataAccessor default declIObjColumnRODataAccessor$</GenRule>
-
-	<GenRule GenDef="TableCol" Name="declIObjColumnBaseROPKeyAccessor"
-		>$switch HasSuperClassRelation no declIObjColumnROPKeyAccessor default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="declIObjColumnBaseROPKeyAccessor"
-		>$switch HasSuperClassRelation no declIObjColumnROPKeyAccessor default empty$</GenRule>
-
-	<GenRule GenDef="TableCol" Name="declIObjColumnROAccessor"
-		>$switch ColumnInPrimaryIndex yes declIObjColumnROPKeyAccessor default declIObjColumnRODataAccessor$</GenRule>
-	<GenRule GenDef="Atom" Name="declIObjColumnROAccessor"
-		>$switch ColumnInPrimaryIndex yes declIObjColumnROPKeyAccessor default declIObjColumnRODataAccessor$</GenRule>
-
-	<GenRule GenDef="TableCol" Name="declIObjColumnROPKeyAccessor">
+	<GenRule GenDef="TableCol" Name="declIObjColumnBasePKeyGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
 	 *
@@ -304,59 +294,34 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	$implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIObjColumnROPKeyAccessor">
-	/**
-	 *	Get the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
-	 *
-	 *	@return	The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
-	 */
-	$implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
-</GenRule>
-
-	<GenRule GenDef="TableCol" Name="declIObjColumnBaseRWPKeyAccessor"
-		>$switch HasSuperClassRelation no declIObjColumnRWPKeyAccessor default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="declIObjColumnBaseRWPKeyAccessor"
-		>$switch HasSuperClassRelation no declIObjColumnRWPKeyAccessor default empty$</GenRule>
-
-	<GenRule GenDef="TableCol" Name="declIObjColumnRWAccessor"
-		>$switch ColumnInPrimaryIndex yes declIObjColumnRWPKeyAccessor default declIObjColumnRWDataAccessor$</GenRule>
-	<GenRule GenDef="Atom" Name="declIObjColumnRWAccessor"
-		>$switch ColumnInPrimaryIndex yes declIObjColumnRWPKeyAccessor default declIObjColumnRWDataAccessor$</GenRule>
-
-	<GenRule GenDef="TableCol" Name="declIObjColumnRWPKeyAccessor">
-	/**
-	 *	Get the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
-	 *
-	 *	@return	The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
-	 */
-	$implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
-
+	<GenRule GenDef="TableCol" Name="declIObjColumnBasePKeySetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
 	 *
-	 *	@param $lower Name$	The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
+	 *	@param value The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$ value to be applied.
 	 */
-	void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ $leadlower Name$);
+	void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value);
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIObjColumnRWPKeyAccessor">
+	<GenRule GenDef="Atom" Name="declIObjColumnBasePKeyGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
 	 *
 	 *	@return	The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
 	 */
 	$implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
+</GenRule>
 
+	<GenRule GenDef="Atom" Name="declIObjColumnBasePKeySetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
 	 *
-	 *	@param $lower Name$	The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
+	 *	@param value The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$ value to be applied.
 	 */
-	void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ $leadlower Name$);
+	void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value);
 </GenRule>
 
-
-	<GenRule GenDef="Object" Name="declIObjColumnRODataAccessor">
+	<GenRule GenDef="TableCol" Name="declIObjColumnBaseDataGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
 	 *
@@ -365,20 +330,31 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	$implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="Object" Name="declIObjColumnRWDataAccessor">
-	/**
-	 *	Get the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
-	 *
-	 *	@return	The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
-	 */
-	$implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
-
+	<GenRule GenDef="TableCol" Name="declIObjColumnBaseDataSetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
 	 *
-	 *	@param value The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
+	 *	@param value The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$ value to be applied.
 	 */
-	void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ $leadlower Name$);
+	void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value);
+</GenRule>
+
+	<GenRule GenDef="Atom" Name="declIObjColumnBaseDataGetter">
+	/**
+	 *	Get the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
+	 *
+	 *	@return	The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
+	 */
+	$implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
+</GenRule>
+
+	<GenRule GenDef="Atom" Name="declIObjColumnBaseDataSetter">
+	/**
+	 *	Set the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
+	 *
+	 *	@param value The $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$ value to be applied.
+	 */
+	void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value);
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIObjPKeyAccessors">

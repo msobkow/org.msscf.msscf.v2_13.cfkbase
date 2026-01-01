@@ -153,7 +153,7 @@ $implSchemaTableObjAllTheMethods$}
 $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty empty )$$JavaObjImplementation$</GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaObjMethods"
-		>$implGetClassCode$$implGetGenDefName$$maybeImplGetScope$$implGetObjName$$maybeImplGetObjQualifier$$maybeImplGetQualNamedObject$$implGetNamedObject$$maybeImplGetObjQualifiedName$$maybeImplGetObjFullName$$implObjRealise$$implObjForget$$implObjRead$$switch HasChain yes implObjMoveUp default empty$$switch HasChain yes implObjMoveDown default empty$$implObjTableAccessors$$switch HasSuperClassRelation no implObjSchemaAccessors default empty$$implObjTableGetRec$$implObjTableRecAccessors$$switch HasSuperClassRelation no implObjPKeyAccessors default empty$$switch HasSuperClassRelation no implObjIsNewAccessors default empty$$implObjBeginEdit$$switch HasSuperClassRelation no implObjEndEdit default empty$$switch HasSuperClassRelation no implObjEditAccessors default empty$$implObjEditAsAccessors$$switch BaseHasAuditColumns yes implObjGetAuditColumns default empty$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implPKeyObjColumnAccessorsDirect each implObjColumnBaseRWPKeyAccessor )$$iterate DataColumns( each implObjColumnAccessors empty empty )$$iterate Relation( each implObjRelationAccessors empty empty )$$switch HasSuperClassRelation yes empty default implObjCopyPKeyToRec$$switch HasSuperClassRelation yes empty default implObjCopyRecToPKey$</GenRule>
+		>$implGetClassCode$$implGetGenDefName$$maybeImplGetScope$$implGetObjName$$maybeImplGetObjQualifier$$maybeImplGetQualNamedObject$$implGetNamedObject$$maybeImplGetObjQualifiedName$$maybeImplGetObjFullName$$implObjRealise$$implObjForget$$implObjRead$$switch HasChain yes implObjMoveUp default empty$$switch HasChain yes implObjMoveDown default empty$$implObjTableAccessors$$switch HasSuperClassRelation no implObjSchemaAccessors default empty$$implObjTableGetRec$$implObjTableRecAccessors$$switch HasSuperClassRelation no implObjPKeyAccessors default empty$$switch HasSuperClassRelation no implObjIsNewAccessors default empty$$implObjBeginEdit$$switch HasSuperClassRelation no implObjEndEdit default empty$$switch HasSuperClassRelation no implObjEditAccessors default empty$$implObjEditAsAccessors$$switch BaseHasAuditColumns yes implObjGetAuditColumns default empty$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implPKeyObjColumnAccessorsDirect each implObjColumnGetter )$$iterate Relation( each implObjRelationAccessors empty empty )$$iterate DataColumns( each implObjColumnAccessors empty empty )$$switch HasSuperClassRelation yes empty default implObjCopyPKeyToRec$$switch HasSuperClassRelation yes empty default implObjCopyRecToPKey$</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetClassCode">
 	@Override
@@ -511,7 +511,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcBoolReqName">
-		if( get$OptionalOrRequired$$Name$() ) {
+		if( rec.get$OptionalOrRequired$$Name$() ) {
 			objName = "true";
 		}
 		else {
@@ -519,7 +519,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcBoolOptName">
-		Boolean val = get$OptionalOrRequired$$Name$();
+		Boolean val = rec.get$OptionalOrRequired$$Name$();
 		if( val == null ) {
 			objName = "";
 		}
@@ -534,17 +534,17 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		objName = get$OptionalOrRequired$$Name$();</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcStringOptName">
-		objName = get$OptionalOrRequired$$Name$();
+		objName = rec.get$OptionalOrRequired$$Name$();
 		if( objName == null ) {
 			objName = "";
 		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcInt16ReqName">
-		short val = get$OptionalOrRequired$$Name$();
+		short val = rec.get$OptionalOrRequired$$Name$();
 		objName = Short.toString( val );</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash128ReqName">
-		CFLibDbKeyHash128 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -552,7 +552,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash160ReqName">
-		CFLibDbKeyHash128 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -560,7 +560,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash224ReqName">
-		CFLibDbKeyHash224 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash224 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -568,7 +568,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash256ReqName">
-		CFLibDbKeyHash256 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash256 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -576,7 +576,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash384ReqName">
-		CFLibDbKeyHash384 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash384 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -584,7 +584,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash512ReqName">
-		CFLibDbKeyHash512 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash512 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -592,7 +592,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUuid6ReqName">
-		CFLibUuid6 val = get$OptionalOrRequired$$Name$();
+		CFLibUuid6 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -601,7 +601,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash128OptName">
-		CFLibDbKeyHash128 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -609,7 +609,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash160OptName">
-		CFLibDbKeyHash128 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -617,7 +617,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash224OptName">
-		CFLibDbKeyHash224 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash224 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -625,7 +625,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash256OptName">
-		CFLibDbKeyHash256 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash256 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -633,7 +633,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash384OptName">
-		CFLibDbKeyHash384 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash384 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -641,7 +641,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash512OptName">
-		CFLibDbKeyHash512 val = get$OptionalOrRequired$$Name$();
+		CFLibDbKeyHash512 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -649,7 +649,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUuid6OptName">
-		CFLibUuid6 val = get$OptionalOrRequired$$Name$();
+		CFLibUuid6 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -657,7 +657,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcInt16OptName">
-		Short val = get$OptionalOrRequired$$Name$();
+		Short val = rec.get$OptionalOrRequired$$Name$();
 		if( val == null ) {
 			objName = "";
 		}
@@ -666,11 +666,11 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcInt32ReqName">
-		int val = get$OptionalOrRequired$$Name$();
+		int val = rec.get$OptionalOrRequired$$Name$();
 		objName = Integer.toString( val );</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcInt32OptName">
-		Integer val = get$OptionalOrRequired$$Name$();
+		Integer val = rec.get$OptionalOrRequired$$Name$();
 		if( val == null ) {
 			objName = "";
 		}
@@ -679,11 +679,11 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcInt64ReqName">
-		long val = get$OptionalOrRequired$$Name$();
+		long val = rec.get$OptionalOrRequired$$Name$();
 		objName = Long.toString( val );</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcInt64OptName">
-		Long val = get$OptionalOrRequired$$Name$();
+		Long val = rec.get$OptionalOrRequired$$Name$();
 		if( val == null ) {
 			objName = "";
 		}
@@ -692,11 +692,11 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUInt16ReqName">
-		int val = get$OptionalOrRequired$$Name$();
+		int val = rec.get$OptionalOrRequired$$Name$();
 		objName = Integer.toString( val );</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUInt16OptName">
-		Integer val = get$OptionalOrRequired$$Name$();
+		Integer val = rec.get$OptionalOrRequired$$Name$();
 		if( val == null ) {
 			objName = "";
 		}
@@ -705,11 +705,11 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUInt32ReqName">
-		long val = get$OptionalOrRequired$$Name$();
+		long val = rec.get$OptionalOrRequired$$Name$();
 		objName = Long.toString( val );</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUInt32OptName">
-		Long val = get$OptionalOrRequired$$Name$();
+		Long val = rec.get$OptionalOrRequired$$Name$();
 		if( val == null ) {
 			objName = "";
 		}
@@ -718,11 +718,11 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUInt64ReqName">
-		BigInteger val = get$OptionalOrRequired$$Name$();
+		BigInteger val = rec.get$OptionalOrRequired$$Name$();
 		objName = val.toString( val );</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUInt64OptName">
-		BigInteger val = get$OptionalOrRequired$$Name$();
+		BigInteger val = rec.get$OptionalOrRequired$$Name$();
 		if( val == null ) {
 			objName = "";
 		}
@@ -731,11 +731,11 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUuidReqName">
-		UUID val = get$OptionalOrRequired$$Name$();
+		UUID val = rec.get$OptionalOrRequired$$Name$();
 		objName = val.toString();</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUuidOptName">
-		UUID val = get$OptionalOrRequired$$Name$();
+		UUID val = rec.get$OptionalOrRequired$$Name$();
 		if( val == null ) {
 			objName = "";
 		}
@@ -1090,16 +1090,23 @@ $			if( ! anyMissing ) {
 	<GenRule GenDef="IndexCol" Name="implObjRelationAccessorsPassPKeyArg">getPKey().get$reference Column implColumnAttrOptionality$$reference Column Name$()</GenRule>
 	<GenRule GenDef="IndexCol" Name="implObjRelationAccessorsCommaPassPKeyArg">,
 			$implObjRelationAccessorsPassPKeyArg$</GenRule>
-	
-	<GenRule GenDef="TableCol" Name="implObjColumnAccessors"
-		>$switch ColumnInPrimaryIndex yes implObjColumnBaseRWPKeyAccessor default implObjColumnDataAccessor$</GenRule>
-	<GenRule GenDef="Atom" Name="implObjColumnAccessors"
-		>$switch ColumnInPrimaryIndex yes implObjColumnBaseRWPKeyAccessor default implObjColumnDataAccessor$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="implObjColumnDataAccessor"
-		>$switch ColumnInAnyRelation yes implObjColumnRODataAccessor default implObjColumnRODataAccessor$</GenRule>
-	<GenRule GenDef="Atom" Name="implObjColumnDataAccessor"
-		>$switch ColumnInAnyRelation yes implObjColumnRODataAccessor default implObjColumnRODataAccessor$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implObjColumnAccessors">$reference Column implObjColumnAccessors$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implObjColumnGetter">$reference Column implObjColumnGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implObjColumnSetter">$reference Column implObjColumnSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implObjColumnGetterSetter">$reference Column implObjColumnGetterSetter$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="implObjColumnAccessors"
+		>$switch InSuperiorRelation yes implObjColumnGetter default implObjColumnGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnGetter">$switch ColumnInPrimaryIndex	yes implObjColumnBasePKeyGetter default implObjColumnDataGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnSetter">$switch ColumnInPrimaryIndex yes implObjColumnBasePKeySetter default implObjColumnDataSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes implObjColumnBasePKeyGetter default implObjColumnDataGetter$$switch ColumnInPrimaryIndex yes implObjColumnBasePKeySetter default implObjColumnDataSetter$</GenRule>
+
+	<GenRule GenDef="Atom" Name="implObjColumnAccessors"
+		>$switch InSuperiorRelation yes implObjColumnGetter default implObjColumnGetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnGetter">$switch ColumnInPrimaryIndex	yes implObjColumnBasePKeyGetter default implObjColumnDataGetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnSetter">$switch ColumnInPrimaryIndex yes implObjColumnBasePKeySetter default implObjColumnDataSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes implObjColumnBasePKeyGetter default implObjColumnDataGetter$$switch ColumnInPrimaryIndex yes implObjColumnBasePKeySetter default implObjColumnDataSetter$</GenRule>
 
 	<GenRule ScopeDef="Table" GenDef="TableCol" Name="IsBaseTable"
 		>$popto Table IsBaseTable$</GenRule>
@@ -1111,18 +1118,16 @@ $			if( ! anyMissing ) {
 	<GenRule GenDef="Atom" Name="HasSuperClassRelation"
 		>$reference Table HasSuperClassRelation$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implObjColumnBaseROPKeyAccessor">$reference Column implObjColumnBaseROPKeyAccessor$</GenRule>
-
-	<GenRule GenDef="TableCol" Name="implObjColumnBaseROPKeyAccessor"
+	<GenRule GenDef="IndexCol" Name="implObjColumnBasePKeyGetter">$reference Column implObjColumnBasePKeyGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnBasePKeyGetter"
 		>$switch HasSuperClassRelation no implObjColumnROPKeyAccessor default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="implObjColumnBaseROPKeyAccessor"
+	<GenRule GenDef="Atom" Name="implObjColumnBasePKeyGetter"
 		>$switch HasSuperClassRelation no implObjColumnROPKeyAccessor default empty$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implObjColumnBaseRWPKeyAccessor">$reference Column implObjColumnBaseRWPKeyAccessor$</GenRule>
-
-	<GenRule GenDef="TableCol" Name="implObjColumnBaseRWPKeyAccessor"
+	<GenRule GenDef="IndexCol" Name="implObjColumnBasePKeySetter">$reference Column implObjColumnBasePKeySetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnBasePKeySetter"
 		>$switch HasSuperClassRelation no implObjColumnRWPKeyAccessor default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="implObjColumnBaseRWPKeyAccessor"
+	<GenRule GenDef="Atom" Name="implObjColumnBasePKeySetter"
 		>$switch HasSuperClassRelation no implObjColumnRWPKeyAccessor default empty$</GenRule>
 
 	<GenRule GenDef="TableCol" Name="implObjColumnROAccessor"
@@ -1130,9 +1135,21 @@ $			if( ! anyMissing ) {
 	<GenRule GenDef="Atom" Name="implObjColumnROAccessor"
 		>$switch ColumnInPrimaryIndex yes implObjColumnROPKeyAccessor default implObjColumnRODataAccessor$</GenRule>
 
+	<GenRule GenDef="TableCol" Name="implObjColumnRWAccessor"
+		>$switch ColumnInPrimaryIndex yes implObjColumnRWPKeyAccessor default implObjColumnRWDataAccessor$</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnRWAccessor"
+		>$switch ColumnInPrimaryIndex yes implObjColumnRWPKeyAccessor default implObjColumnRWDataAccessor$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="implObjColumnDataGetter">$switch ColumnInPrimaryIndex no implObjColumnROAccessor default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnDataGetter">$switch ColumnInPrimaryIndex no implObjColumnROAccessor default empty$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="implObjColumnDataSetter">$switch ColumnInPrimaryIndex no implObjColumnRWAccessor default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnDataSetter">$switch ColumnInPrimaryIndex no implObjColumnRWAccessor default empty$</GenRule>
+	
 	<GenRule GenDef="IndexCol" Name="implPKeyObjColumnAccessorsDirect">$reference Column implPKeyObjColumnAccessorsDirect$</GenRule>
 	
-	<GenRule GenDef="TableCol" Name="implPKeyObjColumnAccessorsDirect">
+	<GenRule GenDef="TableCol" Name="implPKeyObjColumnAccessorsDirect">$switch InSuperiorPrimaryKeyRelation yes implPKeyObjectColumnAccessorsDirectReader default implPKeyObjectColumnAccessorsDirectReader$</GenRule>
+	<GenRule GenDef="TableCol" Name="implPKeyObjectColumnAccessorsDirectReaderWriter">
 	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( getPKey() );
@@ -1144,7 +1161,15 @@ $			if( ! anyMissing ) {
 	}
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="implPKeyObjColumnAccessorsDirect">
+	<GenRule GenDef="TableCol" Name="implPKeyObjectColumnAccessorsDirectReader">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey() );
+	}
+</GenRule>
+
+	<GenRule GenDef="Atom" Name="implPKeyObjColumnAccessorsDirect">$switch InSuperiorPrimaryKeyRelation yes implPKeyObjectColumnAccessorsDirectReader default implPKeyObjectColumnAccessorsDirectReader$</GenRule>
+	<GenRule GenDef="Atom" Name="implPKeyObjectColumnAccessorsDirectReaderWriter">
 	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( getPKey() );
@@ -1153,6 +1178,13 @@ $			if( ! anyMissing ) {
 	@Override
 	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value) {
 		setPKey(value);
+	}
+</GenRule>
+
+	<GenRule GenDef="Atom" Name="implPKeyObjectColumnAccessorsDirectReader">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey() );
 	}
 </GenRule>
 
@@ -1172,22 +1204,12 @@ $			if( ! anyMissing ) {
 
 	<GenRule GenDef="TableCol" Name="implObjColumnRWPKeyAccessor">
 	@Override
-	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
-		return( getPKey().get$implColumnAttrOptionality$$Name$() );
-	}
-
-	@Override
 	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ $leadlower Name$) {
 		getPKey().set$implColumnAttrOptionality$$Name$($leadlower Name$);
 	}
 </GenRule>
 
 	<GenRule GenDef="Atom" Name="implObjColumnRWPKeyAccessor">
-	@Override
-	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
-		return( getPKey().get$implColumnAttrOptionality$$Name$() );
-	}
-
 	@Override
 	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ $leadlower Name$) {
 		getPKey().set$implColumnAttrOptionality$$Name$($leadlower Name$);
@@ -1202,11 +1224,6 @@ $			if( ! anyMissing ) {
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implObjColumnRWDataAccessor">
-	@Override
-	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
-		return( get$TableName$Rec().get$implColumnAttrOptionality$$Name$() );
-	}
-
 	@Override
 	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ $leadlower Name$) {
 		get$TableName$Rec().set$implColumnAttrOptionality$$Name$($leadlower Name$);
@@ -1363,32 +1380,59 @@ $			if( ! anyMissing ) {
 
 	<GenRule GenDef="Table" Name="implObjCopyPKeyToRec">
 	@Override
-	public void copyPKeyToRec() {
-		if( rec != null ) {$reference PrimaryKeyIndex iterate Columns( lone implCopyPKeyDirectToRec each implObjCopyPKeyAttrToRec empty empty )$
-		}
+	public void copyPKeyToRec() {$switch IsPrimaryIndexKeyAtomic yes implObjCopyAtomicPKeyToRec default implObjCopyCompositePKeyToRec$
 		if( edit != null ) {
 			edit.copyPKeyToRec();
 		}
 	}
 </GenRule>
+	<GenRule GenDef="Table" Name="implObjCopyAtomicPKeyToRec">
+		if( rec != null ) {
+			if (getPKey() != rec.getPKey()) {
+				rec.setPKey(getPKey());
+			}
+		}</GenRule>
+	<GenRule GenDef="Table" Name="implObjCopyCompositePKeyToRec">
+		if( rec != null ) {$iterate SuperiorPrimaryKeyRelations( each implObjCopyCompositePKeySuperiorRelation empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implObjCopyCompositePKeyNonSuperiorColumn )$
+		}</GenRule>
+
+	<GenRule GenDef="Relation" Name="implObjCopyCompositePKeySuperiorRelation">$switch IsToIndexUnique yes implObjCopyCompositePKeyRelation default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implObjCopyCompositePKeyRelation">
+			rec.getPKey().set$OptionalOrRequired$$RelationType$$Suffix$(getPKey().get$OptionalOrRequired$$RelationType$$Suffix$());</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implObjCopyCompositePKeyNonSuperiorColumn">$reference Column implObjCopyCompositePKeyNonSuperiorColumn$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implObjCopyCompositePKeyColumn">$reference Column implObjCopyCompositePKeyColumn$</GenRule>
+	<GenRule GenDef="Value" Name="implObjCopyCompositePKeyNonSuperiorColumn">$switch InSuperiorPrimaryKeyRelation yes empty default implObjCopyCompositePKeyColumn$</GenRule>
+	<GenRule GenDef="Value" Name="implObjCopyCompositePKeyColumn">
+			rec.getPKey().set$implColumnAttrOptionality$$Name$(getPKey().get$implColumnAttrOptionality$$Name$());</GenRule>
 
 	<GenRule GenDef="Table" Name="implObjCopyRecToPKey">
 	@Override
-	public void copyRecToPKey() {$reference PrimaryKeyIndex iterate Columns( lone implObjCopyRecAttrDirectToPKey each implObjCopyRecAttrToPKey empty empty )$
+	public void copyRecToPKey() {$switch IsPrimaryIndexKeyAtomic yes implObjCopyRecToAtomicPKey default implObjCopyRecToCompositePKey$
 	}
 </GenRule>
+	<GenRule GenDef="Table" Name="implObjCopyRecToAtomicPKey">
+		if( rec != null ) {
+			if (getPKey() != rec.getPKey()) {
+				setPKey(rec.getPKey());
+			}
+		}</GenRule>
+	<GenRule GenDef="Table" Name="implObjCopyRecToCompositePKey">
+		if( rec != null ) {$iterate SuperiorPrimaryKeyRelations( each implObjCopyRecToCompositePKeySuperiorRelation empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implObjCopyRecToCompositePKeyNonSuperiorColumn )$
+		}</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implCopyPKeyDirectToRec">
-			rec.set$implColumnAttrOptionality$$Name$( getPKey() );</GenRule>
+	<GenRule GenDef="Relation" Name="implObjCopyRecToCompositePKeySuperiorRelation">$switch IsToIndexUnique yes implObjCopyRecToCompositePKeyRelation default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implObjCopyRecToCompositePKeyRelation">
+			getPKey().set$OptionalOrRequired$$RelationType$$Suffix$(rec.getPKey().get$OptionalOrRequired$$RelationType$$Suffix$());</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implObjCopyPKeyAttrToRec">
-			rec.set$implColumnAttrOptionality$$Name$( getPKey().get$implColumnAttrOptionality$$Name$() );</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implObjCopyRecAttrToPKey">
-		getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implObjCopyRecAttrDirectToPKey">
-		setPKey( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
+	<GenRule GenDef="IndexCol" Name="implObjCopyRecToCompositePKeyNonSuperiorColumn">$reference Column implObjCopyRecToCompositePKeyNonSuperiorColumn$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implObjCopyRecToComposititePKeyColumn">$reference Column implObjCopyRecToComposititePKeyColumn$</GenRule>
+	<GenRule GenDef="Value" Name="implObjCopyRecToCompositePKeyNonSuperiorColumn">$switch InSuperiorPrimaryKeyRelation yes empty default implObjCopyRecToComposititePKeyColumn$</GenRule>
+	<GenRule GenDef="Value" Name="implObjCopyRecToComposititePKeyColumn">
+			getPKey().set$implColumnAttrOptionality$$Name$(rec.getPKey().get$implColumnAttrOptionality$$Name$());</GenRule>
+			
+	<GenRule GenDef="IndexCol" Name="implCopyRecToPKeyDirect">
+			setPKey(rec.get$implColumnAttrOptionality$$Name$());</GenRule>
 		
 	<GenRule GenDef="Table" Name="implObjTableGetRec">
 	@Override

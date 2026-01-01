@@ -332,7 +332,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 	<GenRule GenDef="Table" Name="implEditObjClearMultipleNullMembers"
 		>$iterate ContainerRelations( each implEditObjClearRelationMember empty empty )$</GenRule>
 
-	<GenRule GenDef="Relation" Name="implEditObjClearRelationMember">
+	<GenRule GenDef="Relation" Name="ismplEditObjClearRelationMember">
 			$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = null;$iterate Columns( each implEditObjClearRelationMemberSetRecOptionalAttrNull )$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implEditObjClearRelationMemberSetRecOptionalAttrNull"
@@ -414,7 +414,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 		>$poptop Table iterate Relation( each implEditObjRelationSingletonGetClearNull )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implEditObjRelationSingletonGetRestoreObj">
-				if( obj != null ) {$iterate Columns( each implEditObjRelationSingletonAccessorsGetRestoreRecAttr )$
+				if( obj != null ) {<!--$iterate Columns( each implEditObjRelationSingletonAccessorsGetRestoreRecAttr )$-->
 					$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = obj;
 				}</GenRule>
 
@@ -439,20 +439,22 @@ $			if( ! anyMissing ) {
 
 	@Override
 	public void set$OptionalOrRequired$$RelationTypeTag$$Suffix$( I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj value ) {
-			if( rec == null ) {
-				get$reference FromTable TableName$Rec();
-			}
-			if( value != null ) {
-$iterate Columns( each implEditObjRelationSingletonAccessorsSetRecAttr )
-$			}$switch RelationTypeTag Container empty Owner empty default implEditObjRelationSetSingletonElseClearNull$
-			$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = value;$switch HasNarrowed yes implEditObjRelationSetSingletonInvokeSuperNarrowed default empty$
+		if( rec == null ) {
+			get$reference FromTable TableName$Rec();
+		}
+		if( value != null ) {
+			$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = value;
+			get$reference FromTable TableName$Rec().set$OptionalOrRequired$$RelationTypeTag$$Suffix$(value.get$reference ToTable TableName$Rec());
+		}$switch RelationTypeTag Container empty Owner empty default implEditObjRelationSetSingletonElseClearNull$
+		$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = value;$switch HasNarrowed yes implEditObjRelationSetSingletonInvokeSuperNarrowed default empty$
 	}
 </GenRule>
 
 	<GenRule GenDef="Relation" Name="implEditObjRelationSetSingletonElseClearNull">
-			else {
-$iterate Columns( each implEditObjRelationSingletonAccessorsSetRecOptionalAttrNull )
-$			}</GenRule>
+		else {
+			$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = null;
+			get$reference FromTable TableName$Rec().set$OptionalOrRequired$$RelationTypeTag$$Suffix$((I$reference ToTable DefSchemaName$$reference ToTable Name$)null);
+		}</GenRule>
 
 	<GenRule GenDef="Relation" Name="implEditObjRelationSetSingletonClearAllContainers"
 		>$poptop Table iterate Relation( each implEditObjRelationSetSingletonClearNull )$</GenRule>
@@ -581,7 +583,15 @@ $		}
 
 	<GenRule GenDef="IndexCol" Name="implEditObjColumnRWPKeyAccessor">$reference Column implEditObjColumnRWPKeyAccessor$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="implEditObjColumnRWPKeyAccessor">
+	<GenRule GenDef="TableCol" Name="implEditObjColumnRWPKeyAccessor">$switch InSuperiorRelation yes implEditObjColumnActualROPKeyAccessor default implEditObjColumnActualRWPKeyAccessor$</GenRule>
+	<GenRule GenDef="TableCol" Name="implEditObjColumnActualROPKeyAccessor">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey().get$implColumnAttrOptionality$$Name$() );
+	}
+</GenRule>
+
+	<GenRule GenDef="TableCol" Name="implEditObjColumnActualRWPKeyAccessor">
 	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( getPKey().get$implColumnAttrOptionality$$Name$() );
@@ -597,7 +607,16 @@ $		}
 	}
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="implEditObjColumnRWPKeyAccessor">
+
+	<GenRule GenDef="Atom" Name="implEditObjColumnRWPKeyAccessor">$switch InSuperiorRelation yes implEditObjColumnActualROPKeyAccessor default implEditObjColumnActualRWPKeyAccessor$</GenRule>
+	<GenRule GenDef="Atom" Name="implEditObjColumnActualROPKeyAccessor">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey().get$implColumnAttrOptionality$$Name$() );
+	}
+</GenRule>
+
+	<GenRule GenDef="Atom" Name="implEditObjColumnActualRWPKeyAccessor">
 	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( getPKey().get$implColumnAttrOptionality$$Name$() );
@@ -614,9 +633,9 @@ $		}
 
 	<GenRule GenDef="IndexCol" Name="implEditObjColumnDataAccessor">$reference Column implEditObjColumnDataAccessor$</GenRule>
 	<GenRule GenDef="TableCol" Name="implEditObjColumnDataAccessor"
-		>$switch ColumnInAnyRelation yes implEditObjColumnRWDataAccessor default implEditObjColumnRWDataAccessor$</GenRule>
+		>$switch InSuperiorRelation yes implEditObjColumnRODataAccessor default implEditObjColumnRWDataAccessor$</GenRule>
 	<GenRule GenDef="Atom" Name="implEditObjColumnDataAccessor"
-		>$switch ColumnInAnyRelation yes implEditObjColumnRWDataAccessor default implEditObjColumnRWDataAccessor$</GenRule>
+		>$switch InSuperiorRelation yes implEditObjColumnRODataAccessor default implEditObjColumnRWDataAccessor$</GenRule>
 
 	<GenRule GenDef="Object" Name="implEditObjColumnRODataAccessor">
 	@Override
@@ -778,9 +797,7 @@ $		}
 
 	<GenRule GenDef="Table" Name="implEditObjCopyPKeyToRec">
 	@Override
-	public void copyPKeyToRec() {
-		if( rec != null ) {$reference PrimaryKeyIndex iterate Columns( lone implCopyPKeyDirectToRec each implObjCopyPKeyAttrToRec empty empty )$
-		}
+	public void copyPKeyToRec() {$switch IsPrimaryIndexKeyAtomic yes implObjCopyAtomicPKeyToRec default implObjCopyCompositePKeyToRec$
 	}
 </GenRule>
 
@@ -789,7 +806,7 @@ $		}
 
 	<GenRule GenDef="Table" Name="implEditObjCopyRecToPKey">
 	@Override
-	public void copyRecToPKey() {$reference PrimaryKeyIndex iterate Columns( lone implObjCopyRecAttrDirectToPKey each implObjCopyRecAttrToPKey empty empty )$
+	public void copyRecToPKey() {$switch IsPrimaryIndexKeyAtomic yes implObjCopyRecToAtomicPKey default implObjCopyRecToCompositePKey$
 	}
 </GenRule>
 

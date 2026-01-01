@@ -64,7 +64,7 @@ import server.markhome.mcf.v3_1.cflib.dbutil.*;import org.apache.commons.text.St
 
 public interface I$SchemaName$$TableName$EditObj
 	extends I$SchemaName$$TableName$Obj$switch HasSuperClassRelation yes emitEditObjSuperObj default empty$$iterate TableRefs( each alsoExtendReferenceIEditObj empty empty )$
-{$switch HasSuperClassRelation yes empty default declIEditObjOrigIfNoDefSchema$$declIEditObjOrigAsCast$$switch HasSuperClassRelation yes empty default declIEditObjCreate$$switch HasSuperClassRelation yes empty default declIEditObjUpdate$$switch HasSuperClassRelation yes empty default declIEditObjDelete$$switch HasSuperClassRelation yes empty default declIEditObjOptAuditAccessors$$switch HasDefSchema yes empty default declIEditObjColumnAccessors$$iterate Relation( each declIEditObjRelationAccessors empty empty )$$switch HasSuperClassRelation yes empty default declCopyRecsAround$$JavaEditObjInterface$
+{$switch HasSuperClassRelation yes empty default declIEditObjOrigIfNoDefSchema$$declIEditObjOrigAsCast$$switch HasSuperClassRelation yes empty default declIEditObjCreate$$switch HasSuperClassRelation yes empty default declIEditObjUpdate$$switch HasSuperClassRelation yes empty default declIEditObjDelete$$switch HasSuperClassRelation yes empty default declIEditObjOptAuditAccessors$$iterate Relation( each declIEditObjRelationAccessors empty empty )$$switch HasDefSchema yes empty default declIEditObjColumnAccessors$$switch HasSuperClassRelation yes empty default declCopyRecsAround$$JavaEditObjInterface$
 }
 </GenFile>
 
@@ -113,20 +113,14 @@ public interface I$SchemaName$$TableName$EditObj
 	void setUpdatedAt( LocalDateTime value );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declIEditObjColumnAccessors"
-		>$switch HasSuperClassRelation yes declIEditObjInhColumnAccessors default declIEditObjBaseColumnAccessors$</GenRule>
-
-	<GenRule GenDef="Table" Name="declIEditObjInhColumnAccessors"
-		>$iterate Columns( each declIEditObjColumnAccessors )$</GenRule>
-
-	<GenRule GenDef="Table" Name="declIEditObjBaseColumnAccessors"
-		>$iterate Columns( each declIEditObjBaseColumnAccessors )$</GenRule>
-
 	<GenRule GenDef="Relation" Name="declIEditObjRelationAccessors"
-		>$switch RelationToIndexIsUnique yes maybeDeclIEditObjRelationSingletonAccessors default empty$</GenRule>
+		>$switch RelationToIndexIsUnique yes maybeDeclIEditObjRelationSingletonAccessors default maybeDeclIEditObjRelationDuplicateAccessors$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeDeclIEditObjRelationSingletonAccessors"
 		>$switch RelationTypeTag Superclass empty default declIEditObjRelationSingletonAccessors$</GenRule>
+
+	<GenRule GenDef="Relation" Name="maybeDeclIEditObjRelationDuplicateAccessors"
+		>$switch RelationTypeTag Superclass empty default declIEditObjRelationDuplicateAccessors$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declIEditObjRelationSingletonAccessors">
 	/**
@@ -144,30 +138,50 @@ public interface I$SchemaName$$TableName$EditObj
 	void set$OptionalOrRequired$$RelationTypeTag$$Suffix$( I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj value );
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIEditObjBaseColumnAccessors"
-		>$switch ColumnInPrimaryIndex yes declIEditObjColumnRWDataAccessor default declIEditObjColumnDataAccessor$</GenRule>
-	<GenRule GenDef="Atom" Name="declIEditObjBaseColumnAccessors"
-		>$switch ColumnInPrimaryIndex yes declIEditObjColumnRWDataAccessor default declIEditObjColumnDataAccessor$</GenRule>
+	<GenRule GenDef="Relation" Name="declIEditObjRelationDuplicateAccessors">
+	/**
+	 *	Get a list I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj instances referenced by the $Suffix$ key.
+	 *
+	 *	@return	The (potentially empty) list of I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj instances referenced by the $Suffix$ key.
+	 */
+	List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj&gt; get$OptionalOrRequired$$RelationTypeTag$$Suffix$();
+</GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIEditObjPKeyAccessors"
-		>$switch ColumnInAnyRelation yes declIEditObjPKeyNonGenAccessors default declIEditObjPKeyNonGenAccessors$</GenRule>
-	<GenRule GenDef="Atom" Name="declIEditObjPKeyAccessors"
-		>$switch ColumnInAnyRelation yes declIEditObjPKeyNonGenAccessors default declIEditObjPKeyNonGenAccessors$</GenRule>
+	<GenRule GenDef="Table" Name="declIEditObjColumnAccessors">$switch HasSuperClassRelation yes declIEditObjDataColumnAccessors default declIEditObjAllColumnAccessors$</GenRule>
+	<GenRule GenDef="Table" Name="declIEditObjDataColumnAccessors">$iterate DataColumns(each declIEditObjColumnAccessors empty empty)$</GenRule>
+	<GenRule GenDef="Table" Name="declIEditObjAllColumnAccessors">$iterate Columns(each declIEditObjColumnAccessors empty empty)$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="declIEditObjColumnAccessors"
+		>$switch InSuperiorRelation yes declIEditObjColumnGetter default declIEditObjColumnGetterSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="declIEditObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIEditObjColumnBasePKeyGetter default declIEditObjColumnBaseDataGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="declIEditObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIObjColumnBasePKeyGetter default declIObjColumnBaseDataGetter$$switch ColumnInPrimaryIndex yes declIObjColumnBasePKeySetter default declIObjColumnBaseDataSetter$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="declIEditObjColumnBasePKeyGetter">$declIObjColumnGetter$</GenRule>	
+	<GenRule GenDef="TableCol" Name="declIEditObjColumnBaseDataGetter">$declIObjColumnGetter$</GenRule>	
+	
+	<GenRule GenDef="TableCol" Name="declIEditObjColumnBasePKeySetter">$declIObjColumnSetter$</GenRule>	
+	<GenRule GenDef="TableCol" Name="declIEditObjColumnBaseDataSetter">$declIObjColumnSetter$</GenRule>
+
+	<GenRule GenDef="Atom" Name="declIEditObjColumnBasePKeyGetter">$declIObjColumnGetter$</GenRule>	
+	<GenRule GenDef="Atom" Name="declIEditObjColumnBaseDataGetter">$declIObjColumnGetter$</GenRule>	
+	
+	<GenRule GenDef="Atom" Name="declIEditObjColumnBasePKeySetter">$declIObjColumnSetter$</GenRule>	
+	<GenRule GenDef="Atom" Name="declIEditObjColumnBaseDataSetter">$declIObjColumnSetter$</GenRule>
+	
+	<GenRule GenDef="Atom" Name="declIEditObjColumnAccessors"
+		>$switch InSuperiorRelation yes declIEditObjColumnGetter default declIEditObjColumnGetterSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="declIEditObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIObjColumnBasePKeyGetter default declIObjColumnBaseDataGetter$</GenRule>
+	<GenRule GenDef="Atom" Name="declIEditObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIObjColumnBasePKeyGetter default declIObjColumnBaseDataGetter$$switch ColumnInPrimaryIndex yes declIObjColumnBasePKeySetter default declIObjColumnBaseDataSetter$</GenRule>
 
 	<GenRule GenDef="TableCol" Name="declIEditObjPKeyNonGenAccessors"
 		>$switch GenerateId yes declIEditObjColumnDataAccessor default declIEditObjColumnDataAccessor$</GenRule>
 	<GenRule GenDef="Atom" Name="declIEditObjPKeyNonGenAccessors"
 		>$switch GenerateId yes declIEditObjColumnDataAccessor default declIEditObjColumnDataAccessor$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIEditObjColumnAccessors"
-		>$switch ColumnInPrimaryIndex yes declIEditObjColumnDataAccessor default declIEditObjColumnDataAccessor$</GenRule>
-	<GenRule GenDef="Atom" Name="declIEditObjColumnAccessors"
-		>$switch ColumnInPrimaryIndex yes declIEditObjColumnDataAccessor default declIEditObjColumnDataAccessor$</GenRule>
-
 	<GenRule GenDef="TableCol" Name="declIEditObjColumnDataAccessor"
-		>$switch ColumnInAnyRelation yes declIEditObjColumnRWDataAccessor default declIEditObjColumnRWDataAccessor$</GenRule>
+		>$switch InSuperiorRelation no declIEditObjColumnRWDataAccessor default declIEditObjColumnDataAccessor$</GenRule>
 	<GenRule GenDef="Atom" Name="declIEditObjColumnDataAccessor"
-		>$switch ColumnInAnyRelation yes declIEditObjColumnRWDataAccessor default declIEditObjColumnRWDataAccessor$</GenRule>
+		>$switch InSuperiorRelation no declIEditObjColumnRWDataAccessor default declIEditObjColumnDataAccessor$</GenRule>
 
 	<GenRule GenDef="TableCol" Name="declIEditObjColumnBaseROPKeyAccessor"
 		>$switch HasSuperClassRelation no declIEditObjColumnROPKeyAccessor default empty$</GenRule>
@@ -178,6 +192,15 @@ public interface I$SchemaName$$TableName$EditObj
 		>$switch ColumnInPrimaryIndex yes declIEditObjColumnROPKeyAccessor default declIEditObjColumnRODataAccessor$</GenRule>
 	<GenRule GenDef="Atom" Name="declIEditObjColumnROAccessor"
 		>$switch ColumnInPrimaryIndex yes declIEditObjColumnROPKeyAccessor default declIEditObjColumnRODataAccessor$</GenRule>
+
+	<GenRule GenDef="Object" Name="declIEditObjColumnDataAccessor">
+	/**
+	 *	Get the $lower implColumnAttrOptionality$ $implJavaAtomType$ attribute $Name$.
+	 *
+	 *	@return	The $implJavaAtomType$ value of the attribute $Name$.
+	 */
+	$implJavaAtomType$ get$implColumnAttrOptionality$$Name$();
+</GenRule>
 
 	<GenRule GenDef="Object" Name="declIEditObjColumnRWDataAccessor">
 	/**
