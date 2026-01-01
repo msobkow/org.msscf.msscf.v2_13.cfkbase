@@ -100,15 +100,26 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberJoinColumns">$switch IsToIndexAtomic yes declSchemaJpaRelationMemberJoinAColumn default declSchemaJpaRelationMemberJoinMultiColumn$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberJoinAColumn">$iterate Columns( first declSchemaJpaRelationMemberAJoinColumn each empty)$</GenRule>
 	<GenRule GenDef="RelationCol" Name="declSchemaJpaRelationMemberAJoinColumn">
-	@JoinColumn( name="$reference FromCol DbColumnName$", referencedColumnName="$reference ToCol DbColumnName$" )</GenRule>
+	@JoinColumn( name="$switch IsFromColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference FromCol DbColumnName$", referencedColumnName="$switch IsToColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference ToCol DbColumnName$" )</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberJoinMultiColumn">
 	@JoinColumns({$iterate Columns( first declSchemaJpaRelationMemberJoinColumn each declCommaSchemaJpaRelationMemberJoinColumn)$
 	})</GenRule>
+	<GenRule GenDef="Object" Name="emitMemberJoinAColumnPKeyDot">pkey.</GenRule>
+
 	<GenRule GenDef="RelationCol" Name="declSchemaJpaRelationMemberJoinColumn">
-		@JoinColumn( name="$reference FromCol DbColumnName$", referencedColumnName="$reference ToCol DbColumnName$" )</GenRule>
+		@JoinColumn( name="$switch IsFromColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference FromCol DbColumnName$", referencedColumnName="$switch IsToColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference ToCol DbColumnName$" )</GenRule>
 	<GenRule GenDef="RelationCol" Name="declCommaSchemaJpaRelationMemberJoinColumn">,$declSchemaJpaRelationMemberJoinColumn$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOptionalClause">, optional=$RelationRequiredAsReverseBoolString$</GenRule>
 	<GenRule GenDef="Relation" Name="RelationRequiredAsReverseBoolString">$switch IsRequired yes false default true$</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="IsFromColInCompositePrimaryKey">$switch IsFromPrimaryIndexAtomic yes no default ColInFromPrimaryKey$</GenRule>
+	<GenRule GenDef="RelationCol" Name="ColInFromPrimaryKey">$reference FromCol ColumnInPrimaryIndex yes yes default no$</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="IsToColInCompositePrimaryKey">$switch IsToPrimaryIndexAtomic yes no default ColInToPrimaryKey$</GenRule>
+	<GenRule GenDef="RelationCol" Name="ColInToPrimaryKey">$reference ToCol ColumnInPrimaryIndex yes yes default no$</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="IsFromPrimaryIndexAtomic">$reference FromCol reference Column reference Table IsPrimaryIndexKeyAtomic$</GenRule>
+	<GenRule GenDef="RelationCol" Name="IsToPrimaryIndexAtomic">$reference ToCol reference Column reference Table IsPrimaryIndexKeyAtomic$</GenRule>
 
 	<GenRule GenDef="Relation" Name="JpaRequiresMappedBy">$switch RelationType
 		Lookup no
@@ -119,8 +130,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 		Superclass no
 		default yes$</GenRule>
 
-	<GenRule GenDef="Relation" Name="emitJpaMappedBy">$iterate ReverseRelationships( lone reallyEmitJpaMappedBy empty empty each empty )$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyEmitJpaMappedBy">, mappedBy="$reference FromTable DefSchemaName$Jpa$reference FromTable TableName$.$leadlower OptionalOrRequired$$RelationType$$Suffix$"</GenRule>
+	<GenRule GenDef="Relation" Name="emitJpaMappedBy"><!--$iterate ReverseRelationships( lone reallyEmitJpaMappedBy empty empty each empty )$--></GenRule>
+	<GenRule GenDef="Relation" Name="reallyEmitJpaMappedBy">, mappedBy="$reference ToTable DefSchemaName$Jpa$reference ToTable TableName$.$leadlower OptionalOrRequired$$RelationType$$Suffix$"</GenRule>
 
 	<GenRule GenDef="Relation" Name="emitInterfaceDataType">$switch IsToIndexUnique yes emitInterfaceDataTypeSingleton default emitInterfaceDataTypeSet$</GenRule>
 	<GenRule GenDef="Relation" Name="emitInterfaceDataTypeSingleton">I$reference ToTable DefSchemaName$$reference ToTable TableName$</GenRule>
