@@ -73,15 +73,15 @@ import $reference ManufacturingSchema lower JavaPackage$.$lower reference Manufa
 )$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$jpaPersistenceContext$
 public class $SchemaName$Jpa$TableName$$switch HasDefSchema yes extendSchemaJpaTableJPA default extendSchemaJpaTableJPASuperJPA$$switch HasDefSchema yes empty default maybeImplSchemaJpaTableComparable$
 {$switch HasDefSchemaOrSuper no implCompactedPrimaryIndexClassJPAAttr default empty$$switch HasDefSchemaOrSuper no maybeDeclSchemaJpaTablePKeyMembers default empty$$switch HasDefSchemaOrSuper no implJpaRequiredRevisionAttr default empty$$iterate SuperiorCandidateDataRelations(each declSchemaJpaRelationMember empty empty)$$iterate SubservientCandidateDataRelations(each declSchemaJpaRelationMember empty empty)$$switch HasDefSchema yes empty default declSchemaJpaTableJPAColumns$
-$switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSchemaJpaTableJPABaseConstruct$$switch HasDefSchema no implJpaGetClassCode default empty$$switch HasDefSchemaOrSuper no implSchemaJpaTablePKeyWrappers default empty$$iterate SuperiorCandidateDataRelations(each maybeImplSchemaJpaTableDataRelationGetterSetter empty empty)$$iterate SubservientCandidateDataRelations(each implSchemaJpaTableDataRelationGetter empty empty)$$switch HasDefSchema no maybeImplOptAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$implSchemaJpaTableToString$}
+$switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSchemaJpaTableJPABaseConstruct$$switch HasDefSchema no implJpaGetClassCode default empty$$switch HasDefSchemaOrSuper no implSchemaJpaTablePKeyWrappers default empty$$iterate SuperiorDataRelations(each maybeImplSchemaJpaTableDataRelationGetterSetter empty empty)$$iterate SubservientDataRelations(each implSchemaJpaTableDataRelationGetter empty empty)$$switch HasDefSchema no maybeImplOptAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$implSchemaJpaTableToString$}
 </GenFile>
 
 	<GenRule GenDef="Table" Name="maybeDeclSchemaJpaTablePKeyMembers">$switch IsPrimaryIndexKeyAtomic yes implSchemaJpaTablePKeyMembers default empty$</GenRule>
 	<GenRule GenDef="Table" Name="implSchemaJpaTablePKeyMembers">$iterate SuperiorCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$</GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaJpaTablePKeyWrappers">$switch IsPrimaryIndexKeyAtomic yes implSchemaJpaTablePKeyRelationAccessors default implSchemaJpaTablePKeyRelationWrappers$</GenRule>
-	<GenRule GenDef="Table" Name="implSchemaJpaTablePKeyRelationAccessors">$iterate SuperiorCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetterSetter empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetter empty empty)$</GenRule>
-	<GenRule GenDef="Table" Name="implSchemaJpaTablePKeyRelationWrappers">$iterate SuperiorCandidatePrimaryKeyRelations(each implSchemaJpaTableWrapPKeyRelationGetterSetter empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each implSchemaJpaTableWrapPKeyRelationGetter empty empty)$</GenRule>
+	<GenRule GenDef="Table" Name="implSchemaJpaTablePKeyRelationAccessors">$iterate SuperiorPrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetterSetter empty empty)$$iterate SubservientPrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetter empty empty)$</GenRule>
+	<GenRule GenDef="Table" Name="implSchemaJpaTablePKeyRelationWrappers">$iterate SuperiorPrimaryKeyRelations(each implSchemaJpaTableWrapPKeyRelationGetterSetter empty empty)$$iterate SubservientPrimaryKeyRelations(each implSchemaJpaTableWrapPKeyRelationGetter empty empty)$</GenRule>
 	
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableWrapPKeyRelationGetterSetter">$switch IsCandidateRelation yes implSchemaJpaTableWrapPKeyRelationCandidateGetterSetter default implSchemaJpaTableWrapPKeyRelationNonCandidateGetterSetter$</GenRule>
 
@@ -136,7 +136,7 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 		return( pkey.get$OptionalOrRequired$$RelationType$$Suffix$() );
 	}</GenRule>
 
-	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTableDataRelationGetterSetter">$switch HasDefSchema yes implSchemaJpaTableRelationNonCandidateGetterSetter default implSuperiorSchemaJpaTableDataRelationGetterSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTableDataRelationGetterSetter">$switch ToTableHasDefSchema yes implSchemaJpaTableRelationNonCandidateGetterSetter default implSuperiorSchemaJpaTableDataRelationGetterSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implSuperiorSchemaJpaTableDataRelationGetterSetter">$switch IsSuperiorRelation yes implInDataSchemaJpaTableDataRelationGetterSetter default implInDataSchemaJpaTableDataRelationGetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implInDataSchemaJpaTableDataRelationGetterSetter">$switch IsRelationInPrimaryIndex no implSchemaJpaTableRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableDataRelationGetter">$switch IsRelationInPrimaryIndex no implSchemaJpaTableRelationGetter default empty$</GenRule>
@@ -265,36 +265,53 @@ $switch HasSuperClassRelation no implJpaOptAuditColumnAttr default empty$$iterat
 	</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implJpaTableColumnGetterSetter">$reference Column implJpaTableColumnGetterSetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implJpaTableColumnGetterSetter">$switch InSuperiorCandidateDataRelation yes implDerefSuperiorCandidateDataRelationColColumnGetter default implColumnGetterSetter$</GenRule>
-	<GenRule GenDef="Atom" Name="implJpaTableColumnGetterSetter">$switch InSuperiorCandidateDataRelation yes implDerefSuperiorCandidateDataRelationColColumnGetter default implColumnGetterSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implJpaTableColumnGetterSetter">$switch InSuperiorDataRelation yes implDerefSuperiorDataRelationColColumnGetter default implColumnGetterSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implJpaTableColumnGetterSetter">$switch InSuperiorDataRelation yes implDerefSuperiorDataRelationColColumnGetter default implColumnGetterSetter$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implDerefSuperiorDataRelationColColumnGetter">$reference Column implDerefSuperiorDataRelationColColumnGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implDerefSuperiorDataRelationColColumnGetter">$switch InCandidateRelation yes implDerefSuperiorCandidateDataRelationColColumnGetter default implDerefSuperiorNonCandidateDataRelationColColumnGetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implDerefSuperiorDataRelationColColumnGetter">$switch InCandidateRelation yes implDerefSuperiorCandidateDataRelationColColumnGetter default implDerefSuperiorNonCandidateDataRelationColColumnGetter$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implDerefSuperiorCandidateDataRelationColColumnGetter">$reference Column implDerefSuperiorCandidateDataRelationColColumnGetter$</GenRule>
 	<GenRule GenDef="TableCol" Name="implDerefSuperiorCandidateDataRelationColColumnGetter">
 	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
-		$reference SuperiorCandidateDataRelationCol reference Relation emitInterfaceDataType$ result = get$reference SuperiorCandidateDataRelationCol reference Relation OptionalOrRequired$$reference SuperiorCandidateDataRelationCol reference Relation RelationType$$reference SuperiorCandidateDataRelationCol reference Relation Suffix$();
+		$reference SuperiorDataRelationCol reference Relation emitInterfaceDataType$ result = get$reference SuperiorCandidateDataRelationCol reference Relation OptionalOrRequired$$reference SuperiorCandidateDataRelationCol reference Relation RelationType$$reference SuperiorCandidateDataRelationCol reference Relation Suffix$();
 		if (result != null) {
 			return result.get$reference SuperiorCandidateDataRelationCol reference ToCol implColumnAttrOptionality$$reference SuperiorCandidateDataRelationCol reference ToCol Name$();
 		}
 		else {$switch IsNullable yes derefReturnNull default derefReturnInitVal$
 		}
+	}
+</GenRule>
+	<GenRule GenDef="Atom" Name="implDerefSuperiorCandidateDataRelationColColumnGetter">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		$reference SuperiorDataRelationCol reference Relation emitInterfaceDataType$ result = get$reference SuperiorCandidateDataRelationCol reference Relation OptionalOrRequired$$reference SuperiorCandidateDataRelationCol reference Relation RelationType$$reference SuperiorCandidateDataRelationCol reference Relation Suffix$();
+		if (result != null) {
+			return result.get$reference SuperiorCandidateDataRelationCol reference ToCol implColumnAttrOptionality$$reference SuperiorCandidateDataRelationCol reference ToCol Name$();
+		}
+		else {$switch IsNullable yes derefReturnNull default derefReturnInitVal$
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implDerefSuperiorNonCandidateDataRelationColColumnGetter">$reference Column implDerefSuperiorNonCandidateDataRelationColColumnGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implDerefSuperiorNonCandidateDataRelationColColumnGetter">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( $lower implColumnAttrOptionality$$Name$ );
+	}
+</GenRule>
+	<GenRule GenDef="Atom" Name="implDerefSuperiorNonCandidateDataRelationColColumnGetter">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( $lower implColumnAttrOptionality$$Name$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="derefReturnInitVal">
-			return( I$reference SuperiorCandidateDataRelationCol reference ToCol DefSchemaName$$reference SuperiorCandidateDataRelationCol reference ToCol TableName$.$upper reference SuperiorCandidateDataRelationCol reference ToCol Name$_INIT_VALUE );</GenRule>
-
-	<GenRule GenDef="Atom" Name="implDerefSuperiorCandidateDataRelationColColumnGetter">
-	@Override
-	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
-		$reference SuperiorCandidateDataRelationCol reference Relation emitInterfaceDataType$ result = get$reference SuperiorCandidateDataRelationCol reference Relation OptionalOrRequired$$reference SuperiorCandidateDataRelationCol reference Relation RelationType$$reference SuperiorCandidateDataRelationCol reference Relation Suffix$();
-		if (result != null) {
-			return result.get$reference SuperiorCandidateDataRelationCol reference ToCol implColumnAttrOptionality$$reference SuperiorCandidateDataRelationCol reference ToCol Name$();
-		}
-		else {$switch IsNullable yes derefReturnNull default derefReturnInitVal$
-		}
-	}
-</GenRule>
+			return( I$reference SuperiorDataRelationCol reference ToCol DefSchemaName$$reference SuperiorDataRelationCol reference ToCol TableName$.$upper reference SuperiorDataRelationCol reference ToCol Name$_INIT_VALUE );</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaColumnAttrPKeyColumnAccessorsSetAttrOnlyIfNotNull">
 		if ($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$ != null) {
