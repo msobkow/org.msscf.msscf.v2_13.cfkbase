@@ -102,15 +102,15 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	@OneToOne(fetch=FetchType.LAZY$declSchemaJpaRelationMemberOptionalClause$$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)$switch JpaRequiresMappedBy yes declSchemaJpaRelationOneToOneMappedTags default declSchemaJpaRelationOneToOneUnmappedTags$
 	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneMappedTags">
-	$switch IsFromIndexAtomic yes empty default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$</GenRule>
+	$switch IsToIndexAtomic yes empty default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneUnmappedTags">
-	$switch IsFromIndexAtomicPrimaryKeyIndex yes declSuperiorAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$declSchemaJpaSuperiorRelationMemberAttributeOverrides$</GenRule>
+	$switch IsToIndexAtomicPrimaryKeyIndex yes declSuperiorAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToMany">
 	@OneToMany(fetch=FetchType.LAZY$emitJpaMappedBy$)$switch IsFromPrimaryIndexKey no declSchemaJpaRelationMemberJoinColumns default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$
 	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberManyToOne">
-	@ManyToOne(fetch=FetchType.LAZY$declSchemaJpaRelationMemberOptionalClause$)$switch IsToIndexAtomicPrimaryKeyIndex yes declAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaSuperiorRelationMemberAttributeOverrides default declSchemaJpaRelationMemberMaybeCompositeAttributeOverrides$
+	@ManyToOne(fetch=FetchType.LAZY$declSchemaJpaRelationMemberOptionalClause$)$switch IsToIndexAtomicPrimaryKeyIndex yes declAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default declSchemaJpaRelationMemberMaybeCompositeAttributeOverrides$
 	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberManyToMany">
 	@ManyToMany(fetch=FetchType.LAZY$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)$switch JpaRequiresMappedBy no 
@@ -231,7 +231,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationUuid">
 	@JoinColumn( name="$reference FromCol DbColumnName$" )</GenRule>
 
-	<GenRule GenDef="Relation" Name="declSchemaJpaSuperiorRelationMemberAttributeOverrides">
+	<GenRule GenDef="Relation" Name="declSchemaJpaRelationSuperiorMemberAttributeOverrides">
 	@AttributeOverrides({$iterate Columns( first implJpaSuperiorRelationColAttrOverrides each commaImplJpaSuperiorRelationColAttrOverrides )$
 	})</GenRule>
 	<GenRule GenDef="RelationCol" Name="commaImplJpaSuperiorRelationColAttrOverrides">,$implJpaSuperiorRelationColAttrOverrides$</GenRule>
@@ -286,51 +286,51 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesBlob">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesBool">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesEnum">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesInt16">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesInt32">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesInt64">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesUInt16">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesUInt32">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesUInt64">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesFloat">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesDouble">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesNumber">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, scale=$reference FromCol Digits$, precision=$reference FromCol Precis$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, scale=$reference FromCol Digits$, precision=$reference FromCol Precis$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesString">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesToken">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesNmToken">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesNmTokens">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesText">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesDate">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesTime">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesTimestamp">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesTZDate">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesTZTime">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesTZTimestamp">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesDbKeyHash128">
 		@AttributeOverride(name="bytes", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=CFLibDbKeyHash128.HASH_LENGTH ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesDbKeyHash160">
@@ -346,7 +346,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesUuid6">
 		@AttributeOverride(name="bytes", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=CFLibUuid6.TOTAL_BYTES ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColAttrOverridesUuid">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=16 ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=16 ) )</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implJpaRelationColumnOverride">$switch IsSuperiorRelation yes implJpaSuperiorRelationColumnOverride default empty$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverride"
@@ -396,51 +396,51 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideBlob">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideBool">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideEnum">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideInt16">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideInt32">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideInt64">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideUInt16">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideUInt32">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideUInt64">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideFloat">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideDouble">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideNumber">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, scale=$reference FromCol Digits$, precision=$reference FromCol Precis$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, scale=$reference FromCol Digits$, precision=$reference FromCol Precis$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideString">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideToken">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideNmToken">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideNmTokens">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideText">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=$reference FromCol MaxLen$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideDate">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideTime">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideTimestamp">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideTZDate">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideTZTime">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideTZTimestamp">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$ ) )</GenRule>
 	<!-- The DbKeyHash overrides might need to override name="bytes" instead of name="$reference FromCol DbColumnName$" -->
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideDbKeyHash128">
 		@AttributeOverride(name="bytes", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=CFLibDbKeyHash128.HASH_LENGTH ) )</GenRule>
@@ -457,22 +457,24 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideUuid6">
 		@AttributeOverride(name="bytes", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=CFLibUuid6.TOTAL_BYTES ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJpaSuperiorRelationColumnOverrideUuid">
-		@AttributeOverride(name="$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=16 ) )</GenRule>
+		@AttributeOverride(name="$reference FromCol DbColumnName$", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=16 ) )</GenRule>
 
 	<GenRule GenDef="Index" Name="IsUniqueBool">$switch IsUnique yes true default false$</GenRule>
 
-	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberJoinColumns">$switch IsToIndexAtomic yes declSchemaJpaRelationMemberJoinAColumn default declSchemaJpaRelationMemberJoinMultiColumn$</GenRule>
-	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberJoinAColumn">$iterate Columns( first declSchemaJpaRelationMemberAJoinColumn each empty)$</GenRule>
-	<GenRule GenDef="RelationCol" Name="declSchemaJpaRelationMemberAJoinColumn">
-	@JoinColumn( name="$switch IsFromColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", referencedColumnName="$switch IsToColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference ToCol lower implColumnAttrOptionality$$reference ToCol Name$" )</GenRule>
-	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberJoinMultiColumn">
-	@JoinColumns({$iterate Columns( first declSchemaJpaRelationMemberJoinColumn each declCommaSchemaJpaRelationMemberJoinColumn)$
+	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberJoinColumns">$switch IsSuperiorRelation yes declSchemaJpaSuperiorRelationMemberJoinColumns default declSchemaJpaSubservientRelationMemberJoinColumns$</GenRule>
+
+	<GenRule GenDef="Relation" Name="declSchemaJpaSuperiorRelationMemberJoinColumns">$switch IsToIndexAtomic yes declSchemaJpaSuperiorRelationMemberJoinAColumn default declSchemaJpaSuperiorRelationMemberJoinMultiColumn$</GenRule>
+	<GenRule GenDef="Relation" Name="declSchemaJpaSuperiorRelationMemberJoinAColumn">$iterate Columns( first declSchemaJpaSuperiorRelationMemberAJoinColumn each empty)$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSchemaJpaSuperiorRelationMemberAJoinColumn">
+	@JoinColumn( name="$reference FromCol DbColumnName$", referencedColumnName="$switch IsToColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference ToCol lower implColumnAttrOptionality$$reference ToCol Name$" )</GenRule>
+	<GenRule GenDef="Relation" Name="declSchemaJpaSuperiorRelationMemberJoinMultiColumn">
+	@JoinColumns({$iterate Columns( first declSchemaJpaSuperiorRelationMemberJoinColumn each declCommaSchemaJpaSuperiorRelationMemberJoinColumn)$
 	})</GenRule>
 	<GenRule GenDef="Object" Name="emitMemberJoinAColumnPKeyDot">pkey.</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="declSchemaJpaRelationMemberJoinColumn">
-		@JoinColumn( name="$switch IsFromColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference FromCol lower implColumnAttrOptionality$$reference FromCol Name$", referencedColumnName="$switch IsToColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference ToCol lower implColumnAttrOptionality$$reference ToCol Name$" )</GenRule>
-	<GenRule GenDef="RelationCol" Name="declCommaSchemaJpaRelationMemberJoinColumn">,$declSchemaJpaRelationMemberJoinColumn$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSchemaJpaSuperiorRelationMemberJoinColumn">
+		@JoinColumn( name="$reference FromCol DbColumnName$", referencedColumnName="$switch IsToColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference ToCol lower implColumnAttrOptionality$$reference ToCol Name$" )</GenRule>
+	<GenRule GenDef="RelationCol" Name="declCommaSchemaJpaSuperiorRelationMemberJoinColumn">,$declSchemaJpaSuperiorRelationMemberJoinColumn$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOptionalClause">, optional=$RelationRequiredAsReverseBoolString$</GenRule>
 	<GenRule GenDef="Relation" Name="RelationRequiredAsReverseBoolString">$switch IsRequired yes false default true$</GenRule>
 
