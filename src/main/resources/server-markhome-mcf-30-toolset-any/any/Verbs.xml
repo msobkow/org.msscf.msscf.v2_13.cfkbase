@@ -44,12 +44,11 @@
 		></GenRule>
 
 	<GenRule GenDef="Relation" Name="ToTableHasDefSchema">$reference ToTable HasDefSchema$</GenRule>
-	<GenRule GenDef="Relation" Name="IsToIndexPrimaryKeyIndex">$reference ToIndex IsPrimaryKeyIndex$</GenRule>
+	<GenRule GenDef="Relation" Name="IsToIndexPrimaryKeyIndex">$reference ToIndex IsPrimaryIndex$</GenRule>
 	<GenRule GenDef="Relation" Name="IsToIndexAtomic">$reference ToIndex IsAtomic$</GenRule>
 	<GenRule GenDef="Relation" Name="IsCandidateRelation">$switch IsSuperiorCandidateRelation yes yes default IsSubservientCandidateRelation$</GenRule>
 	<GenRule GenDef="Relation" Name="IsNonCandidateRelation">$switch IsSuperiorNonCandidateRelation yes yes default IsSubservientNonCandidateRelation$</GenRule>
-	<GenRule GenDef="Value" Name="InCandidateRelation">$switch InSuperiorCandidateRelation yes yes default InSubservientCandidateRelation$</GenRule>
-	<GenRule GenDef="Value" Name="InNonCandidateRelation">$switch InSuperiorNonCandidateRelation yes yes default InSubservientNonCandidateRelation$</GenRule>
+	<GenRule GenDef="Relation" Name="IsToIndexAtomicPrimaryKeyIndex">$switch IsToIndexAtomic yes IsToIndexPrimaryKeyIndex default no$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="ToTableHasDefSchema">$reference Relation ToTableHasDefSchema$</GenRule>
 	<GenRule GenDef="RelationCol" Name="IsToIndexPrimaryKeyIndex">$reference Relation IsToIndexPrimaryKeyIndex$</GenRule>
@@ -60,8 +59,12 @@
 	<GenRule GenDef="RelationCol" Name="IsNonCandidateRelation">$reference Relation IsNonCandidateRelation$</GenRule>
 	<GenRule GenDef="RelationCol" Name="IsSuperiorNonCandidateRelation">$reference Relation IsSuperiorNonCandidateRelation$</GenRule>
 	<GenRule GenDef="RelationCol" Name="IsSubservientNonCandidateRelation">$reference Relation IsSubservientNonCandidateRelation$</GenRule>
+	<GenRule GenDef="RelationCol" Name="IsSuperiorRelation">$reference Relation IsSuperiorRelation$</GenRule>
+	<GenRule GenDef="RelationCol" Name="IsSubservientRelation">$reference Relation IsSubservientRelation$</GenRule>
+	<GenRule GenDef="RelationCol" Name="IsToIndexAtomicPrimaryKeyIndex">$reference Relation IsToIndexAtomicPrimaryKeyIndex$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="IsSuperiorRelation">$reference Relation IsSuperioRelation$</GenRule>
+	<GenRule GenDef="Value" Name="InCandidateRelation">$switch InSuperiorCandidateRelation yes yes default InSubservientCandidateRelation$</GenRule>
+	<GenRule GenDef="Value" Name="InNonCandidateRelation">$switch InSuperiorNonCandidateRelation yes yes default InSubservientNonCandidateRelation$</GenRule>
 
 	<GenRule GenDef="Object" Name="HasDefaultLicense">no</GenRule>
 

@@ -89,8 +89,6 @@ public class $SchemaName$Jpa$TableName$PKey$switch HasDefSchema yes SchemaJpaTab
 	}
 </GenRule>
 
-	<GenRule GenDef="Relation" Name="IsToIndexAtomicPrimaryKeyIndex">$switch IsToIndexAtomic yes IsToPrimaryIndexKey default no$</GenRule>
-
 	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyImplBaseDefBody">$iterate SuperiorCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$$reference PrimaryKeyIndex iterate Columns(
 	each maybeJpaTablePKeyImplJpaColumnAttr )$
 $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetterSetter empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each implJpaPKeyColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
@@ -99,29 +97,37 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToSomething">$switch IsToIndexUnique yes declSchemaJpaRelationMemberOneToOne default declSchemaJpaRelationMemberOneToMany$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberManyToSomething">$switch IsToIndexUnique yes declSchemaJpaRelationMemberManyToOne default declSchemaJpaRelationMemberManyToMany$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToOne">
+		
 	@OneToOne(fetch=FetchType.LAZY$declSchemaJpaRelationMemberOptionalClause$$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)$switch JpaRequiresMappedBy yes declSchemaJpaRelationOneToOneMappedTags default declSchemaJpaRelationOneToOneUnmappedTags$
 	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
-	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneMappedTags">
-	$switch IsToIndexAtomic yes empty default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$</GenRule>
-	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneUnmappedTags">
-	$switch IsToIndexAtomicPrimaryKeyIndex yes declSuperiorAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default empty$</GenRule>
+	
+	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneMappedTags">$switch IsToIndexAtomic yes empty default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$</GenRule>
+	
+	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneUnmappedTags">$switch IsToIndexAtomicPrimaryKeyIndex yes declAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToMany">
 	@OneToMany(fetch=FetchType.LAZY$emitJpaMappedBy$)$switch IsFromPrimaryIndexKey no declSchemaJpaRelationMemberJoinColumns default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$
 	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
+	
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberManyToOne">
 	@ManyToOne(fetch=FetchType.LAZY$declSchemaJpaRelationMemberOptionalClause$)$switch IsToIndexAtomicPrimaryKeyIndex yes declAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default declSchemaJpaRelationMemberMaybeCompositeAttributeOverrides$
 	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
+	
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberManyToMany">
 	@ManyToMany(fetch=FetchType.LAZY$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)$switch JpaRequiresMappedBy no 
 		declSchemaJpaRelationMemberJoinColumns default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch JpaRequiresMappedBy no declSchemaJpaRelationOnlySuperiorMemberAttributeOverrides default empty$
 	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
+	
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns">$switch IsToIndexAtomic no declSchemaJpaRelationMemberJoinColumns default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberMaybeCompositeAttributeOverrides">$switch IsSuperiorRelation yes declSchemaJpaRelationMemberMaybeCompositeAttributeOverridesIfNotAtomic default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberMaybeCompositeAttributeOverridesIfNotAtomic">$switch IsToIndexAtomic no declSchemaJpaRelationMemberCompositeAttributeOverrides default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOnlySuperiorMemberAttributeOverrides">$switch IsSuperiorRelation yes declSchemaJpaRelationSuperiorMemberAttributeOverrides default empty$</GenRule>
+	
+	<GenRule GenDef="Relation" Name="declAtomicPrimarySpecification">$switch JpaRequiresMappedBy no declSuperiorAtomicPrimarySpecification default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declSuperiorAtomicPrimarySpecification">$iterate Columns( first declSuperiorAtomicPrimarySpecification each errorShouldOnlyBeOneRelationCol)$</GenRule>
+
 	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecification"
 		>$switch FromColBaseModelAtomClass
 			BlobDef declSuperiorAtomicPrimarySpecificationBlob
