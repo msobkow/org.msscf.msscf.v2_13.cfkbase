@@ -103,10 +103,10 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneMappedTags">$switch IsToIndexAtomic yes empty default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$</GenRule>
 	
-	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneUnmappedTags">$switch IsToIndexAtomicPrimaryKeyIndex yes declAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneUnmappedTags">$switch IsToIndexAtomicPrimaryKeyIndex yes declAtomicPrimaIsFromPrimaryIndexKeyrySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToMany">
-	@OneToMany(fetch=FetchType.LAZY$emitJpaMappedBy$)$switch IsFromPrimaryIndexKey no declSchemaJpaRelationMemberJoinColumns default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$
+	@OneToMany(fetch=FetchType.LAZY$switch HasReverseRelation yes emitJpaMappedBy default empty$)$switch HasReverseRelation no declSchemaJpaRelationMemberJoinColumns default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$
 	protected $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 	
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberManyToOne">
@@ -495,6 +495,16 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="Object" Name="emitMemberJoinAColumnPKeyDot">pkey.</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="ToColHasSuperiorCandidateRelationCol">$reference ToCol reference Column HasSuperiorCandidateRelationCol$</GenRule>
+
+	<GenRule GenDef="Relation" Name="declSchemaJpaSubservientRelationMemberJoinColumns">$switch IsToIndexAtomic yes declSchemaJpaSubservientRelationMemberJoinAColumn default declSchemaJpaSubservientRelationMemberJoinMultiColumn$</GenRule>
+	<GenRule GenDef="Relation" Name="declSchemaJpaSubservientRelationMemberJoinAColumn">$iterate Columns( first declSchemaJpaSubservientRelationMemberAJoinColumn each empty)$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSchemaJpaSubservientRelationMemberAJoinColumn">
+	@JoinColumn( name="$reference FromCol reference Column DbColumnName$", referencedColumnName="$reference ToCol reference Column DbColumnName$" )</GenRule>
+	<GenRule GenDef="Relation" Name="declSchemaJpaSubservientRelationMemberJoinMultiColumn">
+	@JoinColumns({$iterate Columns( first declSchemaJpaSubservientRelationMemberJoinColumn each declCommaSchemaJpaSubservientRelationMemberJoinColumn)$
+	})</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="ToColHasSubservientCandidateRelationCol">$reference ToCol reference Column HasSubservientCandidateRelationCol$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="SchemaTablePKeyChaseRelationToCol">$switch IsToColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$switch ToColHasSuperiorCandidateRelationCol yes SchemaTablePKeyChaseRelationToColRecurse default SchemaTablePKeyFoundRelationToCol$</GenRule>
 	<GenRule GenDef="RelationCol" Name="SchemaTablePKeyChaseRelationToColRecurse">$reference ToCol reference Column reference SuperiorCandidateRelationCol reference Relation lower OptionalOrRequired$$reference ToCol reference Column reference SuperiorCandidateRelationCol reference Relation RelationType$$reference ToCol reference Column reference SuperiorCandidateRelationCol reference Relation Suffix$.$reference ToCol reference Column reference SuperiorCandidateRelationCol SchemaTablePKeyChaseRelationToCol$</GenRule>

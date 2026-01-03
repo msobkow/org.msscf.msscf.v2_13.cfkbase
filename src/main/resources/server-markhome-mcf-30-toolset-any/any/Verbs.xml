@@ -43,15 +43,22 @@
 	<GenRule GenDef="Value" Name="XmlElementName"
 		></GenRule>
 
-	<GenRule GenDef="IndexCol" Name="IsColumnInCompositePrimaryKey">$reference Column InCompositePrimaryKey$</GenRule>
-
+	<GenRule GenDef="IndexCol" Name="InCompositePrimaryKey">$reference Column InCompositePrimaryKey$</GenRule>
+	<GenRule GenDef="TableCol" Name="InCompositePrimaryKey">$switch ColumnInPrimaryIndex yes ReverseIsPrimaryIndexKeyAtomic default no$</GenRule>
+	<GenRule GenDef="Atom" Name="InCompositePrimaryKey">$switch ColumnInPrimaryIndex yes ReverseIsPrimaryIndexKeyAtomic default no$</GenRule>
+	<GenRule GenDef="TableCol" Name="ReverseIsPrimaryIndexKeyAtomic">$reference Table reference BaseClass reference PrimaryKeyIndex ReverseIsAtomic$</GenRule>
+	<GenRule GenDef="Atom" Name="ReverseIsPrimaryIndexKeyAtomic">$reference Table reference BaseClass reference PrimaryKeyIndex ReverseIsAtomic$</GenRule>
+	<GenRule GenDef="Table" Name="ReverseIsPrimaryIndexKeyAtomic">$reference BaseClass reference PrimaryKeyIndex ReverseIsAtomic$</GenRule>
+	<GenRule GenDef="Index" Name="ReverseIsAtomic">$switch IsAtomic yes no default yes$</GenRule>
+	
+	<GenRule GenDef="Relation" Name="ReverseIsToIndexAtomic">$switch IsToIndexAtomic yes no default yes$</GenRule>
 	<GenRule GenDef="Relation" Name="ToTableHasDefSchema">$reference ToTable HasDefSchema$</GenRule>
 	<GenRule GenDef="Relation" Name="IsToIndexPrimaryKeyIndex">$reference ToIndex IsPrimaryIndex$</GenRule>
 	<GenRule GenDef="Relation" Name="IsToIndexAtomic">$reference ToIndex IsAtomic$</GenRule>
 	<GenRule GenDef="Relation" Name="IsCandidateRelation">$switch IsSuperiorCandidateRelation yes yes default IsSubservientCandidateRelation$</GenRule>
 	<GenRule GenDef="Relation" Name="IsNonCandidateRelation">$switch IsSuperiorNonCandidateRelation yes yes default IsSubservientNonCandidateRelation$</GenRule>
-	<GenRule GenDef="Relation" Name="IsToIndexAtomicPrimaryKeyIndex">$switch IsToIndexAtomic yes IsToIndexPrimaryKeyIndex default no$</GenRule>
-	<GenRule GenDef="Relation" Name="IsToIndexNonAtomicPrimaryKeyIndex">$switch IsToIndexAtomic no IsToIndexPrimaryKeyIndex default no$</GenRule>
+	<GenRule GenDef="Relation" Name="IsToIndexAtomicPrimaryKeyIndex">$switch IsToIndexPrimaryKeyIndex yes IsToIndexAtomic default no$</GenRule>
+	<GenRule GenDef="Relation" Name="IsToIndexNonAtomicPrimaryKeyIndex">$switch IsToIndexPrimaryKeyIndex yes ReverseIsToIndexAtomic default no$</GenRule>
 	<GenRule GenDef="Relation" Name="ReverseIsToIndexPrimaryKeyIndex">$switch IsToIndexPrimaryKeyIndex yes no default yes$</GenRule>
 	<GenRule GenDef="RelationCol" Name="ToTableHasDefSchema">$reference Relation ToTableHasDefSchema$</GenRule>
 	<GenRule GenDef="RelationCol" Name="IsToIndexPrimaryKeyIndex">$reference Relation IsToIndexPrimaryKeyIndex$</GenRule>
