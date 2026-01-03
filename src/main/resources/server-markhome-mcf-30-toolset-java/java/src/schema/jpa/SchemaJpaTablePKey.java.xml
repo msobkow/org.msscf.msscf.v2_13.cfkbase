@@ -99,7 +99,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToOne">
 		
 	@OneToOne(fetch=FetchType.LAZY$declSchemaJpaRelationMemberOptionalClause$$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)$switch JpaRequiresMappedBy yes declSchemaJpaRelationOneToOneMappedTags default declSchemaJpaRelationOneToOneUnmappedTags$
-	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
+	protected $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 	
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneMappedTags">$switch IsToIndexAtomic yes empty default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$</GenRule>
 	
@@ -107,16 +107,16 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToMany">
 	@OneToMany(fetch=FetchType.LAZY$emitJpaMappedBy$)$switch IsFromPrimaryIndexKey no declSchemaJpaRelationMemberJoinColumns default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$
-	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
+	protected $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 	
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberManyToOne">
-	@ManyToOne(fetch=FetchType.LAZY$declSchemaJpaRelationMemberOptionalClause$)$switch IsToIndexAtomicPrimaryKeyIndex yes declAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default declSchemaJpaRelationMemberMaybeCompositeAttributeOverrides$
-	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
+	@ManyToOne(fetch=FetchType.LAZY$declSchemaJpaRelationMemberOptionalClause$)$switch IsToIndexAtomicPrimaryKeyIndex yes declAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$<!--$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default declSchemaJpaRelationMemberMaybeCompositeAttributeOverrides$-->
+	protected $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 	
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberManyToMany">
 	@ManyToMany(fetch=FetchType.LAZY$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)$switch JpaRequiresMappedBy no 
-		declSchemaJpaRelationMemberJoinColumns default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch JpaRequiresMappedBy no declSchemaJpaRelationOnlySuperiorMemberAttributeOverrides default empty$
-	private $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
+		declSchemaJpaRelationMemberJoinColumns default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$<!--$switch JpaRequiresMappedBy no declSchemaJpaRelationOnlySuperiorMemberAttributeOverrides default empty$-->
+	protected $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 	
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns">$switch IsToIndexAtomic no declSchemaJpaRelationMemberJoinColumns default empty$</GenRule>
 
@@ -220,6 +220,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	@JoinColumn( name="$reference FromCol DbColumnName$" )</GenRule>
 	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationTZTimestamp">
 	@JoinColumn( name="$reference FromCol DbColumnName$" )</GenRule>
+<!--
 	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationDbKeyHash128">
 	@AttributeOverride(name="bytes", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=CFLibDbKeyHash128.HASH_LENGTH ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationDbKeyHash160">
@@ -234,6 +235,21 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	@AttributeOverride(name="bytes", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=CFLibDbKeyHash512.HASH_LENGTH ) )</GenRule>
 	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationUuid6">
 	@AttributeOverride(name="bytes", column = @Column( name="$reference FromCol DbColumnName$", nullable=$reference FromCol IsNullaBool$, unique=$popto Relation reference FromIndex IsUniqueBool$, length=CFLibUuid6.TOTAL_BYTES ) )</GenRule>
+-->
+	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationDbKeyHash128">
+	@JoinColumn( name="$reference FromCol DbColumnName$" )</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationDbKeyHash160">
+	@JoinColumn( name="$reference FromCol DbColumnName$" )</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationDbKeyHash224">
+	@JoinColumn( name="$reference FromCol DbColumnName$" )</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationDbKeyHash256">
+	@JoinColumn( name="$reference FromCol DbColumnName$" )</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationDbKeyHash384">
+	@JoinColumn( name="$reference FromCol DbColumnName$" )</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationDbKeyHash512">
+	@JoinColumn( name="$reference FromCol DbColumnName$" )</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationUuid6">
+	@JoinColumn( name="$reference FromCol DbColumnName$" )</GenRule>
 	<GenRule GenDef="RelationCol" Name="declSuperiorAtomicPrimarySpecificationUuid">
 	@JoinColumn( name="$reference FromCol DbColumnName$" )</GenRule>
 
@@ -472,14 +488,20 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="Relation" Name="declSchemaJpaSuperiorRelationMemberJoinColumns">$switch IsToIndexAtomic yes declSchemaJpaSuperiorRelationMemberJoinAColumn default declSchemaJpaSuperiorRelationMemberJoinMultiColumn$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaSuperiorRelationMemberJoinAColumn">$iterate Columns( first declSchemaJpaSuperiorRelationMemberAJoinColumn each empty)$</GenRule>
 	<GenRule GenDef="RelationCol" Name="declSchemaJpaSuperiorRelationMemberAJoinColumn">
-	@JoinColumn( name="$reference FromCol DbColumnName$", referencedColumnName="$switch IsToColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference ToCol lower implColumnAttrOptionality$$reference ToCol Name$" )</GenRule>
+	@JoinColumn( name="$reference FromCol reference Column DbColumnName$", referencedColumnName="$reference ToCol reference Column DbColumnName$" )</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaSuperiorRelationMemberJoinMultiColumn">
 	@JoinColumns({$iterate Columns( first declSchemaJpaSuperiorRelationMemberJoinColumn each declCommaSchemaJpaSuperiorRelationMemberJoinColumn)$
 	})</GenRule>
 	<GenRule GenDef="Object" Name="emitMemberJoinAColumnPKeyDot">pkey.</GenRule>
 
+	<GenRule GenDef="RelationCol" Name="ToColHasSuperiorCandidateRelationCol">$reference ToCol reference Column HasSuperiorCandidateRelationCol$</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="SchemaTablePKeyChaseRelationToCol">$switch IsToColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$switch ToColHasSuperiorCandidateRelationCol yes SchemaTablePKeyChaseRelationToColRecurse default SchemaTablePKeyFoundRelationToCol$</GenRule>
+	<GenRule GenDef="RelationCol" Name="SchemaTablePKeyChaseRelationToColRecurse">$reference ToCol reference Column reference SuperiorCandidateRelationCol reference Relation lower OptionalOrRequired$$reference ToCol reference Column reference SuperiorCandidateRelationCol reference Relation RelationType$$reference ToCol reference Column reference SuperiorCandidateRelationCol reference Relation Suffix$.$reference ToCol reference Column reference SuperiorCandidateRelationCol SchemaTablePKeyChaseRelationToCol$</GenRule>
+	<GenRule GenDef="RelationCol" Name="SchemaTablePKeyFoundRelationToCol">$reference ToCol reference Column lower implColumnAttrOptionality$$reference ToCol reference Column Name$</GenRule>
+
 	<GenRule GenDef="RelationCol" Name="declSchemaJpaSuperiorRelationMemberJoinColumn">
-		@JoinColumn( name="$reference FromCol DbColumnName$", referencedColumnName="$switch IsToColInCompositePrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference ToCol lower implColumnAttrOptionality$$reference ToCol Name$" )</GenRule>
+		@JoinColumn( name="$reference FromCol reference Column DbColumnName$", referencedColumnName="$reference ToCol reference Column DbColumnName$" )</GenRule>
 	<GenRule GenDef="RelationCol" Name="declCommaSchemaJpaSuperiorRelationMemberJoinColumn">,$declSchemaJpaSuperiorRelationMemberJoinColumn$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOptionalClause">, optional=$RelationRequiredAsReverseBoolString$</GenRule>
 	<GenRule GenDef="Relation" Name="RelationRequiredAsReverseBoolString">$switch IsRequired yes false default true$</GenRule>
@@ -507,7 +529,9 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="Relation" Name="errorNoReverseRelationFound">
 		ERROR IN APPLICATION MODEL - NO REVERSE RELATIONSHIP FOR $DefSchemaName$Jpa$reference FromTable TableName$.$lower OptionalOrRequired$$RelationType$$Suffix$ FOUND
 	</GenRule>
-	<GenRule GenDef="Relation" Name="reallyEmitJpaMappedBy">, mappedBy="$reference ReverseRelationship reference FromTable DefSchemaName$Jpa$reference ReverseRelationship reference FromTable TableName$.$reference ReverseRelationship leadlower OptionalOrRequired$$reference ReverseRelationship RelationType$$reference ReverseRelationship Suffix$"</GenRule>
+	<GenRule GenDef="Relation" Name="reallyEmitJpaMappedBy">, mappedBy="$switch IsReverseRelationshipInPrimaryKey yes emitMemberJoinAColumnPKeyDot default empty$$reference ReverseRelationship leadlower OptionalOrRequired$$reference ReverseRelationship RelationType$$reference ReverseRelationship Suffix$"</GenRule>
+
+	<GenRule GenDef="Relation" Name="IsReverseRelationshipInPrimaryKey">$reference ReverseRelationship AllRelationFromColsInPrimaryKey$</GenRule>
 
 	<GenRule GenDef="Relation" Name="emitInterfaceDataType">$switch IsToIndexUnique yes emitInterfaceDataTypeSingleton default emitInterfaceDataTypeSet$</GenRule>
 	<GenRule GenDef="Relation" Name="emitInterfaceDataTypeSingleton">I$reference ToTable DefSchemaName$$reference ToTable TableName$</GenRule>
@@ -1067,19 +1091,19 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$ ) )</GenRule>
 	<!-- The DbKeyHash overrides might need to override name="bytes" instead of name="$DbColumnName$" -->
 	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash128">
-		@AttributeOverride(name="bytes", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash128.HASH_LENGTH ) )</GenRule>
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash128.HASH_LENGTH ) )</GenRule>
 	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash160">
-		@AttributeOverride(name="bytes", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash160.HASH_LENGTH ) )</GenRule>
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash160.HASH_LENGTH ) )</GenRule>
 	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash224">
-		@AttributeOverride(name="bytes", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash224.HASH_LENGTH ) )</GenRule>
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash224.HASH_LENGTH ) )</GenRule>
 	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash256">
-		@AttributeOverride(name="bytes", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash256.HASH_LENGTH ) )</GenRule>
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash256.HASH_LENGTH ) )</GenRule>
 	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash384">
-		@AttributeOverride(name="bytes", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash384.HASH_LENGTH ) )</GenRule>
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash384.HASH_LENGTH ) )</GenRule>
 	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideDbKeyHash512">
-		@AttributeOverride(name="bytes", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash512.HASH_LENGTH ) )</GenRule>
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibDbKeyHash512.HASH_LENGTH ) )</GenRule>
 	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideUuid6">
-		@AttributeOverride(name="bytes", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibUuid6.TOTAL_BYTES ) )</GenRule>
+		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=CFLibUuid6.TOTAL_BYTES ) )</GenRule>
 	<GenRule GenDef="IndexCol" Name="implJpaAttrColumnOverrideUuid">
 		@AttributeOverride(name="$DbColumnName$", column = @Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=16 ) )</GenRule>
 
