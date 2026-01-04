@@ -100,10 +100,10 @@ import java.util.*;
 import javax.naming.*;
 import javax.sql.*;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.xerces.xni.grammars.Grammar;
 import org.xml.sax.*;
 
-import org.msscf.msscf.cflib.CFLib.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$importJavaPackageSchemaName$$iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaNameObj$</GenRule>
+import server.markhome.mcf.v3_1.cflib.*;
+import server.markhome.mcf.v3_1.cflib.xml.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$importJavaPackageSchemaName$$iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaNameObj$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLoaderUseCluster">
 	// The cluster to use for loading
@@ -155,7 +155,6 @@ $iterate SchemaTables( each implSchemaSaxLoaderDeclLoaderBehaviour empty empty )
 	// The source for loading the supported schema
 	public final static String	SCHEMA_URI = "/opt/$lower reference MinorVersion reference ParentMajVer reference ParentSPrj reference ParentTPrj Name$/$reference MinorVersion reference ParentMajVer Name$.0.$reference MinorVersion Name$/xsd/$lower SchemaName$-structured.xsd";
 	public final static String	SCHEMA_ROOT_URI = "/xsd/$lower SchemaName$-structured.xsd";$iterate SchemaRefs( each implSchemaSaxLoaderSchemaRefConstants empty empty )$
-	protected Grammar myGrammar = null;
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="implSchemaSaxLoaderSchemaRefConstants">
@@ -171,76 +170,14 @@ $iterate SchemaTables( each implSchemaSaxLoaderDeclLoaderBehaviour empty empty )
 	public $SchemaName$SaxLoader() {
 		super();
 		setRootElementHandler( getSaxRootHandler() );
-		if( myGrammar == null ) {
-			InputStream input;
-			File file = new File( SCHEMA_URI );
-			if( file.exists() ) {
-				try {
-					input = new FileInputStream( file );
-				}
-				catch( Exception e ) {
-					input = null;
-				}
-				if( input != null ) {
-					myGrammar = addToGrammarPool( SCHEMA_URI, input );
-				}
-			}
-			else {
-				input = getClass().getResourceAsStream( SCHEMA_ROOT_URI );
-				if( input != null ) {
-					myGrammar = addToGrammarPool( SCHEMA_ROOT_URI, input );
-				}
-			}$iterate SchemaRefs( each implSchemaSaxLoaderConstructorLoadXSD empty empty )$
-		}
 		initParser();
 	}
 </GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="implSchemaSaxLoaderConstructorLoadXSD">
-			file = new File( $upper reference RefSchema SchemaName$_URI );
-			if( file.exists() ) {
-				try {
-					input = new FileInputStream( file );
-				}
-				catch( Exception e ) {
-					input = null;
-				}
-				if( input != null ) {
-					addToGrammarPool( $upper reference RefSchema SchemaName$_URI, input );
-				}
-			}
-			else {
-				input = getClass().getResourceAsStream( $upper reference RefSchema SchemaName$_ROOT_URI );
-				if( input != null ) {
-					addToGrammarPool( $upper reference RefSchema SchemaName$_ROOT_URI, input );
-				}
-			}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLoaderConstructorLogger">
 	public $SchemaName$SaxLoader( ICFLibMessageLog logger ) {
 		super( logger );
 		setRootElementHandler( getSaxRootHandler() );
-		if( myGrammar == null ) {
-			InputStream input;
-			File file = new File( SCHEMA_URI );
-			if( file.exists() ) {
-				try {
-					input = new FileInputStream( file );
-				}
-				catch( Exception e ) {
-					input = null;
-				}
-				if( input != null ) {
-					myGrammar = addToGrammarPool( SCHEMA_URI, input );
-				}
-			}
-			else {
-				input = getClass().getResourceAsStream( SCHEMA_ROOT_URI );
-				if( input != null ) {
-					myGrammar = addToGrammarPool( SCHEMA_ROOT_URI, input );
-				}
-			}$iterate SchemaRefs( each implSchemaSaxLoaderConstructorLoadXSD empty empty )$
-		}
 		initParser();
 	}
 </GenRule>
