@@ -50,11 +50,13 @@
 
 $MssSourceLicense$
 
-package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$saxloader;
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$saxloader;
 
 import java.io.File;
-import java.util.Calendar;
+import java.time.*;
 import server.markhome.mcf.v3_1.cflib.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import server.markhome.mcf.v3_1.cflib.inz.Inz;
 import server.markhome.mcf.v3_1.cflib.xml.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$importJavaPackageSchemaName$$iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaNameObj$
 
 public class $SchemaName$SaxLdr
@@ -111,7 +113,6 @@ $implSchemaSaxLdrEvalRemaining$
 				"value" );
 		}
 		else if( value.equals( "default" ) ) {
-			boolean transactionStarted = schema.beginTransaction();
 			try {
 				I$SecSchemaName$SysClusterObj sysCluster = schema.getSysClusterTableObj().readSysClusterByIdIdx( 1 );
 				if( sysCluster == null ) {
@@ -130,25 +131,14 @@ $implSchemaSaxLdrEvalRemaining$
 				clusterName = value;
 				clusterObj = useCluster;
 				saxLoader.getSchemaObj().setSecCluster( useCluster );
-				if( transactionStarted ) {
-					schema.commit();
-				}
 			}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrClusterAccessorsPart02">
 			catch( RuntimeException e ) {
-				if( transactionStarted ) {
-					try {
-						schema.rollback();
-					}
-					catch( Exception e2 ) {
-					}
-				}
 				throw e;
 			}
 		}
 		else if( value.equals( "system" ) ) {
-			boolean transactionStarted = schema.beginTransaction();
 			try {
 				I$SecSchemaName$ClusterObj useCluster = schema.getClusterTableObj().readClusterByUDomNameIdx( "system" );
 				if( useCluster == null ) {
@@ -160,27 +150,18 @@ $implSchemaSaxLdrEvalRemaining$
 				clusterName = value;
 				clusterObj = useCluster;
 				saxLoader.getSchemaObj().setSecCluster( useCluster );
-				if( transactionStarted ) {
-					schema.commit();
-				}
 			}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrClusterAccessorsPart03">
 			catch( RuntimeException e ) {
-				if( transactionStarted ) {
-					try {
-						schema.rollback();
-					}
-					catch( Exception e2 ) {
-					}
-				}
 				throw e;
 			}
 		}
 		else {
 			throw new CFLibUsageException( getClass(),
 				S_ProcName,
-				"Expected value to by 'default' or 'system'" );
+				Inz.x("cflib.xml.CFLibXmlUtil.XmlExpectedDefaultOrSystem"),
+				Inz.s("cflib.xml.CFLibXmlUtil.XmlExpectedDefaultOrSystem"));
 		}
 	}
 </GenRule>
@@ -195,7 +176,6 @@ $implSchemaSaxLdrEvalRemaining$
 		if( clusterObj == null ) {
 			I$SchemaName$SchemaObj schema = saxLoader.getSchemaObj();
 			if( clusterName.equals( "default" ) ) {
-				boolean transactionStarted = schema.beginTransaction();
 				try {
 					I$SecSchemaName$SysClusterObj sysCluster = schema.getSysClusterTableObj().readSysClusterByIdIdx( 1 );
 					if( sysCluster == null ) {
@@ -213,25 +193,14 @@ $implSchemaSaxLdrEvalRemaining$
 					}
 					clusterObj = useCluster;
 					saxLoader.getSchemaObj().setSecCluster( useCluster );
-					if( transactionStarted ) {
-						schema.commit();
-					}
 				}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrClusterAccessorsPart05">
 				catch( RuntimeException e ) {
-					if( transactionStarted ) {
-						try {
-							schema.rollback();
-						}
-						catch( Exception e2 ) {
-						}
-					}
 					throw e;
 				}
 			}
 			else if( clusterName.equals( "system" ) ) {
-				boolean transactionStarted = schema.beginTransaction();
 				try {
 					I$SecSchemaName$ClusterObj useCluster = schema.getClusterTableObj().readClusterByUDomNameIdx( "system" );
 					if( useCluster == null ) {
@@ -242,18 +211,8 @@ $implSchemaSaxLdrEvalRemaining$
 					}
 					clusterObj = useCluster;
 					saxLoader.getSchemaObj().setSecCluster( useCluster );
-					if( transactionStarted ) {
-						schema.commit();
-					}
 				}
 				catch( RuntimeException e ) {
-					if( transactionStarted ) {
-						try {
-							schema.rollback();
-						}
-						catch( Exception e2 ) {
-						}
-					}
 					throw e;
 				}
 			}
@@ -284,7 +243,6 @@ $implSchemaSaxLdrEvalRemaining$
 				"value" );
 		}
 		else if( value.equals( "system" ) ) {
-			boolean transactionStarted = schema.beginTransaction();
 			try {
 				I$SecSchemaName$TenantObj useTenant = schema.getTenantTableObj().readTenantByUNameIdx( clusterObj.getRequiredId(),
 					"system" );
@@ -297,20 +255,10 @@ $implSchemaSaxLdrEvalRemaining$
 				tenantName = value;
 				tenantObj = useTenant;
 				saxLoader.getSchemaObj().setSecTenant( useTenant );
-				if( transactionStarted ) {
-					schema.commit();
-				}
 			}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrTenantAccessorsPart02">
 			catch( RuntimeException e ) {
-				if( transactionStarted ) {
-					try {
-						schema.rollback();
-					}
-					catch( Exception e2 ) {
-					}
-				}
 				throw e;
 			}
 		}
@@ -324,11 +272,11 @@ $implSchemaSaxLdrEvalRemaining$
 			if( clusterName.equals( "system" ) ) {
 				throw new CFLibUsageException( getClass(),
 					S_ProcName,
-					"Cluster 'system' only supports the tenant 'system', not '" + value + "'" );
+					String.format(Inz.x("cflib.xml.CFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName),
+					String.format(Inz.s("cflib.xml.CFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName) );
 			}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrTenantAccessorsPart03">
-			boolean transactionStarted = schema.beginTransaction();
 			try {
 				I$SecSchemaName$TenantObj useTenant = schema.getTenantTableObj().readTenantByUNameIdx( clusterObj.getRequiredId(),
 					value );
@@ -341,20 +289,10 @@ $implSchemaSaxLdrEvalRemaining$
 				tenantName = value;
 				tenantObj = useTenant;
 				saxLoader.getSchemaObj().setSecTenant( useTenant );
-				if( transactionStarted ) {
-					schema.commit();
-				}
 			}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrTenantAccessorsPart04">
 			catch( RuntimeException e ) {
-				if( transactionStarted ) {
-					try {
-						schema.rollback();
-					}
-					catch( Exception e2 ) {
-					}
-				}
 				throw e;
 			}
 		}
@@ -377,7 +315,6 @@ $implSchemaSaxLdrEvalRemaining$
 					"value" );
 			}
 			else if( tenantName.equals( "system" ) ) {
-				boolean transactionStarted = schema.beginTransaction();
 				try {
 					I$SecSchemaName$TenantObj useTenant = schema.getTenantTableObj().readTenantByUNameIdx( clusterObj.getRequiredId(),
 						"system" );
@@ -389,20 +326,10 @@ $implSchemaSaxLdrEvalRemaining$
 					}
 					tenantObj = useTenant;
 					saxLoader.getSchemaObj().setSecTenant( useTenant );
-					if( transactionStarted ) {
-						schema.commit();
-					}
 				}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrTenantAccessorsPart06">
 				catch( RuntimeException e ) {
-					if( transactionStarted ) {
-						try {
-							schema.rollback();
-						}
-						catch( Exception e2 ) {
-						}
-					}
 					throw e;
 				}
 			}
@@ -416,11 +343,11 @@ $implSchemaSaxLdrEvalRemaining$
 				if( clusterName.equals( "system" ) ) {
 					throw new CFLibUsageException( getClass(),
 						S_ProcName,
-						"Cluster 'system' only supports the tenant 'system', not '" + tenantName + "'" );
+						String.format(Inz.x("cflib.xml.CFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName),
+						String.format(Inz.s("cflib.xml.CFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName) );
 				}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrTenantAccessorsPart07">
-				boolean transactionStarted = schema.beginTransaction();
 				try {
 					I$SecSchemaName$TenantObj useTenant = schema.getTenantTableObj().readTenantByUNameIdx( clusterObj.getRequiredId(),
 						tenantName );
@@ -432,20 +359,10 @@ $implSchemaSaxLdrEvalRemaining$
 					}
 					tenantObj = useTenant;
 					saxLoader.getSchemaObj().setSecTenant( useTenant );
-					if( transactionStarted ) {
-						schema.commit();
-					}
 				}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrTenantAccessorsPart08">
 				catch( RuntimeException e ) {
-					if( transactionStarted ) {
-						try {
-							schema.rollback();
-						}
-						catch( Exception e2 ) {
-						}
-					}
 					throw e;
 				}
 			}
@@ -472,21 +389,10 @@ $implSchemaSaxLdrEvalRemaining$
 	public I$SecSchemaName$SecUserObj getSecUserObj() {
 		if( secUserObj == null ) {
 			I$SchemaName$SchemaObj schema = saxLoader.getSchemaObj();
-			boolean transactionStarted = schema.beginTransaction();
 			try {
 				secUserObj = schema.getSecUserTableObj().readSecUserByULoginIdx( secUserName );
-				if( transactionStarted ) {
-					schema.commit();
-				}
 			}
 			catch( RuntimeException e ) {
-				if( transactionStarted ) {
-					try {
-						schema.rollback();
-					}
-					catch( Exception e2 ) {
-					}
-				}
 				throw e;
 			}
 		}
@@ -501,7 +407,6 @@ $implSchemaSaxLdrEvalRemaining$
 	public I$SecSchemaName$SecSessionObj getSecSessionObj() {
 		if( secSessionObj == null ) {
 			I$SchemaName$SchemaObj schema = saxLoader.getSchemaObj();
-			boolean transactionStarted = schema.beginTransaction();
 			try {
 				getClusterObj();
 				getTenantObj();
@@ -509,22 +414,12 @@ $implSchemaSaxLdrEvalRemaining$
 				secSessionObj = schema.getSecSessionTableObj().newInstance();
 				I$SecSchemaName$SecSessionEditObj sessionEdit = secSessionObj.beginEdit();
 				sessionEdit.setRequiredContainerSecUser( secUserObj );
-				sessionEdit.setRequiredStart( Calendar.getInstance() );
+				sessionEdit.setRequiredStart( LocalDateTime.now() );
 				sessionEdit.setOptionalFinish( null );
 				secSessionObj = sessionEdit.create();
 				sessionEdit = null;
-				if( transactionStarted ) {
-					schema.commit();
-				}
 			}
 			catch( RuntimeException e ) {
-				if( transactionStarted ) {
-					try {
-						schema.rollback();
-					}
-					catch( Exception e2 ) {
-					}
-				}
 				throw e;
 			}
 		}
