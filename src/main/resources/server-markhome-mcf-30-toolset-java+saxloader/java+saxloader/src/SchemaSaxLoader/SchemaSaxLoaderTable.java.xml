@@ -55,10 +55,13 @@ package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$
 import java.math.*;
 import java.sql.*;
 import java.text.*;
+import java.time.*;
 import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import org.xml.sax.*;
 import server.markhome.mcf.v3_1.cflib.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import server.markhome.mcf.v3_1.cflib.inz.Inz;
 import server.markhome.mcf.v3_1.cflib.xml.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$
 
 /*
@@ -716,6 +719,20 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 			NmTokenDef implTableApplyAttrVar
 			NmTokensDef implTableApplyAttrVar
 			TextDef implTableApplyAttrVar
+			DbKeyHash128Gen implTableApplyNatVar
+			DbKeyHash160Gen implTableApplyNatVar
+			DbKeyHash224Gen implTableApplyNatVar
+			DbKeyHash256Gen implTableApplyNatVar
+			DbKeyHash384Gen implTableApplyNatVar
+			DbKeyHash512Gen implTableApplyNatVar
+			DbKeyHash128Def implTableApplyNatVar
+			DbKeyHash160Def implTableApplyNatVar
+			DbKeyHash224Def implTableApplyNatVar
+			DbKeyHash256Def implTableApplyNatVar
+			DbKeyHash384Def implTableApplyNatVar
+			DbKeyHash512Def implTableApplyNatVar
+			Uuid6Gen implTableApplyNatVar
+			Uuid6Def implTableApplyNatVar
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableApplyNatVar"
@@ -1104,6 +1121,20 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			TZTimestampDef implTableConvertColTZTimestampValue
 			UuidGen implTableConvertColUuidValue
 			UuidDef implTableConvertColUuidValue
+			DbKeyHash128Gen implTableConvertColDbKeyHash128Value
+			DbKeyHash160Gen implTableConvertColDbKeyHash160Value
+			DbKeyHash224Gen implTableConvertColDbKeyHash224Value
+			DbKeyHash256Gen implTableConvertColDbKeyHash256Value
+			DbKeyHash384Gen implTableConvertColDbKeyHash384Value
+			DbKeyHash512Gen implTableConvertColDbKeyHash512Value
+			DbKeyHash128Def implTableConvertColDbKeyHash128Value
+			DbKeyHash160Def implTableConvertColDbKeyHash160Value
+			DbKeyHash224Def implTableConvertColDbKeyHash224Value
+			DbKeyHash256Def implTableConvertColDbKeyHash256Value
+			DbKeyHash384Def implTableConvertColDbKeyHash384Value
+			DbKeyHash512Def implTableConvertColDbKeyHash512Value
+			Uuid6Gen implTableConvertColUuid6Value
+			Uuid6Def implTableConvertColUuid6Value
 			default ErrorUnrecognizedBaseModelAtomClass$
 			editBuff.getPKey().set$OptionalOrRequired$$Name$( nat$Name$ );
 			editBuff.get$poptop Table TableName$Buff().set$OptionalOrRequired$$Name$( nat$Name$ );
@@ -1126,8 +1157,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
-					"$Name$",
-					attr$Name$ );
+					"$Name$" );
 			}</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertColOptBoolValue">
@@ -1144,8 +1174,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
-					"$Name$",
-					attr$Name$ );
+					"$Name$" );
 			}</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertColEnumValue"
@@ -1250,7 +1279,6 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
 					e );
 			}</GenRule>
 
@@ -1263,7 +1291,6 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
 					e );
 			}</GenRule>
 
@@ -1276,7 +1303,6 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
 					e );
 			}</GenRule>
 
@@ -1289,7 +1315,6 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
 					e );
 			}</GenRule>
 
@@ -1302,7 +1327,6 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
 					e );
 			}</GenRule>
 
@@ -1315,13 +1339,96 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
 					e );
 			}</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertColUuidValue">
 			nat$Name$ = new UUID( attr$Name$ );</GenRule>
 
+	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash128Value">
+			try {
+				nat$Name$ = CFLibDbKeyHash128.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash160Value">
+			try {
+				nat$Name$ = CFLibDbKeyHash160.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash224Value">
+			try {
+				nat$Name$ = CFLibDbKeyHash224.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash256Value">
+			try {
+				nat$Name$ = CFLibDbKeyHash256.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}</GenRule>			
+
+
+	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash384Value">
+			try {
+				nat$Name$ = CFLibDbKeyHash384.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash512Value">
+			try {
+				nat$Name$ = CFLibDbKeyHash512.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertColUuid6Value">
+			try {
+				nat$Name$ = CFLibUuid6.fromString( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableConvertNatId">
 			Integer natId;
@@ -1386,6 +1493,20 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			NmTokenDef implTableConvertReqString
 			NmTokensDef implTableConvertReqString
 			TextDef implTableConvertReqString
+			DbKeyHash128Gen implTableConvertReqDbKeyHash128
+			DbKeyHash160Gen implTableConvertReqDbKeyHash160
+			DbKeyHash224Gen implTableConvertReqDbKeyHash224
+			DbKeyHash256Gen implTableConvertReqDbKeyHash256
+			DbKeyHash384Gen implTableConvertReqDbKeyHash384
+			DbKeyHash512Gen implTableConvertReqDbKeyHash512
+			DbKeyHash128Def implTableConvertReqDbKeyHash128
+			DbKeyHash160Def implTableConvertReqDbKeyHash160
+			DbKeyHash224Def implTableConvertReqDbKeyHash224
+			DbKeyHash256Def implTableConvertReqDbKeyHash256
+			DbKeyHash384Def implTableConvertReqDbKeyHash384
+			DbKeyHash512Def implTableConvertReqDbKeyHash512
+			Uuid6Gen implTableConvertReqUuid6
+			Uuid6Def implTableConvertReqUuid6
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptAttr"
@@ -1418,6 +1539,20 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			NmTokenDef implTableConvertOptString
 			NmTokensDef implTableConvertOptString
 			TextDef implTableConvertOptString
+			DbKeyHash128Gen implTableConvertOptDbKeyHash128
+			DbKeyHash160Gen implTableConvertOptDbKeyHash160
+			DbKeyHash224Gen implTableConvertOptDbKeyHash224
+			DbKeyHash256Gen implTableConvertOptDbKeyHash256
+			DbKeyHash384Gen implTableConvertOptDbKeyHash384
+			DbKeyHash512Gen implTableConvertOptDbKeyHash512
+			DbKeyHash128Def implTableConvertOptDbKeyHash128
+			DbKeyHash160Def implTableConvertOptDbKeyHash160
+			DbKeyHash224Def implTableConvertOptDbKeyHash224
+			DbKeyHash256Def implTableConvertOptDbKeyHash256
+			DbKeyHash384Def implTableConvertOptDbKeyHash384
+			DbKeyHash512Def implTableConvertOptDbKeyHash512
+			Uuid6Gen implTableConvertOptUuid6
+			Uuid6Def implTableConvertOptUuid6
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqBlob">
@@ -1435,7 +1570,8 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			else {
 				throw new CFLibUsageException( getClass(),
 					S_ProcName,
-					"Unexpected $Name$ value, must be one of true, false, yes, no, 1, or 0, not \"" + attr$Name$ + "\"" );
+					String.format(Inz.x("cflib.xml.CFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$),
+					String.format(Inz.s("cflib.xml.CFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$));
 			}
 </GenRule>
 
@@ -1480,7 +1616,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqDate">
-			Calendar nat$Name$;
+			LocalDate nat$Name$;
 			try {
 				nat$Name$ = CFLibXmlUtil.parseDate( attr$Name$ );
 			}
@@ -1489,13 +1625,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
 					e );
 			}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqTime">
-			Calendar nat$Name$;
+			LocalTime nat$Name$;
 			try {
 				nat$Name$ = CFLibXmlUtil.parseTime( attr$Name$ );
 			}
@@ -1504,13 +1639,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
 					e );
 			}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqTimestamp">
-			Calendar nat$Name$;
+			LocalDateTime nat$Name$;
 			try {
 				nat$Name$ = CFLibXmlUtil.parseTimestamp( attr$Name$ );
 			}
@@ -1519,13 +1653,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
 					e );
 			}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqTZDate">
-			Calendar nat$Name$;
+			LocalDate nat$Name$;
 			try {
 				nat$Name$ = CFLibXmlUtil.parseTZDate( attr$Name$ );
 			}
@@ -1534,13 +1667,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
 					e );
 			}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqTZTime">
-			Calendar nat$Name$;
+			LocalTime nat$Name$;
 			try {
 				nat$Name$ = CFLibXmlUtil.parseTZTime( attr$Name$ );
 			}
@@ -1549,13 +1681,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
 					e );
 			}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqTZTimestamp">
-			Calendar nat$Name$;
+			LocalDateTime nat$Name$;
 			try {
 				nat$Name$ = CFLibXmlUtil.parseTZTimestamp( attr$Name$ );
 			}
@@ -1564,7 +1695,104 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					S_ProcName,
 					0,
 					"$Name$",
-					attr$Name$,
+					e );
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash128">
+			CFLibDbKeyHash128 nat$Name$;
+			try {
+				nat$Name$ = CFLibDbKeyHash128.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash160">
+			CFLibDbKeyHash160 nat$Name$;
+			try {
+				nat$Name$ = CFLibDbKeyHash160.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash224">
+			CFLibDbKeyHash224 nat$Name$;
+			try {
+				nat$Name$ = CFLibDbKeyHash224.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash256">
+			CFLibDbKeyHash256 nat$Name$;
+			try {
+				nat$Name$ = CFLibDbKeyHash256.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash384">
+			CFLibDbKeyHash384 nat$Name$;
+			try {
+				nat$Name$ = CFLibDbKeyHash384.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash512">
+			CFLibDbKeyHash512 nat$Name$;
+			try {
+				nat$Name$ = CFLibDbKeyHash512.fromHex( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
+					e );
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertReqUuid6">
+			CFLibUuid6 nat$Name$;
+			try {
+				nat$Name$ = CFLibUuid6.fromString( attr$Name$ );
+			}
+			catch( RuntimeException e ) {
+				throw new CFLibInvalidArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"$Name$",
 					e );
 			}
 </GenRule>
@@ -1604,7 +1832,8 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			else {
 				throw new CFLibUsageException( getClass(),
 					S_ProcName,
-					"Unexpected $Name$ value, must be one of true, false, yes, no, 1, or 0, not \"" + attr$Name$ + "\"" );
+					String.format(Inz.x("cflib.xml.CFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$),
+					String.format(Inz.s("cflib.xml.CFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$));
 			}
 </GenRule>
 
@@ -1709,7 +1938,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptDate">
-			Calendar nat$Name$;
+			LocalDate nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
@@ -1722,14 +1951,13 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 						S_ProcName,
 						0,
 						"$Name$",
-						attr$Name$,
 						e );
 				}
 			}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptTime">
-			Calendar nat$Name$;
+			LocalTime nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
@@ -1742,14 +1970,13 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 						S_ProcName,
 						0,
 						"$Name$",
-						attr$Name$,
 						e );
 				}
 			}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptTimestamp">
-			Calendar nat$Name$;
+			LocalDateTime nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
@@ -1762,14 +1989,13 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 						S_ProcName,
 						0,
 						"$Name$",
-						attr$Name$,
 						e );
 				}
 			}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptTZDate">
-			Calendar nat$Name$;
+			LocalDate nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
@@ -1782,14 +2008,13 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 						S_ProcName,
 						0,
 						"$Name$",
-						attr$Name$,
 						e );
 				}
 			}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptTZTime">
-			Calendar nat$Name$;
+			LocalTime nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
@@ -1802,14 +2027,13 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 						S_ProcName,
 						0,
 						"$Name$",
-						attr$Name$,
 						e );
 				}
 			}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptTZTimestamp">
-			Calendar nat$Name$;
+			LocalDateTime nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
@@ -1822,7 +2046,139 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 						S_ProcName,
 						0,
 						"$Name$",
-						attr$Name$,
+						e );
+				}
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash128">
+			CFLibDbKeyHash128 nat$Name$;
+			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
+				nat$Name$ = null;
+			}
+			else {
+				try {
+					nat$Name$ = CFLibDbKeyHash128.fromHex( attr$Name$ );
+				}
+				catch( RuntimeException e ) {
+					throw new CFLibInvalidArgumentException( getClass(),
+						S_ProcName,
+						0,
+						"$Name$",
+						e );
+				}
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash160">
+			CFLibDbKeyHash160 nat$Name$;
+			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
+				nat$Name$ = null;
+			}
+			else {
+				try {
+					nat$Name$ = CFLibDbKeyHash128.fromHex( attr$Name$ );
+				}
+				catch( RuntimeException e ) {
+					throw new CFLibInvalidArgumentException( getClass(),
+						S_ProcName,
+						0,
+						"$Name$",
+						e );
+				}
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash224">
+			CFLibDbKeyHash224 nat$Name$;
+			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
+				nat$Name$ = null;
+			}
+			else {
+				try {
+					nat$Name$ = CFLibDbKeyHash224.fromHex( attr$Name$ );
+				}
+				catch( RuntimeException e ) {
+					throw new CFLibInvalidArgumentException( getClass(),
+						S_ProcName,
+						0,
+						"$Name$",
+						e );
+				}
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash256">
+			CFLibDbKeyHash256 nat$Name$;
+			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
+				nat$Name$ = null;
+			}
+			else {
+				try {
+					nat$Name$ = CFLibDbKeyHash256.fromHex( attr$Name$ );
+				}
+				catch( RuntimeException e ) {
+					throw new CFLibInvalidArgumentException( getClass(),
+						S_ProcName,
+						0,
+						"$Name$",
+						e );
+				}
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash384">
+			CFLibDbKeyHash128 nat$Name$;
+			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
+				nat$Name$ = null;
+			}
+			else {
+				try {
+					nat$Name$ = CFLibDbKeyHash384.fromHex( attr$Name$ );
+				}
+				catch( RuntimeException e ) {
+					throw new CFLibInvalidArgumentException( getClass(),
+						S_ProcName,
+						0,
+						"$Name$",
+						e );
+				}
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash512">
+			CFLibDbKeyHash512 nat$Name$;
+			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
+				nat$Name$ = null;
+			}
+			else {
+				try {
+					nat$Name$ = CFLibDbKeyHash512.fromHex( attr$Name$ );
+				}
+				catch( RuntimeException e ) {
+					throw new CFLibInvalidArgumentException( getClass(),
+						S_ProcName,
+						0,
+						"$Name$",
+						e );
+				}
+			}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implTableConvertOptUuid6">
+			CFLibUuid6 nat$Name$;
+			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
+				nat$Name$ = null;
+			}
+			else {
+				try {
+					nat$Name$ = CFLibUuid6.fromString( attr$Name$ );
+				}
+				catch( RuntimeException e ) {
+					throw new CFLibInvalidArgumentException( getClass(),
+						S_ProcName,
+						0,
+						"$Name$",
 						e );
 				}
 			}
