@@ -47,12 +47,14 @@
 		ExpansionKeyName="$SchemaName$StructuredXSD"
 		ExpansionFileName="$lower SchemaName$-structured.xsd"
 >$XsdXmlPreamble$&lt;xsd:schema xmlns="$SchemaLoaderNamespace$" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="$SchemaLoaderNamespace$" version="$reference MinorVersion reference ParentMajVer Name$.$reference MinorVersion Name$"&gt;
+&lt;xs:import namespace="http://server.markhome.mcf/mcf/xsd/v3_1/cflibdbutil-3.1.xsd" schemaLocation="http://server.markhome.mcf/mcf/xsd/v3_1/cflibdbutil-3.1.xsd"/&gt;
+
 $SchemaAnnotation$$iterate Types( first CommentDeclAtomType each DeclAtomType empty empty )$$iterate SchemaTables( first CommentDeclTableColTypes each DeclTableColTypes empty empty )$$iterate SchemaTables( first CommentDeclIndexType each DeclIndexType empty empty )$$CommentTableObjTypes$$iterate SchemaTables( each DeclTableRootObjType empty empty )$$DeclRootDocument$
 &lt;/xsd:schema&gt;
 </GenFile>
 
 	<GenRule GenDef="SchemaDef" Name="SchemaLoaderNamespace"
-		>http://msscf.org:8080/msscf/$reference MinorVersion reference ParentMajVer Name$.0.$reference MinorVersion Name$/$lower SchemaName$-structured.xsd</GenRule>
+		>http://server.markhome.mcf/mcf/xsd/v$reference MinorVersion reference ParentMajVer Name$_$reference MinorVersion Name$/$lower SchemaName$-structured.xsd</GenRule>
 
 	<GenRule GenDef="Object" Name="XsdXmlPreamble"
 >&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -250,6 +252,41 @@ $DeclTableColTypes$</GenRule>
 	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
 &lt;/xsd:simpleType&gt;
 </GenRule>
+	<GenRule GenDef="DbKeyHash128Def" Name="DeclTableColType">
+&lt;xsd:simpleType name="$TableName$$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="DbKeyHash160Def" Name="DeclTableColType">
+&lt;xsd:simpleType name="$TableName$$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="DbKeyHash224Def" Name="DeclTableColType">
+&lt;xsd:simpleType name="$TableName$$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="DbKeyHash256Def" Name="DeclTableColType">
+&lt;xsd:simpleType name="$TableName$$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="DbKeyHash384Def" Name="DeclTableColType">
+&lt;xsd:simpleType name="$TableName$$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="DbKeyHash512Def" Name="DeclTableColType">
+&lt;xsd:simpleType name="$TableName$$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="Uuid6Def" Name="DeclTableColType">
+&lt;xsd:simpleType name="$TableName$$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
 	<GenRule GenDef="TableCol" Name="DeclTableColType">
 &lt;xsd:simpleType name="$TableName$$Name$Type"&gt;
 	&lt;xsd:restriction base="$XsdBaseType$"&gt;$switch BaseModelAtomClass StringDef DeclTableColMaxLenPreserveWhitespace TextDef DeclTableColMaxLenPreserveWhitespace default empty$
@@ -405,6 +442,41 @@ $DeclIndexType$</GenRule>
 	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
 &lt;/xsd:simpleType&gt;
 </GenRule>
+	<GenRule GenDef="DbKeyHash128Def" Name="DeclAtomType">
+&lt;xsd:simpleType name="$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="DbKeyHash160Def" Name="DeclAtomType">
+&lt;xsd:simpleType name="$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="DbKeyHash224Def" Name="DeclAtomType">
+&lt;xsd:simpleType name="$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="DbKeyHash256Def" Name="DeclAtomType">
+&lt;xsd:simpleType name="$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="DbKeyHash384Def" Name="DeclAtomType">
+&lt;xsd:simpleType name="$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="DbKeyHash512Def" Name="DeclAtomType">
+&lt;xsd:simpleType name="$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
+	<GenRule GenDef="Uuid6Def" Name="DeclAtomType">
+&lt;xsd:simpleType name="$Name$Type"&gt;
+	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
+&lt;/xsd:simpleType&gt;
+</GenRule>
 	<GenRule GenDef="UuidDef" Name="DeclAtomType">
 &lt;xsd:simpleType name="$Name$Type"&gt;
 	&lt;xsd:restriction base="$XsdBaseType$"/&gt;
@@ -466,6 +538,20 @@ $DeclIndexType$</GenRule>
 		>xsd:NMTOKENS</GenRule>
 	<GenRule GenDef="UuidDef" Name="XsdBaseType"
 		>xsd:string</GenRule>
+	<GenRule GenDef="DbKeyHash128Def" Name="XsdBaseType"
+		>DbKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Def" Name="XsdBaseType"
+		>DbKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Def" Name="XsdBaseType"
+		>DbKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Def" Name="XsdBaseType"
+		>DbKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Def" Name="XsdBaseType"
+		>DbKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Def" Name="XsdBaseType"
+		>DbKeyHash512</GenRule>
+	<GenRule GenDef="Uuid6Def" Name="XsdBaseType"
+		>Uuid6</GenRule>
 	<GenRule GenDef="TableCol" Name="XsdBaseType"
 		>$reference DataType Name$Type</GenRule>
 	<GenRule GenDef="IndexCol" Name="XsdBaseType"
