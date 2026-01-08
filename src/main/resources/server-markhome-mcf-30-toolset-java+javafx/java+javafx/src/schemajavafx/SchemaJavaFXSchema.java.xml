@@ -62,7 +62,6 @@ import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.inz.Inz;
 import server.markhome.mcf.v3_1.cflib.javafx.*;
 import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$$iterate SchemaRefs( each importJavaPackageSchemaNameJavaFX empty empty )$
-import $lower JavaPackage$.$SchemaName$SaxLoader.$SchemaName$SaxLoader;
 
 public class $SchemaName$JavaFXSchema
 implements I$SchemaName$JavaFXSchema
@@ -70,7 +69,6 @@ implements I$SchemaName$JavaFXSchema
 </GenFile>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaJavaFXClassBody">
-	protected $SecSchemaName$ClientConfigurationFile clientConfigurationFile = null;
 	protected KeyStore keyStore = null;
 	protected I$SchemaName$SchemaObj schema = null;
 	protected String clusterName = "system";
@@ -80,7 +78,7 @@ implements I$SchemaName$JavaFXSchema
 	protected String secUserName = "system";
 	protected I$SecSchemaName$SecUserObj secUserObj = null;
 	protected I$SecSchemaName$SecSessionObj secSessionObj = null;$iterate SchemaTables( each declSchemaJavaFXSchemaTableFactory empty empty )$
-$implSchemaJavaFXSchemaConstructor$$implSchemaJavaFXGetSetClientConfigurationFile$$implSchemaJavaFXGetSetKeyStore$$implSchemaJavaFXSchemaGetSetSchema$$implSchemaJavaFXSchemaGetSetClusterName$$implSchemaJavaFXSchemaGetSetTenantName$$implSchemaJavaFXSchemaGetSetSecUserName$$implSchemaJavaFXSchemaGetSecSessionObj$$iterate SchemaTables( each implSchemaJavaFXSchemaGetTableFactory empty empty )$</GenRule>
+$implSchemaJavaFXSchemaConstructor$$implSchemaJavaFXGetSetKeyStore$$implSchemaJavaFXSchemaGetSetSchema$$implSchemaJavaFXSchemaGetSetClusterName$$implSchemaJavaFXSchemaGetSetTenantName$$implSchemaJavaFXSchemaGetSetSecUserName$$implSchemaJavaFXSchemaGetSecSessionObj$$iterate SchemaTables( each implSchemaJavaFXSchemaGetTableFactory empty empty )$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaJavaFXGetSetKeyStore">
 	public KeyStore getKeyStore() {
@@ -92,24 +90,9 @@ $implSchemaJavaFXSchemaConstructor$$implSchemaJavaFXGetSetClientConfigurationFil
 	}
 </GenRule>
 
-	<GenRule GenDef="SchemaDef" Name="implSchemaJavaFXGetSetClientConfigurationFile">
-	public $SecSchemaName$ClientConfigurationFile getClientConfigurationFile() {
-		return( clientConfigurationFile );
-	}
-
-	public void setClientConfigurationFile( $SecSchemaName$ClientConfigurationFile value ) {
-		if( value == null ) {
-			throw new CFLibNullArgumentException( getClass(),
-				"setClientConfigurationFile",
-				1,
-				"value" );
-		}
-		clientConfigurationFile = value;
-	}
-</GenRule>
-
 	<GenRule GenDef="SchemaDef" Name="implSchemaJavaFXSchemaConstructor">
 	public $SchemaName$JavaFXSchema() {
+		$SchemaName$JavaFX.init();
 	}
 </GenRule>
 
@@ -132,31 +115,22 @@ $implSchemaJavaFXSchemaConstructor$$implSchemaJavaFXGetSetClientConfigurationFil
 
 	public I$SecSchemaName$ClusterObj getClusterObj() {
 		if( clusterObj == null ) {
-			if( ( schema != null ) &amp;&amp; schema.isConnected() ) {
-				boolean transactionStarted = schema.beginTransaction();
-				try {
-					clusterObj = schema.getClusterTableObj().readClusterByUDomNameIdx( clusterName );
-					if( transactionStarted ) {
-						schema.commit();
-					}
-				}
-				catch( RuntimeException e ) {
-					if( transactionStarted ) {
-						try {
-							schema.rollback();
-						}
-						catch( Exception e2 ) {
-						}
-					}
-					throw e;
-				}
+			if( schema != null ) {
+				clusterObj = schema.getClusterTableObj().readClusterByUDomNameIdx( clusterName );
 			}
 			if( clusterObj == null ) {
-				throw new RuntimeException( "Cluster \"" + clusterName + "\" could not be found" );
+				throw new CFLibDataNotFoundException( getClass(),
+					"getClusterObj",
+					"UniqueDomainName",
+					"UniqueDomainName",
+					clusterName );
 			}
 		}
 		else {
-			throw new RuntimeException( "Cannot resolve Cluster before a connection is established" );
+			throw new CFLibRuntimeException( getClass(),
+				"getClusterObj",
+				String.format(Inz.x("cflib.common.CannotResolveWithoutCnx"), "Cluster"),
+				String.format(Inz.s("cflib.common.CannotResolveWithoutCnx"), "Cluster") );
 		}
 		return( clusterObj );
 	}
@@ -181,31 +155,23 @@ $implSchemaJavaFXSchemaConstructor$$implSchemaJavaFXGetSetClientConfigurationFil
 
 	public I$SecSchemaName$TenantObj getTenantObj() {
 		if( tenantObj == null ) {
-			if( ( schema != null ) &amp;&amp; schema.isConnected() ) {
-				boolean transactionStarted = schema.beginTransaction();
-				try {
-					tenantObj = schema.getTenantTableObj().readTenantByUNameIdx( getClusterObj().getRequiredId(), tenantName );
-					if( transactionStarted ) {
-						schema.commit();
-					}
-				}
-				catch( RuntimeException e ) {
-					if( transactionStarted ) {
-						try {
-							schema.rollback();
-						}
-						catch( Exception e2 ) {
-						}
-					}
-					throw e;
-				}
+			if( schema != null ) {
+				tenantObj = schema.getTenantTableObj().readTenantByUNameIdx( getClusterObj().getRequiredId(), tenantName );
 			}
 			if( tenantObj == null ) {
-				throw new RuntimeException( "Tenant \"" + tenantName + "\" could not be found for Cluster \"" + clusterName + "\"" );
+				throw new CFLibDataNotFoundException( getClass(),
+					"getTenantObj",
+					"UniqueTenantName",
+					"UniqueTenantName",
+					new Object() {	protected long clusterId = getClusterObj().getRequiredId();
+						protected String name = tenantName; } );
 			}
 		}
 		else {
-			throw new CFLibRuntimeException( "Cannot resolve tenant before a connection is established" );
+			throw new CFLibRuntimeException( getClass(),
+				"getTenantObj",
+				String.format(Inz.x("cflib.common.CannotResolveWithoutCnx"), "Tenant"),
+				String.format(Inz.s("cflib.common.CannotResolveWithoutCnx"), "Tenant") );
 		}
 		return( tenantObj );
 	}
@@ -230,31 +196,26 @@ $implSchemaJavaFXSchemaConstructor$$implSchemaJavaFXGetSetClientConfigurationFil
 
 	public I$SecSchemaName$SecUserObj getSecUserObj() {
 		if( secUserObj == null ) {
-			if( ( schema != null ) &amp;&amp; schema.isConnected() ) {
-				boolean transactionStarted = schema.beginTransaction();
-				try {
-					secUserObj = schema.getSecUserTableObj().readSecUserByULoginIdx( secUserName );
-					if( transactionStarted ) {
-						schema.commit();
-					}
-				}
-				catch( RuntimeException e ) {
-					if( transactionStarted ) {
-						try {
-							schema.rollback();
-						}
-						catch( Exception e2 ) {
-						}
-					}
-					throw e;
-				}
+			if( schema != null ) {
+				secUserObj = schema.getSecUserTableObj().readSecUserByULoginIdx( secUserName );
 			}
 			if( secUserObj == null ) {
-				throw new RuntimeException( "SecUser \"" + secUserName + "\" could not be found" );
+				throw new CFLibDataNotFoundException( getClass(),
+					"getSecUserObj",
+					"UniqueLogin",
+					"UniqueLogin",
+					secUserName );
+<!--				throw new CFLibRuntimeException( getClass(),
+					"getSecUserObj",
+					String.format(Inz.x("cflib.common.SecUserNotFound"), secUserName),
+					String.format(Inz.s("cflib.common.SecUserNotFound"), secUserName) );-->
 			}
 		}
 		else {
-			throw new CFLibRuntimeException( "Cannot resolve sec user before a connection is established" );
+			throw new CFLibRuntimeException( getClass(),
+				"getSecUserObj",
+				String.format(Inz.x("cflib.common.CannotResolveWithoutCnx"), "SecUser"),
+				String.format(Inz.s("cflib.common.CannotResolveWithoutCnx"), "SecUser") );
 		}
 		return( secUserObj );
 	}
@@ -263,37 +224,24 @@ $implSchemaJavaFXSchemaConstructor$$implSchemaJavaFXGetSetClientConfigurationFil
 	<GenRule GenDef="SchemaDef" Name="implSchemaJavaFXSchemaGetSecSessionObj">
 	public I$SecSchemaName$SecSessionObj getSecSessionObj() {
 		if( secSessionObj == null ) {
-			if( ( schema != null ) &amp;&amp; schema.isConnected() ) {
-				boolean transactionStarted = schema.beginTransaction();
-				try {
-					getClusterObj();
-					getTenantObj();
-					getSecUserObj();
-					secSessionObj = schema.getSecSessionTableObj().newInstance();
-					I$SecSchemaName$SecSessionEditObj sessionEdit = secSessionObj.beginEdit();
-					sessionEdit.setRequiredContainerSecUser( secUserObj );
-					sessionEdit.setRequiredStart( Calendar.getInstance() );
-					sessionEdit.setOptionalFinish( null );
-					secSessionObj = sessionEdit.create();
-					sessionEdit = null;
-					if( transactionStarted ) {
-						schema.commit();
-					}
-				}
-				catch( RuntimeException e ) {
-					if( transactionStarted ) {
-						try {
-							schema.rollback();
-						}
-						catch( Exception e2 ) {
-						}
-					}
-					throw e;
-				}
+			if( schema != null ) {
+				getClusterObj();
+				getTenantObj();
+				getSecUserObj();
+				secSessionObj = schema.getSecSessionTableObj().newInstance();
+				I$SecSchemaName$SecSessionEditObj sessionEdit = secSessionObj.beginEdit();
+				sessionEdit.setRequiredContainerSecUser( secUserObj );
+				sessionEdit.setRequiredStart( LocalDateTime.now() );
+				sessionEdit.setOptionalFinish( null );
+				secSessionObj = sessionEdit.create();
+				sessionEdit = null;
 			}
 		}
 		else {
-			throw new CFLibRuntimeException( "Cannot resolve sec session before a connection is established" );
+			throw new CFLibRuntimeException( getClass(),
+				"getSecSessionObj",
+				String.format(Inz.x("cflib.common.CannotResolveWithoutCnx"), "SecSession"),
+				String.format(Inz.s("cflib.common.CannotResolveWithoutCnx"), "SecSession") );
 		}
 		return( secSessionObj );
 	}

@@ -33,72 +33,52 @@
 		xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		xsi:schemaLocation="http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://msscf.org:8088/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java+javafx"
-	Name="src/schemajavafx/ISchemaJavaFXSchema.java"
+	Name="src/schemajavafx/SchemaJavaFX.java"
 	Revision="3.0"
-	Descr="Java 25 JavaFX Schema Interface specification">
+	Descr="Java 25 JavaFX Library Hooks">
 
-	<GenFile GenDef="SchemaDef" Name="fileISchemaJavaFXSchemaJava"
+	<GenFile GenDef="SchemaDef" Name="fileSchemaJavaFXJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$javafx"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$javafx/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$javafx"
-		ExpansionClassName="I$SchemaName$JavaFXSchemaJava"
-		ExpansionKeyName="I$SchemaName$JavaFXSchemaJava"
-		ExpansionFileName="I$SchemaName$JavaFXSchema.java"
->$ISchemaJavaFXSchemaPreamble$
-/**
- *	The I$SchemaName$JavaFXSchema defines the factory interface for the
- *	for the various panes and components used to construct a GUI interface
- *	using the JavaFX framework.
- */
-public interface I$SchemaName$JavaFXSchema$iterate SchemaRefs( first extendISchemaJavaFXSchemaSchemaRef each commaNewlineISchemaJavaFXSchemaSchemaRef empty empty )$
-{
-	KeyStore getKeyStore();
-	void setKeyStore( KeyStore value );
-
-	I$SecSchemaName$SchemaObj getSchema();
-	void setSchema( I$SecSchemaName$SchemaObj argSchema );
-
-	String getClusterName();
-	void setClusterName( String argClusterName );
-	I$SecSchemaName$ClusterObj getClusterObj();
-
-	String getTenantName();
-	void setTenantName( String argTenantName );
-	I$SecSchemaName$TenantObj getTenantObj();
-
-	String getSecUserName();
-	void setSecUserName( String argSecUserName );
-	I$SecSchemaName$SecUserObj getSecUserObj();
-
-	I$SecSchemaName$SecSessionObj getSecSessionObj();
-$iterate SchemaTables( each declSchemaJavaFXSchemaGetTableFactory empty empty )$}
-</GenFile>
-
-	<GenRule GenDef="SchemaRef" Name="extendISchemaJavaFXSchemaSchemaRef">
-	extends I$reference RefSchema SchemaName$JavaFXSchema</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="commaNewlineISchemaJavaFXSchemaSchemaRef">,
-		I$reference RefSchema SchemaName$JavaFXSchema</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="ISchemaJavaFXSchemaPreamble"
->// Description: Java 25 JavaFX Schema Interface for $SchemaName$.
+		ExpansionClassName="I$SchemaName$JavaFXJava"
+		ExpansionKeyName="I$SchemaName$JavaFXJava"
+		ExpansionFileName="I$SchemaName$JavaFX.java"
+>>// Description: Java 25 JavaFX package hook for $SchemaName$.
 
 $MssSourceLicense$
 
 package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$javafx;
 
-import java.math.*;
-import java.time.*;
-import java.text.*;
-import java.util.*;
-import java.security.KeyStore;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.inz.Inz;
+import server.markhome.mcf.v3_1.cflib.inz.InzPathEntry;
 import server.markhome.mcf.v3_1.cflib.javafx.*;
-import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$$iterate SchemaRefs( each importJavaPackageSchemaNameJavaFX empty empty )$
+
+/**
+ *	The $SchemaName$JavaFX package hook is used to initialize the Inz path search among other things.
+ */
+public class $SchemaName$JavaFX
+{
+	protected static boolean initialized = false;
+		
+	public static init() {
+		if (initialized) {
+			return;
+		}
+		CFJavaFX.init();
+		initialized = true;
+        <!--Inz.addPathEntry(new InzPathEntry("/opt/mcf/v3_1/java" + "/server.markhome.mcf.v3_1.cflib.cflibjavafx/src/main/resources/inz/langs"));-->
+		InzPathEntry entry = new InzPathEntry($SchemaName$JavaFX.class, "resource:/inz/langs/");
+		Inz.addPathEntry(entry);
+	}
+}
+</GenFile>
+
+	<GenRule GenDef="SchemaDef" Name="ISchemaJavaFXSchemaPreamble"
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="importJavaPackageSchemaNameJavaFX"

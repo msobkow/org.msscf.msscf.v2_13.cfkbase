@@ -273,13 +273,15 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 								if( ! focus.getIsNew() ) {
 									throw new CFLibUsageException( getClass(),
 										S_ProcName,
-										"Transitioning to PaneMode Add requires Focus.getIsNew() to be true" );
+										Inz.x("cflibjavafx.common.MustBeNew"),
+										Inz.s("cflibjavafx.common.MustBeNew") );
 								}
 								editObj = (I$DefSchemaName$$TableName$EditObj)focus.beginEdit();
 								if( editObj == null ) {
 									throw new CFLibUsageException( getClass(),
 										S_ProcName,
-										"Expected beginEdit() to return a new edition of the focus object" );
+										Inz.x("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition"),
+										Inz.s("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition") );
 								}
 							}
 							else {
@@ -293,22 +295,26 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 					case Edit:
 						throw new CFLibUsageException( getClass(),
 							S_ProcName,
-							"Cannot transition PaneMode Edit to Add" );
+							Inz.x("cflibjavafx.common.CannotTransitionEditToAdd"),
+							Inz.s("cflibjavafx.common.CannotTransitionEditToAdd") );
 					case Update:
 						if( ( editObj == null ) || ( ! editObj.getIsNew() ) ) {
 							throw new CFLibUsageException( getClass(),
 								S_ProcName,
-								"Cannot transition PaneMode Update to Add" );
+								Inz.x("cflibjavafx.common.CannotTransitionUpdateToAdd"),
+								Inz.s("cflibjavafx.common.CannotTransitionUpdateToAdd") );
 						}
 						break;
 					case Delete:
 						throw new CFLibUsageException( getClass(),
 							S_ProcName,
-							"Cannot transition PaneMode Delete to Add" );
+							Inz.x("cflibjavafx.common.CannotTransitionDeleteToAdd"),
+							Inz.s("cflibjavafx.common.CannotTransitionDeleteToAdd") );
 					default:
 						throw new CFLibUsageException( getClass(),
 							S_ProcName,
-							"Cannot transition PaneMode default to Add" );
+							Inz.x("cflibjavafx.common.CannotTransitionDefaultToAdd"),
+							Inz.s("cflibjavafx.common.CannotTransitionDefaultToAdd") );
 				}</GenRule>
 
 	<GenRule GenDef="Table" Name="implSetPaneModeAttrPaneSetToView">
@@ -326,7 +332,8 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 					default:
 						throw new CFLibUsageException( getClass(),
 							S_ProcName,
-							"Cannot transition PaneMode " + oldValue + " to View" );
+							String.format(Inz.x("cflibjavafx.common.CannotTransitionOldValueToView"), oldValue),
+							String.format(Inz.s("cflibjavafx.common.CannotTransitionOldValueToView"), oldValue) );
 				}
 				if( editObj != null ) {
 					editObj.endEdit();
@@ -338,7 +345,8 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 					default:
 						throw new CFLibUsageException( getClass(),
 							S_ProcName,
-							"Cannot transition PaneMode " + oldValue + " to Edit" ); 
+							String.format(Inz.x("cflibjavafx.common.CannotTransitionOldValueToEdit"), oldValue),
+							String.format(Inz.s("cflibjavafx.common.CannotTransitionOldValueToEdit"), oldValue) );
 				}</GenRule>
 
 	<GenRule GenDef="Table" Name="implSetPaneModeAttrPaneSetToEditPartOne">
@@ -348,7 +356,8 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 							if( editObj == null ) {
 								throw new CFLibUsageException( getClass(),
 									S_ProcName,
-									"Expected beginEdit() to return a new edition of the focus object" );
+									Inz.x("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition"),
+									Inz.s("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition") );
 							}
 						}
 						break;</GenRule>
@@ -360,7 +369,8 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 							if( editObj == null ) {
 								throw new CFLibUsageException( getClass(),
 									S_ProcName,
-									"Expected beginEdit() to return a new edition of the focus object" );
+									Inz.x("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition"),
+									Inz.s("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition") );
 							}
 						}
 						break;
@@ -370,7 +380,8 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 							if( editObj == null ) {
 								throw new CFLibUsageException( getClass(),
 									S_ProcName,
-									"Expected beginEdit() to return a new edition of the focus object" );
+									Inz.x("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition"),
+									Inz.s("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition") );
 							}
 						}
 						break;
@@ -378,7 +389,8 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 						if( editObj == null ) {
 							throw new CFLibUsageException( getClass(),
 								S_ProcName,
-								"Cannot transition PaneMode " + oldValue + " to Edit" ); 
+								String.format(Inz.x("cflibjavafx.common.CannotTransitionOldValueToEdit"), oldValue),
+								String.format(Inz.s("cflibjavafx.common.CannotTransitionOldValueToEdit"), oldValue) );
 						}
 						break;</GenRule>
 
@@ -386,7 +398,8 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 				if( ( oldValue != CFPane.PaneMode.Edit ) &amp;&amp; ( oldValue != CFPane.PaneMode.Add ) ) {
 					throw new CFLibUsageException( getClass(),
 						S_ProcName,
-						"Cannot transition from mode " + oldValue + " to Update" );
+						String.format(Inz.x("cflibjavafx.common.CannotTransitionOldValueToUpdate"), oldValue),
+						String.format(Inz.s("cflibjavafx.common.CannotTransitionOldValueToUpdate"), oldValue) );
 				}
 				super.setPaneMode( value );
 				if( editObj != null ) {
@@ -407,7 +420,8 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 					default:
 						throw new CFLibUsageException( getClass(),
 							S_ProcName,
-							"Cannot transition PaneMode " + oldValue + " to Delete" ); 
+							String.format(Inz.x("cflibjavafx.common.CannotTransitionOldValueToDelete"), oldValue),
+							String.format(Inz.s("cflibjavafx.common.CannotTransitionOldValueToDelete"), oldValue) );
 				}
 				editObj.deleteInstance();
 				editObj = null;
@@ -420,9 +434,10 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 							if( editObj == null ) {
 								editObj = (I$DefSchemaName$$TableName$EditObj)focus.beginEdit();
 								if( editObj == null ) {
-									throw new CFLibUsageException( getClass(),
-										S_ProcName,
-										"Expected beginEdit() to return a new edition of the focus object" );
+								throw new CFLibUsageException( getClass(),
+									S_ProcName,
+									Inz.x("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition"),
+									Inz.s("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition") );
 								}
 							}
 						}
@@ -432,9 +447,10 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 							if( editObj == null ) {
 								editObj = (I$DefSchemaName$$TableName$EditObj)focus.beginEdit();
 								if( editObj == null ) {
-									throw new CFLibUsageException( getClass(),
-										S_ProcName,
-										"Expected beginEdit() to return a new edition of the focus object" );
+								throw new CFLibUsageException( getClass(),
+									S_ProcName,
+									Inz.x("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition"),
+									Inz.s("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition") );
 								}
 							}
 						}
@@ -444,14 +460,16 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 					case Update:
 						throw new CFLibUsageException( getClass(),
 							S_ProcName,
-							"Cannot transition PaneMode Update to Delete" ); 
+							String.format(Inz.x("cflibjavafx.common.CannotTransitionOldValueToDelete"), oldValue),
+							String.format(Inz.s("cflibjavafx.common.CannotTransitionOldValueToDelete"), oldValue) );
 					case Delete:
 						if( editObj == null ) {
 							editObj = (I$DefSchemaName$$TableName$EditObj)focus.beginEdit();
 							if( editObj == null ) {
 								throw new CFLibUsageException( getClass(),
 									S_ProcName,
-									"Expected beginEdit() to return a new edition of the focus object" );
+									Inz.x("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition"),
+									Inz.s("cflibjavafx.common.ExpectedBeginEditToReturnNewEdition") );
 							}
 						}
 						break;</GenRule>
@@ -908,6 +926,20 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 			TZTimestampDef declAttrPaneEmitClassTZTimestamp
 			UuidGen declAttrPaneEmitClassUuid
 			UuidDef declAttrPaneEmitClassUuid
+			DbKeyHash128Gen declAttrPaneEmitClassDbKeyHash128
+			DbKeyHash160Gen declAttrPaneEmitClassDbKeyHash160
+			DbKeyHash224Gen declAttrPaneEmitClassDbKeyHash224
+			DbKeyHash256Gen declAttrPaneEmitClassDbKeyHash256
+			DbKeyHash384Gen declAttrPaneEmitClassDbKeyHash384
+			DbKeyHash512Gen declAttrPaneEmitClassDbKeyHash512
+			DbKeyHash128Def declAttrPaneEmitClassDbKeyHash128
+			DbKeyHash160Def declAttrPaneEmitClassDbKeyHash160
+			DbKeyHash224Def declAttrPaneEmitClassDbKeyHash224
+			DbKeyHash256Def declAttrPaneEmitClassDbKeyHash256
+			DbKeyHash384Def declAttrPaneEmitClassDbKeyHash384
+			DbKeyHash512Def declAttrPaneEmitClassDbKeyHash512
+			Uuid6Gen declAttrPaneEmitClassUuid6
+			Uuid6Def declAttrPaneEmitClassUuid6
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassBool">
@@ -916,7 +948,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -926,7 +958,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 		public $Name$Editor() {
 			super();
 			setIsNullable( $declAttrPaneEmitIsNullableAsTrueFalse$ );
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -943,7 +975,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -952,16 +984,16 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();$switch HasMinValue yes declAttrPaneEmitClassInt16SetMinValue default empty$$switch HasMaxValue yes declAttrPaneEmitClassInt16SetMaxValue default empty$
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassInt16SetMinValue">
-			setMinValue( $EffSchemaName$$TableName$Buff.$upper Name$_MIN_VALUE );</GenRule>
+			setMinValue( I$EffSchemaName$$TableName$.$upper Name$_MIN_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassInt16SetMaxValue">
-			setMaxValue( $EffSchemaName$$TableName$Buff.$upper Name$_MAX_VALUE );</GenRule>
+			setMaxValue( I$EffSchemaName$$TableName$.$upper Name$_MAX_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassEnum">
 	protected class $Name$CFLabel
@@ -969,7 +1001,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -989,7 +1021,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -998,16 +1030,16 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();$switch HasMinValue yes declAttrPaneEmitClassInt32SetMinValue default empty$$switch HasMaxValue yes declAttrPaneEmitClassInt32SetMaxValue default empty$
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassInt32SetMinValue">
-			setMinValue( $EffSchemaName$$TableName$Buff.$upper Name$_MIN_VALUE );</GenRule>
+			setMinValue( I$EffSchemaName$$TableName$.$upper Name$_MIN_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassInt32SetMaxValue">
-			setMaxValue( $EffSchemaName$$TableName$Buff.$upper Name$_MAX_VALUE );</GenRule>
+			setMaxValue( I$EffSchemaName$$TableName$.$upper Name$_MAX_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassInt64">
 	protected class $Name$CFLabel
@@ -1015,7 +1047,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1024,16 +1056,16 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();$switch HasMinValue yes declAttrPaneEmitClassInt64SetMinValue default empty$$switch HasMaxValue yes declAttrPaneEmitClassInt64SetMaxValue default empty$
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassInt64SetMinValue">
-			setMinValue( $EffSchemaName$$TableName$Buff.$upper Name$_MIN_VALUE );</GenRule>
+			setMinValue( I$EffSchemaName$$TableName$.$upper Name$_MIN_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassInt64SetMaxValue">
-			setMaxValue( $EffSchemaName$$TableName$Buff.$upper Name$_MAX_VALUE );</GenRule>
+			setMaxValue( I$EffSchemaName$$TableName$.$upper Name$_MAX_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassUInt16">
 	protected class $Name$CFLabel
@@ -1041,7 +1073,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1050,16 +1082,16 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();$switch HasMinValue yes declAttrPaneEmitClassUInt16SetMinValue default empty$$switch HasMaxValue yes declAttrPaneEmitClassUInt16SetMaxValue default empty$
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassUInt16SetMinValue">
-			setMinValue( $EffSchemaName$$TableName$Buff.$upper Name$_MIN_VALUE );</GenRule>
+			setMinValue( I$EffSchemaName$$TableName$.$upper Name$_MIN_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassUInt16SetMaxValue">
-			setMaxValue( $EffSchemaName$$TableName$Buff.$upper Name$_MAX_VALUE );</GenRule>
+			setMaxValue( I$EffSchemaName$$TableName$.$upper Name$_MAX_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassUInt32">
 	protected class $Name$CFLabel
@@ -1067,7 +1099,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1076,16 +1108,16 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();$switch HasMinValue yes declAttrPaneEmitClassUInt32SetMinValue default empty$$switch HasMaxValue yes declAttrPaneEmitClassUInt32SetMaxValue default empty$
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassUInt32SetMinValue">
-			setMinValue( $EffSchemaName$$TableName$Buff.$upper Name$_MIN_VALUE );</GenRule>
+			setMinValue( I$EffSchemaName$$TableName$.$upper Name$_MIN_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassUInt32SetMaxValue">
-			setMaxValue( $EffSchemaName$$TableName$Buff.$upper Name$_MAX_VALUE );</GenRule>
+			setMaxValue( I$EffSchemaName$$TableName$.$upper Name$_MAX_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassUInt64">
 	protected class $Name$CFLabel
@@ -1093,7 +1125,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1102,16 +1134,16 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();$switch HasMinValue yes declAttrPaneEmitClassUInt64SetMinValue default empty$$switch HasMaxValue yes declAttrPaneEmitClassUInt64SetMaxValue default empty$
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassUInt64SetMinValue">
-			setMinValue( $EffSchemaName$$TableName$Buff.$upper Name$_MIN_VALUE );</GenRule>
+			setMinValue( I$EffSchemaName$$TableName$.$upper Name$_MIN_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassUInt64SetMaxValue">
-			setMaxValue( $EffSchemaName$$TableName$Buff.$upper Name$_MAX_VALUE );</GenRule>
+			setMaxValue( I$EffSchemaName$$TableName$.$upper Name$_MAX_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassFloat">
 	protected class $Name$CFLabel
@@ -1119,7 +1151,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1128,16 +1160,16 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();$switch HasMinValue yes declAttrPaneEmitClassFloatSetMinValue default empty$$switch HasMaxValue yes declAttrPaneEmitClassFloatSetMaxValue default empty$
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassFloatSetMinValue">
-			setMinValue( $EffSchemaName$$TableName$Buff.$upper Name$_MIN_VALUE );</GenRule>
+			setMinValue( I$EffSchemaName$$TableName$.$upper Name$_MIN_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassFloatSetMaxValue">
-			setMaxValue( $EffSchemaName$$TableName$Buff.$upper Name$_MAX_VALUE );</GenRule>
+			setMaxValue( I$EffSchemaName$$TableName$.$upper Name$_MAX_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassDouble">
 	protected class $Name$CFLabel
@@ -1145,7 +1177,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1154,16 +1186,16 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();$switch HasMinValue yes declAttrPaneEmitClassDoubleSetMinValue default empty$$switch HasMaxValue yes declAttrPaneEmitClassDoubleSetMaxValue default empty$
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassDoubleSetMinValue">
-			setMinValue( $EffSchemaName$$TableName$Buff.$upper Name$_MIN_VALUE );</GenRule>
+			setMinValue( I$EffSchemaName$$TableName$.$upper Name$_MIN_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassDoubleSetMaxValue">
-			setMaxValue( $EffSchemaName$$TableName$Buff.$upper Name$_MAX_VALUE );</GenRule>
+			setMaxValue( I$EffSchemaName$$TableName$.$upper Name$_MAX_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassNumber">
 	protected class $Name$CFLabel
@@ -1171,7 +1203,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1180,16 +1212,16 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super( $Digits$, $Precis$ );$switch HasMinValue yes declAttrPaneEmitClassNumberSetMinValue default empty$$switch HasMaxValue yes declAttrPaneEmitClassNumberSetMaxValue default empty$
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassNumberSetMinValue">
-			setMinValue( $EffSchemaName$$TableName$Buff.$upper Name$_MIN_VALUE );</GenRule>
+			setMinValue( I$EffSchemaName$$TableName$.$upper Name$_MIN_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassNumberSetMaxValue">
-			setMaxValue( $EffSchemaName$$TableName$Buff.$upper Name$_MAX_VALUE );</GenRule>
+			setMaxValue( I$EffSchemaName$$TableName$.$upper Name$_MAX_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declAttrPaneEmitClassString">
 	protected class $Name$CFLabel
@@ -1197,7 +1229,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1207,7 +1239,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 		public $Name$Editor() {
 			super();
 			setMaxLen( $MaxLen$ );
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1218,7 +1250,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1228,7 +1260,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 		public $Name$Editor() {
 			super();
 			setMaxLen( $MaxLen$ );
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1239,7 +1271,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1249,7 +1281,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 		public $Name$Editor() {
 			super();
 			setMaxLen( $MaxLen$ );
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1260,7 +1292,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1270,7 +1302,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 		public $Name$Editor() {
 			super();
 			setMaxLen( $MaxLen$ );
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1281,7 +1313,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1291,7 +1323,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 		public $Name$Editor() {
 			super();
 			setMaxLen( $MaxLen$ );
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 			setPrefHeight( $ShowLines$ * 20 );
 			setMinHeight( $ShowLines$ * 20 );
 		}
@@ -1304,7 +1336,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1313,7 +1345,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1324,7 +1356,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1333,7 +1365,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1344,7 +1376,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1353,7 +1385,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1364,7 +1396,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1373,7 +1405,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1384,7 +1416,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1393,7 +1425,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1404,7 +1436,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1413,7 +1445,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1424,7 +1456,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
 		}
 	}
 
@@ -1433,7 +1465,127 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$Editor() {
 			super();
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="declAttrPaneEmitClassDbKeyHash128">
+	protected class $Name$CFLabel
+		extends CFLabel
+	{
+		public $Name$CFLabel() {
+			super();
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
+		}
+	}
+
+	protected class $Name$Editor
+		extends CFDbKeyHash128Editor
+	{
+		public $Name$Editor() {
+			super();
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="declAttrPaneEmitClassDbKeyHash224">
+	protected class $Name$CFLabel
+		extends CFLabel
+	{
+		public $Name$CFLabel() {
+			super();
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
+		}
+	}
+
+	protected class $Name$Editor
+		extends CFDbKeyHash224Editor
+	{
+		public $Name$Editor() {
+			super();
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="declAttrPaneEmitClassDbKeyHash256">
+	protected class $Name$CFLabel
+		extends CFLabel
+	{
+		public $Name$CFLabel() {
+			super();
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
+		}
+	}
+
+	protected class $Name$Editor
+		extends CFDbKeyHash256Editor
+	{
+		public $Name$Editor() {
+			super();
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="declAttrPaneEmitClassDbKeyHash384">
+	protected class $Name$CFLabel
+		extends CFLabel
+	{
+		public $Name$CFLabel() {
+			super();
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
+		}
+	}
+
+	protected class $Name$Editor
+		extends CFDbKeyHash384Editor
+	{
+		public $Name$Editor() {
+			super();
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="declAttrPaneEmitClassDbKeyHash512">
+	protected class $Name$CFLabel
+		extends CFLabel
+	{
+		public $Name$CFLabel() {
+			super();
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
+		}
+	}
+
+	protected class $Name$Editor
+		extends CFDbKeyHash512Editor
+	{
+		public $Name$Editor() {
+			super();
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="declAttrPaneEmitClassUuid6">
+	protected class $Name$CFLabel
+		extends CFLabel
+	{
+		public $Name$CFLabel() {
+			super();
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel"));
+		}
+	}
+
+	protected class $Name$Editor
+		extends CFUuid6Editor
+	{
+		public $Name$Editor() {
+			super();
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1500,8 +1652,10 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 				I$reference ToTable EffSchemaName$$reference ToTable TableName$Obj referencedObj = (I$reference ToTable EffSchemaName$$reference ToTable TableName$Obj)javafxReference$RelationTypeTag$$Suffix$.getReferencedObject();
 				CFBorderPane form = null;
 				if( referencedObj != null ) {
-					String classCode = referencedObj.getClassCode();
-					if( "$reference ToTable ClassCode$".equals( classCode ) ) {
+					int classCode = referencedObj.getClassCode();
+					I$SecSchemaName$Schema.ClassMapEntry mapentry = I$DefSchemaName$Schema.getClassMapByRuntimeClassCode(classCode);
+					int backingClassCode = mapentry.getBackingClassCode();
+					if( backingClassCode == I$reference ToTable DefSchemaName$$TableName$.CLASS_CODE ) {
 						form = javafxSchema.get$reference ToTable TableName$Factory().newAddForm( cfFormManager, referencedObj, null, true );
 						I$reference ToTable EffSchemaName$JavaFX$reference ToTable TableName$PaneCommon spec = (I$reference ToTable EffSchemaName$JavaFX$reference ToTable TableName$PaneCommon)form;
 						spec.setJavaFXFocus( referencedObj );
@@ -1520,7 +1674,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="classAttrPaneEmitActionViewReferencePerformedWalkSubClasses">
-					else if( "$ClassCode$".equals( classCode ) ) {
+					else if( backingClassCode == I$reference ToTable DefSchemaName$$TableName$.CLASS_CODE ) {
 						I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)referencedObj;
 						form = javafxSchema.get$TableName$Factory().newAddForm( cfFormManager, obj, null, true );
 						I$EffSchemaName$JavaFX$TableName$PaneCommon spec = (I$EffSchemaName$JavaFX$TableName$PaneCommon)form;
@@ -1577,7 +1731,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopTopDep" Name="classAttrPaneEmitActionChasePopPageOfObj">
 			I$reference Relation reference ToTable SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = (I$reference Relation reference ToTable SchemaName$$reference Relation reference ToTable TableName$Obj)focus.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return( null );
 			}$reference PopSubDep classAttrPaneEmitActionLocatePopPageOfObj$</GenRule>
 
@@ -1596,7 +1750,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopSubDep1" Name="classAttrPaneEmitActionChasePopPageOfObj">
 			I$SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = ref$popto PopTopDep reference Relation Suffix$.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return( null );
 			}$reference PopSubDep classAttrPaneEmitActionLocatePopPageOfObj$</GenRule>
 
@@ -1615,7 +1769,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopSubDep2" Name="classAttrPaneEmitActionChasePopPageOfObj">
 			I$SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = ref$popto PopSubDep1 reference Relation Suffix$.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return( null );
 			}$reference PopSubDep classAttrPaneEmitActionLocatePopPageOfObj$</GenRule>
 
@@ -1689,7 +1843,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopTopDep" Name="classAttrPaneEmitActionChasePopListOfObj">
 			I$reference Relation reference ToTable SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = (I$reference Relation reference ToTable SchemaName$$reference Relation reference ToTable TableName$Obj)focus.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return;
 			}$reference PopSubDep classAttrPaneEmitActionLocatePopListOfObj$</GenRule>
 
@@ -1702,7 +1856,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopSubDep1" Name="classAttrPaneEmitActionChasePopListOfObj">
 			I$SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = ref$popto PopTopDep reference Relation Suffix$.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return;
 			}$reference PopSubDep classAttrPaneEmitActionLocatePopListOfObj$</GenRule>
 
@@ -1715,7 +1869,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopSubDep2" Name="classAttrPaneEmitActionChasePopListOfObj">
 			I$SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = ref$popto PopSubDep1 reference Relation Suffix$.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return;
 			}$reference PopSubDep classAttrPaneEmitActionLocatePopListOfObj$</GenRule>
 
@@ -1759,7 +1913,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopTopDep" Name="classAttrPaneEmitActionChaseCheckPopPageOfObj">
 			I$reference Relation reference ToTable SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = (I$reference Relation reference ToTable SchemaName$$reference Relation reference ToTable TableName$Obj)focus.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return;
 			}$reference PopSubDep classAttrPaneEmitActionCheckPopPageOfObj$</GenRule>
 
@@ -1769,7 +1923,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopSubDep1" Name="classAttrPaneEmitActionChaseCheckPopPageOfObj">
 			I$SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = ref$popto PopTopDep reference Relation Suffix$.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return;
 			}$reference PopSubDep classAttrPaneEmitActionCheckPopPageOfObj$</GenRule>
 
@@ -1779,7 +1933,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopSubDep2" Name="classAttrPaneEmitActionChaseCheckPopPageOfObj">
 			I$SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = ref$popto PopSubDep1 reference Relation Suffix$.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return;
 			}$reference PopSubDep classAttrPaneEmitActionCheckPopPageOfObj$</GenRule>
 
@@ -1815,7 +1969,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopTopDep" Name="classAttrPaneEmitActionChaseCheckPopListOfObj">
 			I$reference Relation reference ToTable SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = (I$reference Relation reference ToTable SchemaName$$reference Relation reference ToTable TableName$Obj)focus.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return;
 			}$reference PopSubDep classAttrPaneEmitActionCheckPopListOfObj$</GenRule>
 
@@ -1825,7 +1979,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopSubDep1" Name="classAttrPaneEmitActionChaseCheckPopListOfObj">
 			I$SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = ref$popto PopTopDep reference Relation Suffix$.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return;
 			}$reference PopSubDep classAttrPaneEmitActionCheckPopListOfObj$</GenRule>
 
@@ -1835,7 +1989,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	<GenRule GenDef="PopSubDep2" Name="classAttrPaneEmitActionChaseCheckPopListOfObj">
 			I$SchemaName$$reference Relation reference ToTable TableName$Obj ref$reference Relation Suffix$ = ref$popto PopSubDep1 reference Relation Suffix$.get$reference Relation OptionalOrRequired$$reference Relation RelationTypeTag$$reference Relation Suffix$( javafxIsInitializing );
 			if( ref$reference Relation Suffix$ == null ) {
-				CFConsole.message( "You must specify a $reference Relation EffLabel$ before selecting a $poptop Relation EffLabel$" );
+				CFConsole.message( String.format(Inz.s("cflibjavafx.common.SpecifyRelationBeforeSelectingTarget"), Inz.s("$reference Relation lower DefSchemaName$.javafx.$reference Relation TableName$.AttrPane.$reference Relation RelationType$$reference Relation Suffix$.EffLabel"), Inz.s("$poptop Relation lower DefSchemaName$.javafx.$poptop Relation TableName$.AttrPane.$poptop Relation RelationType$$poptop Relation Suffix$.EffLabel") );
 				return;
 			}$reference PopSubDep classAttrPaneEmitActionCheckPopListOfObj$</GenRule>
 
@@ -1882,7 +2036,7 @@ import org.apache.commons.codec.binary.Base64;$poptop SchemaDef iterate SchemaRe
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$RelationType$$Suffix$.EffLabel"));
 		}
 	}
 $classAttrPaneEmitCallbackReferenceChosen$$classAttrPaneEmitReferenceCallback$
@@ -1891,7 +2045,7 @@ $classAttrPaneEmitCallbackReferenceChosen$$classAttrPaneEmitReferenceCallback$
 	{
 		public $Name$CFReferenceEditor() {
 			super( new $Name$ReferenceCallback() );
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1919,7 +2073,7 @@ $classAttrPaneEmitCallbackReferenceChosen$$classAttrPaneEmitReferenceCallback$
 	{
 		public $Name$CFLabel() {
 			super();
-			setText( "$EffLabel$" );
+			setText(Inz.s("$lower DefSchemaName$.javafx.$TableName$.AttrPane.$RelationType$$Suffix$.EffLabel"));
 		}
 	}
 $classAttrPaneEmitCallbackReferenceChosen$$classAttrPaneEmitReferenceCallback$
@@ -1928,7 +2082,7 @@ $classAttrPaneEmitCallbackReferenceChosen$$classAttrPaneEmitReferenceCallback$
 	{
 		public $Name$CFReferenceEditor() {
 			super( new $Name$ReferenceCallback() );
-			setFieldName( "$EffLabel$" );
+			setFieldNameInzTag( "$lower DefSchemaName$.javafx.$TableName$.AttrPane.$Name$.EffLabel" );
 		}
 	}
 </GenRule>
@@ -1963,6 +2117,20 @@ $classAttrPaneEmitCallbackReferenceChosen$$classAttrPaneEmitReferenceCallback$
 			TZTimestampDef CFEditorTypeTZTimestamp
 			UuidGen CFEditorTypeUuid
 			UuidDef CFEditorTypeUuid
+			DbKeyHash128Gen CFEditorTypeDbKeyHash128
+			DbKeyHash160Gen CFEditorTypeDbKeyHash160
+			DbKeyHash224Gen CFEditorTypeDbKeyHash224
+			DbKeyHash256Gen CFEditorTypeDbKeyHash256
+			DbKeyHash384Gen CFEditorTypeDbKeyHash384
+			DbKeyHash512Gen CFEditorTypeDbKeyHash512
+			Uuid6Gen CFEditorTypeUuid6
+			DbKeyHash128Def CFEditorTypeDbKeyHash128
+			DbKeyHash160Def CFEditorTypeDbKeyHash160
+			DbKeyHash224Def CFEditorTypeDbKeyHash224
+			DbKeyHash256Def CFEditorTypeDbKeyHash256
+			DbKeyHash384Def CFEditorTypeDbKeyHash384
+			DbKeyHash512Def CFEditorTypeDbKeyHash512
+			Uuid6Def CFEditorTypeUuid6
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="CFEditorTypeBlob">CFBlobEditor</GenRule>
@@ -1988,6 +2156,13 @@ $classAttrPaneEmitCallbackReferenceChosen$$classAttrPaneEmitReferenceCallback$
 	<GenRule GenDef="Value" Name="CFEditorTypeTZTime">CFTZTimeEditor</GenRule>
 	<GenRule GenDef="Value" Name="CFEditorTypeTZTimestamp">CFTZTimestampEditor</GenRule>
 	<GenRule GenDef="Value" Name="CFEditorTypeUuid">CFUuidEditor</GenRule>
+	<GenRule GenDef="Value" Name="CFEditorTypeUuid6">CFUuid6Editor</GenRule>
+	<GenRule GenDef="Value" Name="CFEditorTypeDbKeyHash128">CFDbKeyHash128Editor</GenRule>
+	<GenRule GenDef="Value" Name="CFEditorTypeDbKeyHash160">CFDbKeyHash160Editor</GenRule>
+	<GenRule GenDef="Value" Name="CFEditorTypeDbKeyHash224">CFDbKeyHash224Editor</GenRule>
+	<GenRule GenDef="Value" Name="CFEditorTypeDbKeyHash256">CFDbKeyHash256Editor</GenRule>
+	<GenRule GenDef="Value" Name="CFEditorTypeDbKeyHash384">CFDbKeyHash384Editor</GenRule>
+	<GenRule GenDef="Value" Name="CFEditorTypeDbKeyHash512">CFDbKeyHash512Editor</GenRule>
 
 	<GenRule GenDef="Table" Name="implAttrPaneMethodPopulateFields">
 	public void populateFields()
@@ -2104,6 +2279,20 @@ $classAttrPaneEmitCallbackReferenceChosen$$classAttrPaneEmitReferenceCallback$
 			TZTimestampDef implAttrPanePopulateEmitTZTimestamp
 			UuidGen implAttrPanePopulateEmitUuid
 			UuidDef implAttrPanePopulateEmitUuid
+			DbKeyHash128Gen implAttrPanePopulateEmitDbKeyHash128
+			DbKeyHash160Gen implAttrPanePopulateEmitDbKeyHash160
+			DbKeyHash224Gen implAttrPanePopulateEmitDbKeyHash224
+			DbKeyHash256Gen implAttrPanePopulateEmitDbKeyHash256
+			DbKeyHash384Gen implAttrPanePopulateEmitDbKeyHash384
+			DbKeyHash512Gen implAttrPanePopulateEmitDbKeyHash512
+			Uuid6Gen implAttrPanePopulateEmitUuid6
+			DbKeyHash128Def implAttrPanePopulateEmitDbKeyHash128
+			DbKeyHash160Def implAttrPanePopulateEmitDbKeyHash160
+			DbKeyHash224Def implAttrPanePopulateEmitDbKeyHash224
+			DbKeyHash256Def implAttrPanePopulateEmitDbKeyHash256
+			DbKeyHash384Def implAttrPanePopulateEmitDbKeyHash384
+			DbKeyHash512Def implAttrPanePopulateEmitDbKeyHash512
+			Uuid6Def implAttrPanePopulateEmitUuid6
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implAttrPanePopulateEmitBool">
@@ -2316,6 +2505,69 @@ $classAttrPaneEmitCallbackReferenceChosen$$classAttrPaneEmitReferenceCallback$
 		}
 </GenRule>
 
+	<GenRule GenDef="Value" Name="implAttrPanePopulateEmitUuid6">
+		if( popObj == null ) {
+			getJavaFXEditor$Name$().setUuid6Value( null );
+		}
+		else {
+			getJavaFXEditor$Name$().setUuid6Value( popObj.get$OptionalOrRequired$$Name$() );
+		}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePopulateEmitDbKeyHash128">
+		if( popObj == null ) {
+			getJavaFXEditor$Name$().setDbKeyHash128Value( null );
+		}
+		else {
+			getJavaFXEditor$Name$().setDbKeyHash128Value( popObj.get$OptionalOrRequired$$Name$() );
+		}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePopulateEmitDbKeyHash160">
+		if( popObj == null ) {
+			getJavaFXEditor$Name$().setDbKeyHash160Value( null );
+		}
+		else {
+			getJavaFXEditor$Name$().setDbKeyHash160Value( popObj.get$OptionalOrRequired$$Name$() );
+		}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePopulateEmitDbKeyHash224">
+		if( popObj == null ) {
+			getJavaFXEditor$Name$().setDbKeyHash224Value( null );
+		}
+		else {
+			getJavaFXEditor$Name$().setDbKeyHash224Value( popObj.get$OptionalOrRequired$$Name$() );
+		}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePopulateEmitDbKeyHash256">
+		if( popObj == null ) {
+			getJavaFXEditor$Name$().setDbKeyHash256Value( null );
+		}
+		else {
+			getJavaFXEditor$Name$().setDbKeyHash256Value( popObj.get$OptionalOrRequired$$Name$() );
+		}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePopulateEmitDbKeyHash384">
+		if( popObj == null ) {
+			getJavaFXEditor$Name$().setDbKeyHash384Value( null );
+		}
+		else {
+			getJavaFXEditor$Name$().setDbKeyHash384Value( popObj.get$OptionalOrRequired$$Name$() );
+		}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePopulateEmitDbKeyHash512">
+		if( popObj == null ) {
+			getJavaFXEditor$Name$().setDbKeyHash512Value( null );
+		}
+		else {
+			getJavaFXEditor$Name$().setDbKeyHash512Value( popObj.get$OptionalOrRequired$$Name$() );
+		}
+</GenRule>
+
 	<GenRule GenDef="Table" Name="implAttrPaneMethodPostFields">
 	public void postFields()
 	{
@@ -2331,7 +2583,8 @@ $classAttrPaneEmitCallbackReferenceChosen$$classAttrPaneEmitReferenceCallback$
 		if( editObj == null ) {
 			throw new CFLibUsageException( getClass(),
 				S_ProcName,
-				"Pane is unfocused or is not editing the focus object" );
+				Inz.s("cflibjavafx.common.PaneIsUnfocusedOrNotEditing"),
+				Inz.x("cflibjavafx.common.PaneIsUnfocusedOrNotEditing") );
 		}
 $implAttrPanePostParentWidgets$$implAttrPanePostLookupWidgets$$implAttrPanePostFields$	}
 </GenRule>
@@ -2428,6 +2681,20 @@ $implAttrPanePostParentWidgets$$implAttrPanePostLookupWidgets$$implAttrPanePostF
 			TZTimestampDef implAttrPanePostEmitTZTimestamp
 			UuidGen implAttrPanePostEmitUuid
 			UuidDef implAttrPanePostEmitUuid
+			DbKeyHash128Gen implAttrPanePostEmitDbKeyHash128
+			DbKeyHash160Gen implAttrPanePostEmitDbKeyHash160
+			DbKeyHash224Gen implAttrPanePostEmitDbKeyHash224
+			DbKeyHash256Gen implAttrPanePostEmitDbKeyHash256
+			DbKeyHash384Gen implAttrPanePostEmitDbKeyHash384
+			DbKeyHash512Gen implAttrPanePostEmitDbKeyHash512
+			Uuid6Gen implAttrPanePostEmitUuid6
+			DbKeyHash128Def implAttrPanePostEmitDbKeyHash128
+			DbKeyHash160Def implAttrPanePostEmitDbKeyHash160
+			DbKeyHash224Def implAttrPanePostEmitDbKeyHash224
+			DbKeyHash256Def implAttrPanePostEmitDbKeyHash256
+			DbKeyHash384Def implAttrPanePostEmitDbKeyHash384
+			DbKeyHash512Def implAttrPanePostEmitDbKeyHash512
+			Uuid6Def implAttrPanePostEmitUuid6
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implAttrPanePostEmitBool">
@@ -2607,6 +2874,34 @@ $implAttrPanePostParentWidgets$$implAttrPanePostLookupWidgets$$implAttrPanePostF
 
 	<GenRule GenDef="Value" Name="implAttrPanePostEmitUuid">
 		editObj.set$OptionalOrRequired$$Name$( getJavaFXEditor$Name$().getUuidValue() );
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePostEmitUuid6">
+		editObj.set$OptionalOrRequired$$Name$( getJavaFXEditor$Name$().getUuid6Value() );
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePostEmitDbKeyHash128">
+		editObj.set$OptionalOrRequired$$Name$( getJavaFXEditor$Name$().getDbKeyHash128Value() );
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePostEmitDbKeyHash160">
+		editObj.set$OptionalOrRequired$$Name$( getJavaFXEditor$Name$().getDbKeyHash160Value() );
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePostEmitDbKeyHash224">
+		editObj.set$OptionalOrRequired$$Name$( getJavaFXEditor$Name$().getDbKeyHash224Value() );
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePostEmitDbKeyHash256">
+		editObj.set$OptionalOrRequired$$Name$( getJavaFXEditor$Name$().getDbKeyHash256Value() );
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePostEmitDbKeyHash384">
+		editObj.set$OptionalOrRequired$$Name$( getJavaFXEditor$Name$().getDbKeyHash384Value() );
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implAttrPanePostEmitDbKeyHash512">
+		editObj.set$OptionalOrRequired$$Name$( getJavaFXEditor$Name$().getDbKeyHash512Value() );
 </GenRule>
 
 </RuleSet>
