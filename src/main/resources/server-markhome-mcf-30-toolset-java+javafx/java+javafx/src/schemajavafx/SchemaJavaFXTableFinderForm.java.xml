@@ -97,14 +97,14 @@ $switch PageData yes classJavaFXTableFinderFormListTabRefListPageData default em
 
 	<GenRule GenDef="Table" Name="pageJavaFXTableFinderFormContainingTenant">
 			if( containingTenant == null ) {
-				$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
-				long containingTenantId = auth.getSecTenantId();
+				I$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
+				CFLibDbKeyHash256 containingTenantId = auth.getSecTenantId();
 				containingTenant = schemaObj.getTenantTableObj().readTenantByIdIdx( containingTenantId );
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="pageJavaFXTableFinderFormContainingCluster">
 			if( containingCluster == null ) {
-				$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
+				I$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
 				long containingClusterId = auth.getSecClusterId();
 				containingCluster = schemaObj.getClusterTableObj().readClusterByIdIdx( containingClusterId );
 			}</GenRule>
@@ -412,8 +412,10 @@ $switch PageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefresh defa
 						}
 						I$DefSchemaName$$TableName$Obj selectedInstance = getJavaFXFocusAs$TableName$();
 						if( selectedInstance != null ) {
-							String classCode = selectedInstance.getClassCode();
-							if( "$ClassCode$".equals( classCode ) ) {
+							int classCode = selectedInstance.getClassCode();
+							I$SecSchemaName$Schema.ClassMapEntry entry = I$DefSchemaName$Schema.getClassMapByRuntimeClassCode(classCode);
+							int backingClassCode = entry.getBackingClassCode();
+							if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( cfFormManager, selectedInstance, getViewEditClosedCallback(), false );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
 								cfFormManager.pushForm( frame );
@@ -439,7 +441,7 @@ $switch PageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefresh defa
 		>$iterate TableSubClasses( each implViewSelectedActionActionPerformedWireSubClass empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implViewSelectedActionActionPerformedWireSubClass">
-							else if( "$ClassCode$".equals( classCode ) ) {
+							else if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)selectedInstance;
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( cfFormManager, obj, getViewEditClosedCallback(), false );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
@@ -463,8 +465,10 @@ $switch PageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefresh defa
 						}
 						I$DefSchemaName$$TableName$Obj selectedInstance = getJavaFXFocusAs$TableName$();
 						if( selectedInstance != null ) {
-							String classCode = selectedInstance.getClassCode();
-							if( "$ClassCode$".equals( classCode ) ) {
+							int classCode = selectedInstance.getClassCode();
+							I$SecSchemaName$Schema.ClassMapEntry entry = I$DefSchemaName$Schema.getClassMapByRuntimeClassCode(classCode);
+							int backingClassCode = entry.getBackingClassCode();
+							if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( cfFormManager, selectedInstance, getViewEditClosedCallback(), false );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.Edit );
 								cfFormManager.pushForm( frame );
@@ -490,7 +494,7 @@ $switch PageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefresh defa
 		>$iterate TableSubClasses( each classEditSelectedActionActionPerformedWireSubClass empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="classEditSelectedActionActionPerformedWireSubClass">
-							else if( "$ClassCode$".equals( classCode ) ) {
+							else if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)selectedInstance;
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( cfFormManager, obj, getViewEditClosedCallback(), false );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.Edit );
@@ -534,8 +538,10 @@ $switch PageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefresh defa
 						}
 						I$DefSchemaName$$TableName$Obj selectedInstance = getJavaFXFocusAs$TableName$();
 						if( selectedInstance != null ) {
-							String classCode = selectedInstance.getClassCode();
-							if( "$ClassCode$".equals( classCode ) ) {
+							int classCode = selectedInstance.getClassCode();
+							I$SecSchemaName$Schema.ClassMapEntry entry = I$DefSchemaName$Schema.getClassMapByRuntimeClassCode(classCode);
+							int backingClassCode = entry.getBackingClassCode();
+							if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newAskDeleteForm( cfFormManager, selectedInstance, getDeleteCallback() );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
 								cfFormManager.pushForm( frame );
@@ -561,7 +567,7 @@ $switch PageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefresh defa
 		>$iterate TableSubClasses( each classDeleteSelectedActionActionPerformedWireSubClass empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="classDeleteSelectedActionActionPerformedWireSubClass">
-							else if( "$ClassCode$".equals( classCode ) ) {
+							else if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)selectedInstance;
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newAskDeleteForm( cfFormManager, obj, getDeleteCallback() );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
@@ -857,14 +863,14 @@ $switch PageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefresh defa
 
 	<GenRule GenDef="Table" Name="loadJavaFXTableFinderFormContainingTenant">
 		if( ( containingTenant == null ) || forceReload ) {
-			$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
-			long containingTenantId = auth.getSecTenantId();
+			I$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
+			CFLibDbKeyHash256 containingTenantId = auth.getSecTenantId();
 			containingTenant = schemaObj.getTenantTableObj().readTenantByIdIdx( containingTenantId );
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="loadJavaFXTableFinderFormContainingCluster">
 		if( ( containingCluster == null ) || forceReload ) {
-			$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
+			I$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
 			long containingClusterId = auth.getSecClusterId();
 			containingCluster = schemaObj.getClusterTableObj().readClusterByIdIdx( containingClusterId );
 		}</GenRule>

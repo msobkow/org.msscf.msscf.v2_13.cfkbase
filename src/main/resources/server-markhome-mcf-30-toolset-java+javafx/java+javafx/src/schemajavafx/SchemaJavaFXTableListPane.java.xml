@@ -53,6 +53,7 @@ $MssSourceLicense$
 package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$javafx;
 
 import java.math.*;
+import java.time.*;
 import java.util.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
@@ -553,8 +554,10 @@ $implConstructJavaFXTableListPane$$implGetSetCFFormManager$$implGetJavaFXSchema$
 						}
 						I$DefSchemaName$$TableName$Obj selectedInstance = getJavaFXFocusAs$TableName$();
 						if( selectedInstance != null ) {
-							String classCode = selectedInstance.getClassCode();
-							if( "$ClassCode$".equals( classCode ) ) {
+							int classCode = selectedInstance.getClassCode();
+							I$SecSchemaName$Schema.ClassMapEntry entry = I$DefSchemaName$Schema.getClassMapByRuntimeClassCode(classCode);
+							int backingClassCode = entry.getBackingClassCode();
+							if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( cfFormManager, selectedInstance, getViewEditClosedCallback(), false );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
 								cfFormManager.pushForm( frame );
@@ -580,7 +583,7 @@ $implConstructJavaFXTableListPane$$implGetSetCFFormManager$$implGetJavaFXSchema$
 		>$iterate TableSubClasses( each classJavaFXTableListPaneViewSelectedActionPerformedWireSubClass empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="classJavaFXTableListPaneViewSelectedActionPerformedWireSubClass">
-							else if( "$ClassCode$".equals( classCode ) ) {
+							else if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)selectedInstance;
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( cfFormManager, obj, getViewEditClosedCallback(), false );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
@@ -604,8 +607,10 @@ $implConstructJavaFXTableListPane$$implGetSetCFFormManager$$implGetJavaFXSchema$
 						}
 						I$DefSchemaName$$TableName$Obj selectedInstance = getJavaFXFocusAs$TableName$();
 						if( selectedInstance != null ) {
-							String classCode = selectedInstance.getClassCode();
-							if( "$ClassCode$".equals( classCode ) ) {
+							int classCode = selectedInstance.getClassCode();
+							I$SecSchemaName$Schema.ClassMapEntry entry = I$DefSchemaName$Schema.getClassMapByRuntimeClassCode(classCode);
+							int backingClassCode = entry.getBackingClassCode();
+							if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( cfFormManager, selectedInstance, getViewEditClosedCallback(), false );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.Edit );
 								cfFormManager.pushForm( frame );
@@ -631,7 +636,7 @@ $implConstructJavaFXTableListPane$$implGetSetCFFormManager$$implGetJavaFXSchema$
 		>$iterate TableSubClasses( each classJavaFXTableListPaneEditSelectedActionPerformedWireSubClass empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="classJavaFXTableListPaneEditSelectedActionPerformedWireSubClass">
-							else if( "$ClassCode$".equals( classCode ) ) {
+							else if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)selectedInstance;
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( cfFormManager, obj, getViewEditClosedCallback(), false );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.Edit );
@@ -655,8 +660,10 @@ $implConstructJavaFXTableListPane$$implGetSetCFFormManager$$implGetJavaFXSchema$
 						}
 						I$DefSchemaName$$TableName$Obj selectedInstance = getJavaFXFocusAs$TableName$();
 						if( selectedInstance != null ) {
-							String classCode = selectedInstance.getClassCode();
-							if( "$ClassCode$".equals( classCode ) ) {
+							int classCode = selectedInstance.getClassCode();
+							I$SecSchemaName$Schema.ClassMapEntry entry = I$DefSchemaName$Schema.getClassMapByRuntimeClassCode(classCode);
+							int backingClassCode = entry.getBackingClassCode();
+							if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newAskDeleteForm( cfFormManager, selectedInstance, getDeleteCallback() );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
 								cfFormManager.pushForm( frame );
@@ -682,7 +689,7 @@ $implConstructJavaFXTableListPane$$implGetSetCFFormManager$$implGetJavaFXSchema$
 		>$iterate TableSubClasses( each classJavaFXTableListPaneDeleteSelectedActionPerformedWireSubClass empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="classJavaFXTableListPaneDeleteSelectedActionPerformedWireSubClass">
-							else if( "$ClassCode$".equals( classCode ) ) {
+							else if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)selectedInstance;
 								CFBorderPane frame = javafxSchema.get$TableName$Factory().newAskDeleteForm( cfFormManager, obj, getDeleteCallback() );
 								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
@@ -774,7 +781,8 @@ $implConstructJavaFXTableListPane$$implGetSetCFFormManager$$implGetJavaFXSchema$
 				if( ( head == null ) &amp;&amp; ( javafxDataCollection.size() &gt; 0 ) ) {
 					throw new CFLibRuntimeException( getClass(),
 						S_ProcName,
-						"Could not locate head of object chain" );
+						Inz.x("cflibjavafx.common.CouldNotLocateHeadOfChain"),
+						Inz.s("cflibjavafx.common.CouldNotLocateHeadOfChain") );
 				}
 				I$DefSchemaName$$TableName$Obj cur = head;
 				while( cur != null ) {
@@ -912,9 +920,9 @@ $implConstructJavaFXTableListPane$$implGetSetCFFormManager$$implGetJavaFXSchema$
 					return( null );
 				}
 				else {
-					String classCode = obj.getClassCode();
+					int classCode = obj.getClassCode();
 					ReadOnlyObjectWrapper&lt;String&gt; observable = new ReadOnlyObjectWrapper&lt;String&gt;();
-					observable.setValue( classCode );
+					observable.setValue( Integer.toString(classCode) );
 					return( observable );
 				}
 			}
