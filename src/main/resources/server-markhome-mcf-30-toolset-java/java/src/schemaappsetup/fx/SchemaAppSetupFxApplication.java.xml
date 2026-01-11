@@ -66,20 +66,32 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.stereotype.Component;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
+
+import javafx.application.Application;
+import javafx.application.Application.Parameters;
+import javafx.application.HostServices;
+import javafx.application.Platform;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+
+import server.markhome.mcf.v3_1.cfsec.cfsecappsetup.CFSecAppSetup;
+
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.inz.Inz;
 import server.markhome.mcf.v3_1.cflib.inz.InzPathEntry;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.*;$iterate SchemaRefs( each importJavaPackageSchemaNameBuff empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.buff.*;
-import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.appsetup.fx.$SchemaName$AppSetupFxApplication;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$appsetup.$SchemaName$AppSetup;
 $AppSetupFxApplicationClassBody$
 </GenFile>
 
@@ -87,7 +99,7 @@ $AppSetupFxApplicationClassBody$
 @Component
 public class $SchemaName$AppSetupFxApplication extends Application {
 
-	public static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger($reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.appsetup.fx.$SchemaName$AppSetupFxApplication.class.getName());
+	public static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger($reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$appsetup.$SchemaName$AppSetup.class.getName());
 
 	public static String INIT_LOG_MESSAGE1 = "The $SchemaName$AppSetupFxApplication init method is called";
 
