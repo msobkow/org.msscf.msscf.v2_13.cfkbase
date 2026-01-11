@@ -29,16 +29,12 @@ Mark's Code Fractal CFKBase 3.1 Code Fractal Knowledge Base
 Overview
 --------
 The rules defined herein presume a specific combination of tools and releases.
-Java JDK 17, GWT 2.12.2, and Spring 4.0. GWT is the limiting technology for the
-supported JDK, but that only applies with GWT code aspects of the overall outputs
-for the builds. If you do not use nor require GWT, simply don't build those
-modules nor ship them; you can obviously compile the other code with higher
-releases of JDK than 17 without changing anything more than your copy of
-the pom.xml and your package names and hierarchy to reflect the branch.
+Java JDK 25, JavaFX 25.0.1, and Spring 4.0.  I had considered using GWT for a web
+interface to replace the JavaFX clients, but decided I'd rather focus on JDK 25
+compatability right now rather than purposely using a near-obsolete Java syntax.
 
-As of 2026-01-10 16h15 CST, the output code base and rule base are actually
-JDK 25 compatible and even require JDK 25 for the core interfaces produced.
-Those embedded interface constants will have to move to a hierachy of classes
-with static class members instead, but in the same package. Then the rules need
-to be updated to reference the new classes instead of the interfaces, and we should
-be back on the road with New Code...
+As such, I'll be searching for a new web interface toolkit, ideally one that breaks
+the single-form limitation of GWT and allows for multi-browser-tab/window functionality
+without requiring excessive knowledge of JavaScript or JavaScript debugging to "make
+it go."  Certainly React is popular at this time, but I know nothing about it at this
+point.
