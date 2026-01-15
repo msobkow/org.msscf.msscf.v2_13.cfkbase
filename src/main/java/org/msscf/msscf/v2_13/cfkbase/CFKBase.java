@@ -1,7 +1,7 @@
 /*
  *	Mark's Code Fractal 2.13 CFKBase - Code Fractal Knowledge Base
  *
- *	Copyright (C) 2016-2025 Mark Stephen Sobkow
+ *	Copyright (C) 2016-2026 Mark Stephen Sobkow
  *
  *	This file is part of Mark's Code Fractal 2.13, providing the extensible
  *	knowledge base for starting to customize Mark's Code Fractal with your own
