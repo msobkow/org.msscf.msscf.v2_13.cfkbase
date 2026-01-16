@@ -1,4 +1,4 @@
-1,$s:server.markhome.mcf:io.github.msobkow:g
+1,$s,http://msscf.org:8088,https://msobkow.github.io,g
 w
 q
 
