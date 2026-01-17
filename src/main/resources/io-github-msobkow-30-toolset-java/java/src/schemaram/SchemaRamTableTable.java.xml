@@ -127,7 +127,7 @@ $JavaMethodBody$	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="moreRamTableMethods"
-		>$iterate DispensedId16Generators( each implRamNextIdGen empty empty )$$iterate DispensedId32Generators( each implRamNextIdGen empty empty )$$iterate DispensedId64Generators( each implRamNextIdGen empty empty )$$implRamCreateTable$$implRamReadTableDerivedByPKey$$implRamLockTableDerivedByPKey$$implRamReadAllTableDerived$$implRamReadTableDerivedByIndexes$$implRamReadTableBuffByPKey$$implRamLockTableBuffByPKey$$implRamReadAllTableBuff$$switch PageData yes implRamPageAllTableBuff default empty$$implRamReadTableBuffByIndexes$$implRamPageTableBuffByIndexes$$switch HasChain yes implRamMoveUpTableBuff default empty$$switch HasChain yes implRamMoveDownTableBuff default empty$$implRamUpdateTable$$implRamDeleteTable$$implRamTableReleasePreparedStatements$$iterate ServerMethods( each implServerMethod empty empty )$</GenRule>
+		>$implRamCreateTable$$implRamReadTableDerivedByPKey$$implRamLockTableDerivedByPKey$$implRamReadAllTableDerived$$implRamReadTableDerivedByIndexes$$implRamReadTableBuffByPKey$$implRamLockTableBuffByPKey$$implRamReadAllTableBuff$$switch PageData yes implRamPageAllTableBuff default empty$$implRamReadTableBuffByIndexes$$implRamPageTableBuffByIndexes$$switch HasChain yes implRamMoveUpTableBuff default empty$$switch HasChain yes implRamMoveDownTableBuff default empty$$implRamUpdateTable$$implRamDeleteTable$$iterate ServerMethods( each implServerMethod empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamMoveUpTableBuff">
 	/**
@@ -524,70 +524,8 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetNextCur )
 		= new HashMap&lt; $SchemaName$Ram$popto Table TableName$Id64Gen,
 				$SchemaName$Ram$popto Table TableName$Id64Gen &gt;();</GenRule>
 
-	<GenRule ScopeDef="Table" GenDef="Id16Gen" Name="implRamTableGenerateNextId16">
-	protected short generateNextId16( $popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( first implRamNextIdGenPKeyArg each implRamNextIdGenCommaPKeyArg )$,
-		short argSliceId )
-	{
-		$SchemaName$Ram$popto Table TableName$Id16Gen key = new $SchemaName$Ram$popto Table TableName$Id16Gen();$popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamNextIdGenApplyArgToKey )$
-		key.setRequiredSliceId( argSliceId );
-
-		$SchemaName$Ram$popto Table TableName$Id16Gen useGen = id16Generator.get( key );
-		if( useGen == null ) {
-			id16Generator.put( key, key );
-			useGen = key;
-		}
-
-		short retNext = useGen.getNextId();
-
-		return( retNext );
-	}
-</GenRule>
-
 	<GenRule GenDef="IndexCol" Name="implRamNextIdGenApplyArgToKey">
 		key.set$OptionalOrRequired$$Name$( arg$Name$ );</GenRule>
-
-	<GenRule ScopeDef="Table" GenDef="Id32Gen" Name="implRamTableGenerateNextId32">
-	protected int generateNextId32( $popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( first implRamNextIdGenPKeyArg each implRamNextIdGenCommaPKeyArg )$,
-		short argSliceId )
-	{
-		$SchemaName$Ram$popto Table TableName$Id32Gen key = new $SchemaName$Ram$popto Table TableName$Id32Gen();$popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamNextIdGenApplyArgToKey )$
-		key.setRequiredSliceId( argSliceId );
-
-		$SchemaName$Ram$popto Table TableName$Id32Gen useGen = id32Generator.get( key );
-		if( useGen == null ) {
-			id32Generator.put( key, key );
-			useGen = key;
-		}
-
-		int retNext = useGen.getNextId();
-
-		return( retNext );
-	}
-</GenRule>
-
-	<GenRule ScopeDef="Table" GenDef="Id64Gen" Name="implRamTableGenerateNextId64">
-	protected long generateNextId64( $popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( first implRamNextIdGenPKeyArg each implRamNextIdGenCommaPKeyArg )$,
-		short argSliceId )
-	{
-		$SchemaName$Ram$popto Table TableName$Id64Gen key = new $SchemaName$Ram$popto Table TableName$Id64Gen();$popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamNextIdGenApplyArgToKey )$
-		key.setRequiredSliceId( argSliceId );
-
-		$SchemaName$Ram$popto Table TableName$Id64Gen useGen = id64Generator.get( key );
-		if( useGen == null ) {
-			id64Generator.put( key, key );
-			useGen = key;
-		}
-
-		long retNext = useGen.getNextId();
-
-		return( retNext );
-	}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="implRamTableReleasePreparedStatements">
-	public void releasePreparedStatements() {
-	}
-</GenRule>
 
 	<GenRule GenDef="Index" Name="implRamReadTableBuffByIndex"
 		>$switch IsUnique
