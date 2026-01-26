@@ -59,15 +59,15 @@ import java.text.*;
 import java.util.*;
 import io.github.msobkow.v3_1.cflib.*;
 import io.github.msobkow.v3_1.cflib.dbutil.*;
-$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$importJavaPackageSchemaName$$iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaNameObj$
-import $reference ManufacturingSchema lower JavaPackage$.$SchemaName$SaxLoader.*;
+$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$importJavaPackageSchemaName$$iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaNameObj$$iterate SchemaRefs( each importJavaPackageSchemaNameBuff empty empty )$$importJavaPackageSchemaNameBuff$
+import $reference ManufacturingSchema lower JavaPackage$.$lower SchemaName$saxloader.*;
 
 public class $SchemaName$RamSchema
-	extends $SchemaName$Schema
+	extends $SchemaName$BuffSchema
 	implements I$SchemaName$Schema
 {
 $iterate Id16Generators( each declRamNextIdGen empty empty )$$iterate Id32Generators( each declRamNextIdGen empty empty )$$iterate Id64Generators( each declRamNextIdGen empty empty )$
-$implSchemaRamConstructor$$implRamSchemaConnectionMethods$$implRamSchemaNewSchema$$iterate Id16Generators( each implRamNextIdGen empty empty)$$iterate Id32Generators( each implRamNextIdGen empty empty)$$iterate Id64Generators( each implRamNextIdGen empty empty)$$iterate UuidGenerators( each implRamNextIdGen empty empty )$$implRamSchemaReleasePreparedStatements$$implRamSchemaFileImport$}
+$implSchemaRamConstructor$$implRamSchemaNewSchema$$iterate Id16Generators( each implRamNextIdGen empty empty)$$iterate Id32Generators( each implRamNextIdGen empty empty)$$iterate Id64Generators( each implRamNextIdGen empty empty)$$iterate UuidGenerators( each implRamNextIdGen empty empty )$$implRamSchemaFileImport$}
 </GenFile>
 
 	<GenRule GenDef="SchemaDef" Name="implRamSchemaReleasePreparedStatements">
@@ -224,7 +224,7 @@ $implSchemaRamConstructor$$implRamSchemaConnectionMethods$$implRamSchemaNewSchem
 
 		$SchemaName$SaxLoader saxLoader = new $SchemaName$SaxLoader();
 		I$SchemaName$SchemaObj schemaObj = new $SchemaName$SchemaObj();
-		schemaObj.setBackingStore( this );
+		schemaObj.set$SchemaName$BackingStore( this );
 		saxLoader.setSchemaObj( schemaObj );
 		I$SecSchemaName$ClusterObj useCluster = schemaObj.getClusterTableObj().readClusterByIdIdx( Authorization.getSecClusterId() );
 		I$SecSchemaName$TenantObj useTenant = schemaObj.getTenantTableObj().readTenantByIdIdx( Authorization.getSecTenantId() );
@@ -243,13 +243,13 @@ $implSchemaRamConstructor$$implRamSchemaConnectionMethods$$implRamSchemaNewSchem
 </GenRule>
 
 	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="declRamNextIdGen"
->		protected short next$Name$Value = 1;
+>	protected short next$Name$Value = 1;
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="declRamNextIdGen"
->		protected int next$Name$Value = 1;
+>	protected int next$Name$Value = 1;
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="declRamNextIdGen"
->		protected long next$Name$Value = 1;
+>	protected long next$Name$Value = 1;
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaRamConstructTable">
