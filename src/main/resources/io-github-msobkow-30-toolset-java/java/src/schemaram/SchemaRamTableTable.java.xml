@@ -507,24 +507,6 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetNextCur )
 	}
 </GenRule>
 
-	<GenRule ScopeDef="Table" GenDef="Id16Gen" Name="implRamTableDeclId16Gen">
-	private Map&lt; $SchemaName$Ram$popto Table TableName$Id16Gen,
-				$SchemaName$Ram$popto Table TableName$Id16Gen &gt; id16Generator
-		= new HashMap&lt; $SchemaName$Ram$popto Table TableName$Id16Gen,
-				$SchemaName$Ram$popto Table TableName$Id16Gen &gt;();</GenRule>
-
-	<GenRule ScopeDef="Table" GenDef="Id32Gen" Name="implRamTableDeclId32Gen">
-	private Map&lt; $SchemaName$Ram$popto Table TableName$Id32Gen,
-				$SchemaName$Ram$popto Table TableName$Id32Gen &gt; id32Generator
-		= new HashMap&lt; $SchemaName$Ram$popto Table TableName$Id32Gen,
-				$SchemaName$Ram$popto Table TableName$Id32Gen &gt;();</GenRule>
-
-	<GenRule ScopeDef="Table" GenDef="Id64Gen" Name="implRamTableDeclId64Gen">
-	private Map&lt; $SchemaName$Ram$popto Table TableName$Id64Gen,
-				$SchemaName$Ram$popto Table TableName$Id64Gen &gt; id64Generator
-		= new HashMap&lt; $SchemaName$Ram$popto Table TableName$Id64Gen,
-				$SchemaName$Ram$popto Table TableName$Id64Gen &gt;();</GenRule>
-
 	<GenRule GenDef="IndexCol" Name="implRamNextIdGenApplyArgToKey">
 		key.set$OptionalOrRequired$$Name$( arg$Name$ );</GenRule>
 
@@ -576,7 +558,23 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetNextCur )
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implRamLockTableDerivedByPKey">
+	<GenRule GenDef="Table" Name="implRamLockTableDerivedByPKey">$switch IsPrimaryIndexKeyAtomic yes implRamLockTableDerivedByAtomicPKey default implRamLockTableDerivedByCompositePKey$</GenRule>
+	<GenRule GenDef="Table" Name="implRamLockTableDerivedByAtomicPKey">
+	public I$popto Table DefSchemaName$$poptop Table TableName$ lockDerived( I$SecSchemaName$Authorization Authorization,
+		$ICompactedPrimaryIndexClass$ PKey )
+	{
+		final String S_ProcName = "$SchemaName$Ram$TableName$.readDerived";
+		I$popto Table DefSchemaName$$poptop Table TableName$ buff;
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
+		}
+		else {
+			buff = null;
+		}
+		return( buff );
+	}
+</GenRule>
+	<GenRule GenDef="Table" Name="implRamLockTableDerivedByCompositePKey">
 	public I$popto Table DefSchemaName$$poptop Table TableName$ lockDerived( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey )
 	{
@@ -646,7 +644,7 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetNextCur )
 	public I$popto Table DefSchemaName$$poptop Table TableName$ readDerivedBy$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$.readDerivedBy$Suffix$";
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key = schema.getFactory$TableName$().new$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamReadTableSetKeyAttr )$
 		I$DefSchemaName$$TableName$ buff;
 		if( dictBy$Suffix$.containsKey( key ) ) {
@@ -659,7 +657,22 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implRamReadTableDerivedByThisPrimaryIndex">
+	<GenRule GenDef="Index" Name="implRamReadTableDerivedByThisPrimaryIndex">$switch IsPrimaryIndexKeyAtomic yes implRamReadTableDerivedByThisAtomicPrimaryIndex default implRamReadTableDerivedByThisCompositePrimaryIndex$</GenRule>
+	<GenRule GenDef="Index" Name="implRamReadTableDerivedByThisAtomicPrimaryIndex">
+	public I$poptop Table DefSchemaName$$poptop Table TableName$ readDerivedBy$reference Table reference BaseClass reference PrimaryKeyIndex Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
+	{
+		final String S_ProcName = "$SchemaName$Ram$TableName$.readDerivedBy$reference Table reference BaseClass reference PrimaryKeyIndex Suffix$() ";
+		I$poptop Table DefSchemaName$$poptop Table TableName$ buff;
+		if( dictByPKey.containsKey( $poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns ( first Name each empty empty empty )$ ) ) {
+			buff = dictByPKey.get( $poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns ( first Name each empty empty empty )$ );
+		}
+		else {
+			buff = null;
+		}
+		return( buff );
+	}
+</GenRule>
+	<GenRule GenDef="Index" Name="implRamReadTableDerivedByThisCompositePrimaryIndex">
 	public I$poptop Table DefSchemaName$$poptop Table TableName$ readDerivedBy$reference Table reference BaseClass reference PrimaryKeyIndex Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$.readDerivedBy$reference Table reference BaseClass reference PrimaryKeyIndex Suffix$() ";
@@ -700,7 +713,7 @@ $poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( eac
 	public I$poptop Table DefSchemaName$$poptop Table TableName$[] readDerivedBy$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$.readDerivedBy$Suffix$";
-		$poptop Table DefSchemaName$Buff$poptop Table TableName$By$Suffix$Key key = schema.getFactory$poptop Table TableName$().new$Suffix$Key();
+		$poptop Table DefSchemaName$Buff$poptop Table TableName$By$Suffix$Key key = ($poptop Table DefSchemaName$Buff$poptop Table TableName$By$Suffix$Key)schema.getFactory$poptop Table TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamReadTableSetKeyAttr )$
 		I$poptop Table DefSchemaName$$poptop Table TableName$[] recArray;
 		if( dictBy$Suffix$.containsKey( key ) ) {
@@ -751,7 +764,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$.readBuff";
 		I$DefSchemaName$$TableName$ buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) &amp;&amp; ( ! buff.getClassCode().equals( "$ClassCode$" ) ) ) {
+		if( ( buff != null ) &amp;&amp; ( buff.getClassCode() != I$DefSchemaName$$TableName$.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -764,7 +777,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	{
 		final String S_ProcName = "lockBuff";
 		I$DefSchemaName$$TableName$ buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) &amp;&amp; ( ! buff.getClassCode().equals( "$ClassCode$" ) ) ) {
+		if( ( buff != null ) &amp;&amp; ( buff.getClassCode() != I$DefSchemaName$$TableName$.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -780,7 +793,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 		I$poptop Table DefSchemaName$$poptop Table TableName$[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx &lt; buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) &amp;&amp; buff.getClassCode().equals( "$ClassCode$" ) ) {
+			if( ( buff != null ) &amp;&amp; ( buff.getClassCode() == I$DefSchemaName$$TableName$.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -855,7 +868,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$.readBuffBy$Suffix$() ";
 		I$poptop Table DefSchemaName$$poptop Table TableName$ buff = readDerivedBy$Suffix$( Authorization$iterate Columns( each implRamReadTableBuffCommaPassColArg )$ );
-		if( ( buff != null ) &amp;&amp; buff.getClassCode().equals( "$ClassCode$" ) ) {
+		if( ( buff != null ) &amp;&amp; ( buff.getClassCode() == I$DefSchemaName$$TableName$.CLASS_CODE ) ) {
 			return( (I$poptop Table DefSchemaName$$poptop Table TableName$)buff );
 		}
 		else {
@@ -873,7 +886,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 		I$popto Table DefSchemaName$$poptop Table TableName$[] buffList = readDerivedBy$Suffix$( Authorization$iterate Columns( each implRamReadTableBuffCommaPassColArg )$ );
 		for( int idx = 0; idx &lt; buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) &amp;&amp; buff.getClassCode().equals( "$ClassCode$" ) ) {
+			if( ( buff != null ) &amp;&amp; ( buff.getClassCode() == I$DefSchemaName$$TableName$.CLASS_CODE ) ) {
 				filteredList.add( (I$popto Table DefSchemaName$$poptop Table TableName$)buff );
 			}
 		}
@@ -991,7 +1004,10 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	}
 </GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implRamCreateTablePKeyToBuff">
+	<GenRule GenDef="IndexCol" Name="implRamCreateTablePKeyToBuff">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableAtomicPKeyToBuff default implRamCreateTableCompositePKeyToBuff$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implRamCreateTableAtomicPKeyToBuff">
+		Buff.set$reference Column Optionality$$reference Column Name$( pkey );</GenRule>
+	<GenRule GenDef="IndexCol" Name="implRamCreateTableCompositePKeyToBuff">
 		Buff.set$reference Column Optionality$$reference Column Name$( pkey.get$reference Column Optionality$$reference Column Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamCreateTableCopyBackPKeyToBuff"
@@ -1003,8 +1019,30 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	<GenRule GenDef="Table" Name="implRamCreateTablePKeyCopyBuff"
 		>$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamCreateTablePKeyCopyId empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implRamCreateTable">
-	public void create$TableName$( I$SecSchemaName$Authorization Authorization,
+	<GenRule GenDef="Table" Name="implRamCreateTable">$switch IsPrimaryIndexKeyAtomic yes implRamCreateAtomicTable default implRamCreateCompositeTable$</GenRule>
+	<GenRule GenDef="Table" Name="implRamCreateAtomicTable">
+	public I$DefSchemaName$$TableName$ create$TableName$( I$SecSchemaName$Authorization Authorization,
+		I$DefSchemaName$$TableName$ Buff )
+	{
+		final String S_ProcName = "create$TableName$";$switch IsInstantiable yes implRamCreateTableMaybeInitChainLinks default empty$$switch HasSuperClassRelation yes implRamCreateTableInvokeSuper default empty$
+		$ICompactedPrimaryIndexClass$ pkey;$switch HasSuperClassRelation no implRamCreateTablePKeyGenNew default implRamCreateTablePKeyCopyBuff$$switch HasSuperClassRelation no implRamCreateTableCopyBackPKeyToBuff default empty$$iterate Index( each maybeImplRamCreateTableInitIndexKey )$
+		// Validate unique indexes
+
+		if( dictByPKey.containsKey( pkey ) ) {
+			throw new CFLibPrimaryKeyNotNewException( getClass(), S_ProcName, pkey );
+		}
+$iterate Index( each maybeImplRamCreateTableCheckUniqueIndex )$
+		// Validate foreign keys
+$iterate Relation( each implRamCreateTableIntegrityCheck empty empty )$
+		// Proceed with adding the new record
+
+		dictByPKey.put( pkey, Buff );
+$iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable yes implRamCreateTableMaybeChainLinkTail default empty$
+		return( Buff );
+	}
+</GenRule>
+	<GenRule GenDef="Table" Name="implRamCreateCompositeTable">
+	public I$DefSchemaName$$TableName$ create$TableName$( I$SecSchemaName$Authorization Authorization,
 		I$DefSchemaName$$TableName$ Buff )
 	{
 		final String S_ProcName = "create$TableName$";$switch IsInstantiable yes implRamCreateTableMaybeInitChainLinks default empty$$switch HasSuperClassRelation yes implRamCreateTableInvokeSuper default empty$
@@ -1021,6 +1059,7 @@ $iterate Relation( each implRamCreateTableIntegrityCheck empty empty )$
 
 		dictByPKey.put( pkey, Buff );
 $iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable yes implRamCreateTableMaybeChainLinkTail default empty$
+		return( Buff );
 	}
 </GenRule>
 
@@ -1032,7 +1071,7 @@ $iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable 
 
 	<GenRule GenDef="Table" Name="implRamCreateTableInitChainLinksWithCC">
 		I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$ tail = null;
-		if( Buff.getClassCode().equals( "$ClassCode$" ) ) {$implRamCreateTableInitChainLinksBody$
+		if( Buff.getClassCode() == I$DefSchemaName$$TableName$.CLASS_CODE ) ) {$implRamCreateTableInitChainLinksBody$
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamCreateTableInitChainLinksNoCC">
@@ -1083,8 +1122,8 @@ $implRamCreateTableInitChainLinksBody$
 
 	<GenRule GenDef="Table" Name="implRamCreateTableChainLinkTailWithCC">
 		if( tail != null ) {
-			String tailClassCode = tail.getClassCode();
-			if( tailClassCode.equals( "$ClassCode$" ) ) {$implRamCreateTableChainLinkTailBody$
+			int tailClassCode = tail.getClassCode();
+			if( tailClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {$implRamCreateTableChainLinkTailBody$
 			}$iterate TableSubClasses( each implRamCreateTableChainLinkTailWithCCWalkHierarchy empty empty )$
 			else {
 				throw new CFLibUsageException( getClass(),
@@ -1094,7 +1133,7 @@ $implRamCreateTableInitChainLinksBody$
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamCreateTableChainLinkTailWithCCWalkHierarchy">
-			else if( tailClassCode.equals( "$ClassCode$" ) ) {$implRamCreateTableChainLinkTailBody$
+			else if( tailClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {$implRamCreateTableChainLinkTailBody$
 			}$iterate TableSubClasses( each implRamCreateTableChainLinkTailWithCCWalkHierarchy empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamCreateTableChainLinkTailBody">
@@ -1347,6 +1386,7 @@ $implRamCreateTableInitChainLinksBody$
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
 				"$Name$",
+				"$Name$",
 				key$Suffix$ );
 		}
 </GenRule>
@@ -1579,7 +1619,7 @@ $implRamCreateTableInitChainLinksBody$
 		>$switch IsPrimaryIndex yes empty default implRamCreateTableInitIndexKey$</GenRule>
 
 	<GenRule GenDef="Index" Name="implRamCreateTableInitIndexKey">
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key$Suffix$ = schema.getFactory$TableName$().new$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamCreateTableInitKeyAttr )$</GenRule>
 
 	<GenRule GenDef="Index" Name="maybeImplRamCreateTableAddToIndex"
@@ -1634,7 +1674,10 @@ $iterate Columns( each implRamCreateTableInitKeyAttr )$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implRamCreateTablePKeyGenIdInvokeTableNextCommaPassArg">,
 			Buff.get$OptionalOrRequired$$Name$()</GenRule>
 
-	<GenRule GenDef="TableCol" Name="implRamCreateTablePKeyGenIdInvokeSchemaNext">
+	<GenRule GenDef="TableCol" Name="implRamCreateTablePKeyGenIdInvokeSchemaNext">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTablePKeyGenIdInvokeAtomicSchemaNext default implRamCreateTablePKeyGenIdInvokeCompositeSchemaNext$</GenRule>
+	<GenRule GenDef="TableCol" Name="implRamCreateTablePKeyGenIdInvokeAtomicSchemaNext">
+		pkey = schema.next$reference DataType Name$();</GenRule>
+	<GenRule GenDef="TableCol" Name="implRamCreateTablePKeyGenIdInvokeCompositeSchemaNext">
 		pkey.set$implColumnAttrOptionality$$Name$( schema.next$reference DataType Name$() );</GenRule>
 
 	<GenRule GenDef="Atom" Name="implRamCreateTableKeys"
@@ -1646,9 +1689,15 @@ $iterate Columns( each implRamCreateTableInitKeyAttr )$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamCreateTablePKeyGenIdInitContainerKeyCol">
 	 	$leadlower popto TableCol reference DataType reference Dispenser reference BaseClass TableName$PKey.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( Buff.get$reference FromCol OptionalOrRequired$$reference FromCol Name$() );</GenRule>
 
-	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysCopyId">
+	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysCopyId">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableKeysCopyAtomicId default implRamCreateTableKeysCopyCompositeId$</GenRule>
+	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysCopyAtomicId">
+		pkey = Buff.get$switch IsNullable yes implColumnAttrOptional default implColumnAttrRequired$$Name$();</GenRule>
+	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysCopyCompositeId">
 		pkey.set$implColumnAttrOptionality$$Name$( Buff.get$switch IsNullable yes implColumnAttrOptional default implColumnAttrRequired$$Name$() );</GenRule>
-	<GenRule GenDef="Atom" Name="implRamCreateTableKeysCopyId">
+	<GenRule GenDef="Atom" Name="implRamCreateTableKeysCopyId">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableKeysCopyAtomicId default implRamCreateTableKeysCopyCompositeId$</GenRule>
+	<GenRule GenDef="Atom" Name="implRamCreateTableKeysCopyAtomicId">
+		pkey = Buff.get$switch IsNullable yes implColumnAttrOptional default implColumnAttrRequired$$Name$();</GenRule>
+	<GenRule GenDef="Atom" Name="implRamCreateTableKeysCopyCompositeId">
 		pkey.set$implColumnAttrOptionality$$Name$( Buff.get$switch IsNullable yes implColumnAttrOptional default implColumnAttrRequired$$Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamReadTableByPKey">
@@ -1706,7 +1755,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	<GenRule GenDef="Index" Name="implRamReadTableByUniqueIndex">
 	public I$DefSchemaName$$TableName$ read$TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key = schema.getFactory$TableName$().new$Suffix$Key();$iterate Columns( each implRamReadTableSetKeyAttr )$
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.getFactory$TableName$().newBy$Suffix$Key();$iterate Columns( each implRamReadTableSetKeyAttr )$
 		I$DefSchemaName$$TableName$ rec;
 		if( dictBy$Suffix$.containsKey( key ) ) {
 			rec = dictBy$Suffix$.get( key );
@@ -1725,7 +1774,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	<GenRule GenDef="Index" Name="implRamReadTableByDuplicateIndex">
 	public I$DefSchemaName$$TableName$[] read$TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key = schema.getFactory$TableName$().new$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamReadTableSetKeyAttr )$
 		I$DefSchemaName$$TableName$[] recArray;
 		if( dictBy$Suffix$.containsKey( key ) ) {
@@ -1756,8 +1805,36 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );</GenRule>
 
-	<GenRule GenDef="Table" Name="implRamUpdateTable">
-	public void update$TableName$( I$SecSchemaName$Authorization Authorization,
+	<GenRule GenDef="Table" Name="implRamUpdateTable">$switch IsPrimaryIndexKeyAtomic yes implRamUpdateAtomicTable default implRamUpdateCompositeTable$</GenRule>
+	<GenRule GenDef="Table" Name="implRamUpdateAtomicTable">
+	public I$DefSchemaName$$TableName$ update$TableName$( I$SecSchemaName$Authorization Authorization,
+		I$DefSchemaName$$TableName$ Buff )
+	{$switch HasSuperClassRelation yes implRamUpdateTableInvokeSuper default empty$
+		$ICompactedPrimaryIndexClass$ pkey = Buff.getPKey();
+		I$DefSchemaName$$TableName$ existing = dictByPKey.get( pkey );
+		if( existing == null ) {
+			throw new CFLibStaleCacheDetectedException( getClass(),
+				"update$TableName$",
+				"Existing record not found",
+				"$TableName$",
+				pkey );
+		}$switch HasSuperClassRelation no implRamUpdateTableCheckRevision default empty$$iterate Index( each maybeImplRamUpdateTableInitIndexKey )$
+		// Check unique indexes
+$iterate Index( each maybeImplRamUpdateTableCheckUniqueKey )$
+		// Validate foreign keys
+$iterate Relation( each implRamUpdateTableIntegrityCheck empty empty )$
+		// Update is valid
+
+		Map&lt; $ICompactedPrimaryIndexClass$, $DefSchemaName$Buff$TableName$ &gt; subdict;
+
+		dictByPKey.remove( pkey );
+		dictByPKey.put( pkey, Buff );
+$iterate Index( each maybeImplRamUpdateTableReplaceIndexEntry )$
+		return(Buff);
+	}
+</GenRule>
+	<GenRule GenDef="Table" Name="implRamUpdateCompositeTable">
+	public I$DefSchemaName$$TableName$ update$TableName$( I$SecSchemaName$Authorization Authorization,
 		I$DefSchemaName$$TableName$ Buff )
 	{$switch HasSuperClassRelation yes implRamUpdateTableInvokeSuper default empty$
 		$ICompactedPrimaryIndexClass$ pkey = schema.getFactory$reference BaseClass TableName$().newPKey();$switch IsBaseTable yes implRamUpdateTableSetPKeyClassCode default empty$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamUpdateTablePKey empty empty )$
@@ -1780,12 +1857,16 @@ $iterate Relation( each implRamUpdateTableIntegrityCheck empty empty )$
 		dictByPKey.remove( pkey );
 		dictByPKey.put( pkey, Buff );
 $iterate Index( each maybeImplRamUpdateTableReplaceIndexEntry )$
+		return(Buff);
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implRamUpdateTableInvokeSuper">
-		schema.getTable$reference SuperClassRelation reference ToTable TableName$().update$reference SuperClassRelation reference ToTable TableName$( Authorization,
-			Buff );</GenRule>
+		I$DefSchemaName$$TableName$ repl = schema.getTable$reference SuperClassRelation reference ToTable TableName$().update$reference SuperClassRelation reference ToTable TableName$( Authorization,
+			Buff );
+		if (repl != Buff) {
+			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
+		}</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamUpdateTableSetPKeyClassCode">
 		pkey.setClassCode( Buff.getClassCode() );</GenRule>
@@ -1874,6 +1955,7 @@ $iterate Columns( each implRamUpdateTableCheckReqRefColIsNull )$
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"update$TableName$",
 					"$IndexName$",
+					"$IndexName$",
 					newKey$Suffix$ );
 			}
 		}
@@ -1906,9 +1988,9 @@ $iterate Columns( each implRamUpdateTableCheckReqRefColIsNull )$
 		>$switch IsPrimaryIndex yes empty default implRamUpdateTableInitIndexKey$</GenRule>
 
 	<GenRule GenDef="Index" Name="implRamUpdateTableInitIndexKey">
-		$DefSchemaName$Buff$TableName$By$Suffix$Key existingKey$Suffix$ = schema.getFactory$TableName$().new$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key existingKey$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamUpdateTableInitExistingKeyAttr )$
-		$DefSchemaName$Buff$TableName$By$Suffix$Key newKey$Suffix$ = schema.getFactory$TableName$().new$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key newKey$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamUpdateTableInitNewKeyAttr )$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implRamUpdateTableInitExistingKeyAttr"
@@ -2515,7 +2597,7 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 	<GenRule GenDef="Index" Name="implRamDeleteTableByIndex">
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implNextIdGenDeclAttr )$ )
 	{
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key = schema.getFactory$TableName$().new$Suffix$Key();$iterate Columns( each implRamDeleteApplyArgToKey )$
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.getFactory$TableName$().newBy$Suffix$Key();$iterate Columns( each implRamDeleteApplyArgToKey )$
 		delete$poptop Table TableName$By$Suffix$( Authorization, key );
 	}
 
@@ -2587,13 +2669,7 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 	<GenRule GenDef="IndexCol" Name="implRamDeleteCommaPassArgColumn">,
 			argKey.get$OptionalOrRequired$$Name$()</GenRule>
 
-	<GenRule GenDef="Index" Name="implRamDeleteTableByPrimaryIndex">
-	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implNextIdGenDeclAttr )$ )
-	{
-		$poptop Table reference BaseClass BuffCompactedPrimaryIndexClass$ key = schema.getFactory$TableName$().newPKey();$iterate Columns( each implRamDeleteApplyArgToKey )$
-		delete$poptop Table TableName$By$Suffix$( Authorization, key );
-	}
-
+	<GenRule GenDef="Index" Name="implRamDeleteTableByPrimaryIndex">$switch IsPrimaryIndexKeyAtomic yes empty default implRamDeleteTableByPrimaryIndexWrapper$
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization,
 		$poptop Table reference BaseClass ICompactedPrimaryIndexClass$ argKey )
 	{$switch implDeleteTableBySuffixNeedProcName yes implDeleteTableBySuffixImplProcName default empty$
@@ -2617,7 +2693,14 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 		}
 	}
 </GenRule>
-
+	<GenRule GenDef="Index" Name="implRamDeleteTableByPrimaryIndexWrapper">
+	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implNextIdGenDeclAttr )$ )
+	{
+		$poptop Table reference BaseClass BuffCompactedPrimaryIndexClass$ key = schema.getFactory$TableName$().newPKey();$iterate Columns( each implRamDeleteApplyArgToKey )$
+		delete$poptop Table TableName$By$Suffix$( Authorization, key );
+	}
+</GenRule>
+	
 	<GenRule GenDef="Relation" Name="implRamDeleteTableIntegrityCheck"
 		>$switch RelationTypeTag
 			Superclass implRamDeleteTableCheckSuperClassReference
@@ -2685,7 +2768,7 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 		>$switch IsPrimaryIndex yes empty default implRamDeleteTableInitIndexKey$</GenRule>
 
 	<GenRule GenDef="Index" Name="implRamDeleteTableInitIndexKey">
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key$Suffix$ = schema.getFactory$TableName$().new$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamDeleteTableInitExistingKeyAttr )$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implRamDeleteTableInitExistingKeyAttr"
