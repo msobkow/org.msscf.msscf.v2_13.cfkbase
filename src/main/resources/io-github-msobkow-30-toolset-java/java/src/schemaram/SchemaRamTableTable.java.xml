@@ -72,8 +72,8 @@ $poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty emp
 public class $SchemaName$Ram$TableName$Table
 	implements I$SchemaName$$TableName$Table
 {
-	private I$SchemaName$Schema schema;$declRamTableByPKey$$iterate Index( each maybeDeclRamTableByIndex )$$iterate DispensedId16Generators( first implRamTableDeclId16Gen each empty empty empty )$$iterate DispensedId32Generators( first implRamTableDeclId32Gen each empty empty empty )$$iterate DispensedId64Generators( first implRamTableDeclId64Gen each empty empty empty )$$JavaRamTableMembers$
-$implConstructRamTableTable$$iterate DispensedId16Generators( first implRamTableGenerateNextId16 each empty empty empty )$$iterate DispensedId32Generators( first implRamTableGenerateNextId32 each empty empty empty )$$iterate DispensedId64Generators( first implRamTableGenerateNextId64 each empty empty empty )$$moreRamTableMethods$$JavaRamTableImplementation$}
+	private I$SchemaName$Schema schema;$declRamTableByPKey$$iterate Index( each maybeDeclRamTableByIndex )$$JavaRamTableMembers$
+$implConstructRamTableTable$$moreRamTableMethods$$JavaRamTableImplementation$}
 </GenFile>
 
 	<GenRule GenDef="Index" Name="PageData"
@@ -128,7 +128,29 @@ $JavaMethodBody$	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="moreRamTableMethods"
-		>$implRamCreateTable$$implRamReadTableDerivedByPKey$$implRamLockTableDerivedByPKey$$implRamReadAllTableDerived$$implRamReadTableDerivedByIndexes$$implRamReadTableBuffByPKey$$implRamLockTableBuffByPKey$$implRamReadAllTableBuff$$switch PageData yes implRamPageAllTableBuff default empty$$implRamReadTableBuffByIndexes$$implRamPageTableBuffByIndexes$$switch HasChain yes implRamMoveUpTableBuff default empty$$switch HasChain yes implRamMoveDownTableBuff default empty$$implRamUpdateTable$$implRamDeleteTable$$iterate ServerMethods( each implServerMethod empty empty )$</GenRule>
+		>$switch HasSuperClassRelation yes empty default implRamTableEnsureRec$$implRamCreateTable$$implRamReadTableDerivedByPKey$$implRamLockTableDerivedByPKey$$implRamReadAllTableDerived$$implRamReadTableDerivedByIndexes$$implRamReadTableBuffByPKey$$implRamLockTableBuffByPKey$$implRamReadAllTableBuff$$switch PageData yes implRamPageAllTableBuff default empty$$implRamReadTableBuffByIndexes$$implRamPageTableBuffByIndexes$$switch HasChain yes implRamMoveUpTableBuff default empty$$switch HasChain yes implRamMoveDownTableBuff default empty$$implRamUpdateTable$$implRamDeleteTable$$iterate ServerMethods( each implServerMethod empty empty )$</GenRule>
+		
+	<GenRule GenDef="Table" Name="implRamTableEnsureRec">
+	public $DefSchemaName$Buff$TableName$ ensureRec(I$DefSchemaName$$TableName$ rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			int classCode = rec.getClassCode();
+			if (classCode == I$DefSchemaName$$TableName$.CLASS_CODE) {
+				return( (($DefSchemaName$Buff$TableName$DefaultFactory)(schema.getFactory$TableName$())).ensureRec(rec) );
+			}$iterate TableSubClasses( each implRamTableEnsureRecWalkSubClass empty empty )$
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+			}
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implRamTableEnsureRecWalkSubClass">
+			else if (classCode == I$DeffSchemaName$$TableName$.CLASS_CODE) {
+				return( (($DefSchemaName$Buff$TableName$DefaultFactory)(schema.getFactory$TableName$())).ensureRec(rec) );
+			}$iterate TableSubClasses( each implRamTableEnsureRecWalkSubClass empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamMoveUpTableBuff">
 	/**
@@ -150,6 +172,8 @@ $JavaMethodBody$	}
 		if( cur == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
+				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
 				"Could not locate object" );
 		}
 
@@ -162,6 +186,8 @@ $JavaMethodBody$	}
 		if( prev == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
+				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
 				"Could not locate object.prev" );
 		}
 
@@ -171,6 +197,8 @@ $JavaMethodBody$	}
 			if( grandprev == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
+					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
 					"Could not locate object.prev.prev" );
 			}
 		}
@@ -181,6 +209,8 @@ $JavaMethodBody$	}
 			if( next == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
+					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
 					"Could not locate object.next" );
 			}
 		}
@@ -276,92 +306,80 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetCurPrev )
 			editGrandnext.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( cur.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffInstantiateBuff">
-			if( classCode.equals( "$reference Chain reference Table ClassCode$" ) ) {
+			if( classCode == I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$.CLASS_CODE ) {
 				newInstance = schema.getFactory$reference Chain reference Table TableName$().newBuff();
 			}$reference Chain reference Table iterate TableSubClasses( each implRamSchemaMoveBuffWalkInstantiateBuff empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \\"" + classCode + "\\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffWalkInstantiateBuff">
-			else if( classCode.equals( "$ClassCode$" ) ) {
+			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 				newInstance = schema.getFactory$TableName$().newBuff();
 			}$iterate TableSubClasses( each implRamSchemaMoveBuffWalkInstantiateBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffUpdateCur">
-			if( classCode.equals( "$reference Chain reference Table ClassCode$" ) ) {
+			if( classCode == I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$.CLASS_CODE ) {
 				schema.getTable$reference Chain reference Table TableName$().update$reference Chain reference Table TableName$( Authorization, editCur );
 			}$reference Chain reference Table iterate TableSubClasses( each implRamSchemaMoveBuffWalkUpdateCur empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \\"" + classCode + "\\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-cur-", "Not " + Integer.toString(classCode));
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffWalkUpdateCur">
-			else if( classCode.equals( "$ClassCode$" ) ) {
+			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 				schema.getTable$TableName$().update$TableName$( Authorization, ($EffSchemaName$$TableName$Buff)editCur );
 			}$iterate TableSubClasses( each implRamSchemaMoveBuffWalkUpdateCur empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffUpdatePrev">
-			if( classCode.equals( "$reference Chain reference Table ClassCode$" ) ) {
+			if( classCode == I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$.CLASS_CODE ) {
 				schema.getTable$reference Chain reference Table TableName$().update$reference Chain reference Table TableName$( Authorization, editPrev );
 			}$reference Chain reference Table iterate TableSubClasses( each implRamSchemaMoveBuffWalkUpdatePrev empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \\"" + classCode + "\\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-prev-", "Not " + Integer.toString(classCode));
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffWalkUpdatePrev">
-			else if( classCode.equals( "$ClassCode$" ) ) {
+			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 				schema.getTable$TableName$().update$TableName$( Authorization, ($EffSchemaName$$TableName$Buff)editPrev );
 			}$iterate TableSubClasses( each implRamSchemaMoveBuffWalkUpdatePrev empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffUpdateNext">
-			if( classCode.equals( "$reference Chain reference Table ClassCode$" ) ) {
+			if( classCode == I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$.CLASS_CODE ) {
 				schema.getTable$reference Chain reference Table TableName$().update$reference Chain reference Table TableName$( Authorization, editNext );
 			}$reference Chain reference Table iterate TableSubClasses( each implRamSchemaMoveBuffWalkUpdateNext empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \\"" + classCode + "\\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-next-", "Not " + Integer.toString(classCode));
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffWalkUpdateNext">
-			else if( classCode.equals( "$ClassCode$" ) ) {
+			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 				schema.getTable$TableName$().update$TableName$( Authorization, ($EffSchemaName$$TableName$Buff)editNext );
 			}$iterate TableSubClasses( each implRamSchemaMoveBuffWalkUpdateNext empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffUpdateGrandnext">
-			if( classCode.equals( "$reference Chain reference Table ClassCode$" ) ) {
+			if( classCode == I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$.CLASS_CODE ) {
 				schema.getTable$reference Chain reference Table TableName$().update$reference Chain reference Table TableName$( Authorization, editGrandnext );
 			}$reference Chain reference Table iterate TableSubClasses( each implRamSchemaMoveBuffWalkUpdateGrandnext empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \\"" + classCode + "\\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-grand-next-", "Not " + Integer.toString(classCode));
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffWalkUpdateGrandnext">
-			else if( classCode.equals( "$ClassCode$" ) ) {
+			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 				schema.getTable$TableName$().update$TableName$( Authorization, ($EffSchemaName$$TableName$Buff)editGrandnext );
 			}$iterate TableSubClasses( each implRamSchemaMoveBuffWalkUpdateGrandnext empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffUpdateGrandprev">
-			if( classCode.equals( "$reference Chain reference Table ClassCode$" ) ) {
+			if( classCode == I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$.CLASS_CODE ) {
 				schema.getTable$reference Chain reference Table TableName$().update$reference Chain reference Table TableName$( Authorization, editGrandprev );
 			}$reference Chain reference Table iterate TableSubClasses( each implRamSchemaMoveBuffWalkUpdateGrandprev empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \\"" + classCode + "\\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-grand-prev-", "Not " + Integer.toString(classCode));
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffWalkUpdateGrandprev">
-			else if( classCode.equals( "$ClassCode$" ) ) {
+			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 				schema.getTable$TableName$().update$TableName$( Authorization, ($EffSchemaName$$TableName$Buff)editGrandprev );
 			}$iterate TableSubClasses( each implRamSchemaMoveBuffWalkUpdateGrandprev empty empty )$</GenRule>
 
@@ -421,6 +439,8 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetCurPrev )
 		if( cur == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
+				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
 				"Could not locate object" );
 		}
 
@@ -433,6 +453,8 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetCurPrev )
 		if( next == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
+				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
 				"Could not locate object.next" );
 		}
 
@@ -442,6 +464,8 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetCurPrev )
 			if( grandnext == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
+					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
 					"Could not locate object.next.next" );
 			}
 		}
@@ -452,11 +476,13 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetCurPrev )
 			if( prev == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
+					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
 					"Could not locate object.prev" );
 			}
 		}
 
-		String classCode = cur.getClassCode();
+		integer classCode = cur.getClassCode();
 		$EffSchemaName$$reference Chain reference Table TableName$Buff newInstance;$implRamSchemaMoveBuffInstantiateBuff$
 		$EffSchemaName$$reference Chain reference Table TableName$Buff editCur = newInstance;
 		editCur.set( cur );
@@ -932,78 +958,6 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	}
 </GenRule>
 
-	<GenRule ScopeDef="Table" GenDef="Id16Gen" Name="implRamNextIdGen">
-	public short next$Name$( I$SecSchemaName$Authorization Authorization,
-		$popto Table reference BaseClass ICompactedPrimaryIndexClass$ pkey )
-	{
-		short retval = next$Name$( Authorization$popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamNextIdGenExtractCommaPKeyArg )$ );
-		return( retval );
-	}
-
-	public short next$Name$( I$SecSchemaName$Authorization Authorization$popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamNextIdGenCommaPKeyArg )$ )
-	{
-		short retNext = generateNextId16( $popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( first implRamNextIdGenPassPKeyArg each implRamNextIdGenCommaPassPKeyArg )$,
-			(short)$Slice$ );
-		return( retNext );
-	}
-</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implRamNextIdGenPassPKeyArg"
-		>arg$Name$</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implRamNextIdGenCommaPassPKeyArg">,
-		$implRamNextIdGenPassPKeyArg$</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implRamNextIdGenExtractCommaPKeyArg">,
-			pkey.get$OptionalOrRequired$$Name$()</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implRamNextIdGenPKeyArg"
-		>$implJavaAtomType$ arg$Name$</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implRamNextIdGenCommaPKeyArg">,
-		$implRamNextIdGenPKeyArg$</GenRule>
-
-	<GenRule ScopeDef="Table" GenDef="Id32Gen" Name="implRamNextIdGen">
-	public int next$Name$( I$SecSchemaName$Authorization Authorization,
-		$popto Table reference BaseClass ICompactedPrimaryIndexClass$ pkey )
-	{
-		int retval = next$Name$( Authorization$popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamNextIdGenExtractCommaPKeyArg )$ );
-		return( retval );
-	}
-
-	public int next$Name$( I$SecSchemaName$Authorization Authorization$popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamNextIdGenCommaPKeyArg )$ )
-	{
-		int retNext = generateNextId32( $popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( first implRamNextIdGenPassPKeyArg each implRamNextIdGenCommaPassPKeyArg )$,
-			(short)$Slice$ );
-		return( retNext );
-	}
-</GenRule>
-
-	<GenRule ScopeDef="Table" GenDef="Id64Gen" Name="implRamNextIdGen">
-	public long next$Name$( I$SecSchemaName$Authorization Authorization,
-		$popto Table reference BaseClass ICompactedPrimaryIndexClass$ pkey )
-	{
-		long retval = next$Name$( Authorization$popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamNextIdGenExtractCommaPKeyArg )$ );
-		return( retval );
-	}
-
-	public long next$Name$( I$SecSchemaName$Authorization Authorization$popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamNextIdGenCommaPKeyArg )$ )
-	{
-		long retNext = generateNextId64( $popto Table reference BaseClass reference PrimaryKeyIndex iterate Columns( first implRamNextIdGenPassPKeyArg each implRamNextIdGenCommaPassPKeyArg )$,
-			(short)$Slice$ );
-		return( retNext );
-	}
-</GenRule>
-
-	<GenRule ScopeDef="Table" GenDef="UuidGen" Name="implRamNextIdGen">
-	public UUID next$Name$( I$SecSchemaName$Authorization Authorization,
-		$popto Table reference BaseClass ICompactedPrimaryIndexClass$ pkey )
-	{
-		UUID retval = UUID.randomUUID();
-		return( retval );
-	}
-</GenRule>
-
 	<GenRule GenDef="IndexCol" Name="implRamCreateTablePKeyToBuff">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableAtomicPKeyToBuff default implRamCreateTableCompositePKeyToBuff$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implRamCreateTableAtomicPKeyToBuff">
 		Buff.set$reference Column Optionality$$reference Column Name$( pkey );</GenRule>
@@ -1022,9 +976,10 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	<GenRule GenDef="Table" Name="implRamCreateTable">$switch IsPrimaryIndexKeyAtomic yes implRamCreateAtomicTable default implRamCreateCompositeTable$</GenRule>
 	<GenRule GenDef="Table" Name="implRamCreateAtomicTable">
 	public I$DefSchemaName$$TableName$ create$TableName$( I$SecSchemaName$Authorization Authorization,
-		I$DefSchemaName$$TableName$ Buff )
+		I$DefSchemaName$$TableName$ iBuff )
 	{
-		final String S_ProcName = "create$TableName$";$switch IsInstantiable yes implRamCreateTableMaybeInitChainLinks default empty$$switch HasSuperClassRelation yes implRamCreateTableInvokeSuper default empty$
+		final String S_ProcName = "create$TableName$";
+		$switch HasSuperClassRelation yes implRamCreateTableInvokeSuper default implRamCreateTableImplBase$
 		$ICompactedPrimaryIndexClass$ pkey;$switch HasSuperClassRelation no implRamCreateTablePKeyGenNew default implRamCreateTablePKeyCopyBuff$$switch HasSuperClassRelation no implRamCreateTableCopyBackPKeyToBuff default empty$$iterate Index( each maybeImplRamCreateTableInitIndexKey )$
 		// Validate unique indexes
 
@@ -1038,15 +993,40 @@ $iterate Relation( each implRamCreateTableIntegrityCheck empty empty )$
 
 		dictByPKey.put( pkey, Buff );
 $iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable yes implRamCreateTableMaybeChainLinkTail default empty$
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == I$DefSchemaName$$TableName$.CLASS_CODE) {
+				$DefSchemaName$Buff$TableName$ retbuff = (($DefSchemaName$Buff$TableName$)(schema.getFactory$TableName$().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}$iterate TableSubClasses( each implRamCreateTableWalkRetBuff empty empty )$
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 </GenRule>
+
+	<GenRule GenDef="Table" Name="implRamCreateTableWalkRetBuff">
+			else if (classCode == I$DefSchemaName$$TableName$.CLASS_CODE) {
+				$DefSchemaName$Buff$TableName$ retbuff = (($DefSchemaName$Buff$TableName$)(schema.getFactory$TableName$().newRec()));
+				retbuff.set((I$DefSchemaName$$TableName$)Buff);
+				return( retbuff );
+			}$iterate TableSubClasses( each implRamCreateTableWalkRetBuff empty empty )$</GenRule>
+
+	<GenRule GenDef="Table" Name="implRamCreateTableImplBase">
+		$DefSchemaName$Buff$TableName$ Buff = ensureRec(iBuff);$switch IsInstantiable yes implRamCreateTableMaybeInitChainLinks default empty$</GenRule>
+
 	<GenRule GenDef="Table" Name="implRamCreateCompositeTable">
 	public I$DefSchemaName$$TableName$ create$TableName$( I$SecSchemaName$Authorization Authorization,
-		I$DefSchemaName$$TableName$ Buff )
+		I$DefSchemaName$$TableName$ iBuff )
 	{
-		final String S_ProcName = "create$TableName$";$switch IsInstantiable yes implRamCreateTableMaybeInitChainLinks default empty$$switch HasSuperClassRelation yes implRamCreateTableInvokeSuper default empty$
-		$ICompactedPrimaryIndexClass$ pkey = schema.getFactory$reference BaseClass TableName$().newPKey();$switch HasClassCode yes implRamCreateTableSetPKeyClassCode default empty$$switch HasSuperClassRelation no implRamCreateTablePKeyGenNew default implRamCreateTablePKeyCopyBuff$$switch HasSuperClassRelation no implRamCreateTableCopyBackPKeyToBuff default empty$$iterate Index( each maybeImplRamCreateTableInitIndexKey )$
+		final String S_ProcName = "create$TableName$";
+		$switch HasSuperClassRelation yes implRamCreateTableInvokeSuper default implRamCreateTableImplBase$
+		$ICompactedPrimaryIndexClass$ pkey = schema.getFactory$reference BaseClass TableName$().newPKey();$switch HasSuperClassRelation no implRamCreateTablePKeyGenNew default implRamCreateTablePKeyCopyBuff$$switch HasSuperClassRelation no implRamCreateTableCopyBackPKeyToBuff default empty$$iterate Index( each maybeImplRamCreateTableInitIndexKey )$
 		// Validate unique indexes
 
 		if( dictByPKey.containsKey( pkey ) ) {
@@ -1059,7 +1039,20 @@ $iterate Relation( each implRamCreateTableIntegrityCheck empty empty )$
 
 		dictByPKey.put( pkey, Buff );
 $iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable yes implRamCreateTableMaybeChainLinkTail default empty$
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == I$DefSchemaName$$TableName$.CLASS_CODE) {
+				$DefSchemaName$Buff$TableName$ retbuff = (($DefSchemaName$Buff$TableName$)(schema.getFactory$TableName$().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}$iterate TableSubClasses( each implRamCreateTableWalkRetBuff empty empty )$
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 </GenRule>
 
@@ -1144,9 +1137,10 @@ $implRamCreateTableInitChainLinksBody$
 	<GenRule GenDef="RelationCol" Name="implRamCreateTableChainTailLinkAssignNext">
 				tailEdit.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( Buff.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
 
+		$DefSchemaName$Buff$TableName Buff = (($DefSchemaName$Buff$TableName$Factory)schema.get$TableName$Factory()).ensureRec(iBuff);$switch IsInstantiable yes implRamCreateTableMaybeInitChainLinks default empty$
 	<GenRule GenDef="Table" Name="implRamCreateTableInvokeSuper">
-		schema.getTable$reference SuperClassRelation reference ToTable TableName$().create$reference SuperClassRelation reference ToTable TableName$( Authorization,
-			Buff );</GenRule>
+		$DefSchemaName$Buff$TableName$ Buff = ($DefSchemaName$Buff$TableName$)(schema.getTable$reference SuperClassRelation reference ToTable TableName$().create$reference SuperClassRelation reference ToTable TableName$( Authorization,
+			iBuff ));$switch IsInstantiable yes implRamCreateTableMaybeInitChainLinks default empty$</GenRule>
 
 	<GenRule GenDef="TableCol" Name="checkPKeyHasValue"
 		>$reference DataType checkPKeyHasTableColValue$</GenRule>
@@ -2197,7 +2191,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 			}</GenRule>
 
 	<GenRule GenDef="DelDep" Name="implRamDeleteTableDelDepWalkAllocEditBuff">
-					else if( classCode.equals( "$ClassCode$" ) ) {
+					else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 						editBuff = schema.getFactory$TableName$().newBuff();
 					}$iterate TableSubClasses( each implRamDeleteTableDelDepWalkAllocEditBuff empty empty )$</GenRule>
 
@@ -2207,13 +2201,11 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 	<GenRule GenDef="Table" Name="implRamDeleteTableClearRootSubObjectRefs">
 		$EffSchemaName$$TableName$Buff editSubobj = schema.getTable$TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$( Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamDeleteTableClearRootSubObjectExistingArg )$ );$implRamDeleteTableClearSubObjectRefs$
 		classCode = editSubobj.getClassCode();
-		if( classCode.equals( "$ClassCode$" ) ) {
+		if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 			schema.getTable$TableName$().update$TableName$( Authorization, editSubobj );
 		}$iterate TableSubClasses( each implRamDeleteTableSubObjectWalkSaveEditBuff empty empty )$
 		else {
-			new CFLibUnsupportedClassException( getClass(),
-				S_ProcName,
-				"Unrecognized ClassCode \"" + classCode + "\"" );
+			throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-clear-root-subobject-refs-", "Not " + Integer.toString(classCode));
 		}
 		existing = editSubobj;</GenRule>
 
@@ -2248,12 +2240,12 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 			editSubobj.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( null );</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableSubObjectWalkSaveEditBuff">
-		else if( classCode.equals( "$ClassCode$" ) ) {
+		else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 			schema.getTable$TableName$().update$TableName$( Authorization, ($EffSchemaName$$TableName$Buff)editSubobj );
 		}$iterate TableSubClasses( each implRamDeleteTableSubObjectWalkSaveEditBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableSubObjectWalkAllocEditBuff">
-		else if( classCode.equals( "$ClassCode$" ) ) {
+		else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 			editSubobj = schema.getFactory$TableName$().newBuff();
 		}$iterate TableSubClasses( each implRamDeleteTableSubObjectWalkAllocEditBuff empty empty )$</GenRule>
 
@@ -2289,9 +2281,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 							schema.getTable$reference Relation reference FromTable TableName$().update$popto ClearTopDep reference Relation reference FromTable TableName$( Authorization, editBuff );
 						}$reference Relation reference FromTable iterate TableSubClasses( each implRamDeleteTableClearDepWalkSaveEditBuff empty empty )$
 						else {
-							new CFLibUnsupportedClassException( getClass(),
-								S_ProcName,
-								"Unrecognized ClassCode \"" + classCode + "\"" );
+							throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-clear-top-dep-", "Not " + Integer.toString(classCode));
 						}
 					}</GenRule>
 
@@ -2327,9 +2317,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 							schema.getTable$popto ClearTopDep reference Relation reference ToTable TableName$().update$popto ClearTopDep reference Relation reference ToTable TableName$( Authorization, editBuff );
 						}$popto ClearTopDep reference Relation reference ToTable iterate TableSubClasses( each implRamDeleteTableClearDepWalkSaveEditBuff empty empty )$
 						else {
-							new CFLibUnsupportedClassException( getClass(),
-								S_ProcName,
-								"Unrecognized ClassCode \"" + classCode + "\"" );
+							throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-clear-sub-dep-1-", "Not " + Integer.toString(classCode));
 						}
 					}</GenRule>
 
@@ -2368,9 +2356,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 							schema.getTable$popto ClearSubDep1 reference Relation reference ToTable TableName$().update$popto ClearSubDep1 reference Relation reference ToTable TableName$( Authorization, editBuff );
 						}$popto ClearSubDep1 reference Relation reference ToTable iterate TableSubClasses( each implRamDeleteTableClearDepWalkSaveEditBuff empty empty )$
 						else {
-							new CFLibUnsupportedClassException( getClass(),
-								S_ProcName,
-								"Unrecognized ClassCode \"" + classCode + "\"" );
+							throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-clear-sub-dep-2-", "Not " + Integer.toString(classCode));
 						}
 					}</GenRule>
 
@@ -2390,12 +2376,12 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 					}</GenRule>
 
 	<GenRule GenDef="ClearDep" Name="implRamDeleteTableClearDepWalkAllocEditBuff">
-						else if( classCode.equals( "$ClassCode$" ) ) {
+						else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 							editBuff = schema.getFactory$TableName$().newBuff();
 						}$iterate TableSubClasses( each implRamDeleteTableClearDepWalkAllocEditBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableClearDepWalkSaveEditBuff">
-						else if( classCode.equals( "$ClassCode$" ) ) {
+						else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 							schema.getTable$TableName$().update$TableName$( Authorization, ($EffSchemaName$$TableName$Buff)editBuff );
 						}$iterate TableSubClasses( each implRamDeleteTableClearDepWalkSaveEditBuff empty empty )$</GenRule>
 
@@ -2410,9 +2396,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 							schema.getTable$popto ClearSubDep2 reference Relation reference ToTable TableName$().update$popto ClearSubDep2 reference Relation reference ToTable TableName$( Authorization, editBuff );
 						}$popto ClearSubDep2 reference Relation reference ToTable iterate TableSubClasses( each implRamDeleteTableClearDepWalkSaveEditBuff empty empty )$
 						else {
-							new CFLibUnsupportedClassException( getClass(),
-								S_ProcName,
-								"Unrecognized ClassCode \"" + classCode + "\"" );
+							throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-clear-sub-dep-3-", "Not " + Integer.toString(classCode));
 						}
 					}
 				</GenRule>
@@ -2440,18 +2424,14 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 				editPrev = schema.getFactory$reference Chain reference PrevRel reference ToTable TableName$().newBuff();
 			}$reference Chain reference PrevRel reference ToTable iterate TableSubClasses( each implRamDeleteTableUpdatePrevWalkAllocBuff empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-update-prev-", "Not " + Integer.toString(classCode));
 			}
 			editPrev.set( prev );$reference Chain reference NextRel iterate Columns( each implRamDeleteTableUpdatePrevSetPrevNext )$
 			if( classCode.equals( "$reference Chain reference PrevRel reference ToTable ClassCode$" ) ) {
 				schema.getTable$reference Chain reference PrevRel reference ToTable TableName$().update$reference Chain reference PrevRel reference ToTable TableName$( Authorization, editPrev );
 			}$reference Chain reference PrevRel reference ToTable iterate TableSubClasses( each implRamDeleteTableUpdatePrevWalkUpdateBuff empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-edit-prev-", "Not " + Integer.toString(classCode));
 			}
 		}
 </GenRule>
@@ -2460,12 +2440,12 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 			editPrev.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( next$reference ToCol Name$ );</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdatePrevWalkUpdateBuff">
-			else if( classCode.equals( "$ClassCode$" ) ) {
+			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 				schema.getTable$TableName$().update$TableName$( Authorization, ($EffSchemaName$$TableName$Buff)editPrev );
 			}$iterate TableSubClasses( each implRamDeleteTableUpdatePrevWalkUpdateBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdatePrevWalkAllocBuff">
-			else if( classCode.equals( "$ClassCode$" ) ) {
+			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 				editPrev = schema.getFactory$TableName$().newBuff();
 			}$iterate TableSubClasses( each implRamDeleteTableUpdatePrevWalkAllocBuff empty empty )$</GenRule>
 
@@ -2495,18 +2475,14 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 				editNext = schema.getFactory$reference Chain reference NextRel reference ToTable TableName$().newBuff();
 			}$reference Chain reference NextRel reference ToTable iterate TableSubClasses( each implRamDeleteTableUpdateNextWalkAllocBuff empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-update-next-", "Not " + Integer.toString(classCode));
 			}
 			editNext.set( next );$reference Chain reference PrevRel iterate Columns( each implRamDeleteTableUpdateNextSetNextPrev )$
 			if( classCode.equals( "$reference Chain reference NextRel reference ToTable ClassCode$" ) ) {
 				schema.getTable$reference Chain reference NextRel reference ToTable TableName$().update$reference Chain reference NextRel reference ToTable TableName$( Authorization, editNext );
 			}$reference Chain reference NextRel reference ToTable iterate TableSubClasses( each implRamDeleteTableUpdateNextWalkUpdateBuff empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-edit-next-", "Not " + Integer.toString(classCode));
 			}
 		}
 </GenRule>
@@ -2515,12 +2491,12 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 			editNext.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( prev$reference ToCol Name$ );</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdateNextWalkUpdateBuff">
-			else if( classCode.equals( "$ClassCode$" ) ) {
+			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 				schema.getTable$TableName$().update$TableName$( Authorization, ($EffSchemaName$$TableName$Buff)editNext );
 			}$iterate TableSubClasses( each implRamDeleteTableUpdateNextWalkUpdateBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdateNextWalkAllocBuff">
-			else if( classCode.equals( "$ClassCode$" ) ) {
+			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 				editNext = schema.getFactory$TableName$().newBuff();
 			}$iterate TableSubClasses( each implRamDeleteTableUpdateNextWalkAllocBuff empty empty )$</GenRule>
 
@@ -2643,11 +2619,7 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 				schema.getTable$TableName$().delete$TableName$( Authorization, cur );
 			}$iterate ReverseRelations( each implDeleteTableBySuffixClassWalker empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of $TableName$ must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}</GenRule>
 
 	<GenRule GenDef="Relation" Name="implDeleteTableBySuffixClassWalker"

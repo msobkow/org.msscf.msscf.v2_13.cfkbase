@@ -100,7 +100,38 @@ public class $SchemaName$Buff$TableName$DefaultFactory$switch HasDefSchema yes e
 			new $DefSchemaName$Buff$TableName$By$Suffix$Key();
 		return( key );
 	}
+
+	public $DefSchemaName$Buff$TableName$By$Suffix$Key ensureBy$Suffix$Key(I$DefSchemaName$$TableName$By$Suffix$Key key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof $DefSchemaName$Buff$TableName$By$Suffix$Key) {
+			return( ($DefSchemaName$Buff$TableName$By$Suffix$Key)key );
+		}
+		else {
+			$DefSchemaName$Buff$TableName$By$Suffix$Key mapped = new $DefSchemaName$Buff$TableName$By$Suffix$Key();$iterate Columns( each implBuffCopyKeyAttrToMapped )$
+			return( mapped );
+		}
+	}
 </GenRule>
+
+	<GenRule GenDef="Relation" Name="maybeEnsureBuffCopySuperiorRelation">$switch IsSuperiorPrimaryKeyRelation yes ensureBuffCopySuperiorRelation default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="ensureBuffCopySuperiorRelation">
+			mapped.set$OptionalOrRequired$$RelationType$$Suffix$( $iterate Columns( first passKeyAttr each commaPassKeyAttr )$ );</GenRule>
+	<GenRule GenDef="RelationCol" Name="passKeyAttr">key.get$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="commaPassKeyAttr">,
+				$passKeyAttr$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="maybeImplBuffCopyKeyAttrToMapped">$switch InSuperiorRelation yes empty default implBuffCopyKeyAttrToMapped$</GenRule>
+	<GenRule GenDef="TableCol" Name="maybeImplBuffCopyKeyAttrToMapped">$switch InSuperiorRelation yes empty default implBuffCopyKeyAttrToMapped$</GenRule>
+	<GenRule GenDef="Atom" Name="maybeImplBuffCopyKeyAttrToMapped">$switch InSuperiorRelation yes empty default implBuffCopyKeyAttrToMapped$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implBuffCopyKeyAttrToMapped">
+			mapped.set$implColumnAttrOptionality$$Name$( key.get$implColumnAttrOptionality$$Name$() );</GenRule>
+	<GenRule GenDef="TableCol" Name="implBuffCopyKeyAttrToMapped">
+			mapped.set$implColumnAttrOptionality$$Name$( key.get$implColumnAttrOptionality$$Name$() );</GenRule>
+	<GenRule GenDef="Atom" Name="implBuffCopyKeyAttrToMapped">
+			mapped.set$implColumnAttrOptionality$$Name$( key.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
     <GenRule GenDef="Table" Name="implBuffNewPKey"
             >$switch HasDefSchema no ifNotAtomicBuffImplNewPKey default empty$</GenRule>
@@ -112,6 +143,19 @@ public class $SchemaName$Buff$TableName$DefaultFactory$switch HasDefSchema yes e
             new $DefSchemaName$Buff$reference BaseClass TableName$PKey();
         return( pkey );
     }
+
+	public $DefSchemaName$Buff$reference BaseClass TableName$PKey ensurePKey(I$DefSchemaName$$reference BaseClass TableName$PKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof $DefSchemaName$Buff$reference BaseClass TableName$PKey) {
+			return( ($DefSchemaName$Buff$reference BaseClass TableName$PKey)key );
+		}
+		else {
+			$DefSchemaName$Buff$reference BaseClass TableName$PKey mapped = new $DefSchemaName$Buff$reference BaseClass TableName$PKey();$reference BaseClass iterate Relation( each maybeEnsureBuffCopySuperiorRelation empty empty)$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplBuffCopyKeyAttrToMapped )$
+			return( mapped );
+		}
+	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="maybeImplBuffNewHPKey">$switch BaseHasHistory yes implBuffNewHPKey default empty$</GenRule>
@@ -123,6 +167,23 @@ public class $SchemaName$Buff$TableName$DefaultFactory$switch HasDefSchema yes e
 			new $DefSchemaName$Buff$reference BaseClass TableName$HPKey();
 		return( hpkey );
 	}
+
+	public $DefSchemaName$Buff$reference BaseClass TableName$HPKey ensureHPKey(I$DefSchemaName$$reference BaseClass TableName$HPKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if( key instanceof $DefSchemaName$Buff$reference BaseClass TableName$HPKey) {
+			return( ($DefSchemaName$Buff$reference BaseClass TableName$HPKey)key );
+		}
+		else {
+			$DefSchemaName$Buff$reference BaseClass TableName$HPKey mapped = new $DefSchemaName$Buff$reference BaseClass TableName$HPKey();
+			mapped.setAuditClusterId(key.getAuditClusterId());
+			mapped.setAuditActionId(key.getAuditActionId());
+			mapped.setAuditSessionId(key.getAuditSessionId());
+			mapped.setAuditStamp(key.getAuditStamp());$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implBuffCopyKeyAttrToMapped )$
+			return( mapped );
+		}
+	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffNewRec">
@@ -132,6 +193,20 @@ public class $SchemaName$Buff$TableName$DefaultFactory$switch HasDefSchema yes e
 			new $DefSchemaName$Buff$TableName$();
 		return( rec );
 	}
+
+	public $DefSchemaName$Buff$TableName$ ensureRec(I$DefSchemaName$$TableName$ rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof $DefSchemaName$Buff$TableName$) {
+			return( ($DefSchemaName$Buff$TableName$)rec );
+		}
+		else {
+			$DefSchemaName$Buff$TableName$ mapped = new $DefSchemaName$Buff$TableName$();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffNewHRec">
@@ -140,6 +215,20 @@ public class $SchemaName$Buff$TableName$DefaultFactory$switch HasDefSchema yes e
 		I$DefSchemaName$$TableName$H hrec =
 			new $DefSchemaName$Buff$TableName$H();
 		return( hrec );
+	}
+
+	public $DefSchemaName$Buff$TableName$H ensureHRec(I$DefSchemaName$$TableName$H hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof $DefSchemaName$Buff$TableName$H) {
+			return( ($DefSchemaName$Buff$TableName$H)hrec );
+		}
+		else {
+			$DefSchemaName$Buff$TableName$H mapped = new $DefSchemaName$Buff$TableName$H();
+			mapped.set(hrec);
+			return( mapped );
+		}
 	}
 </GenRule>
 
