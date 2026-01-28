@@ -1026,7 +1026,7 @@ $iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable 
 	{
 		final String S_ProcName = "create$TableName$";
 		$switch HasSuperClassRelation yes implRamCreateTableInvokeSuper default implRamCreateTableImplBase$
-		$ICompactedPrimaryIndexClass$ pkey = schema.getFactory$reference BaseClass TableName$().newPKey();$switch HasSuperClassRelation no implRamCreateTablePKeyGenNew default implRamCreateTablePKeyCopyBuff$$switch HasSuperClassRelation no implRamCreateTableCopyBackPKeyToBuff default empty$$iterate Index( each maybeImplRamCreateTableInitIndexKey )$
+		$BuffCompactedPrimaryIndexClass$ pkey = ($BuffCompactedPrimaryIndexClass$)(schema.getFactory$reference BaseClass TableName$().newPKey());$switch HasSuperClassRelation no implRamCreateTablePKeyGenNew default implRamCreateTablePKeyCopyBuff$$switch HasSuperClassRelation no implRamCreateTableCopyBackPKeyToBuff default empty$$iterate Index( each maybeImplRamCreateTableInitIndexKey )$
 		// Validate unique indexes
 
 		if( dictByPKey.containsKey( pkey ) ) {
@@ -1331,7 +1331,10 @@ $implRamCreateTableInitChainLinksBody$
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"$RelationTypeTag$",
+						"$RelationTypeTag$",
 						"$Name$",
+						"$Name$",
+						"$reference ToTable Name$",
 						"$reference ToTable Name$",
 						null );
 				}
@@ -1347,7 +1350,10 @@ $implRamCreateTableInitChainLinksBody$
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"$RelationTypeTag$",
+						"$RelationTypeTag$",
 						"$Name$",
+						"$Name$",
+						"$reference ToTable Name$",
 						"$reference ToTable Name$",
 						null );
 				}
@@ -1902,7 +1908,10 @@ $iterate Columns( each implRamUpdateTableCheckReqRefColIsNull )$
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"update$TableName$",
 						"$RelationTypeTag$",
+						"$RelationTypeTag$",
 						"$Name$",
+						"$Name$",
+						"$reference ToTable Name$",
 						"$reference ToTable Name$",
 						null );
 				}
@@ -1919,7 +1928,10 @@ $iterate Columns( each implRamUpdateTableCheckReqRefColIsNull )$
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"update$TableName$",
 						"$RelationTypeTag$",
+						"$RelationTypeTag$",
 						"$Name$",
+						"$Name$",
+						"$reference ToTable Name$",
 						"$reference ToTable Name$",
 						null );
 				}
