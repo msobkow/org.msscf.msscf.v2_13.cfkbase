@@ -785,10 +785,10 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implRamReadTableBuffByPKey">
-	public I$DefSchemaName$$TableName$ readBuff( I$SecSchemaName$Authorization Authorization,
+	public I$DefSchemaName$$TableName$ readRec( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey )
 	{
-		final String S_ProcName = "$SchemaName$Ram$TableName$.readBuff";
+		final String S_ProcName = "$SchemaName$Ram$TableName$.readRec";
 		I$DefSchemaName$$TableName$ buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) &amp;&amp; ( buff.getClassCode() != I$DefSchemaName$$TableName$.CLASS_CODE ) ) {
 			buff = null;
@@ -798,10 +798,10 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implRamLockTableBuffByPKey">
-	public I$DefSchemaName$$TableName$ lockBuff( I$SecSchemaName$Authorization Authorization,
+	public I$DefSchemaName$$TableName$ lockRec( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		I$DefSchemaName$$TableName$ buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) &amp;&amp; ( buff.getClassCode() != I$DefSchemaName$$TableName$.CLASS_CODE ) ) {
 			buff = null;
@@ -811,9 +811,9 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implRamReadAllTableBuff">
-	public I$DefSchemaName$$TableName$[] readAllBuff( I$SecSchemaName$Authorization Authorization )
+	public I$DefSchemaName$$TableName$[] readAllRec( I$SecSchemaName$Authorization Authorization )
 	{
-		final String S_ProcName = "$SchemaName$Ram$TableName$.readAllBuff";
+		final String S_ProcName = "$SchemaName$Ram$TableName$.readAllRec";
 		I$DefSchemaName$$TableName$ buff;
 		ArrayList&lt;I$poptop Table DefSchemaName$$poptop Table TableName$&gt; filteredList = new ArrayList&lt;I$poptop Table DefSchemaName$$poptop Table TableName$&gt;();
 		I$poptop Table DefSchemaName$$poptop Table TableName$[] buffList = readAllDerived( Authorization );
@@ -835,9 +835,9 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	 *
 	 *	@return All the specific $TableName$ instances in the database accessible for the Authorization.
 	 */
-	public I$DefSchemaName$$TableName$[] pageAllBuff( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ )
+	public I$DefSchemaName$$TableName$[] pageAllRec( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ )
 	{
-		final String S_ProcName = "pageAllBuff";
+		final String S_ProcName = "pageAllRec";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 </GenRule>
@@ -852,9 +852,9 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public I$DefSchemaName$$poptop Table TableName$[] pageBuffBy$declReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ )
+	public I$DefSchemaName$$poptop Table TableName$[] pageRecBy$declReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ )
 	{
-		final String S_ProcName = "pageBuffBy$declReadTableSuffix$";
+		final String S_ProcName = "pageRecBy$declReadTableSuffix$";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 </GenRule>
@@ -890,9 +890,9 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 		>$switch IsUnique yes empty default implRamPageTableBuffByDuplicateIndex$</GenRule>
 
 	<GenRule GenDef="Index" Name="implRamReadTableBuffByUniqueIndex">
-	public I$poptop Table DefSchemaName$$poptop Table TableName$ readBuffBy$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
+	public I$poptop Table DefSchemaName$$poptop Table TableName$ readRecBy$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
-		final String S_ProcName = "$SchemaName$Ram$TableName$.readBuffBy$Suffix$() ";
+		final String S_ProcName = "$SchemaName$Ram$TableName$.readRecBy$Suffix$() ";
 		I$poptop Table DefSchemaName$$poptop Table TableName$ buff = readDerivedBy$Suffix$( Authorization$iterate Columns( each implRamReadTableBuffCommaPassColArg )$ );
 		if( ( buff != null ) &amp;&amp; ( buff.getClassCode() == I$DefSchemaName$$TableName$.CLASS_CODE ) ) {
 			return( (I$poptop Table DefSchemaName$$poptop Table TableName$)buff );
@@ -904,9 +904,9 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 </GenRule>
 
 	<GenRule GenDef="Index" Name="implRamReadTableBuffByDuplicateIndex">
-	public I$poptop Table DefSchemaName$$poptop Table TableName$[] readBuffBy$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
+	public I$poptop Table DefSchemaName$$poptop Table TableName$[] readRecBy$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
-		final String S_ProcName = "$SchemaName$Ram$TableName$.readBuffBy$Suffix$() ";
+		final String S_ProcName = "$SchemaName$Ram$TableName$.readRecBy$Suffix$() ";
 		I$poptop Table DefSchemaName$$poptop Table TableName$ buff;
 		ArrayList&lt;I$popto Table DefSchemaName$$poptop Table TableName$&gt; filteredList = new ArrayList&lt;I$popto Table DefSchemaName$$poptop Table TableName$&gt;();
 		I$popto Table DefSchemaName$$poptop Table TableName$[] buffList = readDerivedBy$Suffix$( Authorization$iterate Columns( each implRamReadTableBuffCommaPassColArg )$ );
