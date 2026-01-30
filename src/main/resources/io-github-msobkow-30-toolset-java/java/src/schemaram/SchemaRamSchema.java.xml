@@ -70,139 +70,6 @@ $iterate Id16Generators( each declRamNextIdGen empty empty )$$iterate Id32Genera
 $implSchemaRamConstructor$$implRamSchemaNewSchema$$iterate Id16Generators( each implRamNextIdGen empty empty)$$iterate Id32Generators( each implRamNextIdGen empty empty)$$iterate Id64Generators( each implRamNextIdGen empty empty)$$iterate UuidGenerators( each implRamNextIdGen empty empty )$$implRamSchemaFileImport$}
 </GenFile>
 
-	<GenRule GenDef="SchemaDef" Name="implRamSchemaReleasePreparedStatements">
-	public void releasePreparedStatements() {
-	}
-</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implRamSchemaConnectionMethods">
-	protected boolean sessConnected = false;
-
-	public boolean isConnected() {
-		return( sessConnected );
-	}
-
-	public boolean connect() {
-		if( sessConnected ) {
-			return( false );
-		}
-		else {
-			sessConnected = true;
-			tranOpen = false;
-			return( true );
-		}
-	}
-
-	public boolean connect( String username, String password ) {
-		final String S_ProcName = "connect";
-		if( ( username == null ) || ( username.length() &lt;= 0 ) ) {
-			throw new CFLibNullArgumentException( getClass(),
-				S_ProcName,
-				1,
-				"username" );
-		}
-		if( password == null ) {
-			throw new CFLibNullArgumentException( getClass(),
-				S_ProcName,
-				2,
-				"password" );
-		}
-		if( ! username.equals( "system" ) ) {
-			throw new CFLibRuntimeException( getClass(),
-				S_ProcName,
-				"Only 'system' is authorized to use a RAM database" );
-		}
-		if( sessConnected ) {
-			return( false );
-		}
-		else {
-			sessConnected = true;
-			tranOpen = false;
-			return( true );
-		}
-	}
-
-	public boolean connect( String loginId, String password, String clusterName, String tenantName ) {
-		final String S_ProcName = "connect";
-		if( ( loginId == null ) || ( loginId.length() &lt;= 0 ) ) {
-			throw new CFLibNullArgumentException( getClass(),
-				S_ProcName,
-				1,
-				"loginId" );
-		}
-		if( password == null ) {
-			throw new CFLibNullArgumentException( getClass(),
-				S_ProcName,
-				2,
-				"password" );
-		}
-		if( clusterName == null ) {
-			throw new CFLibNullArgumentException( getClass(),
-				S_ProcName,
-				3,
-				"clusterName" );
-		}
-		if( tenantName == null ) {
-			throw new CFLibNullArgumentException( getClass(),
-				S_ProcName,
-				4,
-				"tenantName" );
-		}
-		if( ! loginId.equals( "system" ) ) {
-			throw new CFLibRuntimeException( getClass(),
-				S_ProcName,
-				"Only 'system' is authorized to use a RAM database" );
-		}
-		if( ! clusterName.equals( "system" ) ) {
-			throw new CFLibRuntimeException( getClass(),
-				S_ProcName,
-				"Only the 'system' Cluster is authorized to use a RAM database" );
-		}
-		if( ! tenantName.equals( "system" ) ) {
-			throw new CFLibRuntimeException( getClass(),
-				S_ProcName,
-				"Only the 'system' Tenant is authorized to use a RAM database" );
-		}
-		if( sessConnected ) {
-			return( false );
-		}
-		else {
-			sessConnected = true;
-			tranOpen = false;
-			return( true );
-		}
-	}
-
-	public void disconnect( boolean doCommit ) {
-		tranOpen = false;
-		sessConnected = false;
-	}
-
-	//	Transactions are not supported, so pretend there is always one open
-
-	protected boolean tranOpen = false;
-
-	public boolean isTransactionOpen() {
-		return( tranOpen );
-	}
-
-	public boolean beginTransaction() {
-		if( tranOpen ) {
-			return( false );
-		}
-		tranOpen = true;
-		return( true );
-	}
-
-	public void commit() {
-		tranOpen = false;
-	}
-
-	public void rollback() {
-		tranOpen = false;
-	}
-</GenRule>
-
 	<GenRule GenDef="SchemaDef" Name="implRamSchemaFileImport">
 	public String fileImport( $SecSchemaName$Authorization Authorization,
 		String fileName,
@@ -242,17 +109,22 @@ $implSchemaRamConstructor$$implRamSchemaNewSchema$$iterate Id16Generators( each 
 	}
 </GenRule>
 
-	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="declRamNextIdGen"
+	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="declRamNextIdGen">$switch HasDefSchema yes empty default reallyDeclRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="declRamNextIdGen">$switch HasDefSchema yes empty default reallyDeclRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="declRamNextIdGen">$switch HasDefSchema yes empty default reallyDeclRamNextIdGen$</GenRule>
+	
+	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="reallyDeclRamNextIdGen"
 >	protected short next$Name$Value = 1;
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="declRamNextIdGen"
+	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="reallyDeclRamNextIdGen"
 >	protected int next$Name$Value = 1;
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="declRamNextIdGen"
+	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="reallyDeclRamNextIdGen"
 >	protected long next$Name$Value = 1;
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implSchemaRamConstructTable">
+	<GenRule GenDef="Table" Name="implSchemaRamConstructTable">$switch HasDefSchema yes empty default reallyImplSchemaRamConstructTable$</GenRule>
+	<GenRule GenDef="Table" Name="reallyImplSchemaRamConstructTable">
 		table$TableName$ = new $SchemaName$Ram$TableName$Table( this );</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaRamConstructor">
@@ -261,25 +133,30 @@ $implSchemaRamConstructor$$implRamSchemaNewSchema$$iterate Id16Generators( each 
 	}
 </GenRule>
 
-	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="implRamNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
+	
+	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="reallyImplRamNextIdGen">
 	public short next$Name$() {
 		short next = next$Name$Value++;
 		return( next );
 	}
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="implRamNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="reallyImplRamNextIdGen">
 	public int next$Name$() {
 		int next = next$Name$Value++;
 		return( next );
 	}
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="implRamNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="reallyImplRamNextIdGen">
 	public long next$Name$() {
 		long next = next$Name$Value++;
 		return( next );
 	}
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="implRamNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="reallyImplRamNextIdGen">
 	public UUID next$Name$() {
 		UUID next = UUID.randomUUID();
 		return( next );

@@ -40,7 +40,9 @@
 	<GenRule GenDef="IndexCol" Name="DbColumnName"
 		>$reference Column DbColumnName$</GenRule>
 
-	<GenFile GenDef="Table" Name="fileSchemaRamTableTableJava"
+	<GenRule GenDef="Table" Name="fileSchemaRamTableTableJava">$switch HasDefSchema yes empty default reallyFileSchemaRamTableTableJava$</GenRule>
+	
+	<GenFile GenDef="Table" Name="reallyFileSchemaRamTableTableJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema SchemaName$Ram"
 		SourceBundle="java"
@@ -128,8 +130,19 @@ $JavaMethodBody$	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="moreRamTableMethods"
-		>$switch HasSuperClassRelation yes empty default implRamTableEnsureRec$$implRamCreateTable$$implRamReadTableDerivedByPKey$$implRamLockTableDerivedByPKey$$implRamReadAllTableDerived$$implRamReadTableDerivedByIndexes$$implRamReadTableBuffByPKey$$implRamLockTableBuffByPKey$$implRamReadAllTableBuff$$switch PageData yes implRamPageAllTableBuff default empty$$implRamReadTableBuffByIndexes$$implRamPageTableBuffByIndexes$$switch HasChain yes implRamMoveUpTableBuff default empty$$switch HasChain yes implRamMoveDownTableBuff default empty$$implRamUpdateTable$$implRamDeleteTable$$iterate ServerMethods( each implServerMethod empty empty )$</GenRule>
-		
+		>$switch HasSuperClassRelation yes invokeBaseEnsureRec default implRamTableEnsureRec$$implRamCreateTable$$implRamReadTableDerivedByPKey$$implRamLockTableDerivedByPKey$$implRamReadAllTableDerived$$implRamReadTableDerivedByIndexes$$implRamReadTableBuffByPKey$$implRamLockTableBuffByPKey$$implRamReadAllTableBuff$$switch PageData yes implRamPageAllTableBuff default empty$$implRamReadTableBuffByIndexes$$implRamPageTableBuffByIndexes$$switch HasChain yes implRamMoveUpTableBuff default empty$$switch HasChain yes implRamMoveDownTableBuff default empty$$implRamUpdateTable$$implRamDeleteTable$$iterate ServerMethods( each implServerMethod empty empty )$</GenRule>
+
+	<GenRule GenDef="Table" Name="invokeBaseEnsureRec">
+	public $reference BaseClass DefSchemaName$Buff$reference BaseClass TableName$ ensureRec(I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			return (($reference BaseClass DefSchemaName$Ram$reference BaseClass TableName$Table)(schema.getTable$reference BaseClass TableName$())).ensureRec(rec);
+		}
+	}
+</GenRule>
+
 	<GenRule GenDef="Table" Name="implRamTableEnsureRec">
 	public $DefSchemaName$Buff$TableName$ ensureRec(I$DefSchemaName$$TableName$ rec) {
 		if (rec == null) {
@@ -170,11 +183,7 @@ $JavaMethodBody$	}
 
 		cur = schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each passCommaColumnArg )$);
 		if( cur == null ) {
-			throw new CFLibCollisionDetectedException( getClass(),
-				S_ProcName,
-				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-				"Could not locate object" );
+			throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object" );
 		}
 
 		if( $reference Chain reference PrevRel reference FromIndex iterate Columns( first implRamMoveBuffCurColNull each implRamMoveBuffCurAndColNull )$ )
@@ -182,72 +191,60 @@ $JavaMethodBody$	}
 			return( ($EffSchemaName$Buff$TableName$)cur );
 		}
 
-		prev = schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference PrevRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaCurCol )$ );
+		prev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference PrevRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaCurCol )$ ));
 		if( prev == null ) {
-			throw new CFLibCollisionDetectedException( getClass(),
-				S_ProcName,
-				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-				"Could not locate object.prev" );
+			throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.prev" );
 		}
 
 		if( $reference Chain reference PrevRel reference FromIndex iterate Columns( first implRamMoveBuffPrevColNotNull each implRamMoveBuffPrevAndColNotNull )$ )
 		{
-			grandprev = schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference PrevRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaPrevCol )$ );
+			grandprev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference PrevRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaPrevCol )$ ));
 			if( grandprev == null ) {
-				throw new CFLibCollisionDetectedException( getClass(),
-					S_ProcName,
-					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-					"Could not locate object.prev.prev" );
+				throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.prev.prev" );
 			}
 		}
 
 		if( $reference Chain reference NextRel reference FromIndex iterate Columns( first implRamMoveBuffCurColNotNull each implRamMoveBuffCurAndColNotNull )$ )
 		{
-			next = schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference NextRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaCurCol )$ );
+			next = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference NextRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaCurCol )$ ));
 			if( next == null ) {
-				throw new CFLibCollisionDetectedException( getClass(),
-					S_ProcName,
-					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-					"Could not locate object.next" );
+				throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.next" );
 			}
 		}
 
-		String classCode = prev.getClassCode();
+		int classCode = prev.getClassCode();
 		I$EffSchemaName$$reference Chain reference Table TableName$ newInstance;$implRamSchemaMoveBuffInstantiateBuff$
-		I$EffSchemaName$$reference Chain reference Table TableName$ editPrev = newInstance;
+		$EffSchemaName$Buff$reference Chain reference Table TableName$ editPrev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)newInstance;
 		editPrev.set( prev );
 
 		classCode = cur.getClassCode();$implRamSchemaMoveBuffInstantiateBuff$
-		$EffSchemaName$Buff$reference Chain reference Table TableName$ editCur = newInstance;
+		$EffSchemaName$Buff$reference Chain reference Table TableName$ editCur = ($EffSchemaName$Buff$reference Chain reference Table TableName$)newInstance;
 		editCur.set( cur );
 
 		$EffSchemaName$Buff$reference Chain reference Table TableName$ editGrandprev = null;
 		if( grandprev != null ) {
 			classCode = grandprev.getClassCode();$implRamSchemaMoveBuffInstantiateBuff$
-			editGrandprev = newInstance;
+			editGrandprev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)newInstance;
 			editGrandprev.set( grandprev );
 		}
 
 		$EffSchemaName$Buff$reference Chain reference Table TableName$ editNext = null;
 		if( next != null ) {
 			classCode = next.getClassCode();$implRamSchemaMoveBuffInstantiateBuff$
-			editNext = newInstance;
+			editNext = ($EffSchemaName$Buff$reference Chain reference Table TableName$)newInstance;
 			editNext.set( next );
 		}
 
-		if( editGrandprev != null ) {$reference Chain reference NextRel iterate Columns( each implRamMoveSetGrandprevCur )$$reference Chain reference PrevRel iterate Columns( each implRamMoveSetCurGrandprev )$
+		if( editGrandprev != null ) {$reference Chain reference NextRel implRamMoveSetGrandprevCur$$reference Chain reference PrevRel implRamMoveSetCurGrandprev$
 		}
-		else {$reference Chain reference PrevRel iterate Columns( each implRamMoveSetCurNull )$
+		else {$reference Chain reference PrevRel implRamMoveSetCurNull$
 		}
-$reference Chain reference PrevRel iterate Columns( each implRamMoveSetPrevCur )$
-$reference Chain reference NextRel iterate Columns( each implRamMoveSetCurPrev )$
+$reference Chain reference PrevRel implRamMoveSetPrevCur$
+$reference Chain reference NextRel implRamMoveSetCurPrev$
 
-		if( next != null ) {$reference Chain reference NextRel iterate Columns( each implRamMoveSetPrevNext )$$reference Chain reference PrevRel iterate Columns( each implRamMoveSetNextPrev )$
+		if( next != null ) {$reference Chain reference NextRel implRamMoveSetPrevNext$$reference Chain reference PrevRel implRamMoveSetNextPrev$
 		}
-		else {$reference Chain reference NextRel iterate Columns( each implRamMoveSetPrevNull )$
+		else {$reference Chain reference NextRel implRamMoveSetPrevNull$
 		}
 
 		if( editGrandprev != null ) {
@@ -266,48 +263,74 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetCurPrev )
 	}
 </GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetGrandprevCur">
-			editGrandprev.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( cur.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetGrandprevCur">
+			editGrandprev.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassArg each implRamMoveCommaPassArg )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassArg">cur.get$reference ToCol reference Column OptionalOrRequired$$reference ToCol reference Column Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassArg">, $implRamMovePassArg$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetCurGrandprev">
-			editCur.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( grandprev.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetCurGrandprev">
+			editCur.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassGrandprevArg each implRamMoveCommaPassGrandprevArg )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassGrandprevArg">grandprev.get$reference ToCol reference Column OptionalOrRequired$$reference ToCol reference Column Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassGrandprevArg">, $implRamMovePassArg$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetCurNull">
-			editCur.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( null );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetCurNull">
+			editCur.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassNull each implRamMoveCommaPassNull )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassNull">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassNull">, $implRamMovePassNull$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetPrevCur">
-			editPrev.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( cur.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetPrevCur">
+			editPrev.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassPrevCur each implRamMoveCommaPassPrevCur )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassPrevCur">cur.get$reference ToCol OptionalOrRequired$$reference ToCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassPrevCur">, $implRamMovePassPrevCur$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetPrevNext">
-			editPrev.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( next.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetPrevNext">
+			editPrev.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassPrevNext each implRamMoveCommaPassPrevNext )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassPrevNext">next.get$reference ToCol OptionalOrRequired$$reference ToCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassPrevNext">, $implRamMovePassPrevNext$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetPrevNull">
-			editPrev.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( null );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetPrevNull">
+			editPrev.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassPrevNull each implRamMoveCommaPassPrevNull )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassPrevNull">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassPrevNull">, $implRamMovePassPrevNull$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetCurPrev">
-			editCur.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( prev.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetCurPrev">
+			editCur.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassCurPrev each implRamMoveCommaPassCurPrev )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassCurPrev">prev.get$reference ToCol OptionalOrRequired$$reference ToCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassCurPrev">, $implRamMovePassCurPrev$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetCurNext">
-			editCur.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( next.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetCurNext">
+			editCur.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassCurNext each implRamMoveCommaPassCurNext )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassCurNext">next.get$reference ToCol OptionalOrRequired$$reference ToCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassCurNext">, $implRamMovePassCurNext$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetCurGrandnext">
-			editCur.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( grandnext.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetCurGrandnext">
+			editCur.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassCurGrandnext each implRamMoveCommaPassCurGrandnext )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassCurGrandnext">grandnext.get$reference ToCol OptionalOrRequired$$reference ToCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassCurGrandnext">, $implRamMovePassCurGrandnext$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetNextPrev">
-			editNext.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( prev.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetNextPrev">
+			editNext.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassNextPrev each implRamMoveCommaPassNextPrev )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassNextPrev">prev.get$reference ToCol OptionalOrRequired$$reference ToCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassNextPrev">, $implRamMovePassNextPrev$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetNextCur">
-			editNext.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( cur.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetNextCur">
+			editNext.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassNextCur each implRamMoveCommaPassNextCur )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassNextCur">cur.get$reference ToCol OptionalOrRequired$$reference ToCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassNextCur">, $implRamMovePassNextCur$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetNextNull">
-			editNext.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( null );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetNextNull">
+			editNext.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassNextNull each implRamMoveCommaPassNextNull )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassNextNull">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassNextNull">, $implRamMovePassNextNull$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamMoveSetGrandnextCur">
-			editGrandnext.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( cur.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamMoveSetGrandnextCur">
+			editGrandnext.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassGrandnextCur each implRamMoveCommaPassGrandnextCur )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassGrandnextCur">cur.get$reference ToCol OptionalOrRequired$$reference ToCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassGrandnextCur">, $implRamMovePassGrandnextCur$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffInstantiateBuff">
 			if( classCode == I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$.CLASS_CODE ) {
-				newInstance = schema.getFactory$reference Chain reference Table TableName$().newBuff();
+				newInstance = schema.getFactory$reference Chain reference Table TableName$().newRec();
 			}$reference Chain reference Table iterate TableSubClasses( each implRamSchemaMoveBuffWalkInstantiateBuff empty empty )$
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
@@ -315,7 +338,7 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetCurPrev )
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffWalkInstantiateBuff">
 			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-				newInstance = schema.getFactory$TableName$().newBuff();
+				newInstance = schema.getFactory$TableName$().newRec();
 			}$iterate TableSubClasses( each implRamSchemaMoveBuffWalkInstantiateBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffUpdateCur">
@@ -435,13 +458,9 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetCurPrev )
 		$EffSchemaName$Buff$reference Chain reference Table TableName$ next = null;
 		$EffSchemaName$Buff$reference Chain reference Table TableName$ grandnext = null;
 
-		cur = schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each passCommaColumnArg )$);
+		cur = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each passCommaColumnArg )$));
 		if( cur == null ) {
-			throw new CFLibCollisionDetectedException( getClass(),
-				S_ProcName,
-				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-				"Could not locate object" );
+			throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object" );
 		}
 
 		if( $reference Chain reference NextRel reference FromIndex iterate Columns( first implRamMoveBuffCurColNull each implRamMoveBuffCurAndColNull )$ )
@@ -449,72 +468,60 @@ $reference Chain reference NextRel iterate Columns( each implRamMoveSetCurPrev )
 			return( ($EffSchemaName$Buff$TableName$)cur );
 		}
 
-		next = schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference NextRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaCurCol )$ );
+		next = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference NextRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaCurCol )$ ));
 		if( next == null ) {
-			throw new CFLibCollisionDetectedException( getClass(),
-				S_ProcName,
-				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-				"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-				"Could not locate object.next" );
+			throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.next" );
 		}
 
 		if( $reference Chain reference NextRel reference FromIndex iterate Columns( first implRamMoveBuffNextColNotNull each implRamMoveBuffNextAndColNotNull )$ )
 		{
-			grandnext = schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference NextRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaNextCol )$ );
+			grandnext = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference NextRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaNextCol )$ ));
 			if( grandnext == null ) {
-				throw new CFLibCollisionDetectedException( getClass(),
-					S_ProcName,
-					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-					"Could not locate object.next.next" );
+				throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.next.next" );
 			}
 		}
 
 		if( $reference Chain reference PrevRel reference FromIndex iterate Columns( first implRamMoveBuffCurColNotNull each implRamMoveBuffCurAndColNotNull )$ )
 		{
-			prev = schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference PrevRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaCurCol )$ );
+			prev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getTable$reference Chain reference Table TableName$().readDerivedBy$reference BaseClass reference PrimaryKeyIndex Suffix$(Authorization$reference Chain reference PrevRel reference FromIndex iterate Columns( each implRamMoveBuffPassCommaCurCol )$ ));
 			if( prev == null ) {
-				throw new CFLibCollisionDetectedException( getClass(),
-					S_ProcName,
-					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-					"$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$By$reference BaseClass reference PrimaryKeyIndex Suffix$Key",
-					"Could not locate object.prev" );
+				throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.prev" );
 			}
 		}
 
-		integer classCode = cur.getClassCode();
-		$EffSchemaName$Buff$reference Chain reference Table TableName$ newInstance;$implRamSchemaMoveBuffInstantiateBuff$
-		$EffSchemaName$Buff$reference Chain reference Table TableName$ editCur = newInstance;
+		int classCode = cur.getClassCode();
+		I$EffSchemaName$$reference Chain reference Table TableName$ newInstance;$implRamSchemaMoveBuffInstantiateBuff$
+		$EffSchemaName$Buff$reference Chain reference Table TableName$ editCur = ($EffSchemaName$Buff$reference Chain reference Table TableName$)newInstance;
 		editCur.set( cur );
 
 		classCode = next.getClassCode();$implRamSchemaMoveBuffInstantiateBuff$
-		$EffSchemaName$Buff$reference Chain reference Table TableName$ editNext = newInstance;
+		$EffSchemaName$Buff$reference Chain reference Table TableName$ editNext = ($EffSchemaName$Buff$reference Chain reference Table TableName$)newInstance;
 		editNext.set( next );
 
 		$EffSchemaName$Buff$reference Chain reference Table TableName$ editGrandnext = null;
 		if( grandnext != null ) {
 			classCode = grandnext.getClassCode();$implRamSchemaMoveBuffInstantiateBuff$
-			editGrandnext = newInstance;
+			editGrandnext = ($EffSchemaName$Buff$reference Chain reference Table TableName$)newInstance;
 			editGrandnext.set( grandnext );
 		}
 
 		$EffSchemaName$Buff$reference Chain reference Table TableName$ editPrev = null;
 		if( prev != null ) {
 			classCode = prev.getClassCode();$implRamSchemaMoveBuffInstantiateBuff$
-			editPrev = newInstance;
+			editPrev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)newInstance;
 			editPrev.set( prev );
 		}
 
-		if( prev != null ) {$reference Chain reference NextRel iterate Columns( each implRamMoveSetPrevNext )$$reference Chain reference PrevRel iterate Columns( each implRamMoveSetNextPrev )$
+		if( prev != null ) {$reference Chain reference NextRel implRamMoveSetPrevNext$$reference Chain reference PrevRel implRamMoveSetNextPrev$
 		}
-		else {$reference Chain reference PrevRel iterate Columns( each implRamMoveSetNextNull )$
+		else {$reference Chain reference PrevRel implRamMoveSetNextNull$
 		}
-$reference Chain reference PrevRel iterate Columns( each implRamMoveSetCurNext )$
-$reference Chain reference NextRel iterate Columns( each implRamMoveSetNextCur )$
+$reference Chain reference PrevRel implRamMoveSetCurNext$
+$reference Chain reference NextRel implRamMoveSetNextCur$
 
-		if( editGrandnext != null ) {$reference Chain reference NextRel iterate Columns( each implRamMoveSetCurGrandnext )$$reference Chain reference PrevRel iterate Columns( each implRamMoveSetGrandnextCur )$
+		if( editGrandnext != null ) {$reference Chain reference NextRel implRamMoveSetCurGrandnext$$reference Chain reference PrevRel implRamMoveSetGrandnextCur$
 		}
-		else {$reference Chain reference NextRel iterate Columns( each implRamMoveSetCurNull )$
+		else {$reference Chain reference NextRel implRamMoveSetCurNull$
 		}
 
 		if( editPrev != null ) {
@@ -1078,7 +1085,7 @@ $iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable 
 			}$iterate TableSubClasses( each implRamCreateTableWalkRetBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamCreateTableImplBase">
-		$DefSchemaName$Buff$TableName$ Buff = ensureRec(iBuff);$switch IsInstantiable yes implRamCreateTableMaybeInitChainLinks default empty$</GenRule>
+		$DefSchemaName$Buff$TableName$ Buff = ($DefSchemaName$Buff$TableName$)ensureRec(iBuff);$switch IsInstantiable yes implRamCreateTableMaybeInitChainLinks default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamCreateCompositeTable">
 	public I$DefSchemaName$$TableName$ create$TableName$( I$SecSchemaName$Authorization Authorization,
@@ -1124,7 +1131,7 @@ $iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable 
 
 	<GenRule GenDef="Table" Name="implRamCreateTableInitChainLinksWithCC">
 		I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$ tail = null;
-		if( Buff.getClassCode() == I$DefSchemaName$$TableName$.CLASS_CODE ) ) {$implRamCreateTableInitChainLinksBody$
+		if( Buff.getClassCode() == I$DefSchemaName$$TableName$.CLASS_CODE ) {$implRamCreateTableInitChainLinksBody$
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamCreateTableInitChainLinksNoCC">
@@ -1140,19 +1147,23 @@ $implRamCreateTableInitChainLinksBody$
 					tail = siblings[idx];
 				}
 			}
-			if( tail != null ) {$reference Chain reference PrevRel iterate Columns( each implRamCreateTableInitChainLinksAssignPrev )$
+			if( tail != null ) {$reference Chain reference PrevRel implRamCreateTableInitChainLinksAssignPrev$
 			}
-			else {$reference Chain reference PrevRel iterate Columns( each implRamCreateTableInitChainLinksClearPrev )$
+			else {$reference Chain reference PrevRel implRamCreateTableInitChainLinksClearPrev$
 			}</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implRamCreateTableInitChainLinksCommaPassArg">,
 				Buff.get$OptionalOrRequired$$Name$()</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamCreateTableInitChainLinksClearPrev">
-				Buff.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( null );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamCreateTableInitChainLinksClearPrev">
+				Buff.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamCreateTableInitChainLinksClearPrev each implRamCreateTableInitChainLinksCommaClearPrev )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamCreateTableInitChainLinksClearPrev">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamCreateTableInitChainLinksCommaClearPrev">, $implRamCreateTableInitChainLinksClearPrev$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamCreateTableInitChainLinksAssignPrev">
-				Buff.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( tail.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamCreateTableInitChainLinksAssignPrev">
+				Buff.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamCreateTableInitChainLinksAssignPrev each implRamCreateTableInitChainLinksCommaAssignPrev )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamCreateTableInitChainLinksAssignPrev">tail.get$reference ToCol OptionalOrRequired$$reference ToCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamCreateTableInitChainLinksCommaAssignPrev">, $implRamCreateTableInitChainLinksAssignPrev$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implRamCreateTableInitChainLinksCheckNext"
 		>( siblings[idx].get$OptionalOrRequired$$Name$() == null )</GenRule>
@@ -1168,8 +1179,8 @@ $implRamCreateTableInitChainLinksBody$
 
 	<GenRule GenDef="Table" Name="implRamCreateTableChainLinkTailNoCC">
 		if( tail != null ) {
-			I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$ tailEdit = schema.getFactory$reference Chain reference Table TableName$().newBuff();
-			tailEdit.set( (I$DefSchemaName$$TableName$)tail );$reference Chain reference NextRel iterate Columns( each implRamCreateTableChainTailLinkAssignNext )$
+			I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$ tailEdit = schema.getFactory$reference Chain reference Table TableName$().newRec();
+			tailEdit.set( (I$DefSchemaName$$TableName$)tail );$reference Chain reference NextRel implRamCreateTableChainTailLinkAssignNext$
 			schema.getTable$reference Chain reference Table TableName$().update$reference Chain reference Table TableName$( Authorization, tailEdit );
 		}</GenRule>
 
@@ -1190,14 +1201,16 @@ $implRamCreateTableInitChainLinksBody$
 			}$iterate TableSubClasses( each implRamCreateTableChainLinkTailWithCCWalkHierarchy empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamCreateTableChainLinkTailBody">
-				I$DefSchemaName$$TableName$ tailEdit = schema.getFactory$TableName$().newBuff();
-				tailEdit.set( (I$DefSchemaName$$TableName$)tail );$reference Chain reference NextRel iterate Columns( each implRamCreateTableChainTailLinkAssignNext )$
+				I$DefSchemaName$$TableName$ tailEdit = schema.getFactory$TableName$().newRec();
+				tailEdit.set( (I$DefSchemaName$$TableName$)tail );$reference Chain reference NextRel implRamCreateTableChainTailLinkAssignNext$
 				schema.getTable$TableName$().update$TableName$( Authorization, tailEdit );</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamCreateTableChainTailLinkAssignNext">
-				tailEdit.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( Buff.get$reference ToCol OptionalOrRequired$$reference ToCol Name$() );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamCreateTableChainTailLinkAssignNext">
+				tailEdit.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamCreateTableChainTailLinkAssignNext each implRamCreateTableChainTailCommaLinkAssignNext )$);</GenRule>
 
-		$DefSchemaName$Buff$TableName Buff = (($DefSchemaName$Buff$TableName$Factory)schema.get$TableName$Factory()).ensureRec(iBuff);$switch IsInstantiable yes implRamCreateTableMaybeInitChainLinks default empty$
+	<GenRule GenDef="RelationCol" Name="implRamCreateTableChainTailLinkAssignNext">Buff.get$reference ToCol OptionalOrRequired$$reference ToCol Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamCreateTableChainTailCommaLinkAssignNext">, $implRamCreateTableChainTailCommaLinkAssignNext$</GenRule>
+
 	<GenRule GenDef="Table" Name="implRamCreateTableInvokeSuper">
 		$DefSchemaName$Buff$TableName$ Buff = ($DefSchemaName$Buff$TableName$)(schema.getTable$reference SuperClassRelation reference ToTable TableName$().create$reference SuperClassRelation reference ToTable TableName$( Authorization,
 			iBuff ));$switch IsInstantiable yes implRamCreateTableMaybeInitChainLinks default empty$</GenRule>
@@ -1926,7 +1939,7 @@ $iterate Index( each maybeImplRamUpdateTableReplaceIndexEntry )$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implRamUpdateTableImplBase">
-		$DefSchemaName$Buff$TableName$ Buff = ensureRec(iBuff);</GenRule>
+		$DefSchemaName$Buff$TableName$ Buff = ($DefSchemaName$Buff$TableName$)ensureRec(iBuff);</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamUpdateTableInvokeSuper">
 		$DefSchemaName$Buff$TableName$ Buff = ($DefSchemaName$Buff$TableName$)schema.getTable$reference SuperClassRelation reference ToTable TableName$().update$reference SuperClassRelation reference ToTable TableName$( Authorization,	Buff );</GenRule>
@@ -2085,7 +2098,7 @@ $iterate Columns( each implRamUpdateTableInitNewKeyAttr )$</GenRule>
 		I$DefSchemaName$$TableName$ iBuff )
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$Table.delete$TableName$() ";
-		$DefSchemaName$Buff$TableName$ Buff = ensureRec(iBuff);
+		$DefSchemaName$Buff$TableName$ Buff = ($DefSchemaName$Buff$TableName$)ensureRec(iBuff);
 		int classCode;
 		$BuffCompactedPrimaryIndexClass$ pkey = ($BuffCompactedPrimaryIndexClass$)(Buff.getPKey());
 		$DefSchemaName$Buff$TableName$ existing = dictByPKey.get( pkey );
@@ -2106,7 +2119,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 		I$DefSchemaName$$TableName$ iBuff )
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$Table.delete$TableName$() ";
-		$DefSchemaName$Buff$TableName$ Buff = ensureRec(iBuff);
+		$DefSchemaName$Buff$TableName$ Buff = ($DefSchemaName$Buff$TableName$)ensureRec(iBuff);
 		int classCode;
 		$BuffCompactedPrimaryIndexClass$ pkey = ($BuffCompactedPrimaryIndexClass$)(Buff.getPKey());
 		$DefSchemaName$Buff$TableName$ existing = dictByPKey.get( pkey );
@@ -2291,7 +2304,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="DelDep" Name="implRamDeleteTableDelDepWalkAllocEditBuff">
 					else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-						editBuff = schema.getFactory$TableName$().newBuff();
+						editBuff = schema.getFactory$TableName$().newRec();
 					}$iterate TableSubClasses( each implRamDeleteTableDelDepWalkAllocEditBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implRamDeleteTableClearRootSubObjectExistingArg">,
@@ -2345,7 +2358,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableSubObjectWalkAllocEditBuff">
 		else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-			editSubobj = schema.getFactory$TableName$().newBuff();
+			editSubobj = schema.getFactory$TableName$().newRec();
 		}$iterate TableSubClasses( each implRamDeleteTableSubObjectWalkAllocEditBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableClearDeps"
@@ -2392,7 +2405,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="ClearTopDep" Name="implRamDeleteTableClearDupDepChaseDown">
 			$reference Relation reference ToTable EffSchemaName$Buff$reference Relation reference ToTable TableName$ buff$Name$;
-			($reference Relation reference ToTable EffSchemaName$$reference Relation reference ToTable TableName$ arr$Name$[] = schema.getTable$reference Relation reference ToTable TableName$().readDerivedBy$reference Relation reference ToIndex Suffix$( Authorization$reference Relation iterate Columns( each implRamDeleteTablePassCommaExistingArg )$ );
+			I$reference Relation reference ToTable EffSchemaName$$reference Relation reference ToTable TableName$ arr$Name$[] = schema.getTable$reference Relation reference ToTable TableName$().readDerivedBy$reference Relation reference ToIndex Suffix$( Authorization$reference Relation iterate Columns( each implRamDeleteTablePassCommaExistingArg )$ );
 			for( int idx$Name$ = 0; idx$Name$ &lt; arr$Name$.length; idx$Name$++ ) {
 				buff$Name$ = ($reference Relation reference ToTable EffSchemaName$Buff$reference Relation reference ToTable TableName$)(arr$Name$[idx$Name$]);$reference ClearSubDep implRamDeleteTableClearDep$
 			}</GenRule>
@@ -2477,7 +2490,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="ClearDep" Name="implRamDeleteTableClearDepWalkAllocEditBuff">
 						else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-							editBuff = schema.getFactory$TableName$().newBuff();
+							editBuff = schema.getFactory$TableName$().newRec();
 						}$iterate TableSubClasses( each implRamDeleteTableClearDepWalkAllocEditBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableClearDepWalkSaveEditBuff">
@@ -2513,7 +2526,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 		$reference Chain reference PrevRel reference ToTable EffSchemaName$Buff$reference Chain reference PrevRel reference ToTable TableName$ prev = null;
 		if( $reference Chain reference PrevRel iterate Columns( first implRamDeleteTableUpdatePrevCheckNotNull each implRamDeleteTableUpdatePrevCheckAndNotNull )$ )
 		{
-			prev = schema.getTable$reference Chain reference PrevRel reference ToTable TableName$().readDerivedBy$reference Chain reference PrevRel reference ToIndex Suffix$( Authorization$reference Chain reference PrevRel iterate Columns( each implRamTableUpdatePrevPassCommaVar )$ );
+			prev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getTable$reference Chain reference PrevRel reference ToTable TableName$().readDerivedBy$reference Chain reference PrevRel reference ToIndex Suffix$( Authorization$reference Chain reference PrevRel iterate Columns( each implRamTableUpdatePrevPassCommaVar )$ ));
 			if( prev == null ) {
 				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
@@ -2523,13 +2536,13 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 			$reference Chain reference PrevRel reference ToTable EffSchemaName$Buff$reference Chain reference PrevRel reference ToTable TableName$ editPrev;
 			classCode = prev.getClassCode();
 			if( classCode == I$reference Chain reference PrevRel reference ToTable DefSchemaName$$reference Chain reference PrevRel reference ToTable Name$.CLASS_CODE ) {
-				editPrev = schema.getFactory$reference Chain reference PrevRel reference ToTable TableName$().newBuff();
+				editPrev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getFactory$reference Chain reference PrevRel reference ToTable TableName$().newRec());
 			}$reference Chain reference PrevRel reference ToTable iterate TableSubClasses( each implRamDeleteTableUpdatePrevWalkAllocBuff empty empty )$
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-update-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-			editPrev.set( prev );$reference Chain reference NextRel iterate Columns( each implRamDeleteTableUpdatePrevSetPrevNext )$
-			if( classCode.equals( "$reference Chain reference PrevRel reference ToTable ClassCode$" ) ) {
+			editPrev.set( prev );$reference Chain reference NextRel implRamDeleteTableUpdatePrevSetPrevNext$
+			if( classCode == I$reference Chain reference PrevRel reference ToTable DefSchemaName$$reference Chain reference PrevRel reference ToTable TableName$.CLASS_CODE ) {
 				schema.getTable$reference Chain reference PrevRel reference ToTable TableName$().update$reference Chain reference PrevRel reference ToTable TableName$( Authorization, editPrev );
 			}$reference Chain reference PrevRel reference ToTable iterate TableSubClasses( each implRamDeleteTableUpdatePrevWalkUpdateBuff empty empty )$
 			else {
@@ -2538,9 +2551,11 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 		}
 </GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamDeleteTableUpdatePrevSetPrevNext">
-			editPrev.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( next$reference ToCol Name$ );</GenRule>
-
+	<GenRule GenDef="Relation" Name="implRamDeleteTableUpdatePrevSetPrevNext">
+			editPrev.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamDeleteTableUpdatePrevSetPrevNext each implRamDeleteTableUpdatePrevCommaSetPrevNext )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamDeleteTableUpdatePrevSetPrevNext">next$reference ToCol Name$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamDeleteTableUpdatePrevCommaSetPrevNext">, $implRamDeleteTableUpdatePrevSetPrevNext$</GenRule>
+	
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdatePrevWalkUpdateBuff">
 			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 				schema.getTable$TableName$().update$TableName$( Authorization, ($EffSchemaName$Buff$TableName$)editPrev );
@@ -2548,7 +2563,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdatePrevWalkAllocBuff">
 			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-				editPrev = schema.getFactory$TableName$().newBuff();
+				editPrev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getFactory$TableName$().newRec());
 			}$iterate TableSubClasses( each implRamDeleteTableUpdatePrevWalkAllocBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implRamDeleteTableUpdatePrevCheckNotNull"
@@ -2564,7 +2579,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 		$reference Chain reference NextRel reference ToTable EffSchemaName$Buff$reference Chain reference NextRel reference ToTable TableName$ next = null;
 		if( $reference Chain reference NextRel iterate Columns( first implRamDeleteTableUpdateNextCheckNotNull each implRamDeleteTableUpdateNextCheckAndNotNull )$ )
 		{
-			next = schema.getTable$reference Chain reference NextRel reference ToTable TableName$().readDerivedBy$reference Chain reference NextRel reference ToIndex Suffix$( Authorization$reference Chain reference NextRel iterate Columns( each implRamTableUpdateNextPassCommaVar )$ );
+			next = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getTable$reference Chain reference NextRel reference ToTable TableName$().readDerivedBy$reference Chain reference NextRel reference ToIndex Suffix$( Authorization$reference Chain reference NextRel iterate Columns( each implRamTableUpdateNextPassCommaVar )$ ));
 			if( next == null ) {
 				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
@@ -2574,12 +2589,12 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 			$reference Chain reference NextRel reference ToTable EffSchemaName$Buff$reference Chain reference NextRel reference ToTable TableName$ editNext;
 			classCode = next.getClassCode();
 			if( classCode == I$reference Chain reference NextRel reference ToTable DefSchemaName$$reference Chain reference NextRel reference ToTable Name$.CLASS_CODE ) {
-				editNext = schema.getFactory$reference Chain reference NextRel reference ToTable TableName$().newBuff();
+				editNext = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getFactory$reference Chain reference NextRel reference ToTable TableName$().newRec());
 			}$reference Chain reference NextRel reference ToTable iterate TableSubClasses( each implRamDeleteTableUpdateNextWalkAllocBuff empty empty )$
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-update-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-			editNext.set( next );$reference Chain reference PrevRel iterate Columns( each implRamDeleteTableUpdateNextSetNextPrev )$
+			editNext.set( next );$reference Chain reference PrevRel implRamDeleteTableUpdateNextSetNextPrev$
 			if( classCode == I$reference Chain reference NextRel reference ToTable DefSchemaName$$reference Chain reference NextRel reference ToTable Name$.CLASS_CODE ) {
 				schema.getTable$reference Chain reference NextRel reference ToTable TableName$().update$reference Chain reference NextRel reference ToTable TableName$( Authorization, editNext );
 			}$reference Chain reference NextRel reference ToTable iterate TableSubClasses( each implRamDeleteTableUpdateNextWalkUpdateBuff empty empty )$
@@ -2589,8 +2604,10 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 		}
 </GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamDeleteTableUpdateNextSetNextPrev">
-			editNext.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( prev$reference ToCol Name$ );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamDeleteTableUpdateNextSetNextPrev">
+			editNext.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamDeleteTableUpdateNextSetNextPrev each implRamDeleteTableUpdateNextCommaSetNextPrev )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamDeleteTableUpdateNextSetNextPrev">prev$reference ToCol Name$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamDeleteTableUpdateNextCommaSetNextPrev">, $implRamDeleteTableUpdateNextSetNextPrev$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdateNextWalkUpdateBuff">
 			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
@@ -2599,7 +2616,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdateNextWalkAllocBuff">
 			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-				editNext = schema.getFactory$TableName$().newBuff();
+				editNext = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.getFactory$TableName$().newRec());
 			}$iterate TableSubClasses( each implRamDeleteTableUpdateNextWalkAllocBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implRamDeleteTableUpdateNextCheckNotNull"
@@ -2721,7 +2738,7 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 				schema.getTable$TableName$().delete$TableName$( Authorization, cur );
 			}$iterate ReverseRelations( each implDeleteTableBySuffixClassWalker empty empty )$
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)subClassCode, "Classcode not recognized: " + Integer.toString(subClassCode));
 			}</GenRule>
 
 	<GenRule GenDef="Relation" Name="implDeleteTableBySuffixClassWalker"
@@ -2818,7 +2835,10 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 			throw new CFLibDependentsDetectedException( getClass(),
 				"delete$popto Table TableName$",
 				"$RelationTypeTag$",
+				"$RelationTypeTag$",
 				"$Name$",
+				"$Name$",
+				"$reference FromTable Name$",
 				"$reference FromTable Name$",
 				pkey );
 		}
@@ -2831,7 +2851,10 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 			throw new CFLibDependentsDetectedException( getClass(),
 				"delete$popto Table TableName$",
 				"$RelationTypeTag$",
+				"$RelationTypeTag$",
 				"$Name$",
+				"$Name$",
+				"$reference FromTable Name$",
 				"$reference FromTable Name$",
 				pkey );
 		}
@@ -2842,7 +2865,10 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 			throw new CFLibDependentsDetectedException( getClass(),
 				"delete$popto Table TableName$",
 				"$RelationTypeTag$",
+				"$RelationTypeTag$",
 				"$Name$",
+				"$Name$",
+				"$reference FromTable Name$",
 				"$reference FromTable Name$",
 				pkey );
 		}
