@@ -138,7 +138,7 @@ $JavaMethodBody$	}
 			return( null );
 		}
 		else {
-			return (($reference BaseClass DefSchemaName$Ram$reference BaseClass TableName$Table)(schema.getTable$reference BaseClass TableName$())).ensureRec(rec);
+			return (($reference BaseClass DefSchemaName$Ram$reference BaseClass TableName$Table)(schema.getTable$reference BaseClass TableName$())).ensureRec((I$reference BaseClass DefSchemaName$$reference BaseClass TableName$)rec);
 		}
 	}
 </GenRule>
@@ -151,7 +151,7 @@ $JavaMethodBody$	}
 		else {
 			int classCode = rec.getClassCode();
 			if (classCode == I$DefSchemaName$$TableName$.CLASS_CODE) {
-				return( (($DefSchemaName$Buff$TableName$DefaultFactory)(schema.getFactory$TableName$())).ensureRec(rec) );
+				return( (($DefSchemaName$Buff$TableName$DefaultFactory)(schema.getFactory$TableName$())).ensureRec((I$DefSchemaName$$TableName$)rec) );
 			}$iterate TableSubClasses( each implRamTableEnsureRecWalkSubClass empty empty )$
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
@@ -162,7 +162,7 @@ $JavaMethodBody$	}
 
 	<GenRule GenDef="Table" Name="implRamTableEnsureRecWalkSubClass">
 			else if (classCode == I$DefSchemaName$$TableName$.CLASS_CODE) {
-				return( (($DefSchemaName$Buff$TableName$DefaultFactory)(schema.getFactory$TableName$())).ensureRec(rec) );
+				return( (($DefSchemaName$Buff$TableName$DefaultFactory)(schema.getFactory$TableName$())).ensureRec((I$DefSchemaName$$TableName$)rec) );
 			}$iterate TableSubClasses( each implRamTableEnsureRecWalkSubClass empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamMoveUpTableBuff">
@@ -171,10 +171,10 @@ $JavaMethodBody$	}
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public I$poptop Table DefSchemaName$$poptop Table TableName$ moveBuffUp( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
+	public I$poptop Table DefSchemaName$$poptop Table TableName$ moveRecUp( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		I$EffSchemaName$$reference Chain reference Table TableName$ grandprev = null;
 		I$EffSchemaName$$reference Chain reference Table TableName$ prev = null;
@@ -448,10 +448,10 @@ $reference Chain reference NextRel implRamMoveSetCurPrev$
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public I$popto Table DefSchemaName$$poptop Table TableName$ moveBuffDown( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
+	public I$popto Table DefSchemaName$$poptop Table TableName$ moveRecDown( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		$EffSchemaName$Buff$reference Chain reference Table TableName$ prev = null;
 		$EffSchemaName$Buff$reference Chain reference Table TableName$ cur = null;
@@ -1190,9 +1190,7 @@ $implRamCreateTableInitChainLinksBody$
 			if( tailClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {$implRamCreateTableChainLinkTailBody$
 			}$iterate TableSubClasses( each implRamCreateTableChainLinkTailWithCCWalkHierarchy empty empty )$
 			else {
-				throw new CFLibUsageException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode " + tailClassCode );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-table-chain-link-tail-", (Integer)tailClassCode, "Classcode not recognized: " + Integer.toString(tailClassCode));
 			}
 		}</GenRule>
 
@@ -1942,7 +1940,7 @@ $iterate Index( each maybeImplRamUpdateTableReplaceIndexEntry )$
 		$DefSchemaName$Buff$TableName$ Buff = ($DefSchemaName$Buff$TableName$)ensureRec(iBuff);</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamUpdateTableInvokeSuper">
-		$DefSchemaName$Buff$TableName$ Buff = ($DefSchemaName$Buff$TableName$)schema.getTable$reference SuperClassRelation reference ToTable TableName$().update$reference SuperClassRelation reference ToTable TableName$( Authorization,	Buff );</GenRule>
+		$DefSchemaName$Buff$TableName$ Buff = ($DefSchemaName$Buff$TableName$)(schema.getTable$reference SuperClassRelation reference ToTable TableName$().update$reference SuperClassRelation reference ToTable TableName$( Authorization,	iBuff ));</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamUpdateTableSetPKeyClassCode">
 		pkey.setClassCode( Buff.getClassCode() );</GenRule>
@@ -2345,10 +2343,10 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 	<GenRule GenDef="Relation" Name="implRamDeleteTableClearSubObjectLookupCols"
 			>$switch IsSubObjectLookup yes implRamDeleteTableReallyClearSubObjectLookupCols default empty$</GenRule>
 
-	<GenRule GenDef="Relation" Name="implRamDeleteTableReallyClearSubObjectLookupCols"
-			>editSubobj.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamDeleteTableClearSubObjectPassFromCol each implRamDeleteTableClearSubObjectCommaPassFromCol )$);</GenRule>
+	<GenRule GenDef="Relation" Name="implRamDeleteTableReallyClearSubObjectLookupCols">
+			editSubobj.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamDeleteTableClearSubObjectPassFromCol each implRamDeleteTableClearSubObjectCommaPassFromCol )$);</GenRule>
 
-	<GenRule GenDef="Object" Name="implRamDeleteTableClearSubObjectPassFromCol">null</GenRule>
+	<GenRule GenDef="Object" Name="implRamDeleteTableClearSubObjectPassFromCol">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
 	<GenRule GenDef="Object" Name="implRamDeleteTableClearSubObjectCommaPassFromCol">, $implRamDeleteTableClearSubObjectPassFromCol$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableSubObjectWalkSaveEditBuff">
@@ -2424,7 +2422,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="ClearSubDep1" Name="implRamDeleteTableClearThisOne">
 					{
-						$popto ClearTopDep reference Relation reference ToTable EffSchemaName$Buff$popto ClearTopDep reference Relation reference ToTable Name$ editBuff = ($popto ClearTopDep reference Relation reference ToTable EffSchemaName$Buff$popto ClearTopDep reference Relation reference ToTable Name$)(schema.getTable$popto ClearTopDep reference Relation reference ToTable TableName$().readDerivedBy$popto ClearTopDep reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex Suffix$( Authorization$popto ClearTopDep reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamDeleteTableClearPassTopDepArg )$ ));$reference Relation iterate Columns( each implRamDeleteTableClearRelationFromAttr empty empty )$
+						$popto ClearTopDep reference Relation reference ToTable EffSchemaName$Buff$popto ClearTopDep reference Relation reference ToTable Name$ editBuff = ($popto ClearTopDep reference Relation reference ToTable EffSchemaName$Buff$popto ClearTopDep reference Relation reference ToTable Name$)(schema.getTable$popto ClearTopDep reference Relation reference ToTable TableName$().readDerivedBy$popto ClearTopDep reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex Suffix$( Authorization$popto ClearTopDep reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamDeleteTableClearPassTopDepArg )$ ));$reference Relation implRamDeleteTableClearRelationFromAttr$
 						classCode = editBuff.getClassCode();
 						if( classCode == I$popto ClearTopDep reference Relation reference ToTable DefSchemaName$$popto ClearTopDep reference Relation reference ToTable Name$.CLASS_CODE ) {
 							schema.getTable$popto ClearTopDep reference Relation reference ToTable TableName$().update$popto ClearTopDep reference Relation reference ToTable TableName$( Authorization, editBuff );
@@ -2463,7 +2461,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="ClearSubDep2" Name="implRamDeleteTableClearThisOne">
 					{
-						$popto ClearSubDep1 reference Relation reference ToTable EffSchemaName$Buff$popto ClearSubDep1 reference Relation reference ToTable Name$ editBuff = ($popto ClearSubDep1 reference Relation reference ToTable EffSchemaName$Buff$popto ClearSubDep1 reference Relation reference ToTable Name$)(schema.getTable$popto ClearSubDep1 reference Relation reference ToTable TableName$().readDerivedBy$popto ClearSubDep1 reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex Suffix$( Authorization$popto ClearSubDep1 reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamDeleteTableClearPassSubDep1Arg )$ ));$reference Relation iterate Columns( each implRamDeleteTableClearRelationFromAttr empty empty )$
+						$popto ClearSubDep1 reference Relation reference ToTable EffSchemaName$Buff$popto ClearSubDep1 reference Relation reference ToTable Name$ editBuff = ($popto ClearSubDep1 reference Relation reference ToTable EffSchemaName$Buff$popto ClearSubDep1 reference Relation reference ToTable Name$)(schema.getTable$popto ClearSubDep1 reference Relation reference ToTable TableName$().readDerivedBy$popto ClearSubDep1 reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex Suffix$( Authorization$popto ClearSubDep1 reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamDeleteTableClearPassSubDep1Arg )$ ));$reference Relation implRamDeleteTableClearRelationFromAttr$
 						classCode = editBuff.getClassCode();
 						if( classCode == I$popto ClearSubDep1 reference Relation reference ToTable EffSchemaName$$popto ClearSubDep1 reference Relation reference ToTable TableName$.CLASS_CODE ) {
 							schema.getTable$popto ClearSubDep1 reference Relation reference ToTable TableName$().update$popto ClearSubDep1 reference Relation reference ToTable TableName$( Authorization, editBuff );
@@ -2503,7 +2501,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="ClearSubDep3" Name="implRamDeleteTableClearThisOne">
 					{
-						$popto ClearSubDep2 reference Relation reference ToTable EffSchemaName$Buff$popto ClearSubDep2 reference Relation reference ToTable Name$ editBuff = ($popto ClearSubDep2 reference Relation reference ToTable EffSchemaName$Buff$popto ClearSubDep2 reference Relation reference ToTable Name$)(schema.getTable$popto ClearSubDep2 reference Relation reference ToTable TableName$().readDerivedBy$popto ClearSubDep2 reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex Suffix$( Authorization$popto ClearSubDep2 reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamDeleteTableClearPassSubDep2Arg )$ ));$reference Relation iterate Columns( each implRamDeleteTableClearRelationFromAttr empty empty )$
+						$popto ClearSubDep2 reference Relation reference ToTable EffSchemaName$Buff$popto ClearSubDep2 reference Relation reference ToTable Name$ editBuff = ($popto ClearSubDep2 reference Relation reference ToTable EffSchemaName$Buff$popto ClearSubDep2 reference Relation reference ToTable Name$)(schema.getTable$popto ClearSubDep2 reference Relation reference ToTable TableName$().readDerivedBy$popto ClearSubDep2 reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex Suffix$( Authorization$popto ClearSubDep2 reference Relation reference ToTable reference BaseClass reference PrimaryKeyIndex iterate Columns( each implRamDeleteTableClearPassSubDep2Arg )$ ));$reference Relation implRamDeleteTableClearRelationFromAttr$
 						classCode = editBuff.getClassCode();
 						if( classCode == I$popto ClearSubDep2 reference Relation reference ToTable DefSchemaName$$popto ClearSubDep2 reference Relation reference ToTable Name$.CLASS_CODE ) {
 							schema.getTable$popto ClearSubDep2 reference Relation reference ToTable TableName$().update$popto ClearSubDep2 reference Relation reference ToTable TableName$( Authorization, editBuff );
@@ -2514,12 +2512,14 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 					}
 				</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationToAttr">
-						editBuff.set$reference ToCol OptionalOrRequired$$reference ToCol Name$( null );</GenRule>
+	<GenRule GenDef="Relation" Name="implRamDeleteTableClearRelationToAttr">
+						editBuff.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamDeleteTableClearRelationPassToAttr default implRamDeleteTableClearRelationCommaPassToAttr )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationPassToAttr">($reference ToCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationCommaPassToAttr">, $implRamDeleteTableClearRelationPassToAttr$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationFromAttr">
-						editBuff.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( null );</GenRule>
-	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationPassFromAttr">null</GenRule>
+	<GenRule GenDef="Relation" Name="implRamDeleteTableClearRelationFromAttr">
+						editBuff.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamDeleteTableClearRelationPassFromAttr each implRamDeleteTableClearRelationCommaPassFromAttr )$);</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationPassFromAttr">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationCommaPassFromAttr">, $implRamDeleteTableClearRelationPassFromAttr$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdatePrev">
