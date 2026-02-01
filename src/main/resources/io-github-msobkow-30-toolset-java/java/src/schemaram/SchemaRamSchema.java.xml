@@ -67,8 +67,19 @@ public class $SchemaName$RamSchema
 	implements I$SchemaName$Schema
 {
 $iterate Id16Generators( each declRamNextIdGen empty empty )$$iterate Id32Generators( each declRamNextIdGen empty empty )$$iterate Id64Generators( each declRamNextIdGen empty empty )$
-$implSchemaRamConstructor$$implRamSchemaNewSchema$$iterate Id16Generators( each implRamNextIdGen empty empty)$$iterate Id32Generators( each implRamNextIdGen empty empty)$$iterate Id64Generators( each implRamNextIdGen empty empty)$$iterate UuidGenerators( each implRamNextIdGen empty empty )$$implRamSchemaFileImport$}
+$implSchemaRamConstructor$$implRamSchemaNewSchema$$iterate Id16Generators( each implRamNextIdGen empty empty)$$iterate Id32Generators( each implRamNextIdGen empty empty)$$iterate Id64Generators( each implRamNextIdGen empty empty)$$iterate DbKeyHash128Generators( each implRamNextIdGen empty empty )$$iterate DbKeyHash160Generators( each implRamNextIdGen empty empty )$$iterate DbKeyHash224Generators( each implRamNextIdGen empty empty )$$iterate DbKeyHash256Generators( each implRamNextIdGen empty empty )$$iterate DbKeyHash384Generators( each implRamNextIdGen empty empty )$$iterate DbKeyHash512Generators( each implRamNextIdGen empty empty )$$iterate UuidGenerators( each implRamNextIdGen empty empty )$$iterate Uuid6Generators( each implRamNextIdGen empty empty )$$implRamSchemaFileImport$
+		
+	@Override
+	public void wireTableTableInstances() {$iterate Tables( each maybeWireRamSchemaTableTableInstance empty empty )$
+	}
+}
 </GenFile>
+
+	<GenRule GenDef="Table" Name="maybeWireRamSchemaTableTableInstance">$switch HasDefSchema yes empty default wireRamSchemaTableTableInstance$</GenRule>
+	<GenRule GenDef="Table" Name="wireRamSchemaTableTableInstance">
+		if (table$TableName$ == null || !(table$TableName$ instanceof $DefSchemaName$Ram$TableName$Table)) {
+			table$TableName$ = new $DefSchemaName$Ram$TableName$Table(this);
+		}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implRamSchemaFileImport">
 	public String fileImport( $SecSchemaName$Authorization Authorization,
@@ -137,33 +148,94 @@ $implSchemaRamConstructor$$implRamSchemaNewSchema$$iterate Id16Generators( each 
 	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash128Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash160Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash224Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash256Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash384Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash512Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Uuid6Gen" Name="implRamNextIdGen">$switch HasDefSchema yes empty default reallyImplRamNextIdGen$</GenRule>
 	
 	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="reallyImplRamNextIdGen">
+	@Override
 	public short next$Name$() {
 		short next = next$Name$Value++;
 		return( next );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="reallyImplRamNextIdGen">
+	@Override
 	public int next$Name$() {
 		int next = next$Name$Value++;
 		return( next );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="reallyImplRamNextIdGen">
+	@Override
 	public long next$Name$() {
 		long next = next$Name$Value++;
 		return( next );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="reallyImplRamNextIdGen">
+	@Override
 	public UUID next$Name$() {
 		UUID next = UUID.randomUUID();
 		return( next );
 	}
 </GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash128Gen" Name="reallyImplRamNextIdGen">
+	@Override
+	public CFLibDbKeyHash128 next$Name$() {
+		CFLibDbKeyHash128 retval = new CFLibDbKeyHash128(0);
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash160Gen" Name="reallyImplRamNextIdGen">
+	@Override
+	public CFLibDbKeyHash160 next$Name$() {
+		CFLibDbKeyHash160 retval = new CFLibDbKeyHash160(0);
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash224Gen" Name="reallyImplRamNextIdGen">
+	@Override
+	public CFLibDbKeyHash224 next$Name$() {
+		CFLibDbKeyHash224 retval = new CFLibDbKeyHash224(0);
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash256Gen" Name="reallyImplRamNextIdGen">
+	@Override
+	public CFLibDbKeyHash256 next$Name$() {
+		CFLibDbKeyHash256 retval = new CFLibDbKeyHash256(0);
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash384Gen" Name="reallyImplRamNextIdGen">
+	@Override
+	public CFLibDbKeyHash384 next$Name$() {
+		CFLibDbKeyHash384 retval = new CFLibDbKeyHash384(0);
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash512Gen" Name="reallyImplRamNextIdGen">
+	@Override
+	public CFLibDbKeyHash512 next$Name$() {
+		CFLibDbKeyHash512 retval = new CFLibDbKeyHash512(0);
+		return( retval );
+	}
+</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Uuid6Gen" Name="reallyImplRamNextIdGen">
+	@Override
+	public CFLibUuid6 next$Name$() {
+		CFLibUuid6 retval = CFLibUuid6.generate();
+		return( retval );
+	}
+</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implRamSchemaNewSchema">
+	@Override
 	public I$SchemaName$Schema newSchema() {
 		throw new CFLibMustOverrideException( getClass(), "newSchema" );
 	}

@@ -72,9 +72,13 @@ public interface I$SchemaName$$TableName$Table$iterate TableRefs( first extendsJ
 $declCreateTable$
 $declUpdateTable$
 $declDeleteTable$
-$declReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declReadTableDerivedByPKeyArgs$$declLockTableDerivedByPKey$$declReadAllTableDerived$$declReadTableDerivedByIndexes$$declReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declReadTableRecByPKeyArgs$$declLockTableRecByPKey$$declReadAllTableRec$$switch PageData yes declPageAllTableRec default empty$$declReadTableRecByIndexes$$switch PageData yes declPageTableRecByIndexes default empty$$switch HasChain yes declMoveUpTableRec default empty$$switch HasChain yes declMoveDownTableRec default empty$$iterate ServerMethods( each declServerMethod empty empty )$$JavaTableInterface$}
+$declReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declReadTableDerivedByPKeyArgs$$declLockTableDerivedByPKey$$declReadAllTableDerived$$declReadTableDerivedByIndexes$$declReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declReadTableRecByPKeyArgs$$declLockTableRecByPKey$$declReadAllTableRec$$switch InheritsPageData yes declPageAllTableRec default empty$$declReadTableRecByIndexes$$switch InheritsPageData yes declPageTableRecByIndexes default empty$$switch HasChain yes declMoveUpTableRec default empty$$switch HasChain yes declMoveDownTableRec default empty$$iterate ServerMethods( each declServerMethod empty empty )$$JavaTableInterface$}
 </GenFile>
 
+	<GenRule GenDef="Table" Name="InheritsPageData">$switch PageData yes yes default maybeSuperPageData$</GenRule>
+	<GenRule GenDef="Table" Name="maybeSuperPageData">$switch HasSuperClassRelation yes superPageData default no$</GenRule>
+	<GenRule GenDef="Table" Name="superPageData">$reference SuperClassRelation reference ToTable InheritsPageData$</GenRule>
+	
 	<GenRule GenDef="Table" Name="extendsJavaSchemaTableNameTable">
 extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 
@@ -313,13 +317,13 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 		>$reference SuperClassRelation reference ToTable declPageTableRecByIndexes$$iterate Index( each declPageTableRecByNonPrimaryIndex )$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPageTableRecByBaseIndexes"
-		>$iterate Index( each declPageTableRecByIndex )$</GenRule>
+		>$iterate Index( each declPageTableRecByNonPrimaryIndex )$</GenRule>
 
 	<GenRule GenDef="Index" Name="declPageTableRecByNonPrimaryIndex"
-		>$switch IsPrimaryIndex yes empty default declPageTableRecSPs$</GenRule>
+		>$switch IsPrimaryIndex yes empty default maybe_declPageTableRecByIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPageTableRecSPs"
-		>$switch PageData yes maybe_declPageTableRecByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="maybe_pagedata_declPageTableRecByIndex"
+		>$switch InheritsPageData yes maybe_declPageTableRecByIndex default empty$</GenRule>
 
 	<GenRule GenDef="Index" Name="maybe_declPageTableRecByIndex"
 		>$switch IsUnique yes empty default declPageTableRecByDuplicateIndex$</GenRule>

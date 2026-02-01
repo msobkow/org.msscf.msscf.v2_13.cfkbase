@@ -92,7 +92,7 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 
 	<GenRule GenDef="Table" Name="maybeWireJpaSchemaTableTableInstance">$switch HasDefSchema yes empty default wireJpaSchemaTableTableInstance$</GenRule>
 	<GenRule GenDef="Table" Name="wireJpaSchemaTableTableInstance">
-		if (table$TableName$ == null) {
+		if (table$TableName$ == null || !(table$TableName$ instanceof $DefSchemaName$Jpa$TableName$Table)) {
 			table$TableName$ = new $DefSchemaName$Jpa$TableName$Table(this);
 		}</GenRule>
 

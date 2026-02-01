@@ -46,7 +46,7 @@
 	<GenRule GenDef="SchemaDef" Name="validatePageData"
 		>$iterate SchemaTables( each validatePageData )$</GenRule>
 	<GenRule GenDef="Table" Name="validatePageData"
-		>$switch PageData yes checkPageDataNoSubclasses default empty$</GenRule>
+		>$switch InheritsPageData yes checkPageDataNoSubclasses default empty$</GenRule>
 	<GenRule GenDef="Table" Name="checkPageDataNoSubclasses"
 		>$switch HasSubClasses no checkPageDataNormalizedKey default FailAssertPageDataNotAllowedForTablesWithSubclasses$</GenRule>
 	<GenRule GenDef="Table" Name="checkPageDataNormalizedKey"
@@ -60,7 +60,7 @@
 		>$switch HasDefSchema yes empty default realTableFiles$</GenRule>
 
 	<GenRule GenDef="Table" Name="realTableFiles"
-		>$fileISchemaJavaFXTableFactoryJava$$fileISchemaJavaFXTableChosenJava$$fileISchemaJavaFXTablePaneCommonJava$$fileISchemaJavaFXTablePaneListJava$$fileSchemaJavaFXTableFactoryJava$$fileSchemaJavaFXTableAttrPaneJava$$fileSchemaJavaFXTableAskDeleteFormJava$$fileSchemaJavaFXTableEltTabPaneJava$$fileSchemaJavaFXTableListPaneJava$$switch IsInstantiable yes maybeFileSchemaJavaFXTableFinderFormJava default empty$$fileSchemaJavaFXTablePickerPaneJava$$fileSchemaJavaFXTablePickerFormJava$$fileSchemaJavaFXTableAddPaneJava$$fileSchemaJavaFXTableViewEditPaneJava$$fileSchemaJavaFXTableAddFormJava$$fileSchemaJavaFXTableViewEditFormJava$$switch PageData yes fileISchemaJavaFXTablePageCallbackJava default empty$</GenRule>
+		>$fileISchemaJavaFXTableFactoryJava$$fileISchemaJavaFXTableChosenJava$$fileISchemaJavaFXTablePaneCommonJava$$fileISchemaJavaFXTablePaneListJava$$fileSchemaJavaFXTableFactoryJava$$fileSchemaJavaFXTableAttrPaneJava$$fileSchemaJavaFXTableAskDeleteFormJava$$fileSchemaJavaFXTableEltTabPaneJava$$fileSchemaJavaFXTableListPaneJava$$switch IsInstantiable yes maybeFileSchemaJavaFXTableFinderFormJava default empty$$fileSchemaJavaFXTablePickerPaneJava$$fileSchemaJavaFXTablePickerFormJava$$fileSchemaJavaFXTableAddPaneJava$$fileSchemaJavaFXTableViewEditPaneJava$$fileSchemaJavaFXTableAddFormJava$$fileSchemaJavaFXTableViewEditFormJava$$switch InheritsPageData yes fileISchemaJavaFXTablePageCallbackJava default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeFileSchemaJavaFXTableFinderFormJava"
 		>$switch HasContainer no fileSchemaJavaFXTableFinderFormJava default containerCheckFileSchemaJavaFXTableFinderFormJava$</GenRule>
