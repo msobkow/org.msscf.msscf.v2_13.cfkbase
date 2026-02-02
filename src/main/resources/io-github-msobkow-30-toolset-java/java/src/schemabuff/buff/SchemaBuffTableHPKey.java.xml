@@ -71,7 +71,7 @@ public class $poptop SchemaDef SchemaName$Buff$TableName$HPKey$switch HasDefSche
 </GenFile>
 
 	<GenRule GenDef="Table" Name="SchemaTableBuffHPKeyImplDefBody">
-	protected long auditClusterId;
+	protected CFLibDbKeyHash256 auditClusterId;
 	protected LocalDateTime auditStamp;
 	protected short auditActionId;
 	protected int requiredRevision;
@@ -98,7 +98,7 @@ $reference PrimaryKeyIndex implBuffHPKeyConstructor$$poptop SchemaDef implAuditC
 	<GenRule GenDef="Index" Name="implBuffHPKeyToString">
 	@Override
 	public String getXmlAttrFragment() {
-		String ret = " auditClusterId=\"" + auditClusterId + "\\""
+		String ret = " auditClusterId=\"" + (auditClusterId != null ? auditClusterId.toString() : "null") + "\\""
 			+ " auditStamp=\\"" + (auditStamp != null ? CFLibXmlUtil.formatTimestamp(auditStamp) : "null") + "\\""
 			+ " auditAction=\\"" + auditActionId + "\\""
 			+ " revision=\\"" + requiredRevision + "\\""

@@ -73,8 +73,10 @@ public class $poptop SchemaDef SchemaName$Jpa$TableName$HPKey$switch HasDefSchem
 </GenFile>
 
 	<GenRule GenDef="Table" Name="SchemaTableHPKeyImplDefBody">
-	@Column(name="auditClusterId", nullable=false)
-	protected long auditClusterId;
+	@AttributeOverrides({
+		@AttributeOverride(name="bytes", column=@Column(name="auditClusterId", nullable=false, length=CFLibDbKeyHash256.HASH_LENGTH) )
+	})
+	protected CFLibDbKeyHash256 auditClusterId;
 
 	@Column(name="auditStamp", nullable=false)
 	protected LocalDateTime auditStamp;
@@ -97,7 +99,7 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 
 	<GenRule GenDef="Index" Name="implJpaHPKeyAttributeOverrides">
 	@AttributeOverrides({
-		@AttributeOverride(name="auditClusterId", column = @Column( name="auditClusterId", nullable=false ) ),
+		@AttributeOverride(name="auditClusterId", column = @Column( name="auditClusterId", nullable=false, length=CFLibDbKeyHash256.HASH_LENGTH ) ),
 		@AttributeOverride(name="auditStamp", column = @Column( name="auditStamp", nullable=false ) ),
 		@AttributeOverride(name="auditAction", column = @Column( name="auditAction", nullable=false ) ),
 		@AttributeOverride(name="requiredRevision", column = @Column( name="requiredRevision", nullable=false ) ),
@@ -121,7 +123,9 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 	@Override
 	public int hashCode() {
 		int hashCode = 0;
-		hashCode = hashCode + (int)( auditClusterId ) &amp; 0x7fffffff;
+		if( auditClusterId != null ) {
+			hashCode = hashCode + auditClusterId.hashCode();
+		}
 		if( auditStamp != null ) {
 			hashCode = hashCode + auditStamp.hashCode();
 		}
@@ -166,11 +170,19 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 	<GenRule GenDef="Table" Name="emitHPKeyHistoryClassNames">, I$reference BaseClass SchemaName$$reference BaseClass TableName$HPKey, I$SchemaName$$TableName$H</GenRule>
 
 	<GenRule GenDef="Object" Name="implHPKeyCompareToAuditClusterId">
-			if (getAuditClusterId() &lt; rhs.getAuditClusterId()) {
-				return( -1 );
+			if( getAuditClusterId() == null ) {
+				if( rhs.getAuditClusterId() != null ) {
+					return( -1 );
+				}
 			}
-			else if (getAuditClusterId() &gt; rhs.getAuditClusterId()) {
+			else if( rhs.getAuditClusterId() == null ) {
 				return( 1 );
+			}
+			else {
+				cmp = getAuditClusterId().compareTo( rhs.getAuditClusterId() );
+				if( cmp != 0 ) {
+					return( cmp );
+				}
 			}</GenRule>
 
 	<GenRule GenDef="Object" Name="implHPKeyCompareToAuditStamp">
@@ -246,7 +258,17 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implHPKeyEqualsAuditClusterId">
-			if (getAuditClusterId() != rhs.getAuditClusterId()) {
+			if (getAuditClusterId() != null) {
+				if (rhs.getAuditClusterId() != null) {
+					if ( ! getAuditClusterId().equals(rhs.getAuditClusterId())) {
+						return( false );
+					}
+				}
+				else {
+					return( false );
+				}
+			}
+			else if (rhs.getAuditClusterId() != null) {
 				return( false );
 			}</GenRule>
 
@@ -293,7 +315,7 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 	<GenRule GenDef="Index" Name="implHPKeyToString">
 	@Override
 	public String getXmlAttrFragment() {
-		String ret = " auditClusterId=\"" + auditClusterId + "\\""
+		String ret = " auditClusterId=\"" + (auditClusterId != null ? auditClusterId.toString() : "null" ) + "\\""
 			+ " auditStamp=\\"" + (auditStamp != null ? CFLibXmlUtil.formatTimestamp(auditStamp) : "null") + "\\""
 			+ " auditAction=\\"" + auditActionId + "\\""
 			+ " requiredRevision=\\"" + requiredRevision + "\\""
@@ -310,12 +332,12 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 
 	<GenRule GenDef="Object" Name="implAuditClusterIdGetterSetter">
 	@Override
-	public long getAuditClusterId() {
+	public CFLibDbKeyHash256 getAuditClusterId() {
 		return( auditClusterId );
 	}
 
 	@Override
-	public void setAuditClusterId( long value ) {
+	public void setAuditClusterId( CFLibDbKeyHash256 value ) {
 		auditClusterId = value;
 	}
 </GenRule>

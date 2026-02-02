@@ -83,7 +83,7 @@ $implSchemaObjGetSetSecCluster$$implSchemaObjGetSetSecTenant$$implSchemaObjGetSe
 	protected String secTenantName = "system";
 	protected String secUserName = "system";
 	protected I$SecSchemaName$ClusterObj secCluster = null;
-	protected long secClusterId = 0L;
+	protected CFLibDbKeyHash256 secClusterId = null;
 	protected I$SecSchemaName$TenantObj secTenant = null;
 	protected CFLibDbKeyHash256 secTenantId = null;
 	protected I$SecSchemaName$SecUserObj secUser = null;
@@ -164,7 +164,7 @@ $iterate SchemaTables( each declSchemaSchemaObjTableObjMember empty empty )$$Jav
 			}
 			else {
 				secCluster = getClusterTableObj().readClusterByUDomNameIdx( secClusterName );
-				if( ( secCluster == null ) &amp;&amp; ( secClusterId &gt; 0 ) ) {
+				if( secCluster == null &amp;&amp; secClusterId != null &amp;&amp; !secClusterId.isNull() ) {
 					secCluster = getClusterTableObj().readClusterByIdIdx( secClusterId );
 				}
 			}
@@ -191,7 +191,7 @@ $iterate SchemaTables( each declSchemaSchemaObjTableObjMember empty empty )$$Jav
 		}
 	}
 
-	public long getSecClusterId() {
+	public CFLibDbKeyHash256 getSecClusterId() {
 		return( secClusterId );
 	}
 </GenRule>
