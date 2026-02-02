@@ -575,6 +575,9 @@ $reference Chain reference NextRel implRamMoveSetNextCur$
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$.readDerived";
 		I$popto Table DefSchemaName$$poptop Table TableName$ buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}
@@ -586,8 +589,8 @@ $reference Chain reference NextRel implRamMoveSetNextCur$
 </GenRule>
 	<GenRule GenDef="Table" Name="implRamReadTableDerivedByCompositePKey">
 	@Override
-	public I$DefSchemaName$$TableName$ readDerived( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
-	{
+	public I$DefSchemaName$$TableName$ readDerived( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$ )
+	{$reference BaseClass reference PrimaryKeyIndex iterate Columns( each ifPKeyColumnRequiredButNullReturnNull )$
 		$BuffCompactedPrimaryIndexClass$ key = ($BuffCompactedPrimaryIndexClass$)(schema.getFactory$reference BaseClass TableName$().newPKey());$iterate SuperiorPrimaryKeyRelations( each implRamReadTableKeySetSuperiorRelation empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetKeyAttr empty empty )$
 		return( readDerived( Authorization, key ) );
 	}
@@ -608,6 +611,13 @@ $reference Chain reference NextRel implRamMoveSetNextCur$
 	}
 </GenRule>
 
+	<GenRule GenDef="IndexCol" Name="ifPKeyColumnRequiredButNullReturnNull">$switch IsNullable yes empty default ifRequiredPKeyColumnNullReturnNull$</GenRule>
+	<GenRule GenDef="IndexCol" Name="ifRequiredPKeyColumnNullReturnNull">
+		{	$implJavaOptAtomType$ test$Name$ = $Name$;
+			if (test$Name$ == null) {
+				return( null );
+			}
+		}</GenRule>
 	<GenRule GenDef="Relation" Name="implRamReadTableKeySetSuperiorRelation">
 		key.set$OptionalOrRequired$$RelationType$$Suffix$( $iterate Columns( first implRamReadTableKeyArgRelation each implRamReadTableCommaKeyArgRelation empty empty )$ );</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamReadTableKeyArgRelation">$reference FromCol reference Column Name$</GenRule>
