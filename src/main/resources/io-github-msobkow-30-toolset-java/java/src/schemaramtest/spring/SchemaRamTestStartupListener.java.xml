@@ -52,7 +52,6 @@ $MssSourceLicense$
 
 package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$ramtest.spring;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -69,11 +68,16 @@ public class $SchemaName$RamTestStartupListener {$iterate SchemaRefs( each autow
     public void onApplicationReady(ApplicationReadyEvent event) {
         System.err.println("$SchemaName$RamTest StartupListener tests beginning...");
 $iterate SchemaRefs( each RamTestWireTableTableInstances empty empty )$$RamTestWireTableTableInstances$
+$iterate SchemaRefs( each RamTestBootstrapSchema empty empty )$$RamTestBootstrapSchema$
 $iterate SchemaRefs( each execRamTestTestRunner empty empty )$$execRamTestTestRunner$
         System.err.println("$SchemaName$RamTest StartupListener tests complete.");
     }
 }
 </GenFile>
+
+	<GenRule GenDef="SchemaRef" Name="RamTestBootstrapSchema">$reference RefSchema RamTestBootstrapSchema$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="RamTestBootstrapSchema">
+		I$SchemaName$Schema.getBacking$SchemaName$().bootstrapSchema();</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="RamTestWireTableTableInstances">$reference RefSchema RamTestWireTableTableInstances$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="RamTestWireTableTableInstances">

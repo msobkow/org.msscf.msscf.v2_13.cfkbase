@@ -57,6 +57,7 @@ import java.net.*;
 import java.rmi.*;
 import java.sql.*;
 import java.text.*;
+import java.time.*;
 import java.util.*;
 import io.github.msobkow.v3_1.cflib.*;
 import io.github.msobkow.v3_1.cflib.dbutil.*;
@@ -68,8 +69,176 @@ public class $SchemaName$BuffSchema
 {$iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate SchemaTables( each declSchemaBuffTableTableMember )$
 $iterate SchemaTables( each declSchemaBuffTableFactoryMember )$
-$implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXmlEncodeString$}
+$implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXmlEncodeString$$implSchemaBuffBootstrap$}
 </GenFile>
+
+<GenRule GenDef="SchemaDef" Name="implSchemaBuffBootstrap">
+	public void bootstrapSchema() {$iterate SchemaRefs( empty implSchemaBuffBootstrapSecurity each empty )$
+	}
+</GenRule>
+
+	<GenRule GenDef="Object" Name="implSchemaBuffBootstrapSecurity">$poptop SchemaDef implSchemaBuffBootstrapSecurity$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="implSchemaBuffBootstrapSecurity">
+		$DefSchemaName$BuffSysCluster sysCluster;
+		CFLibDbKeyHash256 systemClusterID;
+		$DefSchemaName$BuffCluster systemCluster;
+		$DefSchemaName$BuffSecUser adminUser;
+		CFLibDbKeyHash256 adminUID;
+		$DefSchemaName$BuffSecSession bootstrapSession;
+		CFLibDbKeyHash256 bootstrapSessionID;
+		$DefSchemaName$BuffTenant systemTenant;
+		CFLibDbKeyHash256 systemTenantID;
+		I$DefSchemaName$SysCluster[] sysClusters = getTableSysCluster().readAllDerived(null);
+		if (sysClusters != null &amp;&amp; sysClusters.length == 1) {
+			sysCluster = ($DefSchemaName$BuffSysCluster)(sysClusters[0]);
+			systemClusterID = sysCluster.getRequiredClusterId();
+			if(systemClusterID == null || systemClusterID.isNull()) {
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "systemClusterID");
+			}
+			systemCluster = ($DefSchemaName$BuffCluster)(getTableCluster().readDerived(null, systemClusterID));
+			if (systemCluster == null) {
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "systemCluster");
+			}
+			adminUID = systemCluster.getCreatedByUserId();
+			if (adminUID == null || adminUID.isNull()) {
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "adminUID");
+			}
+			adminUser = ($DefSchemaName$BuffSecUser)(getTableSecUser().readDerived(null, adminUID));
+			if( adminUser == null) {
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "adminUser");
+			}
+			systemTenant = ($DefSchemaName$BuffTenant)(getTableTenant().readDerivedByUNameIdx(null, systemClusterID, "system"));
+			if( systemTenant == null) {
+				systemTenantID = null;
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "systemTenant");
+			}
+			else {
+				systemTenantID = systemTenant.getPKey();
+			}
+			bootstrapSession = ($DefSchemaName$BuffSecSession)(getTableSecSession().readDerivedByStartIdx(null, adminUID, systemCluster.getCreatedAt()));
+			if (bootstrapSession == null) {
+				I$DefSchemaName$SecSession[] sessions = getTableSecSession().readDerivedBySecUserIdx(null, adminUID);
+				if (sessions != null) {
+					for (I$DefSchemaName$SecSession cursess: sessions) {
+						if (bootstrapSession == null || cursess.getRequiredStart().compareTo(bootstrapSession.getRequiredStart()) &lt; 0) {
+							bootstrapSession = ($DefSchemaName$BuffSecSession)cursess;
+						}
+					}
+				}
+				if (bootstrapSession == null) {
+					throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "bootstrapSession");
+				}
+			}
+			bootstrapSessionID = bootstrapSession.getPKey();
+		}
+		else {
+			sysCluster = null;
+			systemCluster = null;
+			systemClusterID = null;
+			adminUID = null;
+			adminUser = null;
+			bootstrapSession = null;
+			bootstrapSessionID = null;
+			systemTenant = null;
+			systemTenantID = null;
+		}
+		LocalDateTime now = LocalDateTime.now();
+		if (adminUID == null || adminUID.isNull()) {
+			adminUID = new CFLibDbKeyHash256(0);
+		}
+		if (bootstrapSessionID == null || bootstrapSessionID.isNull()) {
+			bootstrapSessionID = new CFLibDbKeyHash256(0);
+		}
+		if (systemClusterID == null || systemClusterID.isNull()) {
+			systemClusterID = new CFLibDbKeyHash256(0);
+		}
+		if (systemTenantID == null || systemTenantID.isNull()) {
+			systemTenantID = new CFLibDbKeyHash256(0);
+		}
+		if (I$SecSchemaName$Schema.getSysClusterId() == null || I$SecSchemaName$Schema.getSysClusterId().isNull()) {
+			I$SecSchemaName$Schema.setSysClusterId(systemClusterID);
+		}
+		else if ( ! I$SecSchemaName$Schema.getSysClusterId().equals( systemClusterID )) {
+			throw new CFLibInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system cluster id disagrees with new system cluster id", "Previously set system cluster id disagrees with new system cluster id");
+		}
+		if (I$SecSchemaName$Schema.getSysTenantId() == null || I$SecSchemaName$Schema.getSysTenantId().isNull()) {
+			I$SecSchemaName$Schema.setSysTenantId(systemTenantID);
+		}
+		else if ( ! I$SecSchemaName$Schema.getSysTenantId().equals( systemTenantID )) {
+			throw new CFLibInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system tenant id disagrees with new system tenant id", "Previously set system tenant id disagrees with new system tenant id");
+		}
+		if (I$SecSchemaName$Schema.getSysAdminId() == null || I$SecSchemaName$Schema.getSysAdminId().isNull()) {
+			I$SecSchemaName$Schema.setSysAdminId(adminUID);
+		}
+		else if ( ! I$SecSchemaName$Schema.getSysAdminId().equals( adminUID )) {
+			throw new CFLibInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system admin id disagrees with new system admin id", "Previously set system admin id disagrees with new system admin id");
+		}
+
+		String fqdn;
+		try {
+			InetAddress localHost = InetAddress.getLocalHost();
+			fqdn = localHost.getCanonicalHostName();
+		} catch (java.net.UnknownHostException e) {
+			fqdn = "localhost";
+		}
+		if (systemCluster == null) {
+			systemCluster = ($DefSchemaName$BuffCluster)(getFactoryCluster().newRec());
+			systemCluster.setPKey(systemClusterID);
+			systemCluster.setCreatedByUserId(adminUID);
+			systemCluster.setUpdatedByUserId(adminUID);
+			systemCluster.setCreatedAt(now);
+			systemCluster.setUpdatedAt(now);
+			systemCluster.setRequiredFullDomName(fqdn);
+			systemCluster.setRequiredDescription("System cluster for " + fqdn);
+			systemCluster = ($DefSchemaName$BuffCluster)(getTableCluster().createCluster(null, systemCluster));
+			systemClusterID = systemCluster.getPKey();
+		}
+		if (adminUser == null) {
+			adminUser = ($DefSchemaName$BuffSecUser)(getFactorySecUser().newRec());
+			adminUser.setCreatedByUserId(adminUID);
+			adminUser.setUpdatedByUserId(adminUID);
+			adminUser.setCreatedAt(now);
+			adminUser.setUpdatedAt(now);
+			adminUser.setPKey(adminUID);
+			adminUser.setRequiredLoginId("sysadmin");
+			adminUser.setRequiredEMailAddress("sysadmin@" + fqdn);
+			adminUser.setRequiredPasswordHash(I$SecSchemaName$Schema.getPasswordHash("ChangeOnInstall"));
+			adminUser = ($DefSchemaName$BuffSecUser)(getTableSecUser().createSecUser(null, adminUser));
+			adminUID = adminUser.getPKey();
+		}
+		if (systemTenant == null) {
+			systemTenant = ($DefSchemaName$BuffTenant)(getFactoryTenant().newRec());
+			systemTenant.setPKey(systemTenantID);
+			systemTenant.setCreatedByUserId(adminUID);
+			systemTenant.setUpdatedByUserId(adminUID);
+			systemTenant.setCreatedAt(now);
+			systemTenant.setUpdatedAt(now);
+			systemTenant.setRequiredContainerCluster(systemClusterID);
+			systemTenant.setRequiredTenantName("system");
+			systemTenant = ($DefSchemaName$BuffTenant)(getTableTenant().createTenant(null, systemTenant));
+			systemTenantID = systemTenant.getPKey();
+		}
+		if (bootstrapSession == null) {
+			bootstrapSession = ($DefSchemaName$BuffSecSession)(getFactorySecSession().newRec());
+			bootstrapSession.setPKey(bootstrapSessionID);
+			bootstrapSession.setRequiredContainerSecUser(adminUID);
+			bootstrapSession.setRequiredParentSecProxy(adminUID);
+			bootstrapSession.setOptionalSecDevName(null);
+			bootstrapSession.setRequiredStart(now);
+			bootstrapSession.setOptionalFinish(null);
+			bootstrapSession = ($DefSchemaName$BuffSecSession)(getTableSecSession().createSecSession(null, bootstrapSession));
+			bootstrapSessionID = bootstrapSession.getPKey();
+		}
+		if (sysCluster == null) {
+			sysCluster = ($DefSchemaName$BuffSysCluster)(getFactorySysCluster().newRec());
+			sysCluster.setRequiredContainerCluster(systemClusterID);
+			sysCluster = ($DefSchemaName$BuffSysCluster)(getTableSysCluster().createSysCluster(null, sysCluster));
+		}
+		if (bootstrapSession.getOptionalFinish() == null) {
+			bootstrapSession.setOptionalFinish(LocalDateTime.now());
+			bootstrapSession = ($DefSchemaName$BuffSecSession)(getTableSecSession().updateSecSession(null, bootstrapSession));
+		}
+</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implBuffSchemaClassMapInitializers">
 	@Override

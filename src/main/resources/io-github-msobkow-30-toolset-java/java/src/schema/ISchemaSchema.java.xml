@@ -53,7 +53,10 @@ $MssSourceLicense$
 package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$;
 
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.math.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.atomic.*;
@@ -67,8 +70,95 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 {
 	public static final String SCHEMA_NAME = "$SchemaName$";
 	public static final String DBSCHEMA_NAME = "$DbSchemaName$";
-$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate Types( empty empty each declISchemaEnumType )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$}
+$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( empty declISchemaSecurityAttrs each empty )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$$declSchemaBootstrap$}
 </GenFile>
+
+	<GenRule GenDef="Object" Name="declISchemaSecurityAttrs">
+	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysClusterId = new AtomicReference&lt;&gt;();
+	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysTenantId = new AtomicReference&lt;&gt;();
+	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysAdminId = new AtomicReference&lt;&gt;();
+
+	public static String getPasswordHash(String pw) {
+		if (pw == null || pw.isEmpty()) {
+			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "getPasswordHash", 1, "pw");
+		}
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-512");
+            byte[] bytes = md.digest(pw.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i &lt; bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] &amp; 0xff) + 0x100, 16).substring(1));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
+	}
+
+	public static CFLibDbKeyHash256 getSysClusterId() {
+		return (sysClusterId.get());
+	}
+
+	public static void setSysClusterId(CFLibDbKeyHash256 argClusterId) {
+		if (argClusterId == null || argClusterId.isNull()) {
+			throw new CFLibNullArgumentException(I$SchemaName$Schema.class, "setSysClusterId", 1, "argClusterId");
+		}
+		CFLibDbKeyHash256 oldid = sysClusterId.get();
+		if (oldid == null) {
+			sysClusterId.compareAndSet(null, argClusterId);
+		}
+		else if (oldid.isNull()) {
+			sysClusterId.compareAndSet(oldid, argClusterId);
+		}
+		else {
+			throw new CFLibInvalidArgumentException(I$SchemaName$Schema.class, "setSysClusterId", "sysClusterId has already been set", "sysClusterId has already been set");
+		}
+	}
+
+	public static CFLibDbKeyHash256 getSysTenantId() {
+		return (sysTenantId.get());
+	}
+
+	public static void setSysTenantId(CFLibDbKeyHash256 argTenantId) {
+		if (argTenantId == null || argTenantId.isNull()) {
+			throw new CFLibNullArgumentException(I$SchemaName$Schema.class, "setSysTenantId", 1, "argTenantId");
+		}
+		CFLibDbKeyHash256 oldid = sysTenantId.get();
+		if (oldid == null) {
+			sysTenantId.compareAndSet(null, argTenantId);
+		}
+		else if (oldid.isNull()) {
+			sysTenantId.compareAndSet(oldid, argTenantId);
+		}
+		else {
+			throw new CFLibInvalidArgumentException(I$SchemaName$Schema.class, "setSysTenantId", "sysTenantId has already been set", "sysTenantId has already been set");
+		}
+	}
+
+	public static CFLibDbKeyHash256 getSysAdminId() {
+		return (sysAdminId.get());
+	}
+
+	public static void setSysAdminId(CFLibDbKeyHash256 argAdminId) {
+		if (argAdminId == null || argAdminId.isNull()) {
+			throw new CFLibNullArgumentException(I$SchemaName$Schema.class, "setSysAdminId", 1, "argAdminId");
+		}
+		CFLibDbKeyHash256 oldid = sysAdminId.get();
+		if (oldid == null) {
+			sysAdminId.compareAndSet(null, argAdminId);
+		}
+		else if (oldid.isNull()) {
+			sysAdminId.compareAndSet(oldid, argAdminId);
+		}
+		else {
+			throw new CFLibInvalidArgumentException(I$SchemaName$Schema.class, "setSysAdminId", "sysAdminId has already been set", "sysAdminId has already been set");
+		}
+	}
+</GenRule>
+
+<GenRule GenDef="SchemaDef" Name="declSchemaBootstrap">
+	public void bootstrapSchema();
+</GenRule>
 
 <GenRule GenDef="Object" Name="declISchemaClassMapEntry">
 	public static interface BackingRecConstructor {
