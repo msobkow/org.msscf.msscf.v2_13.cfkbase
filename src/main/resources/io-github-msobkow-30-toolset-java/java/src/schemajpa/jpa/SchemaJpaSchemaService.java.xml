@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Mark's Code Fractal CFKBase 3.1 Code Fractal Knowledge Base
+ *
+ *	Copyright 2016-2026 Mark Stephen Sobkow
+ *
+ *	This file is part of Mark's Code Fractal CFKBase.
+ *
+ *	Mark's Code Fractal CFKBase is available under dual commercial license from
+ *	Mark Stephen Sobkow, or under the terms of the GNU General Public License,
+ *	Version 3 or later.
+ *
+ *	Mark's Code Fractal CFKBase is free software: you can redistribute it and/or
+ *	modify it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	Mark's Code Fractal CFKBase is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with Mark's Code Fractal CFKBase.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+	xmlns="https://msobkow.github.io/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="https://msobkow.github.io/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd https://msobkow.github.io/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
+	ToolSet="java"
+	Name="src/Schema/jpa/SchemaJpaSchemaService.java"
+	Revision="3.0"
+	Descr="Java 25 Spring JPA Service for Schema">
+
+	<GenFile GenDef="SchemaDef" Name="fileSchemaJpaSchemaServiceJava"
+			GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackage$.jpa"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$jpa/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa"
+		ExpansionClassName="$SchemaName$JpaSchemaServiceJava"
+		ExpansionKeyName="$SchemaName$JpaSchemaServiceJava"
+		ExpansionFileName="$SchemaName$JpaSchemaService.java"
+>// Description: Java 25 Spring JPA Service for $SchemaName$
+
+$MssSourceLicense$
+
+package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.jpa;
+
+import java.io.Serializable;
+import java.math.*;
+import java.net.InetAddress;
+import java.time.*;
+import java.util.*;
+import jakarta.persistence.*;
+import io.github.msobkow.v3_1.cflib.*;
+import io.github.msobkow.v3_1.cflib.dbutil.*;
+import io.github.msobkow.v3_1.cflib.xml.CFLibXmlUtil;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
+
+/**
+ *	Services for schema $SchemaName$ defined in $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa
+ *	using the $SchemaName$*Repository objects to access the data directly, bypassing normal application security for the bootstrap and login processing.
+ */
+@Service("$lower DefDbSchemaName$JpaSchemaService")
+public class $SchemaName$JpaSchemaService {
+
+	@Autowired
+	@Qualifier("$lower DefDbSchemaName$EntityManagerFactory")
+	private LocalContainerEntityManagerFactoryBean $lower DefDbSchemaName$EntityManagerFactory;$iterate Tables( each JpaSchemaServiceMaybeAutowireService empty empty )$
+$JpaSchemaServiceBootstrap$
+}
+</GenFile>
+
+	<GenRule GenDef="Table" Name="JpaSchemaServiceMaybeAutowireService">$switch HasDefSchema yes empty default JpaSchemaServiceAutowireService$</GenRule>
+	<GenRule GenDef="Table" Name="JpaSchemaServiceAutowireService">
+	@Autowired
+	private $DefSchemaName$Jpa$TableName$Service $lower TableName$Service;
+</GenRule>
+
+<GenRule GenDef="SchemaDef" Name="JpaSchemaServiceBootstrap">
+	public void bootstrapSchema() {$iterate SchemaRefs( empty invokeJpaSchemaServiceBootstrapSecurity each empty )$
+	}
+$iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$</GenRule>
+
+	<GenRule GenDef="Object" Name="invokeJpaSchemaServiceBootstrapSecurity">
+		bootstrapSecurity();</GenRule>
+
+	<GenRule GenDef="Object" Name="implJpaSchemaServiceBootstrapSecurity">$poptop SchemaDef implJpaSchemaServiceBootstrapSecurity$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapSecurity">
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	protected void bootstrapSecurity() {
+		$DefSchemaName$JpaSysCluster sysCluster;
+		CFLibDbKeyHash256 systemClusterID;
+		$DefSchemaName$JpaCluster systemCluster;
+		$DefSchemaName$JpaSecUser adminUser;
+		CFLibDbKeyHash256 adminUID;
+		$DefSchemaName$JpaSecSession bootstrapSession;
+		CFLibDbKeyHash256 bootstrapSessionID;
+		$DefSchemaName$JpaTenant systemTenant;
+		CFLibDbKeyHash256 systemTenantID;
+		List&lt;$DefSchemaName$JpaSysCluster&gt; sysClusters = sysclusterService.findAll();
+		if (sysClusters != null &amp;&amp; sysClusters.size() == 1) {
+			sysCluster = sysClusters.get(0);
+			systemClusterID = sysCluster.getRequiredClusterId();
+			if(systemClusterID == null || systemClusterID.isNull()) {
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "systemClusterID");
+			}
+			systemCluster = clusterService.find(systemClusterID);
+			if (systemCluster == null) {
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "systemCluster");
+			}
+			adminUID = systemCluster.getCreatedByUserId();
+			if (adminUID == null || adminUID.isNull()) {
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "adminUID");
+			}
+			adminUser = secuserService.find(adminUID);
+			if( adminUser == null) {
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "adminUser");
+			}
+			systemTenant = tenantService.findByUNameIdx(systemClusterID, "system");
+			if( systemTenant == null) {
+				systemTenantID = null;
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "systemTenant");
+			}
+			else {
+				systemTenantID = systemTenant.getPKey();
+			}
+			bootstrapSession = secsessionService.findByStartIdx(adminUID, systemCluster.getCreatedAt());
+			if (bootstrapSession == null) {
+				List&lt;$DefSchemaName$JpaSecSession&gt; sessions = secsessionService.findBySecUserIdx(adminUID);
+				if (sessions != null) {
+					for ($DefSchemaName$JpaSecSession cursess: sessions) {
+						if (bootstrapSession == null || cursess.getRequiredStart().compareTo(bootstrapSession.getRequiredStart()) &lt; 0) {
+							bootstrapSession = cursess;
+						}
+					}
+				}
+				if (bootstrapSession == null) {
+					throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "bootstrapSession");
+				}
+			}
+			bootstrapSessionID = bootstrapSession.getPKey();
+		}
+		else {
+			sysCluster = null;
+			systemCluster = null;
+			systemClusterID = null;
+			adminUID = null;
+			adminUser = null;
+			bootstrapSession = null;
+			bootstrapSessionID = null;
+			systemTenant = null;
+			systemTenantID = null;
+		}
+		LocalDateTime now = LocalDateTime.now();
+		if (adminUID == null || adminUID.isNull()) {
+			adminUID = new CFLibDbKeyHash256(0);
+		}
+		if (bootstrapSessionID == null || bootstrapSessionID.isNull()) {
+			bootstrapSessionID = new CFLibDbKeyHash256(0);
+		}
+		if (systemClusterID == null || systemClusterID.isNull()) {
+			systemClusterID = new CFLibDbKeyHash256(0);
+		}
+		if (systemTenantID == null || systemTenantID.isNull()) {
+			systemTenantID = new CFLibDbKeyHash256(0);
+		}
+		if (I$SecSchemaName$Schema.getSysClusterId() == null || I$SecSchemaName$Schema.getSysClusterId().isNull()) {
+			I$SecSchemaName$Schema.setSysClusterId(systemClusterID);
+		}
+		else if ( ! I$SecSchemaName$Schema.getSysClusterId().equals( systemClusterID )) {
+			throw new CFLibInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system cluster id disagrees with new system cluster id", "Previously set system cluster id disagrees with new system cluster id");
+		}
+		if (I$SecSchemaName$Schema.getSysTenantId() == null || I$SecSchemaName$Schema.getSysTenantId().isNull()) {
+			I$SecSchemaName$Schema.setSysTenantId(systemTenantID);
+		}
+		else if ( ! I$SecSchemaName$Schema.getSysTenantId().equals( systemTenantID )) {
+			throw new CFLibInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system tenant id disagrees with new system tenant id", "Previously set system tenant id disagrees with new system tenant id");
+		}
+		if (I$SecSchemaName$Schema.getSysAdminId() == null || I$SecSchemaName$Schema.getSysAdminId().isNull()) {
+			I$SecSchemaName$Schema.setSysAdminId(adminUID);
+		}
+		else if ( ! I$SecSchemaName$Schema.getSysAdminId().equals( adminUID )) {
+			throw new CFLibInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system admin id disagrees with new system admin id", "Previously set system admin id disagrees with new system admin id");
+		}
+
+		String fqdn;
+		try {
+			InetAddress localHost = InetAddress.getLocalHost();
+			fqdn = localHost.getCanonicalHostName();
+		} catch (java.net.UnknownHostException e) {
+			fqdn = "localhost";
+		}
+		if (systemCluster == null) {
+			systemCluster = new $DefSchemaName$JpaCluster();
+			systemCluster.setRequiredRevision(1);
+			systemCluster.setPKey(systemClusterID);
+			systemCluster.setCreatedByUserId(adminUID);
+			systemCluster.setUpdatedByUserId(adminUID);
+			systemCluster.setCreatedAt(now);
+			systemCluster.setUpdatedAt(now);
+			systemCluster.setRequiredFullDomName(fqdn);
+			systemCluster.setRequiredDescription("System cluster for " + fqdn);
+			systemCluster = clusterService.create(systemCluster);
+			systemClusterID = systemCluster.getPKey();
+		}
+		if (adminUser == null) {
+			adminUser = new $DefSchemaName$JpaSecUser();
+			adminUser.setRequiredRevision(1);
+			adminUser.setCreatedByUserId(adminUID);
+			adminUser.setUpdatedByUserId(adminUID);
+			adminUser.setCreatedAt(now);
+			adminUser.setUpdatedAt(now);
+			adminUser.setPKey(adminUID);
+			adminUser.setRequiredLoginId("sysadmin");
+			adminUser.setRequiredEMailAddress("sysadmin@" + fqdn);
+			adminUser.setRequiredPasswordHash(I$SecSchemaName$Schema.getPasswordHash("ChangeOnInstall"));
+			adminUser = secuserService.create(adminUser);
+			adminUID = adminUser.getPKey();
+		}
+		if (systemTenant == null) {
+			systemTenant = new $DefSchemaName$JpaTenant();
+			systemTenant.setRequiredRevision(1);
+			systemTenant.setPKey(systemTenantID);
+			systemTenant.setCreatedByUserId(adminUID);
+			systemTenant.setUpdatedByUserId(adminUID);
+			systemTenant.setCreatedAt(now);
+			systemTenant.setUpdatedAt(now);
+			systemTenant.setRequiredContainerCluster(systemClusterID);
+			systemTenant.setRequiredTenantName("system");
+			systemTenant = tenantService.create(systemTenant);
+			systemTenantID = systemTenant.getPKey();
+		}
+		if (bootstrapSession == null) {
+			bootstrapSession = new $DefSchemaName$JpaSecSession();
+			bootstrapSession.setRequiredRevision(1);
+			bootstrapSession.setPKey(bootstrapSessionID);
+			bootstrapSession.setRequiredContainerSecUser(adminUID);
+			bootstrapSession.setRequiredParentSecProxy(adminUID);
+			bootstrapSession.setOptionalSecDevName(null);
+			bootstrapSession.setRequiredStart(now);
+			bootstrapSession.setOptionalFinish(null);
+			bootstrapSession = secsessionService.create(bootstrapSession);
+			bootstrapSessionID = bootstrapSession.getPKey();
+		}
+		if (sysCluster == null) {
+			sysCluster = new $DefSchemaName$JpaSysCluster();
+			sysCluster.setRequiredContainerCluster(systemClusterID);
+			sysCluster = sysclusterService.create(sysCluster);
+		}
+		if (bootstrapSession.getOptionalFinish() == null) {
+			bootstrapSession.setOptionalFinish(LocalDateTime.now());
+			bootstrapSession.setRequiredRevision(bootstrapSession.getRequiredRevision() + 1);
+			bootstrapSession = secsessionService.update(bootstrapSession);
+		}
+	}
+</GenRule>
+
+</RuleSet>
