@@ -74,6 +74,7 @@
 	&lt;jaxb-api.version&gt;2.4.0-b180725.0427&lt;/jaxb-api.version&gt;
 	&lt;jakarta-annotation-api.version&gt;3.0.0&lt;/jakarta-annotation-api.version&gt;
 	&lt;jakarta-persistence-api.version&gt;3.2.0&lt;/jakarta-persistence-api.version&gt;
+	&lt;aspectj-runtime.version&gt;1.9.25.1&lt;/aspectj-runtime.version&gt;
   &lt;/properties&gt;
 
   &lt;dependencies&gt;
@@ -132,7 +133,12 @@
     &lt;dependency&gt;
         &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
         &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;
-        &lt;version&gt;1.9.7&lt;/version&gt;
+		&lt;version&gt;$${aspectj-runtime.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+        &lt;artifactId&gt;aspectjtools&lt;/artifactId&gt;
+		&lt;version&gt;$${aspectj-runtime.version}&lt;/version&gt;
     &lt;/dependency&gt;$iterate SchemaRefs( each emitPomSchemaRefBaseDependency empty empty )$$emitPomSchemaRefBaseDependency$$iterate SchemaRefs( each emitPomSchemaRefBuffDependency empty empty )$
   &lt;/dependencies&gt;
 
@@ -142,14 +148,39 @@
             &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
             &lt;artifactId&gt;aspectj-maven-plugin&lt;/artifactId&gt;
             &lt;version&gt;1.16.0&lt;/version&gt;
+			&lt;configuration&gt;
+				&lt;complianceLevel&gt;1.6&lt;/complianceLevel&gt;
+				&lt;includes&gt;
+					&lt;include&gt;**/*.java&lt;/include&gt;
+					&lt;include&gt;**/*.aj&lt;/include&gt;
+				&lt;/includes&gt;
+			&lt;/configuration&gt;
             &lt;executions&gt;
                 &lt;execution&gt;
+					&lt;id&gt;compile_with_aspectj&lt;/id&gt;
                     &lt;goals&gt;
                         &lt;goal&gt;compile&lt;/goal&gt;
+                    &lt;/goals&gt;
+                &lt;/execution&gt;
+                &lt;execution&gt;
+					&lt;id&gt;test-compile_with_aspectj&lt;/id&gt;
+                    &lt;goals&gt;
                         &lt;goal&gt;test-compile&lt;/goal&gt;
                     &lt;/goals&gt;
                 &lt;/execution&gt;
             &lt;/executions&gt;
+			&lt;dependencies&gt;
+				&lt;dependency&gt;
+        			&lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+			        &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;
+					&lt;version&gt;$${aspectj-runtime.version}&lt;/version&gt;
+				&lt;/dependency&gt;
+				&lt;dependency&gt;
+        			&lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+			        &lt;artifactId&gt;aspectjtools&lt;/artifactId&gt;
+					&lt;version&gt;$${aspectj-runtime.version}&lt;/version&gt;
+				&lt;/dependency&gt;
+			&lt;/dependencies&gt;
         &lt;/plugin --&gt;
       &lt;plugin&gt;
           &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
