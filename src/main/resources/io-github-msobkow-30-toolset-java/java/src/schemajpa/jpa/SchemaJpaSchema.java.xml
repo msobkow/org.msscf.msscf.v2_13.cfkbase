@@ -67,6 +67,7 @@ import io.github.msobkow.v3_1.cflib.*;
 import io.github.msobkow.v3_1.cflib.dbutil.*;
 import io.github.msobkow.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameJpa empty empty )$
+import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$jpahooks.*;
 
 public class $SchemaName$JpaSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
@@ -74,10 +75,19 @@ public class $SchemaName$JpaSchema
 $iterate SchemaTables( each declJpaSchemaTableTableMember )$
 $iterate SchemaTables( each declJpaSchemaTableFactoryMember )$
 
-	$SchemaName$JpaSchemaHooks schemaHooks = null;
-$implJpaSchemaClassMapInitializers$
+	protected $SchemaName$JpaHooksSchema schemaHooks = null;
+$implJpaSchemaClassMapInitializers$$implSchemaGetSchemaHooks$
 $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootstrap$}
 </GenFile>
+
+<GenRule GenDef="SchemaDef" Name="implSchemaGetSchemaHooks">
+	public $SchemaName$JpaHooksSchema getSchemaHooks() {
+		if (schemaHooks == null) {
+			schemaHooks = new $SchemaName$JpaHooksSchema();
+		}
+		return( schemaHooks );
+	}
+</GenRule>
 
 <GenRule GenDef="SchemaDef" Name="implSchemaBootstrap">
 	public void bootstrapSchema() {

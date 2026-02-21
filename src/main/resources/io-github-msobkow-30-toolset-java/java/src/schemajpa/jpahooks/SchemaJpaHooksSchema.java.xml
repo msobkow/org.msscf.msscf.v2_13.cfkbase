@@ -50,7 +50,7 @@
 
 $MssSourceLicense$
 
-package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.jpahooks;
+package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$jpahooks;
 
 import java.io.Serializable;
 import java.math.*;
@@ -68,8 +68,8 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.repository.query.Param;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
-import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaJpaPackageSchemaName empty empty )$
-import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.jpa.*;
+import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;$iterate SchemaRefs( each importJavaPackageSchemaNameJpa empty empty )$
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa.*;
 
 /**
  *	Hooks for schema $SchemaName$ Spring resources that need to be used by getter-wrappers for AtomicReference members of the multi-threaded wedge between Spring resources and POJO code.
@@ -91,14 +91,14 @@ $iterate Tables( each JpaSchemaHooksMaybeAutowireRepository empty empty )$
 
 	@Autowired
 	@Qualifier("$SchemaName$JpaIdGenService")
-	private $SchemaName$JpaIdGenService schemaIdGenService;
-$iterate Tables( each JpaSchemaHooksMaybeAutowireService empty empty )$$JpaSchemaHooksGetEntityManagerFactoryBean$$JpaSchemaHooksGetSchemaService$$JpaSchemaHooksGetSchemaIdGenService$$iterate Tables( each JpaSchemaHooksMaybeGetTableRepository empty empty )$$iterate Tables( each JpaSchemaHooksMaybeGetTableService empty empty )$</GenRule>
+	private $SchemaName$JpaIdGenService idGenService;
+$iterate Tables( each JpaSchemaHooksMaybeAutowireService empty empty )$$JpaSchemaHooksGetEntityManagerFactoryBean$$JpaSchemaHooksGetSchemaService$$JpaSchemaHooksGetIdGenService$$iterate Tables( each JpaSchemaHooksMaybeGetTableRepository empty empty )$$iterate Tables( each JpaSchemaHooksMaybeGetTableService empty empty )$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="JpaSchemaHooksGetEntityManagerFactoryBean">
 	public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
 		if ( $lower DefDbSchemaName$EntityManagerFactory == null ) {
 			// Dynamically resolve the repository by qualifier name
-			throw new CFLibNotImplementedException( getClass(), "getEntityManagerFactoryBean",
+			throw new CFLibNotImplementedYetException( getClass(), "getEntityManagerFactoryBean",
 				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either",
 				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either" );
 		}
@@ -110,7 +110,7 @@ $iterate Tables( each JpaSchemaHooksMaybeAutowireService empty empty )$$JpaSchem
 	public $DefSchemaName$JpaSchemaService getSchemaService() {
 		if ( schemaService == null ) {
 			// Dynamically resolve the repository by qualifier name
-			throw new CFLibNotImplementedException( getClass(), "getSchemaService",
+			throw new CFLibNotImplementedYetException( getClass(), "getSchemaService",
 				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either",
 				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either" );
 		}
@@ -118,15 +118,15 @@ $iterate Tables( each JpaSchemaHooksMaybeAutowireService empty empty )$$JpaSchem
 	}
 </GenRule>
 
-	<GenRule GenDef="SchemaDef" Name="JpaSchemaHooksGetSchemaIdGenService">
-	public $DefSchemaName$JpaSchemaIdGenService getSchemaIdGenService() {
-		if ( schemaIdGenService == null ) {
+	<GenRule GenDef="SchemaDef" Name="JpaSchemaHooksGetIdGenService">
+	public $DefSchemaName$JpaIdGenService getIdGenService() {
+		if ( idGenService == null ) {
 			// Dynamically resolve the repository by qualifier name
-			throw new CFLibNotImplementedException( getClass(), "getSchemaIdGenService",
+			throw new CFLibNotImplementedYetException( getClass(), "getIdGenService",
 				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either",
 				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either" );
 		}
-		return( schemaService );
+		return( idGenService );
 	}
 </GenRule>
 
@@ -148,7 +148,7 @@ $iterate Tables( each JpaSchemaHooksMaybeAutowireService empty empty )$$JpaSchem
 	public $DefSchemaName$Jpa$TableName$Repository get$TableName$Repository() {
 		if ( $leadlower TableName$Repository == null ) {
 			// Dynamically resolve the repository by interface type
-			throw new CFLibNotImplementedException( getClass(), "get$TableName$Repository",
+			throw new CFLibNotImplementedYetException( getClass(), "get$TableName$Repository",
 				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either",
 				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either" );
 		}
@@ -161,7 +161,7 @@ $iterate Tables( each JpaSchemaHooksMaybeAutowireService empty empty )$$JpaSchem
 	public $DefSchemaName$Jpa$TableName$Service get$TableName$Service() {
 		if ( $leadlower TableName$Service == null ) {
 			// Dynamically resolve the repository by qualifier name
-			throw new CFLibNotImplementedException( getClass(), "get$TableName$Service",
+			throw new CFLibNotImplementedYetException( getClass(), "get$TableName$Service",
 				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either",
 				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either" );
 		}
