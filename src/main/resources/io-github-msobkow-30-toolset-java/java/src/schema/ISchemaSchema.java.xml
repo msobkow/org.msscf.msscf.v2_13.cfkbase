@@ -73,6 +73,25 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 $iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( empty declISchemaSecurityAttrs each empty )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$$declSchemaBootstrap$}
 </GenFile>
 
+	<GenRule GenDef="Object" Name="importsForApplicationContextAware">
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;</GenRule>
+
+	<GenRule GenDef="Object" Name="implementsApplicationContextAware"> implements ApplicationContextAware</GenRule>
+
+	<GenRule GenDef="Object" Name="commaApplicationContextAware">, ApplicationContextAware</GenRule>
+
+	<GenRule GenDef="Object" Name="declApplicationContextAwareContext">
+	private ApplicationContext applicationContext = null;</GenRule>
+
+	<GenRule GenDef="Object" Name="implApplicationContextAwareSetApplicationContext">
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
+</GenRule>
+
 	<GenRule GenDef="Object" Name="declISchemaSecurityAttrs">
 	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysClusterId = new AtomicReference&lt;&gt;();
 	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysTenantId = new AtomicReference&lt;&gt;();

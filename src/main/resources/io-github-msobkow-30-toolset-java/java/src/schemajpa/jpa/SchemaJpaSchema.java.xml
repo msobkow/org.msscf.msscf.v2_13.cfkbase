@@ -62,36 +62,52 @@ import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;$importsForApplicationContextAware$
 import io.github.msobkow.v3_1.cflib.*;
 import io.github.msobkow.v3_1.cflib.dbutil.*;
 import io.github.msobkow.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameJpa empty empty )$
-import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$jpahooks.*;
 
 public class $SchemaName$JpaSchema
-	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
-{$iterate SchemaRefs( each empty empty declTablePerms )$
+	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$$commaApplicationContextAware$
+{$declApplicationContextAwareContext$
+	private $DefSchemaName$JpaSchemaService $lower DefSchemaName$JpaSchemaService = null;
+$iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate SchemaTables( each declJpaSchemaTableTableMember )$
 $iterate SchemaTables( each declJpaSchemaTableFactoryMember )$
-
-	protected $SchemaName$JpaHooksSchema schemaHooks = null;
-$implJpaSchemaClassMapInitializers$$implSchemaGetSchemaHooks$
+$implJpaSchemaClassMapInitializers$$implApplicationContextAwareSetApplicationContext$$implSchemaGetJpaSchemaService$
 $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootstrap$}
 </GenFile>
 
-<GenRule GenDef="SchemaDef" Name="implSchemaGetSchemaHooks">
-	public $SchemaName$JpaHooksSchema getSchemaHooks() {
-		if (schemaHooks == null) {
-			schemaHooks = new $SchemaName$JpaHooksSchema();
+<GenRule GenDef="SchemaDef" Name="implSchemaGetJpaSchemaService">
+	public $DefSchemaName$JpaSchemaService getJpaSchemaService() {
+		if ( $lower DefSchemaName$JpaSchemaService == null ) {
+			if (applicationContext == null) {
+				throw new CFLibNullArgumentException(getClass(), "getJpaSchemaService", 0, "applicationContext");
+			}
+			try {
+				// Third alternative is scoped, which is a form of singleton as far as I'm aware as of 2026-02-21 -- mark.sobkow@gmail.com
+				if ((!applicationContext.isSingleton("$lower DefSchemaName$JpaSchemaService")) &amp;&amp; applicationContext.isPrototype("$lower DefSchemaName$JpaSchemaService")) {
+					throw new CFLibNotImplementedYetException(getClass(), "getJpaSchemaService",
+						"Bean '$lower DefSchemaName$JpaSchemaService' is not a singleton",
+						"Bean '$lower DefSchemaName$JpaSchemaService' is not a singleton");
+				}
+				$lower DefSchemaName$JpaSchemaService = ($DefSchemaName$JpaSchemaService)(applicationContext.getBean("$lower DefSchemaName$JpaSchemaService", $DefSchemaName$JpaSchemaService.class));
+				if ($lower DefSchemaName$JpaSchemaService == null) {
+					throw new CFLibNullArgumentException(getClass(), "getJpaSchemaService", 0, "applicationContext.getBean('$lower DefSchemaName$JpaSchemaService', $DefSchemaName$JpaSchemaService.class)");
+				}
+			}
+			catch (BeansException ex) {
+				throw new CFLibNullArgumentException(getClass(), "getJpaSchemaService", 0, "applicationContext.getBean('$lower DefSchemaName$JpaSchemaService', $DefSchemaName$JpaSchemaService.class)");
+			}
 		}
-		return( schemaHooks );
+		return( $lower DefSchemaName$JpaSchemaService );
 	}
 </GenRule>
 
 <GenRule GenDef="SchemaDef" Name="implSchemaBootstrap">
 	public void bootstrapSchema() {
-		getSchemaHooks().getSchemaService().bootstrapSchema();
+		getJpaSchemaService().bootstrapSchema();
 	}
 </GenRule>
 
