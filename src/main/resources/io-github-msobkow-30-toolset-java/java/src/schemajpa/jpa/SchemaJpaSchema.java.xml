@@ -65,6 +65,7 @@ import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;$importsForApplicationContextAware$
 import io.github.msobkow.v3_1.cflib.*;
 import io.github.msobkow.v3_1.cflib.dbutil.*;
+import io.github.msobkow.v3_1.cflib.inz.Inz;
 import io.github.msobkow.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameJpa empty empty )$
 
@@ -81,24 +82,50 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 
 <GenRule GenDef="SchemaDef" Name="implSchemaGetJpaSchemaService">
 	public $DefSchemaName$JpaSchemaService getJpaSchemaService() {
+		final String S_ProcName = "getJpaSchemaService";
+		final String S_BeanClassName = "$DefSchemaName$JpaSchemaService";
+		final String S_BeanName = "$lower DefDbSchemaName$JpaSchemaService";
+		final String S_MemberName = "$lower DefSchemaName$JpaSchemaService";
 		if ( $lower DefSchemaName$JpaSchemaService == null ) {
 			if (applicationContext == null) {
-				throw new CFLibNullArgumentException(getClass(), "getJpaSchemaService", 0, "applicationContext");
+				throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "applicationContext");
 			}
 			try {
-				// Third alternative is scoped, which is a form of singleton as far as I'm aware as of 2026-02-21 -- mark.sobkow@gmail.com
-				if ((!applicationContext.isSingleton("$lower DefSchemaName$JpaSchemaService")) &amp;&amp; applicationContext.isPrototype("$lower DefSchemaName$JpaSchemaService")) {
-					throw new CFLibNotImplementedYetException(getClass(), "getJpaSchemaService",
-						"Bean '$lower DefSchemaName$JpaSchemaService' is not a singleton",
-						"Bean '$lower DefSchemaName$JpaSchemaService' is not a singleton");
+				if (!applicationContext.containsBean(S_BeanName)) {
+					throw new CFLibInvalidStateException(getClass(), S_ProcName,
+						String.format(Inz.s("cflib.common.ACContainsBeanFailure"), S_BeanName),
+						String.format(Inz.x("cflib.common.ACContainsBeanFailure"), S_BeanName));
 				}
-				$lower DefSchemaName$JpaSchemaService = ($DefSchemaName$JpaSchemaService)(applicationContext.getBean("$lower DefSchemaName$JpaSchemaService", $DefSchemaName$JpaSchemaService.class));
+				if (!applicationContext.isTypeMatch(S_BeanName, $DefSchemaName$JpaSchemaService.class)) {
+					throw new CFLibInvalidStateException(getClass(), S_ProcName,
+						String.format(Inz.s("cflib.common.ACBeanTypeFailure"), S_BeanName, S_BeanClassName),
+						String.format(Inz.x("cflib.common.ACBeanTypeFailure"), S_BeanName, S_BeanClassName));
+				}
+				if (applicationContext.isSingleton(S_BeanName)) {
+					// Resolve singletons like configuration data if they exist, hope that default construction takes place
+					$lower DefSchemaName$JpaSchemaService = ($DefSchemaName$JpaSchemaService)(applicationContext.getBean(S_BeanName, $DefSchemaName$JpaSchemaService.class));
+				}
+				else if(applicationContext.isPrototype(S_BeanName)) {
+					// If it is a prototype, get a copy for our manual 'autowiring' like Spring would do
+					$lower DefSchemaName$JpaSchemaService = ($DefSchemaName$JpaSchemaService)(applicationContext.getBean(S_BeanName, $DefSchemaName$JpaSchemaService.class));
+				}
+				// Otherwise it would be a scoped bean, and I've no idea how to search scoped beans as of 2026-02-21, so we'll default to constructing a local instance -- mark.sobkow@gmail.com
 				if ($lower DefSchemaName$JpaSchemaService == null) {
-					throw new CFLibNullArgumentException(getClass(), "getJpaSchemaService", 0, "applicationContext.getBean('$lower DefSchemaName$JpaSchemaService', $DefSchemaName$JpaSchemaService.class)");
+					// Need to manually construct and register instance; the plumbing is presumed to happen automagically via createBean()
+					$lower DefSchemaName$JpaSchemaService = ($DefSchemaName$JpaSchemaService)(applicationContext.getAutowireCapableBeanFactory().createBean($DefSchemaName$JpaSchemaService.class));
+					if ($lower DefSchemaName$JpaSchemaService == null) {
+						throw new CFLibInvalidStateException( getClass(), S_ProcName,
+							String.format(Inz.s("cflib.common.ACAutowireBeanInstanceCreationFailure"),	S_BeanClassName),
+							 String.format(Inz.x("cflib.common.ACAutowireBeanInstanceCreationFailure"), S_BeanClassName));
+					}
 				}
 			}
 			catch (BeansException ex) {
-				throw new CFLibNullArgumentException(getClass(), "getJpaSchemaService", 0, "applicationContext.getBean('$lower DefSchemaName$JpaSchemaService', $DefSchemaName$JpaSchemaService.class)");
+				$lower DefSchemaName$JpaSchemaService = null;
+				throw new CFLibInvalidStateException(getClass(), S_ProcName, 
+					String.format(Inz.s("cflib.common.CaughtWhileTryingToResolve"), ex.getClass().getName(), S_BeanClassName, S_MemberName, ex.getMessage()),
+					String.format(Inz.x("cflib.common.CaughtWhileTryingToResolve"), ex.getClass().getName(), S_BeanClassName, S_MemberName, ex.getLocalizedMessage()),
+					ex);
 			}
 		}
 		return( $lower DefSchemaName$JpaSchemaService );
