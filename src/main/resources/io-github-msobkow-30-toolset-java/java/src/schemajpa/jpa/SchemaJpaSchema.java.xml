@@ -68,52 +68,46 @@ import io.github.msobkow.v3_1.cflib.dbutil.*;
 import io.github.msobkow.v3_1.cflib.inz.Inz;
 import io.github.msobkow.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameJpa empty empty )$
+import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$jpahooks.$DefSchemaName$JpaHooksSchema;
 
 public class $SchemaName$JpaSchema
-	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$$commaApplicationContextAware$
-{$declApplicationContextAwareContext$
-	private $DefSchemaName$JpaSchemaService $lower DefSchemaName$JpaSchemaService = null;
+	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
+{
+	private $DefSchemaName$JpaHooksSchema $lower DefSchemaName$JpaHooksSchema = null;
 $iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate SchemaTables( each declJpaSchemaTableTableMember )$
 $iterate SchemaTables( each declJpaSchemaTableFactoryMember )$
-$implJpaSchemaClassMapInitializers$$implApplicationContextAwareSetApplicationContext$$implSchemaGetJpaSchemaService$
+$implJpaSchemaClassMapInitializers$$implSchemaGetJpaHooksSchema$$implSchemaGetSchemaService$
 $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootstrap$}
 </GenFile>
 
-<GenRule GenDef="SchemaDef" Name="implSchemaGetJpaSchemaService">
-	public $DefSchemaName$JpaSchemaService getJpaSchemaService() {
-		final String S_ProcName = "getJpaSchemaService";
-		final String S_BeanClassName = "$DefSchemaName$JpaSchemaService";
-		final String S_BeanName = "$lower DefDbSchemaName$JpaSchemaService";
-		final String S_MemberName = "$lower DefSchemaName$JpaSchemaService";
-		if ( $lower DefSchemaName$JpaSchemaService == null ) {
-			if (applicationContext == null) {
-				throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "applicationContext");
+<GenRule GenDef="SchemaDef" Name="implSchemaGetSchemaService">
+	public $DefSchemaName$JpaSchemaService getSchemaService() {
+		return( getJpaHooksSchema().getSchemaService() );
+	}</GenRule>
+
+<GenRule GenDef="SchemaDef" Name="implSchemaGetJpaHooksSchema">
+	public $DefSchemaName$JpaHooksSchema getJpaHooksSchema() {
+		final String S_ProcName = "getJpaHooksSchema";
+		final String S_BeanClassName = "$DefSchemaName$JpaHooksSchema";
+		final String S_BeanName = "$lower DefDbSchemaName$JpaHooksSchema";
+		final String S_MemberName = "$lower DefSchemaName$JpaHooksSchema";
+		if ( $lower DefSchemaName$JpaHooksSchema == null ) {
+			ApplicationContext ctx = I$DefSchemaName$Schema.getApplicationContext();
+			if (ctx == null) {
+				throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "I$DefSchemaName$Schema.getApplicationContext()");
 			}
 			try {
-				if (!applicationContext.containsBean(S_BeanName)) {
-					throw new CFLibInvalidStateException(getClass(), S_ProcName,
-						String.format(Inz.s("cflib.common.ACContainsBeanFailure"), S_BeanName),
-						String.format(Inz.x("cflib.common.ACContainsBeanFailure"), S_BeanName));
-				}
-				if (!applicationContext.isTypeMatch(S_BeanName, $DefSchemaName$JpaSchemaService.class)) {
+				if (!ctx.isTypeMatch(S_BeanName, $DefSchemaName$JpaHooksSchema.class)) {
 					throw new CFLibInvalidStateException(getClass(), S_ProcName,
 						String.format(Inz.s("cflib.common.ACBeanTypeFailure"), S_BeanName, S_BeanClassName),
 						String.format(Inz.x("cflib.common.ACBeanTypeFailure"), S_BeanName, S_BeanClassName));
 				}
-				if (applicationContext.isSingleton(S_BeanName)) {
-					// Resolve singletons like configuration data if they exist, hope that default construction takes place
-					$lower DefSchemaName$JpaSchemaService = ($DefSchemaName$JpaSchemaService)(applicationContext.getBean(S_BeanName, $DefSchemaName$JpaSchemaService.class));
-				}
-				else if(applicationContext.isPrototype(S_BeanName)) {
-					// If it is a prototype, get a copy for our manual 'autowiring' like Spring would do
-					$lower DefSchemaName$JpaSchemaService = ($DefSchemaName$JpaSchemaService)(applicationContext.getBean(S_BeanName, $DefSchemaName$JpaSchemaService.class));
-				}
-				// Otherwise it would be a scoped bean, and I've no idea how to search scoped beans as of 2026-02-21, so we'll default to constructing a local instance -- mark.sobkow@gmail.com
-				if ($lower DefSchemaName$JpaSchemaService == null) {
+				$lower DefSchemaName$JpaHooksSchema = ($DefSchemaName$JpaHooksSchema)(ctx.getBean(S_BeanName, $DefSchemaName$JpaHooksSchema.class));
+				if ($lower DefSchemaName$JpaHooksSchema == null) {
 					// Need to manually construct and register instance; the plumbing is presumed to happen automagically via createBean()
-					$lower DefSchemaName$JpaSchemaService = ($DefSchemaName$JpaSchemaService)(applicationContext.getAutowireCapableBeanFactory().createBean($DefSchemaName$JpaSchemaService.class));
-					if ($lower DefSchemaName$JpaSchemaService == null) {
+					$lower DefSchemaName$JpaHooksSchema = ($DefSchemaName$JpaHooksSchema)(ctx.getAutowireCapableBeanFactory().createBean($DefSchemaName$JpaHooksSchema.class));
+					if ($lower DefSchemaName$JpaHooksSchema == null) {
 						throw new CFLibInvalidStateException( getClass(), S_ProcName,
 							String.format(Inz.s("cflib.common.ACAutowireBeanInstanceCreationFailure"),	S_BeanClassName),
 							 String.format(Inz.x("cflib.common.ACAutowireBeanInstanceCreationFailure"), S_BeanClassName));
@@ -121,20 +115,20 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 				}
 			}
 			catch (BeansException ex) {
-				$lower DefSchemaName$JpaSchemaService = null;
+				$lower DefSchemaName$JpaHooksSchema = null;
 				throw new CFLibInvalidStateException(getClass(), S_ProcName, 
 					String.format(Inz.s("cflib.common.CaughtWhileTryingToResolve"), ex.getClass().getName(), S_BeanClassName, S_MemberName, ex.getMessage()),
 					String.format(Inz.x("cflib.common.CaughtWhileTryingToResolve"), ex.getClass().getName(), S_BeanClassName, S_MemberName, ex.getLocalizedMessage()),
 					ex);
 			}
 		}
-		return( $lower DefSchemaName$JpaSchemaService );
+		return( $lower DefSchemaName$JpaHooksSchema );
 	}
 </GenRule>
 
 <GenRule GenDef="SchemaDef" Name="implSchemaBootstrap">
 	public void bootstrapSchema() {
-		getJpaSchemaService().bootstrapSchema();
+		getSchemaService().bootstrapSchema();
 	}
 </GenRule>
 
