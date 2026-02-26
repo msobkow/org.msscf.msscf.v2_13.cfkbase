@@ -56,7 +56,8 @@ package $reference ManufacturingSchema lower JavaPackage$.$reference Manufacturi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;$importsForApplicationContextAware$
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;$importsForApplicationContextAware$
 import io.github.msobkow.v3_1.cflib.*;
 import io.github.msobkow.v3_1.cflib.dbutil.*;$iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.*;$iterate SchemaRefs( each importJavaPackageSchemaNameJpa empty empty )$
@@ -66,10 +67,13 @@ import $reference ManufacturingSchema lower JavaPackage$.$reference Manufacturin
 public class $SchemaName$JpaTestStartupListener$implementsApplicationContextAware$ {$iterate SchemaRefs( each autowireJpaTestStartupListenerTestRunner empty empty )$$autowireJpaTestStartupListenerTestRunner$
 $declApplicationContextAwareContext$
 $implApplicationContextAwareSetApplicationContext$
+$iterate SchemaRefs( each JpaTestDeclJpaHooksSchema empty empty )$$JpaTestDeclJpaHooksSchema$
 	@EventListener
     public void onApplicationReady(ApplicationReadyEvent event) {
         System.err.println("$SchemaName$JpaTest StartupListener tests beginning...");
 $iterate SchemaRefs( each JpaTestSetApplicationContext empty empty )$$JpaTestSetApplicationContext$
+$iterate SchemaRefs( each JpaTestWireJpaHooksSchema empty empty )$$JpaTestWireJpaHooksSchema$
+
 $iterate SchemaRefs( each JpaTestWireTableTableInstances empty empty )$$JpaTestWireTableTableInstances$
 $iterate SchemaRefs( each JpaTestBootstrapSchema empty empty )$$JpaTestBootstrapSchema$
 $iterate SchemaRefs( each execJpaTestTestRunner empty empty )$$execJpaTestTestRunner$
@@ -77,6 +81,17 @@ $iterate SchemaRefs( each execJpaTestTestRunner empty empty )$$execJpaTestTestRu
     }
 }
 </GenFile>
+
+	<GenRule GenDef="SchemaRef" Name="JpaTestDeclJpaHooksSchema">$reference RefSchema JpaTestDeclJpaHooksSchema$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="JpaTestDeclJpaHooksSchema">
+	@Autowired
+	@Qualifier("$lower DefDbSchemaName$JpaHooksSchema")
+	private $DefSchemaName$JpaHooksSchema $lower DefSchemaName$JpaHooksSchema;
+</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="JpaTestWireJpaHooksSchema">$reference RefSchema JpaTestWireJpaHooksSchema$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="JpaTestWireJpaHooksSchema">
+		(($DefSchemaName$JpaSchema)I$SchemaName$Schema.getBacking$SchemaName$()).setJpaHooksSchema($lower DefSchemaName$JpaHooksSchema);</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="JpaTestSetApplicationContext">$reference RefSchema JpaTestSetApplicationContext$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="JpaTestSetApplicationContext">
