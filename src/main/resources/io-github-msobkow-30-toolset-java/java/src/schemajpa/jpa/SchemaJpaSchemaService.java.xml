@@ -145,7 +145,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$</
 				List&lt;$DefSchemaName$JpaSecSession&gt; sessions = secsessionService.findBySecUserIdx(adminUID);
 				if (sessions != null) {
 					for ($DefSchemaName$JpaSecSession cursess: sessions) {
-						if (bootstrapSession == null || cursess.getRequiredStart().compareTo(bootstrapSession.getRequiredStart()) &lt; 0) {
+						if (bootstrapSession == null || (bootstrapSession != null &amp;&amp; (cursess.getRequiredStart().compareTo(bootstrapSession.getRequiredStart()) &lt; 0))) {
 							bootstrapSession = cursess;
 						}
 					}
@@ -209,7 +209,8 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$</
 		if (systemCluster == null) {
 			systemCluster = new $DefSchemaName$JpaCluster();
 			systemCluster.setRequiredRevision(1);
-			systemCluster.setPKey(systemClusterID);
+			systemCluster.setRequiredId(systemClusterID);
+//			systemCluster.setPKey(systemClusterID);
 			systemCluster.setCreatedByUserId(adminUID);
 			systemCluster.setUpdatedByUserId(adminUID);
 			systemCluster.setCreatedAt(now);
@@ -226,7 +227,8 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$</
 			adminUser.setUpdatedByUserId(adminUID);
 			adminUser.setCreatedAt(now);
 			adminUser.setUpdatedAt(now);
-			adminUser.setPKey(adminUID);
+			adminUser.setRequiredSecUserId(adminUID);
+//			adminUser.setPKey(adminUID);
 			adminUser.setRequiredLoginId("sysadmin");
 			adminUser.setRequiredEMailAddress("sysadmin@" + fqdn);
 			adminUser.setRequiredPasswordHash(I$SecSchemaName$Schema.getPasswordHash("ChangeOnInstall"));
@@ -236,7 +238,8 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$</
 		if (systemTenant == null) {
 			systemTenant = new $DefSchemaName$JpaTenant();
 			systemTenant.setRequiredRevision(1);
-			systemTenant.setPKey(systemTenantID);
+			systemTenant.setRequiredId(systemTenantID);
+//			systemTenant.setPKey(systemTenantID);
 			systemTenant.setCreatedByUserId(adminUID);
 			systemTenant.setUpdatedByUserId(adminUID);
 			systemTenant.setCreatedAt(now);
@@ -249,23 +252,25 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$</
 		if (bootstrapSession == null) {
 			bootstrapSession = new $DefSchemaName$JpaSecSession();
 			bootstrapSession.setRequiredRevision(1);
-			bootstrapSession.setPKey(bootstrapSessionID);
+			bootstrapSession.setRequiredSecSessionId(bootstrapSessionID);
+//			bootstrapSession.setPKey(bootstrapSessionID);
 			bootstrapSession.setRequiredSecUserId(adminUID);
 			bootstrapSession.setOptionalSecProxyId(adminUID);
 			bootstrapSession.setOptionalSecDevName(null);
 			bootstrapSession.setRequiredStart(now);
 			bootstrapSession.setOptionalFinish(null);
 			bootstrapSession = secsessionService.create(bootstrapSession);
-			bootstrapSessionID = bootstrapSession.getPKey();
 		}
+//		bootstrapSessionID = bootstrapSession.getPKey();
+			
 		if (sysCluster == null) {
 			sysCluster = new $DefSchemaName$JpaSysCluster();
 			sysCluster.setRequiredContainerCluster(systemClusterID);
 			sysCluster = sysclusterService.create(sysCluster);
 		}
-		if (bootstrapSession.getOptionalFinish() == null) {
+		if (bootstrapSession != null &amp;&amp; bootstrapSessionID != null &amp;&amp; !bootstrapSessionID.isNull() &amp;&amp; bootstrapSession.getOptionalFinish() == null) {
 			bootstrapSession.setOptionalFinish(LocalDateTime.now());
-			bootstrapSession.setRequiredRevision(bootstrapSession.getRequiredRevision() + 1);
+//			bootstrapSession.setRequiredRevision(bootstrapSession.getRequiredRevision() + 1);
 			bootstrapSession = secsessionService.update(bootstrapSession);
 		}
 	}
