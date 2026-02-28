@@ -96,7 +96,7 @@ $JpaSchemaServiceBootstrap$
 	public void bootstrapSchema() {$iterate SchemaRefs( each invokeJpaSchemaServiceBootstrapReferenced empty empty )$$iterate SchemaRefs( empty invokeJpaSchemaServiceBootstrapSecurity each empty )$
 		bootstrapAllTablesSecurity();
 	}
-$iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$implJpaSchemaServiceBootstrapAllTablesSecurity$$iterate Tables( each maybeImplJpaSchemaServiceBootstrapTable empty empty )$
+$iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$implJpaSchemaServiceBootstrapAllTablesSecurity$$implJpaSchemaServiceBootstrapTableSecurity$
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="invokeJpaSchemaServiceBootstrapReferenced">$reference RefSchema invokeJpaSchemaServiceBootstrapReferenced$</GenRule>
@@ -104,253 +104,343 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		I$SchemaName$Schema.getBacking$SchemaName$().bootstrapSchema();</GenRule>
 	<GenRule GenDef="Object" Name="invokeJpaSchemaServiceBootstrapSecurity">
 		bootstrapSecurity();</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapTableSecurity">
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
+	public void bootstrapTableSecurity(I$SecSchemaName$Authorization auth, String tableName, boolean hasHistory, boolean isMutable) {
+		LocalDateTime now = LocalDateTime.now();
+		String lowerTableName = tableName.toLowerCase();
+		String createPermName = "create" + lowerTableName;
+		String readPermName = "read" + lowerTableName;
+		String updatePermName = "update" + lowerTableName;
+		String deletePermName = "delete" + lowerTableName;
+		String restorePermName = "restore" + lowerTableName;
+		String mutatePermName = "mutate" + lowerTableName;
+		I$SecSchemaName$SecGroup secGroupCreate;
+		CFLibDbKeyHash256 secGroupCreateID;
+		I$SecSchemaName$SecGrpMemb secGroupCreateMembSysadmin;
+		CFLibDbKeyHash256 secGroupCreateMembSysadminID;
+		I$SecSchemaName$SecGroup secGroupRead;
+		CFLibDbKeyHash256 secGroupReadID;
+		I$SecSchemaName$SecGrpMemb secGroupReadMembSysadmin;
+		CFLibDbKeyHash256 secGroupReadMembSysadminID;
+		I$SecSchemaName$SecGroup secGroupUpdate;
+		CFLibDbKeyHash256 secGroupUpdateID;
+		I$SecSchemaName$SecGrpMemb secGroupUpdateMembSysadmin;
+		CFLibDbKeyHash256 secGroupUpdateMembSysadminID;
+		I$SecSchemaName$SecGroup secGroupDelete;
+		CFLibDbKeyHash256 secGroupDeleteID;
+		I$SecSchemaName$SecGrpMemb secGroupDeleteMembSysadmin;
+		CFLibDbKeyHash256 secGroupDeleteMembSysadminID;
+		I$SecSchemaName$SecGroup secGroupRestore;
+		CFLibDbKeyHash256 secGroupRestoreID;
+		I$SecSchemaName$SecGrpMemb secGroupRestoreMembSysadmin;
+		CFLibDbKeyHash256 secGroupRestoreMembSysadminID;
+		I$SecSchemaName$SecGroup secGroupMutate;
+		CFLibDbKeyHash256 secGroupMutateID;
+		I$SecSchemaName$SecGrpMemb secGroupMutateMembSysadmin;
+		CFLibDbKeyHash256 secGroupMutateMembSysadminID;
+
+		secGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), createPermName);
+		if (secGroupCreate != null) {
+			secGroupCreateID = secGroupCreate.getRequiredSecGroupId();
+			secGroupCreateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), secGroupCreateID, I$SecSchemaName$Schema.getSysAdminId());
+			if (secGroupCreateMembSysadmin != null) {
+				secGroupCreateMembSysadminID = secGroupCreateMembSysadmin.getRequiredSecGrpMembId();
+			}
+			else {
+				secGroupCreateMembSysadminID = null;
+			}
+		}
+		else {
+			secGroupCreateID = null;
+			secGroupCreateMembSysadmin = null;
+			secGroupCreateMembSysadminID = null;
+		}
+
+		secGroupRead = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), readPermName);
+		if (secGroupRead != null) {
+			secGroupReadID = secGroupRead.getRequiredSecGroupId();
+			secGroupReadMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), secGroupReadID, I$SecSchemaName$Schema.getSysAdminId());
+			if (secGroupReadMembSysadmin != null) {
+				secGroupReadMembSysadminID = secGroupReadMembSysadmin.getRequiredSecGrpMembId();
+			}
+			else {
+				secGroupReadMembSysadminID = null;
+			}
+		}
+		else {
+			secGroupReadID = null;
+			secGroupReadMembSysadmin = null;
+			secGroupReadMembSysadminID = null;
+		}
+
+		secGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), updatePermName);
+		if (secGroupUpdate != null) {
+			secGroupUpdateID = secGroupUpdate.getRequiredSecGroupId();
+			secGroupUpdateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), secGroupUpdateID, I$SecSchemaName$Schema.getSysAdminId());
+			if (secGroupUpdateMembSysadmin != null) {
+				secGroupUpdateMembSysadminID = secGroupUpdateMembSysadmin.getRequiredSecGrpMembId();
+			}
+			else {
+				secGroupUpdateMembSysadminID = null;
+			}
+		}
+		else {
+			secGroupUpdateID = null;
+			secGroupUpdateMembSysadmin = null;
+			secGroupUpdateMembSysadminID = null;
+		}
+
+		secGroupDelete = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), deletePermName);
+		if (secGroupDelete != null) {
+			secGroupDeleteID = secGroupDelete.getRequiredSecGroupId();
+			secGroupDeleteMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), secGroupDeleteID, I$SecSchemaName$Schema.getSysAdminId());
+			if (secGroupDeleteMembSysadmin != null) {
+				secGroupDeleteMembSysadminID = secGroupDeleteMembSysadmin.getRequiredSecGrpMembId();
+			}
+			else {
+				secGroupDeleteMembSysadminID = null;
+			}
+		}
+		else {
+			secGroupDeleteID = null;
+			secGroupDeleteMembSysadmin = null;
+			secGroupDeleteMembSysadminID = null;
+		}
+
+		if (hasHistory) {
+			secGroupRestore = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), restorePermName);
+			if (secGroupRestore != null) {
+				secGroupRestoreID = secGroupRestore.getRequiredSecGroupId();
+				secGroupRestoreMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), secGroupRestoreID, I$SecSchemaName$Schema.getSysAdminId());
+				if (secGroupRestoreMembSysadmin != null) {
+					secGroupRestoreMembSysadminID = secGroupRestoreMembSysadmin.getRequiredSecGrpMembId();
+				}
+				else {
+					secGroupRestoreMembSysadminID = null;
+				}
+			}
+			else {
+				secGroupRestoreID = null;
+				secGroupRestoreMembSysadmin = null;
+				secGroupRestoreMembSysadminID = null;
+			}
+		}
+		else {
+			secGroupRestore = null;
+			secGroupRestoreID = null;
+			secGroupRestoreMembSysadmin = null;
+			secGroupRestoreMembSysadminID = null;
+		}
+
+		if (isMutable) {
+			secGroupMutate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), mutatePermName);
+			if (secGroupMutate != null) {
+				secGroupMutateID = secGroupMutate.getRequiredSecGroupId();
+				secGroupMutateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), secGroupMutateID, I$SecSchemaName$Schema.getSysAdminId());
+				if (secGroupMutateMembSysadmin != null) {
+					secGroupMutateMembSysadminID = secGroupMutateMembSysadmin.getRequiredSecGrpMembId();
+				}
+				else {
+					secGroupMutateMembSysadminID = null;
+				}
+			}
+			else {
+				secGroupMutateID = null;
+				secGroupMutateMembSysadmin = null;
+				secGroupMutateMembSysadminID = null;
+			}
+		}
+		else {
+			secGroupMutate = null;
+			secGroupMutateID = null;
+			secGroupMutateMembSysadmin = null;
+			secGroupMutateMembSysadminID = null;
+		}
 		
-	<GenRule GenDef="Table" Name="maybeDeclGroupsAndMembers">$switch HasDefSchema yes empty default declGroupsAndMembers$</GenRule>
-	<GenRule GenDef="Table" Name="declGroupsAndMembers">$declCreateGroupAndMember$$declReadGroupAndMember$$declUpdateGroupAndMember$$declDeleteGroupAndMember$</GenRule>
-
-	<GenRule GenDef="Table" Name="declCreateGroupAndMember">
-		I$SecSchemaName$SecGroup secGroupCreate$TableName$;
-		CFLibDbKeyHash256 secGroupCreate$TableName$ID;
-		I$SecSchemaName$SecGrpMemb secGroupCreate$TableName$MembSysadmin;
-		CFLibDbKeyHash256 secGroupCreate$TableName$MembSysadminID;</GenRule>
-
-	<GenRule GenDef="Table" Name="declReadGroupAndMember">
-		I$SecSchemaName$SecGroup secGroupRead$TableName$;
-		CFLibDbKeyHash256 secGroupRead$TableName$ID;
-		I$SecSchemaName$SecGrpMemb secGroupRead$TableName$MembSysadmin;
-		CFLibDbKeyHash256 secGroupRead$TableName$MembSysadminID;</GenRule>
-
-	<GenRule GenDef="Table" Name="declUpdateGroupAndMember">
-		I$SecSchemaName$SecGroup secGroupUpdate$TableName$;
-		CFLibDbKeyHash256 secGroupUpdate$TableName$ID;
-		I$SecSchemaName$SecGrpMemb secGroupUpdate$TableName$MembSysadmin;
-		CFLibDbKeyHash256 secGroupUpdate$TableName$MembSysadminID;</GenRule>
-
-	<GenRule GenDef="Table" Name="declDeleteGroupAndMember">
-		I$SecSchemaName$SecGroup secGroupDelete$TableName$;
-		CFLibDbKeyHash256 secGroupDelete$TableName$ID;
-		I$SecSchemaName$SecGrpMemb secGroupDelete$TableName$MembSysadmin;
-		CFLibDbKeyHash256 secGroupDelete$TableName$MembSysadminID;</GenRule>
-
-	<GenRule GenDef="Table" Name="maybeNullifyGroupsAndMembers">$switch HasDefSchema yes empty default nullifyGroupsAndMembers$</GenRule>
-	<GenRule GenDef="Table" Name="nullifyGroupsAndMembers">
-			secGroupCreate$TableName$ = null;
-			secGroupCreate$TableName$ID = null;
-			secGroupRead$TableName$ = null;
-			secGroupRead$TableName$ID = null;
-			secGroupUpdate$TableName$ = null;
-			secGroupUpdate$TableName$ID = null;
-			secGroupDelete$TableName$ = null;
-			secGroupDelete$TableName$ID = null;</GenRule>
-
-	<GenRule GenDef="Table" Name="maybeResolveGroupsAndMembers">$switch HasDefSchema yes empty default resolveGroupsAndMembers$</GenRule>
-	<GenRule GenDef="Table" Name="resolveGroupsAndMembers">$resolveCreateGroupAndMember$$resolveReadGroupAndMember$$resolveUpdateGroupAndMember$$resolveDeleteGroupAndMember$</GenRule>
-	
-	<GenRule GenDef="Table" Name="resolveCreateGroupAndMember">
-		secGroupCreate$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), "Create$TableName$");
-		if (secGroupCreate$TableName$ != null) {
-			secGroupCreate$TableName$ID = secGroupCreate$TableName$.getRequiredSecGroupId();
-			secGroupCreate$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), secGroupCreate$TableName$ID, I$SecSchemaName$Schema.getSysAdminId());
-			if (secGroupCreate$TableName$MembSysadmin != null) {
-				secGroupCreate$TableName$MembSysadminID = secGroupCreate$TableName$MembSysadmin.getRequiredSecGrpMembId();
+		if (secGroupCreateID == null || secGroupCreateID.isNull()) {
+			secGroupCreateID = new CFLibDbKeyHash256(0);
+		}
+		if (secGroupCreateMembSysadminID == null || secGroupCreateMembSysadminID.isNull()) {
+			secGroupCreateMembSysadminID = new CFLibDbKeyHash256(0);
+		}
+		if (secGroupReadID == null || secGroupReadID.isNull()) {
+			secGroupReadID = new CFLibDbKeyHash256(0);
+		}
+		if (secGroupReadMembSysadminID == null || secGroupReadMembSysadminID.isNull()) {
+			secGroupReadMembSysadminID = new CFLibDbKeyHash256(0);
+		}
+		if (secGroupUpdateID == null || secGroupUpdateID.isNull()) {
+			secGroupUpdateID = new CFLibDbKeyHash256(0);
+		}
+		if (secGroupUpdateMembSysadminID == null || secGroupUpdateMembSysadminID.isNull()) {
+			secGroupUpdateMembSysadminID = new CFLibDbKeyHash256(0);
+		}
+		if (secGroupDeleteID == null || secGroupDeleteID.isNull()) {
+			secGroupDeleteID = new CFLibDbKeyHash256(0);
+		}
+		if (secGroupDeleteMembSysadminID == null || secGroupDeleteMembSysadminID.isNull()) {
+			secGroupDeleteMembSysadminID = new CFLibDbKeyHash256(0);
+		}
+		if (hasHistory) {
+			if (secGroupRestoreID == null || secGroupRestoreID.isNull()) {
+				secGroupRestoreID = new CFLibDbKeyHash256(0);
 			}
-			else {
-				secGroupCreate$TableName$MembSysadminID = null;
+			if (secGroupRestoreMembSysadminID == null || secGroupRestoreMembSysadminID.isNull()) {
+				secGroupRestoreMembSysadminID = new CFLibDbKeyHash256(0);
 			}
 		}
-		else {
-			secGroupCreate$TableName$ID = null;
-			secGroupCreate$TableName$MembSysadmin = null;
-			secGroupCreate$TableName$MembSysadminID = null;
-		}
-</GenRule>
-	
-	<GenRule GenDef="Table" Name="resolveReadGroupAndMember">
-		secGroupRead$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), "Read$TableName$");
-		if (secGroupRead$TableName$ != null) {
-			secGroupRead$TableName$ID = secGroupRead$TableName$.getRequiredSecGroupId();
-			secGroupRead$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), secGroupRead$TableName$ID, I$SecSchemaName$Schema.getSysAdminId());
-			if (secGroupRead$TableName$MembSysadmin != null) {
-				secGroupRead$TableName$MembSysadminID = secGroupRead$TableName$MembSysadmin.getRequiredSecGrpMembId();
+		if (isMutable) {
+			if (secGroupMutateID == null || secGroupMutateID.isNull()) {
+				secGroupMutateID = new CFLibDbKeyHash256(0);
 			}
-			else {
-				secGroupRead$TableName$MembSysadminID = null;
+			if (secGroupMutateMembSysadminID == null || secGroupMutateMembSysadminID.isNull()) {
+				secGroupMutateMembSysadminID = new CFLibDbKeyHash256(0);
 			}
 		}
-		else {
-			secGroupRead$TableName$ID = null;
-			secGroupRead$TableName$MembSysadmin = null;
-			secGroupRead$TableName$MembSysadminID = null;
-		}
-</GenRule>
 
-	<GenRule GenDef="Table" Name="resolveUpdateGroupAndMember">
-		secGroupUpdate$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), "Update$TableName$");
-		if (secGroupUpdate$TableName$ != null) {
-			secGroupUpdate$TableName$ID = secGroupUpdate$TableName$.getRequiredSecGroupId();
-			secGroupUpdate$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), secGroupUpdate$TableName$ID, I$SecSchemaName$Schema.getSysAdminId());
-			if (secGroupUpdate$TableName$MembSysadmin != null) {
-				secGroupUpdate$TableName$MembSysadminID = secGroupUpdate$TableName$MembSysadmin.getRequiredSecGrpMembId();
+		if (secGroupCreate == null) {
+			secGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGroup().newRec();
+			secGroupCreate.setRequiredRevision(1);
+			secGroupCreate.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+			secGroupCreate.setRequiredName(createPermName);
+			secGroupCreate.setRequiredIsVisible(true);
+			secGroupCreate.setRequiredSecGroupId(secGroupCreateID);
+			secGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().createSecGroup(auth, secGroupCreate);
+			secGroupCreateID = secGroupCreate.getRequiredSecGroupId();
+		}
+
+		if (secGroupCreateMembSysadmin == null) {
+			secGroupCreateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGrpMemb().newRec();
+			secGroupCreateMembSysadmin.setRequiredRevision(1);
+			secGroupCreateMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+			secGroupCreateMembSysadmin.setRequiredContainerGroup(secGroupCreateID);
+			secGroupCreateMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+			secGroupCreateMembSysadmin.setRequiredSecGrpMembId(secGroupCreateMembSysadminID);
+			secGroupCreateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().createSecGrpMemb(auth, secGroupCreateMembSysadmin);
+			secGroupCreateMembSysadminID = secGroupCreateMembSysadmin.getRequiredSecGrpMembId();
+		}
+
+		if (secGroupRead == null) {
+			secGroupRead = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGroup().newRec();
+			secGroupRead.setRequiredRevision(1);
+			secGroupRead.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+			secGroupRead.setRequiredName(readPermName);
+			secGroupRead.setRequiredIsVisible(true);
+			secGroupRead.setRequiredSecGroupId(secGroupReadID);
+			secGroupRead = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().createSecGroup(auth, secGroupRead);
+			secGroupReadID = secGroupRead.getRequiredSecGroupId();
+		}
+
+		if (secGroupReadMembSysadmin == null) {
+			secGroupReadMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGrpMemb().newRec();
+			secGroupReadMembSysadmin.setRequiredRevision(1);
+			secGroupReadMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+			secGroupReadMembSysadmin.setRequiredContainerGroup(secGroupReadID);
+			secGroupReadMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+			secGroupReadMembSysadmin.setRequiredSecGrpMembId(secGroupReadMembSysadminID);
+			secGroupReadMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().createSecGrpMemb(auth, secGroupReadMembSysadmin);
+			secGroupReadMembSysadminID = secGroupReadMembSysadmin.getRequiredSecGrpMembId();
+		}
+
+		if (secGroupUpdate == null) {
+			secGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGroup().newRec();
+			secGroupUpdate.setRequiredRevision(1);
+			secGroupUpdate.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+			secGroupUpdate.setRequiredName(updatePermName);
+			secGroupUpdate.setRequiredIsVisible(true);
+			secGroupUpdate.setRequiredSecGroupId(secGroupUpdateID);
+			secGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().createSecGroup(auth, secGroupUpdate);
+			secGroupUpdateID = secGroupUpdate.getRequiredSecGroupId();
+		}
+
+		if (secGroupUpdateMembSysadmin == null) {
+			secGroupUpdateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGrpMemb().newRec();
+			secGroupUpdateMembSysadmin.setRequiredRevision(1);
+			secGroupUpdateMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+			secGroupUpdateMembSysadmin.setRequiredContainerGroup(secGroupUpdateID);
+			secGroupUpdateMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+			secGroupUpdateMembSysadmin.setRequiredSecGrpMembId(secGroupUpdateMembSysadminID);
+			secGroupUpdateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().createSecGrpMemb(auth, secGroupUpdateMembSysadmin);
+			secGroupUpdateMembSysadminID = secGroupUpdateMembSysadmin.getRequiredSecGrpMembId();
+		}
+
+		if (secGroupDelete == null) {
+			secGroupDelete = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGroup().newRec();
+			secGroupDelete.setRequiredRevision(1);
+			secGroupDelete.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+			secGroupDelete.setRequiredName(deletePermName);
+			secGroupDelete.setRequiredIsVisible(true);
+			secGroupDelete.setRequiredSecGroupId(secGroupDeleteID);
+			secGroupDelete = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().createSecGroup(auth, secGroupDelete);
+			secGroupDeleteID = secGroupDelete.getRequiredSecGroupId();
+		}
+
+		if (secGroupDeleteMembSysadmin == null) {
+			secGroupDeleteMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGrpMemb().newRec();
+			secGroupDeleteMembSysadmin.setRequiredRevision(1);
+			secGroupDeleteMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+			secGroupDeleteMembSysadmin.setRequiredContainerGroup(secGroupDeleteID);
+			secGroupDeleteMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+			secGroupDeleteMembSysadmin.setRequiredSecGrpMembId(secGroupDeleteMembSysadminID);
+			secGroupDeleteMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().createSecGrpMemb(auth, secGroupDeleteMembSysadmin);
+			secGroupDeleteMembSysadminID = secGroupDeleteMembSysadmin.getRequiredSecGrpMembId();
+		}
+		
+		if (hasHistory) {
+			if (secGroupRestore == null) {
+				secGroupRestore = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGroup().newRec();
+				secGroupRestore.setRequiredRevision(1);
+				secGroupRestore.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				secGroupRestore.setRequiredName(restorePermName);
+				secGroupRestore.setRequiredIsVisible(true);
+				secGroupRestore.setRequiredSecGroupId(secGroupRestoreID);
+				secGroupRestore = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().createSecGroup(auth, secGroupRestore);
+				secGroupRestoreID = secGroupRestore.getRequiredSecGroupId();
 			}
-			else {
-				secGroupUpdate$TableName$MembSysadminID = null;
+
+			if (secGroupRestoreMembSysadmin == null) {
+				secGroupRestoreMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGrpMemb().newRec();
+				secGroupRestoreMembSysadmin.setRequiredRevision(1);
+				secGroupRestoreMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				secGroupRestoreMembSysadmin.setRequiredContainerGroup(secGroupRestoreID);
+				secGroupRestoreMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+				secGroupRestoreMembSysadmin.setRequiredSecGrpMembId(secGroupRestoreMembSysadminID);
+				secGroupRestoreMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().createSecGrpMemb(auth, secGroupRestoreMembSysadmin);
+				secGroupRestoreMembSysadminID = secGroupRestoreMembSysadmin.getRequiredSecGrpMembId();
 			}
 		}
-		else {
-			secGroupUpdate$TableName$ID = null;
-			secGroupUpdate$TableName$MembSysadmin = null;
-			secGroupUpdate$TableName$MembSysadminID = null;
-		}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="resolveDeleteGroupAndMember">
-		secGroupDelete$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), "Delete$TableName$");
-		if (secGroupDelete$TableName$ != null) {
-			secGroupDelete$TableName$ID = secGroupDelete$TableName$.getRequiredSecGroupId();
-			secGroupDelete$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), secGroupDelete$TableName$ID, I$SecSchemaName$Schema.getSysAdminId());
-			if (secGroupDelete$TableName$MembSysadmin != null) {
-				secGroupDelete$TableName$MembSysadminID = secGroupDelete$TableName$MembSysadmin.getRequiredSecGrpMembId();
+		
+		if (isMutable) {
+			if (secGroupMutate == null) {
+				secGroupMutate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGroup().newRec();
+				secGroupMutate.setRequiredRevision(1);
+				secGroupMutate.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				secGroupMutate.setRequiredName(mutatePermName);
+				secGroupMutate.setRequiredIsVisible(true);
+				secGroupMutate.setRequiredSecGroupId(secGroupMutateID);
+				secGroupMutate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().createSecGroup(auth, secGroupMutate);
+				secGroupMutateID = secGroupMutate.getRequiredSecGroupId();
 			}
-			else {
-				secGroupDelete$TableName$MembSysadminID = null;
+
+			if (secGroupMutateMembSysadmin == null) {
+				secGroupMutateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGrpMemb().newRec();
+				secGroupMutateMembSysadmin.setRequiredRevision(1);
+				secGroupMutateMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				secGroupMutateMembSysadmin.setRequiredContainerGroup(secGroupMutateID);
+				secGroupMutateMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+				secGroupMutateMembSysadmin.setRequiredSecGrpMembId(secGroupMutateMembSysadminID);
+				secGroupMutateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().createSecGrpMemb(auth, secGroupMutateMembSysadmin);
+				secGroupMutateMembSysadminID = secGroupMutateMembSysadmin.getRequiredSecGrpMembId();
 			}
 		}
-		else {
-			secGroupDelete$TableName$ID = null;
-			secGroupDelete$TableName$MembSysadmin = null;
-			secGroupDelete$TableName$MembSysadminID = null;
-		}
+	}		
 </GenRule>
-
-	<GenRule GenDef="Table" Name="maybeCreateMissingGroupsAndMembers">$switch HasDefSchema yes empty default createMissingGroupsAndMembers$</GenRule>
-	<GenRule GenDef="Table" Name="createMissingGroupsAndMembers">$createMissingCreateGroupsAndMembers$$createMissingReadGroupsAndMembers$$createMissingUpdateGroupsAndMembers$$createMissingDeleteGroupsAndMembers$</GenRule>
-
-	<GenRule GenDef="Table" Name="createMissingCreateGroupsAndMembers">
-		if (secGroupCreate$TableName$ == null) {
-			secGroupCreate$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGroup().newRec();
-			secGroupCreate$TableName$.setRequiredRevision(1);
-			secGroupCreate$TableName$.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
-			secGroupCreate$TableName$.setRequiredName("Create$TableName$");
-			secGroupCreate$TableName$.setRequiredIsVisible(true);
-			secGroupCreate$TableName$.setRequiredSecGroupId(secGroupCreate$TableName$ID);
-			secGroupCreate$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().createSecGroup(auth, secGroupCreate$TableName$);
-			secGroupCreate$TableName$ID = secGroupCreate$TableName$.getRequiredSecGroupId();
-		}
-
-		if (secGroupCreate$TableName$MembSysadmin == null) {
-			secGroupCreate$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGrpMemb().newRec();
-			secGroupCreate$TableName$MembSysadmin.setRequiredRevision(1);
-			secGroupCreate$TableName$MembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
-			secGroupCreate$TableName$MembSysadmin.setRequiredContainerGroup(secGroupCreate$TableName$ID);
-			secGroupCreate$TableName$MembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
-			secGroupCreate$TableName$MembSysadmin.setRequiredSecGrpMembId(secGroupCreate$TableName$MembSysadminID);
-			secGroupCreate$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().createSecGrpMemb(auth, secGroupCreate$TableName$MembSysadmin);
-			secGroupCreate$TableName$MembSysadminID = secGroupCreate$TableName$MembSysadmin.getRequiredSecGrpMembId();
-		}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="createMissingReadGroupsAndMembers">
-		if (secGroupRead$TableName$ == null) {
-			secGroupRead$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGroup().newRec();
-			secGroupRead$TableName$.setRequiredRevision(1);
-			secGroupRead$TableName$.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
-			secGroupRead$TableName$.setRequiredName("Read$TableName$");
-			secGroupRead$TableName$.setRequiredIsVisible(true);
-			secGroupRead$TableName$.setRequiredSecGroupId(secGroupRead$TableName$ID);
-			secGroupRead$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().createSecGroup(auth, secGroupRead$TableName$);
-			secGroupRead$TableName$ID = secGroupRead$TableName$.getRequiredSecGroupId();
-		}
-
-		if (secGroupRead$TableName$MembSysadmin == null) {
-			secGroupRead$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGrpMemb().newRec();
-			secGroupRead$TableName$MembSysadmin.setRequiredRevision(1);
-			secGroupRead$TableName$MembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
-			secGroupRead$TableName$MembSysadmin.setRequiredContainerGroup(secGroupRead$TableName$ID);
-			secGroupRead$TableName$MembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
-			secGroupRead$TableName$MembSysadmin.setRequiredSecGrpMembId(secGroupRead$TableName$MembSysadminID);
-			secGroupRead$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().createSecGrpMemb(auth, secGroupRead$TableName$MembSysadmin);
-			secGroupRead$TableName$MembSysadminID = secGroupRead$TableName$MembSysadmin.getRequiredSecGrpMembId();
-		}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="createMissingUpdateGroupsAndMembers">
-		if (secGroupUpdate$TableName$ == null) {
-			secGroupUpdate$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGroup().newRec();
-			secGroupUpdate$TableName$.setRequiredRevision(1);
-			secGroupUpdate$TableName$.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
-			secGroupUpdate$TableName$.setRequiredName("Update$TableName$");
-			secGroupUpdate$TableName$.setRequiredIsVisible(true);
-			secGroupUpdate$TableName$.setRequiredSecGroupId(secGroupUpdate$TableName$ID);
-			secGroupUpdate$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().createSecGroup(auth, secGroupUpdate$TableName$);
-			secGroupUpdate$TableName$ID = secGroupUpdate$TableName$.getRequiredSecGroupId();
-		}
-
-		if (secGroupUpdate$TableName$MembSysadmin == null) {
-			secGroupUpdate$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGrpMemb().newRec();
-			secGroupUpdate$TableName$MembSysadmin.setRequiredRevision(1);
-			secGroupUpdate$TableName$MembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
-			secGroupUpdate$TableName$MembSysadmin.setRequiredContainerGroup(secGroupUpdate$TableName$ID);
-			secGroupUpdate$TableName$MembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
-			secGroupUpdate$TableName$MembSysadmin.setRequiredSecGrpMembId(secGroupUpdate$TableName$MembSysadminID);
-			secGroupUpdate$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().createSecGrpMemb(auth, secGroupUpdate$TableName$MembSysadmin);
-			secGroupUpdate$TableName$MembSysadminID = secGroupUpdate$TableName$MembSysadmin.getRequiredSecGrpMembId();
-		}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="createMissingDeleteGroupsAndMembers">
-		if (secGroupDelete$TableName$ == null) {
-			secGroupDelete$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGroup().newRec();
-			secGroupDelete$TableName$.setRequiredRevision(1);
-			secGroupDelete$TableName$.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
-			secGroupDelete$TableName$.setRequiredName("Delete$TableName$");
-			secGroupDelete$TableName$.setRequiredIsVisible(true);
-			secGroupDelete$TableName$.setRequiredSecGroupId(secGroupDelete$TableName$ID);
-			secGroupDelete$TableName$ = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().createSecGroup(auth, secGroupDelete$TableName$);
-			secGroupDelete$TableName$ID = secGroupDelete$TableName$.getRequiredSecGroupId();
-		}
-
-		if (secGroupDelete$TableName$MembSysadmin == null) {
-			secGroupDelete$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecGrpMemb().newRec();
-			secGroupDelete$TableName$MembSysadmin.setRequiredRevision(1);
-			secGroupDelete$TableName$MembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
-			secGroupDelete$TableName$MembSysadmin.setRequiredContainerGroup(secGroupDelete$TableName$ID);
-			secGroupDelete$TableName$MembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
-			secGroupDelete$TableName$MembSysadmin.setRequiredSecGrpMembId(secGroupDelete$TableName$MembSysadminID);
-			secGroupDelete$TableName$MembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().createSecGrpMemb(auth, secGroupDelete$TableName$MembSysadmin);
-			secGroupDelete$TableName$MembSysadminID = secGroupDelete$TableName$MembSysadmin.getRequiredSecGrpMembId();
-		}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="maybeInitGroupAndMemberIDs">$switch HasDefSchema yes empty default initGroupAndMemberIDs$</GenRule>
-	<GenRule GenDef="Table" Name="initGroupAndMemberIDs">
-		if (secGroupCreate$TableName$ID == null || secGroupCreate$TableName$ID.isNull()) {
-			secGroupCreate$TableName$ID = new CFLibDbKeyHash256(0);
-		}
-		if (secGroupCreate$TableName$MembSysadminID == null || secGroupCreate$TableName$MembSysadminID.isNull()) {
-			secGroupCreate$TableName$MembSysadminID = new CFLibDbKeyHash256(0);
-		}
-		if (secGroupRead$TableName$ID == null || secGroupRead$TableName$ID.isNull()) {
-			secGroupRead$TableName$ID = new CFLibDbKeyHash256(0);
-		}
-		if (secGroupRead$TableName$MembSysadminID == null || secGroupRead$TableName$MembSysadminID.isNull()) {
-			secGroupRead$TableName$MembSysadminID = new CFLibDbKeyHash256(0);
-		}
-		if (secGroupUpdate$TableName$ID == null || secGroupUpdate$TableName$ID.isNull()) {
-			secGroupUpdate$TableName$ID = new CFLibDbKeyHash256(0);
-		}
-		if (secGroupUpdate$TableName$MembSysadminID == null || secGroupUpdate$TableName$MembSysadminID.isNull()) {
-			secGroupUpdate$TableName$MembSysadminID = new CFLibDbKeyHash256(0);
-		}
-		if (secGroupDelete$TableName$ID == null || secGroupDelete$TableName$ID.isNull()) {
-			secGroupDelete$TableName$ID = new CFLibDbKeyHash256(0);
-		}
-		if (secGroupDelete$TableName$MembSysadminID == null || secGroupDelete$TableName$MembSysadminID.isNull()) {
-			secGroupDelete$TableName$MembSysadminID = new CFLibDbKeyHash256(0);
-		}</GenRule>
 
 	<GenRule GenDef="Object" Name="implJpaSchemaServiceBootstrapSecurity">$popto SchemaDef implJpaSchemaServiceBootstrapSecurity$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapSecurity">
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
 	public void bootstrapSecurity() {
 		$SecSchemaName$JpaSysCluster sysCluster;
 		CFLibDbKeyHash256 systemClusterID;
@@ -570,7 +660,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 	<GenRule GenDef="Object" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">$popto SchemaDef implJpaSchemaServiceBootstrapAllTablesSecurity$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
 	public void bootstrapAllTablesSecurity() {
 		LocalDateTime now = LocalDateTime.now();
 		I$SecSchemaName$SecSession bootstrapSession;
@@ -592,7 +682,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		bootstrapSession.setOptionalFinish(null);
 		bootstrapSession = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSession().createSecSession(auth, bootstrapSession);
 		bootstrapSessionID = bootstrapSession.getRequiredSecSessionId();
-$iterate Tables( each maybeInvokeBootstrapTable empty empty )$
+$iterate Tables( each maybeInvokeBootstrapTableSecurity empty empty )$
 
 		if (bootstrapSession != null &amp;&amp; bootstrapSessionID != null &amp;&amp; !bootstrapSessionID.isNull() &amp;&amp; bootstrapSession.getOptionalFinish() == null) {
 			bootstrapSession.setOptionalFinish(LocalDateTime.now());
@@ -601,9 +691,12 @@ $iterate Tables( each maybeInvokeBootstrapTable empty empty )$
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="maybeInvokeBootstrapTable">$switch HasDefSchema yes empty default invokeBootstrapTable$</GenRule>
-	<GenRule GenDef="Table" Name="invokeBootstrapTable">
-		bootstrapTable$TableName$Security(auth);</GenRule>
+	<GenRule GenDef="Table" Name="maybeInvokeBootstrapTableSecurity">$switch HasDefSchema yes empty default invokeBootstrapTableSecurity$</GenRule>
+	<GenRule GenDef="Table" Name="invokeBootstrapTableSecurity">
+		bootstrapTableSecurity(auth, "$TableName$", $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$);</GenRule>
+
+	<GenRule GenDef="Object" Name="emitTrue">true</GenRule>
+	<GenRule GenDef="Object" Name="emitFalse">false</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeImplJpaSchemaServiceBootstrapTable">$switch HasDefSchema yes empty default implJpaSchemaServiceBootstrapTable$</GenRule>
 	<GenRule GenDef="Table" Name="implJpaSchemaServiceBootstrapTable">
