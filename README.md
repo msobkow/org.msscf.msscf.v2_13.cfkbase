@@ -9,6 +9,16 @@ Mark's Code Fractal CFKBase 3.1 Code Fractal Knowledge Base
 	Mark Stephen Sobkow, or under the terms of the GNU General Public License,
 	Version 3 or later.
 
+	As a special exception, Mark Sobkow gives you permission to link this library
+	with independent modules to produce an executable, provided that none of them
+	conflict with the intent of the GPLv3; that is, you are not allowed to invoke
+	the methods of this library from non-GPLv3-compatibly licensed code. You may not
+	implement an LPGLv3 "wedge" to try to bypass this restriction. That said, code which
+	does not rely on this library is free to specify whatever license its authors decide
+	to use. Mark Sobkow specifically rejects the infectious nature of the GPLv3, and
+	considers the mere act of including GPLv3 modules in an executable to be perfectly
+	reasonable given tools like modern Java's single-jar deployment options.
+
 	Mark's Code Fractal CFKBase is free software: you can redistribute it and/or
 	modify it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
