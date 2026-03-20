@@ -107,7 +107,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapTableSecurity">
 	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
-	public void bootstrapTableSecurity(I$SecSchemaName$Authorization auth, String tableName, boolean hasHistory, boolean isMutable) {
+	public void bootstrapTableSecurity(I$SecSchemaName$Authorization auth, String tableName, boolean hasHistory, boolean isMutable, boolean isTenantScoped) {
 		LocalDateTime now = LocalDateTime.now();
 		String lowerTableName = tableName.toLowerCase();
 		String createPermName = "create" + lowerTableName;
@@ -140,7 +140,31 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		CFLibDbKeyHash256 secGroupMutateID;
 		I$SecSchemaName$SecGrpMemb secGroupMutateMembSysadmin;
 		CFLibDbKeyHash256 secGroupMutateMembSysadminID;
-
+		I$SecSchemaName$TSecGroup tsecGroupCreate;
+		CFLibDbKeyHash256 tsecGroupCreateID;
+		I$SecSchemaName$TSecGrpMemb tsecGroupCreateMembSysadmin;
+		CFLibDbKeyHash256 tsecGroupCreateMembSysadminID;
+		I$SecSchemaName$TSecGroup tsecGroupRead;
+		CFLibDbKeyHash256 tsecGroupReadID;
+		I$SecSchemaName$TSecGrpMemb tsecGroupReadMembSysadmin;
+		CFLibDbKeyHash256 tsecGroupReadMembSysadminID;
+		I$SecSchemaName$TSecGroup tsecGroupUpdate;
+		CFLibDbKeyHash256 tsecGroupUpdateID;
+		I$SecSchemaName$TSecGrpMemb tsecGroupUpdateMembSysadmin;
+		CFLibDbKeyHash256 tsecGroupUpdateMembSysadminID;
+		I$SecSchemaName$TSecGroup tsecGroupDelete;
+		CFLibDbKeyHash256 tsecGroupDeleteID;
+		I$SecSchemaName$TSecGrpMemb tsecGroupDeleteMembSysadmin;
+		CFLibDbKeyHash256 tsecGroupDeleteMembSysadminID;
+		I$SecSchemaName$TSecGroup tsecGroupRestore;
+		CFLibDbKeyHash256 tsecGroupRestoreID;
+		I$SecSchemaName$TSecGrpMemb tsecGroupRestoreMembSysadmin;
+		CFLibDbKeyHash256 tsecGroupRestoreMembSysadminID;
+		I$SecSchemaName$TSecGroup tsecGroupMutate;
+		CFLibDbKeyHash256 tsecGroupMutateID;
+		I$SecSchemaName$TSecGrpMemb tsecGroupMutateMembSysadmin;
+		CFLibDbKeyHash256 tsecGroupMutateMembSysadminID;
+		
 		secGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), createPermName);
 		if (secGroupCreate != null) {
 			secGroupCreateID = secGroupCreate.getRequiredSecGroupId();
@@ -433,6 +457,304 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				secGroupMutateMembSysadmin.setRequiredSecGrpMembId(secGroupMutateMembSysadminID);
 				secGroupMutateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecGrpMemb().createSecGrpMemb(auth, secGroupMutateMembSysadmin);
 				secGroupMutateMembSysadminID = secGroupMutateMembSysadmin.getRequiredSecGrpMembId();
+			}
+		}
+
+		if (isTenantScoped) {
+		
+			tsecGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), createPermName);
+			if (tsecGroupCreate != null) {
+				tsecGroupCreateID = tsecGroupCreate.getRequiredTSecGroupId();
+				tsecGroupCreateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), tsecGroupCreateID, I$SecSchemaName$Schema.getSysAdminId());
+				if (tsecGroupCreateMembSysadmin != null) {
+					tsecGroupCreateMembSysadminID = tsecGroupCreateMembSysadmin.getRequiredTSecGrpMembId();
+				}
+				else {
+					tsecGroupCreateMembSysadminID = null;
+				}
+			}
+			else {
+				tsecGroupCreateID = null;
+				tsecGroupCreateMembSysadmin = null;
+				tsecGroupCreateMembSysadminID = null;
+			}
+
+			tsecGroupRead = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), readPermName);
+			if (tsecGroupRead != null) {
+				tsecGroupReadID = tsecGroupRead.getRequiredSecGroupId();
+				tsecGroupReadMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), tsecGroupReadID, I$SecSchemaName$Schema.getSysAdminId());
+				if (tsecGroupReadMembSysadmin != null) {
+					tsecGroupReadMembSysadminID = tsecGroupReadMembSysadmin.getRequiredTSecGrpMembId();
+				}
+				else {
+					tsecGroupReadMembSysadminID = null;
+				}
+			}
+			else {
+				tsecGroupReadID = null;
+				tsecGroupReadMembSysadmin = null;
+				tsecGroupReadMembSysadminID = null;
+			}
+
+			tsecGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), updatePermName);
+			if (tsecGroupUpdate != null) {
+				tsecGroupUpdateID = tsecGroupUpdate.getRequiredTSecGroupId();
+				tsecGroupUpdateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), tsecGroupUpdateID, I$SecSchemaName$Schema.getSysAdminId());
+				if (tsecGroupUpdateMembSysadmin != null) {
+					tsecGroupUpdateMembSysadminID = tsecGroupUpdateMembSysadmin.getRequiredTSecGrpMembId();
+				}
+				else {
+					tsecGroupUpdateMembSysadminID = null;
+				}
+			}
+			else {
+				tsecGroupUpdateID = null;
+				tsecGroupUpdateMembSysadmin = null;
+				tsecGroupUpdateMembSysadminID = null;
+			}
+
+			tsecGroupDelete = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), deletePermName);
+			if (tsecGroupDelete != null) {
+				tsecGroupDeleteID = tsecGroupDelete.getRequiredTSecGroupId();
+				tsecGroupDeleteMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), tsecGroupDeleteID, I$SecSchemaName$Schema.getSysAdminId());
+				if (tsecGroupDeleteMembSysadmin != null) {
+					tsecGroupDeleteMembSysadminID = tsecGroupDeleteMembSysadmin.getRequiredTSecGrpMembId();
+				}
+				else {
+					tsecGroupDeleteMembSysadminID = null;
+				}
+			}
+			else {
+				tsecGroupDeleteID = null;
+				tsecGroupDeleteMembSysadmin = null;
+				tsecGroupDeleteMembSysadminID = null;
+			}
+
+			if (hasHistory) {
+				tsecGroupRestore = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), restorePermName);
+				if (tsecGroupRestore != null) {
+					tsecGroupRestoreID = tsecGroupRestore.getRequiredTSecGroupId();
+					tsecGroupRestoreMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), tsecGroupRestoreID, I$SecSchemaName$Schema.getSysAdminId());
+					if (tsecGroupRestoreMembSysadmin != null) {
+						tsecGroupRestoreMembSysadminID = tsecGroupRestoreMembSysadmin.getRequiredTSecGrpMembId();
+					}
+					else {
+						tsecGroupRestoreMembSysadminID = null;
+					}
+				}
+				else {
+					tsecGroupRestoreID = null;
+					tsecGroupRestoreMembSysadmin = null;
+					tsecGroupRestoreMembSysadminID = null;
+				}
+			}
+			else {
+				tsecGroupRestore = null;
+				tsecGroupRestoreID = null;
+				tsecGroupRestoreMembSysadmin = null;
+				tsecGroupRestoreMembSysadminID = null;
+			}
+
+			if (isMutable) {
+				tsecGroupMutate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), mutatePermName);
+				if (tsecGroupMutate != null) {
+					tsecGroupMutateID = tsecGroupMutate.getRequiredTSecGroupId();
+					tsecGroupMutateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().readDerivedByUUserIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), tsecGroupMutateID, I$SecSchemaName$Schema.getSysAdminId());
+					if (tsecGroupMutateMembSysadmin != null) {
+						tsecGroupMutateMembSysadminID = tsecGroupMutateMembSysadmin.getRequiredTSecGrpMembId();
+					}
+					else {
+						tsecGroupMutateMembSysadminID = null;
+					}
+				}
+				else {
+					tsecGroupMutateID = null;
+					tsecGroupMutateMembSysadmin = null;
+					tsecGroupMutateMembSysadminID = null;
+				}
+			}
+			else {
+				tsecGroupMutate = null;
+				tsecGroupMutateID = null;
+				tsecGroupMutateMembSysadmin = null;
+				tsecGroupMutateMembSysadminID = null;
+			}
+
+			if (tsecGroupCreateID == null || tsecGroupCreateID.isNull()) {
+				tsecGroupCreateID = new CFLibDbKeyHash256(0);
+			}
+			if (tsecGroupCreateMembSysadminID == null || tsecGroupCreateMembSysadminID.isNull()) {
+				tsecGroupCreateMembSysadminID = new CFLibDbKeyHash256(0);
+			}
+			if (tsecGroupReadID == null || tsecGroupReadID.isNull()) {
+				tsecGroupReadID = new CFLibDbKeyHash256(0);
+			}
+			if (tsecGroupReadMembSysadminID == null || tsecGroupReadMembSysadminID.isNull()) {
+				tsecGroupReadMembSysadminID = new CFLibDbKeyHash256(0);
+			}
+			if (tsecGroupUpdateID == null || tsecGroupUpdateID.isNull()) {
+				tsecGroupUpdateID = new CFLibDbKeyHash256(0);
+			}
+			if (tsecGroupUpdateMembSysadminID == null || tsecGroupUpdateMembSysadminID.isNull()) {
+				tsecGroupUpdateMembSysadminID = new CFLibDbKeyHash256(0);
+			}
+			if (tsecGroupDeleteID == null || tsecGroupDeleteID.isNull()) {
+				tsecGroupDeleteID = new CFLibDbKeyHash256(0);
+			}
+			if (tsecGroupDeleteMembSysadminID == null || tsecGroupDeleteMembSysadminID.isNull()) {
+				tsecGroupDeleteMembSysadminID = new CFLibDbKeyHash256(0);
+			}
+			if (hasHistory) {
+				if (tsecGroupRestoreID == null || tsecGroupRestoreID.isNull()) {
+					tsecGroupRestoreID = new CFLibDbKeyHash256(0);
+				}
+				if (tsecGroupRestoreMembSysadminID == null || tsecGroupRestoreMembSysadminID.isNull()) {
+					tsecGroupRestoreMembSysadminID = new CFLibDbKeyHash256(0);
+				}
+			}
+			if (isMutable) {
+				if (tsecGroupMutateID == null || tsecGroupMutateID.isNull()) {
+					tsecGroupMutateID = new CFLibDbKeyHash256(0);
+				}
+				if (tsecGroupMutateMembSysadminID == null || tsecGroupMutateMembSysadminID.isNull()) {
+					tsecGroupMutateMembSysadminID = new CFLibDbKeyHash256(0);
+				}
+			}
+
+			if (tsecGroupCreate == null) {
+				tsecGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGroup().newRec();
+				tsecGroupCreate.setRequiredRevision(1);
+				tsecGroupCreate.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				tsecGroupCreate.setRequiredName(createPermName);
+				tsecGroupCreate.setRequiredIsVisible(true);
+				tsecGroupCreate.setRequiredTSecGroupId(tsecGroupCreateID);
+				tsecGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().createTSecGroup(auth, tsecGroupCreate);
+				tsecGroupCreateID = tsecGroupCreate.getRequiredTSecGroupId();
+			}
+
+			if (tsecGroupCreateMembSysadmin == null) {
+				tsecGroupCreateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGrpMemb().newRec();
+				tsecGroupCreateMembSysadmin.setRequiredRevision(1);
+				tsecGroupCreateMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				tsecGroupCreateMembSysadmin.setRequiredContainerGroup(tsecGroupCreateID);
+				tsecGroupCreateMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+				tsecGroupCreateMembSysadmin.setRequiredTSecGrpMembId(tsecGroupCreateMembSysadminID);
+				tsecGroupCreateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().createTSecGrpMemb(auth, tsecGroupCreateMembSysadmin);
+				tsecGroupCreateMembSysadminID = tsecGroupCreateMembSysadmin.getRequiredTSecGrpMembId();
+			}
+
+			if (tsecGroupRead == null) {
+				tsecGroupRead = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGroup().newRec();
+				tsecGroupRead.setRequiredRevision(1);
+				tsecGroupRead.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				tsecGroupRead.setRequiredName(readPermName);
+				tsecGroupRead.setRequiredIsVisible(true);
+				tsecGroupRead.setRequiredTSecGroupId(tsecGroupReadID);
+				tsecGroupRead = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().createTSecGroup(auth, tsecGroupRead);
+				tsecGroupReadID = tsecGroupRead.getRequiredTSecGroupId();
+			}
+
+			if (tsecGroupReadMembSysadmin == null) {
+				tsecGroupReadMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGrpMemb().newRec();
+				tsecGroupReadMembSysadmin.setRequiredRevision(1);
+				tsecGroupReadMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				tsecGroupReadMembSysadmin.setRequiredContainerGroup(tsecGroupReadID);
+				tsecGroupReadMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+				tsecGroupReadMembSysadmin.setRequiredTSecGrpMembId(tsecGroupReadMembSysadminID);
+				tsecGroupReadMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().createTSecGrpMemb(auth, tsecGroupReadMembSysadmin);
+				tsecGroupReadMembSysadminID = tsecGroupReadMembSysadmin.getRequiredTSecGrpMembId();
+			}
+
+			if (tsecGroupUpdate == null) {
+				tsecGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGroup().newRec();
+				tsecGroupUpdate.setRequiredRevision(1);
+				tsecGroupUpdate.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				tsecGroupUpdate.setRequiredName(updatePermName);
+				tsecGroupUpdate.setRequiredIsVisible(true);
+				tsecGroupUpdate.setRequiredTSecGroupId(tsecGroupUpdateID);
+				tsecGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().createTSecGroup(auth, tsecGroupUpdate);
+				tsecGroupUpdateID = tsecGroupUpdate.getRequiredTSecGroupId();
+			}
+
+			if (tsecGroupUpdateMembSysadmin == null) {
+				tsecGroupUpdateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGrpMemb().newRec();
+				tsecGroupUpdateMembSysadmin.setRequiredRevision(1);
+				tsecGroupUpdateMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				tsecGroupUpdateMembSysadmin.setRequiredContainerGroup(tsecGroupUpdateID);
+				tsecGroupUpdateMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+				tsecGroupUpdateMembSysadmin.setRequiredTSecGrpMembId(tsecGroupUpdateMembSysadminID);
+				tsecGroupUpdateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().createTSecGrpMemb(auth, tsecGroupUpdateMembSysadmin);
+				tsecGroupUpdateMembSysadminID = tsecGroupUpdateMembSysadmin.getRequiredTSecGrpMembId();
+			}
+
+			if (tsecGroupDelete == null) {
+				tsecGroupDelete = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGroup().newRec();
+				tsecGroupDelete.setRequiredRevision(1);
+				tsecGroupDelete.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				tsecGroupDelete.setRequiredName(deletePermName);
+				tsecGroupDelete.setRequiredIsVisible(true);
+				tsecGroupDelete.setRequiredTSecGroupId(tsecGroupDeleteID);
+				tsecGroupDelete = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().createTSecGroup(auth, tsecGroupDelete);
+				tsecGroupDeleteID = tsecGroupDelete.getRequiredTSecGroupId();
+			}
+
+			if (tsecGroupDeleteMembSysadmin == null) {
+				tsecGroupDeleteMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGrpMemb().newRec();
+				tsecGroupDeleteMembSysadmin.setRequiredRevision(1);
+				tsecGroupDeleteMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+				tsecGroupDeleteMembSysadmin.setRequiredContainerGroup(tsecGroupDeleteID);
+				tsecGroupDeleteMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+				tsecGroupDeleteMembSysadmin.setRequiredTSecGrpMembId(tsecGroupDeleteMembSysadminID);
+				tsecGroupDeleteMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().createTSecGrpMemb(auth, tsecGroupDeleteMembSysadmin);
+				tsecGroupDeleteMembSysadminID = tsecGroupDeleteMembSysadmin.getRequiredTSecGrpMembId();
+			}
+
+			if (hasHistory) {
+				if (tsecGroupRestore == null) {
+					tsecGroupRestore = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGroup().newRec();
+					tsecGroupRestore.setRequiredRevision(1);
+					tsecGroupRestore.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+					tsecGroupRestore.setRequiredName(restorePermName);
+					tsecGroupRestore.setRequiredIsVisible(true);
+					tsecGroupRestore.setRequiredTSecGroupId(tsecGroupRestoreID);
+					tsecGroupRestore = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().createTSecGroup(auth, tsecGroupRestore);
+					tsecGroupRestoreID = tsecGroupRestore.getRequiredTSecGroupId();
+				}
+
+				if (tsecGroupRestoreMembSysadmin == null) {
+					tsecGroupRestoreMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGrpMemb().newRec();
+					tsecGroupRestoreMembSysadmin.setRequiredRevision(1);
+					tsecGroupRestoreMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+					tsecGroupRestoreMembSysadmin.setRequiredContainerGroup(tsecGroupRestoreID);
+					tsecGroupRestoreMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+					tsecGroupRestoreMembSysadmin.setRequiredTSecGrpMembId(tsecGroupRestoreMembSysadminID);
+					tsecGroupRestoreMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().createTSecGrpMemb(auth, tsecGroupRestoreMembSysadmin);
+					tsecGroupRestoreMembSysadminID = tsecGroupRestoreMembSysadmin.getRequiredTSecGrpMembId();
+				}
+			}
+
+			if (isMutable) {
+				if (tsecGroupMutate == null) {
+					tsecGroupMutate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGroup().newRec();
+					tsecGroupMutate.setRequiredRevision(1);
+					tsecGroupMutate.setRequiredContainerCluster(I$SecSchemaName$Schema.getSysClusterId());
+					tsecGroupMutate.setRequiredName(mutatePermName);
+					tsecGroupMutate.setRequiredIsVisible(true);
+					tsecGroupMutate.setRequiredTSecGroupId(tsecGroupMutateID);
+					tsecGroupMutate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGroup().createTSecGroup(auth, tsecGroupMutate);
+					tsecGroupMutateID = tsecGroupMutate.getRequiredTSecGroupId();
+				}
+
+				if (tsecGroupMutateMembSysadmin == null) {
+					tsecGroupMutateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactoryTSecGrpMemb().newRec();
+					tsecGroupMutateMembSysadmin.setRequiredRevision(1);
+					tsecGroupMutateMembSysadmin.setRequiredOwnerCluster(I$SecSchemaName$Schema.getSysClusterId());
+					tsecGroupMutateMembSysadmin.setRequiredContainerGroup(tsecGroupMutateID);
+					tsecGroupMutateMembSysadmin.setRequiredParentUser(I$SecSchemaName$Schema.getSysAdminId());
+					tsecGroupMutateMembSysadmin.setRequiredTSecGrpMembId(tsecGroupMutateMembSysadminID);
+					tsecGroupMutateMembSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTSecGrpMemb().createTSecGrpMemb(auth, tsecGroupMutateMembSysadmin);
+					tsecGroupMutateMembSysadminID = tsecGroupMutateMembSysadmin.getRequiredTSecGrpMembId();
+				}
 			}
 		}
 	}		
