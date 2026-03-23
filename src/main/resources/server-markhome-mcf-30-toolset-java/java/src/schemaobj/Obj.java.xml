@@ -60,7 +60,8 @@ import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaObjImport$
+import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaName$$JavaObjImport$
 
 public class $SchemaName$$TableName$Obj
 $switch HasSuperClassRelation yes implObjExtendSuperClassImplements default implObjTabImplementsSpace$I$SchemaName$$TableName$Obj
@@ -456,12 +457,12 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			NmTokenDef implGetObjNameCalcStringReqName
 			NmTokensDef ErrorUnsupportedBaseModelAtomClass
 			TextDef ErrorUnsupportedBaseModelAtomClass
-			DateDef ErrorUnsupportedBaseModelAtomClass
-			TimeDef ErrorUnsupportedBaseModelAtomClass
-			TimestampDef ErrorUnsupportedBaseModelAtomClass
-			TZDateDef ErrorUnsupportedBaseModelAtomClass
-			TZTimeDef ErrorUnsupportedBaseModelAtomClass
-			TZTimestampDef ErrorUnsupportedBaseModelAtomClass
+			DateDef implGetObjNameCalcDateReqName
+			TimeDef implGetObjNameCalcTimeReqName
+			TimestampDef implGetObjNameCalcTimestampReqName
+			TZDateDef implGetObjNameCalcTZDateReqName
+			TZTimeDef implGetObjNameCalcTZTimeReqName
+			TZTimestampDef implGetObjNameCalcTZTimestampReqName
 			UuidDef implGetObjNameCalcUuidReqName
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
@@ -501,12 +502,11 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			NmTokenDef implGetObjNameCalcStringOptName
 			NmTokensDef ErrorUnsupportedBaseModelAtomClass
 			TextDef ErrorUnsupportedBaseModelAtomClass
-			DateDef ErrorUnsupportedBaseModelAtomClass
-			TimeDef ErrorUnsupportedBaseModelAtomClass
-			TimestampDef ErrorUnsupportedBaseModelAtomClass
-			TZDateDef ErrorUnsupportedBaseModelAtomClass
-			TZTimeDef ErrorUnsupportedBaseModelAtomClass
-			TZTimestampDef ErrorUnsupportedBaseModelAtomClass
+			TimeDef implGetObjNameCalcTimeOptName
+			TimestampDef implGetObjNameCalcTimestampOptName
+			TZDateDef implGetObjNameCalcTZDateOptName
+			TZTimeDef implGetObjNameCalcTZTimeOptName
+			TZTimestampDef implGetObjNameCalcTZTimestampOptName
 			UuidDef implGetObjNameCalcUuidOptName
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
@@ -741,6 +741,108 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		}
 		else {
 			objName = val.toString();
+		}</GenRule>
+
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDateReqName">
+		LocalDate val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatDate(val);
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcDateOptName">
+		LocalDate val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatDate(val);
+		}
+		else {
+			objName = "";
+		}</GenRule>
+
+	<GenRule GenDef="Value" Name="implGetObjNameCalcTimeReqName">
+		LocalTime val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatTime(val);
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcTimeOptName">
+		LocalTime val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatTime(val);
+		}
+		else {
+			objName = "";
+		}</GenRule>
+
+	<GenRule GenDef="Value" Name="implGetObjNameCalcTimestampReqName">
+		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatTimestamp(val);
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcTimestampOptName">
+		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatTimestamp(val);
+		}
+		else {
+			objName = "";
+		}</GenRule>
+
+	<GenRule GenDef="Value" Name="implGetObjNameCalcTZDateReqName">
+		LocalDate val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatTZDate(val);
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcTZDateOptName">
+		LocalDate val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatTZDate(val);
+		}
+		else {
+			objName = "";
+		}</GenRule>
+
+	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimeReqName">
+		LocalTime val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatTZTime(val);
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimeOptName">
+		LocalTime val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatTZTime(val);
+		}
+		else {
+			objName = "";
+		}</GenRule>
+
+	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimestampReqName">
+		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatTZTimestamp(val);
+		}
+		else {
+			objName = "";
+		}</GenRule>
+	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimestampOptName">
+		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
+		if (val != null) {
+			objName = CFLibXmlUtil.formatTZTimestamp(val);
+		}
+		else {
+			objName = "";
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeImplGetScope"
@@ -1204,15 +1306,15 @@ $			if( ! anyMissing ) {
 
 	<GenRule GenDef="TableCol" Name="implObjColumnRWPKeyAccessor">
 	@Override
-	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ $leadlower Name$) {
-		getPKey().set$implColumnAttrOptionality$$Name$($leadlower Name$);
+	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value) {
+		getPKey().set$implColumnAttrOptionality$$Name$(value);
 	}
 </GenRule>
 
 	<GenRule GenDef="Atom" Name="implObjColumnRWPKeyAccessor">
 	@Override
-	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ $leadlower Name$) {
-		getPKey().set$implColumnAttrOptionality$$Name$($leadlower Name$);
+	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value) {
+		getPKey().set$implColumnAttrOptionality$$Name$(value);
 	}
 </GenRule>
 
@@ -1225,8 +1327,8 @@ $			if( ! anyMissing ) {
 
 	<GenRule GenDef="Object" Name="implObjColumnRWDataAccessor">
 	@Override
-	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ $leadlower Name$) {
-		get$TableName$Rec().set$implColumnAttrOptionality$$Name$($leadlower Name$);
+	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value) {
+		get$TableName$Rec().set$implColumnAttrOptionality$$Name$(value);
 	}
 </GenRule>
 
