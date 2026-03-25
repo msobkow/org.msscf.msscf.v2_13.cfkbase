@@ -108,6 +108,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapTableSecurity">
 	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
 	public void bootstrapTableSecurity(I$SecSchemaName$Authorization auth, String tableName, boolean hasHistory, boolean isMutable, boolean isTenantScoped) {
+/**
 		LocalDateTime now = LocalDateTime.now();
 		String lowerTableName = tableName.toLowerCase();
 		String createPermName = "create" + lowerTableName;
@@ -757,6 +758,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				}
 			}
 		}
+**/
 	}		
 </GenRule>
 
@@ -764,6 +766,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapSecurity">
 	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
 	public void bootstrapSecurity() {
+/**
 		$SecSchemaName$JpaSysCluster sysCluster;
 		CFLibDbKeyHash256 systemClusterID;
 		$SecSchemaName$JpaCluster systemCluster;
@@ -977,6 +980,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			bootstrapSession.setOptionalFinish(LocalDateTime.now());
 			bootstrapSession = secsessionService.update(bootstrapSession);
 		}
+**/
 	}
 </GenRule>
 
