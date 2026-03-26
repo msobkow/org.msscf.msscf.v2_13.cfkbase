@@ -107,7 +107,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapTableSecurity">
 	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
-	public void bootstrapTableSecurity(I$SecSchemaName$Authorization auth, String tableName, boolean hasHistory, boolean isMutable, boolean isTenantScoped) {
+	public void bootstrapTableSecurity(I$SecSchemaName$Authorization auth, String tableName, boolean hasHistory, boolean isMutable, String secScope) {
 /**
 		LocalDateTime now = LocalDateTime.now();
 		String lowerTableName = tableName.toLowerCase();
@@ -941,7 +941,6 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			bootstrapSession.setRequiredSecSessionId(bootstrapSessionID);
 			bootstrapSession.setRequiredSecUserId(adminUID);
 			bootstrapSession.setOptionalSecProxyId(adminUID);
-			bootstrapSession.setOptionalSecDevName(null);
 			bootstrapSession.setRequiredStart(now);
 			bootstrapSession.setOptionalFinish(null);
 			bootstrapSession = secsessionService.create(bootstrapSession);
@@ -1003,7 +1002,6 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		bootstrapSession.setRequiredSecSessionId(bootstrapSessionID);
 		bootstrapSession.setRequiredSecUserId(I$SecSchemaName$Schema.getSysAdminId());
 		bootstrapSession.setOptionalSecProxyId(I$SecSchemaName$Schema.getSysAdminId());
-		bootstrapSession.setOptionalSecDevName(null);
 		bootstrapSession.setRequiredStart(now);
 		bootstrapSession.setOptionalFinish(null);
 		bootstrapSession = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSession().createSecSession(auth, bootstrapSession);
@@ -1019,21 +1017,9 @@ $iterate Tables( each maybeInvokeBootstrapTableSecurity empty empty )$
 
 	<GenRule GenDef="Table" Name="maybeInvokeBootstrapTableSecurity">$switch HasDefSchema yes empty default invokeBootstrapTableSecurity$</GenRule>
 	<GenRule GenDef="Table" Name="invokeBootstrapTableSecurity">
-		bootstrapTableSecurity(auth, "$TableName$", $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$);</GenRule>
+		bootstrapTableSecurity(auth, "$TableName$", $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$");</GenRule>
 
 	<GenRule GenDef="Object" Name="emitTrue">true</GenRule>
 	<GenRule GenDef="Object" Name="emitFalse">false</GenRule>
-
-	<GenRule GenDef="Table" Name="maybeImplJpaSchemaServiceBootstrapTable">$switch HasDefSchema yes empty default implJpaSchemaServiceBootstrapTable$</GenRule>
-	<GenRule GenDef="Table" Name="implJpaSchemaServiceBootstrapTable">
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	public void bootstrapTable$TableName$Security(I$SecSchemaName$Authorization auth) {
-		LocalDateTime now = LocalDateTime.now();
-$declGroupsAndMembers$
-$resolveGroupsAndMembers$
-$initGroupAndMemberIDs$
-$createMissingGroupsAndMembers$
-	}		
-</GenRule>
 
 </RuleSet>
