@@ -259,14 +259,18 @@ $switch HasSuperClassRelation no implJpaOptAuditColumnAttr default empty$$iterat
 	}
 
 	@Override
-	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$) {$switch IsAtomicPrimaryIndexKeyNullable yes implJpaColumnAttrPKeyColumnAccessorsSetAttrDirect default implJpaColumnAttrPKeyColumnAccessorsSetAttrOnlyIfNotNull$
+	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$) {$implJpaColumnAttrPKeyColumnAccessorsSetAttrDirect$
 	}
 	$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJpaTableColumnGetterSetter first empty each empty empty empty )$
 	</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implJpaTableColumnGetterSetter">$reference Column implJpaTableColumnGetterSetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implJpaTableColumnGetterSetter">$switch InSuperiorDataRelation yes implDerefSuperiorDataRelationColColumnGetter default implColumnGetterSetter$</GenRule>
-	<GenRule GenDef="Atom" Name="implJpaTableColumnGetterSetter">$switch InSuperiorDataRelation yes implDerefSuperiorDataRelationColColumnGetter default implColumnGetterSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implJpaTableColumnGetterSetter">$switch InSuperiorDataRelation yes implDerefSuperiorDataRelationColColumnGetter default implMaybeColumnGetterSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implJpaTableColumnGetterSetter">$switch InSuperiorDataRelation yes implDerefSuperiorDataRelationColColumnGetter default implMaybeColumnGetterSetter$</GenRule>
+
+	<GenRule GenDef="Value" Name="implMaybeColumnGetterSetter">$switch IsNullable yes implOptGetter default implReqGetter$$switch InSuperiorRelation yes empty default implMaybeColumnSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implMaybeColumnSetter">$switch InSuperiorRelation yes empty default implColumnRealSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implColumnRealSetter">$switch IsNullable yes implOptSetter default implReqSetter$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implDerefSuperiorDataRelationColColumnGetter">$reference Column implDerefSuperiorDataRelationColColumnGetter$</GenRule>
 	<GenRule GenDef="TableCol" Name="implDerefSuperiorDataRelationColColumnGetter">$switch InCandidateRelation yes implDerefSuperiorCandidateDataRelationColColumnGetter default implDerefSuperiorNonCandidateDataRelationColColumnGetter$</GenRule>
@@ -318,7 +322,7 @@ $switch HasSuperClassRelation no implJpaOptAuditColumnAttr default empty$$iterat
 			set$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each emptyl empty empty )$($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);
 		}</GenRule>
 	<GenRule GenDef="Table" Name="implJpaColumnAttrPKeyColumnAccessorsSetAttrDirect">
-		set$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each emptyl empty empty )$($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);</GenRule>
+		this.$lower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each emptyl empty empty )$ = $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$;</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaColumnAttrPKeyInstanceAccessors">
 	@Override
