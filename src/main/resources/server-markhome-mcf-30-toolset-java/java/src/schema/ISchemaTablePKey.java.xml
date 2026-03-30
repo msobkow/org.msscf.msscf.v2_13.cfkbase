@@ -93,8 +93,8 @@ $iterate SuperiorRelations(each maybeDeclISchemaTablePKeyRelationGetterSetter em
 	<GenRule GenDef="TableCol" Name="declColumnGetterMaybeSetter">$switch InSuperiorRelation yes declColumnGetter default declColumnGetterSetter$</GenRule>
 	<GenRule GenDef="Atom" Name="declColumnGetterMaybeSetter">$switch InSuperiorRelation yes declColumnGetter default declColumnGetterSetter$</GenRule>
 
-	<GenRule GenDef="Relation" Name="maybeDeclISchemaTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default declInPrimaryISchemaTablePKeyRelationGetterSetter$</GenRule>
-	<GenRule GenDef="Relation" Name="declSuperiorISchemaTablePKeyRelationGetterSetter">$switch IsSuperiorRelation yes declInPrimaryISchemaTablePKeyRelationGetterSetter default declInferiorISchemaTablePKeyRelationGetter$</GenRule>
+	<GenRule GenDef="Relation" Name="maybeDeclISchemaTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default declSuperiorISchemaTablePKeyRelationGetterSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declSuperiorISchemaTablePKeyRelationGetterSetter">$switch IsSuperiorRelation yes declInPrimaryISchemaTablePKeyRelationGetterSetter default declSubservientISchemaTablePKeyRelationGetter$</GenRule>
 	<GenRule GenDef="Relation" Name="declInPrimaryISchemaTablePKeyRelationGetterSetter">$switch IsRelationInPrimaryIndex yes declISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declISchemaTablePKeyRelationGetterSetter">
 	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();$switch IsToIndexUnique yes declISchemaTablePKeyRelationSetter default empty$</GenRule>
@@ -103,9 +103,9 @@ $iterate SuperiorRelations(each maybeDeclISchemaTablePKeyRelationGetterSetter em
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$);</GenRule>
 
 
-	<GenRule GenDef="Relation" Name="maybeDeclISchemaTablePKeyRelationGetter">$switch HasDefSchema yes empty default declInInferiorISchemaTablePKeyRelationGetter$</GenRule>
-	<GenRule GenDef="Relation" Name="declInferiorISchemaTablePKeyRelationGetter">$switch IsInferiorRelation yes declInInferiorPrimaryISchemaTablePKeyRelationGetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="declInInferiorPrimaryISchemaTablePKeyRelationGetter">$switch IsRelationInPrimaryIndex yes declISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="maybeDeclISchemaTablePKeyRelationGetter">$switch HasDefSchema yes empty default declInSubservientISchemaTablePKeyRelationGetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declSubservientISchemaTablePKeyRelationGetter">$switch IsSubservientRelation yes declInSubservientPrimaryISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declInSubservientPrimaryISchemaTablePKeyRelationGetter">$switch IsRelationInPrimaryIndex yes declISchemaTablePKeyRelationGetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declISchemaTablePKeyRelationGetter">
 	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
 

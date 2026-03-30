@@ -103,7 +103,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneMappedTags">$switch IsToIndexAtomic yes empty default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$</GenRule>
 	
-	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneUnmappedTags">$switch IsToIndexAtomicPrimaryKeyIndex yes declAtomicPrimaIsFromPrimaryIndexKeyrySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneUnmappedTags">$switch IsToIndexAtomicPrimaryKeyIndex yes declAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToMany">
 	@OneToMany(fetch=FetchType.LAZY$switch HasReverseRelation yes emitJpaMappedBy default empty$)$switch HasReverseRelation no declSchemaJpaRelationMemberJoinColumns default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$
@@ -1526,8 +1526,9 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 		}
 	}
 </GenRule>
-	
+
 	<GenRule GenDef="IndexCol" Name="implColumnGetterSetter">$reference Column implColumnGetterSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implColumnGetter">$reference Column implColumnGetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="implRevisionGetterSetter">
 	@Override

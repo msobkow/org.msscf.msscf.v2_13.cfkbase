@@ -1107,9 +1107,10 @@ $			if( ! anyMissing ) {
 	<GenRule GenDef="RelationCol" Name="implObjRelationSingletonAccessorsSetRecAttrNull"
 >				$leadlower reference FromCol reference Table TableName$Rec.set$reference FromCol switch IsNullable yes implOptional default implRequired$$reference FromCol Name$( null );
 </GenRule>
-
-	<GenRule GenDef="RelationCol" Name="implObjRelationAccessorsPassArg"
-		>$reference FromCol switch ColumnInPrimaryIndex yes implObjRelationAccessorsPKey default implObjRelationAccessorsRec$.get$reference FromCol OptionalOrRequired$$reference FromCol Name$()</GenRule>
+	
+	<GenRule GenDef="RelationCol" Name="implObjRelationAccessorsPassArg">$switch FromColInPrimaryIndex yes implObjRelationAccessorsPassPKeyArg default implObjRelationAccessorsPassDataArg$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implObjRelationAccessorsPassDataArg"
+		>$implObjRelationAccessorsRec$.get$reference FromCol OptionalOrRequired$$reference FromCol Name$()</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implObjRelationAccessorsToColIsNullable"
 		>$reference ToCol IsNullable$</GenRule>
@@ -1189,7 +1190,15 @@ $			if( ! anyMissing ) {
 </GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implObjRelationAccessorsPassPKeyDirect">getPKey()</GenRule>
-	<GenRule GenDef="IndexCol" Name="implObjRelationAccessorsPassPKeyArg">getPKey().get$reference Column implColumnAttrOptionality$$reference Column Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implObjRelationAccessorsPassPKeyArg">$reference FromCol switch IsPrimaryIndexKeyAtomic yes implObjRelationAccessorsPassPKeyArgAtomic default implObjRelationAccessorsPassPKeyArgDeref$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implObjRelationAccessorsPassPKeyArgAtomic">getPKey()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implObjRelationAccessorsPassPKeyArgDeref$">getPKey().get$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="implObjRelationAccessorsCommaPassPKeyArg">,
+			$implObjRelationAccessorsPassPKeyArg$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implObjRelationAccessorsPassPKeyArg">$switch IsPrimaryIndexKeyAtomic yes implObjRelationAccessorsPassPKeyArgAtomic default implObjRelationAccessorsPassPKeyArgDeref$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implObjRelationAccessorsPassPKeyArgAtomic">getPKey()</GenRule>
+	<GenRule GenDef="IndexCol" Name="implObjRelationAccessorsPassPKeyArgDeref">getPKey().get$reference Column implColumnAttrOptionality$$reference Column Name$()</GenRule>
 	<GenRule GenDef="IndexCol" Name="implObjRelationAccessorsCommaPassPKeyArg">,
 			$implObjRelationAccessorsPassPKeyArg$</GenRule>
 
@@ -1290,28 +1299,60 @@ $			if( ! anyMissing ) {
 	}
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="implObjColumnROPKeyAccessor">
+	<GenRule GenDef="IndexCol" Name="implObjColumnROPKeyAccessor">$reference Column implObjColumnROPKeyAccessor$</GenRule>
+	
+	<GenRule GenDef="TableCol" Name="implObjColumnROPKeyAccessor">$switch IsPrimaryIndexKeyAtomic yes implObjColumnROPKeyAcessorAtomic default implObjColumnROPKeyAccessorDeref$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnROPKeyAccessorAtomic">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey() );
+	}
+</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnROPKeyAccessorDeref">
 	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( getPKey().get$implColumnAttrOptionality$$Name$() );
 	}
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="implObjColumnROPKeyAccessor">
+	<GenRule GenDef="Atom" Name="implObjColumnROPKeyAccessor">$switch IsPrimaryIndexKeyAtomic yes implObjColumnROPKeyAcessorAtomic default implObjColumnROPKeyAccessorDeref$</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnROPKeyAccessorAtomic">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey() );
+	}
+</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnROPKeyAccessorDeref">
 	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( getPKey().get$implColumnAttrOptionality$$Name$() );
 	}
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="implObjColumnRWPKeyAccessor">
+	<GenRule GenDef="IndexCol" Name="implObjColumnRWPKeyAccessor">$reference Column implObjColumnRWPKeyAccessor$</GenRule>
+	
+	<GenRule GenDef="TableCol" Name="implObjColumnRWPKeyAccessor">$switch IsPrimaryIndexKeyAtomic yes implObjColumnRWPKeyAccessorAtomic default implObjColumnRWPKeyAccessorDeref$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnRWPKeyAccessorAtomic">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value) {
+		setPKey(value);
+	}
+</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnRWPKeyAccessorDeref">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value) {
 		getPKey().set$implColumnAttrOptionality$$Name$(value);
 	}
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="implObjColumnRWPKeyAccessor">
+	<GenRule GenDef="Atom" Name="implObjColumnRWPKeyAccessor">$switch IsPrimaryIndexKeyAtomic yes implObjColumnRWPKeyAccessorAtomic default implObjColumnRWPKeyAccessorDeref$</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnRWPKeyAccessorAtomic">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value) {
+		setPKey(value);
+	}
+</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnRWPKeyAccessorDeref">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value) {
 		getPKey().set$implColumnAttrOptionality$$Name$(value);
@@ -1461,7 +1502,10 @@ $			if( ! anyMissing ) {
 	}
 </GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implObjReadPassPKeyArg"
+	<GenRule GenDef="IndexCol" Name="implObjReadPassPKeyArg">$switch IsPrimaryIndexKeyAtomic yes implObjReadPassPKeyArgAtomic default implObjReadPassPKeyArgDeref$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implObjReadPassPKeyArgAtomic"
+		>getPKey()</GenRule>
+	<GenRule GenDef="IndexCol" Name="implObjReadPassPKeyArgDeref"
 		>getPKey().get$OptionalOrRequired$$Name$()</GenRule>
 	<GenRule GenDef="IndexCol" Name="implObjReadCommaPassPKeyArg">,
 			$implObjReadPassPKeyArg$</GenRule>

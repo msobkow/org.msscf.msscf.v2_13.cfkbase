@@ -117,12 +117,13 @@ public interface I$SchemaName$$TableName$EditObj
 		>$switch RelationToIndexIsUnique yes maybeDeclIEditObjRelationSingletonAccessors default maybeDeclIEditObjRelationDuplicateAccessors$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeDeclIEditObjRelationSingletonAccessors"
-		>$switch RelationTypeTag Superclass empty default declIEditObjRelationSingletonAccessors$</GenRule>
+		>$switch RelationTypeTag Superclass empty Components declIEditObjRelationSingletonGetter Children declIEditObjRelationSingletonGetter default declIEditObjRelationSingletonAccessors$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeDeclIEditObjRelationDuplicateAccessors"
 		>$switch RelationTypeTag Superclass empty default declIEditObjRelationDuplicateAccessors$</GenRule>
 
-	<GenRule GenDef="Relation" Name="declIEditObjRelationSingletonAccessors">
+	<GenRule GenDef="Relation" Name="declIEditObjRelationSingletonAccessors">$declIEditObjRelationSingletonGetter$$declIEditObjRelationSingletonSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declIEditObjRelationSingletonGetter">
 	/**
 	 *	Get the I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj instance referenced by the $Suffix$ key.
 	 *
@@ -130,6 +131,15 @@ public interface I$SchemaName$$TableName$EditObj
 	 */
 	I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj get$OptionalOrRequired$$RelationTypeTag$$Suffix$();
 
+	/**
+	 *	Get the $lower OptionalOrRequired$ I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj instance referenced by the $Suffix$ key.
+	 *
+	 *	@return	The $lower OptionalOrRequired$ I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj instance referenced by the $Suffix$ key.
+	 */
+	I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj get$OptionalOrRequired$$RelationTypeTag$$Suffix$( boolean forceRead );
+</GenRule>
+
+	<GenRule GenDef="Relation" Name="declIEditObjRelationSingletonSetter">
 	/**
 	 *	Set the I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj instance referenced by the $Suffix$ key.
 	 *

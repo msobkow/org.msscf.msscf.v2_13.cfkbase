@@ -116,7 +116,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjMethods"
-		>$implEditObjGetClassCode$$implGetGenDefName$$maybeImplGetScope$$implGetObjName$$maybeImplGetObjQualifier$$maybeImplGetQualNamedObject$$implGetNamedObject$$maybeImplGetObjQualifiedName$$maybeImplGetObjFullName$$implEditObjRealise$$implEditObjForget$$switch HasSuperClassRelation no implEditObjRead default empty$$switch HasChain yes implEditObjMoveUp default empty$$switch HasChain yes implEditObjMoveDown default empty$$implEditObjCreate$$implEditObjUpdate$$implEditObjDelete$$implEditObjTableAccessors$$switch HasSuperClassRelation no implEditObjEditAccessors default empty$$implEditObjEditAsAccessors$$switch HasSuperClassRelation no implEditObjBeginEdit default empty$$switch HasSuperClassRelation no implEditObjEndEdit default empty$$switch HasSuperClassRelation no implEditObjOrigAccessors default empty$$implEditObjOrigAsCast$$switch HasSuperClassRelation no implEditObjSchemaAccessors default empty$$implEditObjRecAccessors$$implEditObjTableRecAccessors$$switch HasSuperClassRelation no implEditObjPKeyAccessors default empty$$switch HasSuperClassRelation no implEditObjIsNewAccessors default empty$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implPKeyEditObjColumnAccessorsDirect each implEditObjColumnBaseRWPKeyAccessor )$$iterate DataColumns( each implEditObjColumnDataAccessor empty empty )$$maybeImplEditObjNarrowedContainerAccessors$$iterate Relation( each implEditObjRelationAccessors empty empty )$$switch HasSuperClassRelation no implEditObjCopyPKeyToRec default empty$$switch HasSuperClassRelation no implEditObjCopyRecToPKey default empty$$implEditObjCopyRecToOrig$$implEditObjCopyOrigToRec$$iterate ServerMethods( each implJavaObjServerMethod empty empty )$</GenRule>
+		>$implEditObjGetClassCode$$implGetGenDefName$$maybeImplGetScope$$implGetObjName$$maybeImplGetObjQualifier$$maybeImplGetQualNamedObject$$implGetNamedObject$$maybeImplGetObjQualifiedName$$maybeImplGetObjFullName$$implEditObjRealise$$implEditObjForget$$switch HasSuperClassRelation no implEditObjRead default empty$$switch HasChain yes implEditObjMoveUp default empty$$switch HasChain yes implEditObjMoveDown default empty$$implEditObjCreate$$implEditObjUpdate$$implEditObjDelete$$implEditObjTableAccessors$$switch HasSuperClassRelation no implEditObjEditAccessors default empty$$implEditObjEditAsAccessors$$switch HasSuperClassRelation no implEditObjBeginEdit default empty$$switch HasSuperClassRelation no implEditObjEndEdit default empty$$switch HasSuperClassRelation no implEditObjOrigAccessors default empty$$implEditObjOrigAsCast$$switch HasSuperClassRelation no implEditObjSchemaAccessors default empty$$implEditObjRecAccessors$$implEditObjTableRecAccessors$$switch HasSuperClassRelation no implEditObjPKeyAccessors default empty$$switch HasSuperClassRelation no implEditObjIsNewAccessors default empty$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implPKeyEditObjColumnAccessorsDirect each implEditObjColumnBaseRWPKeyAccessor )$$iterate DataColumns( each implEditObjColumnRWAccessor empty empty )$$maybeImplEditObjNarrowedContainerAccessors$$iterate Relation( each implEditObjRelationAccessors empty empty )$$switch HasSuperClassRelation no implEditObjCopyPKeyToRec default empty$$switch HasSuperClassRelation no implEditObjCopyRecToPKey default empty$$implEditObjCopyRecToOrig$$implEditObjCopyOrigToRec$$iterate ServerMethods( each implJavaObjServerMethod empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjMoveUp">
 	@Override
@@ -262,7 +262,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 		>$switch RelationToIndexIsUnique yes maybeImplEditObjRelationSingletonAccessors default maybeImplEditObjRelationCollectionAccessors$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeImplEditObjRelationSingletonAccessors"
-		>$switch RelationTypeTag Superclass empty default implEditObjRelationSingletonAccessors$</GenRule>
+		>$switch RelationTypeTag Superclass empty Components implEditObjRelationSingletonGetter Children implEditObjRelationSingletonGetter default implEditObjRelationSingletonAccessors$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeImplEditObjRelationCollectionAccessors"
 		>$switch RelationTypeTag Superclass empty default implObjRelationCollectionAccessors$</GenRule>
@@ -419,7 +419,8 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 					$leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ = obj;
 				}</GenRule>
 
-	<GenRule GenDef="Relation" Name="implEditObjRelationSingletonAccessors">
+	<GenRule GenDef="Relation" Name="implEditObjRelationSingletonAccessors">$implEditObjRelationSingletonGetter$$implEditObjRelationSingletonSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="implEditObjRelationSingletonGetter">
 	@Override
 	public I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj get$OptionalOrRequired$$RelationTypeTag$$Suffix$() {
 		return( get$OptionalOrRequired$$RelationTypeTag$$Suffix$( false ) );
@@ -437,7 +438,9 @@ $			if( ! anyMissing ) {
 		}
 		return( $leadlower OptionalOrRequired$$RelationTypeTag$$Suffix$ );
 	}
-
+</GenRule>
+	
+	<GenRule GenDef="Relation" Name="implEditObjRelationSingletonSetter">
 	@Override
 	public void set$OptionalOrRequired$$RelationTypeTag$$Suffix$( I$reference ToTable DefSchemaName$$reference ToTable TableName$Obj value ) {
 		if( rec == null ) {
@@ -545,14 +548,24 @@ $			if( ! anyMissing ) {
 	<GenRule GenDef="Atom" Name="implEditObjColumnBaseRWPKeyAccessor"
 		>$switch HasSuperClassRelation no implEditObjColumnRWPKeyAccessor default empty$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implEditObjColumnRWAccessor">$reference Column implEditObjColumnRWAccessor$</GenRule>
 	<GenRule GenDef="TableCol" Name="implEditObjColumnRWAccessor"
-		>$switch ColumnInPrimaryIndex yes implEditObjColumnRWPKeyAccessor default implEditObjColumnRWDataAccessor$</GenRule>
+		>$switch ColumnInPrimaryIndex yes implEditObjColumnRWPKeyAccessor default implEditObjColumnDataAccessor$</GenRule>
 	<GenRule GenDef="Atom" Name="implEditObjColumnRWAccessor"
-		>$switch ColumnInPrimaryIndex yes implEditObjColumnRWPKeyAccessor default implEditObjColumnRWDataAccessor$</GenRule>
+		>$switch ColumnInPrimaryIndex yes implEditObjColumnRWPKeyAccessor default implEditObjColumnDataAccessor$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implPKeyEditObjColumnAccessorsDirect">$reference Column implPKeyEditObjColumnAccessorsDirect$</GenRule>
 	
-	<GenRule GenDef="TableCol" Name="implPKeyEditObjColumnAccessorsDirect">
+	<GenRule GenDef="TableCol" Name="implPKeyEditObjColumnAccessorsDirect">$switch InSuperiorRelation yes implPKeyEditObjROColumnAccessorsDirect default implPKeyEditObjRWColumnAccessorsDirect$</GenRule>
+	
+	<GenRule GenDef="TableCol" Name="implPKeyEditObjROColumnAccessorsDirect">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey() );
+	}
+</GenRule>
+	
+	<GenRule GenDef="TableCol" Name="implPKeyEditObjRWColumnAccessorsDirect">
 	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( getPKey() );
@@ -567,7 +580,16 @@ $		}
 	}
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="implPKeyEditObjColumnAccessorsDirect">
+	<GenRule GenDef="Atom" Name="implPKeyEditObjColumnAccessorsDirect">$switch InSuperiorRelation yes implPKeyEditObjROColumnAccessorsDirect default implPKeyEditObjRWColumnAccessorsDirect$</GenRule>
+	
+	<GenRule GenDef="Atom" Name="implPKeyEditObjROColumnAccessorsDirect">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey() );
+	}
+</GenRule>
+	
+	<GenRule GenDef="Atom" Name="implPKeyEditObjRWColumnAccessorsDirect">
 	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
 		return( getPKey() );
@@ -584,7 +606,8 @@ $		}
 
 	<GenRule GenDef="IndexCol" Name="implEditObjColumnRWPKeyAccessor">$reference Column implEditObjColumnRWPKeyAccessor$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="implEditObjColumnRWPKeyAccessor">$switch InSuperiorRelation yes implEditObjColumnActualROPKeyAccessor default implEditObjColumnActualRWPKeyAccessor$</GenRule>
+	<GenRule GenDef="TableCol" Name="implEditObjColumnRWPKeyAccessor">$switch IsPrimaryIndexKeyAtomic yes implEditObjColumnRWAtomicAccessor default implEditObjRWPKeyDerefAccessor$</GenRule>
+	<GenRule GenDef="TableCol" Name="implEditObjRWPKeyDerefAccessor">$switch InSuperiorRelation yes implEditObjColumnActualROPKeyAccessor default implEditObjColumnActualRWPKeyAccessor$</GenRule>
 	<GenRule GenDef="TableCol" Name="implEditObjColumnActualROPKeyAccessor">
 	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
@@ -608,8 +631,32 @@ $		}
 	}
 </GenRule>
 
+	<GenRule GenDef="TableCol" Name="implEditObjColumnRWAtomicAccessor">$switch InSuperiorRelation yes implEditObjColumnActualROAtomicAccessor default implEditObjColumnActualRWAtomicAccessor$</GenRule>
+	<GenRule GenDef="TableCol" Name="implEditObjColumnActualROAtomicAccessor">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey() );
+	}
+</GenRule>
 
-	<GenRule GenDef="Atom" Name="implEditObjColumnRWPKeyAccessor">$switch InSuperiorRelation yes implEditObjColumnActualROPKeyAccessor default implEditObjColumnActualRWPKeyAccessor$</GenRule>
+	<GenRule GenDef="TableCol" Name="implEditObjColumnActualRWAtomicAccessor">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey() );
+	}
+
+	@Override
+	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value) {
+		if ((getPKey() != value ) || ( get$TableName$Rec().get$implColumnAttrOptionality$$Name$() != value )) {
+			setPKey(value);
+			get$TableName$Rec().set$implColumnAttrOptionality$$Name$( value );
+$switch ColumnInAnyRelation yes implEditObjColumnRWDataAccessorClearRelations default empty
+$		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Atom" Name="implEditObjColumnRWPKeyAccessor">$switch IsPrimaryIndexKeyAtomic yes implEditObjColumnRWAtomicAccessor default implEditObjRWPKeyDerefAccessor$</GenRule>
+	<GenRule GenDef="Atom" Name="implEditObjRWPKeyDerefAccessor">$switch InSuperiorRelation yes implEditObjColumnActualROPKeyAccessor default implEditObjColumnActualRWPKeyAccessor$</GenRule>
 	<GenRule GenDef="Atom" Name="implEditObjColumnActualROPKeyAccessor">
 	@Override
 	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
@@ -625,10 +672,35 @@ $		}
 
 	@Override
 	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value) {
-		getPKey().set$implColumnAttrOptionality$$Name$(value);
-		if( get$TableName$Rec().get$implColumnAttrOptionality$$Name$() != value ) {
+		if ((getPKey().get$implColumnAttrOptionality$$Name$() != value ) || ( get$TableName$Rec().get$implColumnAttrOptionality$$Name$() != value )) {
+			getPKey().set$implColumnAttrOptionality$$Name$(value);
 			get$TableName$Rec().set$implColumnAttrOptionality$$Name$( value );
-		}
+$switch ColumnInAnyRelation yes implEditObjColumnRWDataAccessorClearRelations default empty
+$		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Atom" Name="implEditObjColumnRWAtomicAccessor">$switch InSuperiorRelation yes implEditObjColumnActualROAtomicAccessor default implEditObjColumnActualRWAtomicAccessor$</GenRule>
+	<GenRule GenDef="Atom" Name="implEditObjColumnActualROAtomicAccessor">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey() );
+	}
+</GenRule>
+
+	<GenRule GenDef="Atom" Name="implEditObjColumnActualRWAtomicAccessor">
+	@Override
+	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
+		return( getPKey() );
+	}
+
+	@Override
+	public void set$implColumnAttrOptionality$$Name$($implJavaAtomType$ value) {
+		if ((getPKey() != value ) || ( get$TableName$Rec().get$implColumnAttrOptionality$$Name$() != value )) {
+			setPKey(value);
+			get$TableName$Rec().set$implColumnAttrOptionality$$Name$( value );
+$switch ColumnInAnyRelation yes implEditObjColumnRWDataAccessorClearRelations default empty
+$		}
 	}
 </GenRule>
 
@@ -770,7 +842,10 @@ $		}
 	}
 </GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implEditObjReadPassPKeyArg"
+	<GenRule GenDef="IndexCol" Name="implEditObjReadPassPKeyArg">$switch IsPrimaryIndexKeyAtomic yes implEditObjReadPassPKeyArgAtomic default implEditObjReadPassPKeyArgDeref$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implEditObjReadPassPKeyArgAtomic"
+		>getPKey()</GenRule>
+	<GenRule GenDef="IndexCol" Name="implEditObjReadPassPKeyArgDeref"
 		>getPKey().get$OptionalOrRequired$$Name$()</GenRule>
 	<GenRule GenDef="IndexCol" Name="implEditObjReadCommaPassPKeyArg">,
 			$implEditObjReadPassPKeyArg$</GenRule>
@@ -811,10 +886,16 @@ $		}
 	}
 </GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implEditObjCopyRecAttrToPKey">
+	<GenRule GenDef="IndexCol" Name="implEditObjCopyRecAttrToPKey">$switch IsPrimaryIndexKeyAtomic yes implEditObjCopyRecAttrToPKeyAtomic default implEditObjCopyRecAttrToPKeyDeref$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implEditObjCopyRecAttrToPKeyAtomic">
+		setPKey( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
+	<GenRule GenDef="IndexCol" Name="implEditObjCopyRecAttrToPKeyDeref">
 		getPKey().set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implEditObjCopyPKeyAttrToRec">
+	<GenRule GenDef="IndexCol" Name="implEditObjCopyPKeyAttrToRec">$switch IsPrimaryIndexKeyAtomic yes implEditObjCopyPKeyAttrToRecAtomic default implEditObjCopyPKeyAttrToRecDeref$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implEditObjCopyPKeyAttrToRecAtomic">
+		rec.set$implColumnAttrOptionality$$Name$( getPKey() );</GenRule>
+	<GenRule GenDef="IndexCol" Name="implEditObjCopyPKeyAttrToRecDeref">
 		rec.set$implColumnAttrOptionality$$Name$( getPKey().get$implColumnAttrOptionality$$Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjRecAccessors">
