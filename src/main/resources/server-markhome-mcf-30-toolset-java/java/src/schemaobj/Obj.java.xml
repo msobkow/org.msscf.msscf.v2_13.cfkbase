@@ -278,10 +278,241 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		>$reference FromTable reference SuperClassRelation reference ToTable implGetNamedObjectProbeComponents$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implGetNamedObjectProbeXsdComponentByLookupIndex">
-		if( subObj == null ) {
+		if( subObj == null ) {$reference ToTable implGetNamedObjectProbeXsdComponentsMaybeConvertNextNameToIntrinsic$
 			subObj = ((I$SchemaName$SchemaObj)getSchema()).get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$implGetNamedObjectProbeXsdComponentReadByInheritedLookupIndex$
 		}</GenRule>
 
+	<GenRule GenDef="Table" Name="implGetNamedObjectProbeXsdComponentsMaybeConvertNextNameToIntrinsic"
+		>$switch HasLookupIndex yes implGetNamedObjectProbeXsdComponentsConvertNextNameToIntrinsic default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="implGetNamedObjectProbeXsdComponentsConvertNextNameToIntrinsic"
+		>$reference LookupIndex iterate Columns( each empty last implGetNamedObjectConvertNextNameToIntrinsic empty empty )$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implGetNamedObjectConvertNextNameToIntrinsic">
+			$reference Column implGetNamedObjectConvertNextNameToIntrinsic$;</GenRule>
+
+	<GenRule GenDef="Value" Name="implGetNamedObjectConvertNextNameToIntrinsic">$switch IsNullable yes implGetNamedObjectConvertNextNameToOptional default implGetNamedObjectConvertNextNameToRequired$</GenRule>
+	
+	<GenRule GenDef="Value" Name="implGetNamedObjectConvertNextNameToOptional">$switch BaseModelAtomClass
+			BlobDef ErrorCannotConvertNextNameToBlobInObjKBase
+			BoolDef implConvertNextNameToBoolOptional
+			EnumDef implConvertNextNameToEnumOptional
+			Id16Gen implConvertNextNameToInt16Optional
+			Id32Gen implConvertNextNameToInt32Optional
+			Id64Gen implConvertNextNameToInt64Optional
+			Int16Def implConvertNextNameToInt16Optional
+			Int32Def implConvertNextNameToInt32Optional
+			Int64Def implConvertNextNameToInt64Optional
+			UInt16Def implConvertNextNameToUInt16Optional
+			UInt32Def implConvertNextNameToUInt32Optional
+			UInt64Def implConvertNextNameToUInt64Optional
+			FloatDef implConvertNextNameToFloatOptional
+			DoubleDef implConvertNextNameToDoubleOptional
+			NumberDef implConvertNextNameToNumberOptional
+			DateDef implConvertNextNameToDateOptional
+			TimeDef implConvertNextNameToTimeOptional
+			TimestampDef implConvertNextNameToTimestampOptional
+			TZDateDef implConvertNextNameToTZDateOptional
+			TZTimeDef implConvertNextNameToTZTimeOptional
+			TZTimestampDef implConvertNextNameToTZTimestampOptional
+			DbKeyHash128Gen implConvertNextNameToDbKeyHash128Optional
+			DbKeyHash160Gen implConvertNextNameToDbKeyHash160Optional
+			DbKeyHash224Gen implConvertNextNameToDbKeyHash224Optional
+			DbKeyHash256Gen implConvertNextNameToDbKeyHash256Optional
+			DbKeyHash384Gen implConvertNextNameToDbKeyHash384Optional
+			DbKeyHash512Gen implConvertNextNameToDbKeyHash512Optional
+			DbKeyHash128Def implConvertNextNameToDbKeyHash128Optional
+			DbKeyHash160Def implConvertNextNameToDbKeyHash160Optional
+			DbKeyHash224Def implConvertNextNameToDbKeyHash224Optional
+			DbKeyHash256Def implConvertNextNameToDbKeyHash256Optional
+			DbKeyHash384Def implConvertNextNameToDbKeyHash384Optional
+			DbKeyHash512Def implConvertNextNameToDbKeyHash512Optional
+			Uuid6Gen implConvertNextNameToUuid6Optional
+			Uuid6Def implConvertNextNameToUuid6Optional
+			UuidGen implConvertNextNameToUuidOptional
+			UuidDef implConvertNextNameToUuidOptional
+			StringDef implConvertNextNameToStringOptional
+			TokenDef implConvertNextNameToStringOptional
+			NmTokenDef implConvertNextNameToStringOptional
+			NmTokensDef implConvertNextNameToStringOptional
+			TextDef implConvertNextNameToStringOptional
+			default ErrorUnrecognizedBaseModelAtomClassInObjKBase$</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToStringOptional">$implJavaAtomType$ natNextName = nextName</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToBoolOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Boolean.parseBoolean(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToEnumOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? $DefSchemaName$Schema.parse$Name$(nextName): null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToInt16Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Short.parseShort(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToInt32Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Integer.parseInteger(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToInt64Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Long.parseLong(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUInt16Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Integer.parseInteger(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUInt32Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Long.parseLong(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUInt64Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Number.parseNumber(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToFloatOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Float.parseFloat(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDoubleOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Double.parseDouble(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToNumberOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Number.parseNumber(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDateOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibXmlUtil.parseDate(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTimeOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibXmlUtil.parseTime(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTimestampOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibXmlUtil.parseTimestamp(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZDateOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? : CFLibXmlUtil.parseTZDate(nextName) null</GenRule>`
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimeOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibXmlUtil.parseTZTime(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimestampOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibXmlUtil.parseTZTimestamp(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash128Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash128.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash160Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash160.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash224Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash224.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash256Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash256.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash384Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash384.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash512Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash512.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUuid6Optional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibUuid6.fromString(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUuidOptional">$implJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? UUID.fromString(nextName) : null</GenRule>
+
+	<GenRule GenDef="Value" Name="implGetNamedObjectConvertNextNameToRequired">$switch BaseModelAtomClass
+			BlobDef ErrorCannotConvertNextNameToBlobInObjKBase
+			BoolDef implConvertNextNameToBoolRequired
+			EnumDef implConvertNextNameToEnumRequired
+			Id16Gen implConvertNextNameToInt16Required
+			Id32Gen implConvertNextNameToInt32Required
+			Id64Gen implConvertNextNameToInt64Required
+			Int16Def implConvertNextNameToInt16Required
+			Int32Def implConvertNextNameToInt32Required
+			Int64Def implConvertNextNameToInt64Required
+			UInt16Def implConvertNextNameToUInt16Required
+			UInt32Def implConvertNextNameToUInt32Required
+			UInt64Def implConvertNextNameToUInt64Required
+			FloatDef implConvertNextNameToFloatRequired
+			DoubleDef implConvertNextNameToDoubleRequired
+			NumberDef implConvertNextNameToNumberRequired
+			DateDef implConvertNextNameToDateRequired
+			TimeDef implConvertNextNameToTimeRequired
+			TimestampDef implConvertNextNameToTimestampRequired
+			TZDateDef implConvertNextNameToTZDateRequired
+			TZTimeDef implConvertNextNameToTZTimeRequired
+			TZTimestampDef implConvertNextNameToTZTimestampRequired
+			DbKeyHash128Gen implConvertNextNameToDbKeyHash128Required
+			DbKeyHash160Gen implConvertNextNameToDbKeyHash160Required
+			DbKeyHash224Gen implConvertNextNameToDbKeyHash224Required
+			DbKeyHash256Gen implConvertNextNameToDbKeyHash256Required
+			DbKeyHash384Gen implConvertNextNameToDbKeyHash384Required
+			DbKeyHash512Gen implConvertNextNameToDbKeyHash512Required
+			DbKeyHash128Def implConvertNextNameToDbKeyHash128Required
+			DbKeyHash160Def implConvertNextNameToDbKeyHash160Required
+			DbKeyHash224Def implConvertNextNameToDbKeyHash224Required
+			DbKeyHash256Def implConvertNextNameToDbKeyHash256Required
+			DbKeyHash384Def implConvertNextNameToDbKeyHash384Required
+			DbKeyHash512Def implConvertNextNameToDbKeyHash512Required
+			Uuid6Gen implConvertNextNameToUuid6Required
+			Uuid6Def implConvertNextNameToUuid6Required
+			UuidGen implConvertNextNameToUuidRequired
+			UuidDef implConvertNextNameToUuidRequired
+			StringDef implConvertNextNameToStringRequired
+			TokenDef implConvertNextNameToStringRequired
+			NmTokenDef implConvertNextNameToStringRequired
+			NmTokensDef implConvertNextNameToStringRequired
+			TextDef implConvertNextNameToStringRequired
+			default ErrorUnrecognizedBaseModelAtomClassInObjKBase$</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToStringRequired">if (nextName == null) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = nextName</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToBoolRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = Boolean.parseBoolean(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToEnumRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = $DefSchemaName$Schema.parse$Name$(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToInt16Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = Short.parseShort(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToInt32Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = Integer.parseInteger(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToInt64Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = Long.parseLong(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUInt16Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = Integer.parseInteger(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUInt32Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = Long.parseLong(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUInt64Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = Number.parseNumber(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToFloatRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = Float.parseFloat(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDoubleRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = Double.parseDouble(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToNumberRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = Number.parseNumber(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDateRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibXmlUtil.parseDate(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTimeRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibXmlUtil.parseTime(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTimestampRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibXmlUtil.parseTimestamp(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZDateRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibXmlUtil.parseTZDate(nextName)</GenRule>`
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimeRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibXmlUtil.parseTZTime(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimestampRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibXmlUtil.parseTZTimestamp(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash128Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibDbKeyHash128.fromHex(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash160Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibDbKeyHash160.fromHex(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash224Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibDbKeyHash224.fromHex(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash256Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibDbKeyHash256.fromHex(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash384Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibDbKeyHash384.fromHex(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash512Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibDbKeyHash512.fromHex(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUuid6Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = CFLibUuid6.fromString(nextName)</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUuidRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
+				throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+			}
+			$implJavaAtomType$ natNextName = UUID.fromString(nextName)</GenRule>
+	
 	<GenRule GenDef="Relation" Name="implGetNamedObjectProbeXsdComponentReadByInheritedLookupIndex"
 		>$switch ToTableHasInheritedLookupIndex yes implGetNamedObjectProbeXsdComponentReadByToTableInheritedLookupIndex default empty$</GenRule>
 
@@ -301,14 +532,14 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		>$reference LookupIndex Suffix$( $reference LookupIndex iterate Columns( lone implGetNamedObjectReadByArg first implGetNamedObjectReadByPKeyArgs each empty empty empty )$, false );</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implGetNamedObjectReadByArg"
-		>nextName</GenRule>
+		>natNextName</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implGetNamedObjectReadByPKeyArgs"
 		>$poptop Table implGetNamedObjectReadByPKeyArgs$</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetNamedObjectReadByPKeyArgs"
 		>$reference PrimaryKeyIndex iterate Columns( first implGetNamedObjectPassPKeyArg each implGetNamedObjectCommaPassPKeyArg empty empty )$,
-				nextName</GenRule>
+				natNextName</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implGetNamedObjectPassPKeyArg"
 		>get$OptionalOrRequired$$Name$()</GenRule>
