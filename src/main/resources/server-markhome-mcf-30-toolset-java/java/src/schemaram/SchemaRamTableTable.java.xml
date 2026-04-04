@@ -1058,7 +1058,10 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	<GenRule GenDef="IndexCol" Name="implRamCreateTableCompositePKeyToBuff">
 		Buff.set$reference Column Optionality$$reference Column Name$( pkey.get$reference Column Optionality$$reference Column Name$() );</GenRule>
 
-	<GenRule GenDef="Table" Name="implRamCreateTableCopyBackPKeyToBuff"
+	<GenRule GenDef="Table" Name="implRamCreateTableCopyBackPKeyToBuff">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableCopyBackAtomicPKeyToBuff default implRamCreateTableCopyBackCompositePKeyToBuff$</GenRule>
+	<GenRule GenDef="Table" Name="implRamCreateTableCopyBackAtomicPKeyToBuff"
+		>$iterate SuperiorPrimaryKeyRelations( each implRamCreateTableSetAtomicBuffSuperiorRelation empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamCreateTablePKeyToBuff )$</GenRule>
+	<GenRule GenDef="Table" Name="implRamCreateTableCopyBackCompositePKeyToBuff"
 		>$iterate SuperiorPrimaryKeyRelations( each implRamCreateTableSetBuffSuperiorRelation empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamCreateTablePKeyToBuff )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamCreateTablePKeyGenNew"
@@ -1067,13 +1070,20 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	<GenRule GenDef="Table" Name="implRamCreateTablePKeyCopyBuff"
 		>$iterate SuperiorPrimaryKeyRelations( each implRamCreateTablePKeySetSuperiorRelation empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamCreateTablePKeyCopyId empty empty )$</GenRule>
 
+	<GenRule GenDef="Relation" Name="implRamCreateTableSetAtomicBuffSuperiorRelation">
+		Buff.set$OptionalOrRequired$$RelationType$$Suffix$( $iterate Columns( first implRamCreateTableRecAtomicArgRelation each implRamCreateTableCommaBuffAtomicArgRelation empty empty )$ );</GenRule>
 	<GenRule GenDef="Relation" Name="implRamCreateTableSetBuffSuperiorRelation">
 		Buff.set$OptionalOrRequired$$RelationType$$Suffix$( $iterate Columns( first implRamCreateTableRecArgRelation each implRamCreateTableCommaBuffArgRelation empty empty )$ );</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamCreateTableRecAtomicArgRelation">pkey</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamCreateTableCommaBuffAtomicArgRelation">,
+			$implRamCreateTableRecAtomicArgRelation$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamCreateTableRecArgRelation">pkey.get$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$()</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamCreateTableCommaBuffArgRelation">,
 			$implRamCreateTableRecArgRelation$</GenRule>
 
-	<GenRule GenDef="Relation" Name="implRamCreateTablePKeySetSuperiorRelation">
+	<GenRule GenDef="Relation" Name="implRamCreateTablePKeySetSuperiorRelation">$reference FromTable switch IsPrimaryIndexKeyAtomic yes empty default implRamCreateTablePKeyReallySetSuperiorRelation$</GenRule>
+	<GenRule GenDef="Object" Name="implRamCreateTablePKeyReallySetSuperiorRelation">$popto Relation implRamCreateTablePKeyReallySetSuperiorRelation$</GenRule>
+	<GenRule GenDef="Relation" Name="implRamCreateTablePKeyReallySetSuperiorRelation">
 		pkey.set$OptionalOrRequired$$RelationType$$Suffix$( $iterate Columns( first implRamCreateTablePKeyArgRelation each implRamCreateTableCommaPKeyArgRelation empty empty )$ );</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implRamCreateTablePKeyArgRelation">Buff.get$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$()</GenRule>
@@ -1829,7 +1839,7 @@ $iterate Columns( each implRamCreateTableInitKeyAttr )$</GenRule>
 		pkey.setClassCode( Buff.getClassCode() );</GenRule>
 
 	<GenRule ScopeDef="Index" GenDef="IndexCol" Name="implRamCreateTablePKey"
-		>$switch GenerateId yes implRamCreateTablePKeyGenId default maybeImplRamCreateTablePKeyCopyId$</GenRule>
+		>$switch GenerateId yes implRamCreateTablePKeyGenId default implRamCreateTablePKeyCopyId$</GenRule>
 
 	<GenRule ScopeDef="Index" GenDef="IndexCol" Name="implRamCreateTablePKeyGenId"
 		>$reference Column implRamCreateTablePKeyGenId$</GenRule>
@@ -1870,12 +1880,14 @@ $iterate Columns( each implRamCreateTableInitKeyAttr )$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamCreateTablePKeyGenIdInitContainerKeyCol">
 	 	$leadlower popto TableCol reference DataType reference Dispenser reference BaseClass TableName$PKey.set$reference FromCol OptionalOrRequired$$reference FromCol Name$( Buff.get$reference FromCol OptionalOrRequired$$reference FromCol Name$() );</GenRule>
 
-	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysCopyId">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableKeysCopyAtomicId default implRamCreateTableKeysCopyCompositeId$</GenRule>
+	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysCopyId">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableKeysCopyAtomicId default implRamCreateTableKeysMaybeCopyCompositeId$</GenRule>
 	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysCopyAtomicId">
 		pkey = Buff.get$switch IsNullable yes implColumnAttrOptional default implColumnAttrRequired$$Name$();</GenRule>
+	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysMaybeCopyCompositeId">$switch InSuperiorPrimaryKeyRelation yes empty default implRamCreateTableKeysCopyCompositeId$</GenRule> 
 	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysCopyCompositeId">
 		pkey.set$implColumnAttrOptionality$$Name$( Buff.get$switch IsNullable yes implColumnAttrOptional default implColumnAttrRequired$$Name$() );</GenRule>
-	<GenRule GenDef="Atom" Name="implRamCreateTableKeysCopyId">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableKeysCopyAtomicId default implRamCreateTableKeysCopyCompositeId$</GenRule>
+	<GenRule GenDef="Atom" Name="implRamCreateTableKeysCopyId">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableKeysCopyAtomicId default implRamCreateTableKeysMaybeCopyCompositeId$</GenRule>
+	<GenRule GenDef="Atom" Name="implRamCreateTableKeysMaybeCopyCompositeId">$switch InSuperiorPrimaryKeyRelation yes empty default implRamCreateTableKeysCopyCompositeId$</GenRule> 
 	<GenRule GenDef="Atom" Name="implRamCreateTableKeysCopyAtomicId">
 		pkey = Buff.get$switch IsNullable yes implColumnAttrOptional default implColumnAttrRequired$$Name$();</GenRule>
 	<GenRule GenDef="Atom" Name="implRamCreateTableKeysCopyCompositeId">
@@ -2876,7 +2888,8 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 	<GenRule GenDef="IndexCol" Name="implRamDeleteCommaPassArgColumn">,
 			argKey.get$OptionalOrRequired$$Name$()</GenRule>
 
-	<GenRule GenDef="Index" Name="implRamDeleteTableByPrimaryIndex">$switch IsPrimaryIndexKeyAtomic yes implRamDeleteTableByPrimaryAtomicIndex default implRamDeleteTableByPrimaryCompositeIndex$</GenRule>
+	<GenRule GenDef="Index" Name="implRamDeleteTableByPrimaryIndex">$reference Table switch IsPrimaryIndexKeyAtomic yes implRamDeleteTableByPrimaryAtomicIndex default implRamDeleteTableByPrimaryCompositeIndex$</GenRule>
+	<GenRule GenDef="Table" Name="implRamDeleteTableByPrimaryAtomicIndex">$popto Index implRamDeleteTableByPrimaryAtomicIndex$</GenRule>
 	<GenRule GenDef="Index" Name="implRamDeleteTableByPrimaryAtomicIndex">
 	@Override
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization,
@@ -2903,6 +2916,7 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 	}
 </GenRule>
 
+	<GenRule GenDef="Table" Name="implRamDeleteTableByPrimaryCompositeIndex">$popto Index implRamDeleteTableByPrimaryCompositeIndex$</GenRule>
 	<GenRule GenDef="Index" Name="implRamDeleteTableByPrimaryCompositeIndex">
 	@Override
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
