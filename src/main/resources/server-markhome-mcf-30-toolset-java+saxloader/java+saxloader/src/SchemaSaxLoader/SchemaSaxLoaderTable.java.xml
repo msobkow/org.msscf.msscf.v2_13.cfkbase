@@ -2406,7 +2406,9 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 		>$switch IsChainRelation yes empty default implTableCopyNamedRefNamedRelation$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implTableCopyNamedRefNamedRelation"
-		>$switch ToTableHasLookupIndex yes implTableCopyNamedRefRelation default empty$</GenRule>
+		>$switch ToTableHasLookupIndex yes implTableCopyNamedSuperiorRefRelation default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="implTableCopyNamedSuperiorRefRelation">$switch IsSuperiorRelation yes implTableCopyNamedRefRelation default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implTableCopyNamedRefRelation">
 						edit$poptop Table TableName$.set$OptionalOrRequired$$RelationTypeTag$$Suffix$( editBuff.get$OptionalOrRequired$$RelationTypeTag$$Suffix$() );</GenRule>
