@@ -113,6 +113,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		boolean hasHistory,
 		boolean isMutable,
 		String secScope,
+		I$SecSchemaName$SecSysGrp secSysGroupPublic,
 		I$SecSchemaName$SecSysGrp secSysGroupSysAdmin,
 		I$SecSchemaName$SecClusGrp secSysClusGroupSysAdmin,
 		I$SecSchemaName$SecTentGrp secSysTentGroupSysAdmin )
@@ -141,13 +142,15 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		String sysadminGroup = secSysGroupSysAdmin.getRequiredName();
 		String sysclusadminGroup = secSysClusGroupSysAdmin.getRequiredName();
 		String systentadminGroup = secSysTentGroupSysAdmin.getRequiredName();
-
+		String publicGroup = secSysGroupPublic.getRequiredName();
+		
 		I$SecSchemaName$SecSysGrp secGroupCreate;
 		CFLibDbKeyHash256 secGroupCreateID;
 		I$SecSchemaName$SecSysGrpInc secGroupCreateIncSysadmin;
 		I$SecSchemaName$SecSysGrp secGroupRead;
 		CFLibDbKeyHash256 secGroupReadID;
 		I$SecSchemaName$SecSysGrpInc secGroupReadIncSysadmin;
+		I$SecSchemaName$SecSysGrpInc secGroupReadIncPublic;
 		I$SecSchemaName$SecSysGrp secGroupUpdate;
 		CFLibDbKeyHash256 secGroupUpdateID;
 		I$SecSchemaName$SecSysGrpInc secGroupUpdateIncSysadmin;
@@ -219,6 +222,13 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secGroupReadIncSysadmin = null;
 		}
 
+		if (secGroupRead != null &amp;&amp; level == I$SecSchemaName$Schema.SecLevelEnum.Global) {
+			secGroupReadIncPublic = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrpInc().readDerived(auth, secGroupReadID, publicGroup);
+		}
+		else {
+			secGroupReadIncPublic = null;
+		}
+		
 		secGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().readDerivedByUNameIdx(auth, updatePermName);
 		if (secGroupUpdate != null) {
 			secGroupUpdateID = secGroupUpdate.getRequiredSecSysGrpId();
@@ -346,6 +356,21 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secGroupReadIncSysadmin.setRequiredContainerGroup(secGroupReadID);
 			secGroupReadIncSysadmin.setRequiredParentSubGroup(sysadminGroup);
 			secGroupReadIncSysadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrpInc().createSecSysGrpInc(auth, secGroupReadIncSysadmin);
+		}
+
+		if (secGroupRead != null &amp;&amp; level == I$SecSchemaName$Schema.SecLevelEnum.Global &amp;&amp; secGroupReadIncPublic == null) {
+			secGroupReadIncPublic = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecSysGrpInc().newRec();
+			secGroupReadIncPublic.setRequiredRevision(1);
+			secGroupReadIncPublic.setCreatedAt(now);
+			secGroupReadIncPublic.setCreatedByUserId(auth.getSecUserId());
+			secGroupReadIncPublic.setUpdatedAt(now);
+			secGroupReadIncPublic.setUpdatedByUserId(auth.getSecUserId());
+			secGroupReadIncPublic.setRequiredContainerGroup(secGroupReadID);
+			secGroupReadIncPublic.setRequiredParentSubGroup(publicGroup);
+			secGroupReadIncPublic = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrpInc().createSecSysGrpInc(auth, secGroupReadIncPublic);
+		}
+		else {
+			secGroupReadIncPublic = null;
 		}
 
 		if (secGroupUpdate == null) {
@@ -979,6 +1004,9 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		$SecSchemaName$JpaSecSysGrp secSysGroupSysAdmin;
 		CFLibDbKeyHash256 secSysGroupSysAdminID;
 		$SecSchemaName$JpaSecSysGrpMemb secSysGroupSysAdminMembSysadmin;
+		$SecSchemaName$JpaSecSysGrp secSysGroupPublic;
+		CFLibDbKeyHash256 secSysGroupPublicID;
+		$SecSchemaName$JpaSecSysGrpInc secSysGroupPublicIncSysadmin;
 		$SecSchemaName$JpaSecSysGrp secSysGroupSysClusAdmin;
 		CFLibDbKeyHash256 secSysGroupSysClusAdminID;
 		$SecSchemaName$JpaSecClusGrpInc secSysGroupSysClusAdminIncSysclusadmin;
@@ -1040,6 +1068,12 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			}
 			secSysGroupSysAdminID = secSysGroupSysAdmin.getRequiredSecSysGrpId();
 
+			secSysGroupPublic = ($SecSchemaName$JpaSecSysGrp)(secsysgrpService.findByUNameIdx( "public"));
+			if (secSysGroupPublic == null) {
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "secSysGroupPublic");
+			}
+			secSysGroupPublicID = secSysGroupPublic.getRequiredSecSysGrpId();
+
 			secSysGroupSysClusAdmin = ($SecSchemaName$JpaSecSysGrp)(secsysgrpService.findByUNameIdx( "sysclusteradmin"));
 			if (secSysGroupSysClusAdmin == null) {
 				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "secSysGroupSysClusAdmin");
@@ -1055,6 +1089,11 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secSysGroupSysAdminMembSysadmin = ($SecSchemaName$JpaSecSysGrpMemb)(secsysgrpmembService.find(secSysGroupSysAdminID, sysAdminUser.getRequiredLoginId()));
 			if (secSysGroupSysAdminMembSysadmin == null) {
 				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "secSysGroupSysAdminMembSysadmin");
+			}
+			
+			secSysGroupPublicIncSysadmin = ($SecSchemaName$JpaSecSysGrpInc)(secsysgrpincService.find(secSysGroupPublicID, secSysGroupSysAdmin.getRequiredName()));
+			if (secSysGroupPublicIncSysadmin == null) {
+				throw new CFLibNullArgumentException(getClass(), "bootstrapSchema", 0, "secSysGroupPublicIncSysadmin");
 			}
 
 			secSysClusGroupSysAdmin = ($SecSchemaName$JpaSecClusGrp)(secclusgrpService.findByUNameIdx(systemClusterID, "sysclusteradmin"));
@@ -1092,6 +1131,9 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secSysGroupSysAdmin = null;
 			secSysGroupSysAdminID = null;
 			secSysGroupSysAdminMembSysadmin = null;
+			secSysGroupPublic = null;
+			secSysGroupPublicID = null;
+			secSysGroupPublicIncSysadmin = null;
 			secSysGroupSysClusAdmin = null;
 			secSysGroupSysClusAdminID = null;
 			secSysGroupSysTentAdmin = null;
@@ -1124,6 +1166,9 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		}
 		if (secSysGroupSysAdminID == null || secSysGroupSysAdminID.isNull()) {
 			secSysGroupSysAdminID = new CFLibDbKeyHash256(0);
+		}
+		if (secSysGroupPublicID == null || secSysGroupPublicID.isNull()) {
+			secSysGroupPublicID = new CFLibDbKeyHash256(0);
 		}
 		if (secSysGroupSysClusAdminID == null || secSysGroupSysClusAdminID.isNull()) {
 			secSysGroupSysClusAdminID = new CFLibDbKeyHash256(0);
@@ -1249,6 +1294,32 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secSysGroupSysAdminMembSysadmin = ($SecSchemaName$JpaSecSysGrpMemb)(secsysgrpmembService.create(secSysGroupSysAdminMembSysadmin));
 		}
 
+		if (secSysGroupPublic == null) {
+			secSysGroupPublic = new $SecSchemaName$JpaSecSysGrp();
+			secSysGroupPublic.setRequiredRevision(1);
+			secSysGroupPublic.setCreatedAt(now);
+			secSysGroupPublic.setCreatedByUserId(sysAdminUID);
+			secSysGroupPublic.setUpdatedAt(now);
+			secSysGroupPublic.setUpdatedByUserId(sysAdminUID);
+			secSysGroupPublic.setRequiredName("public");
+			secSysGroupPublic.setRequiredSecLevel(I$SecSchemaName$Schema.SecLevelEnum.System);
+			secSysGroupPublic.setRequiredSecSysGrpId(secSysGroupPublicID);
+			secSysGroupPublic = ($SecSchemaName$JpaSecSysGrp)(secsysgrpService.create(secSysGroupPublic));
+			secSysGroupPublicID = secSysGroupPublic.getRequiredSecSysGrpId();
+		}
+
+		if (secSysGroupPublicIncSysadmin == null) {
+			secSysGroupPublicIncSysadmin = new $SecSchemaName$JpaSecSysGrpInc();
+			secSysGroupPublicIncSysadmin.setRequiredContainerGroup(secSysGroupPublicID);
+			secSysGroupPublicIncSysadmin.setCreatedAt(now);
+			secSysGroupPublicIncSysadmin.setCreatedByUserId(sysAdminUID);
+			secSysGroupPublicIncSysadmin.setUpdatedAt(now);
+			secSysGroupPublicIncSysadmin.setUpdatedByUserId(sysAdminUID);
+			secSysGroupPublicIncSysadmin.setRequiredParentSubGroup(secSysGroupSysAdmin.getRequiredName());
+			secSysGroupPublicIncSysadmin.setRequiredRevision(1);
+			secSysGroupPublicIncSysadmin = ($SecSchemaName$JpaSecSysGrpInc)(secsysgrpincService.create(secSysGroupPublicIncSysadmin));
+		}
+		
 		if (secSysGroupSysClusAdmin == null) {
 			secSysGroupSysClusAdmin = new $SecSchemaName$JpaSecSysGrp();
 			secSysGroupSysClusAdmin.setRequiredRevision(1);
@@ -1364,6 +1435,11 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			throw new CFLibNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secSysGroupSysAdmin");
 		}
 
+		I$SecSchemaName$SecSysGrp secSysGroupPublic = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().readDerivedByUNameIdx( auth, "public");
+		if (secSysGroupPublic == null) {
+			throw new CFLibNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secSysGroupPublic");
+		}
+		
 		I$SecSchemaName$SecClusGrp secSysClusGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), "sysclusteradmin");
 		if (secSysClusGroupSysAdmin == null) {
 			throw new CFLibNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secSysClusGroupSysAdmin");
@@ -1383,7 +1459,7 @@ $iterate Tables( each maybeInvokeBootstrapTableSecurity empty empty )$
 
 	<GenRule GenDef="Table" Name="maybeInvokeBootstrapTableSecurity">$switch HasDefSchema yes empty default invokeBootstrapTableSecurity$</GenRule>
 	<GenRule GenDef="Table" Name="invokeBootstrapTableSecurity">
-		bootstrapTableSecurity(auth, now, "$TableName$", $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", secSysGroupSysAdmin, secSysClusGroupSysAdmin, secSysTentGroupSysAdmin);</GenRule>
+		bootstrapTableSecurity(auth, now, "$TableName$", $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", secSysGroupPublic, secSysGroupSysAdmin, secSysClusGroupSysAdmin, secSysTentGroupSysAdmin);</GenRule>
 
 	<GenRule GenDef="Object" Name="emitTrue">true</GenRule>
 	<GenRule GenDef="Object" Name="emitFalse">false</GenRule>
