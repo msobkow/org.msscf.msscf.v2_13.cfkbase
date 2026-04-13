@@ -75,7 +75,7 @@ $iterate SchemaRefs( each JpaTestSetApplicationContext empty empty )$$JpaTestSet
 $iterate SchemaRefs( each JpaTestWireJpaHooksSchema empty empty )$$JpaTestWireJpaHooksSchema$
 
 $iterate SchemaRefs( each JpaTestWireTableTableInstances empty empty )$$JpaTestWireTableTableInstances$
-$iterate SchemaRefs( each JpaTestBootstrapSchema empty empty )$$JpaTestBootstrapSchema$
+$JpaTestBootstrapSchema$
 $iterate SchemaRefs( each execJpaTestTestRunner empty empty )$$execJpaTestTestRunner$
         System.err.println("$SchemaName$JpaTest StartupListener tests complete.");
     }
@@ -97,9 +97,8 @@ $iterate SchemaRefs( each execJpaTestTestRunner empty empty )$$execJpaTestTestRu
 	<GenRule GenDef="SchemaDef" Name="JpaTestSetApplicationContext">
 		I$SchemaName$Schema.getBacking$SchemaName$().setApplicationContext(getApplicationContext());</GenRule>
 		
-	<GenRule GenDef="SchemaRef" Name="JpaTestBootstrapSchema">$reference RefSchema JpaTestBootstrapSchema$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="JpaTestBootstrapSchema">
-		I$SchemaName$Schema.getBacking$SchemaName$().bootstrapSchema();</GenRule>
+		I$SchemaName$Schema.getBacking$SchemaName$().bootstrapSchema(I$SchemaName$Schema.getConsolidatedTableInfo());</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="JpaTestWireTableTableInstances">$reference RefSchema JpaTestWireTableTableInstances$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="JpaTestWireTableTableInstances">

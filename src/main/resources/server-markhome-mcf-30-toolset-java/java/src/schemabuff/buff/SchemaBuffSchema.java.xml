@@ -69,11 +69,24 @@ public class $SchemaName$BuffSchema
 {$iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate SchemaTables( each declSchemaBuffTableTableMember )$
 $iterate SchemaTables( each declSchemaBuffTableFactoryMember )$
-$implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXmlEncodeString$$implSchemaBuffBootstrap$}
+$implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaTablePermsAccessors$$implBuffSchemaXmlEncodeString$$iterate SchemaRefs( empty implSchemaBuffSecBootstrap first implSchemaBuffInvokeBootstrap each empty )$}
 </GenFile>
 
-<GenRule GenDef="SchemaDef" Name="implSchemaBuffBootstrap">
-	public void bootstrapSchema() {$iterate SchemaRefs( empty implSchemaBuffBootstrapSecurity each empty )$
+<GenRule GenDef="Object" Name="implSchemaBuffSecBootstrap">
+	public void bootstrapSchema($SecSchemaName$TableInfo tableInfo[]) {
+	}
+	
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableInfo tableInfo[]) {
+	}
+</GenRule>
+
+<GenRule GenDef="Object" Name="implSchemaBuffInvokeBootstrap">
+	public void bootstrapSchema($SecSchemaName$TableInfo tableInfo[]) {
+		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapSchema(tableInfo);
+	}
+	
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableInfo tableInfo[]) {
+		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapAllTablesSecurity(clusterId, tenantId, tableInfo);
 	}
 </GenRule>
 

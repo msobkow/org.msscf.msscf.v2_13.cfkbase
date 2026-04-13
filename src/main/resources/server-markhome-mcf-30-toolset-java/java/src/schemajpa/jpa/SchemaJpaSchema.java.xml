@@ -130,9 +130,24 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 	}
 </GenRule>
 
-<GenRule GenDef="SchemaDef" Name="implSchemaBootstrap">
-	public void bootstrapSchema() {
-		getSchemaService().bootstrapSchema();
+	<GenRule GenDef="SchemaDef" Name="implSchemaBootstrap">$iterate SchemaRefs( empty implSchemaSecBootstrap first implSchemaInvokeSecBootstrap each empty )$</GenRule>
+	<GenRule GenDef="Object" Name="implSchemaSecBootstrap">
+	public void bootstrapSchema($SecSchemaName$TableInfo tableInfo[]) {
+		getSchemaService().bootstrapSchema(tableInfo);
+	}
+
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableInfo tableInfo[]) {
+		getSchemaService().bootstrapAllTablesSecurity(clusterId, tenantId, tableInfo);
+	}
+</GenRule>
+
+	<GenRule GenDef="Object" Name="implSchemaInvokeSecBootstrap">
+	public void bootstrapSchema($SecSchemaName$TableInfo tableInfo[]) {
+		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapSchema(tableInfo);
+	}
+
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableInfo tableInfo[]) {
+		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapAllTablesSecurity(clusterId, tenantId, tableInfo);
 	}
 </GenRule>
 

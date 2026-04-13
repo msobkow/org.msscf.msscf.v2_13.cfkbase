@@ -69,8 +69,43 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 {
 	public static final String SCHEMA_NAME = "$SchemaName$";
 	public static final String DBSCHEMA_NAME = "$DbSchemaName$";$declApplicationContextAwareContext$
+	public static final $SecSchemaName$TableInfo TABLE_INFO[] = {$iterate DefSchemaTables( first declISchemaTableInfoEntry each declCommaISchemaTableInfoEntry )$};
+	public static final AtomicReference&lt;$SecSchemaName$TableInfo[]&gt; consolidatedTableInfo = new AtomicReference&lt;&gt;();
+	
+	public static $SecSchemaName$TableInfo[] getTableInfo() {
+		return TABLE_INFO;
+	}
+	
+	public static $SecSchemaName$TableInfo[] getConsolidatedTableInfo() {
+		if (consolidatedTableInfo.get() == null) {
+			ArrayList&lt;$SecSchemaName$TableInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefTableInfo )$
+			for( $SecSchemaName$TableInfo info: TABLE_INFO) {
+				lst.add(info);
+			}
+			lst.sort((o1, o2) -&gt; {
+				return o1.getTableName().compareTo(o2.getTableName());
+			});
+			$SecSchemaName$TableInfo arr[] = new $SecSchemaName$TableInfo[lst.size()];
+			int idx = 0;
+			for($SecSchemaName$TableInfo info: lst) {
+				arr[idx++] = info;
+			}
+			consolidatedTableInfo.compareAndSet(arr, null);
+		}
+		return(consolidatedTableInfo.get());
+	}
 $implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( empty declISchemaSecurityAttrs each empty )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$$declSchemaBootstrap$}
 </GenFile>
+
+	<GenRule GenDef="SchemaRef" Name="declISchemaAddRefTableInfo">$reference RefSchema declISchemaAddRefTableInfo$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declISchemaAddRefTableInfo">
+			for( $SecSchemaName$TableInfo info: I$SchemaName$Schema.getTableInfo()) {
+				lst.add(info);
+			}</GenRule>
+
+	<GenRule GenDef="Table" Name="declISchemaTableInfoEntry">new $SecSchemaName$TableInfo("$TableName$", $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$")</GenRule>
+	<GenRule GenDef="Table" Name="declCommaISchemaTableInfoEntry">,
+		$declISchemaTableInfoEntry$</GenRule>
 
 	<GenRule GenDef="Object" Name="importsForApplicationContextAware">
 import java.util.concurrent.atomic.*;
@@ -191,7 +226,8 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 </GenRule>
 
 <GenRule GenDef="SchemaDef" Name="declSchemaBootstrap">
-	public void bootstrapSchema();
+	public void bootstrapSchema($SecSchemaName$TableInfo tableInfo[]);
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableInfo tableInfo[]);
 </GenRule>
 
 <GenRule GenDef="Object" Name="declISchemaClassMapEntry">

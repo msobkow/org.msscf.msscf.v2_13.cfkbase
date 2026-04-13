@@ -68,16 +68,15 @@ public class $SchemaName$RamTestStartupListener {$iterate SchemaRefs( each autow
     public void onApplicationReady(ApplicationReadyEvent event) {
         System.err.println("$SchemaName$RamTest StartupListener tests beginning...");
 $iterate SchemaRefs( each RamTestWireTableTableInstances empty empty )$$RamTestWireTableTableInstances$
-$iterate SchemaRefs( each RamTestBootstrapSchema empty empty )$$RamTestBootstrapSchema$
+$RamTestBootstrapSchema$
 $iterate SchemaRefs( each execRamTestTestRunner empty empty )$$execRamTestTestRunner$
         System.err.println("$SchemaName$RamTest StartupListener tests complete.");
     }
 }
 </GenFile>
 
-	<GenRule GenDef="SchemaRef" Name="RamTestBootstrapSchema">$reference RefSchema RamTestBootstrapSchema$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="RamTestBootstrapSchema">
-		I$SchemaName$Schema.getBacking$SchemaName$().bootstrapSchema();</GenRule>
+		I$SchemaName$Schema.getBacking$SchemaName$().bootstrapSchema(I$SchemaName$Schema.getConsolidatedTableInfo());</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="RamTestWireTableTableInstances">$reference RefSchema RamTestWireTableTableInstances$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="RamTestWireTableTableInstances">

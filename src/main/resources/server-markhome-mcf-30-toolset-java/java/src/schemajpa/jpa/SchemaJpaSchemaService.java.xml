@@ -93,17 +93,17 @@ $JpaSchemaServiceBootstrap$$schematweak JpaSchemaServiceCustomServices$
 </GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="JpaSchemaServiceBootstrap">
-	public void bootstrapSchema() {$iterate SchemaRefs( each invokeJpaSchemaServiceBootstrapReferenced empty empty )$$iterate SchemaRefs( empty invokeJpaSchemaServiceBootstrapSecurity each empty )$
-		bootstrapAllTablesSecurity();
+	public void bootstrapSchema($SecSchemaName$TableInfo tableInfo[]) {$iterate SchemaRefs( empty invokeJpaSchemaServiceBootstrapSecurity first invokeJpaSchemaServiceSecBootstrapSecurity each empty )$
 	}
-$iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$implJpaSchemaServiceBootstrapAllTablesSecurity$$implJpaSchemaServiceBootstrapTableSecurity$
+$iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$iterate SchemaRefs( empty implJpaSchemaServiceBootstrapTableSecurity each empty )$$iterate SchemaRefs( empty implJpaSchemaServiceBootstrapAllTablesSecurity first implJpaSchemaServiceInvokeSuperAllTablesSecurity each empty )$
 </GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="invokeJpaSchemaServiceBootstrapReferenced">$reference RefSchema invokeJpaSchemaServiceBootstrapReferenced$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="invokeJpaSchemaServiceBootstrapReferenced">
-		I$SchemaName$Schema.getBacking$SchemaName$().bootstrapSchema();</GenRule>
+	<GenRule GenDef="SchemaRef" Name="invokeJpaSchemaServiceSecBootstrapSecurity">
+		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapSchema(tableInfo);</GenRule>
+
 	<GenRule GenDef="Object" Name="invokeJpaSchemaServiceBootstrapSecurity">
-		bootstrapSecurity();</GenRule>
+		bootstrapSecurity();
+		bootstrapAllTablesSecurity(tableInfo);</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapTableSecurity">
 	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
@@ -1405,15 +1405,25 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	}
 </GenRule>
 
+	<GenRule GenDef="SchemaRef" Name="implJpaSchemaServiceInvokeSuperAllTablesSecurity">
+	public void bootstrapAllTablesSecurity($SecSchemaName$TableInfo tableInfo[]) {
+		bootstrapAllTablesSecurity(I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), tableInfo);
+	}
+
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableInfo tableInfo[]) {
+		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapAllTablesSecurity(clusterId, tenantId, tableInfo);
+	}
+</GenRule>
+
 	<GenRule GenDef="Object" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">$popto SchemaDef implJpaSchemaServiceBootstrapAllTablesSecurity$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">
 	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
-	public void bootstrapAllTablesSecurity() {
-		bootstrapAllTablesSecurity(I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId());
+	public void bootstrapAllTablesSecurity($SecSchemaName$TableInfo tableInfo[]) {
+		bootstrapAllTablesSecurity(I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), tableInfo);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
-	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId) {
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableInfo tableInfo[]) {
 		LocalDateTime now = LocalDateTime.now();
 		I$SecSchemaName$SecSession bootstrapSession;
 		CFLibDbKeyHash256 bootstrapSessionID = new CFLibDbKeyHash256(0);
@@ -1457,7 +1467,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			throw new CFLibNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secTenant&lt;" + tenantId.toString() + "&gt;");
 		}
 	
-		bootstrapAllTablesSecurity(auth, sysAdminUID, bootstrapSession, secSysGroupSysAdmin, secSysGroupPublic, secCluster, secTenant);
+		bootstrapAllTablesSecurity(auth, sysAdminUID, bootstrapSession, secSysGroupSysAdmin, secSysGroupPublic, secCluster, secTenant, tableInfo);
 
 		if (bootstrapSession != null &amp;&amp; bootstrapSessionID != null &amp;&amp; !bootstrapSessionID.isNull() &amp;&amp; bootstrapSession.getOptionalFinish() == null) {
 			bootstrapSession.setOptionalFinish(LocalDateTime.now());
@@ -1472,7 +1482,8 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		I$SecSchemaName$SecSysGrp secSysGroupSysAdmin,
 		I$SecSchemaName$SecSysGrp secSysGroupPublic,
 		I$SecSchemaName$Cluster secCluster,
-		I$SecSchemaName$Tenant secTenant)
+		I$SecSchemaName$Tenant secTenant,
+		$SecSchemaName$TableInfo tableInfo[])
 	{
 		LocalDateTime now = LocalDateTime.now();
 
@@ -1623,31 +1634,16 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secTentGroupSysAdminIncClusadmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrpInc().createSecTentGrpInc(auth, secTentGroupSysAdminIncClusadmin);
 		}
 	
-		bootstrapAllTablesSecurity(auth, bootstrapSession, sysAdminUID, secSysGroupSysAdmin, secSysGroupPublic, secClusGroupSysAdmin, secTentGroupSysAdmin);
+		for( $SecSchemaName$TableInfo info: tableInfo) {
+			bootstrapTableSecurity(auth, LocalDateTime.now(), info.getTableName(), info.hasHistory(), info.isMutable(), info.getScope(), secSysGroupPublic, secSysGroupSysAdmin, secClusGroupSysAdmin, secTentGroupSysAdmin);
+		}
 
 		if (bootstrapSession != null &amp;&amp; bootstrapSessionID != null &amp;&amp; !bootstrapSessionID.isNull() &amp;&amp; bootstrapSession.getOptionalFinish() == null) {
 			bootstrapSession.setOptionalFinish(LocalDateTime.now());
 			bootstrapSession = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSession().updateSecSession(auth, bootstrapSession);
 		}
 	}
-
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
-	public void bootstrapAllTablesSecurity(I$SecSchemaName$Authorization auth,
-		I$SecSchemaName$SecSession bootstrapSession,
-		CFLibDbKeyHash256 sysAdminUID,
-		I$SecSchemaName$SecSysGrp secSysGroupSysAdmin,
-		I$SecSchemaName$SecSysGrp secSysGroupPublic,
-		I$SecSchemaName$SecClusGrp secSysClusGroupSysAdmin,
-		I$SecSchemaName$SecTentGrp secSysTentGroupSysAdmin)
-	{
-		CFLibDbKeyHash256 bootstrapSessionID = bootstrapSession.getRequiredSecSessionId();
-$iterate Tables( each maybeInvokeBootstrapTableSecurity empty empty )$
-	}
 </GenRule>
-
-	<GenRule GenDef="Table" Name="maybeInvokeBootstrapTableSecurity">$switch HasDefSchema yes empty default invokeBootstrapTableSecurity$</GenRule>
-	<GenRule GenDef="Table" Name="invokeBootstrapTableSecurity">
-		bootstrapTableSecurity(auth, LocalDateTime.now(), "$TableName$", $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", secSysGroupPublic, secSysGroupSysAdmin, secSysClusGroupSysAdmin, secSysTentGroupSysAdmin);</GenRule>
 
 	<GenRule GenDef="Object" Name="emitTrue">true</GenRule>
 	<GenRule GenDef="Object" Name="emitFalse">false</GenRule>
