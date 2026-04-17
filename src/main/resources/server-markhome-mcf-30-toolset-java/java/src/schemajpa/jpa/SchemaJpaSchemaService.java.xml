@@ -106,7 +106,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		bootstrapAllTablesSecurity(tableInfo);</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapTableSecurity">
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecSchemaDbName$TransactionManager")
 	public void bootstrapTableSecurity(I$SecSchemaName$Authorization auth,
 		LocalDateTime now,
 		String tableName,
@@ -588,6 +588,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				csecGroupCreate.setUpdatedByUserId(auth.getSecUserId());
 				csecGroupCreate.setRequiredName(createPermName);
 				csecGroupCreate.setRequiredSecClusGrpId(csecGroupCreateID);
+				csecGroupCreate.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 				csecGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupCreate);
 				csecGroupCreateID = csecGroupCreate.getRequiredSecClusGrpId();
 			}
@@ -613,6 +614,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				csecGroupRead.setUpdatedByUserId(auth.getSecUserId());
 				csecGroupRead.setRequiredName(readPermName);
 				csecGroupRead.setRequiredSecClusGrpId(csecGroupReadID);
+				csecGroupRead.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 				csecGroupRead = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupRead);
 				csecGroupReadID = csecGroupRead.getRequiredSecClusGrpId();
 			}
@@ -638,6 +640,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				csecGroupUpdate.setUpdatedByUserId(auth.getSecUserId());
 				csecGroupUpdate.setRequiredName(updatePermName);
 				csecGroupUpdate.setRequiredSecClusGrpId(csecGroupUpdateID);
+				csecGroupUpdate.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 				csecGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupUpdate);
 				csecGroupUpdateID = csecGroupUpdate.getRequiredSecClusGrpId();
 			}
@@ -663,6 +666,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				csecGroupDelete.setUpdatedByUserId(auth.getSecUserId());
 				csecGroupDelete.setRequiredName(deletePermName);
 				csecGroupDelete.setRequiredSecClusGrpId(csecGroupDeleteID);
+				csecGroupDelete.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 				csecGroupDelete = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupDelete);
 				csecGroupDeleteID = csecGroupDelete.getRequiredSecClusGrpId();
 			}
@@ -689,6 +693,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 					csecGroupRestore.setUpdatedByUserId(auth.getSecUserId());
 					csecGroupRestore.setRequiredName(restorePermName);
 					csecGroupRestore.setRequiredSecClusGrpId(csecGroupRestoreID);
+					csecGroupRestore.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 					csecGroupRestore = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupRestore);
 					csecGroupRestoreID = csecGroupRestore.getRequiredSecClusGrpId();
 				}
@@ -716,6 +721,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 					csecGroupMutate.setUpdatedByUserId(auth.getSecUserId());
 					csecGroupMutate.setRequiredName(mutatePermName);
 					csecGroupMutate.setRequiredSecClusGrpId(csecGroupMutateID);
+					csecGroupMutate.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 					csecGroupMutate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupMutate);
 					csecGroupMutateID = csecGroupMutate.getRequiredSecClusGrpId();
 				}
@@ -733,7 +739,8 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				}
 			}
 		}
-		else if (level == I$SecSchemaName$Schema.SecLevelEnum.Tenant ) {
+
+		if (level == I$SecSchemaName$Schema.SecLevelEnum.Tenant ) {
 			tsecGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysTenantId(), createPermName);
 			if (tsecGroupCreate != null) {
 				tsecGroupCreateID = tsecGroupCreate.getRequiredSecTentGrpId();
@@ -840,6 +847,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				tsecGroupCreate.setUpdatedByUserId(auth.getSecUserId());
 				tsecGroupCreate.setRequiredName(createPermName);
 				tsecGroupCreate.setRequiredSecTentGrpId(tsecGroupCreateID);
+				tsecGroupCreate.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 				tsecGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupCreate);
 				tsecGroupCreateID = tsecGroupCreate.getRequiredSecTentGrpId();
 			}
@@ -865,6 +873,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				tsecGroupRead.setUpdatedByUserId(auth.getSecUserId());
 				tsecGroupRead.setRequiredName(readPermName);
 				tsecGroupRead.setRequiredSecTentGrpId(tsecGroupReadID);
+				tsecGroupRead.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 				tsecGroupRead = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupRead);
 				tsecGroupReadID = tsecGroupRead.getRequiredSecTentGrpId();
 			}
@@ -890,6 +899,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				tsecGroupUpdate.setUpdatedByUserId(auth.getSecUserId());
 				tsecGroupUpdate.setRequiredName(updatePermName);
 				tsecGroupUpdate.setRequiredSecTentGrpId(tsecGroupUpdateID);
+				tsecGroupUpdate.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 				tsecGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupUpdate);
 				tsecGroupUpdateID = tsecGroupUpdate.getRequiredSecTentGrpId();
 			}
@@ -915,6 +925,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				tsecGroupDelete.setUpdatedByUserId(auth.getSecUserId());
 				tsecGroupDelete.setRequiredName(deletePermName);
 				tsecGroupDelete.setRequiredSecTentGrpId(tsecGroupDeleteID);
+				tsecGroupDelete.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 				tsecGroupDelete = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupDelete);
 				tsecGroupDeleteID = tsecGroupDelete.getRequiredSecTentGrpId();
 			}
@@ -941,6 +952,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 					tsecGroupRestore.setUpdatedByUserId(auth.getSecUserId());
 					tsecGroupRestore.setRequiredName(restorePermName);
 					tsecGroupRestore.setRequiredSecTentGrpId(tsecGroupRestoreID);
+					tsecGroupRestore.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 					tsecGroupRestore = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupRestore);
 					tsecGroupRestoreID = tsecGroupRestore.getRequiredSecTentGrpId();
 				}
@@ -968,6 +980,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 					tsecGroupMutate.setUpdatedByUserId(auth.getSecUserId());
 					tsecGroupMutate.setRequiredName(mutatePermName);
 					tsecGroupMutate.setRequiredSecTentGrpId(tsecGroupMutateID);
+					tsecGroupMutate.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 					tsecGroupMutate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupMutate);
 					tsecGroupMutateID = tsecGroupMutate.getRequiredSecTentGrpId();
 				}
@@ -990,7 +1003,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 	<GenRule GenDef="Object" Name="implJpaSchemaServiceBootstrapSecurity">$popto SchemaDef implJpaSchemaServiceBootstrapSecurity$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapSecurity">
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecSchemaDbName$TransactionManager")
 	public void bootstrapSecurity() {
 		$SecSchemaName$JpaSysCluster sysCluster;
 		CFLibDbKeyHash256 systemClusterID;
@@ -1227,6 +1240,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			sysAdminUser.setRequiredSecUserId(sysAdminUID);
 			sysAdminUser.setRequiredLoginId("sysadmin");
 			sysAdminUser.setRequiredEMailAddress("sysadmin@" + fqdn);
+			sysAdminUser.setRequiredAccountStatus(I$SecSchemaName$Schema.SecAccountStatusEnum.ResettingPassword);
 			sysAdminUser = secuserService.create(sysAdminUser);
 			sysAdminUID = sysAdminUser.getPKey();
 		}
@@ -1417,18 +1431,19 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 	<GenRule GenDef="Object" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">$popto SchemaDef implJpaSchemaServiceBootstrapAllTablesSecurity$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecSchemaDbName$TransactionManager")
 	public void bootstrapAllTablesSecurity($SecSchemaName$TableInfo tableInfo[]) {
 		bootstrapAllTablesSecurity(I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), tableInfo);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecSchemaDbName$TransactionManager")
 	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableInfo tableInfo[]) {
 		LocalDateTime now = LocalDateTime.now();
 		I$SecSchemaName$SecSession bootstrapSession;
 		CFLibDbKeyHash256 bootstrapSessionID = new CFLibDbKeyHash256(0);
 
 		I$SecSchemaName$Authorization auth = new $SecSchemaName$Authorization();
+		auth.setSecUserId(I$SecSchemaName$Schema.getSysAdminId());
 		auth.setAuthUuid6(CFLibUuid6.generateUuid6());
 		auth.setSecClusterId(clusterId);
 		auth.setSecTenantId(tenantId);
@@ -1475,7 +1490,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		}
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecSchemaDbName$TransactionManager")
 	public void bootstrapAllTablesSecurity(I$SecSchemaName$Authorization auth,
 		CFLibDbKeyHash256 sysAdminUID,
 		I$SecSchemaName$SecSession bootstrapSession,
