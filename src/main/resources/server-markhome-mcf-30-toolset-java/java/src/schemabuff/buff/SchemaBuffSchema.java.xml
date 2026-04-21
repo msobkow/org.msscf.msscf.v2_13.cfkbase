@@ -90,6 +90,45 @@ $implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaTa
 	}
 </GenRule>
 
+	<GenRule GenDef="Object" Name="implBuffSchemaSecurityMethods">$popto SchemaDef implBuffSchemaSecurityMethods$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="implBuffSchemaSecurityMethods">
+	@Override
+	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 tenantId, String permissionName) {
+		// Dummied out for now
+		return( true );
+	}
+
+	@Override
+	public boolean isMemberOfClusterGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, String permissionName) {
+		// Dummied out for now
+		return( true );
+	}
+
+	@Override
+	public boolean isMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName) {
+		// Dummied out for now
+		return( true );
+	}
+</GenRule>
+
+	<GenRule GenDef="Object" Name="implBuffSchemaSubclassSecurityMethods">$popto SchemaDef implBuffSchemaSubclassSecurityMethods$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="implBuffSchemaSubclassSecurityMethods">
+	@Override
+	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 tenantId, String permissionName) {
+		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(userId, tenantId, permissionName);
+	}
+
+	@Override
+	public boolean isMemberOfClusterGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, String permissionName) {
+		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(userId, clusterId, permissionName);
+	}
+
+	@Override
+	public boolean isMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName) {
+		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfSystemGroup(userId, permissionName);
+	}
+</GenRule>
+
 	<GenRule GenDef="Object" Name="implSchemaBuffBootstrapSecurity">$poptop SchemaDef implSchemaBuffBootstrapSecurity$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implSchemaBuffBootstrapSecurity">
 	/**
@@ -306,7 +345,7 @@ $iterate SchemaRefs( each implBuffSchemaGetSchemaNameSchema empty empty )$$implB
 	protected static I$SecSchemaName$TablePerms tablePerms;</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implBuffSchemaMoreMethods"
-		>$implBuffSchemaSchemaConstructor$$iterate SchemaRefs( first implBuffSchemaNewSchema each empty empty implBuffSchemaNewSchema )$$iterate Id16Generators( each implBuffNextIdGen empty empty)$$iterate Id32Generators( each implBuffNextIdGen empty empty)$$iterate Id64Generators( each implBuffNextIdGen empty empty)$$iterate DbKeyHash128Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash160Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash224Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash256Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash384Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash512Generators( each implBuffNextIdGen empty empty )$$iterate UuidGenerators( each implBuffNextIdGen empty empty )$$iterate Uuid6Generators( each implBuffNextIdGen empty empty )$$iterate SchemaTables(
+		>$implBuffSchemaSchemaConstructor$$iterate SchemaRefs( first implBuffSchemaNewSchema each empty empty implBuffSchemaNewSchema )$$iterate SchemaRefs( empty implBuffSchemaSecurityMethods first implBuffSchemaSubclassSecurityMethods each empty )$$iterate Id16Generators( each implBuffNextIdGen empty empty)$$iterate Id32Generators( each implBuffNextIdGen empty empty)$$iterate Id64Generators( each implBuffNextIdGen empty empty)$$iterate DbKeyHash128Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash160Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash224Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash256Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash384Generators( each implBuffNextIdGen empty empty )$$iterate DbKeyHash512Generators( each implBuffNextIdGen empty empty )$$iterate UuidGenerators( each implBuffNextIdGen empty empty )$$iterate Uuid6Generators( each implBuffNextIdGen empty empty )$$iterate SchemaTables(
 			each implTableMethods empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="declSchemaBuffTableTableMember">

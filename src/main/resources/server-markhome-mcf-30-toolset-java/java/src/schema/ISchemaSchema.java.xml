@@ -78,7 +78,7 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 	
 	public static $SecSchemaName$TableInfo[] getConsolidatedTableInfo() {
 		if (consolidatedTableInfo.get() == null) {
-			ArrayList&lt;$SecSchemaName$TableInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefTableInfo )$
+			ArrayList&lt;$SecSchemaName$TableInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefTableInfo empty empty)$
 			for( $SecSchemaName$TableInfo info: TABLE_INFO) {
 				lst.add(info);
 			}
@@ -94,8 +94,15 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 		}
 		return(consolidatedTableInfo.get());
 	}
-$implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( empty declISchemaSecurityAttrs each empty )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$$declSchemaBootstrap$}
+$implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( empty declISchemaSecurityAttrs each empty )$$iterate SchemaRefs( each empty empty declISchemaSecurityMethods )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$$declSchemaBootstrap$}
 </GenFile>
+
+	<GenRule GenDef="Object" Name="declISchemaSecurityMethods">$popto SchemaDef declISchemaSecurityMethods$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declISchemaSecurityMethods">
+	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 tenantId, String permissionName);
+	public boolean isMemberOfClusterGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, String permissionName);
+	public boolean isMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName);
+</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="declISchemaAddRefTableInfo">$reference RefSchema declISchemaAddRefTableInfo$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declISchemaAddRefTableInfo">
