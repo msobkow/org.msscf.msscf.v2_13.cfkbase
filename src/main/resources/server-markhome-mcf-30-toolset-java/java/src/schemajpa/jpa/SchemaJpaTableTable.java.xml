@@ -203,7 +203,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			ClusterGroup implJpaTableClusterCreateSecurityChecks
 			Cluster implJpaTableClusterCreateSecurityChecks
 			System implJpaTableSystemCreateSecurityChecks
-			Global implJpaTableGlobalCreateSecurityChecks
+			Global implJpaTableSystemCreateSecurityChecks
 			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$
 		if (!permissionGranted) {
 			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, "create$poptop Table lower TableName$", authUserId.toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
@@ -525,19 +525,18 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			}
 		}</GenRule>
 
-		<GenRule GenDef="Table" Name="implJpaTableFilterAndReturnRetlist">$switch SecScope
+		<GenRule GenDef="Table" Name="implJpaTableFilterRetlist">$switch SecScope
 			TenantGroup implJpaTableTenantGroupFilterRetlist
 			Tenant implJpaTableTenantFilterRetlist
 			ClusterGroup implJpaTableClusterGroupFilterRetlist
 			Cluster implJpaTableClusterFilterRetlist
 			System empty
 			Global empty
-			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$$poptop Table tabletweak CafePostReadTableSecurityFilterRetlist$$poptop SchemaDef schematweak CafePostReadSchemaSecurityFilterRetlist$
-		return( retlist );</GenRule>
+			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$$poptop Table tabletweak CafePostReadTableSecurityFilterRetlist$$poptop SchemaDef schematweak CafePostReadSchemaSecurityFilterRetlist$</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantGroupFilterRetlist">$implJpaTableTenantFilterRetlist$
 		if(retlist != null) {
-			ArrayList&lt;var&gt; finallist = new ArrayList&lt;&gt;(retlist.getClass());
+			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {
 				// Retrieve the TenantId and DataGroupName from retval and check ICFSec.backingSchema().isMemberOfTenantGroup(auth,TenantId,DataGroupName), add retval to final list if a member
 				CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
@@ -551,7 +550,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantFilterRetlist">
 		if(retlist != null) {
-			ArrayList&lt;var&gt; finallist = new ArrayList&lt;&gt;(retlist.getClass());
+			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {
 				if(retval != null) {
 					CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
@@ -565,7 +564,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterGroupFilterRetlist">$implJpaTableClusterFilterRetlist$
 		if(retlist != null) {
-			ArrayList&lt;var&gt; finallist = new ArrayList&lt;&gt;(retlist.getClass());
+			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {
 				if(retval != null) {
 					// Retrieve the ClusterId and DataGroupName from retval and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,DataGroupName), clear retval to null if not a member
@@ -581,7 +580,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterFilterRetlist">
 		if(retlist != null) {
-			ArrayList&lt;var&gt; finallist = new ArrayList&lt;&gt;(retlist.getClass());
+			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {
 				if(retval != null) {
 					// Retrieve the ClusterId for the record and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,"read$poptop Table lower TableName$"), clear retval to null if not a member
@@ -642,19 +641,18 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			}
 		}</GenRule>
 
-		<GenRule GenDef="Index" Name="implJpaTableFilterAndReturnRetlist">$switch SecScope
+		<GenRule GenDef="Index" Name="implJpaTableFilterRetlist">$switch SecScope
 			TenantGroup implJpaTableTenantGroupFilterRetlist
 			Tenant implJpaTableTenantFilterRetlist
 			ClusterGroup implJpaTableClusterGroupFilterRetlist
 			Cluster implJpaTableClusterFilterRetlist
 			System empty
 			Global empty
-			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$$poptop Table tabletweak CafePostReadTableSecurityFilterRetlist$$poptop SchemaDef schematweak CafePostReadSchemaSecurityFilterRetlist$
-		return( retlist );</GenRule>
+			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$$poptop Table tabletweak CafePostReadTableSecurityFilterRetlist$$poptop SchemaDef schematweak CafePostReadSchemaSecurityFilterRetlist$</GenRule>
 
 		<GenRule GenDef="Index" Name="implJpaTableTenantGroupFilterRetlist">$implJpaTableTenantFilterRetlist$
 		if(retlist != null) {
-			ArrayList&lt;var&gt; finallist = new ArrayList&lt;&gt;(retlist.getClass());
+			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {
 				// Retrieve the TenantId and DataGroupName from retval and check ICFSec.backingSchema().isMemberOfTenantGroup(auth,TenantId,DataGroupName), add retval to final list if a member
 				CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
@@ -668,7 +666,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 
 		<GenRule GenDef="Index" Name="implJpaTableTenantFilterRetlist">
 		if(retlist != null) {
-			ArrayList&lt;var&gt; finallist = new ArrayList&lt;&gt;(retlist.getClass());
+			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {
 				if(retval != null) {
 					CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
@@ -682,7 +680,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 
 		<GenRule GenDef="Index" Name="implJpaTableClusterGroupFilterRetlist">$implJpaTableClusterFilterRetlist$
 		if(retlist != null) {
-			ArrayList&lt;var&gt; finallist = new ArrayList&lt;&gt;(retlist.getClass());
+			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {
 				if(retval != null) {
 					// Retrieve the ClusterId and DataGroupName from retval and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,DataGroupName), clear retval to null if not a member
@@ -698,7 +696,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 
 		<GenRule GenDef="Index" Name="implJpaTableClusterFilterRetlist">
 		if(retlist != null) {
-			ArrayList&lt;var&gt; finallist = new ArrayList&lt;&gt;(retlist.getClass());
+			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {
 				if(retval != null) {
 					// Retrieve the ClusterId for the record and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,"read$poptop Table lower TableName$"), clear retval to null if not a member
@@ -710,9 +708,6 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			}
 			retlist = finallist;
 		}</GenRule>
-
-
-
 
 	<GenRule GenDef="Table" Name="implJpaReadTableDerivedByPKeyArgs">
 	/**
@@ -761,10 +756,11 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	 */
 	@Override
 	public I$DefSchemaName$$TableName$[] readAllDerived( I$SecSchemaName$Authorization Authorization ) {
-		List&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; results = schema.getJpaHooksSchema().get$poptop Table TableName$Service().findAll();
-		I$DefSchemaName$$poptop Table TableName$[] retset = new I$DefSchemaName$$poptop Table TableName$[results.size()];
+		final String S_ProcName = "readAllDerived";$implJpaTableReadSecurityChecks$
+		List&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; retlist = schema.getJpaHooksSchema().get$poptop Table TableName$Service().findAll();$implJpaTableFilterRetlist$
+		I$DefSchemaName$$poptop Table TableName$[] retset = new I$DefSchemaName$$poptop Table TableName$[retlist.size()];
 		int idx = 0;
-		for ($DefSchemaName$Jpa$poptop Table TableName$ cur: results) {
+		for ($DefSchemaName$Jpa$poptop Table TableName$ cur: retlist) {
 			retset[idx++] = cur;
 		}
 		return( retset );
@@ -805,7 +801,8 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	@Override
 	public I$poptop Table DefSchemaName$$poptop Table TableName$ readDerivedBy$implJpaReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
-		return( schema.getJpaHooksSchema().get$poptop Table TableName$Service().$switch IsPrimaryIndex yes implReadTableDerivedByUniquePKeyIndex default implReadTableDerivedByUniqueOtherIndex$($iterate Columns( first implJpaPassColumnArg each implJpaCommaPassColumnArg )$) );
+		final String S_ProcName = "readDerivedBy$implJpaReadTableSuffix$";$implJpaTableReadSecurityChecks$
+		I$poptop Table DefSchemaName$$poptop Table TableName$ retval = schema.getJpaHooksSchema().get$poptop Table TableName$Service().$switch IsPrimaryIndex yes implReadTableDerivedByUniquePKeyIndex default implReadTableDerivedByUniqueOtherIndex$($iterate Columns( first implJpaPassColumnArg each implJpaCommaPassColumnArg )$);$implJpaTableFilterAndReturnRetval$
 	}
 </GenRule>
 
@@ -823,10 +820,11 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	@Override
 	public I$DefSchemaName$$poptop Table TableName$[] readDerivedBy$implJpaReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
-		List&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; results = schema.getJpaHooksSchema().get$poptop Table TableName$Service().findBy$implJpaReadTableSuffix$($iterate Columns( first implJpaPassColumnArg each implJpaCommaPassColumnArg )$);
-		I$DefSchemaName$$poptop Table TableName$[] retset = new I$DefSchemaName$$poptop Table TableName$[results.size()];
+		final String S_ProcName = "readDerivedBy$implJpaReadTableSuffix$";$implJpaTableReadSecurityChecks$
+		List&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; retlist = schema.getJpaHooksSchema().get$poptop Table TableName$Service().findBy$implJpaReadTableSuffix$($iterate Columns( first implJpaPassColumnArg each implJpaCommaPassColumnArg )$);$implJpaTableFilterRetlist$
+		I$DefSchemaName$$poptop Table TableName$[] retset = new I$DefSchemaName$$poptop Table TableName$[retlist.size()];
 		int idx = 0;
-		for ($DefSchemaName$Jpa$poptop Table TableName$ cur: results) {
+		for ($DefSchemaName$Jpa$poptop Table TableName$ cur: retlist) {
 			retset[idx++] = cur;
 		}
 		return( retset );
@@ -850,6 +848,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	public I$DefSchemaName$$TableName$ readRec( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey )
 	{
+		final String S_ProcName = "readRec";$implJpaTableReadSecurityChecks$
 		throw new CFLibNotImplementedYetException(getClass(), "readRec");
 	}
 </GenRule>
@@ -870,6 +869,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	@Override
 	public I$DefSchemaName$$TableName$ readRec( I$SecSchemaName$Authorization Authorization$reference PrimaryKeyIndex iterate Columns( each implJpaCommaColumnArg )$ )
 	{
+		final String S_ProcName = "readRec";$implJpaTableReadSecurityChecks$
 		throw new CFLibNotImplementedYetException(getClass(), "readRec-args");
 	}
 </GenRule>
@@ -891,6 +891,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	public I$DefSchemaName$$TableName$ lockRec( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey )
 	{
+		final String S_ProcName = "lockRec";$implJpaTableUpdateSecurityChecks$
 		throw new CFLibNotImplementedYetException(getClass(), "lockRec");
 	}
 </GenRule>
@@ -905,6 +906,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	 */
 	@Override
 	public I$DefSchemaName$$TableName$[] readAllRec( I$SecSchemaName$Authorization Authorization ) {
+		final String S_ProcName = "readAllRec";$implJpaTableReadSecurityChecks$
 		throw new CFLibNotImplementedYetException(getClass(), "readAllRec");
 	}
 
@@ -957,6 +959,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	@Override
 	public I$DefSchemaName$$poptop Table TableName$ readRecBy$implJpaReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
+		final String S_ProcName = "readRecBy$implJpaReadTableSuffix$";$implJpaTableReadSecurityChecks$
 		throw new CFLibNotImplementedYetException(getClass(), "readRecBy$implJpaReadTableSuffix$");
 	}
 </GenRule>
@@ -974,6 +977,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	@Override
 	public I$DefSchemaName$$poptop Table TableName$[] readRecBy$implJpaReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
+		final String S_ProcName = "readRecBy$implJpaReadTableSuffix$";$implJpaTableReadSecurityChecks$
 		throw new CFLibNotImplementedYetException(getClass(), "readRecBy$implJpaReadTableSuffix$");
 	}
 </GenRule>
@@ -989,6 +993,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	@Override
 	public I$DefSchemaName$$TableName$[] pageAllRec( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaCommaOptPriorArg )$ )
 	{
+		final String S_ProcName = "pageAllRec";$implJpaTableReadSecurityChecks$
 		throw new CFLibNotImplementedYetException(getClass(), "pageAllRec");
 	}
 </GenRule>
@@ -1006,6 +1011,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	@Override
 	public I$DefSchemaName$$poptop Table TableName$[] pageRecBy$implJpaReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaCommaOptPriorArg )$ )
 	{
+		final String S_ProcName = "pageRecBy$implJpaReadTableSuffix$";$implJpaTableReadSecurityChecks$
 		throw new CFLibNotImplementedYetException(getClass(), "pageRecBy$implJpaReadTableSuffix$");
 	}
 </GenRule>
@@ -1020,6 +1026,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	public I$poptop Table DefSchemaName$$poptop Table TableName$ moveRecUp( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaCommaColumnArg )$,
 		int revision )
 	{
+		final String S_ProcName = "moveRecUp";$implJpaTableUpdateSecurityChecks$
 		throw new CFLibNotImplementedYetException(getClass(), "moveRecUp");
 	}
 </GenRule>
@@ -1034,6 +1041,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	public I$poptop Table DefSchemaName$$poptop Table TableName$ moveRecDown( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaCommaColumnArg )$,
 		int revision )
 	{
+		final String S_ProcName = "moveRecDown";$implJpaTableUpdateSecurityChecks$
 		throw new CFLibNotImplementedYetException(getClass(), "moveRecDown");
 	}
 </GenRule>
@@ -1091,13 +1099,13 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	public I$DefSchemaName$$TableName$ create$TableName$( I$SecSchemaName$Authorization Authorization,
 		I$DefSchemaName$$TableName$ rec )
 	{
+		final String S_ProcName = "create$TableName$";$implJpaTableCreateSecurityChecks$
 		if (rec == null) {
 			throw new CFLibNullArgumentException(getClass(), "create$TableName$", 1, "rec");
 		}
 		else if (rec instanceof $DefSchemaName$Jpa$TableName$) {
 			$DefSchemaName$Jpa$TableName$ jparec = ($DefSchemaName$Jpa$TableName$)rec;
-			$DefSchemaName$Jpa$TableName$ created = schema.getJpaHooksSchema().get$poptop Table TableName$Service().create(jparec);
-			return( created );
+			$DefSchemaName$Jpa$TableName$ retval = schema.getJpaHooksSchema().get$poptop Table TableName$Service().create(jparec);$implJpaTableFilterAndReturnRetval$
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "create$TableName$", "rec", rec, "$DefSchemaName$Jpa$TableName$");
@@ -1115,6 +1123,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	 */
 	@Override
 	public I$DefSchemaName$$TableName$[] readAll$TableName$( I$SecSchemaName$Authorization Authorization ) {
+		final String S_ProcName = "readAll$TableName$";$implJpaTableReadSecurityChecks$
 		throw new CFLibNotImplementedYetException(getClass(), "readAll$TableName$");
 	}
 
@@ -1133,13 +1142,13 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	public I$DefSchemaName$$TableName$ update$TableName$( I$SecSchemaName$Authorization Authorization,
 		I$DefSchemaName$$TableName$ rec )
 	{
+		final String S_ProcName = "update$TableName$";$implJpaTableUpdateSecurityChecks$
 		if (rec == null) {
 			throw new CFLibNullArgumentException(getClass(), "update$TableName$", 1, "rec");
 		}
 		else if (rec instanceof $DefSchemaName$Jpa$TableName$) {
 			$DefSchemaName$Jpa$TableName$ jparec = ($DefSchemaName$Jpa$TableName$)rec;
-			$DefSchemaName$Jpa$TableName$ updated = schema.getJpaHooksSchema().get$poptop Table TableName$Service().update(jparec);
-			return( updated );
+			$DefSchemaName$Jpa$TableName$ retval = schema.getJpaHooksSchema().get$poptop Table TableName$Service().update(jparec);$implJpaTableFilterAndReturnRetval$
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "update$TableName$", "rec", rec, "$DefSchemaName$Jpa$TableName$");
@@ -1159,6 +1168,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	public void delete$TableName$( I$SecSchemaName$Authorization Authorization,
 		I$DefSchemaName$$TableName$ rec )
 	{
+		final String S_ProcName = "delete$TableName$";$implJpaTableDeleteSecurityChecks$
 		if (rec == null) {
 			return;
 		}
@@ -1199,6 +1209,7 @@ $implJpaDeleteTableByInheritedIndexes$
 	@Override
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
+		final String S_ProcName = "delete$poptop Table TableName$By$Suffix$";$implJpaTableDeleteSecurityChecks$
 		schema.getJpaHooksSchema().get$poptop Table TableName$Service().deleteBy$Suffix$($iterate Columns( first implJpaPassColumnArg each implJpaCommaPassColumnArg )$);
 	}
 
@@ -1214,6 +1225,7 @@ $implJpaDeleteTableByInheritedIndexes$
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization,
 		I$DefSchemaName$$TableName$By$Suffix$Key argKey )
 	{
+		final String S_ProcName = "delete$poptop Table TableName$By$Suffix$";$implJpaTableDeleteSecurityChecks$
 		schema.getJpaHooksSchema().get$poptop Table TableName$Service().deleteBy$Suffix$($iterate Columns( first implJpaPassKeyColumnArg each implJpaCommaPassKeyColumnArg )$);
 	}
 </GenRule>
@@ -1235,6 +1247,7 @@ $implJpaDeleteTableByInheritedIndexes$
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ argKey )
 	{
+		final String S_ProcName = "delete$poptop Table TableName$By$Suffix$";$implJpaTableDeleteSecurityChecks$
 		schema.getJpaHooksSchema().get$poptop Table TableName$Service().deleteBy$Suffix$($switch IsPrimaryIndexKeyAtomic yes implJpaDeleteTableByDirectPrimaryIndex default implJpaDeleteTableByDerefPrimaryIndex$);
 	}
 </GenRule>
@@ -1251,6 +1264,7 @@ $implJpaDeleteTableByInheritedIndexes$
 	@Override
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
+		final String S_ProcName = "delete$poptop Table TableName$By$Suffix$";$implJpaTableDeleteSecurityChecks$
 		schema.getJpaHooksSchema().get$poptop Table TableName$Service().deleteBy$Suffix$($iterate Columns( first implJpaPassColumnArg each implJpaCommaPassColumnArg )$);
 	}
 </GenRule>
