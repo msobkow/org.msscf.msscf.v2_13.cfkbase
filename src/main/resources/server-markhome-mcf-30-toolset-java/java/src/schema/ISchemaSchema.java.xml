@@ -152,7 +152,7 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 	<GenRule GenDef="Object" Name="declISchemaSecurityAttrs">
 	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysClusterId = new AtomicReference&lt;&gt;();
 	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysTenantId = new AtomicReference&lt;&gt;();
-	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysAdminId = new AtomicReference&lt;&gt;();
+	static final AtomicReference&lt;CFLibDbKeyHash256&gt; systemId = new AtomicReference&lt;&gt;();
 
 	public static String getPasswordHash(String pw) {
 		if (pw == null || pw.isEmpty()) {
@@ -211,23 +211,23 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 		}
 	}
 
-	public static CFLibDbKeyHash256 getSysAdminId() {
-		return (sysAdminId.get());
+	public static CFLibDbKeyHash256 getSystemId() {
+		return (systemId.get());
 	}
 
-	public static void setSysAdminId(CFLibDbKeyHash256 argAdminId) {
-		if (argAdminId == null || argAdminId.isNull()) {
-			throw new CFLibNullArgumentException(I$SchemaName$Schema.class, "setSysAdminId", 1, "argAdminId");
+	public static void setSystemId(CFLibDbKeyHash256 argSystemId) {
+		if (argSystemId == null || argSystemId.isNull()) {
+			throw new CFLibNullArgumentException(I$SchemaName$Schema.class, "setSystemId", 1, "argSystemId");
 		}
-		CFLibDbKeyHash256 oldid = sysAdminId.get();
+		CFLibDbKeyHash256 oldid = systemId.get();
 		if (oldid == null) {
-			sysAdminId.compareAndSet(null, argAdminId);
+			systemId.compareAndSet(null, argSystemId);
 		}
 		else if (oldid.isNull()) {
-			sysAdminId.compareAndSet(oldid, argAdminId);
+			systemId.compareAndSet(oldid, argSystemId);
 		}
 		else {
-			throw new CFLibInvalidArgumentException(I$SchemaName$Schema.class, "setSysAdminId", "sysAdminId has already been set", "sysAdminId has already been set");
+			throw new CFLibInvalidArgumentException(I$SchemaName$Schema.class, "setSystemId", "systemId has already been set", "systemId has already been set");
 		}
 	}
 </GenRule>
