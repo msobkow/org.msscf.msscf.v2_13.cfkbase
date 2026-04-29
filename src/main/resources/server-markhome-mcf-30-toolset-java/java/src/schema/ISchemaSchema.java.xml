@@ -99,9 +99,12 @@ $implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( ea
 
 	<GenRule GenDef="Object" Name="declISchemaSecurityMethods">$popto SchemaDef declISchemaSecurityMethods$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declISchemaSecurityMethods">
-	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 tenantId, String permissionName);
+	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName);
+	public boolean isMemberOfTenantGroup(String userLogin, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName);
 	public boolean isMemberOfClusterGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, String permissionName);
+	public boolean isMemberOfClusterGroup(String userLogin, CFLibDbKeyHash256 clusterId, String permissionName);
 	public boolean isMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName);
+	public boolean isMemberOfSystemGroup(String userLogin, String permissionName);
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="declISchemaAddRefTableInfo">$reference RefSchema declISchemaAddRefTableInfo$</GenRule>

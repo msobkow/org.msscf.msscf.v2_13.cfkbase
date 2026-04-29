@@ -84,7 +84,13 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 	<GenRule GenDef="Object" Name="implJpaSchemaSecurityMethods">$popto SchemaDef implJpaSchemaSecurityMethods$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaSecurityMethods">
 	@Override
-	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 tenantId, String permissionName) {
+	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
+		// Dummied out for now
+		return( true );
+	}
+
+	@Override
+	public boolean isMemberOfTenantGroup(String userLogin, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
 		// Dummied out for now
 		return( true );
 	}
@@ -96,7 +102,19 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 	}
 
 	@Override
+	public boolean isMemberOfClusterGroup(String userLogin, CFLibDbKeyHash256 clusterId, String permissionName) {
+		// Dummied out for now
+		return( true );
+	}
+
+	@Override
 	public boolean isMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName) {
+		// Dummied out for now
+		return( true );
+	}
+
+	@Override
+	public boolean isMemberOfSystemGroup(String userLogin, String permissionName) {
 		// Dummied out for now
 		return( true );
 	}
@@ -105,8 +123,13 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 	<GenRule GenDef="Object" Name="implJpaSchemaSubclassSecurityMethods">$popto SchemaDef implJpaSchemaSubclassSecurityMethods$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaSubclassSecurityMethods">
 	@Override
-	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 tenantId, String permissionName) {
-		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(userId, tenantId, permissionName);
+	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
+		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(userId, clusterId, tenantId, permissionName);
+	}
+
+	@Override
+	public boolean isMemberOfTenantGroup(String userLogin, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
+		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(userLogin, clusterId, tenantId, permissionName);
 	}
 
 	@Override
@@ -115,8 +138,18 @@ $implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXm
 	}
 
 	@Override
+	public boolean isMemberOfClusterGroup(String userLogin, CFLibDbKeyHash256 clusterId, String permissionName) {
+		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(userLogin, clusterId, permissionName);
+	}
+
+	@Override
 	public boolean isMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName) {
 		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfSystemGroup(userId, permissionName);
+	}
+
+	@Override
+	public boolean isMemberOfSystemGroup(String userLogin, String permissionName) {
+		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfSystemGroup(userLogin, permissionName);
 	}
 </GenRule>
 

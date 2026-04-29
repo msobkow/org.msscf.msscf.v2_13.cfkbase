@@ -93,7 +93,13 @@ $implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaTa
 	<GenRule GenDef="Object" Name="implBuffSchemaSecurityMethods">$popto SchemaDef implBuffSchemaSecurityMethods$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implBuffSchemaSecurityMethods">
 	@Override
-	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 tenantId, String permissionName) {
+	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
+		// Dummied out for now
+		return( true );
+	}
+
+	@Override
+	public boolean isMemberOfTenantGroup(String userLogin, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
 		// Dummied out for now
 		return( true );
 	}
@@ -105,7 +111,19 @@ $implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaTa
 	}
 
 	@Override
+	public boolean isMemberOfClusterGroup(String userLogin, CFLibDbKeyHash256 clusterId, String permissionName) {
+		// Dummied out for now
+		return( true );
+	}
+
+	@Override
 	public boolean isMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName) {
+		// Dummied out for now
+		return( true );
+	}
+
+	@Override
+	public boolean isMemberOfSystemGroup(String userLogin, String permissionName) {
 		// Dummied out for now
 		return( true );
 	}
@@ -114,8 +132,13 @@ $implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaTa
 	<GenRule GenDef="Object" Name="implBuffSchemaSubclassSecurityMethods">$popto SchemaDef implBuffSchemaSubclassSecurityMethods$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implBuffSchemaSubclassSecurityMethods">
 	@Override
-	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 tenantId, String permissionName) {
-		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(userId, tenantId, permissionName);
+	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
+		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(userId, clusterId, tenantId, permissionName);
+	}
+
+	@Override
+	public boolean isMemberOfTenantGroup(String userLogin, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
+		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(userLogin, clusterId, tenantId, permissionName);
 	}
 
 	@Override
@@ -124,8 +147,18 @@ $implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaTa
 	}
 
 	@Override
+	public boolean isMemberOfClusterGroup(String userLogin, CFLibDbKeyHash256 clusterId, String permissionName) {
+		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(userLogin, clusterId, permissionName);
+	}
+
+	@Override
 	public boolean isMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName) {
 		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfSystemGroup(userId, permissionName);
+	}
+
+	@Override
+	public boolean isMemberOfSystemGroup(String userLogin, String permissionName) {
+		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfSystemGroup(userLogin, permissionName);
 	}
 </GenRule>
 
