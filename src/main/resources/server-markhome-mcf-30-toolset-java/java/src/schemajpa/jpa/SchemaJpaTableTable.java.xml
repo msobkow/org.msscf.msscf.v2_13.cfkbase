@@ -85,7 +85,7 @@ public class $SchemaName$Jpa$TableName$Table implements I$SchemaName$$TableName$
 {
 	protected $SchemaName$JpaSchema schema;
 
-$implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTable$$implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default implJpaReadTableDerivedByPKeyArgs$$implJpaLockTableDerivedByPKey$$implJpaReadAllTableDerived$$implJpaReadTableDerivedByIndexes$$implJpaReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default implJpaReadTableRecByPKeyArgs$$implJpaLockTableRecByPKey$$implJpaReadAllTableRec$$switch InheritsPageData yes implJpaPageAllTableRec default empty$$implJpaReadTableRecByIndexes$$switch InheritsPageData yes implJpaPageTableRecByIndexes default empty$$switch HasChain yes implJpaMoveUpTableRec default empty$$switch HasChain yes implJpaMoveDownTableRec default empty$$iterate ServerMethods( each implJpaServerMethod empty empty )$$JavaTableInterface$}
+$implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTableName$$methJpaTableCanUpdateTableName$$methJpaTableCanDeleteTableName$$switch IsMutable yes methJpaTableCanMutateTableName default empty$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTable$$implJpaReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default implJpaReadTableDerivedByPKeyArgs$$implJpaLockTableDerivedByPKey$$implJpaReadAllTableDerived$$implJpaReadTableDerivedByIndexes$$implJpaReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default implJpaReadTableRecByPKeyArgs$$implJpaLockTableRecByPKey$$implJpaReadAllTableRec$$switch InheritsPageData yes implJpaPageAllTableRec default empty$$implJpaReadTableRecByIndexes$$switch InheritsPageData yes implJpaPageTableRecByIndexes default empty$$switch HasChain yes implJpaMoveUpTableRec default empty$$switch HasChain yes implJpaMoveDownTableRec default empty$$iterate ServerMethods( each implJpaServerMethod empty empty )$$JavaTableInterface$}
 </GenFile>
 
 	<GenRule GenDef="Table" Name="implJpaConstructTable">
@@ -101,6 +101,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 		}
 	}
 </GenRule>
+
 
 	<GenRule GenDef="ServerProc" Name="implJpaServerMethod"
 		>$switch IsInstanceMethod yes implJpaInstServerProc default implJpaClassServerProc$</GenRule>
@@ -181,7 +182,8 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaTableCreateSecurityChecks">
+	<GenRule GenDef="Table" Name="methJpaTableCanCreateTableName">
+	protected boolean canCreate$TableName$(String S_ProcName, I$SecSchemaName$Authorization Authorization) {
 		if (Authorization == null) {
 			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
 		}
@@ -205,41 +207,21 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			System implJpaTableSystemCreateSecurityChecks
 			Global implJpaTableSystemCreateSecurityChecks
 			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$
+		return( permissionGranted );
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implJpaTableCreateSecurityChecks">
+		boolean permissionGranted = canCreate$TableName$(S_ProcName, Authorization);
 		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, "create$poptop Table lower TableName$", authUserId.toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, "create$poptop Table lower TableName$", Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
 		}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implJpaTableCreateSecurityChecks">
-		if (Authorization == null) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
-		}
-		boolean permissionGranted = false;
-		CFLibDbKeyHash256 authUserId = Authorization.getSecUserId();$indextweak CafePreCreateIndexSecurity$$poptop Table tabletweak CafePreCreateTableSecurity$$poptop SchemaDef schematweak CafePreCreateSchemaSecurity$
-		if ((!permissionGranted) &amp;&amp; (authUserId == null || authUserId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
-		}
-		// Check for "system" user
-		CFLibDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
-		if ((!permissionGranted) &amp;&amp; (systemId != null &amp;&amp; !systemId.isNull() &amp;&amp; systemId.equals(authUserId))) {
-			permissionGranted = true;
-		}
-		else if ((!permissionGranted) &amp;&amp; (systemId == null || systemId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
-		}$switch SecScope
-			TenantGroup implJpaTableTenantCreateSecurityChecks
-			Tenant implJpaTableTenantCreateSecurityChecks
-			ClusterGroup implJpaTableClusterCreateSecurityChecks
-			Cluster implJpaTableClusterCreateSecurityChecks
-			System implJpaTableSystemCreateSecurityChecks
-			Global implJpaTableSystemCreateSecurityChecks
-			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$
-		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$poptop Table TableName$Table.TABLE_NAME, "create$lower poptop Table TableName$", authUserId.toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
-		}
-</GenRule>
+	<GenRule GenDef="Index" Name="implJpaTableCreateSecurityChecks">$poptop Table implJpaTableCreateSecurityChecks$</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaTableReadSecurityChecks">
+	<GenRule GenDef="Table" Name="methJpaTableCanReadTableName">
+	protected boolean canRead$TableName$(String S_ProcName, I$SecSchemaName$Authorization Authorization) {
 		if (Authorization == null) {
 			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
 		}
@@ -263,41 +245,21 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			System implJpaTableSystemReadSecurityChecks
 			Global implJpaTableGlobalReadSecurityChecks
 			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$
+		return( permissionGranted );
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implJpaTableReadSecurityChecks">
+		boolean permissionGranted = canRead$TableName$(S_ProcName, Authorization);
 		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, "read$poptop Table lower TableName$", authUserId.toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, "read$poptop Table lower TableName$", Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
 		}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implJpaTableReadSecurityChecks">
-		if (Authorization == null) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
-		}
-		boolean permissionGranted = false;
-		CFLibDbKeyHash256 authUserId = Authorization.getSecUserId();$indextweak CafePreReadIndexSecurity$$poptop Table tabletweak CafePreReadTableSecurity$$poptop SchemaDef schematweak CafePreReadSchemaSecurity$
-		if ((!permissionGranted) &amp;&amp; (authUserId == null || authUserId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
-		}
-		// Check for "system" user
-		CFLibDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
-		if ((!permissionGranted) &amp;&amp; (systemId != null &amp;&amp; !systemId.isNull() &amp;&amp; systemId.equals(authUserId))) {
-			permissionGranted = true;
-		}
-		else if ((!permissionGranted) &amp;&amp; (systemId == null || systemId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
-		}$popto Table switch SecScope
-			TenantGroup implJpaTableTenantReadSecurityChecks
-			Tenant implJpaTableTenantReadSecurityChecks
-			ClusterGroup implJpaTableClusterReadSecurityChecks
-			Cluster implJpaTableClusterReadSecurityChecks
-			System implJpaTableSystemReadSecurityChecks
-			Global implJpaTableGlobalReadSecurityChecks
-			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$
-		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$poptop Table TableName$Table.TABLE_NAME, "read$lower poptop Table TableName$", authUserId.toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
-		}
-</GenRule>
+	<GenRule GenDef="Index" Name="implJpaTableReadSecurityChecks">$poptop Table implJpaTableReadSecurityChecks$</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaTableUpdateSecurityChecks">
+	<GenRule GenDef="Table" Name="methJpaTableCanUpdateTableName">
+	protected boolean canUpdate$TableName$(String S_ProcName, I$SecSchemaName$Authorization Authorization) {
 		if (Authorization == null) {
 			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
 		}
@@ -321,41 +283,21 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			System implJpaTableSystemUpdateSecurityChecks
 			Global implJpaTableSystemUpdateSecurityChecks
 			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$
+		return( permissionGranted );
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implJpaTableUpdateSecurityChecks">
+		boolean permissionGranted = canUpdate$TableName$(S_ProcName, Authorization);
 		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, "update$poptop Table lower TableName$", authUserId.toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, "update$poptop Table lower TableName$", Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
 		}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implJpaTableUpdateSecurityChecks">
-		if (Authorization == null) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
-		}
-		boolean permissionGranted = false;
-		CFLibDbKeyHash256 authUserId = Authorization.getSecUserId();$indextweak CafePreUpdateIndexSecurity$$poptop Table tabletweak CafePreUpdateTableSecurity$$poptop SchemaDef schematweak CafePreUpdateSchemaSecurity$
-		if ((!permissionGranted) &amp;&amp; (authUserId == null || authUserId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
-		}
-		// Check for "system" user
-		CFLibDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
-		if ((!permissionGranted) &amp;&amp; (systemId != null &amp;&amp; !systemId.isNull() &amp;&amp; systemId.equals(authUserId))) {
-			permissionGranted = true;
-		}
-		else if ((!permissionGranted) &amp;&amp; (systemId == null || systemId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
-		}$poptop Table switch SecScope
-			TenantGroup implJpaTableTenantUpdateSecurityChecks
-			Tenant implJpaTableTenantUpdateSecurityChecks
-			ClusterGroup implJpaTableClusterUpdateSecurityChecks
-			Cluster implJpaTableClusterUpdateSecurityChecks
-			System implJpaTableSystemUpdateSecurityChecks
-			Global implJpaTableSystemUpdateSecurityChecks
-			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$
-		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$poptop Table TableName$Table.TABLE_NAME, "update$lower poptop Table TableName$", authUserId.toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
-		}
-</GenRule>
+	<GenRule GenDef="Index" Name="implJpaTableUpdateSecurityChecks">$poptop Table implJpaTableUpdateSecurityChecks$</GenRule>
 
-	<GenRule GenDef="Table" Name="implJpaTableDeleteSecurityChecks">
+	<GenRule GenDef="Table" Name="methJpaTableCanDeleteTableName">
+	protected boolean canDelete$TableName$(String S_ProcName, I$SecSchemaName$Authorization Authorization) {
 		if (Authorization == null) {
 			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
 		}
@@ -379,17 +321,26 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			System implJpaTableSystemDeleteSecurityChecks
 			Global implJpaTableSystemDeleteSecurityChecks
 			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$
+		return( permissionGranted );
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implJpaTableDeleteSecurityChecks">
+		boolean permissionGranted = canDelete$TableName$(S_ProcName, Authorization);
 		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, "delete$poptop Table lower TableName$", authUserId.toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, "delete$poptop Table lower TableName$", Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
 		}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implJpaTableDeleteSecurityChecks">
+	<GenRule GenDef="Index" Name="implJpaTableDeleteSecurityChecks">$poptop Table implJpaTableDeleteSecurityChecks$</GenRule>
+
+	<GenRule GenDef="Table" Name="methJpaTableCanMutateTableName">
+	protected boolean canMutate$TableName$(String S_ProcName, I$SecSchemaName$Authorization Authorization) {
 		if (Authorization == null) {
 			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
 		}
 		boolean permissionGranted = false;
-		CFLibDbKeyHash256 authUserId = Authorization.getSecUserId();$indextweak CafePreDeleteIndexSecurity$$poptop Table tabletweak CafePreDeleteTableSecurity$$poptop Table poptop SchemaDef schematweak CafePreDeleteSchemaSecurity$
+		CFLibDbKeyHash256 authUserId = Authorization.getSecUserId();$poptop Table tabletweak CafePreMutateTableSecurity$$poptop SchemaDef schematweak CafePreMutateSchemaSecurity$
 		if ((!permissionGranted) &amp;&amp; (authUserId == null || authUserId.isNull())) {
 			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
 		}
@@ -400,42 +351,50 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 		}
 		else if ((!permissionGranted) &amp;&amp; (systemId == null || systemId.isNull())) {
 			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
-		}$poptop Table switch SecScope
-			TenantGroup implJpaTableTenantDeleteSecurityChecks
-			Tenant implJpaTableTenantDeleteSecurityChecks
-			ClusterGroup implJpaTableClusterDeleteSecurityChecks
-			Cluster implJpaTableClusterDeleteSecurityChecks
-			System implJpaTableSystemDeleteSecurityChecks
-			Global implJpaTableSystemDeleteSecurityChecks
+		}$switch SecScope
+			TenantGroup implJpaTableTenantMutateSecurityChecks
+			Tenant implJpaTableTenantMutateSecurityChecks
+			ClusterGroup implJpaTableClusterMutateSecurityChecks
+			Cluster implJpaTableClusterMutateSecurityChecks
+			System implJpaTableSystemMutateSecurityChecks
+			Global implJpaTableSystemMutateSecurityChecks
 			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$
+		return( permissionGranted );
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implJpaTableMutateSecurityChecks">
+		boolean permissionGranted = canMutate$TableName$(S_ProcName, Authorization);
 		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$poptop Table TableName$Table.TABLE_NAME, "delete$lower poptop Table TableName$", authUserId.toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, "mutate$poptop Table lower TableName$", Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
 		}
 </GenRule>
 
+	<GenRule GenDef="Index" Name="implJpaTableMutateSecurityChecks">$poptop Table implJpaTableMutateSecurityChecks$</GenRule>
+
 		<GenRule GenDef="Table" Name="implJpaTableTenantCreateSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), Authorization.getSecClusterId(), Authorization.getSecTenantId(), "create$lower poptop Table TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), Authorization.getSecClusterId(), Authorization.getSecTenantId(), "create$lower poptop Table TableName$");
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterCreateSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), Authorization.getSecClusterId(), "create$lower poptop Table TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), Authorization.getSecClusterId(), "create$lower poptop Table TableName$");
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableSystemCreateSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfSystemGroup(Authorization.getSecUserId(), "create$poptop Table lower TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfSystemGroup(Authorization.getSecUserId(), "create$poptop Table lower TableName$");
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantReadSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), Authorization.getSecClusterId(), Authorization.getSecTenantId(), "read$lower poptop Table TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), Authorization.getSecClusterId(), Authorization.getSecTenantId(), "read$lower poptop Table TableName$");
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterReadSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), Authorization.getSecClusterId(), "read$lower poptop Table TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), Authorization.getSecClusterId(), "read$lower poptop Table TableName$");
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableGlobalReadSecurityChecks">
@@ -444,39 +403,54 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 
 		<GenRule GenDef="Table" Name="implJpaTableSystemReadSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfSystemGroup(Authorization.getSecUserId(), "read$poptop Table lower TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfSystemGroup(Authorization.getSecUserId(), "read$poptop Table lower TableName$");
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantUpdateSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), "update$poptop Table lower TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), "update$poptop Table lower TableName$");
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterUpdateSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), I$SecSchemaName$Schema.getSysClusterId(), "update$poptop Table lower TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), I$SecSchemaName$Schema.getSysClusterId(), "update$poptop Table lower TableName$");
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableSystemUpdateSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfSystemGroup(Authorization.getSecUserId(), "update$poptop Table lower TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfSystemGroup(Authorization.getSecUserId(), "update$poptop Table lower TableName$");
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantDeleteSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), "delete$poptop Table lower TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), "delete$poptop Table lower TableName$");
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterDeleteSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), I$SecSchemaName$Schema.getSysClusterId(), "delete$poptop Table lower TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), I$SecSchemaName$Schema.getSysClusterId(), "delete$poptop Table lower TableName$");
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableSystemDeleteSecurityChecks">
 		if(!permissionGranted) {
-			permissionGranted = I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfSystemGroup(Authorization.getSecUserId(), "delete$poptop Table lower TableName$");
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfSystemGroup(Authorization.getSecUserId(), "delete$poptop Table lower TableName$");
 		}</GenRule>
 
+		<GenRule GenDef="Table" Name="implJpaTableTenantMutateSecurityChecks">
+		if(!permissionGranted) {
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), "mutate$poptop Table lower TableName$");
+		}</GenRule>
+
+		<GenRule GenDef="Table" Name="implJpaTableClusterMutateSecurityChecks">
+		if(!permissionGranted) {
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), I$SecSchemaName$Schema.getSysClusterId(), "mutate$poptop Table lower TableName$");
+		}</GenRule>
+
+		<GenRule GenDef="Table" Name="implJpaTableSystemMutateSecurityChecks">
+		if(!permissionGranted) {
+			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfSystemGroup(Authorization.getSecUserId(), "mutate$poptop Table lower TableName$");
+		}</GenRule>
+		
 		<GenRule GenDef="Table" Name="implJpaTableFilterAndReturnRetval">$switch SecScope
 			TenantGroup implJpaTableTenantGroupFilterRetval
 			Tenant implJpaTableTenantFilterRetval
@@ -493,7 +467,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 			CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
 			String effDataGroupName = "toberetrieved";
-			if (!I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
+			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
 				retval = null;
 			}
 		}</GenRule>
@@ -503,7 +477,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			// Retrieve the TenantId from retval and check ICFSec.backingSchema().isMemberOfTenantGroup(auth,ClusterId,TenantId,'read$poptop Table lower TableName$'), clear retval to null if not a member
 			CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 			CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
-			if (!I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
+			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
 				retval = null;
 			}
 		}</GenRule>
@@ -513,7 +487,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			// Retrieve the ClusterId and DataGroupName from retval and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,DataGroupName), clear retval to null if not a member
 			CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 			String effDataGroupName = "toberetrieved";
-			if (!I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
+			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
 				retval = null;
 			}
 		}</GenRule>
@@ -522,7 +496,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 		if(retval != null) {
 			// Retrieve the ClusterId for the record and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,"read$poptop Table lower TableName$"), clear retval to null if not a member
 			CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
-			if (!I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
+			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
 				retval = null;
 			}
 		}</GenRule>
@@ -544,7 +518,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 				CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 				CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
 				String effDataGroupName = "toberetrieved";
-				if (I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
+				if (I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
 					finallist.add(retval);
 				}
 			}
@@ -558,7 +532,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 				if(retval != null) {
 					CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 					CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
-					if (I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
+					if (I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
 						finallist.add(retval);
 					}
 				}
@@ -574,7 +548,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 					// Retrieve the ClusterId and DataGroupName from retval and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,DataGroupName), clear retval to null if not a member
 					CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 					String effDataGroupName = "toberetrieved";
-					if (I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
+					if (I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
 						finallist.add(retval);
 					}
 				}
@@ -589,7 +563,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 				if(retval != null) {
 					// Retrieve the ClusterId for the record and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,"read$poptop Table lower TableName$"), clear retval to null if not a member
 					CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
-					if (I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
+					if (I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
 						finallist.add(retval);
 					}
 				}
@@ -613,7 +587,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 			CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
 			String effDataGroupName = "toberetrieved";
-			if (!I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
+			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
 				retval = null;
 			}
 		}</GenRule>
@@ -623,7 +597,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			// Retrieve the TenantId from retval and check ICFSec.backingSchema().isMemberOfTenantGroup(auth,ClusterId,TenantId,'read$poptop Table lower TableName$'), clear retval to null if not a member
 			CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 			CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
-			if (!I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
+			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
 				retval = null;
 			}
 		}</GenRule>
@@ -633,7 +607,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 			// Retrieve the ClusterId and DataGroupName from retval and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,DataGroupName), clear retval to null if not a member
 			CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 			String effDataGroupName = "toberetrieved";
-			if (!I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
+			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
 				retval = null;
 			}
 		}</GenRule>
@@ -642,7 +616,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 		if(retval != null) {
 			// Retrieve the ClusterId for the record and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,"read$poptop Table lower TableName$"), clear retval to null if not a member
 			CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
-			if (!I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
+			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
 				retval = null;
 			}
 		}</GenRule>
@@ -664,7 +638,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 				CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 				CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
 				String effDataGroupName = "toberetrieved";
-				if (I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
+				if (I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
 					finallist.add(retval);
 				}
 			}
@@ -678,7 +652,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 				if(retval != null) {
 					CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 					CFLibDbKeyHash256 effTenantId = CFLibDbKeyHash256.nullGet();
-					if (I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
+					if (I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
 						finallist.add(retval);
 					}
 				}
@@ -694,7 +668,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 					// Retrieve the ClusterId and DataGroupName from retval and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,DataGroupName), clear retval to null if not a member
 					CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
 					String effDataGroupName = "toberetrieved";
-					if (I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
+					if (I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
 						finallist.add(retval);
 					}
 				}
@@ -709,7 +683,7 @@ $implJpaConstructTable$$implJpaCreateTable$$implJpaUpdateTable$$implJpaDeleteTab
 				if(retval != null) {
 					// Retrieve the ClusterId for the record and check ICFSec.backingSchema().isMemberOfClusterGroup(auth,ClusterId,"read$poptop Table lower TableName$"), clear retval to null if not a member
 					CFLibDbKeyHash256 effClusterId = CFLibDbKeyHash256.nullGet();
-					if (I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
+					if (I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
 						finallist.add(retval);
 					}
 				}

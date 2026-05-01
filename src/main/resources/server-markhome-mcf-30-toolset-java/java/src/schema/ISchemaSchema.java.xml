@@ -65,7 +65,7 @@ import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$importsForApplicationContextAware$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 
-public interface I$SchemaName$Schema$iterate SchemaRefs( empty extendsSchemaSecurityControl first extendsPackageSchemaName each commaNewlinePackageSchemaName )$
+public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSchemaName each commaNewlinePackageSchemaName empty empty )$
 {
 	public static final String SCHEMA_NAME = "$SchemaName$";
 	public static final String DBSCHEMA_NAME = "$DbSchemaName$";$declApplicationContextAwareContext$
@@ -94,8 +94,36 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( empty extendsSchemaSecu
 		}
 		return(consolidatedTableInfo.get());
 	}
-$implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( empty declISchemaSecurityAttrs each empty )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$$declSchemaBootstrap$}
+$implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate SchemaRefs( each empty empty declISchemaSecurityAccessors )$$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( empty declISchemaSecurityAttrs each empty )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$$declSchemaBootstrap$}
 </GenFile>
+
+	<GenRule GenDef="Object" Name="declISchemaSecurityAccessors">$poptop SchemaDef declISchemaSecurityAccessors$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declISchemaSecurityAccessors">
+	final static AtomicReference&lt;I$SecSchemaName$SecurityControl&gt; securityControl = new AtomicReference&lt;&gt;();
+	
+	public static I$SecSchemaName$SecurityService getSecurityService() {
+		I$SecSchemaName$SecurityService retval = securityControl.get();
+		if (retval == null) {
+			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "getSecurityService", 0, "securityControl.get()");
+		}
+		return( retval );
+	}
+	
+	public static I$SecSchemaName$SecurityControl getSecurityControl() {
+		I$SecSchemaName$SecurityControl retval = securityControl.get();
+		if (retval == null) {
+			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "getSecurityService", 0, "securityControl.get()");
+		}
+		return( retval );
+	}
+	
+	public static void setSecurityControl(I$SecSchemaName$SecurityControl control) {
+		if (control == null) {
+			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "setSecurityControl", 0, "control");
+		}
+		securityControl.set(control);
+	}
+</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="declISchemaAddRefTableInfo">$reference RefSchema declISchemaAddRefTableInfo$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declISchemaAddRefTableInfo">

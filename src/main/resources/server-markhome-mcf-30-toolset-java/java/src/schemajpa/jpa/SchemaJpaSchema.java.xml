@@ -78,80 +78,8 @@ $iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate SchemaTables( each declJpaSchemaTableTableMember )$
 $iterate SchemaTables( each declJpaSchemaTableFactoryMember )$
 $implJpaSchemaClassMapInitializers$$implSchemaJpaHooksSchemaAccessors$$implSchemaGetSchemaService$
-$implJpaSchemaMoreMethods$$implJpaSchemaTablePermsAccessors$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootstrap$}
+$implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootstrap$}
 </GenFile>
-
-	<GenRule GenDef="Object" Name="implJpaSchemaSecurityMethods">$popto SchemaDef implJpaSchemaSecurityMethods$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaSecurityMethods">
-	@Override
-	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
-		// Dummied out for now
-		return( true );
-	}
-
-	@Override
-	public boolean isMemberOfTenantGroup(String userLogin, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
-		// Dummied out for now
-		return( true );
-	}
-
-	@Override
-	public boolean isMemberOfClusterGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, String permissionName) {
-		// Dummied out for now
-		return( true );
-	}
-
-	@Override
-	public boolean isMemberOfClusterGroup(String userLogin, CFLibDbKeyHash256 clusterId, String permissionName) {
-		// Dummied out for now
-		return( true );
-	}
-
-	@Override
-	public boolean isMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName) {
-		// Dummied out for now
-		return( true );
-	}
-
-	@Override
-	public boolean isMemberOfSystemGroup(String userLogin, String permissionName) {
-		// Dummied out for now
-		return( true );
-	}
-</GenRule>
-
-	<GenRule GenDef="Object" Name="implJpaSchemaSubclassSecurityMethods">$popto SchemaDef implJpaSchemaSubclassSecurityMethods$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaSubclassSecurityMethods">
-	@Override
-	public boolean isMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
-		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(userId, clusterId, tenantId, permissionName);
-	}
-
-	@Override
-	public boolean isMemberOfTenantGroup(String userLogin, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
-		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfTenantGroup(userLogin, clusterId, tenantId, permissionName);
-	}
-
-	@Override
-	public boolean isMemberOfClusterGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, String permissionName) {
-		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(userId, clusterId, permissionName);
-	}
-
-	@Override
-	public boolean isMemberOfClusterGroup(String userLogin, CFLibDbKeyHash256 clusterId, String permissionName) {
-		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfClusterGroup(userLogin, clusterId, permissionName);
-	}
-
-	@Override
-	public boolean isMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName) {
-		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfSystemGroup(userId, permissionName);
-	}
-
-	@Override
-	public boolean isMemberOfSystemGroup(String userLogin, String permissionName) {
-		return I$SecSchemaName$Schema.getBacking$SecSchemaName$().isMemberOfSystemGroup(userLogin, permissionName);
-	}
-</GenRule>
 
 <GenRule GenDef="SchemaDef" Name="implSchemaGetSchemaService">
 	public $DefSchemaName$JpaSchemaService getSchemaService() {
@@ -280,7 +208,7 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 		I$reference RefSchema SchemaName$Schema</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaMoreMethods"
-		>$implJpaSchemaSchemaConstructor$$iterate SchemaRefs( first implJpaSchemaNewSchema each empty empty implJpaSchemaNewSchema )$$iterate SchemaRefs( empty implJpaSchemaSecurityMethods first implJpaSchemaSubclassSecurityMethods each empty )$$iterate Id16Generators( each implNextIdGen empty empty)$$iterate Id32Generators( each implNextIdGen empty empty)$$iterate Id64Generators( each implNextIdGen empty empty)$$iterate DbKeyHash128Generators( each implNextIdGen empty empty )$$iterate DbKeyHash160Generators( each implNextIdGen empty empty )$$iterate DbKeyHash224Generators( each implNextIdGen empty empty )$$iterate DbKeyHash256Generators( each implNextIdGen empty empty )$$iterate DbKeyHash384Generators( each implNextIdGen empty empty )$$iterate DbKeyHash512Generators( each implNextIdGen empty empty )$$iterate UuidGenerators( each implNextIdGen empty empty )$$iterate Uuid6Generators( each implNextIdGen empty empty )$$iterate SchemaTables( each implJpaTableMethods empty empty )$</GenRule>
+		>$implJpaSchemaSchemaConstructor$$iterate SchemaRefs( first implJpaSchemaNewSchema each empty empty implJpaSchemaNewSchema )$$iterate Id16Generators( each implNextIdGen empty empty)$$iterate Id32Generators( each implNextIdGen empty empty)$$iterate Id64Generators( each implNextIdGen empty empty)$$iterate DbKeyHash128Generators( each implNextIdGen empty empty )$$iterate DbKeyHash160Generators( each implNextIdGen empty empty )$$iterate DbKeyHash224Generators( each implNextIdGen empty empty )$$iterate DbKeyHash256Generators( each implNextIdGen empty empty )$$iterate DbKeyHash384Generators( each implNextIdGen empty empty )$$iterate DbKeyHash512Generators( each implNextIdGen empty empty )$$iterate UuidGenerators( each implNextIdGen empty empty )$$iterate Uuid6Generators( each implNextIdGen empty empty )$$iterate SchemaTables( each implJpaTableMethods empty empty )$</GenRule>
 
 	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="implNextIdGen">
 	@Override
@@ -380,40 +308,6 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 
 	public void setFactory$TableName$( I$DefSchemaName$$TableName$Factory value ) {
 		factory$TableName$ = value;
-	}
-</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="implJpaSchemaTablePermsAccessors">
-	/**
-	 *	Get the Table Permissions interface for the schema.
-	 *
-	 *	@return	The Table Permissions interface for the schema.
-	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public static I$SecSchemaName$TablePerms getTablePerms() {
-		return($poptop SchemaDef iterate SchemaRefs(first implJpaReturnThisSchemaRefGetTablePerms each empty empty implJpaReturnLocalGetTablePerms)$);
-	}
-
-	/**
-	 *	Get the Table Permissions interface cast to this schema's implementation.
-	 *
-	 *	@return The Table Permissions interface for this schema.
-	 */
-	public static I$SchemaName$TablePerms get$SchemaName$TablePerms() {
-		return (I$SchemaName$TablePerms)getTablePerms();
-	}
-
-	/**
-	 *	Set the Table Permissions interface for the schema.  All fractal subclasses of
-	 *	the I$SecSchemaName$TablePerms implement at least that interface plus their own
-	 *	accessors.
-	 *
-	 *	@param	value	The Table Permissions interface to be used by the schema.
-	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public static void setTablePerms( I$SecSchemaName$TablePerms value ) {$poptop SchemaDef iterate SchemaRefs(first implJpaThisSchemaRefSetTablePerms each empty empty implJpaLocalSetTablePerms)$
 	}
 </GenRule>
 
