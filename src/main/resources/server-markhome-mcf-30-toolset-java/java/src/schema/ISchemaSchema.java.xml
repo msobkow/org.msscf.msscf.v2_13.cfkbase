@@ -71,11 +71,13 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 	public static final String DBSCHEMA_NAME = "$DbSchemaName$";$declApplicationContextAwareContext$
 	public static final $SecSchemaName$TableInfo TABLE_INFO[] = {$iterate DefSchemaTables( first declISchemaTableInfoEntry each declCommaISchemaTableInfoEntry )$};
 	public static final AtomicReference&lt;$SecSchemaName$TableInfo[]&gt; consolidatedTableInfo = new AtomicReference&lt;&gt;(null);
-	
+	public static final $SecSchemaName$RoleInfo ROLE_INFO[] = {$iterate SchemaOrderedRoles( first declISchemaRoleInfoEntry each declCommaISchemaRoleInfoEntry )$};
+	public static final AtomicReference&lt;$SecSchemaName$RoleInfo[]&gt; consolidatedRoleInfo = new AtomicReference&lt;&gt;(null);
+
 	public static $SecSchemaName$TableInfo[] getTableInfo() {
 		return TABLE_INFO;
 	}
-	
+
 	public static $SecSchemaName$TableInfo[] getConsolidatedTableInfo() {
 		if (consolidatedTableInfo.get() == null) {
 			ArrayList&lt;$SecSchemaName$TableInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefTableInfo empty empty)$
@@ -93,6 +95,27 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 			consolidatedTableInfo.compareAndSet(null, arr);
 		}
 		return(consolidatedTableInfo.get());
+	}
+
+	public static $SecSchemaName$RoleInfo[] getRoleInfo() {
+		return ROLE_INFO;
+	}
+
+	public static $SecSchemaName$RoleInfo[] getConsolidatedRoleInfo() {
+		if (consolidatedRoleInfo.get() == null) {
+			// The ROLE_INFO entries are in dependency order, so do not sort them any other way
+			ArrayList&lt;$SecSchemaName$RoleInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefRoleInfo empty empty)$
+			for( $SecSchemaName$RoleInfo info: ROLE_INFO) {
+				lst.add(info);
+			}
+			$SecSchemaName$RoleInfo arr[] = new $SecSchemaName$RoleInfo[lst.size()];
+			int idx = 0;
+			for($SecSchemaName$RoleInfo info: lst) {
+				arr[idx++] = info;
+			}
+			consolidatedRoleInfo.compareAndSet(null, arr);
+		}
+		return(consolidatedRoleInfo.get());
 	}
 $implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate SchemaRefs( each empty empty declISchemaSecurityAccessors )$$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( empty declISchemaSecurityAttrs each empty )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$$declSchemaBootstrap$}
 </GenFile>
@@ -131,9 +154,19 @@ $implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( ea
 				lst.add(info);
 			}</GenRule>
 
+	<GenRule GenDef="SchemaRef" Name="declISchemaAddRefRoleInfo">$reference RefSchema declISchemaAddRefRoleInfo$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declISchemaAddRefRoleInfo">
+			for( $SecSchemaName$RoleInfo info: I$SchemaName$Schema.getRoleInfo()) {
+				lst.add(info);
+			}</GenRule>
+
 	<GenRule GenDef="Table" Name="declISchemaTableInfoEntry">new $SecSchemaName$TableInfo("$TableName$", $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$")</GenRule>
 	<GenRule GenDef="Table" Name="declCommaISchemaTableInfoEntry">,
 		$declISchemaTableInfoEntry$</GenRule>
+
+	<GenRule GenDef="SchemaRole" Name="declISchemaRoleInfoEntry">new $SecSchemaName$RoleInfo("$Name$", "$MembershipString$")</GenRule>
+	<GenRule GenDef="SchemaRole" Name="declCommaISchemaRoleInfoEntry">,
+		$declISchemaRoleInfoEntry$</GenRule>
 
 	<GenRule GenDef="Object" Name="importsForApplicationContextAware">
 import java.util.concurrent.atomic.*;
