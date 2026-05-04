@@ -33,69 +33,63 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/schema/SchemaRoleInfo.java"
+	Name="src/schema/SchemaRoleInfoDependencyComparator.java"
 	Revision="3.0"
-	Descr="Java SchemaName RoleInfo Implementation">
+	Descr="Java SchemaName RoleInfoDependencyComparator Implementation">
 
-	<GenFile GenDef="SchemaDef" Name="fileSchemaRoleInfoJava"
+	<GenFile GenDef="SchemaDef" Name="fileSchemaRoleInfoDependencyComparatorJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
-		ExpansionClassName="$SchemaName$RoleInfoJava"
-		ExpansionKeyName="$SchemaName$RoleInfoJava"
-		ExpansionFileName="$SchemaName$RoleInfo.java"
+		ExpansionClassName="$SchemaName$RoleInfoDependencyComparatorJava"
+		ExpansionKeyName="$SchemaName$RoleInfoDependencyComparatorJava"
+		ExpansionFileName="$SchemaName$RoleInfoDependencyComparator.java"
 >// Description: Java 25 $SchemaName$ Role Information Implementation
 
 $MssSourceLicense$
 
 package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$;
 
-import java.io.Serializable;
+import java.util.Comparator;
 
 /*
- *	The $SchemaName$RoleInfo objects are passed in to the $SecSchemaName$ schema implementation to be bound
+ *	The $SchemaName$RoleInfoDependencyComparator objects are passed in to the $SecSchemaName$ schema implementation to be bound
  *	to the security system.  Their natural order is to compare by dependency first, and by name second.
  */
-public class $SchemaName$RoleInfo implements Serializable, Comparable&lt;$SchemaName$RoleInfo&gt;
+public class $SchemaName$RoleInfoDependencyComparator implements Comparator&lt;$SchemaName$RoleInfo&gt;
 {
-	protected final String roleName;
-	protected final String membership;
-
-	public $SchemaName$RoleInfo(String roleName, String membership) {
-		this.roleName = roleName;
-		this.membership = membership;
-	}
-
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public String getMembership() {
-		return membership;
-	}
-
 	@Override
-	public int compareTo( $SchemaName$RoleInfo rhs ) {
-		if( rhs == null ) {
+	public int compare( $SchemaName$RoleInfo lhs, $SchemaName$RoleInfo rhs ) {
+		if( lhs == null ) {
+			if ( rhs == null ) {
+				return( 0 );
+			}
+			else {
+				return( -1 );
+			}
+		}
+		else if( rhs == null ) {
 			return( 1 );
 		}
 		else {
+			String lhsName = lhs.getRoleName();
 			String rhsName = rhs.getRoleName();
+			String lhsMembership = lhs.getMembership();
 			String rhsMembership = rhs.getMembership();
-			String members[] = membership.split(" ");
+			String lhsMembers[] = lhsMembership.split(" ");
 			String rhsMembers[] = rhsMembership.split(" ");
 			boolean rhsEnablesLhs = false;
 			boolean lhsEnablesRhs = false;
-			for (String v: members) {
+			for (String v: lhsMembers) {
 				if (rhsName.equals(v)) {
 					lhsEnablesRhs = true;
 					break;
 				}
 			}
 			for (String v: rhsMembers) {
-				if (roleName.equals(v)) {
+				if (lhsName.equals(v)) {
 					rhsEnablesLhs = true;
 					break;
 				}
@@ -103,7 +97,7 @@ public class $SchemaName$RoleInfo implements Serializable, Comparable&lt;$Schema
 			int ret;
 			if (lhsEnablesRhs) {
 				if (rhsEnablesLhs) {
-					ret = roleName.compareTo(rhsName);
+					ret = lhsName.compareTo(rhsName);
 				}
 				else {
 					ret = 1;
@@ -114,7 +108,7 @@ public class $SchemaName$RoleInfo implements Serializable, Comparable&lt;$Schema
 					ret = -1;
 				}
 				else {
-					ret = roleName.compareTo(rhsName);
+					ret = lhsName.compareTo(rhsName);
 				}
 			}
 			return( ret );

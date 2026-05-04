@@ -103,11 +103,12 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 
 	public static $SecSchemaName$RoleInfo[] getConsolidatedRoleInfo() {
 		if (consolidatedRoleInfo.get() == null) {
-			// The ROLE_INFO entries are in dependency order, so do not sort them any other way
 			ArrayList&lt;$SecSchemaName$RoleInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefRoleInfo empty empty)$
 			for( $SecSchemaName$RoleInfo info: ROLE_INFO) {
 				lst.add(info);
 			}
+			// Dependency order is the natural order of role info comparison
+			lst.sort(new $SecSchemaName$RoleInfoDependencyComparator());
 			$SecSchemaName$RoleInfo arr[] = new $SecSchemaName$RoleInfo[lst.size()];
 			int idx = 0;
 			for($SecSchemaName$RoleInfo info: lst) {
