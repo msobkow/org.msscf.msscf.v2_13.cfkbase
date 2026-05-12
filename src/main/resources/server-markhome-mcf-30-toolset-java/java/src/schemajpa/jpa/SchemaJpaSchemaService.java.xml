@@ -76,15 +76,21 @@ import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$l
  *	Services for schema $SchemaName$ defined in $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa
  *	using the $SchemaName$*Repository objects to access the data directly, bypassing normal application security for the bootstrap and login processing.
  */
-@Service("$lower DefDbSchemaName$JpaSchemaService")
+@Service("$lower DefSchemaName$JpaSchemaService")
 public class $SchemaName$JpaSchemaService {
 
 	@Autowired
 	@Qualifier("$lower DefDbSchemaName$EntityManagerFactory")
-	private LocalContainerEntityManagerFactoryBean $lower DefDbSchemaName$EntityManagerFactory;$iterate Tables( each JpaSchemaServiceMaybeAutowireService empty empty )$
+	private LocalContainerEntityManagerFactoryBean $lower DefDbSchemaName$EntityManagerFactory;$iterate Tables( each JpaSchemaServiceMaybeAutowireService empty empty )$$iterate SchemaRefs( empty JpaSchemaServiceAutowireSecRepositories each empty )$
 $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecurityServices each empty )$$schematweak JpaSchemaServiceCustomServices$
 }
 </GenFile>
+
+	<GenRule GenDef="Object" Name="JpaSchemaServiceAutowireSecRepositories">$poptop SchemaDef JpaSchemaServiceAutowireSecRepositories$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="JpaSchemaServiceAutowireSecRepositories">
+	@Autowired
+	private $DefSchemaName$JpaSecUserRepository secuserRepository;
+</GenRule>
 
 	<GenRule GenDef="Object" Name="implSchemaJpaServiceSecurityServices">$poptop SchemaDef implSchemaJpaServiceSecurityServices$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implSchemaJpaServiceSecurityServices">
@@ -96,8 +102,19 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *	@param userLogin 
 	 *	@return null if the userLogin does not exist, is null, is empty, or is blank. Otherwise the DbKey for the user.
 	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public CFLibDbKeyHash256 mapUserLoginToUserId(String userLogin) {
-		throw new CFLibNotImplementedYetException(getClass(), "mapUserLoginToUserId");
+		final String S_ProcName = "mapUserLoginToUserId";
+		if (userLogin == null || userLogin.isEmpty() || userLogin.isBlank()) {
+			return(null);
+		}
+		$DefSchemaName$JpaSecUser rec = secuserService.findByULoginIdx(userLogin);
+		if (rec == null) {
+			return(null);
+		}
+		else {
+			return(rec.getPKey());
+		}
 	}
 
 	/**
@@ -106,8 +123,19 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *	@param userId
 	 *	@return null if the userId does not exist or is null. Otherwise the userLogin for the user.
 	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public String mapUserIdToUserLogin(CFLibDbKeyHash256 userId) {
-		throw new CFLibNotImplementedYetException(getClass(), "mapUserIdToUserLogin");
+		final String S_ProcName = "mapUserIdToUserLogin";
+		if (userId == null || userId.isNull()) {
+			return(null);
+		}
+		$DefSchemaName$JpaSecUser rec = secuserService.find(userId);
+		if (rec == null) {
+			return(null);
+		}
+		else {
+			return(rec.getRequiredLoginId());
+		}
 	}
 
 	/**
@@ -122,6 +150,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public boolean probeMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
 		throw new CFLibNotImplementedYetException(getClass(), "probeMemberOfTenantGroup");
 	}
@@ -137,6 +166,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public boolean probeMemberOfClusterGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, String permissionName) {
 		throw new CFLibNotImplementedYetException(getClass(), "probeMemberOfClusterGroup");
 	}
@@ -150,8 +180,15 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public boolean probeMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName) {
-		throw new CFLibNotImplementedYetException(getClass(), "probeMemberOfSystemGroup");
+		if (userId == null || userId.isNull()) {
+			return(false);
+		}
+		if (permissionName == null || permissionName.isEmpty() || permissionName.isBlank()) {
+			return(false);
+		}
+		return(secuserRepository.countSysSecurityPermsByUserId(permissionName, userId) &gt; 0);
 	}
 </GenRule>
 
@@ -175,7 +212,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		bootstrapAllTablesSecurity(tableInfo);</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapTableSecurity">
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecSchemaDbName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapTableSecurity(I$SecSchemaName$Authorization auth,
 		LocalDateTime now,
 		String tableName,
@@ -1072,7 +1109,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 	<GenRule GenDef="Object" Name="implJpaSchemaServiceBootstrapSecurity">$popto SchemaDef implJpaSchemaServiceBootstrapSecurity$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapSecurity">
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecSchemaDbName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapSecurity() {
 		$SecSchemaName$JpaSysCluster sysCluster;
 		CFLibDbKeyHash256 systemClusterID;
@@ -1529,12 +1566,12 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 	<GenRule GenDef="Object" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">$popto SchemaDef implJpaSchemaServiceBootstrapAllTablesSecurity$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecSchemaDbName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapAllTablesSecurity($SecSchemaName$TableInfo tableInfo[]) {
 		bootstrapAllTablesSecurity(I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), tableInfo);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecSchemaDbName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableInfo tableInfo[]) {
 		LocalDateTime now = LocalDateTime.now();
 		I$SecSchemaName$SecSession bootstrapSession;
@@ -1588,7 +1625,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		}
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower SecSchemaDbName$TransactionManager")
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapAllTablesSecurity(I$SecSchemaName$Authorization auth,
 		CFLibDbKeyHash256 systemUID,
 		I$SecSchemaName$SecSession bootstrapSession,

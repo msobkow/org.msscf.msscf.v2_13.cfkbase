@@ -256,7 +256,14 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implJpaTableReadSecurityChecks">$poptop Table implJpaTableReadSecurityChecks$</GenRule>
+	<GenRule GenDef="Index" Name="implJpaTableReadSecurityChecks">
+		boolean permissionGranted = false;$indextweak CafePreReadIndexSecurityCheck$
+		if (!permissionGranted) {
+			permissionGranted = canRead$poptop Table TableName$(S_ProcName, Authorization);
+		}
+		if (!permissionGranted) {
+			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$poptop Table TableName$Table.TABLE_NAME, "read$poptop Table lower TableName$", Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+		}</GenRule>
 
 	<GenRule GenDef="Table" Name="methJpaTableCanUpdateTableName">
 	protected boolean canUpdate$TableName$(String S_ProcName, I$SecSchemaName$Authorization Authorization) {
