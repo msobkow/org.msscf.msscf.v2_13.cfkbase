@@ -123,6 +123,23 @@ $implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( ea
 
 	<GenRule GenDef="Object" Name="declISchemaSecurityAccessors">$poptop SchemaDef declISchemaSecurityAccessors$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declISchemaSecurityAccessors">
+	final static AtomicReference&lt;I$SecSchemaName$AuthorizationCallback&gt; authorizationCallback = new AtomicReference&lt;&gt;();
+	
+	public static I$SecSchemaName$AuthorizationCallback getAuthorizationCallback() {
+		I$SecSchemaName$AuthorizationCallback retval = authorizationCallback.get();
+		if (retval == null) {
+			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "getAuthorizationCallback", 0, "authorizationCallback.get()");
+		}
+		return( retval );
+	}
+	
+	public static void setAuthorizationCallback(I$SecSchemaName$AuthorizationCallback callback) {
+		if (callback == null) {
+			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "setAuthorizationCallback", 0, "callback");
+		}
+		authorizationCallback.set(callback);
+	}
+
 	final static AtomicReference&lt;I$SecSchemaName$SecurityControl&gt; securityControl = new AtomicReference&lt;&gt;();
 	
 	public static I$SecSchemaName$SecurityService getSecurityService() {

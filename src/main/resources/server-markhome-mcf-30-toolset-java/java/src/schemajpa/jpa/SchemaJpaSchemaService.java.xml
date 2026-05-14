@@ -76,7 +76,7 @@ import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$l
  *	Services for schema $SchemaName$ defined in $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa
  *	using the $SchemaName$*Repository objects to access the data directly, bypassing normal application security for the bootstrap and login processing.
  */
-@Service("$lower DefSchemaName$JpaSchemaService")
+@Service("$lower DefDbSchemaName$JpaSchemaService")
 public class $SchemaName$JpaSchemaService {
 
 	@Autowired
@@ -1383,7 +1383,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				systemAdminUserPassword = new $SecSchemaName$JpaSecUserPassword();
 				systemAdminUserPassword.setRequiredRevision(1);
 				systemAdminUserPassword.setPKey(systemAdminUID);
-				systemAdminUserPassword.setRequiredContainerUser(systemAdminUID);
+				systemAdminUserPassword.setRequiredContainerUser(systemAdminUser);
 				systemAdminUserPassword.setRequiredPWSetStamp(now);
 				systemAdminUserPassword.setRequiredPasswordHash(I$SecSchemaName$Schema.getPasswordHash("ChangeOnInstall"));
 				systemAdminUserPassword = secuserpasswordService.create(systemAdminUserPassword);

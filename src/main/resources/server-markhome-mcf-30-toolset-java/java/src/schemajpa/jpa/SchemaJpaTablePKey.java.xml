@@ -106,7 +106,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationOneToOneUnmappedTags">$switch IsToIndexAtomicPrimaryKeyIndex yes declAtomicPrimarySpecification default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$$switch IsToIndexAtomicPrimaryKeyIndex no declSchemaJpaRelationSuperiorMemberAttributeOverrides default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToMany">
-	@OneToMany(fetch=FetchType.LAZY$switch HasReverseRelation yes emitJpaMappedBy default empty$)$switch HasReverseRelation no declSchemaJpaRelationMemberJoinColumns default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$
+	@OneToMany(fetch=FetchType.LAZY$switch HasReverseRelation yes emitJpaMappedBy default empty$)<!--$switch HasReverseRelation no declSchemaJpaRelationMemberJoinColumns default declSchemaJpaRelationMemberMaybeCompositePrimaryJoinColumns$-->
 	protected $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 	
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberManyToOne">
@@ -600,8 +600,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 		set$OptionalOrRequired$$RelationType$$Suffix$(targetRec);
 	}</GenRule>
 
-	<GenRule GenDef="Relation" Name="derefJpaTableRelationPKeyReadDerived">readDerived(null$iterate Columns(each implCommaSetPassArgColumn)$)</GenRule>
-	<GenRule GenDef="Relation" Name="derefJpaTableRelationDataReadDerived">readDerivedBy$reference ToIndex declReadTableSuffix$(null$iterate Columns(each implCommaSetPassArgColumn)$)</GenRule>
+	<GenRule GenDef="Relation" Name="derefJpaTableRelationPKeyReadDerived">readDerived(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each implCommaSetPassArgColumn)$)</GenRule>
+	<GenRule GenDef="Relation" Name="derefJpaTableRelationDataReadDerived">readDerivedBy$reference ToIndex declReadTableSuffix$(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each implCommaSetPassArgColumn)$)</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implSetPassArgColumn">arg$reference FromCol reference Column Name$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implCommaSetPassArgColumn">, $implSetPassArgColumn$</GenRule>
@@ -623,8 +623,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 		I$reference ToTable DefSchemaName$$reference ToTable TableName$ targetRec = targetTable.$switch IsToPrimaryIndexKey yes derefJpaTableRelationPKeyReadDerivedViaAttrs default derefJpaTableRelationDataReadDerivedViaAttrs$;
 		return(targetRec);</GenRule>
 
-	<GenRule GenDef="Relation" Name="derefJpaTableRelationPKeyReadDerivedViaAttrs">readDerived(null$iterate Columns(each implCommaSetPassAttrArgColumn)$)</GenRule>
-	<GenRule GenDef="Relation" Name="derefJpaTableRelationDataReadDerivedViaAttrs">readDerivedBy$reference ToIndex declReadTableSuffix$(null$iterate Columns(each implCommaSetPassAttrArgColumn)$)</GenRule>
+	<GenRule GenDef="Relation" Name="derefJpaTableRelationPKeyReadDerivedViaAttrs">readDerived(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each implCommaSetPassAttrArgColumn)$)</GenRule>
+	<GenRule GenDef="Relation" Name="derefJpaTableRelationDataReadDerivedViaAttrs">readDerivedBy$reference ToIndex declReadTableSuffix$(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each implCommaSetPassAttrArgColumn)$)</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implCommaSetPassAttrArgColumn">, get$reference FromCol implColumnAttrOptionality$$reference FromCol Name$()</GenRule>
 
