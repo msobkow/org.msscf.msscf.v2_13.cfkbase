@@ -365,11 +365,11 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 		final String S_ProcName = "create";
 		if (data == null) {
 			return( null );
-		}$switch IsPrimaryIndexKeyAtomic yes empty default declServiceCreateEnsurePKeyObjNotNull$$reference BaseClass reference PrimaryKeyIndex iterate Columns(each maybeServiceCreateStashGenerated)$$serviceCheckDataValid$
-		try {$reference BaseClass reference PrimaryKeyIndex iterate Columns(each maybeServiceCreateGenerateId)$$switch IsBaseTableAudited yes serviceCreateInitAuditColumns default empty$
-			if(data.getPKey() != null &amp;&amp; $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.existsById(($JpaCompactedPrimaryIndexClass$)data.getPKey())) {
+		}$reference BaseClass reference PrimaryKeyIndex iterate Columns(each maybeServiceCreateStashGenerated)$$serviceCheckDataValid$
+		try {
+			if(data.getPKey() != null$switch IsPrimaryIndexKeyAtomic yes maybeCheckAndDataPKeyIsNull default empty$ &amp;&amp; $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.existsById(($JpaCompactedPrimaryIndexClass$)data.getPKey())) {
 				return( ($poptop Table SchemaName$Jpa$poptop Table TableName$)($lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.findById(($JpaCompactedPrimaryIndexClass$)(data.getPKey())).get()));
-			}
+			}$reference BaseClass reference PrimaryKeyIndex iterate Columns(each maybeServiceCreateGenerateId)$$switch IsBaseTableAudited yes serviceCreateInitAuditColumns default empty$
 			return $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.save(data);
 		}
 		catch(Exception ex) {$reference BaseClass reference PrimaryKeyIndex iterate Columns(each maybeServiceCreateRestoreGenerated)$
@@ -379,6 +379,25 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 		}
 	}
 </GenRule>
+
+	<GenRule GenDef="Table" Name="maybeCheckAndDataPKeyIsNull">$switch IsAtomicIndexDbKey yes checkAndDataPKeyIsNull default empty$</GenRule>
+	<GenRule GenDef="Table" Name="checkAndDataPKeyIsNull"> &amp;&amp; !data.getPKey().isNull()</GenRule>
+	<GenRule GenDef="Table" Name="IsAtomicIndexDbKey">$reference BaseClass reference PrimaryKeyIndex iterate Columns(empty no lone IsDbKey first no each empty)$</GenRule>
+	<GenRule GenDef="IndexCol" Name="IsDbKey">$reference Column IsDbKey$</GenRule>
+	<GenRule GenDef="Value" Name="IsDbKey">$switch BaseModelAtomClass
+		DbKeyHash128Gen yes
+		DbKeyHash160Gen yes
+		DbKeyHash224Gen yes
+		DbKeyHash256Gen yes
+		DbKeyHash384Gen yes
+		DbKeyHash512Gen yes
+		DbKeyHash128Def yes
+		DbKeyHash160Def yes
+		DbKeyHash224Def yes
+		DbKeyHash256Def yes
+		DbKeyHash384Def yes
+		DbKeyHash512Def yes
+		default no$</GenRule>
 
 	<GenRule GenDef="Table" Name="declServiceCreateEnsurePKeyObjNotNull">
 		if (data.getPKey() == null) {

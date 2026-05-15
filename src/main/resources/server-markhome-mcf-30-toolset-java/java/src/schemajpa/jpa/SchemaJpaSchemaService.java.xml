@@ -1344,7 +1344,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			systemCluster.setCreatedAt(now);
 			systemCluster.setUpdatedAt(now);
 			systemCluster.setRequiredFullDomName(fqdn);
-			systemCluster.setRequiredDescription("System cluster for " + fqdn);
+			systemCluster.setRequiredDescription("system");
 			systemCluster = clusterService.create(systemCluster);
 			systemClusterID = systemCluster.getPKey();
 		}
@@ -1414,7 +1414,21 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			bootstrapSession.setOptionalFinish(null);
 			bootstrapSession = secsessionService.create(bootstrapSession);
 		}
-			
+
+		I$SecSchemaName$Schema.setAuthorizationCallback( new I$SecSchemaName$AuthorizationCallback() {
+			$SecSchemaName$Authorization auth = new $SecSchemaName$Authorization();
+			@Override
+			public I$SecSchemaName$Authorization getEffectiveAuthorization() {
+				return(auth);
+			}
+		});
+		$SecSchemaName$Authorization auth = ($SecSchemaName$Authorization)I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization();
+		auth.setAuthUuid6(CFLibUuid6.generateUuid6());
+		auth.setSecSessionId(bootstrapSessionID);
+		auth.setSecClusterId(systemClusterID);
+		auth.setSecTenantId(systemTenantID);
+		auth.setSecUserId(systemUID);
+
 		if (sysCluster == null) {
 			sysCluster = new $SecSchemaName$JpaSysCluster();
 			sysCluster.setRequiredContainerCluster(systemClusterID);
@@ -1550,6 +1564,12 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		if (bootstrapSession != null &amp;&amp; bootstrapSessionID != null &amp;&amp; !bootstrapSessionID.isNull() &amp;&amp; bootstrapSession.getOptionalFinish() == null) {
 			bootstrapSession.setOptionalFinish(LocalDateTime.now());
 			bootstrapSession = secsessionService.update(bootstrapSession);
+			I$SecSchemaName$Schema.setAuthorizationCallback( new I$SecSchemaName$AuthorizationCallback() {
+				@Override
+				public I$SecSchemaName$Authorization getEffectiveAuthorization() {
+					return(null);
+				}
+			});
 		}
 	}
 </GenRule>
@@ -1576,15 +1596,21 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		LocalDateTime now = LocalDateTime.now();
 		I$SecSchemaName$SecSession bootstrapSession;
 		CFLibDbKeyHash256 bootstrapSessionID = new CFLibDbKeyHash256(0);
+		CFLibDbKeyHash256 systemUID = I$SecSchemaName$Schema.getSystemId();
 
-		I$SecSchemaName$Authorization auth = new $SecSchemaName$Authorization();
-		auth.setSecUserId(I$SecSchemaName$Schema.getSystemId());
+		I$SecSchemaName$Schema.setAuthorizationCallback( new I$SecSchemaName$AuthorizationCallback() {
+			$SecSchemaName$Authorization auth = new $SecSchemaName$Authorization();
+			@Override
+			public I$SecSchemaName$Authorization getEffectiveAuthorization() {
+				return(auth);
+			}
+		});
+		$SecSchemaName$Authorization auth = ($SecSchemaName$Authorization)I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization();
+		auth.setSecUserId(systemUID);
 		auth.setAuthUuid6(CFLibUuid6.generateUuid6());
 		auth.setSecClusterId(clusterId);
 		auth.setSecTenantId(tenantId);
 		auth.setSecSessionId(bootstrapSessionID);
-
-		CFLibDbKeyHash256 systemUID = I$SecSchemaName$Schema.getSystemId();
 
 //I$SecSchemaName$Schema.getSysTenantId(), I$SecSchemaName$Schema.getSystemId()
 		bootstrapSession = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecSession().newRec();
@@ -1622,6 +1648,12 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		if (bootstrapSession != null &amp;&amp; bootstrapSessionID != null &amp;&amp; !bootstrapSessionID.isNull() &amp;&amp; bootstrapSession.getOptionalFinish() == null) {
 			bootstrapSession.setOptionalFinish(LocalDateTime.now());
 			bootstrapSession = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSession().updateSecSession(auth, bootstrapSession);
+			I$SecSchemaName$Schema.setAuthorizationCallback( new I$SecSchemaName$AuthorizationCallback() {
+				@Override
+				public I$SecSchemaName$Authorization getEffectiveAuthorization() {
+					return(null);
+				}
+			});
 		}
 	}
 
@@ -1786,11 +1818,6 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	
 		for( $SecSchemaName$TableInfo info: tableInfo) {
 			bootstrapTableSecurity(auth, LocalDateTime.now(), info.getTableName(), info.hasHistory(), info.isMutable(), info.getScope(), secSysGroupPublic, secSystemAdminGroup, secClusGroupSysAdmin, secTentGroupSysAdmin);
-		}
-
-		if (bootstrapSession != null &amp;&amp; bootstrapSessionID != null &amp;&amp; !bootstrapSessionID.isNull() &amp;&amp; bootstrapSession.getOptionalFinish() == null) {
-			bootstrapSession.setOptionalFinish(LocalDateTime.now());
-			bootstrapSession = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSession().updateSecSession(auth, bootstrapSession);
 		}
 	}
 </GenRule>
