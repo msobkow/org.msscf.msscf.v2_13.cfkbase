@@ -197,11 +197,22 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 
 	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTableEmbedPKeyCandidateRelationCascadeId">$switch IsFromTablePrimaryIndexKeyAtomic yes implSchemaJpaTableEmbedPKeyCandidateRelationCascadeId default empty$</GenRule>
 
-	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyCandidateRelationCascadeId">$iterate Columns(each implSchemaJpaTableEmbedPKeyApplyRelationCol empty empty)$</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyCandidateRelationCascadeId">
+			if ($leadlower OptionalOrRequired$$RelationType$$Suffix$ != null) {$iterate Columns(each implSchemaJpaTableEmbedPKeyApplyRelationCol empty empty)$
+			}
+			else {$iterate Columns(each implSchemaJpaTableEmbedPKeyNullifyRelationCol empty empty)$
+			}</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeyApplyRelationCol">
-			$lower reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$ = $popto Relation leadlower OptionalOrRequired$$popto Relation RelationType$$popto Relation Suffix$.get$reference FromCol implColumnAttrOptionality$$reference FromCol Name$();</GenRule>
+				$lower reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$ = $popto Relation leadlower OptionalOrRequired$$popto Relation RelationType$$popto Relation Suffix$.get$reference FromCol implColumnAttrOptionality$$reference FromCol Name$();</GenRule>
 
+	<GenRule GenDef="RelationCol" Name="IsFromColNullable">$reference FromCol reference Column IsNullable$</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeyNullifyRelationCol">$switch IsFromColNullable no implSchemaJpaTableEmbedPKeyInitvalRelationCol default implSchemaJpaTableEmbedPKeyNullvalRelationCol$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeyInitvalRelationCol">
+				$lower reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$ = I$reference FromCol reference Column reference Table DefSchemaName$$reference FromCol reference Column reference Table TableName$.$upper reference FromCol reference Column Name$_INIT_VALUE;</GenRule>
+	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeyNullvalRelationCol">
+				$lower reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$ = null;</GenRule>
 
 
 
