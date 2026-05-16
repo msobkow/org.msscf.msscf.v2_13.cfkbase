@@ -70,11 +70,61 @@ import $reference ManufacturingSchema lower JavaPackage$.$lower reference Manufa
 	name = "$DbTableName$", schema = "$reference ManufacturingSchema DbSchemaName$",
 	indexes = {$iterate Index( each commaJpaTableIndexAnnotation first jpaTableIndexAnnotation empty empty )$
 	}
-)$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$jpaPersistenceContext$
+)$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$switch TableName SecUser maybeImplJpaNamedSecurityQueries default empty$$jpaPersistenceContext$
 public class $SchemaName$Jpa$TableName$$switch HasDefSchema yes extendSchemaJpaTableJPA default extendSchemaJpaTableJPASuperJPA$$switch HasDefSchema yes empty default maybeImplSchemaJpaTableComparable$
 {$switch HasDefSchemaOrSuper no implCompactedPrimaryIndexClassJPAAttr default empty$$switch HasDefSchemaOrSuper no maybeDeclSchemaJpaTablePKeyMembers default empty$$switch HasDefSchemaOrSuper no implJpaRequiredRevisionAttr default empty$$iterate SuperiorCandidateDataRelations(each declSchemaJpaRelationMember empty empty)$$iterate SubservientCandidateDataRelations(each declSchemaJpaRelationMember empty empty)$$switch HasDefSchema yes empty default declSchemaJpaTableJPAColumns$
 $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSchemaJpaTableJPABaseConstruct$$switch HasDefSchema no implJpaGetClassCode default empty$$switch HasDefSchemaOrSuper no implSchemaJpaTablePKeyWrappers default empty$$iterate SuperiorDataRelations(each maybeImplSchemaJpaTableDataRelationGetterSetter empty empty)$$iterate SubservientDataRelations(each implSchemaJpaTableDataRelationGetter empty empty)$$switch HasDefSchema no maybeImplOptAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$implSchemaJpaTableToString$}
 </GenFile>
+
+	<GenRule GenDef="Table" Name="maybeImplJpaNamedSecurityQueries">$switch IsManufacturingSchemaSecuritySchema yes implJpaNamedSecurityQueries default empty$</GenRule>
+	<GenRule GenDef="Table" Name="implJpaNamedSecurityQueries">
+@NamedQuery(name="$leadlower DbSchemaName$$TableName$.countSysSecurityPermsByLoginId",
+	query="select count(*) from ("
+		+ "select sg0.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg0 join sg0.optionalChildrenMembByGrp mb0 join mb0.pkey.requiredParentUser pu0 where sg0.requiredName = :parmPermName and pu0.requiredLoginId = :parmLoginId"
+		+ " union select sg1.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg1 join sg1.optionalChildrenIncByGrp ig1 join ig1.pkey.requiredParentSubGroup sg1a join sg1a.optionalChildrenMembByGrp mb1 join mb1.pkey.requiredParentUser pu1 where sg1.requiredName = :parmPermName and pu1.requiredLoginId = :parmLoginId"
+		+ " union select sg2.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg2 join sg2.optionalChildrenIncByGrp ig2 join ig2.pkey.requiredParentSubGroup sg2a join sg2a.optionalChildrenIncByGrp ig2a join ig2a.pkey.requiredParentSubGroup sg2b join sg2b.optionalChildrenMembByGrp mb2 join mb2.pkey.requiredParentUser pu2 where sg2.requiredName = :parmPermName and pu2.requiredLoginId = :parmLoginId"
+		+ " union select sg3.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg3 join sg3.optionalChildrenIncByGrp ig3 join ig3.pkey.requiredParentSubGroup sg3a join sg3a.optionalChildrenIncByGrp ig3a join ig3a.pkey.requiredParentSubGroup sg3b join sg3b.optionalChildrenIncByGrp ig3b join ig3b.pkey.requiredParentSubGroup sg3c join sg3c.optionalChildrenMembByGrp mb3 join mb3.pkey.requiredParentUser pu3 where sg3.requiredName = :parmPermName and pu3.requiredLoginId = :parmLoginId"
+		+ " union select sg4.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg4 join sg4.optionalChildrenIncByGrp ig4 join ig4.pkey.requiredParentSubGroup sg4a join sg4a.optionalChildrenIncByGrp ig4a join ig4a.pkey.requiredParentSubGroup sg4b join sg4b.optionalChildrenIncByGrp ig4b join ig4b.pkey.requiredParentSubGroup sg4c join sg4c.optionalChildrenIncByGrp ig4c join ig4c.pkey.requiredParentSubGroup sg4d join sg4d.optionalChildrenMembByGrp mb4 join mb4.pkey.requiredParentUser pu4 where sg4.requiredName = :parmPermName and pu4.requiredLoginId = :parmLoginId"
+		+ " union select sg5.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg5 join sg5.optionalChildrenIncByGrp ig5 join ig5.pkey.requiredParentSubGroup sg5a join sg5a.optionalChildrenIncByGrp ig5a join ig5a.pkey.requiredParentSubGroup sg5b join sg5b.optionalChildrenIncByGrp ig5b join ig5b.pkey.requiredParentSubGroup sg5c join sg5c.optionalChildrenIncByGrp ig5c join ig5c.pkey.requiredParentSubGroup sg5d join sg5d.optionalChildrenIncByGrp ig5d join ig5d.pkey.requiredParentSubGroup sg5e join sg5e.optionalChildrenMembByGrp mb5 join mb5.pkey.requiredParentUser pu5 where sg5.requiredName = :parmPermName and pu5.requiredLoginId = :parmLoginId"
+		+ " union select sg6.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg6 join sg6.optionalChildrenIncByGrp ig6 join ig6.pkey.requiredParentSubGroup sg6a join sg6a.optionalChildrenIncByGrp ig6a join ig6a.pkey.requiredParentSubGroup sg6b join sg6b.optionalChildrenIncByGrp ig6b join ig6b.pkey.requiredParentSubGroup sg6c join sg6c.optionalChildrenIncByGrp ig6c join ig6c.pkey.requiredParentSubGroup sg6d join sg6d.optionalChildrenIncByGrp ig6d join ig6d.pkey.requiredParentSubGroup sg6e join sg6e.optionalChildrenIncByGrp ig6e join ig6e.pkey.requiredParentSubGroup sg6f join sg6f.optionalChildrenMembByGrp mb6 join mb6.pkey.requiredParentUser pu6 where sg6.requiredName = :parmPermName and pu6.requiredLoginId = :parmLoginId"
+		+ " union select sg7.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg7 join sg7.optionalChildrenIncByGrp ig7 join ig7.pkey.requiredParentSubGroup sg7a join sg7a.optionalChildrenIncByGrp ig7a join ig7a.pkey.requiredParentSubGroup sg7b join sg7b.optionalChildrenIncByGrp ig7b join ig7b.pkey.requiredParentSubGroup sg7c join sg7c.optionalChildrenIncByGrp ig7c join ig7c.pkey.requiredParentSubGroup sg7d join sg7d.optionalChildrenIncByGrp ig7d join ig7d.pkey.requiredParentSubGroup sg7e join sg7e.optionalChildrenIncByGrp ig7e join ig7e.pkey.requiredParentSubGroup sg7f join sg7f.optionalChildrenIncByGrp ig7f join ig7f.pkey.requiredParentSubGroup sg7g join sg7g.optionalChildrenMembByGrp mb7 join mb7.pkey.requiredParentUser pu7 where sg7.requiredName = :parmPermName and pu7.requiredLoginId = :parmLoginId)")
+@NamedQuery(name="$leadlower DbSchemaName$$TableName$.countSysSecurityPermsByUserId",
+	query="select count(*) from ("
+		+ "select sg0.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg0 join sg0.optionalChildrenMembByGrp mb0 join mb0.pkey.requiredParentUser pu0 where sg0.requiredName = :parmPermName and pu0.requiredSecUserId = :parmUserId"
+		+ " union select sg1.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg1 join sg1.optionalChildrenIncByGrp ig1 join ig1.pkey.requiredParentSubGroup sg1a join sg1a.optionalChildrenMembByGrp mb1 join mb1.pkey.requiredParentUser pu1 where sg1.requiredName = :parmPermName and pu1.requiredSecUserId = :parmUserId"
+		+ " union select sg2.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg2 join sg2.optionalChildrenIncByGrp ig2 join ig2.pkey.requiredParentSubGroup sg2a join sg2a.optionalChildrenIncByGrp ig2a join ig2a.pkey.requiredParentSubGroup sg2b join sg2b.optionalChildrenMembByGrp mb2 join mb2.pkey.requiredParentUser pu2 where sg2.requiredName = :parmPermName and pu2.requiredSecUserId = :parmUserId"
+		+ " union select sg3.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg3 join sg3.optionalChildrenIncByGrp ig3 join ig3.pkey.requiredParentSubGroup sg3a join sg3a.optionalChildrenIncByGrp ig3a join ig3a.pkey.requiredParentSubGroup sg3b join sg3b.optionalChildrenIncByGrp ig3b join ig3b.pkey.requiredParentSubGroup sg3c join sg3c.optionalChildrenMembByGrp mb3 join mb3.pkey.requiredParentUser pu3 where sg3.requiredName = :parmPermName and pu3.requiredSecUserId = :parmUserId"
+		+ " union select sg4.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg4 join sg4.optionalChildrenIncByGrp ig4 join ig4.pkey.requiredParentSubGroup sg4a join sg4a.optionalChildrenIncByGrp ig4a join ig4a.pkey.requiredParentSubGroup sg4b join sg4b.optionalChildrenIncByGrp ig4b join ig4b.pkey.requiredParentSubGroup sg4c join sg4c.optionalChildrenIncByGrp ig4c join ig4c.pkey.requiredParentSubGroup sg4d join sg4d.optionalChildrenMembByGrp mb4 join mb4.pkey.requiredParentUser pu4 where sg4.requiredName = :parmPermName and pu4.requiredSecUserId = :parmUserId"
+		+ " union select sg5.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg5 join sg5.optionalChildrenIncByGrp ig5 join ig5.pkey.requiredParentSubGroup sg5a join sg5a.optionalChildrenIncByGrp ig5a join ig5a.pkey.requiredParentSubGroup sg5b join sg5b.optionalChildrenIncByGrp ig5b join ig5b.pkey.requiredParentSubGroup sg5c join sg5c.optionalChildrenIncByGrp ig5c join ig5c.pkey.requiredParentSubGroup sg5d join sg5d.optionalChildrenIncByGrp ig5d join ig5d.pkey.requiredParentSubGroup sg5e join sg5e.optionalChildrenMembByGrp mb5 join mb5.pkey.requiredParentUser pu5 where sg5.requiredName = :parmPermName and pu5.requiredSecUserId = :parmUserId"
+		+ " union select sg6.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg6 join sg6.optionalChildrenIncByGrp ig6 join ig6.pkey.requiredParentSubGroup sg6a join sg6a.optionalChildrenIncByGrp ig6a join ig6a.pkey.requiredParentSubGroup sg6b join sg6b.optionalChildrenIncByGrp ig6b join ig6b.pkey.requiredParentSubGroup sg6c join sg6c.optionalChildrenIncByGrp ig6c join ig6c.pkey.requiredParentSubGroup sg6d join sg6d.optionalChildrenIncByGrp ig6d join ig6d.pkey.requiredParentSubGroup sg6e join sg6e.optionalChildrenIncByGrp ig6e join ig6e.pkey.requiredParentSubGroup sg6f join sg6f.optionalChildrenMembByGrp mb6 join mb6.pkey.requiredParentUser pu6 where sg6.requiredName = :parmPermName and pu6.requiredSecUserId = :parmUserId"
+		+ " union select sg7.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg7 join sg7.optionalChildrenIncByGrp ig7 join ig7.pkey.requiredParentSubGroup sg7a join sg7a.optionalChildrenIncByGrp ig7a join ig7a.pkey.requiredParentSubGroup sg7b join sg7b.optionalChildrenIncByGrp ig7b join ig7b.pkey.requiredParentSubGroup sg7c join sg7c.optionalChildrenIncByGrp ig7c join ig7c.pkey.requiredParentSubGroup sg7d join sg7d.optionalChildrenIncByGrp ig7d join ig7d.pkey.requiredParentSubGroup sg7e join sg7e.optionalChildrenIncByGrp ig7e join ig7e.pkey.requiredParentSubGroup sg7f join sg7f.optionalChildrenIncByGrp ig7f join ig7f.pkey.requiredParentSubGroup sg7g join sg7g.optionalChildrenMembByGrp mb7 join mb7.pkey.requiredParentUser pu7 where sg7.requiredName = :parmPermName and pu7.requiredSecUserId = :parmUserId)")
+@NamedQuery(name="$leadlower DbSchemaName$$TableName$.countClusSecurityPermsByLoginId",
+	query="select count(*) from ("
+		+ "select sg0.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg0 join sg0.optionalChildrenImplClusGrp cg0 join cg0.requiredOwnerCluster cl0 join cg0.optionalChildrenMembByGrp mb0 join mb0.pkey.requiredParentUser pu0 where sg0.requiredName = :parmPermName and cl0.requiredId = :parmClusterId and pu0.requiredLoginId = :parmLoginId)")
+@NamedQuery(name="$leadlower DbSchemaName$$TableName$.countClusSecurityPermsByUserId",
+	query="select count(*) from ("
+		+ "select sg0.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg0 join sg0.optionalChildrenImplClusGrp cg0 join cg0.requiredOwnerCluster cl0 join cg0.optionalChildrenMembByGrp mb0 join mb0.pkey.requiredParentUser pu0 where sg0.requiredName = :parmPermName and cl0.requiredId = :parmClusterId and pu0.requiredSecUserId = :parmUserId)")
+@NamedQuery(name="$leadlower DbSchemaName$$TableName$.countTentSecurityPermsByLoginId",
+	query="select count(*) from ("
+		+ "select sg0.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg0 join sg0.optionalChildrenImplTentGrp tg0 join tg0.requiredOwnerTenant tn0 join tg0.optionalChildrenMembByGrp mb0 join mb0.pkey.requiredParentUser pu0 where sg0.requiredName = :parmPermName and tg0.requiredId = :parmTenantId and pu0.requiredLoginId = :parmLoginId)")
+@NamedQuery(name="$leadlower DbSchemaName$$TableName$.countTentSecurityPermsByUserId",
+	query="select count(*) from ("
+		+ "select sg0.requiredName as requiredName from $SecSchemaName$JpaSecSysGrp sg0 join sg0.optionalChildrenImplTentGrp tg0 join tg0.requiredOwnerTenant tn0 join tg0.optionalChildrenMembByGrp mb0 join mb0.pkey.requiredParentUser pu0 where sg0.requiredName = :parmPermName and tg0.requiredId = :parmTenantId and pu0.requiredSecUserId = :parmUserId)")</GenRule>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<GenRule GenDef="Table" Name="maybeDeclSchemaJpaTablePKeyMembers">$switch IsPrimaryIndexKeyAtomic yes implSchemaJpaTablePKeyMembers default empty$</GenRule>
 	<GenRule GenDef="Table" Name="implSchemaJpaTablePKeyMembers">$iterate SuperiorCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$</GenRule>
@@ -408,10 +458,14 @@ $switch HasSuperClassRelation no implJpaOptAuditColumnAttr default empty$$iterat
 	}
 
 	@Override
-	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$) {$implJpaColumnAttrPKeyColumnAccessorsSetAttrDirect$
+	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$) {$iterate SuperiorCandidatePrimaryKeyRelations( empty implJpaColumnAttrPKeyColumnAccessorsSetAttrDirect lone implJpaColumnAttrPKeyColumnAccessorsSetAttrRelation each empty )$
 	}
 	$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJpaTableColumnGetterSetter first empty each empty empty empty )$
 	</GenRule>
+
+	<GenRule GenDef="Relation" Name="implJpaColumnAttrPKeyColumnAccessorsSetAttrRelation">$switch RelationType Container implJpaColumnAttrPKeyColumnReallySetAttrRelation default implJpaColumnAttrPKeyColumnAccessorsSetAttrDirect$</GenRule>
+	<GenRule GenDef="Relation" Name="implJpaColumnAttrPKeyColumnReallySetAttrRelation">
+		set$OptionalOrRequired$$RelationType$$Suffix$($leadlower poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implJpaTableColumnGetterSetter">$reference Column implJpaTableColumnGetterSetter$</GenRule>
 	<GenRule GenDef="TableCol" Name="implJpaTableColumnGetterSetter">$switch InSuperiorRelation yes implDerefSuperiorRelationColColumnGetter default implMaybeColumnGetterSetter$</GenRule>
@@ -470,6 +524,8 @@ $switch HasSuperClassRelation no implJpaOptAuditColumnAttr default empty$$iterat
 		if ($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$ != null) {
 			set$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each emptyl empty empty )$($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);
 		}</GenRule>
+		
+	<GenRule GenDef="Object" Name="implJpaColumnAttrPKeyColumnAccessorsSetAttrDirect">$poptop Table implJpaColumnAttrPKeyColumnAccessorsSetAttrDirect$</GenRule>
 	<GenRule GenDef="Table" Name="implJpaColumnAttrPKeyColumnAccessorsSetAttrDirect">
 		this.$lower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each emptyl empty empty )$ = $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$;</GenRule>
 

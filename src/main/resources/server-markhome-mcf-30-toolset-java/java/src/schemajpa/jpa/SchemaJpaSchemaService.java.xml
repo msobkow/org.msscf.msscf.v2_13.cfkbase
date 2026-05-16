@@ -81,19 +81,13 @@ public class $SchemaName$JpaSchemaService {
 
 	@Autowired
 	@Qualifier("$lower DefDbSchemaName$EntityManagerFactory")
-	private LocalContainerEntityManagerFactoryBean $lower DefDbSchemaName$EntityManagerFactory;$iterate Tables( each JpaSchemaServiceMaybeAutowireService empty empty )$$iterate SchemaRefs( empty JpaSchemaServiceAutowireSecRepositories each empty )$
+	private LocalContainerEntityManagerFactoryBean $lower DefDbSchemaName$EntityManagerFactory;$iterate Tables( each JpaSchemaServiceMaybeAutowireService empty empty )$
 $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecurityServices each empty )$$schematweak JpaSchemaServiceCustomServices$
 }
 </GenFile>
 
-	<GenRule GenDef="Object" Name="JpaSchemaServiceAutowireSecRepositories">$poptop SchemaDef JpaSchemaServiceAutowireSecRepositories$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="JpaSchemaServiceAutowireSecRepositories">
-	@Autowired
-	private $DefSchemaName$JpaSecUserRepository secuserRepository;
-</GenRule>
-
 	<GenRule GenDef="Object" Name="implSchemaJpaServiceSecurityServices">$poptop SchemaDef implSchemaJpaServiceSecurityServices$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="implSchemaJpaServiceSecurityServices">
+	<GenRule GenDef="SchemaDef" Name="implSchemaJpaServiceSecurityServices">$implJpaServiceSecurityQueries$
 	/***** Backend security service methods */
 
 	/**
@@ -164,15 +158,15 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 		if (tenantId == null || tenantId.isNull()) {
 			return(false);
 		}
-		long granted = secuserRepository.countTentSecurityPermsByUserId(permissionName, userId, tenantId);
+		long granted = countTentSecurityPermsByUserId(permissionName, userId, tenantId);
 		if (granted &gt; 0) {
 			return(true);
 		}
-		granted = secuserRepository.countClusSecurityPermsByUserId(permissionName, userId, clusterId);
+		granted = countClusSecurityPermsByUserId(permissionName, userId, clusterId);
 		if (granted &gt; 0) {
 			return(true);
 		}
-		granted = secuserRepository.countSysSecurityPermsByUserId(permissionName, userId);
+		granted = countSysSecurityPermsByUserId(permissionName, userId);
 		if (granted &gt; 0) {
 			return(true);
 		}
@@ -201,11 +195,11 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 		if (clusterId == null || clusterId.isNull()) {
 			return(false);
 		}
-		long granted = secuserRepository.countClusSecurityPermsByUserId(permissionName, userId, clusterId);
+		long granted = countClusSecurityPermsByUserId(permissionName, userId, clusterId);
 		if (granted &gt; 0) {
 			return(true);
 		}
-		granted = secuserRepository.countSysSecurityPermsByUserId(permissionName, userId);
+		granted = countSysSecurityPermsByUserId(permissionName, userId);
 		if (granted &gt; 0) {
 			return(true);
 		}
@@ -229,7 +223,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 		if (permissionName == null || permissionName.isEmpty() || permissionName.isBlank()) {
 			return(false);
 		}
-		long granted = secuserRepository.countSysSecurityPermsByUserId(permissionName, userId);
+		long granted = countSysSecurityPermsByUserId(permissionName, userId);
 		if (granted &gt; 0) {
 			return(true);
 		}
@@ -1869,5 +1863,158 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 	<GenRule GenDef="Object" Name="emitTrue">true</GenRule>
 	<GenRule GenDef="Object" Name="emitFalse">false</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="implJpaServiceSecurityQueries">$iterate SchemaTables(each implSecUserJpaServiceSecurityQueries empty empty)$</GenRule>
+	<GenRule GenDef="Table" Name="implSecUserJpaServiceSecurityQueries">$switch TableName SecUser maybeImplJpaServiceSecurityQueries default empty$</GenRule>
+	<GenRule GenDef="Table" Name="maybeImplJpaServiceSecurityQueries">$switch HasDefSchema yes empty default implJpaServiceSecurityQueries$</GenRule>
+	<GenRule GenDef="Table" Name="implJpaServiceSecurityQueries">
+	/***** Internal low-level security service methods to satisfy SecurityCache implementations */
+
+	/**
+	 *	Count system-level security access for permission granted to a specific user by LoginId.
+	 *
+	 *		@param parmPermName The name of the permission to be checked (all lowercase in the case of generated permission names; custom roles might be mixed-case)
+	 *		@param parmLoginId The LoginId of the user being authorized.
+	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	long countSysSecurityPermsByLoginId(String parmPermName, String parmLoginId) {
+		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
+		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countSysSecurityPermsByLoginId", Long.class);
+		query.setParameter("parmPermName", parmPermName);
+		query.setParameter("parmLoginId", parmLoginId);
+		Long val = query.getSingleResult();
+		em.close();
+		if (val != null) {
+			return(val);
+		}
+		else {
+			return(0L);
+		}
+	}
+
+	/**
+	 *	Count system-level security access for permission granted to a specific user by SecUserId.
+	 *
+	 *		@param parmPermName The name of the permission to be checked (all lowercase in the case of generated permission names; custom roles might be mixed-case)
+	 *		@param parmUserId The UserId of the user being authorized.
+	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	long countSysSecurityPermsByUserId(String parmPermName, CFLibDbKeyHash256 parmUserId) {
+		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
+		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countSysSecurityPermsByUserId", Long.class);
+		query.setParameter("parmPermName", parmPermName);
+		query.setParameter("parmUserId", parmUserId);
+		Long val = query.getSingleResult();
+		em.close();
+		if (val != null) {
+			return(val);
+		}
+		else {
+			return(0L);
+		}
+	}
+
+	/**
+	 *	Count cluster-level security access for permission granted to a specific user by LoginId for the specified ClusterId.
+	 *
+	 *		@param parmPermName The name of the permission to be checked (all lowercase in the case of generated permission names; custom roles might be mixed-case)
+	 *		@param parmLoginId The LoginId of the user being authorized.
+	 *		@param parmClusterId The ClusterId of the permission to be checked (not necessarily the user's current cluster)
+	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	long countClusSecurityPermsByLoginId(String parmPermName, String parmLoginId, CFLibDbKeyHash256 parmClusterId) {
+		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
+		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countClusSecurityPermsByLoginId", Long.class);
+		query.setParameter("parmPermName", parmPermName);
+		query.setParameter("parmLoginId", parmLoginId);
+		query.setParameter("parmClusterId", parmClusterId);
+		Long val = query.getSingleResult();
+		em.close();
+		if (val != null) {
+			return(val);
+		}
+		else {
+			return(0L);
+		}
+	}
+
+	/**
+	 *	Count cluster-level security access for permission granted to a specific user by SecUserId for the specified ClusterId.
+	 *
+	 *		@param parmPermName The name of the permission to be checked (all lowercase in the case of generated permission names; custom roles might be mixed-case)
+	 *		@param parmLoginId The LoginId of the user being authorized.
+	 *		@param parmClusterId The ClusterId of the permission to be checked (not necessarily the user's current cluster)
+	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	long countClusSecurityPermsByUserId(String parmPermName, CFLibDbKeyHash256 parmUserId, CFLibDbKeyHash256 parmClusterId) {
+		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
+		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countClusSecurityPermsByUserId", Long.class);
+		query.setParameter("parmPermName", parmPermName);
+		query.setParameter("parmUserId", parmUserId);
+		query.setParameter("parmClusterId", parmClusterId);
+		Long val = query.getSingleResult();
+		em.close();
+		if (val != null) {
+			return(val);
+		}
+		else {
+			return(0L);
+		}
+	}
+
+	/**
+	 *	Count tenant-level security access for permission granted to a specific user by LoginId for the specified TenantId.
+	 *
+	 *		@param parmPermName The name of the permission to be checked (all lowercase in the case of generated permission names; custom roles might be mixed-case)
+	 *		@param parmLoginId The LoginId of the user being authorized.
+	 *		@param parmTenantId The TenantId of the permission to be checked (not necessarily the user's current tenant)
+	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	long countTentSecurityPermsByLoginId(String parmPermName, String parmLoginId, CFLibDbKeyHash256 parmTenantId) {
+		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
+		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countTentSecurityPermsByLoginId", Long.class);
+		query.setParameter("parmPermName", parmPermName);
+		query.setParameter("parmLoginId", parmLoginId);
+		query.setParameter("parmTenantId", parmTenantId);
+		Long val = query.getSingleResult();
+		em.close();
+		if (val != null) {
+			return(val);
+		}
+		else {
+			return(0L);
+		}
+	}
+
+	/**
+	 *	Count tenant-level security access for permission granted to a specific user by SecUserId for the specified TenantId.
+	 *
+	 *		@param parmPermName The name of the permission to be checked (all lowercase in the case of generated permission names; custom roles might be mixed-case)
+	 *		@param parmLoginId The LoginId of the user being authorized.
+	 *		@param parmTenantId The TenantId of the permission to be checked (not necessarily the user's current tenant)
+	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	long countTentSecurityPermsByUserId(String parmPermName, CFLibDbKeyHash256 parmUserId, CFLibDbKeyHash256 parmTenantId) {
+		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
+		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countTentSecurityPermsByUserId", Long.class);
+		query.setParameter("parmPermName", parmPermName);
+		query.setParameter("parmUserId", parmUserId);
+		query.setParameter("parmTenantId", parmTenantId);
+		Long val = query.getSingleResult();
+		em.close();
+		if (val != null) {
+			return(val);
+		}
+		else {
+			return(0L);
+		}
+	}
+</GenRule>
 
 </RuleSet>
