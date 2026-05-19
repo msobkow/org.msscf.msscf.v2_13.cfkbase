@@ -68,13 +68,17 @@ import $reference ManufacturingSchema lower JavaPackage$.$lower reference Manufa
 @Entity
 @Table(
 	name = "$DbTableName$", schema = "$reference ManufacturingSchema DbSchemaName$",
-	indexes = {$iterate Index( each commaJpaTableIndexAnnotation first jpaTableIndexAnnotation empty empty )$
+	indexes = {$iterate Index( each commaJpaTableIndexAnnotation first jpaTableIndexAnnotation empty empty )$$iterate SuperiorCandidatePrimaryKeyRelations( each maybeCommaJpaTableSpecialIndexAnnotation empty empty )$
 	}
 )$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$switch TableName SecUser maybeImplJpaNamedSecurityQueries default empty$$jpaPersistenceContext$
 public class $SchemaName$Jpa$TableName$$switch HasDefSchema yes extendSchemaJpaTableJPA default extendSchemaJpaTableJPASuperJPA$$switch HasDefSchema yes empty default maybeImplSchemaJpaTableComparable$
 {$switch HasDefSchemaOrSuper no implCompactedPrimaryIndexClassJPAAttr default empty$$switch HasDefSchemaOrSuper no maybeDeclSchemaJpaTablePKeyMembers default empty$$switch HasDefSchemaOrSuper no implJpaRequiredRevisionAttr default empty$$iterate SuperiorCandidateDataRelations(each declSchemaJpaRelationMember empty empty)$$iterate SubservientCandidateDataRelations(each declSchemaJpaRelationMember empty empty)$$switch HasDefSchema yes empty default declSchemaJpaTableJPAColumns$
 $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSchemaJpaTableJPABaseConstruct$$switch HasDefSchema no implJpaGetClassCode default empty$$switch HasDefSchemaOrSuper no implSchemaJpaTablePKeyWrappers default empty$$iterate SuperiorDataRelations(each maybeImplSchemaJpaTableDataRelationGetterSetter empty empty)$$iterate SubservientDataRelations(each implSchemaJpaTableDataRelationGetter empty empty)$$switch HasDefSchema no maybeImplOptAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$implSchemaJpaTableToString$}
 </GenFile>
+
+	<GenRule GenDef="Relation" Name="maybeCommaJpaTableSpecialIndexAnnotation">$switch IsFromTablePrimaryKeyAtomic yes maybeCommaJpaTableSpecialIndexAnnotationIfContainer default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="maybeCommaJpaTableSpecialIndexAnnotationIfContainer">$switch RelationType Container commaJpaTableSpecialIndexAnnotation default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="commaJpaTableSpecialIndexAnnotation">$reference FromIndex commaJpaTableSpecialIndexAnnotation$</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeImplJpaNamedSecurityQueries">$switch IsManufacturingSchemaSecuritySchema yes implJpaNamedSecurityQueries default empty$</GenRule>
 	<GenRule GenDef="Table" Name="implJpaNamedSecurityQueries">
@@ -630,7 +634,20 @@ $switch InSuperiorPrimaryKeyRelation yes empty default implPKeyAttrAccessorSette
 	<GenRule GenDef="Index" Name="jpaTablePrimaryIndexAnnotation">
 		@Index(name = "$IndexName$", columnList = "$jpaTableIndexColumnList$", unique = true)</GenRule>
 	<GenRule GenDef="Index" Name="jpaTableIndexColumnList">$iterate Columns( each CommaDbColumnName first DbColumnName empty empty )$</GenRule>
-	
+
+	<GenRule GenDef="Index" Name="commaJpaTableSpecialIndexAnnotation">,$jpaTableSpecialIndexAnnotation$</GenRule>
+	<GenRule GenDef="Index" Name="jpaTableSpecialIndexAnnotation">$switch IsPrimaryIndex yes jpaTableSpecialPrimaryIndexAnnotation default jpaTableSpecialOrdinaryIndexAnnotation$</GenRule>
+	<GenRule GenDef="Index" Name="jpaTableSpecialOrdinaryIndexAnnotation">
+		@Index(name = "$IndexName$$maybeEmbedSpecialRelationSuffix$", columnList = "$jpaTableSpecialIndexColumnList$", unique = $switch IsUnique yes true default false$)</GenRule>
+	<GenRule GenDef="Index" Name="jpaTableSpecialPrimaryIndexAnnotation">
+		@Index(name = "$IndexName$$maybeEmbedSpecialRelationSuffix$", columnList = "$jpaTableSpecialIndexColumnList$", unique = true)</GenRule>
+	<GenRule GenDef="Index" Name="jpaTableSpecialIndexColumnList">$iterate Columns( first SpecialDbColumnName each CommaSpecialDbColumnName empty empty )$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="CommaSpecialDbColumnName"
+		>, $SpecialDbColumnName$</GenRule>
+	<GenRule GenDef="IndexCol" Name="SpecialDbColumnName"
+		>$DbColumnName$$maybeEmbedSpecialRelationSuffix$</GenRule>
+
 	<GenRule GenDef="IndexCol" Name="CommaDbColumnName"
 		>, $DbColumnName$</GenRule>
 
