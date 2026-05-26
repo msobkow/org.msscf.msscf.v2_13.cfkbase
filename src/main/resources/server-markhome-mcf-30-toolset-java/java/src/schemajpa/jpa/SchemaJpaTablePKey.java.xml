@@ -89,9 +89,9 @@ public class $SchemaName$Jpa$TableName$PKey$switch HasDefSchema yes SchemaJpaTab
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyImplBaseDefBody">$iterate SuperiorCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$$reference PrimaryKeyIndex iterate Columns(
-	each maybeJpaTablePKeyImplJpaColumnAttr )$
-$reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetterSetter empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each implJpaPKeyColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
+	<GenRule GenDef="Table" Name="SchemaJpaTablePKeyImplBaseDefBody">$reference PrimaryKeyIndex iterate Columns(
+	each implJpaColumnAttr )$
+$reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex iterate Columns( each implJpaPKeyColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMember">$switch IsFromIndexUnique yes declSchemaJpaRelationMemberOneToSomething default declSchemaJpaRelationMemberManyToSomething$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToSomething">$switch IsToIndexUnique yes declSchemaJpaRelationMemberOneToOne default declSchemaJpaRelationMemberOneToMany$</GenRule>
@@ -1501,38 +1501,13 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$iterate SuperiorCandidatePrim
 	@Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=16 )</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implJpaPKeyColumnGetterSetter">$reference Column implJpaPKeyColumnGetterSetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implJpaPKeyColumnGetterSetter">$switch InSuperiorCandidatePrimaryKeyRelation yes implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter default implColumnGetterSetter$</GenRule>
-	<GenRule GenDef="Atom" Name="implJpaPKeyColumnGetterSetter">$switch InSuperiorCandidatePrimaryKeyRelation yes implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter default implColumnGetterSetter$</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter">$reference Column implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter">
-	@Override
-	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
-		$reference SuperiorCandidatePrimaryKeyRelationCol reference Relation emitInterfaceDataType$ result = get$reference SuperiorCandidatePrimaryKeyRelationCol reference Relation OptionalOrRequired$$reference SuperiorCandidatePrimaryKeyRelationCol reference Relation RelationType$$reference SuperiorCandidatePrimaryKeyRelationCol reference Relation Suffix$();
-		if (result != null) {
-			return result.get$reference SuperiorCandidatePrimaryKeyRelationCol reference ToCol implColumnAttrOptionality$$reference SuperiorCandidatePrimaryKeyRelationCol reference ToCol Name$();
-		}
-		else {$switch IsNullable yes derefReturnNull default derefThrowError$
-		}
-	}
-</GenRule>
+	<GenRule GenDef="TableCol" Name="implJpaPKeyColumnGetterSetter">$implColumnGetterSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implJpaPKeyColumnGetterSetter">$implColumnGetterSetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="derefReturnNull">
 			return null;</GenRule>
 	<GenRule GenDef="Object" Name="derefThrowError">
 			throw new CFLibNullArgumentException(getClass(), "get$implColumnAttrOptionality$$Name$", 0, "get$reference SuperiorCandidatePrimaryKeyRelationCol reference Relation OptionalOrRequired$$reference SuperiorCandidatePrimaryKeyRelationCol reference Relation RelationType$$reference SuperiorCandidatePrimaryKeyRelationCol reference Relation Suffix$()");</GenRule>
-
-	<GenRule GenDef="Atom" Name="implDerefSuperiorCandidatePrimaryKeyRelationColColumnGetter">
-	@Override
-	public $implJavaAtomType$ get$implColumnAttrOptionality$$Name$() {
-		$reference SuperiorCandidatePrimaryKeyRelationCol reference Relation emitInterfaceDataType$ result = get$reference SuperiorCandidatePrimaryKeyRelationCol reference Relation OptionalOrRequired$$reference SuperiorCandidatePrimaryKeyRelationCol reference Relation RelationType$$reference SuperiorCandidatePrimaryKeyRelationCol reference Relation Suffix$();
-		if (result != null) {
-			return result.get$reference SuperiorCandidatePrimaryKeyRelationCol reference ToCol implColumnAttrOptionality$$reference SuperiorCandidatePrimaryKeyRelationCol reference ToCol Name$();
-		}
-		else {$switch IsNullable yes derefReturnNull default derefThrowError$
-		}
-	}
-</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implColumnGetterSetter">$reference Column implColumnGetterSetter$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implColumnGetter">$reference Column implColumnGetter$</GenRule>

@@ -1138,13 +1138,8 @@ $implReadAllObjComparator$
 	<GenRule GenDef="Index" Name="implTableObjReadByUniqueIndexPKey">$switch IsPrimaryIndexKeyAtomic yes implTableObjReadByUniqueIndexDirectPKey default implTableObjReadByUniqueIndexDerefPKey$</GenRule>
 
 	<GenRule GenDef="Index" Name="implTableObjReadByUniqueIndexDerefPKey">
-		I$reference Table reference BaseClass DefSchemaName$$poptop Table reference BaseClass TableName$PKey pkey = schema.get$DefSchemaName$BackingStore().getFactory$poptop Table reference BaseClass TableName$().newPKey();$poptop Table iterate SuperiorPrimaryKeyRelations( each implReadObjByUniqueIndexCopyRelnToPKey empty empty )$$iterate Columns( each implReadObjByUniqueIndexCopyArgToPKey )$
+		I$reference Table reference BaseClass DefSchemaName$$poptop Table reference BaseClass TableName$PKey pkey = schema.get$DefSchemaName$BackingStore().getFactory$poptop Table reference BaseClass TableName$().newPKey();$iterate Columns( each implReadObjByUniqueIndexCopyArgToPKey )$
 		I$DefSchemaName$$poptop Table TableName$Obj obj = read$poptop Table TableName$( pkey, forceRead );</GenRule>
-
-	<GenRule GenDef="Relation" Name="implReadObjByUniqueIndexCopyRelnToPKey">$switch IsRelationInPrimaryIndex yes implReadObjByUniqueIndexCopySingletonRelnToPKey default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="implReadObjByUniqueIndexCopySingletonRelnToPKey">$switch IsToIndexUnique yes reallyImplReadObjByUniqueIndexCopyRelnToPKey default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyImplReadObjByUniqueIndexCopyRelnToPKey">
-		pkey.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first passAlongColumnArg each passAlongCommaColumnArg )$);</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="passAlongColumnArg">$reference FromCol passAlongColumnArg$</GenRule>
 	<GenRule GenDef="RelationCol" Name="passAlongCommaColumnArg">$reference FromCol passAlongCommaColumnArg$</GenRule>
@@ -1298,7 +1293,7 @@ $implReadAllObjComparator$
 	<GenRule GenDef="Index" Name="implReadObjByUniqueIndexDirectPKey">
 		I$DefSchemaName$$TableName$Obj obj = read$TableName$( $iterate Columns( lone Name each empty empty empty )$ );</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implReadObjByUniqueIndexCopyArgToPKey">$switch InSuperiorPrimaryKeyRelation yes empty default reallyImplReadObjByUniqueIndexCopyArgToPKey$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implReadObjByUniqueIndexCopyArgToPKey">$reallyImplReadObjByUniqueIndexCopyArgToPKey$</GenRule>
 	<GenRule GenDef="IndexCol" Name="reallyImplReadObjByUniqueIndexCopyArgToPKey">
 		pkey.set$implColumnAttrOptionality$$Name$( $Name$ );</GenRule>
 
@@ -1315,7 +1310,7 @@ $implReadAllObjComparator$
 	<GenRule GenDef="IndexCol" Name="implReadObjByAltIdxCopyPKeyAttribute">
 				obj.$maybeDerefPKey$set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implReadObjByUniqueIndexCopyRecToPKey">$switch InSuperiorPrimaryKeyRelation yes empty default reallyImplReadObjByUniqueIndexCopyRecToPKey$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implReadObjByUniqueIndexCopyRecToPKey">$reallyImplReadObjByUniqueIndexCopyRecToPKey$</GenRule>
 	<GenRule GenDef="IndexCol" Name="reallyImplReadObjByUniqueIndexCopyRecToPKey">
 				pkey.set$implColumnAttrOptionality$$Name$( rec.get$implColumnAttrOptionality$$Name$() );</GenRule>
 
@@ -1931,7 +1926,7 @@ $implDeleteObjByDuplicateIndexPart1$
 
 	<GenRule GenDef="Index" Name="implTableObjReadCachedByUniqueIndexPKey">$switch IsPrimaryIndexKeyAtomic yes implTableObjReadCachedByUniqueIndexDirectPKey default implTableObjReadCachedByUniqueIndexDerefPKey$</GenRule>
 	<GenRule GenDef="Index" Name="implTableObjReadCachedByUniqueIndexDerefPKey">
-		I$reference Table reference BaseClass DefSchemaName$$poptop Table reference BaseClass TableName$PKey pkey = schema.get$DefSchemaName$BackingStore().getFactory$poptop Table reference BaseClass TableName$().newPKey();$poptop Table iterate SuperiorPrimaryKeyRelations( each implReadObjByUniqueIndexCopyRelnToPKey empty empty )$$iterate Columns( each implReadObjByUniqueIndexCopyArgToPKey )$$poptop Table iterate SuperiorPrimaryKeyRelations( each implReadObjByUniqueIndexCopyRelnToPKey empty empty )$$iterate Columns( each implReadObjByUniqueIndexCopyArgToPKey )$
+		I$reference Table reference BaseClass DefSchemaName$$poptop Table reference BaseClass TableName$PKey pkey = schema.get$DefSchemaName$BackingStore().getFactory$poptop Table reference BaseClass TableName$().newPKey();$iterate Columns( each implReadObjByUniqueIndexCopyArgToPKey )$$iterate Columns( each implReadObjByUniqueIndexCopyArgToPKey )$
 		obj = readCached$poptop Table TableName$( pkey );</GenRule>
 	<GenRule GenDef="Index" Name="implTableObjReadCachedByUniqueIndexDirectPKey">
 		obj = readCached$poptop Table TableName$( $iterate Columns( lone Name each empty empty empty )$ );</GenRule>
