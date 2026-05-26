@@ -74,8 +74,102 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 </GenFile>
 
 
-	<GenRule GenDef="Table" Name="implSchemaBuffTablePKeyWrappers">$switch IsPrimaryIndexKeyAtomic yes implSchemaBuffTablePKeyRelationAccessors default empty$</GenRule>
-	<GenRule GenDef="Table" Name="implSchemaBuffTablePKeyRelationAccessors">$iterate SuperiorPrimaryKeyRelations(each implSchemaBuffTablePKeyRelationGetterSetter empty empty)$$iterate SubservientPrimaryKeyRelations(each implSchemaBuffTablePKeyRelationGetter empty empty)$</GenRule>
+	<GenRule GenDef="Table" Name="implSchemaBuffTablePKeyWrappers">$switch IsPrimaryIndexKeyAtomic yes empty default implSchemaBuffTablePKeyRelationAccessors$</GenRule>
+	<GenRule GenDef="Table" Name="implSchemaBuffTablePKeyRelationAccessors">$iterate SuperiorPrimaryKeyRelations(each implSchemaBuffTablePKeyColRelationGetterSetter empty empty)$$iterate SubservientPrimaryKeyRelations(each implSchemaBuffTablePKeyRelationGetter empty empty)$</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyColRelationGetterSetter">
+	@Override
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique yes implSchemaBuffTablePKeyColRelationNonCandidateSingletonGetter default implSchemaBuffTablePKeyColRelationNonCandidateDuplicateGetter$
+	}$switch IsToIndexUnique yes implSchemaBuffTablePKeyColRelationSetter default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyColRelationNonCandidateSingletonGetter">
+		I$reference ToTable DefSchemaName$Schema targetBackingSchema = I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$();
+		if (targetBackingSchema == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$()");
+		}
+		I$reference ToTable DefSchemaName$$reference ToTable TableName$Table targetTable = targetBackingSchema.getTable$reference ToTable TableName$();
+		if (targetTable == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$().getTable$reference ToTable TableName$()");
+		}
+		I$reference ToTable DefSchemaName$$reference ToTable TableName$ targetRec = targetTable.$switch IsToIndexPrimaryKeyIndex yes derefBuffTableRelationPKeyReadDerived default derefBuffTableRelationDataReadDerived$;
+		return(targetRec);</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyColRelationNonCandidateDuplicateGetter">
+		I$reference ToTable DefSchemaName$Schema targetBackingSchema = I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$();
+		if (targetBackingSchema == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$()");
+		}
+		I$reference ToTable DefSchemaName$$reference ToTable TableName$Table targetTable = targetBackingSchema.getTable$reference ToTable TableName$();
+		if (targetTable == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$().getTable$reference ToTable TableName$()");
+		}
+		I$reference ToTable DefSchemaName$$reference ToTable TableName$[] targetArr = targetTable.$switch IsToIndexPrimaryKeyIndex yes derefBuffTableRelationPKeyReadDerived default derefBuffTableRelationDataReadDerived$;
+		if( targetArr != null ) {
+			List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$&gt; results = new ArrayList&lt;&gt;(targetArr.length);
+			for (int idx = 0; idx &lt; targetArr.length; idx++) {
+				results.add(targetArr[idx]);
+			}
+			return( results );
+		}
+		else {
+			List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$&gt; results = new ArrayList&lt;&gt;();
+			return( results );
+		}</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyColRelationSetter">
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaBuffTablePKeyColNonCandidateRelationSetterRequired default implSchemaBuffTablePKeyColNonCandidateRelationSetterOptional$
+	}
+
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {$iterate Columns(each implSchemaBuffTableSetPKeyAttrArgColumn)$
+	}</GenRule>
+	
+	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyColRelationGetter">$implSchemaBuffTablePKeyColRelationNonCandidateGetter$</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyColRelationNonCandidateGetter">
+	@Override
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique yes implSchemaBuffTablePKeyColRelationNonCandidateSingletonGetter default implSchemaBuffTablePKeyColRelationNonCandidateDuplicateGetter$
+	}</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableSetPKeyAttrArgColumn">
+		getPKey().set$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$(arg$reference FromCol reference Column Name$);</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyColNonCandidateRelationSetterRequired">
+		if(argObj == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$RelationType$$Suffix$", 1, "argObj");
+		}
+		else {$iterate Columns(each implSchemaBuffTableRelationSetterCopyToPKeyAttr)$
+		}
+	</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyColNonCandidateRelationSetterOptional">
+		if(argObj == null) {$iterate Columns(each implSchemaBuffTableRelationSetterClearPKeyAttr)$
+		}
+		else {$iterate Columns(each implSchemaBuffTableRelationSetterCopyToPKeyAttr)$
+		}
+	</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterCopyToPKeyAttr">
+			getPKey().set$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$(argObj.get$reference ToCol reference Column implColumnAttrOptionality$$reference ToCol reference Column Name$());</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterClearPKeyAttr">
+			getPKey().set$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$(null);</GenRule>
+
+	<GenRule GenDef="Relation" Name="maybeImplSchemaBuffTablePKeyColRelationSetter">$switch HasDefSchema yes empty default implSuperiorSchemaBuffTablePKeyColRelationSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="implSuperiorSchemaBuffTablePKeyColRelationSetter">$switch IsSuperiorRelation yes implInPrimarySchemaBuffTablePKeyColRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implInPrimarySchemaBuffTablePKeyColRelationSetter">$switch IsRelationInPrimaryIndex yes implSchemaBuffTablePKeyColRelationSetter default empty$</GenRule>
+
+
+
+
+
+
+
+
+
+
+
 
 	<GenRule GenDef="Relation" Name="maybeImplSchemaBuffTableDataRelationGetterSetter">$switch IsRelationInPrimaryIndex no implSchemaBuffTableRelationNonCandidateGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="implSuperiorSchemaBuffTableDataRelationGetterSetter">$switch IsSuperiorRelation yes implInDataSchemaBuffTableDataRelationGetterSetter default implInDataSchemaBuffTableDataRelationGetter$</GenRule>
@@ -221,46 +315,45 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 	@Override
 	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$) {$switch IsAtomicPrimaryIndexKeyNullable yes implBuffColumnAttrPKeyColumnAccessorsSetAttrDirect default implBuffColumnAttrPKeyColumnAccessorsSetAttrOnlyIfNotNull$
 	}
-$switch IsPrimaryIndexKeyAtomic yes implBuffColumnAttrPKeyAttrAccessors default implBuffColumnAttrPKeyColumnWrappers$</GenRule>
+$switch IsPrimaryIndexKeyAtomic yes implBuffColumnAttrPKeyAttrAccessors default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyAttrAccessors">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implNonSuperiorColumnGetterSetter empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnWrappers">$reference BaseClass iterate SuperiorPrimaryKeyRelations( each implBuffColumnAttrPKeyWrapRelationGetterSetter empty empty )$$reference BaseClass iterate SubservientPrimaryKeyRelations( each implBuffColumnAttrPKeyWrapRelationGetter empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyWrapColumnGetterSetter empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyAttrAccessors">$reference BaseClass iterate SuperiorPrimaryKeyRelations( each implBuffColumnAttrPKeyWrapRelationGetterSetter empty empty )$$reference BaseClass iterate SubservientPrimaryKeyRelations( each implSchemaBuffTablePKeyColRelationGetter empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implNonSuperiorColumnGetterSetter empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnWrappers">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyWrapColumnGetterSetter empty empty )$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implNonSuperiorColumnGetterSetter">$switch InSuperiorPrimaryKeyRelation yes implColumnGetter default implColumnGetterSetter$</GenRule>
 
-	<GenRule GenDef="Relation" Name="implBuffColumnAttrPKeyWrapRelationGetterSetter">$switch IsToIndexAtomic yes implBuffColumnAttrPKeyWrapRelationSingletonGetterSetter default implBuffColumnAttrPKewRapRelationDuplicateGetter$</GenRule>
+	<GenRule GenDef="Relation" Name="implBuffColumnAttrPKeyWrapRelationGetterSetter">$switch IsToIndexAtomic yes implBuffColumnAttrPKeyWrapRelationSingletonGetterSetter default implBuffColumnAttrPKeyWrapRelationDuplicateGetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implBuffColumnAttrPKeyWrapRelationSingletonGetterSetter">
 	@Override
-	public I$reference ToTable DefSchemaName$$reference ToTable TableName$ get$OptionalOrRequired$$RelationType$$Suffix$() {
-		return( getPKey().get$OptionalOrRequired$$RelationType$$Suffix$() );
+	public I$reference ToTable DefSchemaName$$reference ToTable TableName$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique yes implSchemaBuffTablePKeyRelationNonCandidateSingletonGetter default implSchemaBuffTablePKeyRelationNonCandidateDuplicateGetter$
 	}
-	
-	@Override
-	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ value) {
-		getPKey().set$OptionalOrRequired$$RelationType$$Suffix$(value);
-	}
+$switch IsToIndexUnique yes implSchemaBuffTablePKeyRelationNonCandidateSetter default empty$</GenRule>
 
-	@Override
-	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {
-		getPKey().set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first passSetArgColumn each passCommaSetArgColumn)$);
-	}
-$iterate Columns( each implBuffColumnAttrPKeyWrapRelationAttrGetter empty empty )$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implBuffColumnAttrPKeyWrapRelationAttrGetter">
-	@Override
-	public $reference FromCol reference Column implJavaAtomType$ get$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$() {
-		return (getPKey().get$popto Relation OptionalOrRequired$$popto Relation RelationType$$popto Relation Suffix$().get$reference ToCol reference Column implColumnAttrOptionality$$reference ToCol reference Column Name$());
-	}
-</GenRule>
 
-	<GenRule GenDef="Relation" Name="implBuffColumnAttrPKeyWrapRelationDuplicateGetter">
-	@Override
-	public List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$&gt; get$OptionalOrRequired$$RelationType$$Suffix$() {
-		return( getPKey().get$OptionalOrRequired$$RelationType$$Suffix$() );
-	}
-</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implPKeyWrapColumnGetterSetter">$switch InSuperiorPrimaryKeyRelation yes empty default reallyImplPKeyWrapColumnGetterSetter$</GenRule>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<GenRule GenDef="IndexCol" Name="implPKeyWrapColumnGetterSetter">$reallyImplPKeyWrapColumnGetterSetter$</GenRule>
 	<GenRule GenDef="IndexCol" Name="reallyImplPKeyWrapColumnGetterSetter">
 	@Override
 	public $reference Column implJavaAtomType$ get$reference Column implColumnAttrOptionality$$reference Column Name$() {

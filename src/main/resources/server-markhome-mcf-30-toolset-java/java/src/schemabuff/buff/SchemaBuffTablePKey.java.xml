@@ -92,7 +92,7 @@ public class $SchemaName$Buff$TableName$PKey$switch HasDefSchema yes SchemaBuffT
 </GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaBuffTablePKeyImplBaseDefBody">$reference PrimaryKeyIndex iterate Columns( each implColumnAttr )$
-$reference PrimaryKeyIndex implBuffPKeyConstructor$$iterate SuperiorCandidatePrimaryKeyRelations(each implSchemaBuffTablePKeyRelationGetterSetter empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each implSchemaBuffTablePKeyRelationGetter empty empty)$$reference PrimaryKeyIndex iterate Columns( each implBuffPKeyColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
+$reference PrimaryKeyIndex implBuffPKeyConstructor$$reference PrimaryKeyIndex iterate Columns( each implBuffPKeyColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
 
 
 	<GenRule GenDef="Relation" Name="maybeImplSchemaBuffTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default implInPrimarySchemaBuffTablePKeyRelationGetterSetter$</GenRule>
@@ -100,8 +100,8 @@ $reference PrimaryKeyIndex implBuffPKeyConstructor$$iterate SuperiorCandidatePri
 	<GenRule GenDef="Relation" Name="implInPrimarySchemaBuffTablePKeyRelationGetterSetter">$switch IsRelationInPrimaryIndex yes implSchemaBuffTablePKeyRelationGetterSetter default empty$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implBuffPKeyColumnGetterSetter">$reference Column implBuffPKeyColumnGetterSetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implBuffPKeyColumnGetterSetter">$switch InSuperiorPrimaryKeyRelation yes implColumnGetter default implColumnGetterSetter$</GenRule>
-	<GenRule GenDef="Atom" Name="implBuffPKeyColumnGetterSetter">$switch InSuperiorPrimaryKeyRelation yes implColumnGetter default implColumnGetterSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implBuffPKeyColumnGetterSetter">$implColumnGetterSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implBuffPKeyColumnGetterSetter">$implColumnGetterSetter$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implSchemaBuffTablePKeyRelationGetterSetter">$implSchemaBuffTablePKeyRelationNonCandidateGetterSetter$</GenRule>
 
