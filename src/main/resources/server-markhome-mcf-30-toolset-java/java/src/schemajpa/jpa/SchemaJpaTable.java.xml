@@ -68,16 +68,14 @@ import $reference ManufacturingSchema lower JavaPackage$.$lower reference Manufa
 @Entity
 @Table(
 	name = "$DbTableName$", schema = "$reference ManufacturingSchema DbSchemaName$",
-	indexes = {$iterate Index( each commaJpaTableIndexAnnotation first jpaTableIndexAnnotation empty empty )$$iterate SuperiorCandidatePrimaryKeyRelations( each maybeCommaJpaTableSpecialIndexAnnotation empty empty )$
+	indexes = {$iterate Index( each commaJpaTableIndexAnnotation first jpaTableIndexAnnotation empty empty )$$iterate SuperiorCandidateRelations( each commaJpaTableSpecialIndexAnnotation empty empty )$
 	}
 )$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$switch TableName SecUser maybeImplJpaNamedSecurityQueries default empty$$jpaPersistenceContext$
 public class $SchemaName$Jpa$TableName$$switch HasDefSchema yes extendSchemaJpaTableJPA default extendSchemaJpaTableJPASuperJPA$$switch HasDefSchema yes empty default maybeImplSchemaJpaTableComparable$
-{$switch HasDefSchemaOrSuper no implCompactedPrimaryIndexClassJPAAttr default empty$$switch HasDefSchemaOrSuper no maybeDeclSchemaJpaTablePKeyMembers default empty$$switch HasDefSchemaOrSuper no implJpaRequiredRevisionAttr default empty$$iterate SuperiorCandidateDataRelations(each declSchemaJpaRelationMember empty empty)$$iterate SubservientCandidateDataRelations(each declSchemaJpaRelationMember empty empty)$$switch HasDefSchema yes empty default declSchemaJpaTableJPAColumns$
-$switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSchemaJpaTableJPABaseConstruct$$switch HasDefSchema no implJpaGetClassCode default empty$$switch HasDefSchemaOrSuper no implSchemaJpaTablePKeyWrappers default empty$$iterate SuperiorDataRelations(each maybeImplSchemaJpaTableDataRelationGetterSetter empty empty)$$iterate SubservientDataRelations(each implSchemaJpaTableDataRelationGetter empty empty)$$switch HasDefSchema no maybeImplOptAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$implSchemaJpaTableToString$}
+{$switch HasDefSchemaOrSuper no implCompactedPrimaryIndexClassJPAAttr default empty$$switch HasDefSchemaOrSuper no implSchemaJpaTablePKeyMembers default empty$$switch HasDefSchemaOrSuper no implJpaRequiredRevisionAttr default empty$$iterate SuperiorCandidateDataRelations(each declSchemaJpaRelationMember empty empty)$$iterate SubservientCandidateDataRelations(each declSchemaJpaRelationMember empty empty)$$switch HasDefSchema yes empty default declSchemaJpaTableJPAColumns$
+$switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSchemaJpaTableJPABaseConstruct$$switch HasDefSchema no implJpaGetClassCode default empty$$switch HasDefSchemaOrSuper no implSchemaJpaTableEmbedPKeyRelationAccessors default empty$$iterate SuperiorDataRelations(each maybeImplSchemaJpaTableDataRelationGetterSetter empty empty)$$iterate SubservientDataRelations(each implSchemaJpaTableDataRelationGetter empty empty)$$switch HasDefSchema no maybeImplOptAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no implJpaColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$switch HasDefSchema no implJpaDataGetterSetters default empty$$implJpaEquals$$implJpaGetHashCode$$implJpaCompareTo$$implJpaSet$$implSchemaJpaTableToString$}
 </GenFile>
 
-	<GenRule GenDef="Relation" Name="maybeCommaJpaTableSpecialIndexAnnotation">$switch IsFromTablePrimaryKeyAtomic yes maybeCommaJpaTableSpecialIndexAnnotationIfContainer default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="maybeCommaJpaTableSpecialIndexAnnotationIfContainer">$switch RelationType Container commaJpaTableSpecialIndexAnnotation default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="commaJpaTableSpecialIndexAnnotation">$reference FromIndex commaJpaTableSpecialIndexAnnotation$</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeImplJpaNamedSecurityQueries">$switch IsManufacturingSchemaSecuritySchema yes implJpaNamedSecurityQueries default empty$</GenRule>
@@ -147,23 +145,48 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 		+ " union select tg7.requiredOwnerTenant as tn from $SecSchemaName$JpaSecSysGrp sg7 join sg7.optionalChildrenIncByGrp ig7 join ig7.pkey.requiredParentSubGroup sg7a join sg7a.optionalChildrenIncByGrp ig7a join ig7a.pkey.requiredParentSubGroup sg7b join sg7b.optionalChildrenIncByGrp ig7b join ig7b.pkey.requiredParentSubGroup sg7c join sg7c.optionalChildrenIncByGrp ig7c join ig7c.pkey.requiredParentSubGroup sg7d join sg7d.optionalChildrenIncByGrp ig7d join ig7d.pkey.requiredParentSubGroup sg7e join sg7e.optionalChildrenIncByGrp ig7e join ig7e.pkey.requiredParentSubGroup sg7f join sg7f.optionalChildrenIncByGrp ig7f join ig7f.pkey.requiredParentSubGroup sg7g join sg7g.optionalChildrenImplTentGrp tg7 join tg7.optionalChildrenMembByGrp mb7 join mb7.pkey.requiredParentUser pu7 where sg7.requiredName = :parmPermName and pu7.requiredSecUserId = :parmUserId)"
 		+ " where tn.requiredId = :parmTenantId)")</GenRule>
 
-	<GenRule GenDef="Table" Name="maybeDeclSchemaJpaTablePKeyMembers">$switch IsPrimaryIndexKeyAtomic yes implSchemaJpaTablePKeyMembers default empty$</GenRule>
 	<GenRule GenDef="Table" Name="implSchemaJpaTablePKeyMembers">$iterate SuperiorCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$$iterate SubservientCandidatePrimaryKeyRelations(each declSchemaJpaRelationMember empty empty)$</GenRule>
 
-	<GenRule GenDef="Table" Name="implSchemaJpaTablePKeyWrappers">$switch IsPrimaryIndexKeyAtomic yes implSchemaJpaTableEmbedPKeyRelationAccessors default implSchemaJpaTableEmbedPKeyRelationWrappers$</GenRule>
-	<GenRule GenDef="Table" Name="implSchemaJpaTableEmbedPKeyRelationAccessors">$iterate SuperiorPrimaryKeyRelations(each implSchemaJpaTableEmbedPKeyRelationGetterSetter empty empty)$$iterate SubservientPrimaryKeyRelations(each implSchemaJpaTablePKeyRelationGetter empty empty)$</GenRule>
-	<GenRule GenDef="Table" Name="implSchemaJpaTableEmbedPKeyRelationWrappers">$iterate SuperiorPrimaryKeyRelations(each implSchemaJpaTableWrapPKeyRelationGetterSetter empty empty)$$iterate SubservientPrimaryKeyRelations(each implSchemaJpaTableWrapPKeyRelationGetter empty empty)$</GenRule>
+	<GenRule GenDef="Table" Name="implSchemaJpaTableEmbedPKeyRelationAccessors">$iterate SuperiorPrimaryKeyRelations(each implSchemaJpaTableEmbedPKeyRelationGetterSetter empty empty)$$iterate SubservientPrimaryKeyRelations(each implSchemaJpaTableEmbedPKeyRelationGetter empty empty)$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationGetterSetter">$switch IsCandidateRelation yes implSchemaJpaTableEmbedPKeyRelationCandidateGetterSetter default implSchemaJpaTableEmbedPKeyRelationNonCandidateGetterSetter$</GenRule>
 
-	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationCandidateGetterSetter">
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationCandidateGetterSetter">$switch IsPrimaryIndexKeyAtomic yes implSchemaJpaTableEmbedAtomicPKeyRelationCandidateGetter default implSchemaJpaTableEmbedCompositePKeyRelationCandidateGetter$$switch IsToIndexUnique yes implSchemaJpaTableEmbedPKeyRelationCandidateSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationGetter">$switch IsCandidateRelation yes implSchemaJpaTableEmbedPKeyRelationCandidateGetter default implSchemaJpaTableEmbedPKeyRelationNonCandidateGetter$</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationCandidateGetter">$switch IsPrimaryIndexKeyAtomic yes implSchemaJpaTableEmbedAtomicPKeyRelationCandidateGetter default implSchemaJpaTableEmbedCompositePKeyRelationCandidateGetter$</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedAtomicPKeyRelationCandidateGetter">
 	@Override
-	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique no implSchemaJpaTablePKeyReturnWrapListRelationMember default implSchemaJpaTablePKeyReturnDirectRelationMember$
-	}$switch IsToIndexUnique yes implSchemaJpaTableEmbedPKeyRelationCandidateSetter default empty$</GenRule>
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$implSchemaJpaTablePKeyReturnDirectRelationMember$
+	}</GenRule>
 
-	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationCandidateSetter">
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedCompositePKeyRelationCandidateGetter">
 	@Override
-	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaJpaTableEmbedPKeyCandidateRelationSetterRequired default implSchemaJpaTableEmbedPKeyCandidateRelationSetterOptional$
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$implSchemaJpaTablePKeyReturnDirectRelationMember$
+	}</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationCandidateSetter">$switch IsPrimaryIndexKeyAtomic yes implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetter default implSchemaJpaTableEmbedPKeyRelationCompositeCandidateSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetter">
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaJpaTableEmbedPKeyAtomicCandidateRelationSetterRequired default implSchemaJpaTableEmbedPKeyCandidateRelationSetterOptional$
+	}
+
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {
+		I$reference ToTable DefSchemaName$Schema targetBackingSchema = I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$();
+		if (targetBackingSchema == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$()");
+		}
+		I$reference ToTable DefSchemaName$$reference ToTable TableName$Table targetTable = targetBackingSchema.getTable$reference ToTable TableName$();
+		if (targetTable == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$().getTable$reference ToTable TableName$()");
+		}
+		I$reference ToTable DefSchemaName$$reference ToTable TableName$ targetRec = targetTable.$switch IsToPrimaryIndexKey yes derefJpaTableRelationPKeyReadDerived default derefJpaTableRelationDataReadDerived$;
+		set$OptionalOrRequired$$RelationType$$Suffix$(targetRec);
+	}</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationCompositeCandidateSetter">
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaJpaTableEmbedPKeyCompositeCandidateRelationSetterRequired default implSchemaJpaTableEmbedPKeyCompositeCandidateRelationSetterOptional$
 	}
 
 	@Override
@@ -228,63 +251,97 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {$iterate Columns(each implSchemaJpaTableSetAttrArgColumn)$
 	}</GenRule>
 	
-	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationGetter">$switch IsCandidateRelation yes implSchemaJpaTableEmbedPKeyRelationCandidateGetter default implSchemaJpaTableEmbedPKeyRelationNonCandidateGetter$</GenRule>
-
-	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationCandidateGetter">
-	@Override
-	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique no implSchemaJpaTableEmbedPKeyReturnWrapListRelationMember default implSchemaJpaTableEmbedPKeyReturnDirectRelationMember$
-	}</GenRule>
-	
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationNonCandidateGetter">
 	@Override
 	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique yes implSchemaJpaTableEmbedPKeyRelationNonCandidateSingletonGetter default implSchemaJpaTableEmbedPKeyRelationNonCandidateDuplicateGetter$
 	}</GenRule>
 
-	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyCandidateRelationSetterRequired">
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyCandidateRelationSetterRequired">$switch IsPrimaryIndexKeyAtomic yes implSchemaJpaTableEmbedPKeyAtomicCandidateRelationSetterRequired default implSchemaJpaTableEmbedPKeyCompositeCandidateRelationSetterRequired$</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyAtomicCandidateRelationSetterRequired">
 		if(argObj == null) {
 			throw new CFLibNullArgumentException(getClass(), "set$RelationType$$Suffix$", 1, "argObj");
 		}
 		else if (argObj instanceof $emitMappingDataType$) {
-			$leadlower OptionalOrRequired$$RelationType$$Suffix$ = ($emitMappingDataType$)argObj;$switch RelationType Container maybeImplSchemaJpaTableEmbedPKeyCandidateRelationCascadeId default empty$
+			$leadlower OptionalOrRequired$$RelationType$$Suffix$ = ($emitMappingDataType$)argObj;$maybeImplSchemaJpaTableEmbedPKeyCandidateRelationCascadeId$
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "set$RelationType$$Suffix$", "argObj", argObj, "$emitMappingDataType$");
 		}
 	</GenRule>
-
-	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyCandidateRelationSetterOptional">
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyCompositeCandidateRelationSetterRequired">
 		if(argObj == null) {
-			$leadlower OptionalOrRequired$$RelationType$$Suffix$ = null;
+			throw new CFLibNullArgumentException(getClass(), "set$RelationType$$Suffix$", 1, "argObj");
 		}
 		else if (argObj instanceof $emitMappingDataType$) {
-			$leadlower OptionalOrRequired$$RelationType$$Suffix$ = ($emitMappingDataType$)argObj;$switch RelationType Container maybeImplSchemaJpaTableEmbedPKeyCandidateRelationCascadeId default empty$
+			$leadlower OptionalOrRequired$$RelationType$$Suffix$ = ($emitMappingDataType$)argObj;$maybeImplSchemaJpaTableEmbedPKeyCandidateRelationCascadeId$
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "set$RelationType$$Suffix$", "argObj", argObj, "$emitMappingDataType$");
 		}
 	</GenRule>
 
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyAtomicCandidateRelationSetterOptional">
+		if(argObj == null) {
+			$leadlower OptionalOrRequired$$RelationType$$Suffix$ = null;$maybeImplSchemaJpaTableEmbedPKeyCandidateRelationCascadeId$
+		}
+		else if (argObj instanceof $emitMappingDataType$) {
+			$leadlower OptionalOrRequired$$RelationType$$Suffix$ = ($emitMappingDataType$)argObj;$maybeImplSchemaJpaTableEmbedPKeyCandidateRelationCascadeId$
+		}
+		else {
+			throw new CFLibUnsupportedClassException(getClass(), "set$RelationType$$Suffix$", "argObj", argObj, "$emitMappingDataType$");
+		}
+	</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyCompositeCandidateRelationSetterOptional">
+		if(argObj == null) {
+			$leadlower OptionalOrRequired$$RelationType$$Suffix$ = null;$maybeImplSchemaJpaTableEmbedPKeyCandidateRelationCascadeId$
+		}
+		else if (argObj instanceof $emitMappingDataType$) {
+			$leadlower OptionalOrRequired$$RelationType$$Suffix$ = ($emitMappingDataType$)argObj;$maybeImplSchemaJpaTableEmbedPKeyCandidateRelationCascadeId$
+		}
+		else {
+			throw new CFLibUnsupportedClassException(getClass(), "set$RelationType$$Suffix$", "argObj", argObj, "$emitMappingDataType$");
+		}
+	</GenRule>
+	
 	<GenRule GenDef="Relation" Name="IsFromTablePrimaryIndexKeyAtomic">$reference FromTable reference BaseClass reference PrimaryKeyIndex IsAtomic$</GenRule>
 
-	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTableEmbedPKeyCandidateRelationCascadeId">$switch IsFromTablePrimaryIndexKeyAtomic yes implSchemaJpaTableEmbedPKeyCandidateRelationCascadeId default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="IsFromIndexAtomic">$reference FromIndex IsAtomic$</GenRule>
 
-	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyCandidateRelationCascadeId">
+	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTableEmbedPKeyCandidateRelationCascadeId">$switch IsSuperiorCandidateRelation yes implSchemaJpaTableEmbedPKeyCandidateRelationCascadeId default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyCandidateRelationCascadeId">$switch IsPrimaryIndexKeyAtomic yes implSchemaJpaTableEmbedAtomicPKeyCandRelationCascadeId default implSchemaJpaTableEmbedCompositePKeyCandRelationCascadeId$</GenRule>
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedAtomicPKeyCandRelationCascadeId">
 			if ($leadlower OptionalOrRequired$$RelationType$$Suffix$ != null) {$iterate Columns(each implSchemaJpaTableEmbedPKeyApplyRelationCol empty empty)$
 			}
 			else {$iterate Columns(each implSchemaJpaTableEmbedPKeyNullifyRelationCol empty empty)$
 			}</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeyApplyRelationCol">
-				$lower reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$ = $popto Relation leadlower OptionalOrRequired$$popto Relation RelationType$$popto Relation Suffix$.get$reference FromCol implColumnAttrOptionality$$reference FromCol Name$();</GenRule>
+				$lower reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$ = $popto Relation leadlower OptionalOrRequired$$popto Relation RelationType$$popto Relation Suffix$.get$reference ToCol implColumnAttrOptionality$$reference ToCol Name$();</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedCompositePKeyCandRelationCascadeId">
+			if ($leadlower OptionalOrRequired$$RelationType$$Suffix$ != null) {$iterate Columns(each implSchemaJpaTableEmbedPKeySetRelationCol empty empty)$
+			}
+			else {$iterate Columns(each implSchemaJpaTableEmbedPKeySetNullifyRelationCol empty empty)$
+			}</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeySetRelationCol">
+				getPKey().set$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$($popto Relation leadlower OptionalOrRequired$$popto Relation RelationType$$popto Relation Suffix$.get$reference ToCol implColumnAttrOptionality$$reference ToCol Name$());</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="IsFromColNullable">$reference FromCol reference Column IsNullable$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeyNullifyRelationCol">$switch IsFromColNullable no implSchemaJpaTableEmbedPKeyInitvalRelationCol default implSchemaJpaTableEmbedPKeyNullvalRelationCol$</GenRule>
-	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeyInitvalRelationCol">
-				$lower reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$ = I$reference FromCol reference Column reference Table DefSchemaName$$reference FromCol reference Column reference Table TableName$.$upper reference FromCol reference Column Name$_INIT_VALUE;</GenRule>
+	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeyNullifyRelationCol">$switch IsFromColNullable no empty default implSchemaJpaTableEmbedPKeyNullvalRelationCol$</GenRule>
+	<!--GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeyInitvalRelationCol">
+				$lower reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$ = I$reference FromCol reference Column reference Table DefSchemaName$$reference FromCol reference Column reference Table TableName$.$upper reference FromCol reference Column Name$_INIT_VALUE;</GenRule-->
 	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeyNullvalRelationCol">
 				$lower reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$ = null;</GenRule>
 
+	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeySetNullifyRelationCol">$switch IsFromColNullable no empty default implSchemaJpaTableEmbedPKeySetNullvalRelationCol$</GenRule>
+	<!--GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeyInitvalRelationCol">
+				$lower reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$ = I$reference FromCol reference Column reference Table DefSchemaName$$reference FromCol reference Column reference Table TableName$.$upper reference FromCol reference Column Name$_INIT_VALUE;</GenRule-->
+	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeySetNullvalRelationCol">
+				getPKey().set$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$(null);</GenRule>
 
 
 
@@ -360,12 +417,12 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableRelationCandidateGetter">
 	@Override
-	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique no implSchemaJpaTablePKeyReturnWrapListRelationMember default implSchemaJpaTablePKeyReturnDirectRelationMember$
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$implSchemaJpaTablePKeyReturnDirectRelationMember$
 	}</GenRule>
 	
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableRelationCandidateGetterSetter">
 	@Override
-	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$switch IsToIndexUnique no implSchemaJpaTablePKeyReturnWrapListRelationMember default implSchemaJpaTablePKeyReturnDirectRelationMember$
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$() {$implSchemaJpaTablePKeyReturnDirectRelationMember$
 	}$switch IsToIndexUnique yes implSchemaJpaTableRelationCandidateSetter default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableRelationCandidateSetter">
@@ -638,15 +695,19 @@ $switch InSuperiorPrimaryKeyRelation yes empty default implPKeyAttrAccessorSette
 	<GenRule GenDef="Index" Name="commaJpaTableSpecialIndexAnnotation">,$jpaTableSpecialIndexAnnotation$</GenRule>
 	<GenRule GenDef="Index" Name="jpaTableSpecialIndexAnnotation">$switch IsPrimaryIndex yes jpaTableSpecialPrimaryIndexAnnotation default jpaTableSpecialOrdinaryIndexAnnotation$</GenRule>
 	<GenRule GenDef="Index" Name="jpaTableSpecialOrdinaryIndexAnnotation">
-		@Index(name = "$IndexName$$maybeEmbedSpecialRelationSuffix$", columnList = "$jpaTableSpecialIndexColumnList$", unique = $switch IsUnique yes true default false$)</GenRule>
+		@Index(name = "$IndexName$$embedSpecialRelationSuffix$", columnList = "$jpaTableSpecialIndexColumnList$", unique = $switch IsUnique yes true default false$)</GenRule>
 	<GenRule GenDef="Index" Name="jpaTableSpecialPrimaryIndexAnnotation">
-		@Index(name = "$IndexName$$maybeEmbedSpecialRelationSuffix$", columnList = "$jpaTableSpecialIndexColumnList$", unique = true)</GenRule>
+		@Index(name = "$IndexName$$embedSpecialRelationSuffix$", columnList = "$jpaTableSpecialIndexColumnList$", unique = true)</GenRule>
 	<GenRule GenDef="Index" Name="jpaTableSpecialIndexColumnList">$iterate Columns( first SpecialDbColumnName each CommaSpecialDbColumnName empty empty )$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="CommaSpecialDbColumnName"
 		>, $SpecialDbColumnName$</GenRule>
 	<GenRule GenDef="IndexCol" Name="SpecialDbColumnName"
-		>$DbColumnName$$maybeEmbedSpecialRelationSuffix$</GenRule>
+		>$DbColumnName$$embedSpecialRelationSuffix$</GenRule>
+
+	<GenRule GenDef="Relation" Name="embedSpecialRelationSuffix">$switch IsSuperiorCandidateRelation yes Suffix default empty$</GenRule>
+	<GenRule GenDef="Index" Name="embedSpecialRelationSuffix">$popto Relation embedSpecialRelationSuffix$</GenRule>
+	<GenRule GenDef="IndexCol" Name="embedSpecialRelationSuffix">$popto Relation embedSpecialRelationSuffix$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="CommaDbColumnName"
 		>, $DbColumnName$</GenRule>
@@ -1187,5 +1248,7 @@ $switch BaseHasHistory yes implJpaSetHistory default empty$</GenRule>
 	<GenRule GenDef="Table" Name="implToStringEmitPKeyXmlAttrFragment">$switch IsPrimaryIndexKeyAtomic yes implToStringEmitPKeyAttrXmlAttrFragment default implToStringEmitPKeyObjXmlAttrFragment$</GenRule>
 	<GenRule GenDef="Table" Name="implToStringEmitPKeyObjXmlAttrFragment">pkey.getXmlAttrFragment() </GenRule>
 	<GenRule GenDef="Table" Name="implToStringEmitPKeyAttrXmlAttrFragment">""$reference BaseClass reference PrimaryKeyIndex iterate Columns( first implToStringEmitXmlAttr each empty empty empty )$</GenRule>
+
+	<GenRule GenDef="Relation" Name="IsPrimaryIndexKeyAtomic">$reference FromTable reference BaseClass reference PrimaryKeyIndex IsAtomic$</GenRule>
 
 </RuleSet>
