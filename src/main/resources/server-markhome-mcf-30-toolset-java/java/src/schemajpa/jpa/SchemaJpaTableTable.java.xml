@@ -466,7 +466,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 			System empty
 			Global empty
 			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$$poptop Table tabletweak CafePostReadTableSecurityFilterRetval$
-		return( retval );</GenRule>
+		return(retval);</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantGroupFilterRetval">$implJpaTableTenantFilterRetval$
 		if(retval != null) {$implJpaTableTenantFindForRetval$
@@ -608,7 +608,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 			System empty
 			Global empty
 			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$$poptop Table tabletweak CafePostReadTableSecurityFilterRetval$$indextweak CafePostReadIndexSecurityFilterRetval$
-		return( retval );</GenRule>
+		return(retval);</GenRule>
 
 		<GenRule GenDef="Index" Name="implJpaTableTenantGroupFilterRetval">$implJpaTableTenantFilterRetval$
 		if(retval != null) {$implJpaTableTenantFindForRetval$
@@ -1102,7 +1102,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 			throw new CFLibNullArgumentException(getClass(), "create$TableName$", 1, "rec");
 		}
 		else if (rec instanceof $DefSchemaName$Jpa$TableName$) {
-			$DefSchemaName$Jpa$TableName$ jparec = ($DefSchemaName$Jpa$TableName$)rec;
+			$DefSchemaName$Jpa$TableName$ jparec = ($DefSchemaName$Jpa$TableName$)rec;$switch IsBaseTableAudited yes implJpaTableCreateInitAuditColumns default empty$
 			$DefSchemaName$Jpa$TableName$ retval = schema.getJpaHooksSchema().get$poptop Table TableName$Service().create(jparec);$implJpaTableFilterAndReturnRetval$
 		}
 		else {
@@ -1110,6 +1110,12 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}
 	}
 </GenRule>
+
+	<GenRule GenDef="Table" Name="implJpaTableCreateInitAuditColumns">
+			jparec.setCreatedAt(LocalDateTime.now());
+			jparec.setUpdatedAt(jparec.getCreatedAt());
+			jparec.setCreatedByUserId(Authorization.getSecUserId());
+			jparec.setUpdatedByUserId(Authorization.getSecUserId());</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaReadAllTable">
 	/**
@@ -1145,7 +1151,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 			throw new CFLibNullArgumentException(getClass(), "update$TableName$", 1, "rec");
 		}
 		else if (rec instanceof $DefSchemaName$Jpa$TableName$) {
-			$DefSchemaName$Jpa$TableName$ jparec = ($DefSchemaName$Jpa$TableName$)rec;
+			$DefSchemaName$Jpa$TableName$ jparec = ($DefSchemaName$Jpa$TableName$)rec;$switch IsBaseTableAudited yes implJpaTableUpdateInitAuditColumns default empty$
 			$DefSchemaName$Jpa$TableName$ retval = schema.getJpaHooksSchema().get$poptop Table TableName$Service().update(jparec);$implJpaTableFilterAndReturnRetval$
 		}
 		else {
@@ -1153,6 +1159,10 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}
 	}
 </GenRule>
+
+	<GenRule GenDef="Table" Name="implJpaTableUpdateInitAuditColumns">
+			jparec.setUpdatedAt(LocalDateTime.now());
+			jparec.setUpdatedByUserId(Authorization.getSecUserId());</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaDeleteTable">
 	/**
