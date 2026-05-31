@@ -461,8 +461,18 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			data.setCreatedAt(now);
 			data.setUpdatedAt(now);</GenRule>
 
-	<GenRule GenDef="Table" Name="serviceCheckDataValid">$switch HasSuperClassRelation yes serviceCheckInheritedDataValid default empty$$iterate DataColumns( each serviceCheckDataColValid empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="serviceCheckDataValid">$switch HasSuperClassRelation yes serviceCheckInheritedDataValid default empty$$iterate SuperiorRelations(each serviceCheckRequiredSuperiorRelation empty empty)$$iterate DataColumns( each serviceCheckDataColValid empty empty )$</GenRule>
 	<GenRule GenDef="Table" Name="serviceCheckInheritedDataValid">$reference SuperClassRelation reference ToTable serviceCheckDataValid$</GenRule>
+	<GenRule GenDef="Relation" Name="serviceCheckRequiredSuperiorRelation">$switch IsRequired yes serviceCheckUniqueRequiredSuperiorRelation no serviceDontCheckRequiredSuperiorRelation default errorUnrecognizedIsRequiredValue$</GenRule>
+	<GenRule GenDef="Relation" Name="serviceCheckUniqueRequiredSuperiorRelation">$switch IsToIndexUnique yes serviceReallyCheckRequiredSuperiorRelation no serviceDontCheckRequiredSuperiorRelation default errorUnrecognizedIsToIndexUniqueValue$</GenRule>
+	<GenRule GenDef="Relation" Name="serviceDontCheckRequiredSuperiorRelation"></GenRule>
+	<GenRule GenDef="Relation" Name="serviceReallyCheckRequiredSuperiorRelation">
+			if (data.get$OptionalOrRequired$$RelationType$$Suffix$() == null) {
+				throw new CFLibNullArgumentException(getClass(),
+					S_ProcName,
+					0,
+					"data.get$OptionalOrRequired$$RelationType$$Suffix$()");
+			}</GenRule>
 	<GenRule GenDef="Atom" Name="serviceCheckDataColValid">$switch IsNullable yes empty default serviceEnsureDataColNotNull$$switch HasMinValue yes serviceCheckMinValue default empty$$switch HasMaxValue yes serviceCheckMaxValue default empty$</GenRule>
 	<GenRule GenDef="TableCol" Name="serviceCheckDataColValid">$switch IsNullable yes empty default serviceEnsureDataColNotNull$$switch HasMinValue yes serviceCheckMinValue default empty$$switch HasMaxValue yes serviceCheckMaxValue default empty$</GenRule>
 
