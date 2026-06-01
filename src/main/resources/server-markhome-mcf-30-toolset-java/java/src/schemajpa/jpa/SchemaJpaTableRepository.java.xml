@@ -76,9 +76,15 @@ import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$l
  */
 @Transactional(readOnly = true)
 public interface $SchemaName$Jpa$TableName$Repository extends JpaRepository&lt;$SchemaName$Jpa$TableName$, $JpaCompactedPrimaryIndexClass$&gt; {
-$declTableReaders$$declTableLockers$$declTableDeleters$
+$declTableSave$$declTableReaders$$declTableLockers$$declTableDeleters$
 }
 </GenFile>
+
+	<GenRule GenDef="Table" Name="declTableSave">
+	@Transactional
+	@Modifying
+	$DefSchemaName$Jpa$TableName$ save($DefSchemaName$Jpa$TableName$ obj);
+</GenRule>
 
 	<GenRule GenDef="Object" Name="IsManufacturingSchemaSecuritySchema">$reference ManufacturingSchema IsSchemaDefSecuritySchema$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="IsSchemaDefSecuritySchema">$iterate SchemaRefs( empty yes first no each empty )$</GenRule>

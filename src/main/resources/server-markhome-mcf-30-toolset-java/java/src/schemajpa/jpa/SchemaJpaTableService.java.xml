@@ -370,7 +370,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			if(data.getPKey() != null$switch IsPrimaryIndexKeyAtomic yes maybeCheckAndDataPKeyIsNull default empty$ &amp;&amp; $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.existsById(($JpaCompactedPrimaryIndexClass$)data.getPKey())) {
 				return( ($poptop Table SchemaName$Jpa$poptop Table TableName$)($lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.findById(($JpaCompactedPrimaryIndexClass$)(data.getPKey())).get()));
 			}
-			if (data.getRequiredRevision() <= 0) {
+			if (data.getRequiredRevision() &lt;= 0) {
 				data.setRequiredRevision(1);
 			}$reference BaseClass reference PrimaryKeyIndex iterate Columns(each maybeServiceCreateGenerateId empty empty)$$switch IsBaseTableAudited yes serviceCreateInitAuditColumns default empty$
 			return $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.save(data);
@@ -471,10 +471,15 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 	<GenRule GenDef="Relation" Name="serviceDontCheckRequiredSuperiorRelation"></GenRule>
 	<GenRule GenDef="Relation" Name="serviceReallyCheckRequiredSuperiorRelation">
 		if (data.get$OptionalOrRequired$$RelationType$$Suffix$() == null) {
-			throw new CFLibNullArgumentException(getClass(),
+			throw new CFLibUnresolvedRelationException(getClass(),
 				S_ProcName,
-				0,
-				"data.$lower OptionalOrRequired$$RelationType$$Suffix$");
+				"$RelationType$",
+				"$RelationType$",
+				"data.$lower OptionalOrRequired$$RelationType$$Suffix$",
+				"data.$lower OptionalOrRequired$$RelationType$$Suffix$",
+				"$reference ToTable TableName$",
+				"$reference ToTable TableName$",
+				null);
 		}</GenRule>
 	<GenRule GenDef="Atom" Name="serviceCheckDataColValid">$switch IsNullable yes empty default serviceEnsureDataColNotNull$$switch HasMinValue yes serviceCheckMinValue default empty$$switch HasMaxValue yes serviceCheckMaxValue default empty$</GenRule>
 	<GenRule GenDef="TableCol" Name="serviceCheckDataColValid">$switch IsNullable yes empty default serviceEnsureDataColNotNull$$switch HasMinValue yes serviceCheckMinValue default empty$$switch HasMaxValue yes serviceCheckMaxValue default empty$</GenRule>
