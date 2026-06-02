@@ -705,7 +705,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				csecGroupCreate.setCreatedByUserId(auth.getSecUserId());
 				csecGroupCreate.setUpdatedAt(now);
 				csecGroupCreate.setUpdatedByUserId(auth.getSecUserId());
-				csecGroupCreate.setRequiredParentSysGrp(createPermName);
+				csecGroupCreate.setRequiredContainerSysGrp(createPermName);
 				csecGroupCreate.setRequiredSecClusGrpId(csecGroupCreateID);
 				csecGroupCreate.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 				csecGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupCreate);
@@ -719,7 +719,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				csecGroupRead.setCreatedByUserId(auth.getSecUserId());
 				csecGroupRead.setUpdatedAt(now);
 				csecGroupRead.setUpdatedByUserId(auth.getSecUserId());
-				csecGroupRead.setRequiredParentSysGrp(readPermName);
+				csecGroupRead.setRequiredContainerSysGrp(readPermName);
 				csecGroupRead.setRequiredSecClusGrpId(csecGroupReadID);
 				csecGroupRead.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 				csecGroupRead = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupRead);
@@ -733,7 +733,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				csecGroupUpdate.setCreatedByUserId(auth.getSecUserId());
 				csecGroupUpdate.setUpdatedAt(now);
 				csecGroupUpdate.setUpdatedByUserId(auth.getSecUserId());
-				csecGroupUpdate.setRequiredParentSysGrp(updatePermName);
+				csecGroupUpdate.setRequiredContainerSysGrp(updatePermName);
 				csecGroupUpdate.setRequiredSecClusGrpId(csecGroupUpdateID);
 				csecGroupUpdate.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 				csecGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupUpdate);
@@ -747,7 +747,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				csecGroupDelete.setCreatedByUserId(auth.getSecUserId());
 				csecGroupDelete.setUpdatedAt(now);
 				csecGroupDelete.setUpdatedByUserId(auth.getSecUserId());
-				csecGroupDelete.setRequiredParentSysGrp(deletePermName);
+				csecGroupDelete.setRequiredContainerSysGrp(deletePermName);
 				csecGroupDelete.setRequiredSecClusGrpId(csecGroupDeleteID);
 				csecGroupDelete.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 				csecGroupDelete = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupDelete);
@@ -762,7 +762,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 					csecGroupRestore.setCreatedByUserId(auth.getSecUserId());
 					csecGroupRestore.setUpdatedAt(now);
 					csecGroupRestore.setUpdatedByUserId(auth.getSecUserId());
-					csecGroupRestore.setRequiredParentSysGrp(restorePermName);
+					csecGroupRestore.setRequiredContainerSysGrp(restorePermName);
 					csecGroupRestore.setRequiredSecClusGrpId(csecGroupRestoreID);
 					csecGroupRestore.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 					csecGroupRestore = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupRestore);
@@ -778,7 +778,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 					csecGroupMutate.setCreatedByUserId(auth.getSecUserId());
 					csecGroupMutate.setUpdatedAt(now);
 					csecGroupMutate.setUpdatedByUserId(auth.getSecUserId());
-					csecGroupMutate.setRequiredParentSysGrp(mutatePermName);
+					csecGroupMutate.setRequiredContainerSysGrp(mutatePermName);
 					csecGroupMutate.setRequiredSecClusGrpId(csecGroupMutateID);
 					csecGroupMutate.setRequiredOwnerCluster(secSysClusGroupSysAdmin.getRequiredOwnerCluster());
 					csecGroupMutate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, csecGroupMutate);
@@ -878,9 +878,9 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				tsecGroupCreate.setCreatedByUserId(auth.getSecUserId());
 				tsecGroupCreate.setUpdatedAt(now);
 				tsecGroupCreate.setUpdatedByUserId(auth.getSecUserId());
-				tsecGroupCreate.setRequiredParentSysGrp(createPermName);
+				tsecGroupCreate.setRequiredContainerSysGrp(createPermName);
 				tsecGroupCreate.setRequiredSecTentGrpId(tsecGroupCreateID);
-				tsecGroupCreate.setRequiredContainerTenant(secSysTentGroupSysAdmin.getRequiredContainerTenant());
+				tsecGroupCreate.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 				tsecGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupCreate);
 				tsecGroupCreateID = tsecGroupCreate.getRequiredSecTentGrpId();
 			}
@@ -892,9 +892,9 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				tsecGroupRead.setCreatedByUserId(auth.getSecUserId());
 				tsecGroupRead.setUpdatedAt(now);
 				tsecGroupRead.setUpdatedByUserId(auth.getSecUserId());
-				tsecGroupRead.setRequiredParentSysGrp(readPermName);
+				tsecGroupRead.setRequiredContainerSysGrp(readPermName);
 				tsecGroupRead.setRequiredSecTentGrpId(tsecGroupReadID);
-				tsecGroupRead.setRequiredContainerTenant(secSysTentGroupSysAdmin.getRequiredContainerTenant());
+				tsecGroupRead.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 				tsecGroupRead = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupRead);
 				tsecGroupReadID = tsecGroupRead.getRequiredSecTentGrpId();
 			}
@@ -906,9 +906,9 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				tsecGroupUpdate.setCreatedByUserId(auth.getSecUserId());
 				tsecGroupUpdate.setUpdatedAt(now);
 				tsecGroupUpdate.setUpdatedByUserId(auth.getSecUserId());
-				tsecGroupUpdate.setRequiredParentSysGrp(updatePermName);
+				tsecGroupUpdate.setRequiredContainerSysGrp(updatePermName);
 				tsecGroupUpdate.setRequiredSecTentGrpId(tsecGroupUpdateID);
-				tsecGroupUpdate.setRequiredContainerTenant(secSysTentGroupSysAdmin.getRequiredContainerTenant());
+				tsecGroupUpdate.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 				tsecGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupUpdate);
 				tsecGroupUpdateID = tsecGroupUpdate.getRequiredSecTentGrpId();
 			}
@@ -920,9 +920,9 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				tsecGroupDelete.setCreatedByUserId(auth.getSecUserId());
 				tsecGroupDelete.setUpdatedAt(now);
 				tsecGroupDelete.setUpdatedByUserId(auth.getSecUserId());
-				tsecGroupDelete.setRequiredParentSysGrp(deletePermName);
+				tsecGroupDelete.setRequiredContainerSysGrp(deletePermName);
 				tsecGroupDelete.setRequiredSecTentGrpId(tsecGroupDeleteID);
-				tsecGroupDelete.setRequiredContainerTenant(secSysTentGroupSysAdmin.getRequiredContainerTenant());
+				tsecGroupDelete.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 				tsecGroupDelete = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupDelete);
 				tsecGroupDeleteID = tsecGroupDelete.getRequiredSecTentGrpId();
 			}
@@ -935,9 +935,9 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 					tsecGroupRestore.setCreatedByUserId(auth.getSecUserId());
 					tsecGroupRestore.setUpdatedAt(now);
 					tsecGroupRestore.setUpdatedByUserId(auth.getSecUserId());
-					tsecGroupRestore.setRequiredParentSysGrp(restorePermName);
+					tsecGroupRestore.setRequiredContainerSysGrp(restorePermName);
 					tsecGroupRestore.setRequiredSecTentGrpId(tsecGroupRestoreID);
-					tsecGroupRestore.setRequiredContainerTenant(secSysTentGroupSysAdmin.getRequiredContainerTenant());
+					tsecGroupRestore.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 					tsecGroupRestore = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupRestore);
 					tsecGroupRestoreID = tsecGroupRestore.getRequiredSecTentGrpId();
 				}
@@ -951,9 +951,9 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 					tsecGroupMutate.setCreatedByUserId(auth.getSecUserId());
 					tsecGroupMutate.setUpdatedAt(now);
 					tsecGroupMutate.setUpdatedByUserId(auth.getSecUserId());
-					tsecGroupMutate.setRequiredParentSysGrp(mutatePermName);
+					tsecGroupMutate.setRequiredContainerSysGrp(mutatePermName);
 					tsecGroupMutate.setRequiredSecTentGrpId(tsecGroupMutateID);
-					tsecGroupMutate.setRequiredContainerTenant(secSysTentGroupSysAdmin.getRequiredContainerTenant());
+					tsecGroupMutate.setRequiredOwnerTenant(secSysTentGroupSysAdmin.getRequiredOwnerTenant());
 					tsecGroupMutate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, tsecGroupMutate);
 					tsecGroupMutateID = tsecGroupMutate.getRequiredSecTentGrpId();
 				}
@@ -983,14 +983,6 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		$SecSchemaName$JpaSecSysGrp secSysGroupPublic;
 		CFLibDbKeyHash256 secSysGroupPublicID;
 		$SecSchemaName$JpaSecSysGrpInc secSysGroupPublicIncSystemAdmin;
-		$SecSchemaName$JpaSecSysGrp secSysGroupSysClusAdmin;
-		CFLibDbKeyHash256 secSysGroupSysClusAdminID;
-		$SecSchemaName$JpaSecSysGrp secSysGroupSysTentAdmin;
-		CFLibDbKeyHash256 secSysGroupSysTentAdminID;
-		$SecSchemaName$JpaSecClusGrp secSysClusGroupSysAdmin;
-		CFLibDbKeyHash256 secSysClusGroupSysAdminID;
-		$SecSchemaName$JpaSecTentGrp secSysTentGroupSysAdmin;
-		CFLibDbKeyHash256 secSysTentGroupSysAdminID;
 		systemUser = secuserService.findByULoginIdx("system");
 		if (systemUser != null) {
 			systemUID = systemUser.getRequiredSecUserId();
@@ -1064,18 +1056,6 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				}
 				secSysGroupPublicID = secSysGroupPublic.getRequiredSecSysGrpId();
 
-				secSysGroupSysClusAdmin = ($SecSchemaName$JpaSecSysGrp)(secsysgrpService.findByUNameIdx( "systemclusteradmin"));
-				if (secSysGroupSysClusAdmin == null) {
-					throw new CFLibNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSysGroupSysClusAdmin");
-				}
-				secSysGroupSysClusAdminID = secSysGroupSysClusAdmin.getRequiredSecSysGrpId();
-
-				secSysGroupSysTentAdmin = ($SecSchemaName$JpaSecSysGrp)(secsysgrpService.findByUNameIdx( "systemtenantadmin"));
-				if (secSysGroupSysTentAdmin == null) {
-					throw new CFLibNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSysGroupSysTentAdmin");
-				}
-				secSysGroupSysTentAdminID = secSysGroupSysTentAdmin.getRequiredSecSysGrpId();
-
 				secSystemAdminGroupMembSystemAdmin = ($SecSchemaName$JpaSecSysGrpMemb)(secsysgrpmembService.find(secSystemAdminGroupID, systemUser.getRequiredLoginId()));
 				if (secSystemAdminGroupMembSystemAdmin == null) {
 					throw new CFLibNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSystemAdminGroupMembSystemAdmin");
@@ -1085,18 +1065,6 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				if (secSysGroupPublicIncSystemAdmin == null) {
 					throw new CFLibNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSysGroupPublicIncSystemAdmin");
 				}
-
-				secSysClusGroupSysAdmin = ($SecSchemaName$JpaSecClusGrp)(secclusgrpService.findByUNameIdx(systemClusterID, "systemclusteradmin"));
-				if (secSysClusGroupSysAdmin == null) {
-					throw new CFLibNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSysClusGroupSysAdmin");
-				}
-				secSysClusGroupSysAdminID = secSysClusGroupSysAdmin.getRequiredSecClusGrpId();
-
-				secSysTentGroupSysAdmin = ($SecSchemaName$JpaSecTentGrp)(sectentgrpService.findByUNameIdx(systemTenantID, "systemtenantadmin"));
-				if (secSysTentGroupSysAdmin == null) {
-					throw new CFLibNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSysTentGroupSysAdmin");
-				}
-				secSysTentGroupSysAdminID = secSysTentGroupSysAdmin.getRequiredSecTentGrpId();
 			}
 			else {
 				throw new CFLibNullArgumentException(getClass(), "bootstrapSecurity", 0, "SysClusterSingleton");
@@ -1119,18 +1087,6 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secSysGroupPublic = null;
 			secSysGroupPublicID = null;
 			secSysGroupPublicIncSystemAdmin = null;
-			secSysGroupSysClusAdmin = null;
-			secSysGroupSysClusAdminID = null;
-			secSysGroupSysTentAdmin = null;
-			secSysGroupSysTentAdminID = null;
-			secSysClusGroupSysAdmin = null;
-			secSysClusGroupSysAdminID = null;
-			secSysTentGroupSysAdmin = null;
-			secSysTentGroupSysAdminID = null;
-			secSysGroupSysClusAdmin = null;
-			secSysGroupSysClusAdminID = null;
-			secSysGroupSysTentAdmin = null;
-			secSysGroupSysTentAdminID = null;
 		}
 		LocalDateTime now = LocalDateTime.now();
 		if (systemUID == null || systemUID.isNull()) {
@@ -1154,12 +1110,6 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		if (secSysGroupPublicID == null || secSysGroupPublicID.isNull()) {
 			secSysGroupPublicID = new CFLibDbKeyHash256(0);
 		}
-		if (secSysGroupSysClusAdminID == null || secSysGroupSysClusAdminID.isNull()) {
-			secSysGroupSysClusAdminID = new CFLibDbKeyHash256(0);
-		}
-		if (secSysGroupSysTentAdminID == null || secSysGroupSysTentAdminID.isNull()) {
-			secSysGroupSysTentAdminID = new CFLibDbKeyHash256(0);
-		}
 		if (I$SecSchemaName$Schema.getSysClusterId() == null || I$SecSchemaName$Schema.getSysClusterId().isNull()) {
 			I$SecSchemaName$Schema.setSysClusterId(systemClusterID);
 		}
@@ -1172,11 +1122,8 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		else if ( ! I$SecSchemaName$Schema.getSysTenantId().equals( systemTenantID )) {
 			throw new CFLibInvalidArgumentException(getClass(), "bootstrapSecurity", "Previously set system tenant id disagrees with new system tenant id", "Previously set system tenant id disagrees with new system tenant id");
 		}
-		if (I$SecSchemaName$Schema.getSystemId() == null || I$SecSchemaName$Schema.getSystemId().isNull()) {
+		if (!systemUID.equals(I$SecSchemaName$Schema.getSystemId())) {
 			I$SecSchemaName$Schema.setSystemId(systemUID);
-		}
-		else if ( ! I$SecSchemaName$Schema.getSystemId().equals( systemUID )) {
-			throw new CFLibInvalidArgumentException(getClass(), "bootstrapSecurity", "Previously set system admin id disagrees with new system admin id", "Previously set system admin id disagrees with new system admin id");
 		}
 
 		String fqdn;
@@ -1335,60 +1282,6 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secSysGroupPublicIncSystemAdmin.setRequiredRevision(1);
 			secSysGroupPublicIncSystemAdmin = ($SecSchemaName$JpaSecSysGrpInc)(secsysgrpincService.create(secSysGroupPublicIncSystemAdmin));
 		}
-		
-		if (secSysGroupSysClusAdmin == null) {
-			secSysGroupSysClusAdmin = new $SecSchemaName$JpaSecSysGrp();
-			secSysGroupSysClusAdmin.setRequiredRevision(1);
-			secSysGroupSysClusAdmin.setCreatedAt(now);
-			secSysGroupSysClusAdmin.setCreatedByUserId(systemUID);
-			secSysGroupSysClusAdmin.setUpdatedAt(now);
-			secSysGroupSysClusAdmin.setUpdatedByUserId(systemUID);
-			secSysGroupSysClusAdmin.setRequiredName("systemclusteradmin");
-			secSysGroupSysClusAdmin.setRequiredSecLevel(I$SecSchemaName$Schema.SecLevelEnum.Cluster);
-			secSysGroupSysClusAdmin.setRequiredSecSysGrpId(secSysGroupSysClusAdminID);
-			secSysGroupSysClusAdmin = ($SecSchemaName$JpaSecSysGrp)(secsysgrpService.create(secSysGroupSysClusAdmin));
-			secSysGroupSysClusAdminID = secSysGroupSysClusAdmin.getRequiredSecSysGrpId();
-		}
-
-		if (secSysGroupSysTentAdmin == null) {
-			secSysGroupSysTentAdmin = new $SecSchemaName$JpaSecSysGrp();
-			secSysGroupSysTentAdmin.setRequiredRevision(1);
-			secSysGroupSysTentAdmin.setCreatedAt(now);
-			secSysGroupSysTentAdmin.setCreatedByUserId(systemUID);
-			secSysGroupSysTentAdmin.setUpdatedAt(now);
-			secSysGroupSysTentAdmin.setUpdatedByUserId(systemUID);
-			secSysGroupSysTentAdmin.setRequiredName("systemtenantadmin");
-			secSysGroupSysTentAdmin.setRequiredSecLevel(I$SecSchemaName$Schema.SecLevelEnum.Tenant);
-			secSysGroupSysTentAdmin.setRequiredSecSysGrpId(secSysGroupSysTentAdminID);
-			secSysGroupSysTentAdmin = ($SecSchemaName$JpaSecSysGrp)(secsysgrpService.create(secSysGroupSysTentAdmin));
-			secSysGroupSysTentAdminID = secSysGroupSysTentAdmin.getRequiredSecSysGrpId();
-		}
-
-		if (secSysClusGroupSysAdmin == null) {
-			secSysClusGroupSysAdmin = new $SecSchemaName$JpaSecClusGrp();
-			secSysClusGroupSysAdmin.setCreatedAt(now);
-			secSysClusGroupSysAdmin.setCreatedByUserId(systemUID);
-			secSysClusGroupSysAdmin.setUpdatedAt(now);
-			secSysClusGroupSysAdmin.setUpdatedByUserId(systemUID);
-			secSysClusGroupSysAdmin.setRequiredParentSysGrp("systemclusteradmin");
-			secSysClusGroupSysAdmin.setRequiredOwnerCluster(systemClusterID);
-			secSysClusGroupSysAdmin.setRequiredRevision(1);
-			secSysClusGroupSysAdmin = ($SecSchemaName$JpaSecClusGrp)(secclusgrpService.create(secSysClusGroupSysAdmin));
-			secSysClusGroupSysAdminID = secSysClusGroupSysAdmin.getRequiredSecClusGrpId();
-		}
-
-		if (secSysTentGroupSysAdmin == null) {
-			secSysTentGroupSysAdmin = new $SecSchemaName$JpaSecTentGrp();
-			secSysTentGroupSysAdmin.setCreatedAt(now);
-			secSysTentGroupSysAdmin.setCreatedByUserId(systemUID);
-			secSysTentGroupSysAdmin.setUpdatedAt(now);
-			secSysTentGroupSysAdmin.setUpdatedByUserId(systemUID);
-			secSysTentGroupSysAdmin.setRequiredParentSysGrp("systemtenantadmin");
-			secSysTentGroupSysAdmin.setRequiredContainerTenant(systemTenantID);
-			secSysTentGroupSysAdmin.setRequiredRevision(1);
-			secSysTentGroupSysAdmin = ($SecSchemaName$JpaSecTentGrp)(sectentgrpService.create(secSysTentGroupSysAdmin));
-			secSysTentGroupSysAdminID = secSysTentGroupSysAdmin.getRequiredSecTentGrpId();
-		}
 
 		if (bootstrapSession != null &amp;&amp; bootstrapSessionID != null &amp;&amp; !bootstrapSessionID.isNull() &amp;&amp; bootstrapSession.getOptionalFinish() == null) {
 			bootstrapSession.setOptionalFinish(LocalDateTime.now());
@@ -1427,19 +1320,19 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		CFLibDbKeyHash256 bootstrapSessionID = new CFLibDbKeyHash256(0);
 		CFLibDbKeyHash256 systemUID = I$SecSchemaName$Schema.getSystemId();
 
-		I$SecSchemaName$Schema.setAuthorizationCallback( new I$SecSchemaName$AuthorizationCallback() {
-			$SecSchemaName$Authorization auth = new $SecSchemaName$Authorization();
-			@Override
-			public I$SecSchemaName$Authorization getEffectiveAuthorization() {
-				return(auth);
-			}
-		});
-		$SecSchemaName$Authorization auth = ($SecSchemaName$Authorization)I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization();
+		$SecSchemaName$Authorization auth = new $SecSchemaName$Authorization();
 		auth.setSecUserId(systemUID);
 		auth.setAuthUuid6(CFLibUuid6.generateUuid6());
 		auth.setSecClusterId(clusterId);
 		auth.setSecTenantId(tenantId);
 		auth.setSecSessionId(bootstrapSessionID);
+		I$SecSchemaName$Schema.setAuthorizationCallback( new I$SecSchemaName$AuthorizationCallback() {
+			$SecSchemaName$Authorization myauth = auth;
+			@Override
+			public I$SecSchemaName$Authorization getEffectiveAuthorization() {
+				return(myauth);
+			}
+		});
 
 //I$SecSchemaName$Schema.getSysTenantId(), I$SecSchemaName$Schema.getSystemId()
 		bootstrapSession = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecSession().newRec();
@@ -1522,11 +1415,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secSysClusGroupSysAdmin.setRequiredName(secCluster.getRequiredDescription().toLowerCase() + "clusteradmin");
 			secSysClusGroupSysAdmin.setRequiredRevision(1);
 			secSysClusGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().createSecSysGrp(auth, secSysClusGroupSysAdmin);
-			if (secSysClusGroupSysAdmin == null) {
-				secSysClusGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().readDerivedByUNameIdx(auth, secCluster.getRequiredDescription().toLowerCase() + "clusteradmin");
-			}
 		}
-		CFLibDbKeyHash256 secSysClusGroupSysAdminID = secSysClusGroupSysAdmin.getRequiredSecSysGrpId();
 
 		I$SecSchemaName$SecSysGrp secSysTentGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().readDerivedByUNameIdx(auth, secTenant.getRequiredTenantName().toLowerCase() + "tenantadmin");
 		if (secSysTentGroupSysAdmin == null) {
@@ -1538,11 +1427,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secSysTentGroupSysAdmin.setRequiredName(secTenant.getRequiredTenantName().toLowerCase() + "tenantadmin");
 			secSysTentGroupSysAdmin.setRequiredRevision(1);
 			secSysTentGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().createSecSysGrp(auth, secSysTentGroupSysAdmin);
-			if (secSysTentGroupSysAdmin == null) {
-				secSysTentGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().readDerivedByUNameIdx(auth, secTenant.getRequiredTenantName().toLowerCase() + "tenantadmin");
-			}
 		}
-		CFLibDbKeyHash256 secSysTentGroupSysAdminID = secSysTentGroupSysAdmin.getRequiredSecSysGrpId();
 
 		I$SecSchemaName$SecClusGrp secClusGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().readDerivedByUNameIdx(auth, secCluster.getRequiredId(), secCluster.getRequiredDescription().toLowerCase() + "clusteradmin");
 		if (secClusGroupSysAdmin == null) {
@@ -1551,33 +1436,25 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secClusGroupSysAdmin.setCreatedByUserId(systemUID);
 			secClusGroupSysAdmin.setUpdatedAt(now);
 			secClusGroupSysAdmin.setUpdatedByUserId(systemUID);
-			secClusGroupSysAdmin.setRequiredParentSysGrp(secSysClusGroupSysAdmin);
+			secClusGroupSysAdmin.setRequiredContainerSysGrp(secCluster.getRequiredDescription().toLowerCase() + "clusteradmin");
 			secClusGroupSysAdmin.setRequiredOwnerCluster(secCluster);
 			secClusGroupSysAdmin.setRequiredRevision(1);
 			secClusGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, secClusGroupSysAdmin);
-			if (secClusGroupSysAdmin == null) {
-				secClusGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().readDerivedByUNameIdx(auth, secCluster.getRequiredId(), secCluster.getRequiredDescription().toLowerCase() + "clusteradmin");
-			}
 		}
-		CFLibDbKeyHash256 secClusGroupSysAdminID = secClusGroupSysAdmin.getRequiredSecClusGrpId();
 
-		I$SecSchemaName$SecClusGrp secClusGroupTentAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().readDerivedByUNameIdx(auth, secCluster.getRequiredId(), secTenant.getRequiredTenantName().toLowerCase() + "tenantadmin");
-		if (secClusGroupTentAdmin == null) {
-			secClusGroupTentAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecClusGrp().newRec();
-			secClusGroupTentAdmin.setCreatedAt(now);
-			secClusGroupTentAdmin.setCreatedByUserId(systemUID);
-			secClusGroupTentAdmin.setUpdatedAt(now);
-			secClusGroupTentAdmin.setUpdatedByUserId(systemUID);
-			secClusGroupTentAdmin.setRequiredParentSysGrp(secSysTentGroupSysAdmin);
-			secClusGroupTentAdmin.setRequiredOwnerCluster(secCluster);
-			secClusGroupTentAdmin.setRequiredRevision(1);
-			secClusGroupTentAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().createSecClusGrp(auth, secClusGroupTentAdmin);
-			if (secClusGroupTentAdmin == null) {
-				secClusGroupTentAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().readDerivedByUNameIdx(auth, secCluster.getRequiredId(), secTenant.getRequiredTenantName().toLowerCase() + "tenantadmin");
-			}
+		I$SecSchemaName$SecClusGrpMemb secClusGroupMembSystemAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrpMemb().readDerivedByIdIdx(auth, secClusGroupSysAdmin.getRequiredSecClusGrpId(), "systemadmin");
+		if (secClusGroupMembSystemAdmin == null) {
+			secClusGroupMembSystemAdmin = new $SecSchemaName$JpaSecClusGrpMemb();
+			secClusGroupMembSystemAdmin.setRequiredContainerGroup(secClusGroupSysAdmin);
+			secClusGroupMembSystemAdmin.setCreatedAt(now);
+			secClusGroupMembSystemAdmin.setCreatedByUserId(systemUID);
+			secClusGroupMembSystemAdmin.setUpdatedAt(now);
+			secClusGroupMembSystemAdmin.setUpdatedByUserId(systemUID);
+			secClusGroupMembSystemAdmin.setRequiredParentUser("systemadmin");
+			secClusGroupMembSystemAdmin.setRequiredRevision(1);
+			secClusGroupMembSystemAdmin = ($SecSchemaName$JpaSecClusGrpMemb)(secclusgrpmembService.create(($SecSchemaName$JpaSecClusGrpMemb)secClusGroupMembSystemAdmin));
 		}
-		CFLibDbKeyHash256 secClusGroupTentAdminID = secClusGroupTentAdmin.getRequiredSecClusGrpId();
-
+		
 		I$SecSchemaName$SecTentGrp secTentGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().readDerivedByUNameIdx(auth, secTenant.getRequiredId(), secTenant.getRequiredTenantName().toLowerCase() + "tenantadmin");
 		if (secTentGroupSysAdmin == null) {
 			secTentGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getFactorySecTentGrp().newRec();
@@ -1585,16 +1462,25 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secTentGroupSysAdmin.setCreatedByUserId(systemUID);
 			secTentGroupSysAdmin.setUpdatedAt(now);
 			secTentGroupSysAdmin.setUpdatedByUserId(systemUID);
-			secTentGroupSysAdmin.setRequiredParentSysGrp(secSysTentGroupSysAdmin);
-			secTentGroupSysAdmin.setRequiredContainerTenant(secTenant);
+			secTentGroupSysAdmin.setRequiredContainerSysGrp(secTenant.getRequiredTenantName().toLowerCase() + "tenantadmin");
+			secTentGroupSysAdmin.setRequiredOwnerTenant(secTenant);
 			secTentGroupSysAdmin.setRequiredRevision(1);
 			secTentGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().createSecTentGrp(auth, secTentGroupSysAdmin);
-			if (secTentGroupSysAdmin == null) {
-				secTentGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().readDerivedByUNameIdx(auth, secTenant.getRequiredId(), secTenant.getRequiredTenantName().toLowerCase() + "tenantadmin");
-			}
 		}
-		CFLibDbKeyHash256 secTentGroupSysAdminID = secTentGroupSysAdmin.getRequiredSecTentGrpId();
-	
+
+		I$SecSchemaName$SecTentGrpMemb secTentGroupMembSystemAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrpMemb().readDerivedByIdIdx(auth, secTentGroupSysAdmin.getRequiredSecTentGrpId(), "systemadmin");
+		if (secTentGroupMembSystemAdmin == null) {
+			secTentGroupMembSystemAdmin = new $SecSchemaName$JpaSecTentGrpMemb();
+			secTentGroupMembSystemAdmin.setRequiredContainerGroup(secTentGroupSysAdmin);
+			secTentGroupMembSystemAdmin.setCreatedAt(now);
+			secTentGroupMembSystemAdmin.setCreatedByUserId(systemUID);
+			secTentGroupMembSystemAdmin.setUpdatedAt(now);
+			secTentGroupMembSystemAdmin.setUpdatedByUserId(systemUID);
+			secTentGroupMembSystemAdmin.setRequiredParentUser("systemadmin");
+			secTentGroupMembSystemAdmin.setRequiredRevision(1);
+			secTentGroupMembSystemAdmin = ($SecSchemaName$JpaSecTentGrpMemb)(sectentgrpmembService.create(($SecSchemaName$JpaSecTentGrpMemb)secTentGroupMembSystemAdmin));
+		}
+
 		for( $SecSchemaName$TableInfo info: tableInfo) {
 			bootstrapTableSecurity(auth, LocalDateTime.now(), info.getTableName(), info.hasHistory(), info.isMutable(), info.getScope(), secSysGroupPublic, secSystemAdminGroup, secClusGroupSysAdmin, secTentGroupSysAdmin);
 		}

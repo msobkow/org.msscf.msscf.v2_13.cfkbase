@@ -458,18 +458,26 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 			permissionGranted = I$SecSchemaName$Schema.getSecurityService().isMemberOfSystemGroup(Authorization.getSecUserId(), "mutate$poptop Table lower TableName$");
 		}</GenRule>
 		
-		<GenRule GenDef="Table" Name="implJpaTableFilterAndReturnRetval">$switch SecScope
+		<GenRule GenDef="Table" Name="baseCustomSingleFilter">$poptop Table tabletweak CafePostReadTableSecurityCustomFilterRetval$</GenRule>
+		<GenRule GenDef="Table" Name="truncCustomSingleFilter">$gentrunc 100 baseCustomSingleFilter$</GenRule>
+		<GenRule GenDef="Table" Name="hasCustomSingleFilter">$switch truncCustomSingleFilter empty no default yes$</GenRule>
+		
+		<GenRule GenDef="Table" Name="implJpaTableFilterAndReturnRetval">$switch hasCustomSingleFilter yes expandCustomSingleFilter default noCustomSingleFilter$</GenRule>
+
+		<GenRule GenDef="Table" Name="expandCustomSingleFilter">$baseCustomSingleFilter$
+		return(retval);</GenRule>
+		
+		<GenRule GenDef="Table" Name="noCustomSingleFilter">$switch SecScope
 			TenantGroup implJpaTableTenantGroupFilterRetval
 			Tenant implJpaTableTenantFilterRetval
 			ClusterGroup implJpaTableClusterGroupFilterRetval
 			Cluster implJpaTableClusterFilterRetval
 			System empty
 			Global empty
-			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$$poptop Table tabletweak CafePostReadTableSecurityFilterRetval$
-		return(retval);</GenRule>
+			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$$poptop Table tabletweak CafePostReadTableSecurityFilterRetval$</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantGroupFilterRetval">$implJpaTableTenantFilterRetval$
-		if(retval != null) {$implJpaTableTenantFindForRetval$
+		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableTenantFindForRetval$
 			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
 			CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
 			String effDataGroupName = "toberetrieved";
@@ -479,7 +487,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantFilterRetval">
-		if(retval != null) {$implJpaTableTenantFindForRetval$
+		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableTenantFindForRetval$
 			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
 			CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
@@ -488,7 +496,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterGroupFilterRetval">$implJpaTableClusterFilterRetval$
-		if(retval != null) {$implJpaTableClusterFindForRetval$
+		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableClusterFindForRetval$
 			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
 			String effDataGroupName = "toberetrieved";
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
@@ -497,7 +505,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterFilterRetval">
-		if(retval != null) {$implJpaTableClusterFindForRetval$
+		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableClusterFindForRetval$
 			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
 				retval = null;
@@ -539,7 +547,15 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		<GenRule GenDef="Table" Name="maybeRecurseSuperResolveJpaTableTenantFindForRetval">$switch HasSuperClassRelation yes reallyRecurseSuperResolveJpaTableTenantFindForRetval default empty$</GenRule>
 		<GenRule GenDef="Table" Name="reallyRecurseSuperResolveJpaTableTenantFindForRetval">$reference SuperClassRelation reference ToTable resolveJpaTableTenantFindForRetval$</GenRule>
 
-		<GenRule GenDef="Table" Name="implJpaTableFilterRetlist">$switch SecScope
+		<GenRule GenDef="Table" Name="baseCustomDupFilter">$poptop Table tabletweak CafePostReadTableSecurityCustomFilterRetlist$</GenRule>
+		<GenRule GenDef="Table" Name="truncCustomDupFilter">$gentrunc 100 baseCustomDupFilter$</GenRule>
+		<GenRule GenDef="Table" Name="hasCustomDupFilter">$switch truncCustomDupFilter empty no default yes$</GenRule>
+		
+		<GenRule GenDef="Table" Name="implJpaTableFilterRetlist">$switch hasCustomDupFilter yes expandCustomDupFilter default noCustomDupFilter$</GenRule>
+
+		<GenRule GenDef="Table" Name="expandCustomDupFilter">$baseCustomDupFilter$</GenRule>
+
+		<GenRule GenDef="Table" Name="noCustomDupFilter">$switch SecScope
 			TenantGroup implJpaTableTenantGroupFilterRetlist
 			Tenant implJpaTableTenantFilterRetlist
 			ClusterGroup implJpaTableClusterGroupFilterRetlist
@@ -549,7 +565,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$$poptop Table tabletweak CafePostReadTableSecurityFilterRetlist$$poptop SchemaDef schematweak CafePostReadSchemaSecurityFilterRetlist$</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantGroupFilterRetlist">$implJpaTableTenantFilterRetlist$
-		if(retlist != null) {
+		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableTenantFindForRetval$
 				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
@@ -563,7 +579,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantFilterRetlist">
-		if(retlist != null) {
+		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableTenantFindForRetval$
 				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
@@ -576,7 +592,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterGroupFilterRetlist">$implJpaTableClusterFilterRetlist$
-		if(retlist != null) {
+		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableClusterFindForRetval$
 				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
@@ -589,7 +605,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterFilterRetlist">
-		if(retlist != null) {
+		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableClusterFindForRetval$
 				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
@@ -611,7 +627,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		return(retval);</GenRule>
 
 		<GenRule GenDef="Index" Name="implJpaTableTenantGroupFilterRetval">$implJpaTableTenantFilterRetval$
-		if(retval != null) {$implJpaTableTenantFindForRetval$
+		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableTenantFindForRetval$
 			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
 			CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
 			String effDataGroupName = "toberetrieved";
@@ -621,7 +637,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Index" Name="implJpaTableTenantFilterRetval">
-		if(retval != null) {$implJpaTableTenantFindForRetval$
+		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableTenantFindForRetval$
 			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
 			CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
@@ -630,7 +646,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Index" Name="implJpaTableClusterGroupFilterRetval">$implJpaTableClusterFilterRetval$
-		if(retval != null) {$implJpaTableClusterFindForRetval$
+		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableClusterFindForRetval$
 			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
 			String effDataGroupName = "toberetrieved";
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
@@ -639,14 +655,31 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Index" Name="implJpaTableClusterFilterRetval">
-		if(retval != null) {$implJpaTableClusterFindForRetval$
+		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableClusterFindForRetval$
 			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
 				retval = null;
 			}
 		}</GenRule>
 
-		<GenRule GenDef="Index" Name="implJpaTableFilterRetlist">$switch SecScope
+
+
+
+
+
+
+
+
+
+		<GenRule GenDef="Index" Name="baseCustomDupIndexFilter">$poptop Table tabletweak CafePostReadIndexSecurityCustomFilterRetlist$</GenRule>
+		<GenRule GenDef="Index" Name="truncCustomDupIndexFilter">$gentrunc 100 baseCustomDupIndexFilter$</GenRule>
+		<GenRule GenDef="Index" Name="hasCustomDupIndexFilter">$switch truncCustomDupIndexFilter empty no default yes$</GenRule>
+		
+		<GenRule GenDef="Index" Name="implJpaTableFilterRetlist">$switch hasCustomDupIndexFilter yes expandCustomDupIndexFilter default noCustomDupIndexFilter$</GenRule>
+		<GenRule GenDef="Index" Name="noCustomDupIndexFilter">$switch HasCustomDupFilter yes expandCustomDupFilter default reallyNoCustomDupIndexFilter$</GenRule>
+		<GenRule GenDef="Index" Name="expandCustomDupIndexFilter">$baseCustomDupIndexFilter$</GenRule>
+
+		<GenRule GenDef="Index" Name="reallyNoCustomDupIndexFilter">$switch SecScope
 			TenantGroup implJpaTableTenantGroupFilterRetlist
 			Tenant implJpaTableTenantFilterRetlist
 			ClusterGroup implJpaTableClusterGroupFilterRetlist
@@ -656,7 +689,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 			default errorUnrecognizedSecScopeInSchemaJpaTableTableDotJavaDotXml$$poptop Table tabletweak CafePostReadTableSecurityFilterRetlist$$poptop SchemaDef schematweak CafePostReadSchemaSecurityFilterRetlist$</GenRule>
 
 		<GenRule GenDef="Index" Name="implJpaTableTenantGroupFilterRetlist">$implJpaTableTenantFilterRetlist$
-		if(retlist != null) {
+		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableTenantFindForRetval$
 				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
@@ -670,7 +703,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Index" Name="implJpaTableTenantFilterRetlist">
-		if(retlist != null) {
+		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableTenantFindForRetval$
 				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
@@ -683,7 +716,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Index" Name="implJpaTableClusterGroupFilterRetlist">$implJpaTableClusterFilterRetlist$
-		if(retlist != null) {
+		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableClusterFindForRetval$
 				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
@@ -696,7 +729,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		}</GenRule>
 
 		<GenRule GenDef="Index" Name="implJpaTableClusterFilterRetlist">
-		if(retlist != null) {
+		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableClusterFindForRetval$
 				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
