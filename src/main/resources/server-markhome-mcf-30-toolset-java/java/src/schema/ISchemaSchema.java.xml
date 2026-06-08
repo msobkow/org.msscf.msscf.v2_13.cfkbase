@@ -85,7 +85,13 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 				lst.add(info);
 			}
 			lst.sort((o1, o2) -&gt; {
-				return o1.getTableName().compareTo(o2.getTableName());
+				int retval = o1.getSchemaName().compareTo(o2.getSchemaName());
+				if (retval != 0) {
+					return retval;
+				}
+				else {
+					return o1.getTableName().compareTo(o2.getTableName());
+				}
 			});
 			$SecSchemaName$TableInfo arr[] = new $SecSchemaName$TableInfo[lst.size()];
 			int idx = 0;
@@ -178,7 +184,7 @@ $implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( ea
 				lst.add(info);
 			}</GenRule>
 
-	<GenRule GenDef="Table" Name="declISchemaTableInfoEntry">new $SecSchemaName$TableInfo("$TableName$", $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$")</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaTableInfoEntry">new $SecSchemaName$TableInfo("$DefSchemaName$", "$TableName$", $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", "$CodeVis$")</GenRule>
 	<GenRule GenDef="Table" Name="declCommaISchemaTableInfoEntry">,
 		$declISchemaTableInfoEntry$</GenRule>
 

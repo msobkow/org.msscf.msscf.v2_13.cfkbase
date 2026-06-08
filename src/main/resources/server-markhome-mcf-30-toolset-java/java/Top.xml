@@ -35,7 +35,15 @@
 	ToolSet="java"
 	Name="Top"
 	Revision="3.0"
-	Descr="Top level rules for creating Java 21 files">
+	Descr="Top level rules for creating Java 25 files">
+
+	<GenRule GenDef="Object" Name="ExplainCodeVis">$switch CodeVis
+		Public ExplainCodeVisPublic
+		Protected ExplainCodeVisProtected
+		default ExplainCodeVisPrivate$</GenRule>
+	<GenRule GenDef="Object" Name="ExplainCodeVisPublic">CodeVis Public, meaning that any user interface or referencing schema can access it</GenRule>
+	<GenRule GenDef="Object" Name="ExplainCodeVisProtected">CodeVis Protected, meaning that any only user interfaces and application code specific to the defining schema can access it</GenRule>
+	<GenRule GenDef="Object" Name="ExplainCodeVisPrivate">CodeVis Private, meaning that only the back-end code for the schema implementation can access it, and even the code specific user interface cannot</GenRule>
 
 	<GenRule GenDef="MinorVersion" Name="top"
 		>$iterate SchemaDef( each schemaFiles )$</GenRule>
