@@ -69,7 +69,7 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 {
 	public static final String SCHEMA_NAME = "$SchemaName$";
 	public static final String DBSCHEMA_NAME = "$DbSchemaName$";$declApplicationContextAwareContext$
-	public static final $SecSchemaName$TableData TABLE_DATA[] = {$iterate DefSchemaTables( first declISchemaTableDataEntry each declCommaISchemaTableDataEntry )$};
+	public static final $SecSchemaName$TableData TABLE_DATA[] = {$iterate DefSchemaRootTables( first walkISchemaTableDataEntry each walkCommaISchemaTableDataEntry )$};
 	public static final AtomicReference&lt;$SecSchemaName$TableData[]&gt; consolidatedTableData = new AtomicReference&lt;&gt;(null);
 	public static final $SecSchemaName$RoleInfo ROLE_INFO[] = {$iterate SchemaOrderedRoles( first declISchemaRoleInfoEntry each declCommaISchemaRoleInfoEntry )$};
 	public static final AtomicReference&lt;$SecSchemaName$RoleInfo[]&gt; consolidatedRoleInfo = new AtomicReference&lt;&gt;(null);
@@ -84,15 +84,6 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 			for( $SecSchemaName$TableData data: TABLE_DATA) {
 				lst.add(data);
 			}
-			lst.sort((o1, o2) -&gt; {
-				int retval = o1.getSchemaName().compareTo(o2.getSchemaName());
-				if (retval != 0) {
-					return retval;
-				}
-				else {
-					return o1.getTableName().compareTo(o2.getTableName());
-				}
-			});
 			$SecSchemaName$TableData arr[] = new $SecSchemaName$TableData[lst.size()];
 			int idx = 0;
 			for($SecSchemaName$TableData data: lst) {
@@ -184,9 +175,9 @@ $implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( ea
 				lst.add(info);
 			}</GenRule>
 
-	<GenRule GenDef="Table" Name="declISchemaTableDataEntry">new $SecSchemaName$TableData("$DefSchemaName$", "$TableName$", $switch HasSuperClassRelation yes emitISchemaTableDataEntrySuperName default emitNull$, $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", "$CodeVis$")</GenRule>
-	<GenRule GenDef="Table" Name="declCommaISchemaTableDataEntry">,
-		$declISchemaTableDataEntry$</GenRule>
+	<GenRule GenDef="Table" Name="walkISchemaTableDataEntry">new $SecSchemaName$TableData("$DefSchemaName$", "$TableName$", $switch HasSuperClassRelation yes emitISchemaTableDataEntrySuperName default emitNull$, $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", "$CodeVis$")$iterate TableSubClasses( each walkCommaISchemaTableDataEntry )$</GenRule>
+	<GenRule GenDef="Table" Name="walkCommaISchemaTableDataEntry">,
+		$walkISchemaTableDataEntry$</GenRule>
 
 	<GenRule GenDef="Object" Name="emitNull">null</GenRule>
 	<GenRule GenDef="Table" Name="emitISchemaTableDataEntrySuperName">"$reference SuperClassRelation reference ToTable TableName$"</GenRule>
