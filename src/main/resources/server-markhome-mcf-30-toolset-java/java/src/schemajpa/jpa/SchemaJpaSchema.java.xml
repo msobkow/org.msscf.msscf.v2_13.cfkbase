@@ -132,22 +132,22 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaBootstrap">$iterate SchemaRefs( empty implSchemaSecBootstrap first implSchemaInvokeSecBootstrap each empty )$</GenRule>
 	<GenRule GenDef="Object" Name="implSchemaSecBootstrap">
-	public void bootstrapSchema($SecSchemaName$TableInfo tableInfo[]) {
-		getSchemaService().bootstrapSchema(tableInfo);
+	public void bootstrapSchema($SecSchemaName$TableData tableData[]) {
+		getSchemaService().bootstrapSchema(tableData);
 	}
 
-	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableInfo tableInfo[]) {
-		getSchemaService().bootstrapAllTablesSecurity(clusterId, tenantId, tableInfo);
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableData tableData[]) {
+		getSchemaService().bootstrapAllTablesSecurity(clusterId, tenantId, tableData);
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implSchemaInvokeSecBootstrap">
-	public void bootstrapSchema($SecSchemaName$TableInfo tableInfo[]) {
-		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapSchema(tableInfo);
+	public void bootstrapSchema($SecSchemaName$TableData tableData[]) {
+		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapSchema(tableData);
 	}
 
-	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableInfo tableInfo[]) {
-		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapAllTablesSecurity(clusterId, tenantId, tableInfo);
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableData tableData[]) {
+		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapAllTablesSecurity(clusterId, tenantId, tableData);
 	}
 </GenRule>
 

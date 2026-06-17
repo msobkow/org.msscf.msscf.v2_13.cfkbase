@@ -33,20 +33,20 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/schema/SchemaTableInfo.java"
+	Name="src/schema/SchemaTableData.java"
 	Revision="3.0"
-	Descr="Java SchemaName TableInfo Implementation">
+	Descr="Java SchemaName TableData Implementation">
 
-	<GenFile GenDef="SchemaDef" Name="fileSchemaTableInfoJava"
+	<GenFile GenDef="SchemaDef" Name="fileSchemaTableDataJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
-		ExpansionClassName="$SchemaName$TableInfoJava"
-		ExpansionKeyName="$SchemaName$TableInfoJava"
-		ExpansionFileName="$SchemaName$TableInfo.java"
->// Description: Java 25 $SchemaName$ TableInfo Implementation
+		ExpansionClassName="$SchemaName$TableDataJava"
+		ExpansionKeyName="$SchemaName$TableDataJava"
+		ExpansionFileName="$SchemaName$TableData.java"
+>// Description: Java 25 $SchemaName$ TableData Implementation
 
 $MssSourceLicense$
 
@@ -67,21 +67,23 @@ import $lower reference ManufacturingSchema JavaPackage$.$lower reference Manufa
 import $lower reference ManufacturingSchema JavaPackage$.$lower reference ManufacturingSchema SchemaName$obj.I$reference ManufacturingSchema SchemaName$SecSessionObj;
 
 /*
- *	The $SchemaName$TableInfo objects are passed in to the $SecSchemaName$ schema implementation to be bound
+ *	The $SchemaName$TableData objects are passed in to the $SecSchemaName$ schema implementation to be bound
  *	to the 
  */
-public class $SchemaName$TableInfo implements Serializable
+public class $SchemaName$TableData implements Serializable
 {
 	protected final String schemaName;
 	protected final String tableName;
+	protected final String superName;
 	protected final boolean history;
 	protected final boolean mutable;
 	protected final String scope;
 	protected final String codeVis;
 
-	public $SchemaName$TableInfo(String schemaName, String tableName, boolean history, boolean mutable, String scope, String codeVis) {
+	public $SchemaName$TableData(String schemaName, String tableName, String superName, boolean history, boolean mutable, String scope, String codeVis) {
 		this.schemaName = schemaName;
 		this.tableName = tableName;
+		this.superName = superName;
 		this.history = history;
 		this.mutable = mutable;
 		this.scope = scope;
@@ -90,6 +92,10 @@ public class $SchemaName$TableInfo implements Serializable
 
 	public String getTableName() {
 		return tableName;
+	}
+
+	public String getSuperName() {
+		return superName;
 	}
 
 	public String getSchemaName() {
