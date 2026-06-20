@@ -63,14 +63,33 @@ import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import org.apache.commons.text.StringEscapeUtils;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameBuff empty empty )$
+import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.buff.$DefSchemaName$BuffHooksSchema;
 
 public class $SchemaName$BuffSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
-{$iterate SchemaRefs( each empty empty declTablePerms )$
+{
+	private static $DefSchemaName$BuffHooksSchema $lower DefSchemaName$BuffHooksSchema = null;
+$iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate SchemaTables( each declSchemaBuffTableTableMember )$
-$iterate SchemaTables( each declSchemaBuffTableFactoryMember )$
-$implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaXmlEncodeString$$iterate SchemaRefs( empty implSchemaBuffSecBootstrap first implSchemaBuffInvokeBootstrap each empty )$}
+$implBuffSchemaClassMapInitializers$$implSchemaBuffHooksSchemaAccessors$$implSchemaBuffFactoryAccessors$$implBuffSchemaMoreMethods$$implBuffSchemaXmlEncodeString$$iterate SchemaRefs( empty implSchemaBuffSecBootstrap first implSchemaBuffInvokeBootstrap each empty )$}
 </GenFile>
+
+<GenRule GenDef="SchemaDef" Name="implSchemaBuffFactoryAccessors">
+	@Override
+	public I$DefSchemaName$Factory get$DefSchemaName$Factory() {
+		return($DefSchemaName$BuffSchema.getBuffHooksSchema().getFactoryService());
+	}
+</GenRule>
+
+<GenRule GenDef="SchemaDef" Name="implSchemaBuffHooksSchemaAccessors">
+	public static $DefSchemaName$BuffHooksSchema getBuffHooksSchema() {
+		return( $lower DefSchemaName$BuffHooksSchema );
+	}
+
+	public static void setBuffHooksSchema($DefSchemaName$BuffHooksSchema buffHooksSchema) {
+		$lower DefSchemaName$BuffHooksSchema = buffHooksSchema;
+	}
+</GenRule>
 
 <GenRule GenDef="Object" Name="implSchemaBuffSecBootstrap">
 	public void bootstrapSchema($SecSchemaName$TableData tableData[]) {
@@ -196,7 +215,7 @@ $implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaXm
 			fqdn = "localhost";
 		}
 		if (systemCluster == null) {
-			systemCluster = ($DefSchemaName$BuffCluster)(getFactoryCluster().newRec());
+			systemCluster = ($DefSchemaName$BuffCluster)(get$DefSchemaName$Factory().getFactoryCluster().newRec());
 			systemCluster.setPKey(systemClusterID);
 			systemCluster.setCreatedByUserId(systemUID);
 			systemCluster.setUpdatedByUserId(systemUID);
@@ -208,7 +227,7 @@ $implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaXm
 			systemClusterID = systemCluster.getPKey();
 		}
 		if (systemUser == null) {
-			systemUser = ($DefSchemaName$BuffSecUser)(getFactorySecUser().newRec());
+			systemUser = ($DefSchemaName$BuffSecUser)(get$DefSchemaName$Factory().getFactorySecUser().newRec());
 			systemUser.setCreatedByUserId(systemUID);
 			systemUser.setUpdatedByUserId(systemUID);
 			systemUser.setCreatedAt(now);
@@ -221,7 +240,7 @@ $implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaXm
 			systemUID = systemUser.getPKey();
 		}
 		if (systemTenant == null) {
-			systemTenant = ($DefSchemaName$BuffTenant)(getFactoryTenant().newRec());
+			systemTenant = ($DefSchemaName$BuffTenant)(get$DefSchemaName$Factory().getFactoryTenant().newRec());
 			systemTenant.setPKey(systemTenantID);
 			systemTenant.setCreatedByUserId(systemUID);
 			systemTenant.setUpdatedByUserId(systemUID);
@@ -233,7 +252,7 @@ $implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaXm
 			systemTenantID = systemTenant.getPKey();
 		}
 		if (bootstrapSession == null) {
-			bootstrapSession = ($DefSchemaName$BuffSecSession)(getFactorySecSession().newRec());
+			bootstrapSession = ($DefSchemaName$BuffSecSession)(get$DefSchemaName$Factory().getFactorySecSession().newRec());
 			bootstrapSession.setPKey(bootstrapSessionID);
 			bootstrapSession.setRequiredSecUserId(systemUID);
 			bootstrapSession.setOptionalSecProxyId(systemUID);
@@ -243,7 +262,7 @@ $implBuffSchemaClassMapInitializers$$implBuffSchemaMoreMethods$$implBuffSchemaXm
 			bootstrapSessionID = bootstrapSession.getPKey();
 		}
 		if (sysCluster == null) {
-			sysCluster = ($DefSchemaName$BuffSysCluster)(getFactorySysCluster().newRec());
+			sysCluster = ($DefSchemaName$BuffSysCluster)(get$DefSchemaName$Factory().getFactorySysCluster().newRec());
 			sysCluster.setRequiredContainerCluster(systemClusterID);
 			sysCluster = ($DefSchemaName$BuffSysCluster)(getTableSysCluster().createSysCluster(null, sysCluster));
 		}
@@ -312,17 +331,12 @@ $iterate SchemaRefs( each implBuffSchemaGetSchemaNameSchema empty empty )$$implB
 	<GenRule GenDef="Table" Name="declSchemaBuffTableTableMember">
 	protected I$DefSchemaName$$TableName$Table table$TableName$;</GenRule>
 
-	<GenRule GenDef="Table" Name="declSchemaBuffTableFactoryMember">
-	protected I$DefSchemaName$$TableName$Factory factory$TableName$;</GenRule>
-
-	<GenRule GenDef="Table" Name="initSchemaBuffTableTableMember">
+	<GenRule GenDef="Table" Name="initSchemaBuffTableTableMember">$switch HasDefSchema yes empty default reallyInitSchemaBuffTableTableMember$</GenRule>
+	<GenRule GenDef="Table" Name="reallyInitSchemaBuffTableTableMember">
 	table$TableName$ = null; // new $DefSchemaName$Buff$TableName$Table();</GenRule>
 
-	<GenRule GenDef="Table" Name="initSchemaBuffTableFactoryMember">
-	factory$TableName$ = new $DefSchemaName$Buff$TableName$DefaultFactory();</GenRule>
-
 	<GenRule GenDef="Table" Name="implTableMethods"
-		>$implBuffSchemaTableTableAccessors$$implBuffSchemaTableFactoryAccessors$</GenRule>
+		>$implBuffSchemaTableTableAccessors$</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="implBuffReturnThisSchemaRefGetTablePerms">$reference RefSchema SchemaName$BuffSchema.getTablePerms()</GenRule>
 
@@ -346,21 +360,10 @@ $iterate SchemaRefs( each implBuffSchemaGetSchemaNameSchema empty empty )$$implB
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implBuffSchemaTableFactoryAccessors">
-	public I$DefSchemaName$$TableName$Factory getFactory$TableName$() {
-		return( factory$TableName$ );
-	}
-
-	public void setFactory$TableName$( I$DefSchemaName$$TableName$Factory value ) {
-		factory$TableName$ = value;
-	}
-</GenRule>
-
 	<GenRule GenDef="Object" Name="implBuffSchemaSchemaConstructor">
 	public $poptop SchemaDef SchemaName$BuffSchema() {
 $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
-$poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableFactoryMember )
-$	}
+	}
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="implBuffSchemaNewSchema"

@@ -90,9 +90,13 @@ $iterate Tables( each JpaSchemaHooksMaybeAutowireRepository empty empty )$
 	private $DefSchemaName$JpaSchemaService schemaService;
 
 	@Autowired
-	@Qualifier("$SchemaName$JpaIdGenService")
+	@Qualifier("$lower DefDbSchemaName$JpaFactory")
+	private $DefSchemaName$JpaFactoryService factoryService;
+
+	@Autowired
+	@Qualifier("$DbSchemaName$JpaIdGenService")
 	private $SchemaName$JpaIdGenService idGenService;
-$iterate Tables( each JpaSchemaHooksMaybeAutowireService empty empty )$$JpaSchemaHooksGetEntityManagerFactoryBean$$JpaSchemaHooksGetSchemaService$$JpaSchemaHooksGetIdGenService$$iterate Tables( each JpaSchemaHooksMaybeGetTableRepository empty empty )$$iterate Tables( each JpaSchemaHooksMaybeGetTableService empty empty )$</GenRule>
+$iterate Tables( each JpaSchemaHooksMaybeAutowireService empty empty )$$JpaSchemaHooksGetEntityManagerFactoryBean$$JpaSchemaHooksGetSchemaService$$JpaSchemaHooksGetFactoryService$$JpaSchemaHooksGetIdGenService$$iterate Tables( each JpaSchemaHooksMaybeGetTableRepository empty empty )$$iterate Tables( each JpaSchemaHooksMaybeGetTableService empty empty )$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="JpaSchemaHooksGetEntityManagerFactoryBean">
 	public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
@@ -127,6 +131,18 @@ $iterate Tables( each JpaSchemaHooksMaybeAutowireService empty empty )$$JpaSchem
 				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either" );
 		}
 		return( idGenService );
+	}
+</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="JpaSchemaHooksGetFactoryService">
+	public $DefSchemaName$JpaFactoryService getFactoryService() {
+		if ( factoryService == null ) {
+			// Dynamically resolve the factory by qualifier name
+			throw new CFLibNotImplementedYetException( getClass(), "getFactoryService",
+				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either",
+				"ERROR - do not know how to dynamically resolve Spring beans from POJO code yet and AspectJ did not resolve it either" );
+		}
+		return( factoryService );
 	}
 </GenRule>
 

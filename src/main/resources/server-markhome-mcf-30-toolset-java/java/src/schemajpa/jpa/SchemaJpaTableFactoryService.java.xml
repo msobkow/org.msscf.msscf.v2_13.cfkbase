@@ -33,20 +33,20 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/schema/jpa/SchemaJpaTableDefaultFactory.java"
+	Name="src/schema/jpa/SchemaJpaTableFactoryService.java"
 	Revision="3.0"
-	Descr="Java 25 JPA Default Factory implementation for $TableName$">
+	Descr="Java 25 Factory service implementation for $TableName$ JPA objects">
 
-	<GenFile GenDef="Table" Name="fileSchemaJpaTableDefaultFactoryJava"
+	<GenFile GenDef="Table" Name="fileSchemaJpaTableFactoryServiceJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$jpa/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa"
-		ExpansionClassName="$SchemaName$Jpa$TableName$DefaultFactoryJava"
-		ExpansionKeyName="$SchemaName$Jpa$TableName$DefaultFactoryJava"
-		ExpansionFileName="$SchemaName$Jpa$TableName$DefaultFactory.java">
-// Description: Java 25 JPA Default Factory implementation for $TableName$.
+		ExpansionClassName="$SchemaName$Jpa$TableName$FactoryServiceJava"
+		ExpansionKeyName="$SchemaName$Jpa$TableName$FactoryServiceJava"
+		ExpansionFileName="$SchemaName$Jpa$TableName$FactoryService.java">
+// Description: Java 25 Factory service implementation for $TableName$ JPA objects
 
 $MssSourceLicense$
 
@@ -60,33 +60,23 @@ import java.text.*;
 import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameJpa empty empty )$
 
 /*
- *	$SchemaName$$TableName$Factory JPA implementation for $TableName$
+ *	Java 25 Factory service implementation for $TableName$ JPA objects.
  */
-public class $SchemaName$Jpa$TableName$DefaultFactory$switch HasDefSchema yes extendSchemaJpaTableDefaultFactory default empty$
+public class $SchemaName$Jpa$TableName$FactoryService
     implements I$SchemaName$$TableName$Factory
-{$switch HasDefSchema yes implJpaDefaultFactoryInhConstruct default implJpaDefaultFactoryConstruct$$implJpaDefaultFactoryMethods$}
+{$implJpaFactoryServiceConstruct$$switch HasSuperClassRelation no implJpaNewPKey default empty$$switch HasSuperClassRelation no maybeImplJpaNewHPKey default empty$$iterate Index( each implJpaNewNonPrimaryIndexKey )$$implJpaNewRec$$switch BaseHasHistory yes implJpaNewHRec default empty$}
 </GenFile>
 
-	<GenRule GenDef="Table" Name="implJpaDefaultFactoryMethods"
-            >$switch HasSuperClassRelation no implJpaNewPKey default empty$$switch HasSuperClassRelation no maybeImplJpaNewHPKey default empty$$iterate Index( each implJpaNewNonPrimaryIndexKey )$$implJpaNewRec$$switch BaseHasHistory yes implJpaNewHRec default empty$</GenRule>
-
-	<GenRule GenDef="Table" Name="extendSchemaJpaTableDefaultFactory">
-    extends $reference DefSchema SchemaName$Jpa$TableName$DefaultFactory</GenRule>
-
-	<GenRule GenDef="Table" Name="implJpaDefaultFactoryConstruct">
-    public $poptop SchemaDef SchemaName$Jpa$TableName$DefaultFactory() {
-    }
-</GenRule>
-
-    <GenRule GenDef="Table" Name="implJpaDefaultFactoryInhConstruct">
-    public $poptop SchemaDef SchemaName$Jpa$TableName$DefaultFactory() {
-    	super();
-    }
+	<GenRule GenDef="Table" Name="implJpaFactoryServiceConstruct">
+    public $poptop SchemaDef SchemaName$Jpa$TableName$FactoryService() { }
 </GenRule>
 
     <GenRule GenDef="Index" Name="implJpaNewNonPrimaryIndexKey"
@@ -95,8 +85,7 @@ public class $SchemaName$Jpa$TableName$DefaultFactory$switch HasDefSchema yes ex
     <GenRule GenDef="Index" Name="implJpaNewIndexKey">
     @Override
     public I$DefSchemaName$$TableName$By$Suffix$Key newBy$Suffix$Key() {
-	I$DefSchemaName$$TableName$By$Suffix$Key key =
-            new $DefSchemaName$Jpa$TableName$By$Suffix$Key();
+		I$DefSchemaName$$TableName$By$Suffix$Key key = new $DefSchemaName$Jpa$TableName$By$Suffix$Key();
 	return( key );
     }
 
@@ -120,8 +109,7 @@ public class $SchemaName$Jpa$TableName$DefaultFactory$switch HasDefSchema yes ex
     <GenRule GenDef="Table" Name="reallyJpaImplNewPKey">
     @Override
     public I$DefSchemaName$$reference BaseClass TableName$PKey newPKey() {
-        I$DefSchemaName$$reference BaseClass TableName$PKey pkey =
-            new $DefSchemaName$Jpa$reference BaseClass TableName$PKey();
+        I$DefSchemaName$$reference BaseClass TableName$PKey pkey = new $DefSchemaName$Jpa$reference BaseClass TableName$PKey();
         return( pkey );
     }
 
@@ -144,8 +132,7 @@ public class $SchemaName$Jpa$TableName$DefaultFactory$switch HasDefSchema yes ex
     <GenRule GenDef="Table" Name="implJpaNewHPKey">
     @Override
     public I$DefSchemaName$$reference BaseClass TableName$HPKey newHPKey() {
-        I$DefSchemaName$$reference BaseClass TableName$HPKey hpkey =
-            new $DefSchemaName$Jpa$reference BaseClass TableName$HPKey();
+        I$DefSchemaName$$reference BaseClass TableName$HPKey hpkey = new $DefSchemaName$Jpa$reference BaseClass TableName$HPKey();
         return( hpkey );
     }
 
@@ -170,8 +157,7 @@ public class $SchemaName$Jpa$TableName$DefaultFactory$switch HasDefSchema yes ex
     <GenRule GenDef="Table" Name="implJpaNewRec">
     @Override
     public I$DefSchemaName$$TableName$ newRec() {
-        I$DefSchemaName$$TableName$ rec =
-            new $DefSchemaName$Jpa$TableName$();
+        I$DefSchemaName$$TableName$ rec = new $DefSchemaName$Jpa$TableName$();
         return( rec );
     }
 
@@ -193,8 +179,7 @@ public class $SchemaName$Jpa$TableName$DefaultFactory$switch HasDefSchema yes ex
     <GenRule GenDef="Table" Name="implJpaNewHRec">
     @Override
     public I$DefSchemaName$$TableName$H newHRec() {
-        I$DefSchemaName$$TableName$H hrec =
-            new $DefSchemaName$Jpa$TableName$H();
+        I$DefSchemaName$$TableName$H hrec = new $DefSchemaName$Jpa$TableName$H();
         return( hrec );
     }
 

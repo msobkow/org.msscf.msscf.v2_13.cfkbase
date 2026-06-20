@@ -33,20 +33,20 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/schema/buff/SchemaBuffTableDefaultFactory.java"
+	Name="src/schema/buff/SchemaBuffTableFactoryService.java"
 	Revision="2.13"
-	Descr="Java 25 Default Factory implementation for $TableName$ buffers">
+	Descr="Java 25 Factory service implementation for $TableName$ buffers">
 
-	<GenFile GenDef="Table" Name="fileSchemaBuffTableDefaultFactoryJava"
+	<GenFile GenDef="Table" Name="fileSchemaBuffTableFactoryServiceJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.buff"
-		ExpansionClassName="$SchemaName$Buff$TableName$DefaultFactoryJava"
-		ExpansionKeyName="$SchemaName$Buff$TableName$DefaultFactoryJava"
-		ExpansionFileName="$SchemaName$Buff$TableName$DefaultFactory.java">
-// Description: Java 25 Default Factory implementation for $TableName$ buffers
+		ExpansionClassName="$SchemaName$Buff$TableName$FactoryServiceJava"
+		ExpansionKeyName="$SchemaName$Buff$TableName$FactoryServiceJava"
+		ExpansionFileName="$SchemaName$Buff$TableName$FactoryService.java">
+// Description: Java 25 Factory service implementation for $TableName$ buffers
 
 $MssSourceLicense$
 
@@ -61,33 +61,28 @@ import java.time.*;
 import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameBuff empty empty )$
 
 /*
- *	$SchemaName$Buff$TableName$Factory implementation of I$DefSchemaName$$TableName$Factory for $TableName$
+ *	Java 25 Factory service implementation for $TableName$ buffers.
  */
-public class $SchemaName$Buff$TableName$DefaultFactory$switch HasDefSchema yes extendSchemaBuffTableDefaultFactory default empty$
+@Service("$lower DefDbSchemaName$Buff$TableName$FactoryService")
+public class $SchemaName$Buff$TableName$FactoryService
 	implements I$SchemaName$$TableName$Factory
-{$switch HasDefSchema yes implBuffDefaultFactoryInhConstruct default implBuffDefaultFactoryConstruct$$implBuffDefaultFactoryMethods$}
+{$implBuffFactoryServiceConstruct$$implBuffFactoryServiceMethods$}
 </GenFile>
 
-	<GenRule GenDef="Table" Name="implBuffDefaultFactoryMethods"
+	<GenRule GenDef="Table" Name="implBuffFactoryServiceMethods"
 		>$switch HasSuperClassRelation no implBuffNewPKey default empty$$switch HasSuperClassRelation no maybeImplBuffNewHPKey default empty$$iterate Index( each implBuffNewNonPrimaryIndexKey )$$implBuffNewRec$$switch BaseHasHistory yes implBuffNewHRec default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="extendSchemaBuffTableDefaultFactory">
-	extends $reference DefSchema SchemaName$Buff$TableName$DefaultFactory</GenRule>
-
-	<GenRule GenDef="Table" Name="implBuffDefaultFactoryConstruct">
-	public $poptop SchemaDef SchemaName$Buff$TableName$DefaultFactory() {
-	}
-</GenRule>
-
-	<GenRule GenDef="Table" Name="implBuffDefaultFactoryInhConstruct">
-	public $poptop SchemaDef SchemaName$Buff$TableName$DefaultFactory() {
-		super();
+	<GenRule GenDef="Table" Name="implBuffFactoryServiceConstruct">
+	public $poptop SchemaDef SchemaName$Buff$TableName$FactoryService() {
 	}
 </GenRule>
 

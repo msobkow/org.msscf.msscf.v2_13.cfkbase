@@ -73,21 +73,27 @@ import $reference ManufacturingSchema lower JavaPackage$.$lower reference Manufa
 public class $SchemaName$JpaSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
 {
-	private $DefSchemaName$JpaHooksSchema $lower DefSchemaName$JpaHooksSchema = null;
+	private static $DefSchemaName$JpaHooksSchema $lower DefSchemaName$JpaHooksSchema = null;
 $iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate SchemaTables( each declJpaSchemaTableTableMember )$
-$iterate SchemaTables( each declJpaSchemaTableFactoryMember )$
-$implJpaSchemaClassMapInitializers$$implSchemaJpaHooksSchemaAccessors$$implSchemaGetSchemaService$
+$implJpaSchemaClassMapInitializers$$implSchemaJpaHooksSchemaAccessors$$implSchemaJpaFactoryAccessors$$implSchemaGetSchemaService$
 $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootstrap$}
 </GenFile>
 
 <GenRule GenDef="SchemaDef" Name="implSchemaGetSchemaService">
 	public $DefSchemaName$JpaSchemaService getSchemaService() {
-		return( getJpaHooksSchema().getSchemaService() );
+		return( $DefSchemaName$JpaSchema.getJpaHooksSchema().getSchemaService() );
 	}</GenRule>
 
+<GenRule GenDef="SchemaDef" Name="implSchemaJpaFactoryAccessors">
+	@Override
+	public I$DefSchemaName$Factory get$DefSchemaName$Factory() {
+		return($DefSchemaName$JpaSchema.getJpaHooksSchema().getFactoryService());
+	}
+</GenRule>
+
 <GenRule GenDef="SchemaDef" Name="implSchemaJpaHooksSchemaAccessors">
-	public $DefSchemaName$JpaHooksSchema getJpaHooksSchema() {
+	public static $DefSchemaName$JpaHooksSchema getJpaHooksSchema() {
 <!--		final String S_ProcName = "getJpaHooksSchema";
 		final String S_BeanClassName = "$DefSchemaName$JpaHooksSchema";
 		final String S_BeanName = "$lower DefDbSchemaName$JpaHooksSchema";
@@ -125,7 +131,7 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 -->		return( $lower DefSchemaName$JpaHooksSchema );
 	}
 
-	public void setJpaHooksSchema($DefSchemaName$JpaHooksSchema jpaHooksSchema) {
+	public static void setJpaHooksSchema($DefSchemaName$JpaHooksSchema jpaHooksSchema) {
 		$lower DefSchemaName$JpaHooksSchema = jpaHooksSchema;
 	}
 </GenRule>
@@ -289,10 +295,6 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 >	protected I$DefSchemaName$$TableName$Table table$TableName$;
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declJpaSchemaTableFactoryMember"
->	protected I$DefSchemaName$$TableName$Factory factory$TableName$;
-</GenRule>
-
 	<GenRule GenDef="Table" Name="implJpaTableMethods">
 	public I$DefSchemaName$$TableName$Table getTable$TableName$() {
 		return( table$TableName$ );
@@ -300,14 +302,6 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 
 	public void setTable$TableName$( I$DefSchemaName$$TableName$Table value ) {
 		table$TableName$ = value;
-	}
-
-	public I$DefSchemaName$$TableName$Factory getFactory$TableName$() {
-		return( factory$TableName$ );
-	}
-
-	public void setFactory$TableName$( I$DefSchemaName$$TableName$Factory value ) {
-		factory$TableName$ = value;
 	}
 </GenRule>
 
@@ -336,7 +330,7 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 	<GenRule GenDef="Object" Name="implJpaSchemaSchemaConstructor">
 	public $poptop SchemaDef SchemaName$JpaSchema() {
 $poptop SchemaDef iterate SchemaTables( each initJpaSchemaTableTableMember )$
-$poptop SchemaDef iterate SchemaTables( each initJpaSchemaTableFactoryMember )$	}
+	}
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="implJpaSchemaNewSchema"
@@ -358,9 +352,6 @@ $poptop SchemaDef iterate SchemaTables( each initJpaSchemaTableFactoryMember )$	
 
 	<GenRule GenDef="Table" Name="initJpaSchemaTableTableMember">
 		table$TableName$ = null;</GenRule>
-
-	<GenRule GenDef="Table" Name="initJpaSchemaTableFactoryMember">
-		factory$TableName$ = new $DefSchemaName$Jpa$TableName$DefaultFactory();</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaXmlEncodeString">
 	public static String xmlEncodeString( String val ) {

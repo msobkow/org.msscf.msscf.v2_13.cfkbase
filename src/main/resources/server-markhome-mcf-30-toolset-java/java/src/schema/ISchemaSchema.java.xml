@@ -115,8 +115,16 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 		}
 		return(consolidatedRoleInfo.get());
 	}
-$implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate SchemaRefs( each empty empty declISchemaSecurityAccessors )$$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( empty declISchemaSecurityAttrs each empty )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$$declSchemaBootstrap$}
+$implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate SchemaRefs( each empty empty declISchemaSecurityAccessors )$$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( empty declISchemaSecurityAttrs each empty )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaRefs( each declSchemaFactoryAccessors empty empty )$$declSchemaFactoryAccessors$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$$declSchemaBootstrap$}
 </GenFile>
+
+	<GenRule GenDef="SchemaRef" Name="declSchemaFactoryAccessors">$reference RefSchema declSchemaFactoryAccessors$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declSchemaFactoryAccessors">
+	/**
+	 *	Get the factory for $DefSchemaName$ data objects.
+	 */
+	public I$DefSchemaName$Factory get$DefSchemaName$Factory();
+</GenRule>
 
 	<GenRule GenDef="Object" Name="declISchemaSecurityAccessors">$poptop SchemaDef declISchemaSecurityAccessors$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declISchemaSecurityAccessors">
@@ -175,7 +183,7 @@ $implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( ea
 				lst.add(info);
 			}</GenRule>
 
-	<GenRule GenDef="Table" Name="walkISchemaTableDataEntry">new $SecSchemaName$TableData("$DefSchemaName$", "$TableName$", $switch HasSuperClassRelation yes emitISchemaTableDataEntrySuperName default emitNull$, $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", "$CodeVis$")$iterate TableSubClasses( each walkCommaISchemaTableDataEntry )$</GenRule>
+	<GenRule GenDef="Table" Name="walkISchemaTableDataEntry">new $SecSchemaName$TableData("$DefSchemaName$", "$TableName$", $switch HasSuperClassRelation yes emitISchemaTableDataEntrySuperName default emitNull$, $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", "$CodeVis$")$iterate TableSubClasses( each walkCommaISchemaTableDataEntry empty empty )$</GenRule>
 	<GenRule GenDef="Table" Name="walkCommaISchemaTableDataEntry">,
 		$walkISchemaTableDataEntry$</GenRule>
 
@@ -731,7 +739,7 @@ import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectNa
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declTableMethods"
-		>$declSchemaTableTableAccessors$$declSchemaTableFactoryAccessors$</GenRule>
+		>$declSchemaTableTableAccessors$</GenRule>
 
 	<GenRule GenDef="Table" Name="declSchemaTableTableAccessors">
 	/**
@@ -742,17 +750,6 @@ import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectNa
 	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
 	 */
 	public I$DefSchemaName$$TableName$Table getTable$TableName$();
-</GenRule>
-
-	<GenRule GenDef="Table" Name="declSchemaTableFactoryAccessors">
-	/**
-	 *	Get the $TableName$ Factory interface for the schema.
-	 *
-	 *	@return	The $TableName$ Factory interface for the schema.
-	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public I$DefSchemaName$$TableName$Factory getFactory$TableName$();
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="declSchemaTablePermsAccessors"
