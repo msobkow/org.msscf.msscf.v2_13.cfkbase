@@ -76,7 +76,7 @@ public class $SchemaName$JpaSchema
 	private static $DefSchemaName$JpaHooksSchema $lower DefSchemaName$JpaHooksSchema = null;
 $iterate SchemaRefs( each empty empty declTablePerms )$
 $iterate SchemaTables( each declJpaSchemaTableTableMember )$
-$implJpaSchemaClassMapInitializers$$implSchemaJpaHooksSchemaAccessors$$implSchemaJpaFactoryAccessors$$implSchemaGetSchemaService$
+$implJpaSchemaClassMapInitializers$$implSchemaJpaHooksSchemaAccessors$$iterate SchemaRefs( each inhSchemaJpaFactoryAccessors empty empty )$$implSchemaJpaFactoryAccessors$$implSchemaGetSchemaService$
 $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootstrap$}
 </GenFile>
 
@@ -84,6 +84,20 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 	public $DefSchemaName$JpaSchemaService getSchemaService() {
 		return( $DefSchemaName$JpaSchema.getJpaHooksSchema().getSchemaService() );
 	}</GenRule>
+
+<GenRule GenDef="SchemaRef" Name="inhSchemaJpaFactoryAccessors">$reference RefSchema inhSchemaJpaFactoryAccessors$</GenRule>
+<GenRule GenDef="SchemaDef" Name="inhSchemaJpaFactoryAccessors">
+	@Override
+	public I$DefSchemaName$Factory get$DefSchemaName$Factory() {
+		I$DefSchemaName$Schema sch = I$DefSchemaName$Schema.getBacking$DefSchemaName$();
+		if (sch == null) {
+			return null;
+		}
+		else {
+			return(sch.get$DefSchemaName$Factory());
+		}
+	}
+</GenRule>
 
 <GenRule GenDef="SchemaDef" Name="implSchemaJpaFactoryAccessors">
 	@Override

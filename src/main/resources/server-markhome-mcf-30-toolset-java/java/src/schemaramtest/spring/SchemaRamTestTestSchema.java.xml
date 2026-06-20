@@ -89,9 +89,9 @@ $iterate SchemaRefs( empty implRamTestSchemaCFSecUtilityMethods each empty )$}</
 				LocalDateTime now = LocalDateTime.now();
 				CFLibDbKeyHash256 adminpid = new CFLibDbKeyHash256("f012301230123012301230123012301230123012301230123012301230123012");
 				CFLibDbKeyHash256 mgrpid =   new CFLibDbKeyHash256("fabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabc");
-				I$DefSchemaName$SecUser secUserResults = I$DefSchemaName$Schema.getBacking$DefSchemaName$().getTableSecUser().readDerived(null, adminpid);
+				I$SecSchemaName$SecUser secUserResults = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecUser().readDerived(null, adminpid);
 				if( secUserResults == null ) {
-					$DefSchemaName$BuffSecUser newuser = ($DefSchemaName$BuffSecUser)(I$DefSchemaName$Schema.getBacking$DefSchemaName$().getFactorySecUser().newRec());
+					$SecSchemaName$BuffSecUser newuser = ($SecSchemaName$BuffSecUser)(I$SecSchemaName$Schema.getBacking$SecSchemaName$().get$SecSchemaName$Factory().getFactorySecUser().newRec());
 					newuser.setCreatedByUserId( adminpid );
 					newuser.setCreatedAt( now );
 					newuser.setUpdatedByUserId( adminpid );
@@ -102,7 +102,7 @@ $iterate SchemaRefs( empty implRamTestSchemaCFSecUtilityMethods each empty )$}</
 					newuser.setRequiredLoginId( "admin" );
 					newuser.setRequiredEMailAddress("admin@localhost");
 					<!--newuser.setRequiredPasswordHash( computeSHA256("changeoninstall") );-->
-					I$DefSchemaName$SecUser secUserCreated = I$DefSchemaName$Schema.getBacking$DefSchemaName$().getTableSecUser().createSecUser(null, newuser);
+					I$SecSchemaName$SecUser secUserCreated = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecUser().createSecUser(null, newuser);
 					if (secUserCreated == null) {
 						messages.append("Error creating secuser admin - null returned\n");
 					}
