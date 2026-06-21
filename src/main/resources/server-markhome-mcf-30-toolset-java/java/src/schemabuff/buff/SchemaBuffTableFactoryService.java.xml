@@ -195,15 +195,28 @@ public class $SchemaName$Buff$TableName$FactoryService
 			return( null );
 		}
 		else if (rec instanceof $DefSchemaName$Buff$TableName$) {
-			return( ($DefSchemaName$Buff$TableName$)rec );
+			return (($DefSchemaName$Buff$TableName$)rec);
 		}
-		else {
-			$DefSchemaName$Buff$TableName$ mapped = new $DefSchemaName$Buff$TableName$();
-			mapped.set(rec);
-			return( mapped );
+		else {	
+			switch (rec.getClassCode()) {
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Buff$TableName$ mapped = new $DefSchemaName$Buff$TableName$();
+					mapped.set(rec);
+					return(mapped); }$iterate TableSubClasses( each SchemaBuffTableFactoryServiceEnsureRec empty empty )$
+				default:
+					throw new CFLibUnsupportedClassException(getClass(), "ensureRec",
+						"Unsupported class code " + rec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$",
+						"Unsupported class code " + rec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$");
+			}
 		}
 	}
 </GenRule>
+
+	<GenRule GenDef="Table" Name="SchemaBuffTableFactoryServiceEnsureRec">
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Buff$TableName$ mapped = new $DefSchemaName$Buff$TableName$();
+					mapped.set((I$DefSchemaName$$TableName$)rec);
+					return(mapped); }$iterate TableSubClasses( each SchemaBuffTableFactoryServiceEnsureRec empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffNewHRec">
 	@Override
@@ -214,18 +227,31 @@ public class $SchemaName$Buff$TableName$FactoryService
 	}
 
 	public $DefSchemaName$Buff$TableName$H ensureHRec(I$DefSchemaName$$TableName$H hrec) {
-		if (hrec == null) {
+		if( hrec == null ) {
 			return( null );
 		}
-		else if( hrec instanceof $DefSchemaName$Buff$TableName$H) {
-			return( ($DefSchemaName$Buff$TableName$H)hrec );
+		else if (hrec instanceof $DefSchemaName$Buff$TableName$H) {
+			return (($DefSchemaName$Buff$TableName$H)hrec);
 		}
-		else {
-			$DefSchemaName$Buff$TableName$H mapped = new $DefSchemaName$Buff$TableName$H();
-			mapped.set(hrec);
-			return( mapped );
+		else {	
+			switch (hrec.getClassCode()) {
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Buff$TableName$H mapped = new $DefSchemaName$Buff$TableName$H();
+					mapped.set(hrec);
+					return(mapped); }$iterate TableSubClasses( each SchemaBuffTableFactoryServiceEnsureHRec empty empty )$
+				default:
+					throw new CFLibUnsupportedClassException(getClass(), "ensureHRec",
+						"Unsupported class code " + hrec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$",
+						"Unsupported class code " + hrec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$");
+			}
 		}
 	}
 </GenRule>
+
+	<GenRule GenDef="Table" Name="SchemaBuffTableFactoryServiceEnsureHRec">
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Buff$TableName$H mapped = new $DefSchemaName$Buff$TableName$H();
+					mapped.set((I$DefSchemaName$$TableName$H)hrec);
+					return(mapped); }$iterate TableSubClasses( each SchemaBuffTableFactoryServiceEnsureHRec empty empty )$</GenRule>
 
 </RuleSet>

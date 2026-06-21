@@ -169,12 +169,25 @@ public class $SchemaName$Jpa$TableName$FactoryService
 			return( ($DefSchemaName$Jpa$TableName$)rec );
 		}
 		else {
-			$DefSchemaName$Jpa$TableName$ mapped = new $DefSchemaName$Jpa$TableName$();
-			mapped.set(rec);
-			return( mapped );
+			switch(rec.getClassCode()) {
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Jpa$TableName$ mapped = new $DefSchemaName$Jpa$TableName$();
+					mapped.set(rec);
+					return( mapped ); }$iterate TableSubClasses( each SchemaJpaTableFactoryServiceEnsureRec empty empty )$
+				default:
+					throw new CFLibUnsupportedClassException(getClass(), "ensureRec",
+						"Unsupported class code " + rec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$",
+						"Unsupported class code " + rec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$");
+			}
 		}
 	}
 </GenRule>
+
+	<GenRule GenDef="Table" Name="SchemaJpaTableFactoryServiceEnsureRec">
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Jpa$TableName$ mapped = new $DefSchemaName$Jpa$TableName$();
+					mapped.set((I$DefSchemaName$$TableName$)rec);
+					return(mapped); }$iterate TableSubClasses( each SchemaJpaTableFactoryServiceEnsureRec empty empty )$</GenRule>
 
     <GenRule GenDef="Table" Name="implJpaNewHRec">
     @Override
@@ -184,18 +197,31 @@ public class $SchemaName$Jpa$TableName$FactoryService
     }
 
 	public $DefSchemaName$Jpa$TableName$H ensureHRec(I$DefSchemaName$$TableName$H hrec) {
-		if (hrec == null) {
+		if( hrec == null ) {
 			return( null );
 		}
-		else if( hrec instanceof $DefSchemaName$Jpa$TableName$H) {
+		else if (hrec instanceof $DefSchemaName$Jpa$TableName$H) {
 			return( ($DefSchemaName$Jpa$TableName$H)hrec );
 		}
 		else {
-			$DefSchemaName$Jpa$TableName$H mapped = new $DefSchemaName$Jpa$TableName$H();
-			mapped.set(hrec);
-			return( mapped );
+			switch(hrec.getClassCode()) {
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Jpa$TableName$H mapped = new $DefSchemaName$Jpa$TableName$H();
+					mapped.set(hrec);
+					return( mapped ); }$iterate TableSubClasses( each SchemaJpaTableFactoryServiceEnsureHRec empty empty )$
+				default:
+					throw new CFLibUnsupportedClassException(getClass(), "ensureHRec",
+						"Unsupported class code " + hrec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$",
+						"Unsupported class code " + hrec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$");
+			}
 		}
 	}
 </GenRule>
+
+	<GenRule GenDef="Table" Name="SchemaJpaTableFactoryServiceEnsureHRec">
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Jpa$TableName$H mapped = new $DefSchemaName$Jpa$TableName$H();
+					mapped.set((I$DefSchemaName$$TableName$H)hrec);
+					return(mapped); }$iterate TableSubClasses( each SchemaJpaTableFactoryServiceEnsureHRec empty empty )$</GenRule>
 
 </RuleSet>
