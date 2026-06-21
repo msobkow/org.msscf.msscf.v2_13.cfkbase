@@ -69,6 +69,7 @@ import server.markhome.mcf.v3_1.cflib.inz.Inz;
 import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameJpa empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.jpa.$DefSchemaName$JpaHooksSchema;
+$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameBuffDotFactoryService empty empty )$$importJavaPackageSchemaNameBuffDotFactoryService$
 
 public class $SchemaName$JpaSchema
 	implements I$SchemaName$Schema$iterate SchemaRefs( each commaNewlineSchemaSchemaImplementsInterface empty empty )$
@@ -97,12 +98,22 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 			return(sch.get$DefSchemaName$Factory());
 		}
 	}
+	
+	@Override
+	public $DefSchemaName$BuffFactoryService get$DefSchemaName$BuffFactory() {
+		return($DefSchemaName$BuffSchema.getBuffHooksSchema().get$DefSchemaName$Factory());
+	}
 </GenRule>
 
 <GenRule GenDef="SchemaDef" Name="implSchemaJpaFactoryAccessors">
 	@Override
 	public I$DefSchemaName$Factory get$DefSchemaName$Factory() {
 		return($DefSchemaName$JpaSchema.getJpaHooksSchema().getFactoryService());
+	}
+
+	@Override
+	public $DefSchemaName$BuffFactoryService get$DefSchemaName$BuffFactory() {
+		return(($DefSchemaName$BuffFactoryService)($DefSchemaName$BuffSchema.getBuffHooksSchema().getFactoryService()));
 	}
 </GenRule>
 

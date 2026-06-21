@@ -68,17 +68,19 @@ import $reference ManufacturingSchema lower JavaPackage$.$lower reference Manufa
 /**
  *  $SchemaName$Jpa$TableName$H provides history objects matching the $SchemaName$$TableName$ change history.
  *	Note that because all indexes are historical with multiple instances of history records, the only key that can be unique is the primary key of a history table.
- */
+ */$switch BaseHasHistory yes emitSchemaJpaTableHEntityPreamble default empty$
+public class $SchemaName$Jpa$TableName$H$switch HasSuperClassRelation yes implHJPAInheritSuper default empty$$switch HasDefSchema yes empty default maybeImplSchemaTableHComparable$
+{$switch HasSuperClassRelation yes empty default implHJPAPKeyAttribute$$switch HasSuperClassRelation yes empty default implJpaOptAuditColumnAttr$$implHJPADataAttr$
+$implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAccessors$$switch HasSuperClassRelation no implHJPAColumnGetterSetters default implHJPADataGetterSetters$$implHJPAEquals$$implHJPAGetHashCode$$implHJPACompareTo$$implHJPASet$$implSchemaJpaTableHToString$}
+</GenFile>
+
+<GenRule GenDef="Table" Name="emitSchemaJpaTableHEntityPreamble">
 @Entity
 @Table(
     name = "$DbTableName$_h", schema = "$reference ManufacturingSchema DbSchemaName$",
     indexes = {$iterate Index( each commaJpaTableHIndexAnnotation first jpaTableHIndexAnnotation empty empty )$
     }
-)$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$jpaPersistenceContext$
-public class $SchemaName$Jpa$TableName$H$switch HasSuperClassRelation yes implHJPAInheritSuper default empty$$switch HasDefSchema yes empty default maybeImplSchemaTableHComparable$
-{$switch HasSuperClassRelation yes empty default implHJPAPKeyAttribute$$switch HasSuperClassRelation yes empty default implJpaOptAuditColumnAttr$$implHJPADataAttr$
-$implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAccessors$$switch HasSuperClassRelation no implHJPAColumnGetterSetters default implHJPADataGetterSetters$$implHJPAEquals$$implHJPAGetHashCode$$implHJPACompareTo$$implHJPASet$$implSchemaJpaTableHToString$}
-</GenFile>
+)$switch MemberOfClassHierarchy yes jpaInheritanceJoined default empty$$jpaTransactionalSupports$$jpaPersistenceContext$</GenRule>
 
     <!--GenRule GenDef="Table" Name="jpaInheritanceJoined">
 @Inheritance(strategy = InheritanceType.JOINED)$baseTableJpaDiscriminatorColumn$</GenRule-->
@@ -99,9 +101,11 @@ $implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAcces
         @Index(name = "$IndexName$_h", columnList = "auditClusterId, auditStamp, auditAction, requiredRevision, auditSessionId, $jpaTableHIndexColumnList$", unique = true)</GenRule>
     <GenRule GenDef="Index" Name="jpaTableHIndexColumnList">$iterate Columns( each CommaDbColumnName first DbColumnName empty empty )$</GenRule>
 
-    <GenRule GenDef="Table" Name="implHJPAPKeyAttribute">$reference PrimaryKeyIndex implJpaHPKeyAttributeOverrides$
-    @EmbeddedId
+    <GenRule GenDef="Table" Name="implHJPAPKeyAttribute">$reference PrimaryKeyIndex implJpaHPKeyAttributeOverrides$$switch BaseHasHistory yes emitSchemaJpaTableHEmbeddedId default empty$
     protected $reference BaseClass DefSchemaName$Jpa$reference BaseClass TableName$HPKey pkey;</GenRule>
+
+	<GenRule GenDef="Table" Name="emitSchemaJpaTableHEmbeddedId">
+    @EmbeddedId</GenRule>
 
     <GenRule GenDef="Table" Name="maybeImplHJPAOptImplAuditColumnAccessors">$switch HasSuperClassRelation no implHJPAOptImplAuditColumnAccessors default empty$</GenRule>
     <GenRule GenDef="Table" Name="implHJPAOptImplAuditColumnAccessors">$switch HasAuditColumns yes implHJPAColumnOptAuditGetterSetters default empty$</GenRule>
@@ -275,8 +279,9 @@ $implHJPAConstructor$$implHJPAGetClassCode$$maybeImplHJPAOptImplAuditColumnAcces
     <GenRule GenDef="Table" Name="implHJPADataGetterSetters"
             >$iterate DataColumns( each implColumnGetterSetter empty empty )$</GenRule>
 
-    <GenRule GenDef="Table" Name="implHJPADataAttr"
-            >$iterate DataColumns( each implJpaColumnAttr empty empty )$</GenRule>
+    <GenRule GenDef="Table" Name="implHJPADataAttr">$switch BaseHasHistory yes implHJPAJpaColumnAttrs default implHJPAColumnAttrs$</GenRule>
+	<GenRule GenDef="Table" Name="implHJPAJpaColumnAttrs">$iterate DataColumns( each implJpaColumnAttr empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implHJPAColumnAttrs">$iterate DataColumns( each implColumnAttr empty empty )$</GenRule>
 
     <GenRule GenDef="Table" Name="implHJPAInheritSuper"> extends $SchemaName$Jpa$reference SuperClassRelation reference ToTable TableName$H</GenRule>
 

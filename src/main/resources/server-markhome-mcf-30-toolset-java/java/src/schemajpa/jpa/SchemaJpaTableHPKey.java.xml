@@ -72,30 +72,43 @@ public class $poptop SchemaDef SchemaName$Jpa$TableName$HPKey$switch HasDefSchem
 {$SchemaTableHPKeyImplDefBody$}
 </GenFile>
 
-	<GenRule GenDef="Table" Name="SchemaTableHPKeyImplDefBody">
+	<GenRule GenDef="Table" Name="SchemaTableHPKeyImplDefBody">$switch BaseHasHistory yes emitSchemaTableHPKeyImplDefBodyAuditClusterIdPreamble default empty$
+	protected CFLibDbKeyHash256 auditClusterId;
+$switch BaseHasHistory yes emitSchemaTableHPKeyImplDefBodyAuditStampPreamble default empty$
+	protected LocalDateTime auditStamp;
+$switch BaseHasHistory yes emitSchemaTableHPKeyImplDefBodyAuditActionPreamble default empty$
+	protected short auditActionId;
+$switch BaseHasHistory yes emitSchemaTableHPKeyImplDefBodyRequiredRevisionPreamble default empty$
+	protected int requiredRevision;
+$switch BaseHasHistory yes emitSchemaTableHPKeyImplDefBodyAuditSessionIdPreamble default empty$
+	protected CFLibDbKeyHash256 auditSessionId;
+$switch BaseHasHistory yes emitSchemaTableHPKeyImplJpaColumns default emitSchemaTableHPKeyImplColumns$
+$reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClusterIdGetterSetter$$poptop SchemaDef implAuditStampGetterSetter$$poptop SchemaDef implAuditActionIdGetterSetter$$poptop SchemaDef implRevisionGetterSetter$$poptop SchemaDef implAuditSessionIdGetterSetter$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$reference PrimaryKeyIndex implHPKeyEquals$$reference PrimaryKeyIndex implHPKeyGetHashCode$$reference PrimaryKeyIndex implHPKeyCompareTo$$reference PrimaryKeyIndex implHPKeyToString$</GenRule>
+
+	<GenRule GenDef="Table" Name="emitSchemaTableHPKeyImplDefBodyAuditClusterIdPreamble">
 	@AttributeOverrides({
 		@AttributeOverride(name="bytes", column=@Column(name="auditClusterId", nullable=false, length=CFLibDbKeyHash256.HASH_LENGTH) )
-	})
-	protected CFLibDbKeyHash256 auditClusterId;
+	})</GenRule>
 
-	@Column(name="auditStamp", nullable=false)
-	protected LocalDateTime auditStamp;
+	<GenRule GenDef="Table" Name="emitSchemaTableHPKeyImplJpaColumns">$reference PrimaryKeyIndex iterate Columns( each implJpaColumnAttr )$</GenRule>
+	<GenRule GenDef="Table" Name="emitSchemaTableHPKeyImplColumns">$reference PrimaryKeyIndex iterate Columns( each implColumnAttr )$</GenRule>
 
-	@Column(name="auditAction", nullable=false)
-	protected short auditActionId;
+	<GenRule GenDef="Table" Name="emitSchemaTableHPKeyImplDefBodyAuditStampPreamble">
+	@Column(name="auditStamp", nullable=false)</GenRule>
 
-	@Column(name="requiredRevision", nullable=false)
-	protected int requiredRevision;
+	<GenRule GenDef="Table" Name="emitSchemaTableHPKeyImplDefBodyAuditActionPreamble">
+	@Column(name="auditAction", nullable=false)</GenRule>
 
-	@AttributeOverrides({
-		@AttributeOverride(name="bytes", column=@Column(name="auditSessionId", nullable=false, length=CFLibDbKeyHash256.HASH_LENGTH) )
-	})
-	protected CFLibDbKeyHash256 auditSessionId;
-$reference PrimaryKeyIndex iterate Columns( each implJpaColumnAttr )$
-$reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClusterIdGetterSetter$$poptop SchemaDef implAuditStampGetterSetter$$poptop SchemaDef implAuditActionIdGetterSetter$$poptop SchemaDef implRevisionGetterSetter$$poptop SchemaDef implAuditSessionIdGetterSetter$$reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter )$$reference PrimaryKeyIndex implHPKeyEquals$$reference PrimaryKeyIndex implHPKeyGetHashCode$$reference PrimaryKeyIndex implHPKeyCompareTo$$reference PrimaryKeyIndex implHPKeyToString$</GenRule>
+	<GenRule GenDef="Table" Name="emitSchemaTableHPKeyImplDefBodyRequiredRevisionPreamble">
+	@Column(name="requiredRevision", nullable=false)</GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaTableHPKeyInheritDef">
 	extends $DefSchemaName$Jpa$TableName$HPKey</GenRule>
+
+	<GenRule GenDef="Table" Name="emitSchemaTableHPKeyImplDefBodyAuditSessionIdPreamble">
+	@AttributeOverrides({
+		@AttributeOverride(name="bytes", column=@Column(name="auditSessionId", nullable=false, length=CFLibDbKeyHash256.HASH_LENGTH) )
+	})</GenRule>
 
 	<GenRule GenDef="Index" Name="implJpaHPKeyAttributeOverrides">
 	@AttributeOverrides({
@@ -162,7 +175,7 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 				"compareTo",
 				"obj",
 				obj,
-				"I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$PKey, I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$$reference Table switch BaseHasHistory yes emitHPKeyHistoryClassNames default empty$" );
+				"I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$PKey, I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$$emitHPKeyHistoryClassNames$" );
 		}
 	}
 </GenRule>

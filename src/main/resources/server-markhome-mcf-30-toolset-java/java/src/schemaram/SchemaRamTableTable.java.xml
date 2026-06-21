@@ -145,31 +145,16 @@ $JavaMethodBody$	}
 			return( null );
 		}
 		else {
-			return (($reference BaseClass DefSchemaName$Ram$reference BaseClass TableName$Table)(schema.getTable$reference BaseClass TableName$())).ensureRec((I$reference BaseClass DefSchemaName$$reference BaseClass TableName$)rec);
+			return ((($DefSchemaName$Buff$reference BaseClass TableName$FactoryService)(schema.get$reference BaseClass DefSchemaName$BuffFactory().getFactory$reference BaseClass TableName$())).ensureRec(rec));
 		}
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implRamTableEnsureRec">
 	public $DefSchemaName$Buff$TableName$ ensureRec(I$DefSchemaName$$TableName$ rec) {
-		if (rec == null) {
-			return( null );
-		}
-		else {
-			int classCode = rec.getClassCode();
-			switch (classCode) {
-				case I$DefSchemaName$$TableName$.CLASS_CODE:
-					return((($DefSchemaName$Buff$TableName$FactoryService)(schema.get$DefSchemaName$Factory().getFactory$TableName$())).ensureRec((I$DefSchemaName$$TableName$)rec) );$iterate TableSubClasses( each implRamTableEnsureRecWalkSubClass empty empty )$
-				default:
-					throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
-			}
-		}
+		return ((($DefSchemaName$Buff$TableName$FactoryService)(schema.get$DefSchemaName$BuffFactory().getFactory$TableName$())).ensureRec(rec));
 	}
 </GenRule>
-
-	<GenRule GenDef="Table" Name="implRamTableEnsureRecWalkSubClass">
-				case I$DefSchemaName$$TableName$.CLASS_CODE:
-					return((($DefSchemaName$Buff$TableName$FactoryService)(schema.get$DefSchemaName$Factory().getFactory$TableName$())).ensureRec((I$DefSchemaName$$TableName$)rec) );$iterate TableSubClasses( each implRamTableEnsureRecWalkSubClass empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamMoveUpTableRec">
 	/**
@@ -337,7 +322,7 @@ $reference Chain reference NextRel implRamMoveSetCurPrev$
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffInstantiateBuff">
 			if( classCode == I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$.CLASS_CODE ) {
-				newInstance = schema.get$reference Chain reference Table DefSchemaName$Factory().getFactory$reference Chain reference Table TableName$().newRec();
+				newInstance = schema.get$reference Chain reference Table DefSchemaName$BuffFactory().getFactory$reference Chain reference Table TableName$().newRec();
 			}$reference Chain reference Table iterate TableSubClasses( each implRamSchemaMoveBuffWalkInstantiateBuff empty empty )$
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
@@ -345,7 +330,7 @@ $reference Chain reference NextRel implRamMoveSetCurPrev$
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffWalkInstantiateBuff">
 			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-				newInstance = schema.get$reference Chain reference Table DefSchemaName$Factory().getFactory$TableName$().newRec();
+				newInstance = schema.get$reference Chain reference Table DefSchemaName$BuffFactory().getFactory$TableName$().newRec();
 			}$iterate TableSubClasses( each implRamSchemaMoveBuffWalkInstantiateBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamSchemaMoveBuffUpdateCur">
@@ -590,7 +575,7 @@ $reference Chain reference NextRel implRamMoveSetNextCur$
 	@Override
 	public I$DefSchemaName$$TableName$ readDerived( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$ )
 	{$reference BaseClass reference PrimaryKeyIndex iterate Columns( each ifPKeyColumnRequiredButNullReturnNull )$
-		$BuffCompactedPrimaryIndexClass$ key = ($BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$Factory().getFactory$reference BaseClass TableName$().newPKey());$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetKeyAttr empty empty )$
+		$BuffCompactedPrimaryIndexClass$ key = ($BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$BuffFactory().getFactory$reference BaseClass TableName$().newPKey());$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetKeyAttr empty empty )$
 		return( readDerived( Authorization, key ) );
 	}
 
@@ -598,7 +583,7 @@ $reference Chain reference NextRel implRamMoveSetNextCur$
 		$ICompactedPrimaryIndexClass$ PKey )
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$.readDerived";
-		$BuffCompactedPrimaryIndexClass$ key = ($BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$Factory().getFactory$reference BaseClass TableName$().newPKey());$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetPKeyAttr empty empty )$
+		$BuffCompactedPrimaryIndexClass$ key = ($BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$BuffFactory().getFactory$reference BaseClass TableName$().newPKey());$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetPKeyAttr empty empty )$
 		I$popto Table DefSchemaName$$poptop Table TableName$ buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
@@ -653,7 +638,7 @@ $reference Chain reference NextRel implRamMoveSetNextCur$
 		$ICompactedPrimaryIndexClass$ PKey )
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$.lockDerived";
-		$BuffCompactedPrimaryIndexClass$ key = ($BuffCompactedPrimaryIndexClass$)(schema.get$popto Table DefSchemaName$Factory().getFactory$reference BaseClass TableName$().newPKey());$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetPKeyAttr empty empty )$
+		$BuffCompactedPrimaryIndexClass$ key = ($BuffCompactedPrimaryIndexClass$)(schema.get$popto Table DefSchemaName$BuffFactory().getFactory$reference BaseClass TableName$().newPKey());$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetPKeyAttr empty empty )$
 		I$popto Table DefSchemaName$$poptop Table TableName$ buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
@@ -729,7 +714,7 @@ $reference Chain reference NextRel implRamMoveSetNextCur$
 	public I$popto Table DefSchemaName$$poptop Table TableName$ readDerivedBy$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$.readDerivedBy$Suffix$";
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$popto Table DefSchemaName$Factory().getFactory$TableName$().newBy$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$popto Table DefSchemaName$BuffFactory().getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamReadTableSetKeyAttr )$
 		I$DefSchemaName$$TableName$ buff;
 		if( dictBy$Suffix$.containsKey( key ) ) {
@@ -763,7 +748,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	public I$poptop Table DefSchemaName$$poptop Table TableName$ readDerivedBy$reference Table reference BaseClass reference PrimaryKeyIndex Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$.readDerivedBy$reference Table reference BaseClass reference PrimaryKeyIndex Suffix$() ";
-		$poptop Table BuffCompactedPrimaryIndexClass$ key = ($poptop Table BuffCompactedPrimaryIndexClass$)(schema.get$poptop Table DefSchemaName$Factory().getFactory$poptop Table reference BaseClass TableName$().newPKey());$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetKeyAttr empty empty )$
+		$poptop Table BuffCompactedPrimaryIndexClass$ key = ($poptop Table BuffCompactedPrimaryIndexClass$)(schema.get$poptop Table DefSchemaName$BuffFactory().getFactory$poptop Table reference BaseClass TableName$().newPKey());$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetKeyAttr empty empty )$
 		I$poptop Table DefSchemaName$$poptop Table TableName$ buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
@@ -801,7 +786,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	public I$poptop Table DefSchemaName$$poptop Table TableName$[] readDerivedBy$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
 		final String S_ProcName = "$SchemaName$Ram$TableName$.readDerivedBy$Suffix$";
-		$poptop Table DefSchemaName$Buff$poptop Table TableName$By$Suffix$Key key = ($poptop Table DefSchemaName$Buff$poptop Table TableName$By$Suffix$Key)schema.get$poptop Table DefSchemaName$Factory().getFactory$poptop Table TableName$().newBy$Suffix$Key();
+		$poptop Table DefSchemaName$Buff$poptop Table TableName$By$Suffix$Key key = ($poptop Table DefSchemaName$Buff$poptop Table TableName$By$Suffix$Key)schema.get$poptop Table DefSchemaName$BuffFactory().getFactory$poptop Table TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamReadTableSetKeyAttr )$
 		I$poptop Table DefSchemaName$$poptop Table TableName$[] recArray;
 		if( dictBy$Suffix$.containsKey( key ) ) {
@@ -865,7 +850,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	@Override
 	public I$DefSchemaName$$TableName$ readRec( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$ )
 	{
-		$BuffCompactedPrimaryIndexClass$ key = ($BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$Factory().getFactory$reference BaseClass TableName$().newPKey());$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetKeyAttr empty empty )$
+		$BuffCompactedPrimaryIndexClass$ key = ($BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$BuffFactory().getFactory$reference BaseClass TableName$().newPKey());$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetKeyAttr empty empty )$
 		return( readRec( Authorization, key ) );
 	}
 
@@ -1126,7 +1111,7 @@ $iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable 
 		else {
 			int classCode = Buff.getClassCode();
 			if (classCode == I$DefSchemaName$$TableName$.CLASS_CODE) {
-				$DefSchemaName$Buff$TableName$ retbuff = (($DefSchemaName$Buff$TableName$)(schema.get$DefSchemaName$Factory().getFactory$TableName$().newRec()));
+				$DefSchemaName$Buff$TableName$ retbuff = (($DefSchemaName$Buff$TableName$)(schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newRec()));
 				retbuff.set(Buff);
 				return( retbuff );
 			}$iterate TableSubClasses( each implRamCreateTableWalkRetBuff empty empty )$
@@ -1139,7 +1124,7 @@ $iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable 
 
 	<GenRule GenDef="Table" Name="implRamCreateTableWalkRetBuff">
 			else if (classCode == I$DefSchemaName$$TableName$.CLASS_CODE) {
-				$DefSchemaName$Buff$TableName$ retbuff = (($DefSchemaName$Buff$TableName$)(schema.get$DefSchemaName$Factory().getFactory$TableName$().newRec()));
+				$DefSchemaName$Buff$TableName$ retbuff = (($DefSchemaName$Buff$TableName$)(schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newRec()));
 				retbuff.set((I$DefSchemaName$$TableName$)Buff);
 				return( retbuff );
 			}$iterate TableSubClasses( each implRamCreateTableWalkRetBuff empty empty )$</GenRule>
@@ -1154,7 +1139,7 @@ $iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable 
 	{
 		final String S_ProcName = "create$TableName$";
 		$switch HasSuperClassRelation yes implRamCreateTableInvokeSuper default implRamCreateTableImplBase$
-		$BuffCompactedPrimaryIndexClass$ pkey = ($BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$Factory().getFactory$reference BaseClass TableName$().newPKey());$switch HasSuperClassRelation no implRamCreateTablePKeyGenNew default implRamCreateTablePKeyCopyBuff$$switch HasSuperClassRelation no implRamCreateTableCopyBackPKeyToBuff default empty$$iterate Index( each maybeImplRamCreateTableInitIndexKey )$
+		$BuffCompactedPrimaryIndexClass$ pkey = ($BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$BuffFactory().getFactory$reference BaseClass TableName$().newPKey());$switch HasSuperClassRelation no implRamCreateTablePKeyGenNew default implRamCreateTablePKeyCopyBuff$$switch HasSuperClassRelation no implRamCreateTableCopyBackPKeyToBuff default empty$$iterate Index( each maybeImplRamCreateTableInitIndexKey )$
 		// Validate unique indexes
 
 		if( dictByPKey.containsKey( pkey ) ) {
@@ -1173,7 +1158,7 @@ $iterate Index( each maybeImplRamCreateTableAddToIndex )$$switch IsInstantiable 
 		else {
 			int classCode = Buff.getClassCode();
 			if (classCode == I$DefSchemaName$$TableName$.CLASS_CODE) {
-				$DefSchemaName$Buff$TableName$ retbuff = (($DefSchemaName$Buff$TableName$)(schema.get$DefSchemaName$Factory().getFactory$TableName$().newRec()));
+				$DefSchemaName$Buff$TableName$ retbuff = (($DefSchemaName$Buff$TableName$)(schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newRec()));
 				retbuff.set(Buff);
 				return( retbuff );
 			}$iterate TableSubClasses( each implRamCreateTableWalkRetBuff empty empty )$
@@ -1240,7 +1225,7 @@ $implRamCreateTableInitChainLinksBody$
 
 	<GenRule GenDef="Table" Name="implRamCreateTableChainLinkTailNoCC">
 		if( tail != null ) {
-			I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$ tailEdit = schema.get$reference Chain reference Table DefSchemaName$Factory().getFactory$reference Chain reference Table TableName$().newRec();
+			I$reference Chain reference Table DefSchemaName$$reference Chain reference Table TableName$ tailEdit = schema.get$reference Chain reference Table DefSchemaName$BuffFactory().getFactory$reference Chain reference Table TableName$().newRec();
 			tailEdit.set( (I$DefSchemaName$$TableName$)tail );$reference Chain reference NextRel implRamCreateTableChainTailLinkAssignNext$
 			schema.getTable$reference Chain reference Table TableName$().update$reference Chain reference Table TableName$( Authorization, tailEdit );
 		}</GenRule>
@@ -1260,7 +1245,7 @@ $implRamCreateTableInitChainLinksBody$
 			}$iterate TableSubClasses( each implRamCreateTableChainLinkTailWithCCWalkHierarchy empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamCreateTableChainLinkTailBody">
-				I$DefSchemaName$$TableName$ tailEdit = schema.get$DefSchemaName$Factory().getFactory$TableName$().newRec();
+				I$DefSchemaName$$TableName$ tailEdit = schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newRec();
 				tailEdit.set( (I$DefSchemaName$$TableName$)tail );$reference Chain reference NextRel implRamCreateTableChainTailLinkAssignNext$
 				schema.getTable$TableName$().update$TableName$( Authorization, tailEdit );</GenRule>
 
@@ -1813,7 +1798,7 @@ $implRamCreateTableInitChainLinksBody$
 		>$switch IsPrimaryIndex yes empty default implRamCreateTableInitIndexKey$</GenRule>
 
 	<GenRule GenDef="Index" Name="implRamCreateTableInitIndexKey">
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$Factory().getFactory$TableName$().newBy$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamCreateTableInitKeyAttr )$</GenRule>
 
 	<GenRule GenDef="Index" Name="maybeImplRamCreateTableAddToIndex"
@@ -1954,7 +1939,7 @@ $iterate Columns( each implRamCreateTableInitKeyAttr )$</GenRule>
 	@Override
 	public I$DefSchemaName$$TableName$ read$TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
-		$reference Table reference BaseClass BuffCompactedPrimaryIndexClass$ key = ($reference Table reference BaseClass BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$Factory().getFactory$reference BaseClass TableName$().newPKey());
+		$reference Table reference BaseClass BuffCompactedPrimaryIndexClass$ key = ($reference Table reference BaseClass BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$BuffFactory().getFactory$reference BaseClass TableName$().newPKey());
 $iterate Columns( each implRamReadTableSetKeyAttr )$
 		I$DefSchemaName$$TableName$ rec;
 		if( dictByPKey.containsKey( key ) ) {
@@ -1971,7 +1956,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	@Override
 	public I$DefSchemaName$$TableName$ read$TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$Factory().getFactory$TableName$().newBy$Suffix$Key();$iterate Columns( each implRamReadTableSetKeyAttr )$
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newBy$Suffix$Key();$iterate Columns( each implRamReadTableSetKeyAttr )$
 		I$DefSchemaName$$TableName$ rec;
 		if( dictBy$Suffix$.containsKey( key ) ) {
 			rec = dictBy$Suffix$.get( key );
@@ -1987,7 +1972,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	@Override
 	public I$DefSchemaName$$TableName$[] read$TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$Factory().getFactory$TableName$().newBy$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamReadTableSetKeyAttr )$
 		I$DefSchemaName$$TableName$[] recArray;
 		if( dictBy$Suffix$.containsKey( key ) ) {
@@ -2053,7 +2038,7 @@ $iterate Index( each maybeImplRamUpdateTableReplaceIndexEntry )$
 	public I$DefSchemaName$$TableName$ update$TableName$( I$SecSchemaName$Authorization Authorization,
 		I$DefSchemaName$$TableName$ iBuff )
 	{$switch HasSuperClassRelation yes implRamUpdateTableInvokeSuper default implRamUpdateTableImplBase$
-		$BuffCompactedPrimaryIndexClass$ pkey = ($BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$Factory().getFactory$reference BaseClass TableName$().newPKey());$implRamCreateTablePKeyCopyBuff$
+		$BuffCompactedPrimaryIndexClass$ pkey = ($BuffCompactedPrimaryIndexClass$)(schema.get$DefSchemaName$BuffFactory().getFactory$reference BaseClass TableName$().newPKey());$implRamCreateTablePKeyCopyBuff$
 		$DefSchemaName$Buff$TableName$ existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -2211,9 +2196,9 @@ $iterate Columns( each implRamUpdateTableCheckReqRefColIsNull )$
 		>$switch IsPrimaryIndex yes empty default implRamUpdateTableInitIndexKey$</GenRule>
 
 	<GenRule GenDef="Index" Name="implRamUpdateTableInitIndexKey">
-		$DefSchemaName$Buff$TableName$By$Suffix$Key existingKey$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$Factory().getFactory$TableName$().newBy$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key existingKey$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamUpdateTableInitExistingKeyAttr )$
-		$DefSchemaName$Buff$TableName$By$Suffix$Key newKey$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$Factory().getFactory$TableName$().newBy$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key newKey$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamUpdateTableInitNewKeyAttr )$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implRamUpdateTableInitExistingKeyAttr"
@@ -2447,7 +2432,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="DelDep" Name="implRamDeleteTableDelDepWalkAllocEditBuff">
 					else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-						editBuff = schema.get$DefSchemaName$Factory().getFactory$TableName$().newRec();
+						editBuff = schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newRec();
 					}$iterate TableSubClasses( each implRamDeleteTableDelDepWalkAllocEditBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implRamDeleteTableClearRootSubObjectExistingArg">,
@@ -2501,7 +2486,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableSubObjectWalkAllocEditBuff">
 		else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-			editSubobj = schema.get$DefSchemaName$Factory().getFactory$TableName$().newRec();
+			editSubobj = schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newRec();
 		}$iterate TableSubClasses( each implRamDeleteTableSubObjectWalkAllocEditBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableClearDeps"
@@ -2633,7 +2618,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="ClearDep" Name="implRamDeleteTableClearDepWalkAllocEditBuff">
 						else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-							editBuff = schema.get$DefSchemaName$Factory().getFactory$TableName$().newRec();
+							editBuff = schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newRec();
 						}$iterate TableSubClasses( each implRamDeleteTableClearDepWalkAllocEditBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableClearDepWalkSaveEditBuff">
@@ -2681,7 +2666,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 			$reference Chain reference PrevRel reference ToTable EffSchemaName$Buff$reference Chain reference PrevRel reference ToTable TableName$ editPrev;
 			classCode = prev.getClassCode();
 			if( classCode == I$reference Chain reference PrevRel reference ToTable DefSchemaName$$reference Chain reference PrevRel reference ToTable Name$.CLASS_CODE ) {
-				editPrev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.get$reference Chain reference PrevRel reference ToTable DefSchemaName$Factory().getFactory$reference Chain reference PrevRel reference ToTable TableName$().newRec());
+				editPrev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.get$reference Chain reference PrevRel reference ToTable DefSchemaName$BuffFactory().getFactory$reference Chain reference PrevRel reference ToTable TableName$().newRec());
 			}$reference Chain reference PrevRel reference ToTable iterate TableSubClasses( each implRamDeleteTableUpdatePrevWalkAllocBuff empty empty )$
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-update-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
@@ -2708,7 +2693,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdatePrevWalkAllocBuff">
 			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-				editPrev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.get$DefSchemaName$Factory().getFactory$TableName$().newRec());
+				editPrev = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newRec());
 			}$iterate TableSubClasses( each implRamDeleteTableUpdatePrevWalkAllocBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implRamDeleteTableUpdatePrevCheckNotNull"
@@ -2734,7 +2719,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 			$reference Chain reference NextRel reference ToTable EffSchemaName$Buff$reference Chain reference NextRel reference ToTable TableName$ editNext;
 			classCode = next.getClassCode();
 			if( classCode == I$reference Chain reference NextRel reference ToTable DefSchemaName$$reference Chain reference NextRel reference ToTable Name$.CLASS_CODE ) {
-				editNext = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.get$reference Chain reference NextRel reference ToTable DefSchemaName$Factory().getFactory$reference Chain reference NextRel reference ToTable TableName$().newRec());
+				editNext = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.get$reference Chain reference NextRel reference ToTable DefSchemaName$BuffFactory().getFactory$reference Chain reference NextRel reference ToTable TableName$().newRec());
 			}$reference Chain reference NextRel reference ToTable iterate TableSubClasses( each implRamDeleteTableUpdateNextWalkAllocBuff empty empty )$
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-update-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
@@ -2761,7 +2746,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdateNextWalkAllocBuff">
 			else if( classCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-				editNext = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.get$DefSchemaName$Factory().getFactory$TableName$().newRec());
+				editNext = ($EffSchemaName$Buff$reference Chain reference Table TableName$)(schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newRec());
 			}$iterate TableSubClasses( each implRamDeleteTableUpdateNextWalkAllocBuff empty empty )$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implRamDeleteTableUpdateNextCheckNotNull"
@@ -2838,7 +2823,7 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 	@Override
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implNextIdGenDeclAttr )$ )
 	{
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$poptop Table DefSchemaName$Factory().getFactory$TableName$().newBy$Suffix$Key();$iterate Columns( each implRamDeleteApplyArgToKey )$
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$poptop Table DefSchemaName$BuffFactory().getFactory$TableName$().newBy$Suffix$Key();$iterate Columns( each implRamDeleteApplyArgToKey )$
 		delete$poptop Table TableName$By$Suffix$( Authorization, key );
 	}
 
@@ -2940,7 +2925,7 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 	@Override
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ )
 	{
-		$poptop Table BuffCompactedPrimaryIndexClass$ key = ($poptop Table BuffCompactedPrimaryIndexClass$)(schema.get$poptop Table DefSchemaName$Factory().getFactory$poptop Table reference BaseClass TableName$().newPKey());$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetKeyAttr empty empty )$
+		$poptop Table BuffCompactedPrimaryIndexClass$ key = ($poptop Table BuffCompactedPrimaryIndexClass$)(schema.get$poptop Table DefSchemaName$BuffFactory().getFactory$poptop Table reference BaseClass TableName$().newPKey());$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetKeyAttr empty empty )$
 		delete$poptop Table TableName$By$Suffix$( Authorization, key );
 	}
 
@@ -2948,7 +2933,7 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 	public void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$Authorization Authorization,
 		$poptop Table reference BaseClass ICompactedPrimaryIndexClass$ PKey )
 	{$switch implDeleteTableBySuffixNeedProcName yes implDeleteTableBySuffixImplProcName default empty$
-		$poptop Table BuffCompactedPrimaryIndexClass$ key = ($poptop Table BuffCompactedPrimaryIndexClass$)(schema.get$poptop Table DefSchemaName$Factory().getFactory$poptop Table reference BaseClass TableName$().newPKey());$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetPKeyAttr empty empty )$
+		$poptop Table BuffCompactedPrimaryIndexClass$ key = ($poptop Table BuffCompactedPrimaryIndexClass$)(schema.get$poptop Table DefSchemaName$BuffFactory().getFactory$poptop Table reference BaseClass TableName$().newPKey());$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplRamReadTableSetPKeyAttr empty empty )$
 		$poptop Table BuffCompactedPrimaryIndexClass$ argKey = key;
 		boolean anyNotNull = false;$iterate Columns( each implRamDeleteTableByIndexCheckForNotNullColumn )$
 		if( ! anyNotNull ) {
@@ -3047,7 +3032,7 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 		>$switch IsPrimaryIndex yes empty default implRamDeleteTableInitIndexKey$</GenRule>
 
 	<GenRule GenDef="Index" Name="implRamDeleteTableInitIndexKey">
-		$DefSchemaName$Buff$TableName$By$Suffix$Key key$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$Factory().getFactory$TableName$().newBy$Suffix$Key();
+		$DefSchemaName$Buff$TableName$By$Suffix$Key key$Suffix$ = ($DefSchemaName$Buff$TableName$By$Suffix$Key)schema.get$DefSchemaName$BuffFactory().getFactory$TableName$().newBy$Suffix$Key();
 $iterate Columns( each implRamDeleteTableInitExistingKeyAttr )$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implRamDeleteTableInitExistingKeyAttr"

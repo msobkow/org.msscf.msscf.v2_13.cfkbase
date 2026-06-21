@@ -515,7 +515,7 @@ $switch IsPrimaryIndexKeyAtomic yes empty default implBuffColumnAttrPKeyColumnWr
 		else if( obj instanceof I$DefSchemaName$$TableName$ ) {
 			I$DefSchemaName$$TableName$ rhs = (I$DefSchemaName$$TableName$)obj;$switch HasSuperClassRelation no implBuffEqualsOptAuditColumns default empty$$iterate Columns( each implEqualsCmpAttr)$
 			return( true );
-		}$switch BaseHasHistory yes implBuffEqualsHistory default empty$$iterate Index( each maybeBuffImplEqualsCmpKey)$
+		}$implBuffEqualsHistory$$iterate Index( each maybeBuffImplEqualsCmpKey)$
 		else {$switch IsBaseTable yes implBuffEqualsReturnFalse default implBuffEqualsReturnSuper$
 		}
 	}
@@ -591,7 +591,7 @@ $switch IsPrimaryIndexKeyAtomic yes empty default implBuffColumnAttrPKeyColumnWr
 		else if( obj instanceof I$DefSchemaName$$TableName$ ) {
 			I$DefSchemaName$$TableName$ rhs = (I$DefSchemaName$$TableName$)obj;$switch HasSuperClassRelation yes implBuffCompareInvokeSuperRetVal default implBuffCompareInitRetVal$$switch HasSuperClassRelation no implBuffCompareOptAuditColumns default empty$$implBuffCompareHierarchy$
 			return( 0 );
-		}$switch BaseHasHistory yes implBuffCompareToHistory default empty$$iterate Index( each maybeBuffImplCompareToIndex )$
+		}$implBuffCompareToHistory$$iterate Index( each maybeBuffImplCompareToIndex )$
 		else {$switch HasSuperClassRelation no implBuffCompareThrowCannotCompare default implBuffCompareInvokeSuper$
 		}
 	}
@@ -696,7 +696,7 @@ $			return( 0 );
 	@Override
 	public void set$TableName$( I$DefSchemaName$$TableName$ src ) {$switch HasSuperClassRelation yes implBuffSetInvokeSuper default implBuffSetCopyPKey$$switch HasSuperClassRelation no implBuffSetCopyRevision default empty$$switch HasSuperClassRelation no implBuffSetOptAuditColumns default empty$$iterate Relation(each maybeBuffCopySetSchemaTableDataRelation empty empty)$$iterate DataColumns( each maybeBuffSetCopyDataAttr empty empty )$
 	}
-$switch BaseHasHistory yes implBuffSetHistory default empty$</GenRule>
+$implBuffSetHistory$</GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffSetHistory">
 	@Override

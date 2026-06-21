@@ -892,7 +892,7 @@ $switch InSuperiorPrimaryKeyRelation yes empty default implPKeyAttrAccessorSette
 		else if (obj instanceof I$SchemaName$$TableName$) {$switch HasSuperClassRelation yes implJpaEqualsSuper default empty$
 			I$SchemaName$$TableName$ rhs = (I$SchemaName$$TableName$)obj;$switch HasSuperClassRelation yes implJpaEqualsDataCols default implJpaEqualsAllCols$
 			return( true );
-		}$switch BaseHasHistory yes implJpaEqualsHistoryObjects default empty$$iterate Index( each maybeImplSchemaJpaTableEqualsIndexKey empty empty )$
+		}$implJpaEqualsHistoryObjects$$iterate Index( each maybeImplSchemaJpaTableEqualsIndexKey empty empty )$
 		else {$switch HasSuperClassRelation yes implJpaEqualsReturnSuperEquals default implJpaEqualsReturnFalse$
 		}
 	}
@@ -997,7 +997,7 @@ $switch InSuperiorPrimaryKeyRelation yes empty default implPKeyAttrAccessorSette
 		}
 		else if (obj instanceof I$SchemaName$$TableName$) {$switch HasSuperClassRelation yes implJpaCompareToSuper default implJpaComparePKeys$$switch HasSuperClassRelation no implJpaCompareOptAuditColumns default empty$$iterate DataColumns( each implCompareToAttr empty empty )$
 			return( 0 );
-		}$switch BaseHasHistory yes implJpaCompareToHistory default empty$$iterate Index( each maybeImplSchemaJpaTableCompareToIndexKey)$
+		}$implJpaCompareToHistory$$iterate Index( each maybeImplSchemaJpaTableCompareToIndexKey)$
 		else {$switch HasSuperClassRelation yes implJpaCompareToSuperAndRetCmp default implJpaCompareToThrowUnsupportedClass$
 		}
 	}
@@ -1146,7 +1146,7 @@ $			return( 0 );
 	@Override
 	public void set$TableName$( I$DefSchemaName$$TableName$ src ) {$switch HasSuperClassRelation yes implJpaSetInvokeSuper default implJpaSetCopyPKey$$switch HasSuperClassRelation no implJpaSetCopyRevision default empty$$switch HasSuperClassRelation no implJpaSetOptAuditColumns default empty$$iterate Relation(each maybeCopySetSchemaTableDataRelation empty empty)$$iterate DataColumns( each maybeSetCopyDataAttr empty empty )$
 	}
-$switch BaseHasHistory yes implJpaSetHistory default empty$</GenRule>
+$implJpaSetHistory$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJpaSetHistory">
 	@Override
