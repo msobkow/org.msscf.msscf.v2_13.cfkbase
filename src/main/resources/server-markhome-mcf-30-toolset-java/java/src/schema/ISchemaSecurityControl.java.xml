@@ -33,9 +33,9 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/ISchemaSecurityControl.java"
+	Name="src/schema/ISchemaSecurityControl.java"
 	Revision="3.0"
-	Descr="Java 25 $SchemaName$ Security Service Interface">
+	Descr="Java 25 $SchemaName$ Private Security Control Interface">
 
 	<GenFile GenDef="SchemaDef" Name="fileISchemaSecurityControlJava"
 			GenerateOnce="false"
@@ -46,7 +46,7 @@
 		ExpansionClassName="I$SchemaName$SecurityControlJava"
 		ExpansionKeyName="I$SchemaName$SecurityControlJava"
 		ExpansionFileName="I$SchemaName$SecurityControl.java"
->// Description: Java 25 Security Control Interface.
+>// Description: Java 25 Private Security Control Interface.
 
 $MssSourceLicense$
 
@@ -54,49 +54,19 @@ package $reference ManufacturingSchema lower JavaPackage$.$reference Manufacturi
 
 import java.util.List;
 import server.markhome.mcf.v3_1.cflib.dbutil.CFLibDbKeyHash256;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub.I$SchemaName$PubSecurityService;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot.I$SchemaName$ProtSecurityService;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot.I$SchemaName$ProtSecurityControl;
 
 /*
- *	An I$SchemaName$SecurityControl is the protected security service control interface
+ *	An I$SchemaName$SecurityControl is the private security service control interface
  *	used by the system to tell registered caches what information to forget about, including
  *	users, permission groups, tenants, clusters, or the entire cache of information. Application logic
  *	should never invoke the control interface for any reason.  It is intended solely for use by the
  *	infrastructure to issue commands to security cache implementations that have registered for change
  *	and control propagation.
  */
-public interface I$SchemaName$SecurityControl extends I$SchemaName$SecurityService {
-
-	/**
-	 *	Forget about the specified lists of objects.  Any null arguments are presumed to imply empty sets.
-	 *	Caches keep concurrent hash maps of user login strings and user ids mapped to a common internal
-	 *	userinfo object that maintains the caches for the user, one each for the system, the cluster, and
-	 *	the tenant security probes. Each such cache is a map by permission name string.  For the system
-	 *	cache, this map has Boolean data for the true/false state of the cached permission.  For the cluster
-	 *	cache, this map has a sub-map of cluster ids which reference the Booleans.  Similarly, the tenant id
-	 *	sub-maps reference Booleans.
-	 *
-	 *	The userinfo objects also track the last time the user's security information was queried, allowing for
-	 *	a pruning scan to automatically expire stale, unused data should the user wander away from their sessions.
-	 *
-	 *	There is no "global" cache of default permissions applying to all users or anything like that, just per-user permission
-	 *	caching.
-	 *
-	 *	@param userLogins List of user login id strings to forget about.
-	 *	@param userIds List of user ids to forget about.
-	 *	@param clusterIds List of cluster ids to forget about.
-	 *	@param tenantIds List of tenant ids to forget about.
-	 *	@param permissionNames List of permission name strings
-	 */
-	public void forgetAbout(List&lt;String&gt; userLogins,
-		List&lt;CFLibDbKeyHash256&gt; userIds,
-		List&lt;CFLibDbKeyHash256&gt; clusterIds,
-		List&lt;CFLibDbKeyHash256&gt; tenantIds,
-		List&lt;String&gt; permissionNames);
-
-	/**
-	 *	Forget about everything; reset the controlled cache.  Does not forget interest registrations.
-	 */
-	public void forgetAll();
-
+public interface I$SchemaName$SecurityControl extends I$SchemaName$ProtSecurityControl, I$SchemaName$SecurityService {
 }
 </GenFile>
 

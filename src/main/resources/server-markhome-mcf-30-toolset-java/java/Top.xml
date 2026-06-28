@@ -46,7 +46,7 @@
 	<GenRule GenDef="Object" Name="ExplainCodeVisPrivate">CodeVis Private, meaning that only the back-end code for the schema implementation can access it, and even the code specific user interface cannot</GenRule>
 
 	<GenRule GenDef="MinorVersion" Name="top"
-		>$iterate SchemaDef( each schemaFiles )$</GenRule>
+		>$iterate SchemaDef( each schemaPubFiles )$$iterate SchemaDef( each schemaProtFiles )$$iterate SchemaDef( each schemaFiles )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="ToTableHasClassCode"
 		>$reference ToTable HasClassCode$</GenRule>
@@ -81,8 +81,16 @@
 	<GenRule GenDef="RelationCol" Name="ToTableHasLookupIndex"
 		>$reference Relation reference ToTable HasLookupIndex$</GenRule>
 
+	<GenRule ScopeDef="MinorVersion" GenDef="SchemaDef" Name="schemaPubFiles"
+		>$validatePageData$$fileSchemaJavaPubGitIgnore$$fileSchemaJavaPubPomXml$<!--$fileSchemaISchemaPubJava$$fileSchemaISchemaPubFactoryJava$$fileSchemaPubBuffFactoryServiceJava$$fileSchemaPubBuffHooksSchemaJava$$fileSchemaPubBuffSchemaJava$-->$iterate SchemaRefs( each empty empty fileISchemaPubAuthorizationJava )$$iterate SchemaRefs( each empty empty fileISchemaPubAuthorizationCallbackJava )$$iterate SchemaRefs( each empty empty fileSchemaPubAuthorizationJava )$$iterate SchemaRefs( empty fileISchemaPubSecurityServiceJava each empty )$<!--$iterate SchemaRefs( empty fileSchemaPubSecurityCacheJava each empty )$$iterate SchemaRefs( each empty empty fileSchemaPubTableDataJava )$$iterate SchemaRefs( each empty empty fileSchemaPubRoleInfoJava )$$iterate SchemaRefs( each empty empty fileSchemaPubRoleInfoDependencyComparatorJava )$$fileSchemaPubBuffHooksSchemaJava$$fileISchemaPubSchemaObjJava$$fileSchemaSchemaPubObjJava$$fileSchemaITablePubPermsJava$$iterate SchemaPubTables(
+	each tablePubFiles empty empty )$--></GenRule>
+
+	<GenRule ScopeDef="MinorVersion" GenDef="SchemaDef" Name="schemaProtFiles"
+		>$fileSchemaJavaProtGitIgnore$$fileSchemaProtJavaPomXml$<!--$fileSchemaISchemaProtJava$$fileSchemaISchemaProtFactoryJava$$fileSchemaProtBuffFactoryServiceJava$$fileSchemaProtBuffHooksSchemaJava$$fileSchemaProtBuffSchemaJava$-->$iterate SchemaRefs( each empty empty fileISchemaProtAuthorizationJava )$$iterate SchemaRefs( each empty empty fileISchemaProtAuthorizationCallbackJava )$$iterate SchemaRefs( each empty empty fileSchemaProtAuthorizationJava )$$iterate SchemaRefs( empty fileISchemaProtSecurityServiceJava each empty )$$iterate SchemaRefs( empty fileISchemaProtSecurityControlJava each empty )$<!--$iterate SchemaRefs( empty fileSchemaProtSecurityCacheJava each empty )$$iterate SchemaRefs( each empty empty fileSchemaProtTableDataJava )$$iterate SchemaRefs( each empty empty fileSchemaProtoleInfoJava )$$iterate SchemaRefs( each empty empty fileSchemaProtRoleInfoDependencyComparatorJava )$$fileSchemaProtBuffHooksSchemaJava$$fileISchemaProtSchemaObjJava$$fileSchemaSchemaProtObjJava$$fileSchemaITableProtPermsJava$$iterate SchemaProtTables(
+	each tableProtFiles empty empty )$--></GenRule>
+
 	<GenRule ScopeDef="MinorVersion" GenDef="SchemaDef" Name="schemaFiles"
-		>$validatePageData$$fileSchemaJavaGitIgnore$$fileSchemaBinGitIgnore$$fileSchemaCoreGitIgnore$$fileSchemaJavaPomXml$$fileSchemaJavaJpaPomXml$$fileResourcesApplicationProperties$$fileResourcesUserDefaultProperties$$fileResourcesMetaInfPersistenceXml$$fileSchemaRamGitIgnore$$fileSchemaJavaRamPomXml$$fileSchemaISchemaJava$$fileSchemaISchemaFactoryJava$$fileSchemaJpaFactoryServiceJava$$fileSchemaBuffFactoryServiceJava$$fileSchemaJpaConfigJava$$fileSchemaJpaSchemaJava$$iterate SchemaRefs( empty fileSchemaJpaSecurityCacheJava each empty )$$fileSchemaBuffHooksSchemaJava$$fileSchemaJpaHooksSchemaJava$$fileSchemaBuffSchemaJava$$iterate SchemaRefs( each empty empty fileISchemaAuthorizationJava )$$iterate SchemaRefs( each empty empty fileISchemaAuthorizationCallbackJava )$$iterate SchemaRefs( each empty empty fileSchemaAuthorizationJava )$$iterate SchemaRefs( empty fileISchemaSecurityServiceJava each empty )$$iterate SchemaRefs( empty fileISchemaSecurityControlJava each empty )$$iterate SchemaRefs( empty fileSchemaSecurityCacheJava each empty )$$iterate SchemaRefs( each empty empty fileSchemaTableDataJava )$$iterate SchemaRefs( each empty empty fileSchemaRoleInfoJava )$$iterate SchemaRefs( each empty empty fileSchemaRoleInfoDependencyComparatorJava )$$fileSchemaBuffHooksSchemaJava$$fileISchemaSchemaObjJava$$fileSchemaSchemaObjJava$$fileSchemaITablePermsJava$$fileSchemaJavaJpaGitIgnore$$fileSchemaJavaJpaTestGitIgnore$$fileSchemaJavaJpaTestPomXml$$fileSchemaJpaTestJava$$fileSchemaJpaTestEnProperties$$fileSchemaJpaTestPropnamesTxt$$fileSchemaJpaTestApplicationProperties$$fileResourcesJpaTestUserDefaultProperties$$fileSchemaJpaTestStartupListenerJava$$fileSchemaJavaRamTestGitIgnore$$fileSchemaJavaRamTestPomXml$$fileSchemaRamTestJava$$fileSchemaRamTestEnProperties$$fileSchemaRamTestPropnamesTxt$$fileSchemaRamTestApplicationProperties$$fileResourcesRamTestUserDefaultProperties$$fileSchemaRamTestStartupListenerJava$$fileSchemaJavaAppSetupGitIgnore$$fileSchemaJavaAppSetupPomXml$$fileSchemaAppSetupJava$$fileSchemaAppSetupFxApplicationJava$$fileSchemaJpaIdGenServiceJava$$fileSchemaJpaSchemaServiceJava$$iterate SchemaRefs( each fileSchemaJpaTestTestSchemaJava empty empty )$$fileSchemaJpaTestTestSchemaJava$$iterate SchemaRefs( each fileSchemaRamTestTestSchemaJava empty empty )$$fileSchemaRamTestTestSchemaJava$$fileSchemaJpaTestConfigurationJava$$fileSchemaRamTestConfigurationJava$$fileSchemaRamSchemaJava$$iterate SchemaTables(
+		>$validatePageData$$fileSchemaJavaGitIgnore$$fileSchemaBinGitIgnore$$fileSchemaCoreGitIgnore$$fileSchemaJavaPomXml$$fileSchemaJavaJpaPomXml$$fileResourcesApplicationProperties$$fileResourcesUserDefaultProperties$$fileResourcesMetaInfPersistenceXml$$fileSchemaRamGitIgnore$$fileSchemaJavaRamPomXml$$fileSchemaISchemaJava$$fileSchemaISchemaFactoryJava$$fileSchemaJpaFactoryServiceJava$$fileSchemaBuffFactoryServiceJava$$fileSchemaJpaConfigJava$$fileSchemaJpaSchemaJava$$iterate SchemaRefs( empty fileSchemaJpaSecurityCacheJava each empty )$$fileSchemaBuffHooksSchemaJava$$fileSchemaJpaHooksSchemaJava$$fileSchemaBuffSchemaJava$$iterate SchemaRefs( each empty empty fileISchemaAuthorizationJava )$$iterate SchemaRefs( each empty empty fileISchemaAuthorizationCallbackJava )$$iterate SchemaRefs( each empty empty fileSchemaAuthorizationJava )$$iterate SchemaRefs( empty fileISchemaSecurityControlJava each empty )$$iterate SchemaRefs( empty fileISchemaSecurityServiceJava each empty )$$iterate SchemaRefs( empty fileSchemaSecurityCacheJava each empty )$$iterate SchemaRefs( each empty empty fileSchemaTableDataJava )$$iterate SchemaRefs( each empty empty fileSchemaRoleInfoJava )$$iterate SchemaRefs( each empty empty fileSchemaRoleInfoDependencyComparatorJava )$$fileSchemaBuffHooksSchemaJava$$fileISchemaSchemaObjJava$$fileSchemaSchemaObjJava$$fileSchemaITablePermsJava$$fileSchemaJavaJpaGitIgnore$$fileSchemaJavaJpaTestGitIgnore$$fileSchemaJavaJpaTestPomXml$$fileSchemaJpaTestJava$$fileSchemaJpaTestEnProperties$$fileSchemaJpaTestPropnamesTxt$$fileSchemaJpaTestApplicationProperties$$fileResourcesJpaTestUserDefaultProperties$$fileSchemaJpaTestStartupListenerJava$$fileSchemaJavaRamTestGitIgnore$$fileSchemaJavaRamTestPomXml$$fileSchemaRamTestJava$$fileSchemaRamTestEnProperties$$fileSchemaRamTestPropnamesTxt$$fileSchemaRamTestApplicationProperties$$fileResourcesRamTestUserDefaultProperties$$fileSchemaRamTestStartupListenerJava$$fileSchemaJavaAppSetupGitIgnore$$fileSchemaJavaAppSetupPomXml$$fileSchemaAppSetupJava$$fileSchemaAppSetupFxApplicationJava$$fileSchemaJpaIdGenServiceJava$$fileSchemaJpaSchemaServiceJava$$iterate SchemaRefs( each fileSchemaJpaTestTestSchemaJava empty empty )$$fileSchemaJpaTestTestSchemaJava$$iterate SchemaRefs( each fileSchemaRamTestTestSchemaJava empty empty )$$fileSchemaRamTestTestSchemaJava$$fileSchemaJpaTestConfigurationJava$$fileSchemaRamTestConfigurationJava$$fileSchemaRamSchemaJava$$iterate SchemaTables(
 	each tableFiles empty empty )$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="validatePageData"
@@ -98,18 +106,47 @@
 	<GenRule GenDef="IndexCol" Name="checkPageDataNormalizedKey"
 		>$switch IsNullable no empty default FailAssertPageDataNotAllowedForPrimaryKeyWithOptionalColumns$</GenRule>
 
+	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="tablePubFiles"
+		><!--$switch HasDefSchema yes empty default tablePubFilesNoDefSchema$$fileISchemaPubTableObjJava$$fileIPubObjJava$$fileIPubEditObjJava$$fileSchemaPubTableObjJava$$filePubObjJava$$filePubEditObjJava$$iterate Index( each indexPubFiles )$--></GenRule>
+
+	<GenRule GenDef="Table" Name="tablePubHFiles"><!--$fileISchemaPubTableHJava$$switch HasSuperClassRelation yes empty default fileISchemaPubTableHPKeyJava$--></GenRule>
+
+	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="tableProtFiles"
+		><!--$switch HasDefSchema yes empty default tableProtFilesNoDefSchema$$fileISchemaProtTableObjJava$$fileIProtObjJava$$fileIProtEditObjJava$$fileSchemaProtTableObjJava$$fileProtObjJava$$fileProtEditObjJava$$iterate Index( each indexProtFiles )$--></GenRule>
+
+	<GenRule GenDef="Table" Name="tableProtHFiles"><!--$fileISchemaProtTableHJava$$switch HasSuperClassRelation yes empty default fileISchemaProtTableHPKeyJava$--></GenRule>
+
 	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="tableFiles"
 		>$switch HasDefSchema yes empty default tableFilesNoDefSchema$$fileISchemaTableObjJava$$fileIObjJava$$fileIEditObjJava$$fileSchemaTableObjJava$$fileObjJava$$fileEditObjJava$$fileSchemaRamTableTableJava$$iterate Index( each indexFiles )$</GenRule>
 	<GenRule GenDef="Table" Name="tableHFiles">$fileISchemaTableHJava$$switch HasSuperClassRelation yes empty default fileISchemaTableHPKeyJava$</GenRule>
+
+	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="tablePubFilesNoDefSchema"
+		>$fileISchemaPubTableTableJava$$fileSchemaPubBuffTableTableJava$$fileISchemaPubTableFactoryJava$$fileSchemaPubBuffTableFactoryServiceJava$$switch HasSuperClassRelation yes empty default fileISchemaPubTablePKeyJava$$fileISchemaPubTableJava$$iterate Index( each fileISchemaPubTableIndexKeyJava )$$fileISchemaPubTableTableJava$$tablePubHFiles$$switch HasSuperClassRelation yes empty default fileSchemaPubBuffTablePKeyJava$$switch HasSuperClassRelation yes empty default maybeFileSchemaPubBuffTableHPKeyJava$$fileSchemaPubBuffTableJava$$fileSchemaPubBuffTableHJava$$iterate Index( each indexPubFilesNoDefSchema empty empty )$$fileISchemaPubTableObjJava$$fileISchemaPubTableEditObjJava$$fileSchemaPubTableObjJava$$fileSchemaPubTableEditObj$</GenRule>
+
+	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="tableProtFilesNoDefSchema"
+		>$fileISchemaProtTableTableJava$$fileSchemaProtBuffTableTableJava$$fileISchemaProtTableFactoryJava$$fileSchemaProtBuffTableFactoryServiceJava$$switch HasSuperClassRelation yes empty default fileISchemaProtTablePKeyJava$$fileISchemaProtTableJava$$iterate Index( each fileISchemaProtTableIndexKeyJava )$$fileISchemaProtTableTableJava$$tableProtHFiles$$switch HasSuperClassRelation yes empty default fileSchemaProtBuffTablePKeyJava$$switch HasSuperClassRelation yes empty default maybeFileSchemaProtBuffTableHPKeyJava$$fileSchemaProtBuffTableJava$$fileSchemaProtBuffTableHJava$$iterate Index( each indexProtFilesNoDefSchema empty empty )$$fileISchemaProtTableObjJava$$fileISchemaProtTableEditObjJava$$fileSchemaProtTableObjJava$$fileSchemaProtTableEditObj$</GenRule>
 
 	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="tableFilesNoDefSchema"
 		>$fileISchemaTableTableJava$$fileSchemaJpaTableTableJava$$fileSchemaBuffTableTableJava$$fileISchemaTableFactoryJava$$fileSchemaJpaTableFactoryServiceJava$$fileSchemaBuffTableFactoryServiceJava$$switch HasSuperClassRelation yes empty default fileISchemaTablePKeyJava$$fileISchemaTableJava$$iterate Index( each fileISchemaTableIndexKeyJava )$$fileISchemaTableTableJava$$tableHFiles$$switch HasSuperClassRelation yes empty default fileSchemaJpaTablePKeyJava$$switch HasSuperClassRelation yes empty default maybeFileSchemaJpaTableHPKeyJava$$fileSchemaJpaTableJava$$fileSchemaJpaTableHJava$$switch HasSuperClassRelation yes empty default fileSchemaBuffTablePKeyJava$$switch HasSuperClassRelation yes empty default maybeFileSchemaBuffTableHPKeyJava$$fileSchemaBuffTableJava$$fileSchemaBuffTableHJava$$iterate Index( each indexFilesNoDefSchema empty empty )$$fileSchemaJpaTableRepositoryJava$$fileSchemaJpaTableServiceJava$$fileISchemaTableObjJava$$fileISchemaTableEditObjJava$$fileSchemaTableObjJava$$fileSchemaTableEditObj$</GenRule>
 
 	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="maybeFileSchemaJpaTableHPKeyJava">$fileSchemaJpaTableHPKeyJava$</GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="maybeFileSchemaBuffTableHPKeyJava">$fileSchemaBuffTableHPKeyJava$</GenRule>
+	<GenRule ScopeDef="SchemaDef" GenDef="Table" Name="maybeFileSchemaPubBuffTableHPKeyJava"><!--$fileSchemaPubBuffTableHPKeyJava$--></GenRule>
+
+	<GenRule GenDef="Index" Name="indexPubFilesNoDefSchema"
+		><!--$switch IsPrimaryIndex no fileSchemaPubBuffTableIndexKeyJava default empty$--></GenRule>
+
+	<GenRule GenDef="Index" Name="indexProtFilesNoDefSchema"
+		><!--$switch IsPrimaryIndex no fileSchemaProtBuffTableIndexKeyJava default empty$--></GenRule>
 
 	<GenRule GenDef="Index" Name="indexFilesNoDefSchema"
 		>$switch IsPrimaryIndex no fileSchemaJpaTableIndexKeyJava default empty$$switch IsPrimaryIndex no fileSchemaBuffTableIndexKeyJava default empty$</GenRule>
+
+	<GenRule GenDef="Index" Name="indexPubFiles"
+		></GenRule>
+
+	<GenRule GenDef="Index" Name="indexProtFiles"
+		></GenRule>
 
 	<GenRule GenDef="Index" Name="indexFiles"
 		></GenRule>

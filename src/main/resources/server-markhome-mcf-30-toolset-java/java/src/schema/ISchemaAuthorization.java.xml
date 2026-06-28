@@ -33,9 +33,9 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/Schema/ISchemaAuthorization.java"
+	Name="src/schema/ISchemaAuthorization.java"
 	Revision="3.0"
-	Descr="Java 25 $SchemaName$ Authorization Interface">
+	Descr="Java 25 $SchemaName$ Private Authorization Interface">
 
 	<GenFile GenDef="SchemaDef" Name="fileISchemaAuthorizationJava"
 			GenerateOnce="false"
@@ -46,7 +46,7 @@
 		ExpansionClassName="I$SchemaName$AuthorizationJava"
 		ExpansionKeyName="I$SchemaName$AuthorizationJava"
 		ExpansionFileName="I$SchemaName$Authorization.java"
->// Description: Java 25 Authorization Interface.
+>// Description: Java 25 Private Authorization Interface.
 
 $MssSourceLicense$
 
@@ -62,15 +62,19 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import $lower reference ManufacturingSchema JavaPackage$.$lower reference ManufacturingSchema SchemaName$obj.I$reference ManufacturingSchema SchemaName$ClusterObj;
-import $lower reference ManufacturingSchema JavaPackage$.$lower reference ManufacturingSchema SchemaName$obj.I$reference ManufacturingSchema SchemaName$TenantObj;
-import $lower reference ManufacturingSchema JavaPackage$.$lower reference ManufacturingSchema SchemaName$obj.I$reference ManufacturingSchema SchemaName$SecSessionObj;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub.I$SchemaName$PubAuthorization;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot.I$SchemaName$ProtAuthorization;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SecSchemaName$obj.I$SecSchemaName$ClusterObj;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SecSchemaName$obj.I$SecSchemaName$TenantObj;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SecSchemaName$obj.I$SecSchemaName$SecSessionObj;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SecSchemaName$obj.I$SecSchemaName$SecUserObj;
+
 
 /*
  *	An I$SchemaName$Authorization is an authorization ticket
  *	for the system providing services.
  */
-public interface I$SchemaName$Authorization
+public interface I$SchemaName$Authorization extends I$SchemaName$ProtAuthorization
 {$ISchemaAuthorizationImplBody$}
 </GenFile>
 
@@ -78,23 +82,18 @@ public interface I$SchemaName$Authorization
 		>$declIAuthorizationCFLibUuid6Accessors$$declIAuthorizationSecIdAccessors$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="declIAuthorizationSecIdAccessors">
-	public CFLibDbKeyHash256 getSecClusterId();
 	public void setSecClusterId( CFLibDbKeyHash256 clusterId );
-	public void setSecCluster( I$reference ManufacturingSchema SchemaName$ClusterObj value );
-	public CFLibDbKeyHash256 getSecTenantId();
+	public void setSecCluster(I$SecSchemaName$ClusterObj cluster);
 	public void setSecTenantId( CFLibDbKeyHash256 tenantId );
-	public void setSecTenant( I$reference ManufacturingSchema SchemaName$TenantObj value );
-	public CFLibDbKeyHash256 getSecSessionId();
+	public void setSecTenant(I$SecSchemaName$TenantObj tenant);
 	public void setSecSessionId( CFLibDbKeyHash256 sessionId );
-	public void setSecSession( I$reference ManufacturingSchema SchemaName$SecSessionObj value );
-	public CFLibDbKeyHash256 getSecUserId();
+	public void setSecSession(I$SecSchemaName$SecSessionObj session);
 	public void setSecUserId( CFLibDbKeyHash256 userId );
+	public void setSecUser(I$SecSchemaName$SecUserObj user);
 </GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="declIAuthorizationCFLibUuid6Accessors">
-	public CFLibUuid6 getAuthUuid6();
 	public void setAuthUuid6( CFLibUuid6 value );
-	public String getAuthUuid6Str();
 </GenRule>
 
 </RuleSet>

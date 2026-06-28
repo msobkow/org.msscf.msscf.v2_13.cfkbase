@@ -32,19 +32,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
-	ToolSet="java+saxloader"
-	Name="JavaSaxRamLdrPomXml.xml"
+	ToolSet="java"
+	Name="JavaProtPomXml.xml"
 	Revision="3.0"
-	Descr="Java package.schemasaxramldr pom.xml">
+	Descr="Java 25 package.schema protected pom.xml">
 
-	<GenFile GenDef="SchemaDef" Name="fileSchemaJavaSaxRamLdrPomXml"
+	<GenFile GenDef="SchemaDef" Name="fileSchemaProtJavaPomXml"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
-		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$saxramldr"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot"
 		SubPackageName=""
-		ExpansionClassName="JavaSaxRamLdrPomXml"
-		ExpansionKeyName="$SchemaName$JavaSaxRamLdrPomXml"
+		ExpansionClassName="JavaProtPomXml"
+		ExpansionKeyName="$SchemaName$JavaProtPomXml"
 		ExpansionFileName="pom.xml"
 >&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
@@ -56,10 +56,10 @@
   &lt;/parent&gt;
 
   &lt;groupId&gt;$lower DefTopProjectName$.$DefVUnderVersion$&lt;/groupId&gt;
-  &lt;artifactId&gt;$lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower SchemaName$saxramldr&lt;/artifactId&gt;
+  &lt;artifactId&gt;$lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower SchemaName$prot&lt;/artifactId&gt;
   &lt;version&gt;$DefDotVersion$.$GeneratingBuild$&lt;/version&gt;
-  &lt;name&gt;$lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower SchemaName$saxramldr&lt;/name&gt;
-  &lt;description&gt;$TopProjectJustName$ $DefDotVersion$.$GeneratingBuild$ $DefSubProjectName$ $SchemaName$SaxLoader - XML SAX Loadeer using the RAM memory storage for testing&lt;/description&gt;
+  &lt;name&gt;$lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower SchemaName$prot&lt;/name&gt;
+  &lt;description&gt;$TopProjectJustName$ $DefDotVersion$.$GeneratingBuild$ $DefSubProjectName$ $SchemaName$ - Protected package of foundation objects&lt;/description&gt;
   &lt;url&gt;mailto:$AuthorEMail$&lt;/url&gt;
 
   &lt;properties&gt;
@@ -125,7 +125,12 @@
         &lt;groupId&gt;jakarta.annotation&lt;/groupId&gt;
         &lt;artifactId&gt;jakarta.annotation-api&lt;/artifactId&gt;
 		&lt;version&gt;$${jakarta-annotation-api.version}&lt;/version&gt;
-    &lt;/dependency&gt;$iterate SchemaRefs( each emitPomSchemaRefBaseDependency empty empty )$$emitPomSchemaRefBaseDependency$$iterate SchemaRefs( each emitPomSchemaRefSaxLoaderDependency empty empty )$$emitPomSchemaRefSaxLoaderDependency$
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+	  &lt;version&gt;$${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;$iterate SchemaRefs( each emitPomSchemaRefPubBaseDependency empty empty )$$emitPomSchemaRefPubBaseDependency$$iterate SchemaRefs( each emitPomSchemaRefProtBaseDependency empty empty )$
   &lt;/dependencies&gt;
 
 	&lt;distributionManagement&gt;
@@ -207,12 +212,12 @@
 &lt;/project&gt;
 </GenFile>
 
-<GenRule GenDef="SchemaRef" Name="emitPomSchemaRefSaxRamLdrDependency">$reference RefSchema emitPomSchemaRefSaxRamLdrDependency$</GenRule>
+<GenRule GenDef="SchemaRef" Name="emitPomSchemaRefProtBaseDependency">$reference RefSchema emitPomSchemaRefProtBaseDependency$</GenRule>
 
-<GenRule GenDef="SchemaDef" Name="emitPomSchemaRefSaxRamLdrDependency">
+<GenRule GenDef="SchemaDef" Name="emitPomSchemaRefProtBaseDependency">
     &lt;dependency&gt;
         &lt;groupId&gt;$lower DefTopProjectName$.$DefVUnderVersion$&lt;/groupId&gt;
-        &lt;artifactId&gt;$lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower SchemaName$saxramldr&lt;/artifactId&gt;
+        &lt;artifactId&gt;$lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower SchemaName$prot&lt;/artifactId&gt;
         &lt;version&gt;$DefDotVersion$.$GeneratingBuild$&lt;/version&gt;
     &lt;/dependency&gt;</GenRule>
 

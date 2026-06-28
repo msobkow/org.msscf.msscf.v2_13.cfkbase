@@ -33,24 +33,24 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/schema/ISchemaAuthorizationCallback.java"
+	Name="src/schemaprot/ISchemaProtAuthorizationCallback.java"
 	Revision="3.0"
-	Descr="Java 25 $SchemaName$ Private Authorization Callback Interface">
+	Descr="Java 25 $SchemaName$ Protected Authorization Callback Interface">
 
-	<GenFile GenDef="SchemaDef" Name="fileISchemaAuthorizationCallbackJava"
+	<GenFile GenDef="SchemaDef" Name="fileISchemaProtAuthorizationCallbackJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
-		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
-		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
-		ExpansionClassName="I$SchemaName$AuthorizationCallbackJava"
-		ExpansionKeyName="I$SchemaName$AuthorizationCallbackJava"
-		ExpansionFileName="I$SchemaName$AuthorizationCallback.java"
->// Description: Java 25 Private Authorization Callback Interface.
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot"
+		ExpansionClassName="I$SchemaName$ProtAuthorizationCallbackJava"
+		ExpansionKeyName="I$SchemaName$ProtAuthorizationCallbackJava"
+		ExpansionFileName="I$SchemaName$ProtAuthorizationCallback.java"
+>// Description: Java 25 Protected Authorization Callback Interface.
 
 $MssSourceLicense$
 
-package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$;
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot;
 
 import java.lang.reflect.*;
 import java.io.*;
@@ -64,30 +64,18 @@ import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub.I$SchemaName$PubAuthorization;
 import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub.I$SchemaName$PubAuthorizationCallback;
-import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot.I$SchemaName$ProtAuthorization;
-import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot.I$SchemaName$ProtAuthorizationCallback;
 
 /*
- *	An I$SchemaName$AuthorizationCallback is callback method hook for locating the currently applicable authorization object at runtime.
+ *	An I$SchemaName$ProtAuthorizationCallback is callback method hook for locating the currently applicable authorization object at runtime.
  */
-public interface I$SchemaName$AuthorizationCallback extends I$SchemaName$ProtAuthorizationCallback
+public interface I$SchemaName$ProtAuthorizationCallback extends I$SchemaName$PubAuthorizationCallback
 {
-	/**
-	 *	Get the currently effective private authorization to be used for processing on behalf of the user behind the scenes.
-	 *
-	 *	@return	The currently effective private authorization. May be null if there is no currently active user session, in which case some code uses a default system session or rejects the request.
-	 */
-	public I$SchemaName$Authorization getEffectiveAuthorization();
-
 	/**
 	 *	Get the currently effective protected authorization to be used for processing on behalf of the user behind the scenes.
 	 *
 	 *	@return	The currently effective protected authorization. May be null if there is no currently active user session, in which case some code uses a default system session or rejects the request.
 	 */
-	@Override
-	public default I$SchemaName$ProtAuthorization getEffectiveProtAuthorization() {
-		return(getEffectiveAuthorization());
-	}
+	public I$SchemaName$ProtAuthorization getEffectiveProtAuthorization();
 
 	/**
 	 *	Get the currently effective public authorization to be used for processing on behalf of the user behind the scenes.
@@ -96,7 +84,7 @@ public interface I$SchemaName$AuthorizationCallback extends I$SchemaName$ProtAut
 	 */
 	@Override
 	public default I$SchemaName$PubAuthorization getEffectivePubAuthorization() {
-		return(getEffectiveAuthorization());
+		return getEffectiveProtAuthorization();
 	}
 }
 </GenFile>
