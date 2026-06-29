@@ -1,0 +1,1220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Mark's Code Fractal CFKBase 3.1 Code Fractal Knowledge Base
+ *
+ *	Copyright 2016-2026 Mark Stephen Sobkow
+ *
+ *	This file is part of Mark's Code Fractal CFKBase.
+ *
+ *	Mark's Code Fractal CFKBase is available under dual commercial license from
+ *	Mark Stephen Sobkow, or under the terms of the GNU General Public License,
+ *	Version 3 or later.
+ *
+ *	Mark's Code Fractal CFKBase is free software: you can redistribute it and/or
+ *	modify it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	Mark's Code Fractal CFKBase is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with Mark's Code Fractal CFKBase.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+	xmlns="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
+	ToolSet="java"
+	Name="src/schemapub/ISchemaPubTablePKey.java"
+	Revision="3.0"
+	Descr="Java 25 public interface for a $TableName$ primary key object.">
+
+	<GenRule GenDef="Index" Name="IPubCompactedIndexClass">$switch IsAtomic yes implPubJavaOptAtomType default IPubIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="IPubIndexClassName">I$reference Table DefSchemaName$Pub$reference Table TableName$By$Suffix$Key</GenRule>
+
+	<GenRule GenDef="Table" Name="IPubCompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex ICompactedPrimaryIndexClass$</GenRule>
+	<GenRule GenDef="Index" Name="IPubCompactedPrimaryIndexClass">$switch IsAtomic yes implPubJavaOptAtomType default IPubPrimaryIndexClassName$</GenRule>
+
+	<GenRule GenDef="Table" Name="IPubPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex IPubPrimaryIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="IPubPrimaryIndexClassName">I$reference Table DefSchemaName$Pub$reference Table TableName$PKey</GenRule>
+
+	<GenRule GenDef="Table" Name="fileISchemaPubTablePKeyJava">$switch IsPublic yes forRealFileISchemaPubTablePKeyJava default empty$</GenRule>
+	<GenRule GenDef="Table" Name="forRealFileISchemaPubTablePKeyJava">$switch IsPrimaryIndexKeyAtomic yes empty default reallyIFileSchemaPubTablePKeyJava$</GenRule>
+	<GenFile GenDef="Table" Name="reallyIFileSchemaPubTablePKeyJava"
+			GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub"
+		ExpansionClassName="I$SchemaName$Pub$TableName$PKeyJava"
+		ExpansionKeyName="I$SchemaName$Pub$TableName$PKeyJava"
+		ExpansionFileName="I$SchemaName$Pub$TableName$PKey.java"
+>// Description: Java 25 public inteface for a $TableName$ primary key object.
+
+$MssSourceLicense$
+
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub;
+
+import java.io.Serializable;
+import java.math.*;
+import java.time.*;
+import java.util.*;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;
+import server.markhome.mcf.v3_1.cflib.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$
+
+/**
+ *	I$SchemaName$Pub$TableName$PKey public primary key interface for $TableName$ has $reference BaseClass reference PrimaryKeyIndex ExplainCodeVis$.$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )
+$
+ */
+public interface I$SchemaName$Pub$TableName$PKey$switch HasDefSchema yes ISchemaPubTablePKeyExtendBaseDef default empty$
+{$switch HasDefSchema yes ISchemaPubTablePKeyExtendBaseDefBody default ISchemaPubTablePKeyImplBaseDefBody$}
+</GenFile>
+
+	<GenRule GenDef="Table" Name="ISchemaPubTablePKeyExtendBaseDefBody">
+</GenRule>
+
+	<GenRule GenDef="Table" Name="ISchemaPubTablePKeyImplBaseDefBody">
+$reference PrimaryKeyIndex iterate Columns( each declPubColumnGetterSetter )$$declPubRecPKeyEquals$$declPubRecPKeyHashCode$$declPubRecPKeyCompareTo$$reference PrimaryKeyIndex declPubRecPKeyToString$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declPubColumnGetterMaybeSetter">$switch IsPublic yes reallyDeclPubColumnGetterMaybeSetter default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyDeclPubColumnGetterMaybeSetter">$reference Column declPubColumnGetterMaybeSetter$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="declPubColumnGetterMaybeSetter">$switch IsPublic yes reallyDeclPubColumnGetterMaybeSetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclPubColumnGetterMaybeSetter">$switch InSuperiorRelation yes declPubColumnGetter default declPubColumnGetterSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="declPubColumnGetterMaybeSetter">$switch IsPublic yes reallyDeclPubColumnGetterMaybeSetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclPubColumnGetterMaybeSetter">$switch InSuperiorRelation yes declPubColumnGetter default declPubColumnGetterSetter$</GenRule>
+
+	<GenRule GenDef="Relation" Name="maybeDeclPubISchemaTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default declPubSuperiorISchemaTablePKeyRelationGetterSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubSuperiorISchemaTablePKeyRelationGetterSetter">$switch IsPublic yes reallyDeclPubSuperiorISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubSuperiorISchemaTablePKeyRelationGetterSetter">$switch IsSuperiorRelation yes declPubInPrimaryISchemaTablePKeyRelationGetterSetter default declPubSubservientISchemaTablePKeyRelationGetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubInPrimaryISchemaTablePKeyRelationGetterSetter">$switch IsPublic yes reallyDeclPubInPrimaryISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubInPrimaryISchemaTablePKeyRelationGetterSetter">$switch IsRelationInPrimaryIndex yes declPubISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubISchemaTablePKeyRelationGetterSetter">$switch IsPublic yes reallyDeclPubISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubISchemaTablePKeyRelationGetterSetter">
+	public $emitPubInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();$switch IsToIndexUnique yes declPubISchemaTablePKeyRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declISchemaPubTablePKeyRelationSetter">$switch IsPublic yes reallyDeclPubISchemaTablePKeyRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubISchemaTablePKeyRelationSetter">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj);
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declPubSetArgColumn each declPubCommaSetArgColumn)$);</GenRule>
+
+
+	<GenRule GenDef="Relation" Name="maybeDeclPubISchemaTablePKeyRelationGetter">$switch IsPublic yes reallyMaybeDeclPubISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyMaybeDeclPubISchemaTablePKeyRelationGetter">$switch HasDefSchema yes empty default declPubInSubservientISchemaTablePKeyRelationGetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubSubservientISchemaTablePKeyRelationGetter">$switch IsPublic yes reallyDeclPubSubservientISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubSubservientISchemaTablePKeyRelationGetter">$switch IsSubservientRelation yes declPubInSubservientPrimaryISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubInSubservientPrimaryISchemaTablePKeyRelationGetter">$switch IsPublic yes reallyDeclPubInSubservientPrimaryISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubInSubservientPrimaryISchemaTablePKeyRelationGetter">$switch IsRelationInPrimaryIndex yes declPubISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubISchemaTablePKeyRelationGetter">$switch IsPublic yes reallyDeclPubISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubISchemaTablePKeyRelationGetter">
+	public $emitPubInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="declPubSetArgColumn">$reference FromCol reference Column implPubJavaAtomType$ arg$reference FromCol reference Column Name$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declPubCommaSetArgColumn">,
+		$declPubSetArgColumn$</GenRule>
+
+	<GenRule GenDef="Table" Name="ISchemaPubTablePKeyExtendBaseDef">
+	extends I$DefSchemaName$Pub$TableName$PKey</GenRule>
+
+
+	<GenRule GenDef="IndexCol" Name="implPubColumnAttrOptionality"
+		>$switch IsNullable
+			yes implPubColumnAttrOptional
+			default implPubColumnAttrRequired$</GenRule>
+	<GenRule GenDef="Atom" Name="implPubColumnAttrOptionality"
+		>$switch IsNullable
+			yes implPubColumnAttrOptional
+			default implPubColumnAttrRequired$</GenRule>
+	<GenRule GenDef="TableCol" Name="implPubColumnAttrOptionality"
+		>$switch IsNullable
+			yes implPubColumnAttrOptional
+			default implPubColumnAttrRequired$</GenRule>
+
+	<GenRule GenDef="Object" Name="implPubColumnAttrOptional"
+		>Optional</GenRule>
+	<GenRule GenDef="Object" Name="implPubColumnAttrRequired"
+		>Required</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implPubColumnAttrComment">$switch IsPublic yes reallyImplPubColumnAttrComment default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplPubColumnAttrComment">
+ *		$lower implPubColumnAttrOptionality$$Name$	$implPubColumnAttrOptionality$ object attribute $Name$.</GenRule>
+
+	<GenRule ScopeDef="Table" GenDef="Atom" Name="implPubColumnAttrComment">$switch IsPublic yes reallyImplPubColumnAttrComment default empty$</GenRule>
+	<GenRule ScopeDef="Table" GenDef="Atom" Name="reallyImplPubColumnAttrComment">
+ *		$lower implPubColumnAttrOptionality$$Name$	$implPubColumnAttrOptionality$ object attribute $Name$.</GenRule>
+	<GenRule ScopeDef="Table" GenDef="TableCol" Name="implPubColumnAttrComment">$switch IsPublic yes reallyImplPubColumnAttrComment default empty$</GenRule>
+	<GenRule ScopeDef="Table" GenDef="TableCol" Name="reallyImplPubColumnAttrComment">
+ *		$implPubColumnAttrOptionality$$Name$	$implPubColumnAttrOptionality$ object attribute $Name$.</GenRule>
+
+	<GenRule GenDef="Table" Name="implPubCompactedPrimaryIndexClassAttr">$switch IsPublic yes reallyImplPubCompactedPrimaryIndexClassAttr default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyImplPubCompactedPrimaryIndexClassAttr">$reference BaseClass reference PrimaryKeyIndex implPubCompactedPrimaryIndexClassAttr$</GenRule>
+	<GenRule GenDef="Index" Name="implPubCompactedPrimaryIndexClassAttr">$switch IsPublic yes reallyImplPubCompactedPrimaryIndexClassAttr default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplPubCompactedPrimaryIndexClassAttr">$switch IsAtomic yes implPubColumnIdAttr default implPubColumnEmbeddedIdAttr$</GenRule>
+	<GenRule GenDef="Index" Name="implPubColumnIdAttr">$switch IsPublic yes reallyImplPubColumnIdAttr default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplPubColumnIdAttr">$iterate Columns( lone implPubColumnIdAttr first empty each empty empty empty )$</GenRule>
+
+	<GenRule GenDef="Param" Name="implPubJavaAtomType">$switch IsNullable yes implPubJavaOptAtomType default implPubJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="Param" Name="implPubJavaOptAtomType">$reference Type implPubJavaOptAtomType$</GenRule>
+
+	<GenRule GenDef="Param" Name="implPubJavaReqAtomType">$reference Type implPubJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="Index" Name="implPubJavaAtomType">$iterate Columns( lone implPubJavaAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implPubJavaOptAtomType">$iterate Columns( lone implPubJavaOptAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implPubJavaReqAtomType">$iterate Columns( lone implPubJavaReqAtomType first empty each empty empty empty )$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implPubJavaAtomType">$reference Column implPubJavaAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPubJavaOptAtomType">$reference Column implPubJavaOptAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPubJavaReqAtomType">$reference Column implPubJavaReqAtomType$</GenRule>
+	<GenRule GenDef="Value" Name="implPubJavaAtomType" >$switch IsNullable yes implPubJavaOptAtomType default implPubJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="implPubJavaOptAtomType" >$reference DataType implPubJavaOptAtomType$</GenRule>
+	<GenRule GenDef="TableCol" Name="implPubJavaReqAtomType" >$reference DataType implPubJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="PubEffSchemaName">$reference RefSchema PubSchemaName$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="PubEffSchemaName">$PubSchemaName$</GenRule>
+	<GenRule GenDef="Object" Name="PubEffSchemaName" >$switch HasDefSchema yes PubUseDefSchemaName default PubSchemaName$</GenRule>
+	<GenRule GenDef="Object" Name="PubUseDefSchemaName" >$reference DefSchema PubSchemaName$</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="PubSchemaName">$reference RefSchema SchemaName$Pub</GenRule>
+	<GenRule GenDef="SchemaDef" Name="PubSchemaName">$SchemaName$Pub</GenRule>
+
+	<GenRule GenDef="BlobDef" Name="implPubJavaReqAtomType">byte[]</GenRule>
+	<GenRule GenDef="BoolDef" Name="implPubJavaReqAtomType">boolean</GenRule>
+	<GenRule GenDef="EnumDef" Name="implPubJavaReqAtomType">I$EffSchemaName$SchemaPub.$Name$</GenRule>
+	<GenRule GenDef="Int16Def" Name="implPubJavaReqAtomType">short</GenRule>
+	<GenRule GenDef="Int32Def" Name="implPubJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="Int64Def" Name="implPubJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="Id16Gen" Name="implPubJavaReqAtomType">short</GenRule>
+	<GenRule GenDef="Id32Gen" Name="implPubJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="Id64Gen" Name="implPubJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="UInt16Def" Name="implPubJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="UInt32Def" Name="implPubJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="UInt64Def" Name="implPubJavaReqAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="FloatDef" Name="implPubJavaReqAtomType">float</GenRule>
+	<GenRule GenDef="DoubleDef" Name="implPubJavaReqAtomType">double</GenRule>
+	<GenRule GenDef="NumberDef" Name="implPubJavaReqAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="StringDef" Name="implPubJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="TextDef" Name="implPubJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="DateDef" Name="implPubJavaReqAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TimeDef" Name="implPubJavaReqAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TimestampDef" Name="implPubJavaReqAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="TokenDef" Name="implPubJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="NmTokenDef" Name="implPubJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="NmTokensDef" Name="implPubJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="TZDateDef" Name="implPubJavaReqAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TZTimeDef" Name="implPubJavaReqAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TZTimestampDef" Name="implPubJavaReqAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="DbKeyHash128Gen" Name="implPubJavaReqAtomType">CFLibDbKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Gen" Name="implPubJavaReqAtomType">CFLibDbKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Gen" Name="implPubJavaReqAtomType">CFLibDbKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Gen" Name="implPubJavaReqAtomType">CFLibDbKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Gen" Name="implPubJavaReqAtomType">CFLibDbKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Gen" Name="implPubJavaReqAtomType">CFLibDbKeyHash512</GenRule>
+	<GenRule GenDef="DbKeyHash128Def" Name="implPubJavaReqAtomType">CFLibDbKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Def" Name="implPubJavaReqAtomType">CFLibDbKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Def" Name="implPubJavaReqAtomType">CFLibDbKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Def" Name="implPubJavaReqAtomType">CFLibDbKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Def" Name="implPubJavaReqAtomType">CFLibDbKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Def" Name="implPubJavaReqAtomType">CFLibDbKeyHash512</GenRule>
+	<GenRule GenDef="Uuid6Gen" Name="implPubJavaReqAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="Uuid6Def" Name="implPubJavaReqAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="UuidDef" Name="implPubJavaReqAtomType">UUID</GenRule>
+	<GenRule GenDef="UuidGen" Name="implPubJavaReqAtomType">UUID</GenRule>
+
+	<GenRule GenDef="BlobDef" Name="implPubJavaOptAtomType">byte[]</GenRule>
+	<GenRule GenDef="BoolDef" Name="implPubJavaOptAtomType">Boolean</GenRule>
+	<GenRule GenDef="EnumDef" Name="implPubJavaOptAtomType">I$EffSchemaName$SchemaPub.$Name$</GenRule>
+	<GenRule GenDef="Int16Def" Name="implPubJavaOptAtomType">Short</GenRule>
+	<GenRule GenDef="Int32Def" Name="implPubJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="Int64Def" Name="implPubJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="Id16Gen" Name="implPubJavaOptAtomType">Short</GenRule>
+	<GenRule GenDef="Id32Gen" Name="implPubJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="Id64Gen" Name="implPubJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="UInt16Def" Name="implPubJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="UInt32Def" Name="implPubJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="UInt64Def" Name="implPubJavaOptAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="FloatDef" Name="implPubJavaOptAtomType">Float</GenRule>
+	<GenRule GenDef="DoubleDef" Name="implPubJavaOptAtomType">Double</GenRule>
+	<GenRule GenDef="NumberDef" Name="implPubJavaOptAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="StringDef" Name="implPubJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="TextDef" Name="implPubJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="DateDef" Name="implPubJavaOptAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TimeDef" Name="implPubJavaOptAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TimestampDef" Name="implPubJavaOptAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="TokenDef" Name="implPubJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="NmTokenDef" Name="implPubJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="NmTokensDef" Name="implPubJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="TZDateDef" Name="implPubJavaOptAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TZTimeDef" Name="implPubJavaOptAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TZTimestampDef" Name="implPubJavaOptAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="DbKeyHash128Gen" Name="implPubJavaOptAtomType">CFLibDbKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Gen" Name="implPubJavaOptAtomType">CFLibDbKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Gen" Name="implPubJavaOptAtomType">CFLibDbKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Gen" Name="implPubJavaOptAtomType">CFLibDbKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Gen" Name="implPubJavaOptAtomType">CFLibDbKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Gen" Name="implPubJavaOptAtomType">CFLibDbKeyHash512</GenRule>
+	<GenRule GenDef="DbKeyHash128Def" Name="implPubJavaOptAtomType">CFLibDbKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Def" Name="implPubJavaOptAtomType">CFLibDbKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Def" Name="implPubJavaOptAtomType">CFLibDbKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Def" Name="implPubJavaOptAtomType">CFLibDbKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Def" Name="implPubJavaOptAtomType">CFLibDbKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Def" Name="implPubJavaOptAtomType">CFLibDbKeyHash512</GenRule>
+	<GenRule GenDef="Uuid6Gen" Name="implPubJavaOptAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="Uuid6Def" Name="implPubJavaOptAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="UuidDef" Name="implPubJavaOptAtomType">UUID</GenRule>
+	<GenRule GenDef="UuidGen" Name="implPubJavaOptAtomType">UUID</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declPubColumnGetter">$switch IsPublic yes reallyDeclPubColumnGetter default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyDeclPubColumnGetter">$reference Column declPubColumnGetter$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declPubColumnGetterSetter">$switch IsPublic yes reallyDeclPubColumnGetterSetter default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyDeclPubColumnGetterSetter">$reference Column declPubColumnGetterSetter$</GenRule>
+
+	<GenRule GenDef="Object" Name="declPubRevisionGetterSetter">
+	public int getRequiredRevision();
+	public void setRequiredRevision( int value );
+</GenRule>
+
+	<GenRule GenDef="Object" Name="declPubClassCodeGetterSetter">
+	public int getClassCode();
+	public void setClassCode( int value );
+</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubColumnGetter">$switch IsPublic yes reallyDeclPubColumnGetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclPubColumnGetter">$switch IsNullable yes declPubOptGetter default declPubReqGetter$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubColumnGetterSetter">$switch IsPublic yes reallyDeclPubColumnGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclPubColumnGetterSetter">$switch IsNullable yes declPubOptGetter default declPubReqGetter$$switch IsNullable yes declPubOptSetter default declPubReqSetter$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqGetter">$switch IsPublic yes reallyDeclPubReqGetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclPubReqGetter"
+		>$switch BaseModelAtomClass
+			BlobDef declPubReqBlobGetter
+			BoolDef declPubReqBoolGetter
+			EnumDef declPubReqEnumGetter
+			Id16Gen declPubReqInt16Getter
+			Id32Gen declPubReqInt32Getter
+			Id64Gen declPubReqInt64Getter
+			Int16Def declPubReqInt16Getter
+			Int32Def declPubReqInt32Getter
+			Int64Def declPubReqInt64Getter
+			UInt16Def declPubReqUInt16Getter
+			UInt32Def declPubReqUInt32Getter
+			UInt64Def declPubReqUInt64Getter
+			FloatDef declPubReqFloatGetter
+			DoubleDef declPubReqDoubleGetter
+			NumberDef declPubReqNumberGetter
+			DateDef declPubReqDateGetter
+			TimeDef declPubReqTimeGetter
+			TimestampDef declPubReqTimestampGetter
+			TZDateDef declPubReqTZDateGetter
+			TZTimeDef declPubReqTZTimeGetter
+			TZTimestampDef declPubReqTZTimestampGetter
+			DbKeyHash128Gen declPubReqDbKeyHash128Getter
+			DbKeyHash160Gen declPubReqDbKeyHash160Getter
+			DbKeyHash224Gen declPubReqDbKeyHash224Getter
+			DbKeyHash256Gen declPubReqDbKeyHash256Getter
+			DbKeyHash384Gen declPubReqDbKeyHash384Getter
+			DbKeyHash512Gen declPubReqDbKeyHash512Getter
+			DbKeyHash128Def declPubReqDbKeyHash128Getter
+			DbKeyHash160Def declPubReqDbKeyHash160Getter
+			DbKeyHash224Def declPubReqDbKeyHash224Getter
+			DbKeyHash256Def declPubReqDbKeyHash256Getter
+			DbKeyHash384Def declPubReqDbKeyHash384Getter
+			DbKeyHash512Def declPubReqDbKeyHash512Getter
+			Uuid6Gen declPubReqUuid6Getter
+			Uuid6Def declPubReqUuid6Getter
+			UuidGen declPubReqUuidGetter
+			UuidDef declPubReqUuidGetter
+			StringDef declPubReqStringGetter
+			TokenDef declPubReqTokenGetter
+			NmTokenDef declPubReqNmTokenGetter
+			NmTokensDef declPubReqNmTokensGetter
+			TextDef declPubReqTextGetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptGetter">$switch IsPublic yes reallyDeclPubOptGetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclPubOptGetter"
+		>$switch BaseModelAtomClass
+			BlobDef declPubOptBlobGetter
+			BoolDef declPubOptBoolGetter
+			EnumDef declPubOptEnumGetter
+			Id16Gen declPubOptInt16Getter
+			Id32Gen declPubOptInt32Getter
+			Id64Gen declPubOptInt64Getter
+			Int16Def declPubOptInt16Getter
+			Int32Def declPubOptInt32Getter
+			Int64Def declPubOptInt64Getter
+			UInt16Def declPubOptUInt16Getter
+			UInt32Def declPubOptUInt32Getter
+			UInt64Def declPubOptUInt64Getter
+			FloatDef declPubOptFloatGetter
+			DoubleDef declPubOptDoubleGetter
+			NumberDef declPubOptNumberGetter
+			DateDef declPubOptDateGetter
+			TimeDef declPubOptTimeGetter
+			TimestampDef declPubOptTimestampGetter
+			TZDateDef declPubOptTZDateGetter
+			TZTimeDef declPubOptTZTimeGetter
+			TZTimestampDef declPubOptTZTimestampGetter
+			DbKeyHash128Gen declPubOptDbKeyHash128Getter
+			DbKeyHash160Gen declPubOptDbKeyHash160Getter
+			DbKeyHash224Gen declPubOptDbKeyHash224Getter
+			DbKeyHash256Gen declPubOptDbKeyHash256Getter
+			DbKeyHash384Gen declPubOptDbKeyHash384Getter
+			DbKeyHash512Gen declPubOptDbKeyHash512Getter
+			DbKeyHash128Def declPubOptDbKeyHash128Getter
+			DbKeyHash160Def declPubOptDbKeyHash160Getter
+			DbKeyHash224Def declPubOptDbKeyHash224Getter
+			DbKeyHash256Def declPubOptDbKeyHash256Getter
+			DbKeyHash384Def declPubOptDbKeyHash384Getter
+			DbKeyHash512Def declPubOptDbKeyHash512Getter
+			Uuid6Gen declPubOptUuid6Getter
+			Uuid6Def declPubOptUuid6Getter
+			UuidGen declPubOptUuidGetter
+			UuidDef declPubOptUuidGetter
+			StringDef declPubOptStringGetter
+			TokenDef declPubOptTokenGetter
+			NmTokenDef declPubOptNmTokenGetter
+			NmTokensDef declPubOptNmTokensGetter
+			TextDef declPubOptTextGetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqSetter">$switch IsPublic yes reallyDeclPubReqSetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclPubReqSetter"
+		>$switch BaseModelAtomClass
+			BlobDef declPubReqBlobSetter
+			BoolDef declPubReqBoolSetter
+			EnumDef declPubReqEnumSetter
+			Id16Gen declPubReqInt16Setter
+			Id32Gen declPubReqInt32Setter
+			Id64Gen declPubReqInt64Setter
+			Int16Def declPubReqInt16Setter
+			Int32Def declPubReqInt32Setter
+			Int64Def declPubReqInt64Setter
+			UInt16Def declPubReqUInt16Setter
+			UInt32Def declPubReqUInt32Setter
+			UInt64Def declPubReqUInt64Setter
+			FloatDef declPubReqFloatSetter
+			DoubleDef declPubReqDoubleSetter
+			NumberDef declPubReqNumberSetter
+			DateDef declPubReqDateSetter
+			TimeDef declPubReqTimeSetter
+			TimestampDef declPubReqTimestampSetter
+			TZDateDef declPubReqTZDateSetter
+			TZTimeDef declPubReqTZTimeSetter
+			TZTimestampDef declPubReqTZTimestampSetter
+			DbKeyHash128Gen declPubReqDbKeyHash128Setter
+			DbKeyHash160Gen declPubReqDbKeyHash160Setter
+			DbKeyHash224Gen declPubReqDbKeyHash224Setter
+			DbKeyHash256Gen declPubReqDbKeyHash256Setter
+			DbKeyHash384Gen declPubReqDbKeyHash384Setter
+			DbKeyHash512Gen declPubReqDbKeyHash512Setter
+			DbKeyHash128Def declPubReqDbKeyHash128Setter
+			DbKeyHash160Def declPubReqDbKeyHash160Setter
+			DbKeyHash224Def declPubReqDbKeyHash224Setter
+			DbKeyHash256Def declPubReqDbKeyHash256Setter
+			DbKeyHash384Def declPubReqDbKeyHash384Setter
+			DbKeyHash512Def declPubReqDbKeyHash512Setter
+			Uuid6Gen declPubReqUuid6Setter
+			Uuid6Def declPubReqUuid6Setter
+			UuidGen declPubReqUuidSetter
+			UuidDef declPubReqUuidSetter
+			StringDef declPubReqStringSetter
+			TokenDef declPubReqTokenSetter
+			NmTokenDef declPubReqNmTokenSetter
+			NmTokensDef declPubReqNmTokensSetter
+			TextDef declPubReqTextSetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptSetter">$switch IsPublic yes reallyDeclPubOptSetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclPubOptSetter"
+		>$switch BaseModelAtomClass
+			BlobDef declPubOptBlobSetter
+			BoolDef declPubOptBoolSetter
+			EnumDef declPubOptEnumSetter
+			Id16Gen declPubOptInt16Setter
+			Id32Gen declPubOptInt32Setter
+			Id64Gen declPubOptInt64Setter
+			Int16Def declPubOptInt16Setter
+			Int32Def declPubOptInt32Setter
+			Int64Def declPubOptInt64Setter
+			UInt16Def declPubOptUInt16Setter
+			UInt32Def declPubOptUInt32Setter
+			UInt64Def declPubOptUInt64Setter
+			FloatDef declPubOptFloatSetter
+			DoubleDef declPubOptDoubleSetter
+			NumberDef declPubOptNumberSetter
+			DateDef declPubOptDateSetter
+			TimeDef declPubOptTimeSetter
+			TimestampDef declPubOptTimestampSetter
+			TZDateDef declPubOptTZDateSetter
+			TZTimeDef declPubOptTZTimeSetter
+			TZTimestampDef declPubOptTZTimestampSetter
+			DbKeyHash128Gen declPubOptDbKeyHash128Setter
+			DbKeyHash160Gen declPubOptDbKeyHash160Setter
+			DbKeyHash224Gen declPubOptDbKeyHash224Setter
+			DbKeyHash256Gen declPubOptDbKeyHash256Setter
+			DbKeyHash384Gen declPubOptDbKeyHash384Setter
+			DbKeyHash512Gen declPubOptDbKeyHash512Setter
+			DbKeyHash128Def declPubOptDbKeyHash128Setter
+			DbKeyHash160Def declPubOptDbKeyHash160Setter
+			DbKeyHash224Def declPubOptDbKeyHash224Setter
+			DbKeyHash256Def declPubOptDbKeyHash256Setter
+			DbKeyHash384Def declPubOptDbKeyHash384Setter
+			DbKeyHash512Def declPubOptDbKeyHash512Setter
+			Uuid6Gen declPubOptUuid6Setter
+			Uuid6Def declPubOptUuid6Setter
+			UuidGen declPubOptUuidSetter
+			UuidDef declPubOptUuidSetter
+			StringDef declPubOptStringSetter
+			TokenDef declPubOptTokenSetter
+			NmTokenDef declPubOptNmTokenSetter
+			NmTokensDef declPubOptNmTokensSetter
+			TextDef declPubOptTextSetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubMinValue">$switch IsPublic yes reallyDeclPubMinValue default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclPubMinValue"
+		>$switch BaseModelAtomClass
+			BlobDef declPubBlobMinValue
+			BoolDef declPubBoolMinValue
+			EnumDef declPubEnumMinValue
+			Id16Gen declPubInt16MinValue
+			Id32Gen declPubInt32MinValue
+			Id64Gen declPubInt64MinValue
+			Int16Def declPubInt16MinValue
+			Int32Def declPubInt32MinValue
+			Int64Def declPubInt64MinValue
+			UInt16Def declPubUInt16MinValue
+			UInt32Def declPubUInt32MinValue
+			UInt64Def declPubUInt64MinValue
+			FloatDef declPubFloatMinValue
+			DoubleDef declPubDoubleMinValue
+			NumberDef declPubNumberMinValue
+			DateDef declPubDateMinValue
+			TimeDef declPubTimeMinValue
+			TimestampDef declPubTimestampMinValue
+			TZDateDef declPubTZDateMinValue
+			TZTimeDef declPubTZTimeMinValue
+			TZTimestampDef declPubTZTimestampMinValue
+			DbKeyHash128Gen empty
+			DbKeyHash160Gen empty
+			DbKeyHash224Gen empty
+			DbKeyHash256Gen empty
+			DbKeyHash384Gen empty
+			DbKeyHash512Gen empty
+			DbKeyHash128Def empty
+			DbKeyHash160Def empty
+			DbKeyHash224Def empty
+			DbKeyHash256Def empty
+			DbKeyHash384Def empty
+			DbKeyHash512Def empty
+			Uuid6Gen empty
+			Uuid6Def empty
+			UuidGen declPubUuidMinValue
+			UuidDef declPubUuidMinValue
+			StringDef declPubStringMinValue
+			TokenDef declPubTokenMinValue
+			NmTokenDef declPubNmTokenMinValue
+			NmTokensDef declPubNmTokensMinValue
+			TextDef declPubTextMinValue
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubMaxValue">$switch IsPublic yes reallyDeclPubMaxValue default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclPubMaxValue"
+		>$switch BaseModelAtomClass
+			BlobDef declPubBlobMaxValue
+			BoolDef declPubBoolMaxValue
+			EnumDef declPubEnumMaxValue
+			Id16Gen declPubInt16MaxValue
+			Id32Gen declPubInt32MaxValue
+			Id64Gen declPubInt64MaxValue
+			Int16Def declPubInt16MaxValue
+			Int32Def declPubInt32MaxValue
+			Int64Def declPubInt64MaxValue
+			UInt16Def declPubUInt16MaxValue
+			UInt32Def declPubUInt32MaxValue
+			UInt64Def declPubUInt64MaxValue
+			FloatDef declPubFloatMaxValue
+			DoubleDef declPubDoubleMaxValue
+			NumberDef declPubNumberMaxValue
+			DateDef declPubDateMaxValue
+			TimeDef declPubTimeMaxValue
+			TimestampDef declPubTimestampMaxValue
+			TZDateDef declPubTZDateMaxValue
+			TZTimeDef declPubTZTimeMaxValue
+			TZTimestampDef declPubTZTimestampMaxValue
+			DbKeyHash128Gen empty
+			DbKeyHash160Gen empty
+			DbKeyHash224Gen empty
+			DbKeyHash256Gen empty
+			DbKeyHash384Gen empty
+			DbKeyHash512Gen empty
+			DbKeyHash128Def empty
+			DbKeyHash160Def empty
+			DbKeyHash224Def empty
+			DbKeyHash256Def empty
+			DbKeyHash384Def empty
+			DbKeyHash512Def empty
+			Uuid6Gen empty
+			Uuid6Def empty
+			UuidGen declPubUuidMaxValue
+			UuidDef declPubUuidMaxValue
+			StringDef declPubStringMaxValue
+			TokenDef declPubTokenMaxValue
+			NmTokenDef declPubNmTokenMaxValue
+			NmTokensDef declPubNmTokensMaxValue
+			TextDef declPubTextMaxValue
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubInitValue">$switch IsPublic yes reallyDeclPubInitValue default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclPubInitValue"
+		>$switch BaseModelAtomClass
+			BlobDef declPubBlobInitValue
+			BoolDef declPubBoolInitValue
+			EnumDef declPubEnumInitValue
+			Id16Gen declPubInt16InitValue
+			Id32Gen declPubInt32InitValue
+			Id64Gen declPubInt64InitValue
+			Int16Def declPubInt16InitValue
+			Int32Def declPubInt32InitValue
+			Int64Def declPubInt64InitValue
+			UInt16Def declPubUInt16InitValue
+			UInt32Def declPubUInt32InitValue
+			UInt64Def declPubUInt64InitValue
+			FloatDef declPubFloatInitValue
+			DoubleDef declPubDoubleInitValue
+			NumberDef declPubNumberInitValue
+			DateDef declPubDateInitValue
+			TimeDef declPubTimeInitValue
+			TimestampDef declPubTimestampInitValue
+			TZDateDef declPubTZDateInitValue
+			TZTimeDef declPubTZTimeInitValue
+			TZTimestampDef declPubTZTimestampInitValue
+			DbKeyHash128Gen declPubDbKeyHash128InitValue
+			DbKeyHash160Gen declPubDbKeyHash160InitValue
+			DbKeyHash224Gen declPubDbKeyHash224InitValue
+			DbKeyHash256Gen declPubDbKeyHash256InitValue
+			DbKeyHash384Gen declPubDbKeyHash384InitValue
+			DbKeyHash512Gen declPubDbKeyHash512InitValue
+			DbKeyHash128Def declPubDbKeyHash128InitValue
+			DbKeyHash160Def declPubDbKeyHash160InitValue
+			DbKeyHash224Def declPubDbKeyHash224InitValue
+			DbKeyHash256Def declPubDbKeyHash256InitValue
+			DbKeyHash384Def declPubDbKeyHash384InitValue
+			DbKeyHash512Def declPubDbKeyHash512InitValue
+			Uuid6Gen declPubUuid6InitValue
+			Uuid6Def declPubUuid6InitValue
+			UuidGen declPubUuidInitValue
+			UuidDef declPubUuidInitValue
+			StringDef declPubStringInitValue
+			TokenDef declPubTokenInitValue
+			NmTokenDef declPubNmTokenInitValue
+			NmTokensDef declPubNmTokensInitValue
+			TextDef declPubTextInitValue
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubBlobMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubBlobMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubBlobInitValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqBlobGetter">
+	public byte[] get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqBlobSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( byte[] value );</GenRule>
+	
+	<GenRule GenDef="Value" Name="declPubOptBlobGetter">
+	public byte[] get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptBlobSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( byte[] value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubBoolMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubBoolMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubBoolInitValue">
+	public final static boolean $upper Name$_INIT_VALUE = $switch InitValue yes true default false$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqBoolGetter">
+	public boolean get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqBoolSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( boolean value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptBoolGetter">
+	public Boolean get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptBoolSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( Boolean value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubEnumMinValue">
+	public static final I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ $upper Name$_MIN_VALUE = I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$.$reference DataType iterate Tag( first declPubEnumMinValueEmitTagName each empty )$;</GenRule>
+
+	<GenRule GenDef="EnumTag" Name="declPubEnumMinValueEmitTagName"
+		>$Name$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubEnumMaxValue">
+	public static final I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ $upper Name$_MAX_VALUE = I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$.$reference DataType iterate Tag( last declPubEnumMaxValueEmitTagName each empty )$;</GenRule>
+
+	<GenRule GenDef="EnumTag" Name="declPubEnumMaxValueEmitTagName"
+		>$Name$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubEnumInitValue">
+	public static final I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ $upper Name$_INIT_VALUE = $switch IsNullable yes declPubEnumInitValueNull default declPubEnumInitValueAlways$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubEnumInitValueNull"
+		>null</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubEnumInitValueAlways"
+		>$switch HasInitValue yes declPubEnumInitValueConvertOrdinal default declPubEnumInitValueUseFirst$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubEnumInitValueConvertOrdinal"
+		>I$reference DataType EffSchemaName$SchemaPub.ordinalTo$reference DataType Name$( $InitValue$ )</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubEnumInitValueUseFirst"
+		>I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$.$reference DataType iterate Tag( first declPubEnumInitValueUseFirstTagName each empty )$</GenRule>
+
+	<GenRule GenDef="EnumTag" Name="declPubEnumInitValueUseFirstTagName"
+		>$Name$</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqEnumGetter">
+	public I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqEnumSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptEnumGetter">
+	public I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptEnumSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubInt16MinValue">
+	public static final short $upper Name$_MIN_VALUE = (short)$MinValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubInt16MaxValue">
+	public static final short $upper Name$_MAX_VALUE = (short)$MaxValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubInt16InitValue">
+	public static final short $upper Name$_INIT_VALUE = (short)$switch HasInitValue yes InitValue default Zero$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqInt16Getter">
+	public short get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqInt16Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( short value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptInt16Getter">
+	public Short get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptInt16Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( Short value );</GenRule>
+
+	<GenRule GenDef="Value" Name="maybePubAddLForLong">$switch BaseModelAtomClass
+			Int64Def emitPubLForLong
+			Id64Gen emitPubLForLong
+			UInt64Def emitPubLForLong
+			UInt32Def emitPubLForLong
+			default empty$</GenRule>
+	<GenRule GenDef="Value" Name="emitPubLForLong">L</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubInt32MinValue">
+	public static final int $upper Name$_MIN_VALUE = $MinValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubInt32MaxValue">
+	public static final int $upper Name$_MAX_VALUE = $MaxValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubInt32InitValue">
+	public static final int $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqInt32Getter">
+	public int get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqInt32Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( int value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptInt32Getter">
+	public Integer get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptInt32Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( Integer value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubInt64MinValue">
+	public static final long $upper Name$_MIN_VALUE = $MinValue$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubInt64MaxValue">
+	public static final long $upper Name$_MAX_VALUE = $MaxValue$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubInt64InitValue">
+	public static final long $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqInt64Getter">
+	public long get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqInt64Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( long value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptInt64Getter">
+	public Long get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptInt64Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( Long value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUInt16MinValue">
+	public static final int $upper Name$_MIN_VALUE = $MinValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUInt16MaxValue">
+	public static final int $upper Name$_MAX_VALUE = $MaxValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUInt16InitValue">
+	public static final int $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqUInt16Getter">
+	public int get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqUInt16Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( int value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptUInt16Getter">
+	public Integer get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptUInt16Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( Integer value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUInt32MinValue">
+	public static final long $upper Name$_MIN_VALUE = $MinValue$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUInt32MaxValue">
+	public static final long $upper Name$_MAX_VALUE = $MaxValue$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUInt32InitValue">
+	public static final long $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqUInt32Getter">
+	public long get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqUInt32Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( long value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptUInt32Getter">
+	public Long get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptUInt32Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( Long value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUInt64MinValue">
+	public static final BigDecimal $upper Name$_MIN_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Pub.$TableName$.$Name$", "$EffSchemaName$Pub.$TableName$.$Name$", 19, 0, "$MinValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUInt64MaxValue">
+	public static final BigDecimal $upper Name$_MAX_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Pub.$TableName$.$Name$", "$EffSchemaName$Pub.$TableName$.$Name$", 19, 0, "$MaxValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUInt64InitValue">
+	public static final BigDecimal $upper Name$_INIT_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Pub.$TableName$.$Name$", "$EffSchemaName$Pub.$TableName$.$Name$", 19, 0, "$switch HasInitValue yes InitValue default Zero$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqUInt64Getter">
+	public BigDecimal get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqUInt64Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptUInt64Getter">
+	public BigDecimal get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptUInt64Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubFloatMinValue">
+	public static final float $upper Name$_MIN_VALUE = (float)$MinValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubFloatMaxValue">
+	public static final float $upper Name$_MAX_VALUE = (float)$MaxValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubFloatInitValue">
+	public static final float $upper Name$_INIT_VALUE = (float)$switch HasInitValue yes InitValue default Zero$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqFloatGetter">
+	public float get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqFloatSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( float value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptFloatGetter">
+	public Float get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptFloatSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( Float value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubDoubleMinValue">
+	public static final double $upper Name$_MIN_VALUE = $MinValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubDoubleMaxValue">
+	public static final double $upper Name$_MAX_VALUE = $MaxValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubDoubleInitValue">
+	public static final double $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqDoubleGetter">
+	public double get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqDoubleSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( double value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptDoubleGetter">
+	public Double get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptDoubleSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( Double value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubNumberMinValue">
+	public static final BigDecimal $upper Name$_MIN_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Pub.$TableName$.$Name$", "$EffSchemaName$Pub.$TableName$.$Name$", $Digits$, $Precis$, "$MinValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubNumberMaxValue">
+	public static final BigDecimal $upper Name$_MAX_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Pub.$TableName$.$Name$", "$EffSchemaName$.$TableName$Pub.$Name$", $Digits$, $Precis$, "$MaxValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubNumberInitValue">
+	public static final BigDecimal $upper Name$_INIT_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Pub.$TableName$.$Name$", "$EffSchemaName$Pub.$TableName$.$Name$", $Digits$, $Precis$, "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqNumberGetter">
+	public BigDecimal get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqNumberSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptNumberGetter">
+	public BigDecimal get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptNumberSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubDateMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubDateMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubDateInitValue">
+	public static final LocalDate $upper Name$_INIT_VALUE = CFLib.getUTCLocalDate( 1970, 0, 1, 0, 0, 0 );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqDateGetter">
+	public LocalDate get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqDateSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptDateGetter">
+	public LocalDate get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptDateSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTimeMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTimeMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTimeInitValue">
+	public static final LocalTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTime("00:00:00");</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqTimeGetter">
+	public LocalTime get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqTimeSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptTimeGetter">
+	public LocalTime get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptTimeSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTimestampMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTimestampMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTimestampInitValue">
+	public static final LocalDateTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTimestamp("2020-01-01T00:00:00");</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqTimestampGetter">
+	public LocalDateTime get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqTimestampSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptTimestampGetter">
+	public LocalDateTime get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptTimestampSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTZDateMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTZDateMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTZDateInitValue">
+	public static final LocalDate $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZDate("2020-01-01+00:00");</GenRule>
+
+	<GenRule GenDef="Value" Name="declReqPubTZDateGetter">
+	public LocalDate get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqTZDateSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptTZDateGetter">
+	public LocalDate get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptTZDateSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTZTimeMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTZTimeMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTZTimeInitValue">
+	public static final LocalTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZTime("00:00:00+00:00");</GenRule>
+
+	<GenRule GenDef="Value" Name="declReqPubTZTimeGetter">
+	public LocalTime get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqTZTimeSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptTZTimeGetter">
+	public LocalTime get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptTZTimeSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTZTimestampMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTZTimestampMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTZTimestampInitValue">
+	public static final LocalDateTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZTimestamp("2020-01-01T00:00:00+00:00");</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqTZTimestampGetter">
+	public LocalDateTime get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqTZTimestampSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptTZTimestampGetter">
+	public LocalDateTime get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptTZTimestampSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubDbKeyHash128MinValue"></GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash160MinValue"></GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash224MinValue"></GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash256MinValue"></GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash384MinValue"></GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash512MinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubDbKeyHash128MaxValue"></GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash160MaxValue"></GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash224MaxValue"></GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash256MaxValue"></GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash384MaxValue"></GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash512MaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubDbKeyHash128InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero128bits$";
+	public static final CFLibDbKeyHash128 $upper Name$_INIT_VALUE = CFLibDbKeyHash128.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash160InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero160bits$";
+	public static final CFLibDbKeyHash160 $upper Name$_INIT_VALUE = CFLibDbKeyHash160.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash224InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero224bits$";
+	public static final CFLibDbKeyHash224 $upper Name$_INIT_VALUE = CFLibDbKeyHash224.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash256InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero256bits$";
+	public static final CFLibDbKeyHash256 $upper Name$_INIT_VALUE = CFLibDbKeyHash256.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash384InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero384bits$";
+	public static final CFLibDbKeyHash384 $upper Name$_INIT_VALUE = CFLibDbKeyHash384.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+	<GenRule GenDef="Value" Name="declPubDbKeyHash512InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero512bits$";
+	public static final CFLibDbKeyHash512 $upper Name$_INIT_VALUE = CFLibDbKeyHash512.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash128Getter">
+	public CFLibDbKeyHash128 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash128Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash128Getter">
+	public CFLibDbKeyHash128 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash128Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash160Getter">
+	public CFLibDbKeyHash160 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash160Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash160Getter">
+	public CFLibDbKeyHash160 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash160Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash224Getter">
+	public CFLibDbKeyHash224 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash224Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash224Getter">
+	public CFLibDbKeyHash224 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash224Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash256Getter">
+	public CFLibDbKeyHash256 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash256Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash256Getter">
+	public CFLibDbKeyHash256 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash256Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash384Getter">
+	public CFLibDbKeyHash384 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash384Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash384Getter">
+	public CFLibDbKeyHash384 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash384Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash512Getter">
+	public CFLibDbKeyHash512 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqDbKeyHash512Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash512Getter">
+	public CFLibDbKeyHash512 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptDbKeyHash512Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUuid6MinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUuid6MaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUuid6InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$InitValue$";
+	public static final CFLibUuid6 $upper Name$_INIT_VALUE = CFLibUuid6.fromString( S_$upper Name$_INIT_VALUE );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqUuid6Getter">
+	public CFLibUuid6 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqUuid6Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibUuid6 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptUuid6Getter">
+	public CFLibUuid6 get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptUuid6Setter">
+	public void set$implPubColumnAttrOptionality$$Name$( CFLibUuid6 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUuidMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUuidMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubUuidInitValue">
+	public static final UUID $upper Name$_INIT_VALUE = UUID.fromString( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqUuidGetter">
+	public UUID get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqUuidSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( UUID value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptUuidGetter">
+	public UUID get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptUuidSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( UUID value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubStringMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubStringMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubStringInitValue">
+	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqStringGetter">
+	public String get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqStringSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptStringGetter">
+	public String get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptStringSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTokenMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTokenMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTokenInitValue">
+	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqTokenGetter">
+	public String get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqTokenSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptTokenGetter">
+	public String get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptTokenSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubNmTokenMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubNmTokenMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubNmTokenInitValue">
+	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqNmTokenGetter">
+	public String get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqNmTokenSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptNmTokenGetter">
+	public String get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptNmTokenSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubNmTokensMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubNmTokensMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubNmTokensInitValue">
+	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqNmTokensGetter">
+	public String get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqNmTokensSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptNmTokensGetter">
+	public String get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptNmTokensSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTextMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTextMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declPubTextInitValue">
+	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubReqTextGetter">
+	public String get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubReqTextSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declPubOptTextGetter">
+	public String get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declPubOptTextSetter">
+	public void set$implPubColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Table" Name="declPubRecPKeyEquals">
+	@Override
+	public boolean equals( Object obj );
+</GenRule>
+
+	<GenRule GenDef="Table" Name="declPubRecPKeyHashCode">
+	@Override
+	public int hashCode();
+</GenRule>
+
+	<GenRule GenDef="Table" Name="declPubRecPKeyCompareTo">
+	//@Override
+	public int compareTo( I$poptop SchemaDef SchemaName$Pub$TableName$PKey rhs );
+</GenRule>
+
+	<GenRule GenDef="Table" Name="emitPubPKeyHistoryClassNames">, $SchemaName$Pub$TableName$HPKey, $SchemaName$Pub$TableName$H</GenRule>
+
+	<GenRule GenDef="Index" Name="declPubRecPKeyToString">
+	public String getXmlAttrFragment();
+
+	@Override
+	public String toString();
+</GenRule>
+
+</RuleSet>
