@@ -63,7 +63,7 @@ import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPubPackageSchemaNameObj$$JavaPubTableImport$
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPubPackageSchemaNameObj$$tabletweak CafePubTableImport$
 
 /*
  *	$SchemaName$Pub$TableName$Table public database interface for $TableName$ has $ExplainCodeVis$.
@@ -74,7 +74,7 @@ public interface I$SchemaName$Pub$TableName$Table$iterate TableRefs( first exten
 $declPubCreateTable$
 $declPubUpdateTable$
 $declPubDeleteTable$
-$declPubReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declPubReadTableDerivedByPKeyArgs$$declPubLockTableDerivedByPKey$$declPubReadAllTableDerived$$declPubReadTableDerivedByIndexes$$declPubReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declPubReadTableRecByPKeyArgs$$declPubLockTableRecByPKey$$declPubReadAllTableRec$$switch InheritsPubPageData yes declPubPageAllTableRec default empty$$declPubReadTableRecByIndexes$$switch InheritsPubPageData yes declPubPageTableRecByIndexes default empty$$switch HasChain yes declPubMoveUpTableRec default empty$$switch HasChain yes declPubMoveDownTableRec default empty$$iterate ServerMethods( each declPubServerMethod empty empty )$$JavaPubTableInterface$}
+$declPubReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declPubReadTableDerivedByPKeyArgs$$declPubLockTableDerivedByPKey$$declPubReadAllTableDerived$$declPubReadTableDerivedByIndexes$$declPubReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declPubReadTableRecByPKeyArgs$$declPubLockTableRecByPKey$$declPubReadAllTableRec$$switch InheritsPubPageData yes declPubPageAllTableRec default empty$$declPubReadTableRecByIndexes$$switch InheritsPubPageData yes declPubPageTableRecByIndexes default empty$$switch HasChain yes declPubMoveUpTableRec default empty$$switch HasChain yes declPubMoveDownTableRec default empty$$iterate ServerMethods( each declPubServerMethod empty empty )$$tabletweak CafePubTableInterface$}
 </GenFile>
 
 	<GenRule GenDef="Table" Name="InheritsPubPageData">$switch IsPublic yes reallyInheritsPubPageData default no$</GenRule>
@@ -421,7 +421,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	I$DefSchemaName$$poptop Table TableName$[] pageRecBy$declReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ );
+	I$DefSchemaName$Pub$poptop Table TableName$[] pageRecBy$declReadTableSuffix$( I$SecSchemaName$PubAuthorization Authorization$iterate Columns( each declCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declPubMoveUpTableRec">$switch IsPublic yes reallyDeclPubMoveUpTableRec default empty$</GenRule>
@@ -435,14 +435,14 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 		int revision );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declPubMoveDownTableRec">$switch IsPublic yes reallyDeclPubbMoveDownTableRec default empty$</GenRule>
+	<GenRule GenDef="Table" Name="declPubMoveDownTableRec">$switch IsPublic yes reallyDeclPubMoveDownTableRec default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyDeclPubMoveDownTableRec">
 	/**
 	 *	Move the specified record down in the chain (i.e. to the next position.)
 	 *
 	 *	@return	The refreshed record after it has been moved
 	 */
-	I$poptop Table DefSchemaName$$poptop Table TableName$ moveRecDown( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
+	I$poptop Table DefSchemaName$$poptop Table TableName$ moveRecDown( I$SecSchemaName$PubAuthorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
 		int revision );
 </GenRule>
 
@@ -630,7 +630,8 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	<GenRule GenDef="Index" Name="declPubDeleteTableBySpecialIndex"
 		>$switch IsPrimaryIndex yes declPubDeleteTableByPrimaryIndex default declPubDeleteTableByIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubDeleteTableByIndex">
+	<GenRule GenDef="Index" Name="declPubDeleteTableByIndex">$switch IsPublic yes reallyDeclPubDeleteTableByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubDeleteTableByIndex">
 	/**
 	 *	Delete the $poptop Table TableName$ instances identified by the key $Suffix$.
 	 *

@@ -33,71 +33,51 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/schema/SchemaRoleInfo.java"
+	Name="src/schemapub/SchemaPubRoleInfoDependencyComparator.java"
 	Revision="3.0"
-	Descr="Java SchemaName RoleInfo Implementation">
+	Descr="Java Public RoleInfoDependencyComparator Implementation">
 
-	<GenFile GenDef="SchemaDef" Name="fileSchemaRoleInfoJava"
+	<GenFile GenDef="SchemaDef" Name="fileSchemaPubRoleInfoDependencyComparatorJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
-		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
-		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
-		ExpansionClassName="$SchemaName$RoleInfoJava"
-		ExpansionKeyName="$SchemaName$RoleInfoJava"
-		ExpansionFileName="$SchemaName$RoleInfo.java"
->// Description: Java 25 $SchemaName$ Role Information Implementation
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub"
+		ExpansionClassName="$SecPubSchemaName$RoleInfoDependencyComparatorJava"
+		ExpansionKeyName="$SecPubSchemaName$RoleInfoDependencyComparatorJava"
+		ExpansionFileName="$SecPubSchemaName$RoleInfoDependencyComparator.java"
+>// Description: Java 25 $SecSchemaName$ Public Role Information Implementation
 
 $MssSourceLicense$
 
-package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$;
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub;
 
-import java.io.Serializable;
+import java.util.Comparator;
 
 /*
- *	The $SchemaName$RoleInfo objects are passed in to the $SecSchemaName$ schema implementation to be bound
+ *	The $SecPubSchemaName$RoleInfoDependencyComparator objects are passed in to the $SecPubSchemaName$ schema implementation to be bound
  *	to the security system.  Their natural order is to compare by dependency first, and by name second.
  */
-public class $SchemaName$RoleInfo implements Serializable, Comparable&lt;$SchemaName$RoleInfo&gt;
+public class $SecPubSchemaName$RoleInfoDependencyComparator implements Comparator&lt;$SecPubSchemaName$RoleInfo&gt;
 {
-	protected final String roleName;
-	protected final String roleScope;
-	protected final String enables;
-	protected final String includes;
-
-	public $SchemaName$RoleInfo(String roleName, String roleScope, String enables, String includes) {
-		this.roleName = roleName;
-		this.roleScope = roleScope;
-		this.enables = enables;
-		this.includes = includes;
-	}
-
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public String getRoleScope() {
-		return roleScope;
-	}
-
-	public String getEnables() {
-		return enables;
-	}
-
-	public String getIncludes() {
-		return includes;
-	}
-	
 	@Override
-	public int compareTo( $SchemaName$RoleInfo rhs ) {
-		if( rhs == null ) {
+	public int compare( $SecPubSchemaName$RoleInfo lhs, $SecPubSchemaName$RoleInfo rhs ) {
+		if( lhs == null ) {
+			if ( rhs == null ) {
+				return( 0 );
+			}
+			else {
+				return( -1 );
+			}
+		}
+		else if( rhs == null ) {
 			return( 1 );
 		}
 		else {
-			String lhsName = getRoleName();
+			String lhsName = lhs.getRoleName();
 			String rhsName = rhs.getRoleName();
 
-			String lhsEnables = getEnables();
+			String lhsEnables = lhs.getEnables();
 			String rhsEnables = rhs.getEnables();
 			String lhsEnablesArr[] = lhsEnables.split(" ");
 			String rhsEnablesArr[] = rhsEnables.split(" ");
@@ -116,7 +96,7 @@ public class $SchemaName$RoleInfo implements Serializable, Comparable&lt;$Schema
 				}
 			}
 
-			String lhsIncludes = getIncludes();
+			String lhsIncludes = lhs.getIncludes();
 			String rhsIncludes = rhs.getIncludes();
 			String lhsIncludesArr[] = lhsIncludes.split(" ");
 			String rhsIncludesArr[] = rhsIncludes.split(" ");

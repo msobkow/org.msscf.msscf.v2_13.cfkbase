@@ -84,7 +84,8 @@ extends I$reference DefSchema SchemaName$Pub$TableName$Factory</GenRule>
 	<GenRule GenDef="Index" Name="declPubNewNonPrimaryIndexKey"
 		>$switch IsPrimaryIndex yes empty default declPubNewByIndexKey$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubNewByIndexKey">
+	<GenRule GenDef="Index" Name="declPubNewByIndexKey">$switch IsPublic yes reallyDeclPubNewByIndexKey default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubNewByIndexKey">
 	/**
 	 *	Allocate a public $Suffix$ key over public $TableName$ instances.
 	 *

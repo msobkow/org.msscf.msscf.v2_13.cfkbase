@@ -67,12 +67,13 @@ import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate
 /**
  *	I$SchemaName$Pub$TableName$ persistence instances have $ExplainCodeVis$.
  */
-public interface I$SchemaName$Pub$TableName$$switch HasDefSchema yes extendPubSchemaRecTableRec default extendPubSchemaRecTableRecSuperRec$
+public interface I$SchemaName$Pub$TableName$$switch HasDefSchema yes extendSchemaPubRecTableRec default extendSchemaPubRecTableRecSuperRec$
 {$switch HasDefSchema yes empty default declPubISchemaTableRecMinValues$$switch HasDefSchema yes empty default declPubISchemaTableRecMaxValues$$switch HasDefSchema yes empty default declPubISchemaTableRecInitValues$$switch HasDefSchema no declPubRecStaticClassCode default empty$
 $switch HasDefSchema no maybeDeclPubRecGetClassCode default empty$$switch HasDefSchema no maybeDeclPubRecOptImplAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no declPubColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no declPubRevisionGetterSetter default empty$$iterate Relation( each maybeDeclPubISchemaTableRelationGetter empty empty )$$iterate Relation( each maybeDeclPubISchemaTableRelationSetter empty empty )$$switch HasDefSchema no declPubDataGetterSetters default empty$$declPubEqualsObject$$declPubGetHashCode$$declPubCompareToObject$$declPubRecSet$$declPubSchemaRecTableToString$}
 </GenFile>
 
-	<GenRule GenDef="Relation" Name="maybeDeclPubISchemaTableRelationGetter">$switch RelationType Superclass empty default attemptDeclPubISchemaTableRelationGetter$</GenRule>
+	<GenRule GenDef="Relation" Name="maybeDeclPubISchemaTableRelationGetter">$switch IsPublic yes reallyDeclPubISchemaTableRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubISchemaTableRelationGetter">$switch RelationType Superclass empty default attemptDeclPubISchemaTableRelationGetter$</GenRule>
 	<GenRule GenDef="Relation" Name="attemptDeclPubISchemaTableRelationGetter">$switch IsRelationInPrimaryIndex yes empty default candidacyDeclPubISchemaTableRelationGetter$</GenRule>
 	<GenRule GenDef="Relation" Name="candidacyDeclPubISchemaTableRelationGetter">$switch ToTableHasDefSchema yes declPubNonCandidateISchemaTableRelationGetter default declPubCandidateISchemaTableRelationGetter$</GenRule>
 	<GenRule GenDef="Relation" Name="declPubCandidateISchemaTableRelationGetter">
@@ -80,7 +81,8 @@ $switch HasDefSchema no maybeDeclPubRecGetClassCode default empty$$switch HasDef
 	<GenRule GenDef="Relation" Name="declPubNonCandidateISchemaTableRelationGetter">
 	public $emitPubInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
 	
-	<GenRule GenDef="Relation" Name="maybeDeclPubISchemaTableRelationSetter">$switch RelationType Superclass empty Components empty Children empty default attemptDeclPubISchemaTableRelationSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="maybeDeclPubISchemaTableRelationSetter">$switch IsPublic yes reallyDeclPubISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubISchemaTableRelationSetter">$switch RelationType Superclass empty Components empty Children empty default attemptDeclPubISchemaTableRelationSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="attemptDeclPubISchemaTableRelationSetter">$switch ToTableHasDefSchema yes declPubNonCandidateSuperiorISchemaTableRelationSetter default declPubCandidateSuperiorISchemaTableRelationSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="declPubCandidateSuperiorISchemaTableRelationSetter">$switch IsSuperiorRelation yes declPubCandidateNotInPrimaryISchemaTableRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declPubNonCandidateSuperiorISchemaTableRelationSetter">$switch IsSuperiorRelation yes declPubNonCandidateNotInPrimaryISchemaTableRelationSetter default empty$</GenRule>

@@ -40,11 +40,11 @@
 	<GenRule GenDef="Index" Name="IPubCompactedIndexClass">$switch IsAtomic yes implPubJavaOptAtomType default IPubIndexClassName$</GenRule>
 	<GenRule GenDef="Index" Name="IPubIndexClassName">I$reference Table DefSchemaName$Pub$reference Table TableName$By$Suffix$Key</GenRule>
 
-	<GenRule GenDef="Table" Name="IPubCompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex ICompactedPrimaryIndexClass$</GenRule>
+	<GenRule GenDef="Table" Name="IPubCompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex IPubCompactedPrimaryIndexClass$</GenRule>
 	<GenRule GenDef="Index" Name="IPubCompactedPrimaryIndexClass">$switch IsAtomic yes implPubJavaOptAtomType default IPubPrimaryIndexClassName$</GenRule>
 
 	<GenRule GenDef="Table" Name="IPubPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex IPubPrimaryIndexClassName$</GenRule>
-	<GenRule GenDef="Index" Name="IPubPrimaryIndexClassName">I$reference Table DefSchemaName$Pub$reference Table TableName$PKey</GenRule>
+	<GenRule GenDef="Index" Name="IPubPrimaryIndexClassName">I$SchemaName$Pub$TableName$PKey</GenRule>
 
 	<GenRule GenDef="Table" Name="fileISchemaPubTablePKeyJava">$switch IsPublic yes forRealFileISchemaPubTablePKeyJava default empty$</GenRule>
 	<GenRule GenDef="Table" Name="forRealFileISchemaPubTablePKeyJava">$switch IsPrimaryIndexKeyAtomic yes empty default reallyIFileSchemaPubTablePKeyJava$</GenRule>
@@ -102,7 +102,7 @@ $reference PrimaryKeyIndex iterate Columns( each declPubColumnGetterSetter )$$de
 	<GenRule GenDef="Relation" Name="reallyDeclPubInPrimaryISchemaTablePKeyRelationGetterSetter">$switch IsRelationInPrimaryIndex yes declPubISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declPubISchemaTablePKeyRelationGetterSetter">$switch IsPublic yes reallyDeclPubISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyDeclPubISchemaTablePKeyRelationGetterSetter">
-	public $emitPubInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();$switch IsToIndexUnique yes declPubISchemaTablePKeyRelationSetter default empty$</GenRule>
+	public $emitPubInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();$switch IsToIndexUnique yes declISchemaPubTablePKeyRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declISchemaPubTablePKeyRelationSetter">$switch IsPublic yes reallyDeclPubISchemaTablePKeyRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyDeclPubISchemaTablePKeyRelationSetter">
 	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj);
@@ -191,7 +191,7 @@ $reference PrimaryKeyIndex iterate Columns( each declPubColumnGetterSetter )$$de
 
 	<GenRule GenDef="BlobDef" Name="implPubJavaReqAtomType">byte[]</GenRule>
 	<GenRule GenDef="BoolDef" Name="implPubJavaReqAtomType">boolean</GenRule>
-	<GenRule GenDef="EnumDef" Name="implPubJavaReqAtomType">I$EffSchemaName$SchemaPub.$Name$</GenRule>
+	<GenRule GenDef="EnumDef" Name="implPubJavaReqAtomType">I$EffSchemaName$PubSchema.$Name$</GenRule>
 	<GenRule GenDef="Int16Def" Name="implPubJavaReqAtomType">short</GenRule>
 	<GenRule GenDef="Int32Def" Name="implPubJavaReqAtomType">int</GenRule>
 	<GenRule GenDef="Int64Def" Name="implPubJavaReqAtomType">long</GenRule>
@@ -234,7 +234,7 @@ $reference PrimaryKeyIndex iterate Columns( each declPubColumnGetterSetter )$$de
 
 	<GenRule GenDef="BlobDef" Name="implPubJavaOptAtomType">byte[]</GenRule>
 	<GenRule GenDef="BoolDef" Name="implPubJavaOptAtomType">Boolean</GenRule>
-	<GenRule GenDef="EnumDef" Name="implPubJavaOptAtomType">I$EffSchemaName$SchemaPub.$Name$</GenRule>
+	<GenRule GenDef="EnumDef" Name="implPubJavaOptAtomType">I$EffSchemaName$PubSchema.$Name$</GenRule>
 	<GenRule GenDef="Int16Def" Name="implPubJavaOptAtomType">Short</GenRule>
 	<GenRule GenDef="Int32Def" Name="implPubJavaOptAtomType">Integer</GenRule>
 	<GenRule GenDef="Int64Def" Name="implPubJavaOptAtomType">Long</GenRule>
@@ -660,19 +660,19 @@ $reference PrimaryKeyIndex iterate Columns( each declPubColumnGetterSetter )$$de
 	public void set$implPubColumnAttrOptionality$$Name$( Boolean value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declPubEnumMinValue">
-	public static final I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ $upper Name$_MIN_VALUE = I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$.$reference DataType iterate Tag( first declPubEnumMinValueEmitTagName each empty )$;</GenRule>
+	public static final I$reference DataType EffSchemaName$PubSchema.$reference DataType Name$ $upper Name$_MIN_VALUE = I$reference DataType EffSchemaName$PubSchema.$reference DataType Name$.$reference DataType iterate Tag( first declPubEnumMinValueEmitTagName each empty )$;</GenRule>
 
 	<GenRule GenDef="EnumTag" Name="declPubEnumMinValueEmitTagName"
 		>$Name$</GenRule>
 
 	<GenRule GenDef="Value" Name="declPubEnumMaxValue">
-	public static final I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ $upper Name$_MAX_VALUE = I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$.$reference DataType iterate Tag( last declPubEnumMaxValueEmitTagName each empty )$;</GenRule>
+	public static final I$reference DataType EffSchemaName$PubSchema.$reference DataType Name$ $upper Name$_MAX_VALUE = I$reference DataType EffSchemaName$PubSchema.$reference DataType Name$.$reference DataType iterate Tag( last declPubEnumMaxValueEmitTagName each empty )$;</GenRule>
 
 	<GenRule GenDef="EnumTag" Name="declPubEnumMaxValueEmitTagName"
 		>$Name$</GenRule>
 
 	<GenRule GenDef="Value" Name="declPubEnumInitValue">
-	public static final I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ $upper Name$_INIT_VALUE = $switch IsNullable yes declPubEnumInitValueNull default declPubEnumInitValueAlways$;</GenRule>
+	public static final I$reference DataType EffSchemaName$PubSchema.$reference DataType Name$ $upper Name$_INIT_VALUE = $switch IsNullable yes declPubEnumInitValueNull default declPubEnumInitValueAlways$;</GenRule>
 
 	<GenRule GenDef="Value" Name="declPubEnumInitValueNull"
 		>null</GenRule>
@@ -681,23 +681,23 @@ $reference PrimaryKeyIndex iterate Columns( each declPubColumnGetterSetter )$$de
 		>$switch HasInitValue yes declPubEnumInitValueConvertOrdinal default declPubEnumInitValueUseFirst$</GenRule>
 
 	<GenRule GenDef="Value" Name="declPubEnumInitValueConvertOrdinal"
-		>I$reference DataType EffSchemaName$SchemaPub.ordinalTo$reference DataType Name$( $InitValue$ )</GenRule>
+		>I$reference DataType EffSchemaName$PubSchema.ordinalTo$reference DataType Name$( $InitValue$ )</GenRule>
 
 	<GenRule GenDef="Value" Name="declPubEnumInitValueUseFirst"
-		>I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$.$reference DataType iterate Tag( first declPubEnumInitValueUseFirstTagName each empty )$</GenRule>
+		>I$reference DataType EffSchemaName$PubSchema.$reference DataType Name$.$reference DataType iterate Tag( first declPubEnumInitValueUseFirstTagName each empty )$</GenRule>
 
 	<GenRule GenDef="EnumTag" Name="declPubEnumInitValueUseFirstTagName"
 		>$Name$</GenRule>
 
 	<GenRule GenDef="Value" Name="declPubReqEnumGetter">
-	public I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ get$implColumnAttrOptionality$$Name$();</GenRule>
+	public I$reference DataType EffSchemaName$PubSchema.$reference DataType Name$ get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declPubReqEnumSetter">
-	public void set$implPubColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ value );</GenRule>
+	public void set$implPubColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$PubSchema.$reference DataType Name$ value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declPubOptEnumGetter">
-	public I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ get$implPubColumnAttrOptionality$$Name$();</GenRule>
+	public I$reference DataType EffSchemaName$PubSchema.$reference DataType Name$ get$implPubColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declPubOptEnumSetter">
-	public void set$implPubColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$SchemaPub.$reference DataType Name$ value );</GenRule>
+	public void set$implPubColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$PubSchema.$reference DataType Name$ value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declPubInt16MinValue">
 	public static final short $upper Name$_MIN_VALUE = (short)$MinValue$;</GenRule>
