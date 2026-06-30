@@ -365,7 +365,7 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 		}
 		
 		public static void setBacking$DefPubSchemaName$Schema(I$DefPubSchemaName$Schema backingSchema) {
-			I$DefPubSchemaName$Schema.backing$DefPubSchemaName$.set(backingSchema);
+			I$DefPubSchemaName$Schema.backing$DefPubSchemaName$Schema.set(backingSchema);
 		}
 		
 		public I$DefPubSchemaName$Schema get$DefPubSchemaName$Schema();
@@ -420,17 +420,18 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 	<GenRule GenDef="SchemaDef" Name="invokePubSuperISchemaInitClassMapEntries">
 			value = I$DefPubSchemaName$Schema.doInitClassMapEntries(value);</GenRule>
 
-	<GenRule GenDef="Table" Name="maybePubWireToISchemaEntries">$switch HasDefSchema yes empty default wirePubToISchemaEntries$</GenRule>
+	<GenRule GenDef="Table" Name="maybePubWireToISchemaEntries">$switch IsPublic yes reallyPubWireToISchemaEntries default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyPubWireToISchemaEntries">$switch HasDefSchema yes empty default wirePubToISchemaEntries$</GenRule>
 	<GenRule GenDef="Table" Name="wirePubToISchemaEntries">
 				entry = new I$SecPubSchemaName$Schema.ClassMapEntry(I$DefPubSchemaName$Schema.SCHEMA_NAME, "$TableName$", I$DefSchemaName$Pub$TableName$.CLASS_CODE);
 				I$DefPubSchemaName$Schema.entries.add(entry);</GenRule>
 
-        <GenRule GenDef="Object" Name="SecPubSchemaName">$poptop SchemaDef iterate SchemaRefs( first emitSecSchemaPubName each empty empty emitOnlySchemaPubName )$</GenRule>
-        <GenRule GenDef="SchemaRef" Name="emitSecSchemaPubName">$reference RefSchema SchemaName$Pub</GenRule>
-        <GenRule GenDef="Object" Name="emitOnlySchemaPubName">$poptop SchemaDef SchemaName$Pub</GenRule>
+	<GenRule GenDef="Object" Name="SecPubSchemaName">$poptop SchemaDef iterate SchemaRefs( first emitSecSchemaPubName each empty empty emitOnlySchemaPubName )$</GenRule>
+	<GenRule GenDef="SchemaRef" Name="emitSecSchemaPubName">$reference RefSchema SchemaName$Pub</GenRule>
+	<GenRule GenDef="Object" Name="emitOnlySchemaPubName">$poptop SchemaDef SchemaName$Pub</GenRule>
 
-        <GenRule GenDef="Object" Name="DefDefPubSchemaName">$DefSchemaName$Pub</GenRule>
-        <GenRule GenDef="Object" Name="DefPubSchemaName">$SchemaName$Pub</GenRule>
+	<GenRule GenDef="Object" Name="DefDefPubSchemaName">$DefSchemaName$Pub</GenRule>
+	<GenRule GenDef="Object" Name="DefPubSchemaName">$SchemaName$Pub</GenRule>
         
 	<GenRule GenDef="EnumDef" Name="declPubISchemaPubEnumType">$switch IsPublic yes reallyDeclPubISchemaEnumType default empty$</GenRule>
 	<GenRule GenDef="EnumDef" Name="reallyDeclPubISchemaEnumType"
@@ -746,7 +747,8 @@ import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectNa
 	public CFLibDbKeyHash512 next$Name$();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declPubTableMethods"
+	<GenRule GenDef="Table" Name="declPubTableMethods">$switch IsPublic yes reallyDeclPubTableMethods default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubTableMethods"
 		>$declPubSchemaTableTableAccessors$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubSchemaTableTableAccessors">
