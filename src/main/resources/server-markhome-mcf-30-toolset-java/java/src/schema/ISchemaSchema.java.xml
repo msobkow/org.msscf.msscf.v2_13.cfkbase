@@ -63,31 +63,30 @@ import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.text.StringEscapeUtils;$importsForApplicationContextAware$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
-$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameBuffDotFactoryService empty empty )$$importJavaPackageSchemaNameBuffDotFactoryService$
+import org.apache.commons.text.StringEscapeUtils;$importsForApplicationContextAware$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaProtPackageSchemaName empty empty )$$importJavaProtPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameBuffDotFactoryService empty empty )$$importJavaPackageSchemaNameBuffDotFactoryService$
 
 public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSchemaName each commaNewlinePackageSchemaName empty empty )$
 {
 	public static final String SCHEMA_NAME = "$SchemaName$";
 	public static final String DBSCHEMA_NAME = "$DbSchemaName$";$declApplicationContextAwareContext$
-	public static final $SecSchemaName$TableData TABLE_DATA[] = {$iterate DefSchemaRootTables( first walkISchemaTableDataEntry each walkCommaISchemaTableDataEntry )$};
-	public static final AtomicReference&lt;$SecSchemaName$TableData[]&gt; consolidatedTableData = new AtomicReference&lt;&gt;(null);
-	public static final $SecSchemaName$RoleInfo ROLE_INFO[] = {$iterate SchemaOrderedRoles( first declISchemaRoleInfoEntry each declCommaISchemaRoleInfoEntry empty empty )$};
-	public static final AtomicReference&lt;$SecSchemaName$RoleInfo[]&gt; consolidatedRoleInfo = new AtomicReference&lt;&gt;(null);
+	public static final $SecPubSchemaName$TableData TABLE_DATA[] = {$iterate DefSchemaRootTables( first walkISchemaTableDataEntry each walkCommaISchemaTableDataEntry )$};
+	public static final AtomicReference&lt;$SecPubSchemaName$TableData[]&gt; consolidatedTableData = new AtomicReference&lt;&gt;(null);
+	public static final $SecPubSchemaName$RoleInfo ROLE_INFO[] = {$iterate SchemaOrderedRoles( first declISchemaRoleInfoEntry each declCommaISchemaRoleInfoEntry empty empty )$};
+	public static final AtomicReference&lt;$SecPubSchemaName$RoleInfo[]&gt; consolidatedRoleInfo = new AtomicReference&lt;&gt;(null);
 
-	public static $SecSchemaName$TableData[] getTableData() {
+	public static $SecPubSchemaName$TableData[] getTableData() {
 		return TABLE_DATA;
 	}
 
-	public static $SecSchemaName$TableData[] getConsolidatedTableData() {
+	public static $SecPubSchemaName$TableData[] getConsolidatedTableData() {
 		if (consolidatedTableData.get() == null) {
-			ArrayList&lt;$SecSchemaName$TableData&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefTableData empty empty)$
-			for( $SecSchemaName$TableData data: TABLE_DATA) {
+			ArrayList&lt;$SecPubSchemaName$TableData&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefTableData empty empty)$
+			for( $SecPubSchemaName$TableData data: TABLE_DATA) {
 				lst.add(data);
 			}
-			$SecSchemaName$TableData arr[] = new $SecSchemaName$TableData[lst.size()];
+			$SecPubSchemaName$TableData arr[] = new $SecPubSchemaName$TableData[lst.size()];
 			int idx = 0;
-			for($SecSchemaName$TableData data: lst) {
+			for($SecPubSchemaName$TableData data: lst) {
 				arr[idx++] = data;
 			}
 			consolidatedTableData.compareAndSet(null, arr);
@@ -95,21 +94,21 @@ public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSch
 		return(consolidatedTableData.get());
 	}
 
-	public static $SecSchemaName$RoleInfo[] getRoleInfo() {
+	public static $SecPubSchemaName$RoleInfo[] getRoleInfo() {
 		return ROLE_INFO;
 	}
 
-	public static $SecSchemaName$RoleInfo[] getConsolidatedRoleInfo() {
+	public static $SecPubSchemaName$RoleInfo[] getConsolidatedRoleInfo() {
 		if (consolidatedRoleInfo.get() == null) {
-			ArrayList&lt;$SecSchemaName$RoleInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefRoleInfo empty empty)$
-			for( $SecSchemaName$RoleInfo info: ROLE_INFO) {
+			ArrayList&lt;$SecPubSchemaName$RoleInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefRoleInfo empty empty)$
+			for( $SecPubSchemaName$RoleInfo info: ROLE_INFO) {
 				lst.add(info);
 			}
 			// Dependency order is the natural order of role info comparison
-			lst.sort(new $SecSchemaName$RoleInfoDependencyComparator());
-			$SecSchemaName$RoleInfo arr[] = new $SecSchemaName$RoleInfo[lst.size()];
+			lst.sort(new $SecPubSchemaName$RoleInfoDependencyComparator());
+			$SecPubSchemaName$RoleInfo arr[] = new $SecPubSchemaName$RoleInfo[lst.size()];
 			int idx = 0;
-			for($SecSchemaName$RoleInfo info: lst) {
+			for($SecPubSchemaName$RoleInfo info: lst) {
 				arr[idx++] = info;
 			}
 			consolidatedRoleInfo.compareAndSet(null, arr);
@@ -184,24 +183,24 @@ import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectNa
 
 	<GenRule GenDef="SchemaRef" Name="declISchemaAddRefTableData">$reference RefSchema declISchemaAddRefTableData$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declISchemaAddRefTableData">
-			for( $SecSchemaName$TableData data: I$SchemaName$Schema.getTableData()) {
+			for( $SecPubSchemaName$TableData data: I$SchemaName$Schema.getTableData()) {
 				lst.add(data);
 			}</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="declISchemaAddRefRoleInfo">$reference RefSchema declISchemaAddRefRoleInfo$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declISchemaAddRefRoleInfo">
-			for( $SecSchemaName$RoleInfo info: I$SchemaName$Schema.getRoleInfo()) {
+			for( $SecPubSchemaName$RoleInfo info: I$SchemaName$Schema.getRoleInfo()) {
 				lst.add(info);
 			}</GenRule>
 
-	<GenRule GenDef="Table" Name="walkISchemaTableDataEntry">new $SecSchemaName$TableData("$DefSchemaName$", "$TableName$", $switch HasSuperClassRelation yes emitISchemaTableDataEntrySuperName default emitNull$, $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", "$CodeVis$")$iterate TableSubClasses( each walkCommaISchemaTableDataEntry empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="walkISchemaTableDataEntry">new $SecPubSchemaName$TableData("$DefSchemaName$", "$TableName$", $switch HasSuperClassRelation yes emitISchemaTableDataEntrySuperName default emitNull$, $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", "$CodeVis$")$iterate TableSubClasses( each walkCommaISchemaTableDataEntry empty empty )$</GenRule>
 	<GenRule GenDef="Table" Name="walkCommaISchemaTableDataEntry">,
 		$walkISchemaTableDataEntry$</GenRule>
 
 	<GenRule GenDef="Object" Name="emitNull">null</GenRule>
 	<GenRule GenDef="Table" Name="emitISchemaTableDataEntrySuperName">"$reference SuperClassRelation reference ToTable TableName$"</GenRule>
 
-	<GenRule GenDef="SchemaRole" Name="declISchemaRoleInfoEntry">new $SecSchemaName$RoleInfo("$Name$", "$RoleScope$", "$Enables$", "$Includes$")</GenRule>
+	<GenRule GenDef="SchemaRole" Name="declISchemaRoleInfoEntry">new $SecPubSchemaName$RoleInfo("$Name$", "$RoleScope$", "$Enables$", "$Includes$")</GenRule>
 	<GenRule GenDef="SchemaRole" Name="declCommaISchemaRoleInfoEntry">,
 		$declISchemaRoleInfoEntry$</GenRule>
 
@@ -324,8 +323,8 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 </GenRule>
 
 <GenRule GenDef="SchemaDef" Name="declSchemaBootstrap">
-	public void bootstrapSchema($SecSchemaName$TableData tableData[]);
-	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableData tableData[]);
+	public void bootstrapSchema($SecPubSchemaName$TableData tableData[]);
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]);
 </GenRule>
 
 <GenRule GenDef="Object" Name="declISchemaClassMapEntry">

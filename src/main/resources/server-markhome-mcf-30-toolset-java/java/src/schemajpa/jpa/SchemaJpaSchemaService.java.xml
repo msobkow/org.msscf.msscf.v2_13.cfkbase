@@ -69,8 +69,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
-import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.*;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaJpaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$
 
 /**
  *	Services for schema $SchemaName$ defined in $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa
@@ -238,7 +237,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 </GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="JpaSchemaServiceBootstrap">
-	public void bootstrapSchema($SecSchemaName$TableData tableData[]) {$iterate SchemaRefs( empty invokeJpaSchemaServiceBootstrapSecurity first invokeJpaSchemaServiceSecBootstrapSecurity each empty )$
+	public void bootstrapSchema($SecPubSchemaName$TableData tableData[]) {$iterate SchemaRefs( empty invokeJpaSchemaServiceBootstrapSecurity first invokeJpaSchemaServiceSecBootstrapSecurity each empty )$
 	}
 $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$iterate SchemaRefs( empty implJpaSchemaServiceBootstrapTableSecurity each empty )$$iterate SchemaRefs( empty implJpaSchemaServiceBootstrapAllTablesSecurity first implJpaSchemaServiceInvokeSuperAllTablesSecurity each empty )$
 </GenRule>
@@ -1297,11 +1296,11 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="implJpaSchemaServiceInvokeSuperAllTablesSecurity">
-	public void bootstrapAllTablesSecurity($SecSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity($SecPubSchemaName$TableData tableData[]) {
 		bootstrapAllTablesSecurity(I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), tableData);
 	}
 
-	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapAllTablesSecurity(clusterId, tenantId, tableData);
 	}
 </GenRule>
@@ -1309,12 +1308,12 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	<GenRule GenDef="Object" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">$popto SchemaDef implJpaSchemaServiceBootstrapAllTablesSecurity$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">
 	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	public void bootstrapAllTablesSecurity($SecSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity($SecPubSchemaName$TableData tableData[]) {
 		bootstrapAllTablesSecurity(I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), tableData);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 		LocalDateTime now = LocalDateTime.now();
 		I$SecSchemaName$SecSession bootstrapSession;
 		CFLibDbKeyHash256 bootstrapSessionID = new CFLibDbKeyHash256(0);
@@ -1387,7 +1386,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		I$SecSchemaName$SecSysGrp secSysGroupPublic,
 		I$SecSchemaName$Cluster secCluster,
 		I$SecSchemaName$Tenant secTenant,
-		$SecSchemaName$TableData tableData[])
+		$SecPubSchemaName$TableData tableData[])
 	{
 		LocalDateTime now = LocalDateTime.now();
 
@@ -1481,7 +1480,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secTentGroupMembSystemAdmin = ($SecSchemaName$JpaSecTentGrpMemb)(sectentgrpmembService.create(($SecSchemaName$JpaSecTentGrpMemb)secTentGroupMembSystemAdmin));
 		}
 
-		for( $SecSchemaName$TableData data: tableData) {
+		for( $SecPubSchemaName$TableData data: tableData) {
 			bootstrapTableSecurity(auth, LocalDateTime.now(), data.getTableName(), data.hasHistory(), data.isMutable(), data.getScope(), secSysGroupPublic, secSystemAdminGroup, secClusGroupSysAdmin, secTentGroupSysAdmin);
 		}
 	}
