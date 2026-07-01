@@ -119,8 +119,10 @@ $reference PrimaryKeyIndex iterate Columns( each declPubColumnGetterSetter )$$de
 	<GenRule GenDef="Relation" Name="reallyDeclPubISchemaTablePKeyRelationGetter">
 	public $emitPubInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="declPubSetArgColumn">$reference FromCol reference Column implPubJavaAtomType$ arg$reference FromCol reference Column Name$</GenRule>
-	<GenRule GenDef="RelationCol" Name="declPubCommaSetArgColumn">,
+	<GenRule GenDef="RelationCol" Name="declPubSetArgColumn">$switch IsPublic yes reallyDeclPubSetArgColumn default empty$</GenRule>
+	<GenRule GenDef="RelationCol" Name="reallyDeclPubSetArgColumn">$reference FromCol reference Column implPubJavaAtomType$ arg$reference FromCol reference Column Name$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declPubCommaSetArgColumn">$switch IsPublic yes reallyDeclPubCommaSetArgColumn default empty$</GenRule>
+	<GenRule GenDef="RelationCol" Name="reallyDeclPubCommaSetArgColumn">,
 		$declPubSetArgColumn$</GenRule>
 
 	<GenRule GenDef="Table" Name="ISchemaPubTablePKeyExtendBaseDef">
@@ -163,23 +165,35 @@ $reference PrimaryKeyIndex iterate Columns( each declPubColumnGetterSetter )$$de
 	<GenRule GenDef="Index" Name="implPubColumnIdAttr">$switch IsPublic yes reallyImplPubColumnIdAttr default empty$</GenRule>
 	<GenRule GenDef="Index" Name="reallyImplPubColumnIdAttr">$iterate Columns( lone implPubColumnIdAttr first empty each empty empty empty )$</GenRule>
 
-	<GenRule GenDef="Param" Name="implPubJavaAtomType">$switch IsNullable yes implPubJavaOptAtomType default implPubJavaReqAtomType$</GenRule>
+	<GenRule GenDef="Param" Name="implPubJavaAtomType">$switch IsPublic yes reallyImplPubJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplPubJavaAtomType">$switch IsNullable yes implPubJavaOptAtomType default implPubJavaReqAtomType$</GenRule>
 
-	<GenRule GenDef="Param" Name="implPubJavaOptAtomType">$reference Type implPubJavaOptAtomType$</GenRule>
+	<GenRule GenDef="Param" Name="implPubJavaOptAtomType">$switch IsPublic yes reallyImplPubJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplPubJavaOptAtomType">$reference Type implPubJavaOptAtomType$</GenRule>
 
-	<GenRule GenDef="Param" Name="implPubJavaReqAtomType">$reference Type implPubJavaReqAtomType$</GenRule>
+	<GenRule GenDef="Param" Name="implPubJavaReqAtomType">$switch IsPublic yes reallyImplPubJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplPubJavaReqAtomType">$reference Type implPubJavaReqAtomType$</GenRule>
 
-	<GenRule GenDef="Index" Name="implPubJavaAtomType">$iterate Columns( lone implPubJavaAtomType first empty each empty empty empty )$</GenRule>
-	<GenRule GenDef="Index" Name="implPubJavaOptAtomType">$iterate Columns( lone implPubJavaOptAtomType first empty each empty empty empty )$</GenRule>
-	<GenRule GenDef="Index" Name="implPubJavaReqAtomType">$iterate Columns( lone implPubJavaReqAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implPubJavaAtomType">$switch IsPublic yes reallyImplPubJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplPubJavaAtomType">$iterate Columns( lone implPubJavaAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implPubJavaOptAtomType">$switch IsPublic yes reallyImplPubJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplPubJavaOptAtomType">$iterate Columns( lone implPubJavaOptAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implPubJavaReqAtomType">$switch IsPublic yes reallyImplPubJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplPubJavaReqAtomType">$iterate Columns( lone implPubJavaReqAtomType first empty each empty empty empty )$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implPubJavaAtomType">$reference Column implPubJavaAtomType$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPubJavaOptAtomType">$reference Column implPubJavaOptAtomType$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPubJavaReqAtomType">$reference Column implPubJavaReqAtomType$</GenRule>
-	<GenRule GenDef="Value" Name="implPubJavaAtomType" >$switch IsNullable yes implPubJavaOptAtomType default implPubJavaReqAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPubJavaAtomType">$switch IsPublic yes reallyImplPubJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplPubJavaAtomType">$reference Column implPubJavaAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPubJavaOptAtomType">$switch IsPublic yes reallyImplPubJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplPubJavaOptAtomType">$reference Column implPubJavaOptAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPubJavaReqAtomType">$switch IsPublic yes reallyImplPubReqJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplPubJavaReqAtomType">$reference Column implPubJavaReqAtomType$</GenRule>
+	<GenRule GenDef="Value" Name="implPubJavaAtomType" >$switch IsPublic yes reallyImplPubJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyImplPubJavaAtomType" >$switch IsNullable yes implPubJavaOptAtomType default implPubJavaReqAtomType$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="implPubJavaOptAtomType" >$reference DataType implPubJavaOptAtomType$</GenRule>
-	<GenRule GenDef="TableCol" Name="implPubJavaReqAtomType" >$reference DataType implPubJavaReqAtomType$</GenRule>
+	<GenRule GenDef="TableCol" Name="implPubJavaOptAtomType">$switch IsPublic yes reallyImplPubJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyImplPubJavaOptAtomType" >$reference DataType implPubJavaOptAtomType$</GenRule>
+	<GenRule GenDef="TableCol" Name="implPubJavaReqAtomType">$switch IsPublic yes reallyImplPubJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyImplPubJavaReqAtomType" >$reference DataType implPubJavaReqAtomType$</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="PubEffSchemaName">$reference RefSchema PubSchemaName$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="PubEffSchemaName">$PubSchemaName$</GenRule>

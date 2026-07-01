@@ -37,7 +37,8 @@
 	Revision="3.0"
 	Descr="Java 25 Public Edit Object interface">
 
-	<GenFile GenDef="Table" Name="fileIPubEditObjJava"
+	<GenRule GenDef="Table" Name="fileIPubEditObjJava">$switch IsPublic yes reallyFileIPubEditObjJava default empty$</GenRule>
+	<GenFile GenDef="Table" Name="reallyFileIPubEditObjJava"
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
@@ -123,8 +124,10 @@ public interface I$SchemaName$Pub$TableName$EditObj
 	<GenRule GenDef="Relation" Name="maybeDeclIPubEditObjRelationDuplicateAccessors"
 		>$switch RelationTypeTag Superclass empty default declIPubEditObjRelationDuplicateAccessors$</GenRule>
 
-	<GenRule GenDef="Relation" Name="declIPubEditObjRelationSingletonAccessors">$declIPubEditObjRelationSingletonGetter$$declIPubEditObjRelationSingletonSetter$</GenRule>
-	<GenRule GenDef="Relation" Name="declIPubEditObjRelationSingletonGetter">
+	<GenRule GenDef="Relation" Name="declIPubEditObjRelationSingletonAccessors">$switch IsPublic yes reallyDeclIPubEditObjRelationSingletonAccessors default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclIPubEditObjRelationSingletonAccessors">$declIPubEditObjRelationSingletonGetter$$declIPubEditObjRelationSingletonSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declIPubEditObjRelationSingletonGetter">$switch IsPublic yes reallyDeclIPubEditObjRelationSingletonGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclIPubEditObjRelationSingletonGetter">
 	/**
 	 *	Get the I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$Obj instance referenced by the $Suffix$ key.
 	 *
@@ -140,7 +143,8 @@ public interface I$SchemaName$Pub$TableName$EditObj
 	I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$Obj get$OptionalOrRequired$$RelationTypeTag$$Suffix$( boolean forceRead );
 </GenRule>
 
-	<GenRule GenDef="Relation" Name="declIPubEditObjRelationSingletonSetter">
+	<GenRule GenDef="Relation" Name="declIPubEditObjRelationSingletonSetter">$switch IsPublic yes reallyDeclIPubEditObjRelationSingletonSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclIPubEditObjRelationSingletonSetter">
 	/**
 	 *	Set the I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$Obj instance referenced by the $Suffix$ key.
 	 *
@@ -149,7 +153,8 @@ public interface I$SchemaName$Pub$TableName$EditObj
 	void set$OptionalOrRequired$$RelationTypeTag$$Suffix$( I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$Obj value );
 </GenRule>
 
-	<GenRule GenDef="Relation" Name="declIPubEditObjRelationDuplicateAccessors">
+	<GenRule GenDef="Relation" Name="declIPubEditObjRelationDuplicateAccessors">$switch IsPublic yes reallyDeclIPubEditObjRelationDuplicateAccessors default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclIPubEditObjRelationDuplicateAccessors">
 	/**
 	 *	Get a list I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$Obj instances referenced by the $Suffix$ key.
 	 *
@@ -158,11 +163,15 @@ public interface I$SchemaName$Pub$TableName$EditObj
 	List&lt;I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$Obj&gt; get$OptionalOrRequired$$RelationTypeTag$$Suffix$();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declIPubEditObjColumnAccessors">$switch HasSuperClassRelation yes declIPubEditObjDataColumnAccessors default declIPubEditObjAllColumnAccessors$</GenRule>
-	<GenRule GenDef="Table" Name="declIPubEditObjDataColumnAccessors">$iterate DataColumns(each declIPubEditObjColumnAccessors empty empty)$</GenRule>
-	<GenRule GenDef="Table" Name="declIPubEditObjAllColumnAccessors">$iterate Columns(each declIPubEditObjColumnAccessors empty empty)$</GenRule>
+	<GenRule GenDef="Table" Name="declIPubEditObjColumnAccessors">$switch IsPublic yes reallyDeclIPubEditObjColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclIPubEditObjColumnAccessors">$switch HasSuperClassRelation yes declIPubEditObjDataColumnAccessors default declIPubEditObjAllColumnAccessors$</GenRule>
+	<GenRule GenDef="Table" Name="declIPubEditObjDataColumnAccessors">$switch IsPublic yes reallyDeclIPubEditObjDataColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclIPubEditObjDataColumnAccessors">$iterate DataColumns(each declIPubEditObjColumnAccessors empty empty)$</GenRule>
+	<GenRule GenDef="Table" Name="declIPubEditObjAllColumnAccessors">$switch IsPublic yes reallyDeclIPubEditObjAllColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclIPubEditObjAllColumnAccessors">$iterate Columns(each declIPubEditObjColumnAccessors empty empty)$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIPubEditObjColumnAccessors"
+	<GenRule GenDef="TableCol" Name="declIPubEditObjColumnAccessors">$switch IsPublic yes reallyDeclIPubEditObjColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIPubEditObjColumnAccessors"
 		>$switch InSuperiorRelation yes declIPubEditObjColumnGetter default declIPubEditObjColumnGetterSetter$</GenRule>
 	<GenRule GenDef="TableCol" Name="declIPubEditObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIPubEditObjColumnBasePKeyGetter default declIPubEditObjColumnBaseDataGetter$</GenRule>
 	<GenRule GenDef="TableCol" Name="declIPubEditObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIPubObjColumnBasePKeyGetter default declIPubObjColumnBaseDataGetter$$switch ColumnInPrimaryIndex yes declIPubObjColumnBasePKeySetter default declIPubObjColumnBaseDataSetter$</GenRule>
@@ -179,7 +188,8 @@ public interface I$SchemaName$Pub$TableName$EditObj
 	<GenRule GenDef="Atom" Name="declIPubEditObjColumnBasePKeySetter">$declIPubObjColumnSetter$</GenRule>	
 	<GenRule GenDef="Atom" Name="declIPubEditObjColumnBaseDataSetter">$declIPubObjColumnSetter$</GenRule>
 	
-	<GenRule GenDef="Atom" Name="declIPubEditObjColumnAccessors"
+	<GenRule GenDef="Atom" Name="declIPubEditObjColumnAccessors">$switch IsPublic yes reallyDeclIPubEditObjColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIPubEditObjColumnAccessors"
 		>$switch InSuperiorRelation yes declIPubEditObjColumnGetter default declIPubEditObjColumnGetterSetter$</GenRule>
 	<GenRule GenDef="Atom" Name="declIPubEditObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIPubObjColumnBasePKeyGetter default declIPubObjColumnBaseDataGetter$</GenRule>
 	<GenRule GenDef="Atom" Name="declIPubEditObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIPubObjColumnBasePKeyGetter default declIPubObjColumnBaseDataGetter$$switch ColumnInPrimaryIndex yes declIPubObjColumnBasePKeySetter default declIPubObjColumnBaseDataSetter$</GenRule>

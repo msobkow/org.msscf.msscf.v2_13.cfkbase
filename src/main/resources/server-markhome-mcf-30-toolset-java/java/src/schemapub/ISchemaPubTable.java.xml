@@ -81,23 +81,32 @@ $switch HasDefSchema no maybeDeclPubRecGetClassCode default empty$$switch HasDef
 	<GenRule GenDef="Relation" Name="declPubNonCandidateISchemaTableRelationGetter">
 	public $emitPubInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
 	
-	<GenRule GenDef="Relation" Name="maybeDeclPubISchemaTableRelationSetter">$switch IsPublic yes reallyDeclPubISchemaTableRelationSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyDeclPubISchemaTableRelationSetter">$switch RelationType Superclass empty Components empty Children empty default attemptDeclPubISchemaTableRelationSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="maybeDeclPubISchemaTableRelationSetter">$switch IsPublic yes surelyMaybeDeclPubISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="surelyMaybeDeclPubISchemaTableRelationSetter">$switch RelationType Superclass empty Components empty Children empty default attemptDeclPubISchemaTableRelationSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="attemptDeclPubISchemaTableRelationSetter">$switch ToTableHasDefSchema yes declPubNonCandidateSuperiorISchemaTableRelationSetter default declPubCandidateSuperiorISchemaTableRelationSetter$</GenRule>
-	<GenRule GenDef="Relation" Name="declPubCandidateSuperiorISchemaTableRelationSetter">$switch IsSuperiorRelation yes declPubCandidateNotInPrimaryISchemaTableRelationSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="declPubNonCandidateSuperiorISchemaTableRelationSetter">$switch IsSuperiorRelation yes declPubNonCandidateNotInPrimaryISchemaTableRelationSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="declPubCandidateNotInPrimaryISchemaTableRelationSetter">$switch IsRelationInPrimaryIndex yes empty default declPubCandidateUniqueISchemaTableRelationSetter$</GenRule>
-	<GenRule GenDef="Relation" Name="declPubNonCandidateNotInPrimaryISchemaTableRelationSetter">$switch IsRelationInPrimaryIndex yes empty default declPubNonCandidateUniqueISchemaTableRelationSetter$</GenRule>
-	<GenRule GenDef="Relation" Name="declPubCandidateUniqueISchemaTableRelationSetter">$switch IsToIndexUnique yes declPubISchemaTableRelationSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="declPubNonCandidateUniqueISchemaTableRelationSetter">$switch IsToIndexUnique yes declPubISchemaTableRelationSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="declPubISchemaTableRelationSetter">
+	<GenRule GenDef="Relation" Name="declPubCandidateSuperiorISchemaTableRelationSetter">$switch IsPublic yes reallyDeclPubCandidateSuperiorISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubCandidateSuperiorISchemaTableRelationSetter">$switch IsSuperiorRelation yes declPubCandidateNotInPrimaryISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubNonCandidateSuperiorISchemaTableRelationSetter">$switch IsPublic yes reallyDeclPubNonCandidateSuperiorISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubNonCandidateSuperiorISchemaTableRelationSetter">$switch IsSuperiorRelation yes declPubNonCandidateNotInPrimaryISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubCandidateNotInPrimaryISchemaTableRelationSetter">$switch IsPublic yes reallyDeclPubCandidateNotInPrimaryISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubCandidateNotInPrimaryISchemaTableRelationSetter">$switch IsRelationInPrimaryIndex yes empty default declPubCandidateUniqueISchemaTableRelationSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubNonCandidateNotInPrimaryISchemaTableRelationSetter">$switch IsPublic yes reallyDeclPubNonCandidateNotInPrimaryISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubNonCandidateNotInPrimaryISchemaTableRelationSetter">$switch IsRelationInPrimaryIndex yes empty default declPubNonCandidateUniqueISchemaTableRelationSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubCandidateUniqueISchemaTableRelationSetter">$switch IsPublic yes reallyDeclPubCandidateUniqueISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubCandidateUniqueISchemaTableRelationSetter">$switch IsToIndexUnique yes declPubISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubNonCandidateUniqueISchemaTableRelationSetter">$switch IsPublic yes reallyDeclPubNonCandidateUniqueISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubNonCandidateUniqueISchemaTableRelationSetter">$switch IsToIndexUnique yes declPubISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declPubISchemaTableRelationSetter">$switch IsPublic yes reallyDeclPubISchemaTableRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclPubISchemaTableRelationSetter">
 	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj);
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declPubSetArgColumn each declPubCommaSetArgColumn)$);</GenRule>
 
-	<GenRule GenDef="Table" Name="declPubColumnOptAuditGetterSetters"
+	<GenRule GenDef="Table" Name="declPubColumnOptAuditGetterSetters">$switch IsPublic yes reallyDeclPubColumnOptAuditGetterSetters default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubColumnOptAuditGetterSetters"
 		>$switch HasAuditColumns yes declPubColumnAuditGetterSetters default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPubColumnAuditGetterSetters">
+	<GenRule GenDef="Table" Name="declPubColumnAuditGetterSetters">$switch IsPublic yes reallyDeclPubColumnAuditGetterSetters default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubColumnAuditGetterSetters">
 	public CFLibDbKeyHash256 getCreatedByUserId();
 	public void setCreatedByUserId( CFLibDbKeyHash256 value );
 	public LocalDateTime getCreatedAt();
@@ -108,19 +117,23 @@ $switch HasDefSchema no maybeDeclPubRecGetClassCode default empty$$switch HasDef
 	public void setUpdatedAt( LocalDateTime value );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declPubColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes declPubColumnAttrPKeyColumnAccessors default declPubColumnAttrPKeyInstanceAccessors$</GenRule>
+	<GenRule GenDef="Table" Name="declPubColumnAttrPKeyAccessors">$switch IsPublic yes reallyDeclPubColumnAttrPKeyAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes declPubColumnAttrPKeyColumnAccessors default declPubColumnAttrPKeyInstanceAccessors$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPubColumnAttrPKeyColumnAccessors">
+	<GenRule GenDef="Table" Name="declPubColumnAttrPKeyColumnAccessors">$switch IsPublic yes reallyDeclPubColumnAttrPKeyColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubColumnAttrPKeyColumnAccessors">
 	public $reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implPubJavaOptAtomType first empty each empty empty empty )$ getPubPKey();
 	public void setPubPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implPubJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implPubColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);
 	$reference BaseClass iterate Relation(each maybeDeclPubISchemaTablePKeyRelationGetterSetter empty empty)$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declPubColumnGetterMaybeSetter )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPubColumnAttrPKeyInstanceAccessors">
+	<GenRule GenDef="Table" Name="declPubColumnAttrPKeyInstanceAccessors">$switch IsPublic yes reallyDeclPubColumnAttrPKeyInstanceAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubColumnAttrPKeyInstanceAccessors">
 	public I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$Pub$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey getPubPKey();
 	public void setPubPKey(I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$Pub$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey pkey );
 	$reference BaseClass iterate Relation(each maybeDeclPubISchemaTablePKeyRelationGetterSetter empty empty)$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declPubColumnGetterMaybeSetter )$</GenRule>
 
-	<GenRule GenDef="Atom" Name="declPubPKeyAttrAccessors">
+	<GenRule GenDef="Atom" Name="declPubPKeyAttrAccessors">$switch IsPublic yes reallyDeclPubPKeyAttrAccessors default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclPubPKeyAttrAccessors">
 	public $implPubJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 	public void set$implColumnAttrOptionality$$Name$( $implPubJavaAtomType$ $lower implPubColumnAttrOptionality$$Name$ );
 </GenRule>
@@ -137,22 +150,29 @@ $switch HasDefSchema no maybeDeclPubRecGetClassCode default empty$$switch HasDef
 	public void set$implColumnAttrOptionality$$Name$( $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$ );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declISchemaPubTableRecColumns">$switch HasSuperClassRelation no maybeDeclPubRecOptAuditColumnAttrAccessors default empty$$iterate Columns( each maybeDeclPubSchemaRecTableRecDataColumn )$</GenRule>
+	<GenRule GenDef="Table" Name="declISchemaPubTableRecColumns">$switch IsPublic yes reallyDeclISchemaPubTableRecColumns default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclISchemaPubTableRecColumns">$switch HasSuperClassRelation no maybeDeclPubRecOptAuditColumnAttrAccessors default empty$$iterate Columns( each maybeDeclPubSchemaRecTableRecDataColumn )$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="maybeDeclPubSchemaRecTableRecDataColumn">$switch ColumnInPrimaryIndex yes empty default declPubRecColumnRecAttr$</GenRule>
-	<GenRule GenDef="TableCol" Name="maybeDeclPubSchemaRecTableRecDataColumn">$switch ColumnInPrimaryIndex yes empty default declPubRecColumnRecAttr$</GenRule>
-	<GenRule GenDef="Atom" Name="maybeDeclPubSchemaRecTableRecDataColumn">$switch ColumnInPrimaryIndex yes empty default declPubRecColumnRecAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeDeclPubSchemaRecTableRecDataColumn">$switch IsPublic yes reallyMaybeDeclPubSchemaRecTableRecDataColumn default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyMaybeDeclPubSchemaRecTableRecDataColumn">$switch ColumnInPrimaryIndex yes empty default declPubRecColumnRecAttr$</GenRule>
+	<GenRule GenDef="TableCol" Name="maybeDeclPubSchemaRecTableRecDataColumn">$switch IsPublic yes reallyMaybeDeclPubSchemaRecTableRecDataColumn default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyMaybeDeclPubSchemaRecTableRecDataColumn">$switch ColumnInPrimaryIndex yes empty default declPubRecColumnRecAttr$</GenRule>
+	<GenRule GenDef="Atom" Name="maybeDeclPubSchemaRecTableRecDataColumn">$switch IsPublic yes reallyMaybeDeclPubSchemaRecTableRecDataColumn default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyMaybeDeclPubSchemaRecTableRecDataColumn">$switch ColumnInPrimaryIndex yes empty default declPubRecColumnRecAttr$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPubRecColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes declPubRecColumnAttrPKeyColumnAccessors default declPubRecColumnAttrPKeyInstanceAccessors$</GenRule>
+	<GenRule GenDef="Table" Name="declPubRecColumnAttrPKeyAccessors">$switch IsPublic yes reallyDeclPubRecColumnAttrPKeyAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubRecColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes declPubRecColumnAttrPKeyColumnAccessors default declPubRecColumnAttrPKeyInstanceAccessors$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPubRecColumnAttrPKeyColumnAccessors">
+	<GenRule GenDef="Table" Name="declPubRecColumnAttrPKeyColumnAccessors">$switch IsPublic yes reallyDeclPubRecColumnAttrPKeyColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubRecColumnAttrPKeyColumnAccessors">
 	public $reference BaseClass reference PrimaryKeyIndex iterate Columns( lone declJavaOptAtomType first empty each empty empty empty )$ getPubPKey();
 	public void setPubPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone declJavaOptAtomType first empty each empty empty empty )$;
 	$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone declPubColumnGetterSetter first empty each empty empty empty )$
 	</GenRule>
 
 	<GenRule GenDef="Table" Name="IsPubAtomicPrimaryIndexKeyNullable">$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone IsNullable first IsNullable each empty empty no )$</GenRule>
-	<GenRule GenDef="Table" Name="declPubRecColumnAttrPKeyInstanceAccessors">
+	<GenRule GenDef="Table" Name="declPubRecColumnAttrPKeyInstanceAccessors">$switch IsPublic yes reallyDeclPubRecColumnAttrPKeyInstanceAccessors default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubRecColumnAttrPKeyInstanceAccessors">
 	public I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$Pub$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey getPubPKey();
 	public void setPubPKey(I$reference BaseClass reference PrimaryKeyIndex DefSchemaName$Pub$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey pkey );
 $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declPubRecPKeyAttrAccessors )$</GenRule>

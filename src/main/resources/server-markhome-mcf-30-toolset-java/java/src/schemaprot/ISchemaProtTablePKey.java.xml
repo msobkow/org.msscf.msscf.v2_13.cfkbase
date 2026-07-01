@@ -1,0 +1,1234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Mark's Code Fractal CFKBase 3.1 Code Fractal Knowledge Base
+ *
+ *	Copyright 2016-2026 Mark Stephen Sobkow
+ *
+ *	This file is part of Mark's Code Fractal CFKBase.
+ *
+ *	Mark's Code Fractal CFKBase is available under dual commercial license from
+ *	Mark Stephen Sobkow, or under the terms of the GNU General Public License,
+ *	Version 3 or later.
+ *
+ *	Mark's Code Fractal CFKBase is free software: you can redistribute it and/or
+ *	modify it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	Mark's Code Fractal CFKBase is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with Mark's Code Fractal CFKBase.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+	xmlns="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
+	ToolSet="java"
+	Name="src/schemaprot/ISchemaProtTablePKey.java"
+	Revision="3.0"
+	Descr="Java 25 protected interface for a $TableName$ primary key object.">
+
+	<GenRule GenDef="Index" Name="IProtCompactedIndexClass">$switch IsAtomic yes implProtJavaOptAtomType default IProtIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="IProtIndexClassName">I$reference Table DefSchemaName$Prot$reference Table TableName$By$Suffix$Key</GenRule>
+
+	<GenRule GenDef="Table" Name="IProtCompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex IProtCompactedPrimaryIndexClass$</GenRule>
+	<GenRule GenDef="Index" Name="IProtCompactedPrimaryIndexClass">$switch IsAtomic yes implProtJavaOptAtomType default IProtPrimaryIndexClassName$</GenRule>
+
+	<GenRule GenDef="Table" Name="IProtPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex IProtPrimaryIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="IProtPrimaryIndexClassName">I$SchemaName$Prot$TableName$PKey</GenRule>
+
+	<GenRule GenDef="Table" Name="fileISchemaProtTablePKeyJava">$switch IsProtected yes forRealFileISchemaProtTablePKeyJava default empty$</GenRule>
+	<GenRule GenDef="Table" Name="forRealFileISchemaProtTablePKeyJava">$switch IsPrimaryIndexKeyAtomic yes empty default reallyIFileSchemaProtTablePKeyJava$</GenRule>
+	<GenFile GenDef="Table" Name="reallyIFileSchemaProtTablePKeyJava"
+			GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot"
+		ExpansionClassName="I$SchemaName$Prot$TableName$PKeyJava"
+		ExpansionKeyName="I$SchemaName$Prot$TableName$PKeyJava"
+		ExpansionFileName="I$SchemaName$Prot$TableName$PKey.java"
+>// Description: Java 25 protected inteface for a $TableName$ primary key object.
+
+$MssSourceLicense$
+
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot;
+
+import java.io.Serializable;
+import java.math.*;
+import java.time.*;
+import java.util.*;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.text.StringEscapeUtils;
+import server.markhome.mcf.v3_1.cflib.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaProtPackageSchemaName empty empty )$
+
+/**
+ *	I$SchemaName$Prot$TableName$PKey protected primary key interface for $TableName$ has $reference BaseClass reference PrimaryKeyIndex ExplainCodeVis$.$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )
+$
+ */
+public interface I$SchemaName$Prot$TableName$PKey$switch HasDefSchema yes ISchemaProtTablePKeyExtendBaseDef default empty$
+{$switch HasDefSchema yes ISchemaProtTablePKeyExtendBaseDefBody default ISchemaProtTablePKeyImplBaseDefBody$}
+</GenFile>
+
+	<GenRule GenDef="Table" Name="ISchemaProtTablePKeyExtendBaseDefBody">
+</GenRule>
+
+	<GenRule GenDef="Table" Name="ISchemaProtTablePKeyImplBaseDefBody">
+$reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$declProtRecPKeyEquals$$declProtRecPKeyHashCode$$declProtRecPKeyCompareTo$$reference PrimaryKeyIndex declProtRecPKeyToString$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declProtColumnGetterMaybeSetter">$switch IsProtected yes reallyDeclProtColumnGetterMaybeSetter default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyDeclProtColumnGetterMaybeSetter">$reference Column declProtColumnGetterMaybeSetter$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="declProtColumnGetterMaybeSetter">$switch IsProtected yes reallyDeclProtColumnGetterMaybeSetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclProtColumnGetterMaybeSetter">$switch InSuperiorRelation yes declProtColumnGetter default declProtColumnGetterSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="declProtColumnGetterMaybeSetter">$switch IsProtected yes reallyDeclProtColumnGetterMaybeSetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclProtColumnGetterMaybeSetter">$switch InSuperiorRelation yes declProtColumnGetter default declProtColumnGetterSetter$</GenRule>
+
+	<GenRule GenDef="Relation" Name="maybeDeclProtISchemaTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default declProtSuperiorISchemaTablePKeyRelationGetterSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declProtSuperiorISchemaTablePKeyRelationGetterSetter">$switch IsProtected yes reallyDeclProtSuperiorISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclProtSuperiorISchemaTablePKeyRelationGetterSetter">$switch IsSuperiorRelation yes declProtInPrimaryISchemaTablePKeyRelationGetterSetter default declProtSubservientISchemaTablePKeyRelationGetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declProtInPrimaryISchemaTablePKeyRelationGetterSetter">$switch IsProtected yes reallyDeclProtInPrimaryISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclProtInPrimaryISchemaTablePKeyRelationGetterSetter">$switch IsRelationInPrimaryIndex yes declProtISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declProtISchemaTablePKeyRelationGetterSetter">$switch IsProtected yes reallyDeclProtISchemaTablePKeyRelationGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclProtISchemaTablePKeyRelationGetterSetter">
+	public $emitProtInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();$switch IsToIndexUnique yes declISchemaProtTablePKeyRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declISchemaProtTablePKeyRelationSetter">$switch IsProtected yes reallyDeclProtISchemaTablePKeyRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclProtISchemaTablePKeyRelationSetter">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj);
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declProtSetArgColumn each declProtCommaSetArgColumn)$);</GenRule>
+
+
+	<GenRule GenDef="Relation" Name="maybeDeclProtISchemaTablePKeyRelationGetter">$switch IsProtected yes reallyMaybeDeclProtISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyMaybeDeclProtISchemaTablePKeyRelationGetter">$switch HasDefSchema yes empty default declProtInSubservientISchemaTablePKeyRelationGetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declProtSubservientISchemaTablePKeyRelationGetter">$switch IsProtected yes reallyDeclProtSubservientISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclProtSubservientISchemaTablePKeyRelationGetter">$switch IsSubservientRelation yes declProtInSubservientPrimaryISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declProtInSubservientPrimaryISchemaTablePKeyRelationGetter">$switch IsProtected yes reallyDeclProtInSubservientPrimaryISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclProtInSubservientPrimaryISchemaTablePKeyRelationGetter">$switch IsRelationInPrimaryIndex yes declProtISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="declProtISchemaTablePKeyRelationGetter">$switch IsProtected yes reallyDeclProtISchemaTablePKeyRelationGetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclProtISchemaTablePKeyRelationGetter">
+	public $emitProtInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="declProtSetArgColumn">$switch IsProtected yes reallyDeclProtSetArgColumn default empty$</GenRule>
+	<GenRule GenDef="RelationCol" Name="reallyDeclProtSetArgColumn">$reference FromCol reference Column implProtJavaAtomType$ arg$reference FromCol reference Column Name$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declProtCommaSetArgColumn">$switch IsProtected yes reallyDeclProtCommaSetArgColumn default empty$</GenRule>
+	<GenRule GenDef="RelationCol" Name="reallyDeclProtCommaSetArgColumn">,
+		$declProtSetArgColumn$</GenRule>
+
+	<GenRule GenDef="Table" Name="ISchemaProtTablePKeyExtendBaseDef">
+	extends I$DefSchemaName$Prot$TableName$PKey</GenRule>
+
+
+	<GenRule GenDef="IndexCol" Name="implProtColumnAttrOptionality"
+		>$switch IsNullable
+			yes implProtColumnAttrOptional
+			default implProtColumnAttrRequired$</GenRule>
+	<GenRule GenDef="Atom" Name="implProtColumnAttrOptionality"
+		>$switch IsNullable
+			yes implProtColumnAttrOptional
+			default implProtColumnAttrRequired$</GenRule>
+	<GenRule GenDef="TableCol" Name="implProtColumnAttrOptionality"
+		>$switch IsNullable
+			yes implProtColumnAttrOptional
+			default implProtColumnAttrRequired$</GenRule>
+
+	<GenRule GenDef="Object" Name="implProtColumnAttrOptional"
+		>Optional</GenRule>
+	<GenRule GenDef="Object" Name="implProtColumnAttrRequired"
+		>Required</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implProtColumnAttrComment">$switch IsProtected yes reallyImplProtColumnAttrComment default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplProtColumnAttrComment">
+ *		$lower implProtColumnAttrOptionality$$Name$	$implProtColumnAttrOptionality$ object attribute $Name$.</GenRule>
+
+	<GenRule ScopeDef="Table" GenDef="Atom" Name="implProtColumnAttrComment">$switch IsProtected yes reallyImplProtColumnAttrComment default empty$</GenRule>
+	<GenRule ScopeDef="Table" GenDef="Atom" Name="reallyImplProtColumnAttrComment">
+ *		$lower implProtColumnAttrOptionality$$Name$	$implProtColumnAttrOptionality$ object attribute $Name$.</GenRule>
+	<GenRule ScopeDef="Table" GenDef="TableCol" Name="implProtColumnAttrComment">$switch IsProtected yes reallyImplProtColumnAttrComment default empty$</GenRule>
+	<GenRule ScopeDef="Table" GenDef="TableCol" Name="reallyImplProtColumnAttrComment">
+ *		$implProtColumnAttrOptionality$$Name$	$implProtColumnAttrOptionality$ object attribute $Name$.</GenRule>
+
+	<GenRule GenDef="Table" Name="implProtCompactedPrimaryIndexClassAttr">$switch IsProtected yes reallyImplProtCompactedPrimaryIndexClassAttr default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyImplProtCompactedPrimaryIndexClassAttr">$reference BaseClass reference PrimaryKeyIndex implProtCompactedPrimaryIndexClassAttr$</GenRule>
+	<GenRule GenDef="Index" Name="implProtCompactedPrimaryIndexClassAttr">$switch IsProtected yes reallyImplProtCompactedPrimaryIndexClassAttr default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplProtCompactedPrimaryIndexClassAttr">$switch IsAtomic yes implProtColumnIdAttr default implProtColumnEmbeddedIdAttr$</GenRule>
+	<GenRule GenDef="Index" Name="implProtColumnIdAttr">$switch IsProtected yes reallyImplProtColumnIdAttr default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplProtColumnIdAttr">$iterate Columns( lone implProtColumnIdAttr first empty each empty empty empty )$</GenRule>
+
+	<GenRule GenDef="Param" Name="implProtJavaAtomType">$switch IsProtected yes reallyImplProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplProtJavaAtomType">$switch IsNullable yes implProtJavaOptAtomType default implProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="Param" Name="implProtJavaOptAtomType">$switch IsProtected yes reallyImplProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplProtJavaOptAtomType">$reference Type implProtJavaOptAtomType$</GenRule>
+
+	<GenRule GenDef="Param" Name="implProtJavaReqAtomType">$switch IsProtected yes reallyImplProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplProtJavaReqAtomType">$reference Type implProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="Index" Name="implProtJavaAtomType">$switch IsProtected yes reallyImplProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplProtJavaAtomType">$iterate Columns( lone implProtJavaAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implProtJavaOptAtomType">$switch IsProtected yes reallyImplProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplProtJavaOptAtomType">$iterate Columns( lone implProtJavaOptAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implProtJavaReqAtomType">$switch IsProtected yes reallyImplProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplProtJavaReqAtomType">$iterate Columns( lone implProtJavaReqAtomType first empty each empty empty empty )$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implProtJavaAtomType">$switch IsProtected yes reallyImplProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplProtJavaAtomType">$reference Column implProtJavaAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implProtJavaOptAtomType">$switch IsProtected yes reallyImplProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplProtJavaOptAtomType">$reference Column implProtJavaOptAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implProtJavaReqAtomType">$switch IsProtected yes reallyImplProtReqJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplProtJavaReqAtomType">$reference Column implProtJavaReqAtomType$</GenRule>
+	<GenRule GenDef="Value" Name="implProtJavaAtomType" >$switch IsProtected yes reallyImplProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyImplProtJavaAtomType" >$switch IsNullable yes implProtJavaOptAtomType default implProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="implProtJavaOptAtomType">$switch IsProtected yes reallyImplProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyImplProtJavaOptAtomType" >$reference DataType implProtJavaOptAtomType$</GenRule>
+	<GenRule GenDef="TableCol" Name="implProtJavaReqAtomType">$switch IsProtected yes reallyImplProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyImplProtJavaReqAtomType" >$reference DataType implProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="ProtEffSchemaName">$reference RefSchema ProtSchemaName$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="ProtEffSchemaName">$ProtSchemaName$</GenRule>
+	<GenRule GenDef="Object" Name="ProtEffSchemaName" >$switch HasDefSchema yes ProtUseDefSchemaName default ProtSchemaName$</GenRule>
+	<GenRule GenDef="Object" Name="ProtUseDefSchemaName" >$reference DefSchema ProtSchemaName$</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="ProtSchemaName">$reference RefSchema SchemaName$Prot</GenRule>
+	<GenRule GenDef="SchemaDef" Name="ProtSchemaName">$SchemaName$Prot</GenRule>
+
+	<GenRule GenDef="BlobDef" Name="implProtJavaReqAtomType">byte[]</GenRule>
+	<GenRule GenDef="BoolDef" Name="implProtJavaReqAtomType">boolean</GenRule>
+	<GenRule GenDef="EnumDef" Name="implProtJavaReqAtomType">I$EffSchemaName$ProtSchema.$Name$</GenRule>
+	<GenRule GenDef="Int16Def" Name="implProtJavaReqAtomType">short</GenRule>
+	<GenRule GenDef="Int32Def" Name="implProtJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="Int64Def" Name="implProtJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="Id16Gen" Name="implProtJavaReqAtomType">short</GenRule>
+	<GenRule GenDef="Id32Gen" Name="implProtJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="Id64Gen" Name="implProtJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="UInt16Def" Name="implProtJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="UInt32Def" Name="implProtJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="UInt64Def" Name="implProtJavaReqAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="FloatDef" Name="implProtJavaReqAtomType">float</GenRule>
+	<GenRule GenDef="DoubleDef" Name="implProtJavaReqAtomType">double</GenRule>
+	<GenRule GenDef="NumberDef" Name="implProtJavaReqAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="StringDef" Name="implProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="TextDef" Name="implProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="DateDef" Name="implProtJavaReqAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TimeDef" Name="implProtJavaReqAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TimestampDef" Name="implProtJavaReqAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="TokenDef" Name="implProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="NmTokenDef" Name="implProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="NmTokensDef" Name="implProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="TZDateDef" Name="implProtJavaReqAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TZTimeDef" Name="implProtJavaReqAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TZTimestampDef" Name="implProtJavaReqAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="DbKeyHash128Gen" Name="implProtJavaReqAtomType">CFLibDbKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Gen" Name="implProtJavaReqAtomType">CFLibDbKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Gen" Name="implProtJavaReqAtomType">CFLibDbKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Gen" Name="implProtJavaReqAtomType">CFLibDbKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Gen" Name="implProtJavaReqAtomType">CFLibDbKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Gen" Name="implProtJavaReqAtomType">CFLibDbKeyHash512</GenRule>
+	<GenRule GenDef="DbKeyHash128Def" Name="implProtJavaReqAtomType">CFLibDbKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Def" Name="implProtJavaReqAtomType">CFLibDbKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Def" Name="implProtJavaReqAtomType">CFLibDbKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Def" Name="implProtJavaReqAtomType">CFLibDbKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Def" Name="implProtJavaReqAtomType">CFLibDbKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Def" Name="implProtJavaReqAtomType">CFLibDbKeyHash512</GenRule>
+	<GenRule GenDef="Uuid6Gen" Name="implProtJavaReqAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="Uuid6Def" Name="implProtJavaReqAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="UuidDef" Name="implProtJavaReqAtomType">UUID</GenRule>
+	<GenRule GenDef="UuidGen" Name="implProtJavaReqAtomType">UUID</GenRule>
+
+	<GenRule GenDef="BlobDef" Name="implProtJavaOptAtomType">byte[]</GenRule>
+	<GenRule GenDef="BoolDef" Name="implProtJavaOptAtomType">Boolean</GenRule>
+	<GenRule GenDef="EnumDef" Name="implProtJavaOptAtomType">I$EffSchemaName$ProtSchema.$Name$</GenRule>
+	<GenRule GenDef="Int16Def" Name="implProtJavaOptAtomType">Short</GenRule>
+	<GenRule GenDef="Int32Def" Name="implProtJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="Int64Def" Name="implProtJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="Id16Gen" Name="implProtJavaOptAtomType">Short</GenRule>
+	<GenRule GenDef="Id32Gen" Name="implProtJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="Id64Gen" Name="implProtJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="UInt16Def" Name="implProtJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="UInt32Def" Name="implProtJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="UInt64Def" Name="implProtJavaOptAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="FloatDef" Name="implProtJavaOptAtomType">Float</GenRule>
+	<GenRule GenDef="DoubleDef" Name="implProtJavaOptAtomType">Double</GenRule>
+	<GenRule GenDef="NumberDef" Name="implProtJavaOptAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="StringDef" Name="implProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="TextDef" Name="implProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="DateDef" Name="implProtJavaOptAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TimeDef" Name="implProtJavaOptAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TimestampDef" Name="implProtJavaOptAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="TokenDef" Name="implProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="NmTokenDef" Name="implProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="NmTokensDef" Name="implProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="TZDateDef" Name="implProtJavaOptAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TZTimeDef" Name="implProtJavaOptAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TZTimestampDef" Name="implProtJavaOptAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="DbKeyHash128Gen" Name="implProtJavaOptAtomType">CFLibDbKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Gen" Name="implProtJavaOptAtomType">CFLibDbKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Gen" Name="implProtJavaOptAtomType">CFLibDbKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Gen" Name="implProtJavaOptAtomType">CFLibDbKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Gen" Name="implProtJavaOptAtomType">CFLibDbKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Gen" Name="implProtJavaOptAtomType">CFLibDbKeyHash512</GenRule>
+	<GenRule GenDef="DbKeyHash128Def" Name="implProtJavaOptAtomType">CFLibDbKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Def" Name="implProtJavaOptAtomType">CFLibDbKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Def" Name="implProtJavaOptAtomType">CFLibDbKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Def" Name="implProtJavaOptAtomType">CFLibDbKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Def" Name="implProtJavaOptAtomType">CFLibDbKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Def" Name="implProtJavaOptAtomType">CFLibDbKeyHash512</GenRule>
+	<GenRule GenDef="Uuid6Gen" Name="implProtJavaOptAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="Uuid6Def" Name="implProtJavaOptAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="UuidDef" Name="implProtJavaOptAtomType">UUID</GenRule>
+	<GenRule GenDef="UuidGen" Name="implProtJavaOptAtomType">UUID</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declProtColumnGetter">$switch IsProtected yes reallyDeclProtColumnGetter default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyDeclProtColumnGetter">$reference Column declProtColumnGetter$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declProtColumnGetterSetter">$switch IsProtected yes reallyDeclProtColumnGetterSetter default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyDeclProtColumnGetterSetter">$reference Column declProtColumnGetterSetter$</GenRule>
+
+	<GenRule GenDef="Object" Name="declProtRevisionGetterSetter">
+	public int getRequiredRevision();
+	public void setRequiredRevision( int value );
+</GenRule>
+
+	<GenRule GenDef="Object" Name="declProtClassCodeGetterSetter">
+	public int getClassCode();
+	public void setClassCode( int value );
+</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtColumnGetter">$switch IsProtected yes reallyDeclProtColumnGetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclProtColumnGetter">$switch IsNullable yes declProtOptGetter default declProtReqGetter$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtColumnGetterSetter">$switch IsProtected yes reallyDeclProtColumnGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclProtColumnGetterSetter">$switch IsNullable yes declProtOptGetter default declProtReqGetter$$switch IsNullable yes declProtOptSetter default declProtReqSetter$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqGetter">$switch IsProtected yes reallyDeclProtReqGetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclProtReqGetter"
+		>$switch BaseModelAtomClass
+			BlobDef declProtReqBlobGetter
+			BoolDef declProtReqBoolGetter
+			EnumDef declProtReqEnumGetter
+			Id16Gen declProtReqInt16Getter
+			Id32Gen declProtReqInt32Getter
+			Id64Gen declProtReqInt64Getter
+			Int16Def declProtReqInt16Getter
+			Int32Def declProtReqInt32Getter
+			Int64Def declProtReqInt64Getter
+			UInt16Def declProtReqUInt16Getter
+			UInt32Def declProtReqUInt32Getter
+			UInt64Def declProtReqUInt64Getter
+			FloatDef declProtReqFloatGetter
+			DoubleDef declProtReqDoubleGetter
+			NumberDef declProtReqNumberGetter
+			DateDef declProtReqDateGetter
+			TimeDef declProtReqTimeGetter
+			TimestampDef declProtReqTimestampGetter
+			TZDateDef declProtReqTZDateGetter
+			TZTimeDef declProtReqTZTimeGetter
+			TZTimestampDef declProtReqTZTimestampGetter
+			DbKeyHash128Gen declProtReqDbKeyHash128Getter
+			DbKeyHash160Gen declProtReqDbKeyHash160Getter
+			DbKeyHash224Gen declProtReqDbKeyHash224Getter
+			DbKeyHash256Gen declProtReqDbKeyHash256Getter
+			DbKeyHash384Gen declProtReqDbKeyHash384Getter
+			DbKeyHash512Gen declProtReqDbKeyHash512Getter
+			DbKeyHash128Def declProtReqDbKeyHash128Getter
+			DbKeyHash160Def declProtReqDbKeyHash160Getter
+			DbKeyHash224Def declProtReqDbKeyHash224Getter
+			DbKeyHash256Def declProtReqDbKeyHash256Getter
+			DbKeyHash384Def declProtReqDbKeyHash384Getter
+			DbKeyHash512Def declProtReqDbKeyHash512Getter
+			Uuid6Gen declProtReqUuid6Getter
+			Uuid6Def declProtReqUuid6Getter
+			UuidGen declProtReqUuidGetter
+			UuidDef declProtReqUuidGetter
+			StringDef declProtReqStringGetter
+			TokenDef declProtReqTokenGetter
+			NmTokenDef declProtReqNmTokenGetter
+			NmTokensDef declProtReqNmTokensGetter
+			TextDef declProtReqTextGetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptGetter">$switch IsProtected yes reallyDeclProtOptGetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclProtOptGetter"
+		>$switch BaseModelAtomClass
+			BlobDef declProtOptBlobGetter
+			BoolDef declProtOptBoolGetter
+			EnumDef declProtOptEnumGetter
+			Id16Gen declProtOptInt16Getter
+			Id32Gen declProtOptInt32Getter
+			Id64Gen declProtOptInt64Getter
+			Int16Def declProtOptInt16Getter
+			Int32Def declProtOptInt32Getter
+			Int64Def declProtOptInt64Getter
+			UInt16Def declProtOptUInt16Getter
+			UInt32Def declProtOptUInt32Getter
+			UInt64Def declProtOptUInt64Getter
+			FloatDef declProtOptFloatGetter
+			DoubleDef declProtOptDoubleGetter
+			NumberDef declProtOptNumberGetter
+			DateDef declProtOptDateGetter
+			TimeDef declProtOptTimeGetter
+			TimestampDef declProtOptTimestampGetter
+			TZDateDef declProtOptTZDateGetter
+			TZTimeDef declProtOptTZTimeGetter
+			TZTimestampDef declProtOptTZTimestampGetter
+			DbKeyHash128Gen declProtOptDbKeyHash128Getter
+			DbKeyHash160Gen declProtOptDbKeyHash160Getter
+			DbKeyHash224Gen declProtOptDbKeyHash224Getter
+			DbKeyHash256Gen declProtOptDbKeyHash256Getter
+			DbKeyHash384Gen declProtOptDbKeyHash384Getter
+			DbKeyHash512Gen declProtOptDbKeyHash512Getter
+			DbKeyHash128Def declProtOptDbKeyHash128Getter
+			DbKeyHash160Def declProtOptDbKeyHash160Getter
+			DbKeyHash224Def declProtOptDbKeyHash224Getter
+			DbKeyHash256Def declProtOptDbKeyHash256Getter
+			DbKeyHash384Def declProtOptDbKeyHash384Getter
+			DbKeyHash512Def declProtOptDbKeyHash512Getter
+			Uuid6Gen declProtOptUuid6Getter
+			Uuid6Def declProtOptUuid6Getter
+			UuidGen declProtOptUuidGetter
+			UuidDef declProtOptUuidGetter
+			StringDef declProtOptStringGetter
+			TokenDef declProtOptTokenGetter
+			NmTokenDef declProtOptNmTokenGetter
+			NmTokensDef declProtOptNmTokensGetter
+			TextDef declProtOptTextGetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqSetter">$switch IsProtected yes reallyDeclProtReqSetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclProtReqSetter"
+		>$switch BaseModelAtomClass
+			BlobDef declProtReqBlobSetter
+			BoolDef declProtReqBoolSetter
+			EnumDef declProtReqEnumSetter
+			Id16Gen declProtReqInt16Setter
+			Id32Gen declProtReqInt32Setter
+			Id64Gen declProtReqInt64Setter
+			Int16Def declProtReqInt16Setter
+			Int32Def declProtReqInt32Setter
+			Int64Def declProtReqInt64Setter
+			UInt16Def declProtReqUInt16Setter
+			UInt32Def declProtReqUInt32Setter
+			UInt64Def declProtReqUInt64Setter
+			FloatDef declProtReqFloatSetter
+			DoubleDef declProtReqDoubleSetter
+			NumberDef declProtReqNumberSetter
+			DateDef declProtReqDateSetter
+			TimeDef declProtReqTimeSetter
+			TimestampDef declProtReqTimestampSetter
+			TZDateDef declProtReqTZDateSetter
+			TZTimeDef declProtReqTZTimeSetter
+			TZTimestampDef declProtReqTZTimestampSetter
+			DbKeyHash128Gen declProtReqDbKeyHash128Setter
+			DbKeyHash160Gen declProtReqDbKeyHash160Setter
+			DbKeyHash224Gen declProtReqDbKeyHash224Setter
+			DbKeyHash256Gen declProtReqDbKeyHash256Setter
+			DbKeyHash384Gen declProtReqDbKeyHash384Setter
+			DbKeyHash512Gen declProtReqDbKeyHash512Setter
+			DbKeyHash128Def declProtReqDbKeyHash128Setter
+			DbKeyHash160Def declProtReqDbKeyHash160Setter
+			DbKeyHash224Def declProtReqDbKeyHash224Setter
+			DbKeyHash256Def declProtReqDbKeyHash256Setter
+			DbKeyHash384Def declProtReqDbKeyHash384Setter
+			DbKeyHash512Def declProtReqDbKeyHash512Setter
+			Uuid6Gen declProtReqUuid6Setter
+			Uuid6Def declProtReqUuid6Setter
+			UuidGen declProtReqUuidSetter
+			UuidDef declProtReqUuidSetter
+			StringDef declProtReqStringSetter
+			TokenDef declProtReqTokenSetter
+			NmTokenDef declProtReqNmTokenSetter
+			NmTokensDef declProtReqNmTokensSetter
+			TextDef declProtReqTextSetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptSetter">$switch IsProtected yes reallyDeclProtOptSetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclProtOptSetter"
+		>$switch BaseModelAtomClass
+			BlobDef declProtOptBlobSetter
+			BoolDef declProtOptBoolSetter
+			EnumDef declProtOptEnumSetter
+			Id16Gen declProtOptInt16Setter
+			Id32Gen declProtOptInt32Setter
+			Id64Gen declProtOptInt64Setter
+			Int16Def declProtOptInt16Setter
+			Int32Def declProtOptInt32Setter
+			Int64Def declProtOptInt64Setter
+			UInt16Def declProtOptUInt16Setter
+			UInt32Def declProtOptUInt32Setter
+			UInt64Def declProtOptUInt64Setter
+			FloatDef declProtOptFloatSetter
+			DoubleDef declProtOptDoubleSetter
+			NumberDef declProtOptNumberSetter
+			DateDef declProtOptDateSetter
+			TimeDef declProtOptTimeSetter
+			TimestampDef declProtOptTimestampSetter
+			TZDateDef declProtOptTZDateSetter
+			TZTimeDef declProtOptTZTimeSetter
+			TZTimestampDef declProtOptTZTimestampSetter
+			DbKeyHash128Gen declProtOptDbKeyHash128Setter
+			DbKeyHash160Gen declProtOptDbKeyHash160Setter
+			DbKeyHash224Gen declProtOptDbKeyHash224Setter
+			DbKeyHash256Gen declProtOptDbKeyHash256Setter
+			DbKeyHash384Gen declProtOptDbKeyHash384Setter
+			DbKeyHash512Gen declProtOptDbKeyHash512Setter
+			DbKeyHash128Def declProtOptDbKeyHash128Setter
+			DbKeyHash160Def declProtOptDbKeyHash160Setter
+			DbKeyHash224Def declProtOptDbKeyHash224Setter
+			DbKeyHash256Def declProtOptDbKeyHash256Setter
+			DbKeyHash384Def declProtOptDbKeyHash384Setter
+			DbKeyHash512Def declProtOptDbKeyHash512Setter
+			Uuid6Gen declProtOptUuid6Setter
+			Uuid6Def declProtOptUuid6Setter
+			UuidGen declProtOptUuidSetter
+			UuidDef declProtOptUuidSetter
+			StringDef declProtOptStringSetter
+			TokenDef declProtOptTokenSetter
+			NmTokenDef declProtOptNmTokenSetter
+			NmTokensDef declProtOptNmTokensSetter
+			TextDef declProtOptTextSetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtMinValue">$switch IsProtected yes reallyDeclProtMinValue default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclProtMinValue"
+		>$switch BaseModelAtomClass
+			BlobDef declProtBlobMinValue
+			BoolDef declProtBoolMinValue
+			EnumDef declProtEnumMinValue
+			Id16Gen declProtInt16MinValue
+			Id32Gen declProtInt32MinValue
+			Id64Gen declProtInt64MinValue
+			Int16Def declProtInt16MinValue
+			Int32Def declProtInt32MinValue
+			Int64Def declProtInt64MinValue
+			UInt16Def declProtUInt16MinValue
+			UInt32Def declProtUInt32MinValue
+			UInt64Def declProtUInt64MinValue
+			FloatDef declProtFloatMinValue
+			DoubleDef declProtDoubleMinValue
+			NumberDef declProtNumberMinValue
+			DateDef declProtDateMinValue
+			TimeDef declProtTimeMinValue
+			TimestampDef declProtTimestampMinValue
+			TZDateDef declProtTZDateMinValue
+			TZTimeDef declProtTZTimeMinValue
+			TZTimestampDef declProtTZTimestampMinValue
+			DbKeyHash128Gen empty
+			DbKeyHash160Gen empty
+			DbKeyHash224Gen empty
+			DbKeyHash256Gen empty
+			DbKeyHash384Gen empty
+			DbKeyHash512Gen empty
+			DbKeyHash128Def empty
+			DbKeyHash160Def empty
+			DbKeyHash224Def empty
+			DbKeyHash256Def empty
+			DbKeyHash384Def empty
+			DbKeyHash512Def empty
+			Uuid6Gen empty
+			Uuid6Def empty
+			UuidGen declProtUuidMinValue
+			UuidDef declProtUuidMinValue
+			StringDef declProtStringMinValue
+			TokenDef declProtTokenMinValue
+			NmTokenDef declProtNmTokenMinValue
+			NmTokensDef declProtNmTokensMinValue
+			TextDef declProtTextMinValue
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtMaxValue">$switch IsProtected yes reallyDeclProtMaxValue default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclProtMaxValue"
+		>$switch BaseModelAtomClass
+			BlobDef declProtBlobMaxValue
+			BoolDef declProtBoolMaxValue
+			EnumDef declProtEnumMaxValue
+			Id16Gen declProtInt16MaxValue
+			Id32Gen declProtInt32MaxValue
+			Id64Gen declProtInt64MaxValue
+			Int16Def declProtInt16MaxValue
+			Int32Def declProtInt32MaxValue
+			Int64Def declProtInt64MaxValue
+			UInt16Def declProtUInt16MaxValue
+			UInt32Def declProtUInt32MaxValue
+			UInt64Def declProtUInt64MaxValue
+			FloatDef declProtFloatMaxValue
+			DoubleDef declProtDoubleMaxValue
+			NumberDef declProtNumberMaxValue
+			DateDef declProtDateMaxValue
+			TimeDef declProtTimeMaxValue
+			TimestampDef declProtTimestampMaxValue
+			TZDateDef declProtTZDateMaxValue
+			TZTimeDef declProtTZTimeMaxValue
+			TZTimestampDef declProtTZTimestampMaxValue
+			DbKeyHash128Gen empty
+			DbKeyHash160Gen empty
+			DbKeyHash224Gen empty
+			DbKeyHash256Gen empty
+			DbKeyHash384Gen empty
+			DbKeyHash512Gen empty
+			DbKeyHash128Def empty
+			DbKeyHash160Def empty
+			DbKeyHash224Def empty
+			DbKeyHash256Def empty
+			DbKeyHash384Def empty
+			DbKeyHash512Def empty
+			Uuid6Gen empty
+			Uuid6Def empty
+			UuidGen declProtUuidMaxValue
+			UuidDef declProtUuidMaxValue
+			StringDef declProtStringMaxValue
+			TokenDef declProtTokenMaxValue
+			NmTokenDef declProtNmTokenMaxValue
+			NmTokensDef declProtNmTokensMaxValue
+			TextDef declProtTextMaxValue
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtInitValue">$switch IsProtected yes reallyDeclProtInitValue default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyDeclProtInitValue"
+		>$switch BaseModelAtomClass
+			BlobDef declProtBlobInitValue
+			BoolDef declProtBoolInitValue
+			EnumDef declProtEnumInitValue
+			Id16Gen declProtInt16InitValue
+			Id32Gen declProtInt32InitValue
+			Id64Gen declProtInt64InitValue
+			Int16Def declProtInt16InitValue
+			Int32Def declProtInt32InitValue
+			Int64Def declProtInt64InitValue
+			UInt16Def declProtUInt16InitValue
+			UInt32Def declProtUInt32InitValue
+			UInt64Def declProtUInt64InitValue
+			FloatDef declProtFloatInitValue
+			DoubleDef declProtDoubleInitValue
+			NumberDef declProtNumberInitValue
+			DateDef declProtDateInitValue
+			TimeDef declProtTimeInitValue
+			TimestampDef declProtTimestampInitValue
+			TZDateDef declProtTZDateInitValue
+			TZTimeDef declProtTZTimeInitValue
+			TZTimestampDef declProtTZTimestampInitValue
+			DbKeyHash128Gen declProtDbKeyHash128InitValue
+			DbKeyHash160Gen declProtDbKeyHash160InitValue
+			DbKeyHash224Gen declProtDbKeyHash224InitValue
+			DbKeyHash256Gen declProtDbKeyHash256InitValue
+			DbKeyHash384Gen declProtDbKeyHash384InitValue
+			DbKeyHash512Gen declProtDbKeyHash512InitValue
+			DbKeyHash128Def declProtDbKeyHash128InitValue
+			DbKeyHash160Def declProtDbKeyHash160InitValue
+			DbKeyHash224Def declProtDbKeyHash224InitValue
+			DbKeyHash256Def declProtDbKeyHash256InitValue
+			DbKeyHash384Def declProtDbKeyHash384InitValue
+			DbKeyHash512Def declProtDbKeyHash512InitValue
+			Uuid6Gen declProtUuid6InitValue
+			Uuid6Def declProtUuid6InitValue
+			UuidGen declProtUuidInitValue
+			UuidDef declProtUuidInitValue
+			StringDef declProtStringInitValue
+			TokenDef declProtTokenInitValue
+			NmTokenDef declProtNmTokenInitValue
+			NmTokensDef declProtNmTokensInitValue
+			TextDef declProtTextInitValue
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtBlobMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtBlobMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtBlobInitValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqBlobGetter">
+	public byte[] get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqBlobSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( byte[] value );</GenRule>
+	
+	<GenRule GenDef="Value" Name="declProtOptBlobGetter">
+	public byte[] get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptBlobSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( byte[] value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtBoolMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtBoolMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtBoolInitValue">
+	public final static boolean $upper Name$_INIT_VALUE = $switch InitValue yes true default false$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqBoolGetter">
+	public boolean get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqBoolSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( boolean value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptBoolGetter">
+	public Boolean get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptBoolSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( Boolean value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtEnumMinValue">
+	public static final I$reference DataType EffSchemaName$ProtSchema.$reference DataType Name$ $upper Name$_MIN_VALUE = I$reference DataType EffSchemaName$ProtSchema.$reference DataType Name$.$reference DataType iterate Tag( first declProtEnumMinValueEmitTagName each empty )$;</GenRule>
+
+	<GenRule GenDef="EnumTag" Name="declProtEnumMinValueEmitTagName"
+		>$Name$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtEnumMaxValue">
+	public static final I$reference DataType EffSchemaName$ProtSchema.$reference DataType Name$ $upper Name$_MAX_VALUE = I$reference DataType EffSchemaName$ProtSchema.$reference DataType Name$.$reference DataType iterate Tag( last declProtEnumMaxValueEmitTagName each empty )$;</GenRule>
+
+	<GenRule GenDef="EnumTag" Name="declProtEnumMaxValueEmitTagName"
+		>$Name$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtEnumInitValue">
+	public static final I$reference DataType EffSchemaName$ProtSchema.$reference DataType Name$ $upper Name$_INIT_VALUE = $switch IsNullable yes declProtEnumInitValueNull default declProtEnumInitValueAlways$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtEnumInitValueNull"
+		>null</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtEnumInitValueAlways"
+		>$switch HasInitValue yes declProtEnumInitValueConvertOrdinal default declProtEnumInitValueUseFirst$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtEnumInitValueConvertOrdinal"
+		>I$reference DataType EffSchemaName$ProtSchema.ordinalTo$reference DataType Name$( $InitValue$ )</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtEnumInitValueUseFirst"
+		>I$reference DataType EffSchemaName$ProtSchema.$reference DataType Name$.$reference DataType iterate Tag( first declProtEnumInitValueUseFirstTagName each empty )$</GenRule>
+
+	<GenRule GenDef="EnumTag" Name="declProtEnumInitValueUseFirstTagName"
+		>$Name$</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqEnumGetter">
+	public I$reference DataType EffSchemaName$ProtSchema.$reference DataType Name$ get$implColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqEnumSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$ProtSchema.$reference DataType Name$ value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptEnumGetter">
+	public I$reference DataType EffSchemaName$ProtSchema.$reference DataType Name$ get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptEnumSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( I$reference DataType EffSchemaName$ProtSchema.$reference DataType Name$ value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtInt16MinValue">
+	public static final short $upper Name$_MIN_VALUE = (short)$MinValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtInt16MaxValue">
+	public static final short $upper Name$_MAX_VALUE = (short)$MaxValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtInt16InitValue">
+	public static final short $upper Name$_INIT_VALUE = (short)$switch HasInitValue yes InitValue default Zero$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqInt16Getter">
+	public short get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqInt16Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( short value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptInt16Getter">
+	public Short get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptInt16Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( Short value );</GenRule>
+
+	<GenRule GenDef="Value" Name="maybeProtAddLForLong">$switch BaseModelAtomClass
+			Int64Def emitProtLForLong
+			Id64Gen emitProtLForLong
+			UInt64Def emitProtLForLong
+			UInt32Def emitProtLForLong
+			default empty$</GenRule>
+	<GenRule GenDef="Value" Name="emitProtLForLong">L</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtInt32MinValue">
+	public static final int $upper Name$_MIN_VALUE = $MinValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtInt32MaxValue">
+	public static final int $upper Name$_MAX_VALUE = $MaxValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtInt32InitValue">
+	public static final int $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqInt32Getter">
+	public int get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqInt32Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( int value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptInt32Getter">
+	public Integer get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptInt32Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( Integer value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtInt64MinValue">
+	public static final long $upper Name$_MIN_VALUE = $MinValue$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtInt64MaxValue">
+	public static final long $upper Name$_MAX_VALUE = $MaxValue$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtInt64InitValue">
+	public static final long $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqInt64Getter">
+	public long get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqInt64Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( long value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptInt64Getter">
+	public Long get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptInt64Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( Long value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUInt16MinValue">
+	public static final int $upper Name$_MIN_VALUE = $MinValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUInt16MaxValue">
+	public static final int $upper Name$_MAX_VALUE = $MaxValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUInt16InitValue">
+	public static final int $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqUInt16Getter">
+	public int get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqUInt16Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( int value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptUInt16Getter">
+	public Integer get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptUInt16Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( Integer value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUInt32MinValue">
+	public static final long $upper Name$_MIN_VALUE = $MinValue$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUInt32MaxValue">
+	public static final long $upper Name$_MAX_VALUE = $MaxValue$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUInt32InitValue">
+	public static final long $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$L;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqUInt32Getter">
+	public long get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqUInt32Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( long value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptUInt32Getter">
+	public Long get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptUInt32Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( Long value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUInt64MinValue">
+	public static final BigDecimal $upper Name$_MIN_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Prot.$TableName$.$Name$", "$EffSchemaName$Prot.$TableName$.$Name$", 19, 0, "$MinValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUInt64MaxValue">
+	public static final BigDecimal $upper Name$_MAX_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Prot.$TableName$.$Name$", "$EffSchemaName$Prot.$TableName$.$Name$", 19, 0, "$MaxValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUInt64InitValue">
+	public static final BigDecimal $upper Name$_INIT_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Prot.$TableName$.$Name$", "$EffSchemaName$Prot.$TableName$.$Name$", 19, 0, "$switch HasInitValue yes InitValue default Zero$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqUInt64Getter">
+	public BigDecimal get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqUInt64Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptUInt64Getter">
+	public BigDecimal get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptUInt64Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtFloatMinValue">
+	public static final float $upper Name$_MIN_VALUE = (float)$MinValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtFloatMaxValue">
+	public static final float $upper Name$_MAX_VALUE = (float)$MaxValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtFloatInitValue">
+	public static final float $upper Name$_INIT_VALUE = (float)$switch HasInitValue yes InitValue default Zero$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqFloatGetter">
+	public float get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqFloatSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( float value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptFloatGetter">
+	public Float get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptFloatSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( Float value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtDoubleMinValue">
+	public static final double $upper Name$_MIN_VALUE = $MinValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtDoubleMaxValue">
+	public static final double $upper Name$_MAX_VALUE = $MaxValue$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtDoubleInitValue">
+	public static final double $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqDoubleGetter">
+	public double get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqDoubleSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( double value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptDoubleGetter">
+	public Double get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptDoubleSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( Double value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtNumberMinValue">
+	public static final BigDecimal $upper Name$_MIN_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Prot.$TableName$.$Name$", "$EffSchemaName$Prot.$TableName$.$Name$", $Digits$, $Precis$, "$MinValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtNumberMaxValue">
+	public static final BigDecimal $upper Name$_MAX_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Prot.$TableName$.$Name$", "$EffSchemaName$.$TableName$Prot.$Name$", $Digits$, $Precis$, "$MaxValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtNumberInitValue">
+	public static final BigDecimal $upper Name$_INIT_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Prot.$TableName$.$Name$", "$EffSchemaName$Prot.$TableName$.$Name$", $Digits$, $Precis$, "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqNumberGetter">
+	public BigDecimal get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqNumberSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptNumberGetter">
+	public BigDecimal get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptNumberSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtDateMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtDateMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtDateInitValue">
+	public static final LocalDate $upper Name$_INIT_VALUE = CFLib.getUTCLocalDate( 1970, 0, 1, 0, 0, 0 );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqDateGetter">
+	public LocalDate get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqDateSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptDateGetter">
+	public LocalDate get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptDateSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTimeMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTimeMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTimeInitValue">
+	public static final LocalTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTime("00:00:00");</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqTimeGetter">
+	public LocalTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqTimeSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptTimeGetter">
+	public LocalTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptTimeSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTimestampMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTimestampMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTimestampInitValue">
+	public static final LocalDateTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTimestamp("2020-01-01T00:00:00");</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqTimestampGetter">
+	public LocalDateTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqTimestampSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptTimestampGetter">
+	public LocalDateTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptTimestampSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTZDateMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTZDateMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTZDateInitValue">
+	public static final LocalDate $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZDate("2020-01-01+00:00");</GenRule>
+
+	<GenRule GenDef="Value" Name="declReqProtTZDateGetter">
+	public LocalDate get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqTZDateSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptTZDateGetter">
+	public LocalDate get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptTZDateSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTZTimeMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTZTimeMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTZTimeInitValue">
+	public static final LocalTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZTime("00:00:00+00:00");</GenRule>
+
+	<GenRule GenDef="Value" Name="declReqProtTZTimeGetter">
+	public LocalTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqTZTimeSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptTZTimeGetter">
+	public LocalTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptTZTimeSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTZTimestampMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTZTimestampMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTZTimestampInitValue">
+	public static final LocalDateTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZTimestamp("2020-01-01T00:00:00+00:00");</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqTZTimestampGetter">
+	public LocalDateTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqTZTimestampSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptTZTimestampGetter">
+	public LocalDateTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptTZTimestampSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtDbKeyHash128MinValue"></GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash160MinValue"></GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash224MinValue"></GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash256MinValue"></GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash384MinValue"></GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash512MinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtDbKeyHash128MaxValue"></GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash160MaxValue"></GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash224MaxValue"></GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash256MaxValue"></GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash384MaxValue"></GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash512MaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtDbKeyHash128InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero128bits$";
+	public static final CFLibDbKeyHash128 $upper Name$_INIT_VALUE = CFLibDbKeyHash128.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash160InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero160bits$";
+	public static final CFLibDbKeyHash160 $upper Name$_INIT_VALUE = CFLibDbKeyHash160.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash224InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero224bits$";
+	public static final CFLibDbKeyHash224 $upper Name$_INIT_VALUE = CFLibDbKeyHash224.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash256InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero256bits$";
+	public static final CFLibDbKeyHash256 $upper Name$_INIT_VALUE = CFLibDbKeyHash256.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash384InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero384bits$";
+	public static final CFLibDbKeyHash384 $upper Name$_INIT_VALUE = CFLibDbKeyHash384.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+	<GenRule GenDef="Value" Name="declProtDbKeyHash512InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$switch HasInitValue yes InitValue default Zero512bits$";
+	public static final CFLibDbKeyHash512 $upper Name$_INIT_VALUE = CFLibDbKeyHash512.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash128Getter">
+	public CFLibDbKeyHash128 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash128Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash128Getter">
+	public CFLibDbKeyHash128 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash128Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash160Getter">
+	public CFLibDbKeyHash160 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash160Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash160Getter">
+	public CFLibDbKeyHash160 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash160Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash224Getter">
+	public CFLibDbKeyHash224 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash224Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash224Getter">
+	public CFLibDbKeyHash224 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash224Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash256Getter">
+	public CFLibDbKeyHash256 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash256Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash256Getter">
+	public CFLibDbKeyHash256 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash256Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash384Getter">
+	public CFLibDbKeyHash384 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash384Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash384Getter">
+	public CFLibDbKeyHash384 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash384Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash512Getter">
+	public CFLibDbKeyHash512 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqDbKeyHash512Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash512Getter">
+	public CFLibDbKeyHash512 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptDbKeyHash512Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUuid6MinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUuid6MaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUuid6InitValue">
+	public static final String S_$upper Name$_INIT_VALUE = "$InitValue$";
+	public static final CFLibUuid6 $upper Name$_INIT_VALUE = CFLibUuid6.fromString( S_$upper Name$_INIT_VALUE );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqUuid6Getter">
+	public CFLibUuid6 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqUuid6Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibUuid6 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptUuid6Getter">
+	public CFLibUuid6 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptUuid6Setter">
+	public void set$implProtColumnAttrOptionality$$Name$( CFLibUuid6 value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUuidMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUuidMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtUuidInitValue">
+	public static final UUID $upper Name$_INIT_VALUE = UUID.fromString( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqUuidGetter">
+	public UUID get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqUuidSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( UUID value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptUuidGetter">
+	public UUID get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptUuidSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( UUID value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtStringMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtStringMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtStringInitValue">
+	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqStringGetter">
+	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqStringSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptStringGetter">
+	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptStringSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTokenMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTokenMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTokenInitValue">
+	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqTokenGetter">
+	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqTokenSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptTokenGetter">
+	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptTokenSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtNmTokenMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtNmTokenMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtNmTokenInitValue">
+	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqNmTokenGetter">
+	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqNmTokenSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptNmTokenGetter">
+	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptNmTokenSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtNmTokensMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtNmTokensMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtNmTokensInitValue">
+	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqNmTokensGetter">
+	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqNmTokensSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptNmTokensGetter">
+	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptNmTokensSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTextMinValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTextMaxValue"></GenRule>
+
+	<GenRule GenDef="Value" Name="declProtTextInitValue">
+	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtReqTextGetter">
+	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtReqTextSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Value" Name="declProtOptTextGetter">
+	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	<GenRule GenDef="Value" Name="declProtOptTextSetter">
+	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+
+	<GenRule GenDef="Table" Name="declProtRecPKeyEquals">
+	@Override
+	public boolean equals( Object obj );
+</GenRule>
+
+	<GenRule GenDef="Table" Name="declProtRecPKeyHashCode">
+	@Override
+	public int hashCode();
+</GenRule>
+
+	<GenRule GenDef="Table" Name="declProtRecPKeyCompareTo">
+	//@Override
+	public int compareTo( I$poptop SchemaDef SchemaName$Prot$TableName$PKey rhs );
+</GenRule>
+
+	<GenRule GenDef="Table" Name="emitProtPKeyHistoryClassNames">, $SchemaName$Prot$TableName$HPKey, $SchemaName$Prot$TableName$H</GenRule>
+
+	<GenRule GenDef="Index" Name="declProtRecPKeyToString">
+	public String getXmlAttrFragment();
+
+	@Override
+	public String toString();
+</GenRule>
+
+</RuleSet>
