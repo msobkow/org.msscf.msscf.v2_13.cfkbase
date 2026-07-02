@@ -62,12 +62,12 @@ import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaProtPackageSchemaName empty empty )$
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$switch IsPublic yes importJavaPubPackages default empty$$poptop SchemaDef iterate SchemaRefs( each importJavaProtPackageSchemaName empty empty )$<!--$poptop SchemaDef iterate SchemaRefs( each importJavaProtPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaProtPackageSchemaNameObj$-->$tabletweak CafeProtTableFactoryImport$
 
 /*
  *	I$SchemaName$Prot$TableName$Factory protected interface for $TableName$
  */
-public interface I$SchemaName$Prot$TableName$Factory$switch HasDefSchema yes extendsJavaDefSchemaProtTableFactory default empty empty empty$
+public interface I$SchemaName$Prot$TableName$Factory$switch HasDefSchema yes extendsJavaDefSchemaProtTableFactory default maybeExtendsJavaDefSchemaPubTableBaseFactory$
 {$switch HasDefSchema yes declJavaDefSchemaProtTableFactoryInheritBody default declJavaDefSchemaProtTableFactoryBaseBody$}
 </GenFile>
 
@@ -78,8 +78,14 @@ public interface I$SchemaName$Prot$TableName$Factory$switch HasDefSchema yes ext
 $switch HasSuperClassRelation no declProtRecNewPKey default empty$$switch HasSuperClassRelation no declProtNewHPKey default empty$$iterate Index( each declProtNewNonPrimaryIndexKey )$$declProtNewRec$$declProtNewHRec$
 </GenRule>
 
+	<GenRule GenDef="Table" Name="maybeExtendsJavaDefSchemaPubTableBaseFactory">$switch IsPublic yes extendsJavaDefSchemaPubTableBaseFactory default empty$</GenRule>
+	<GenRule GenDef="Table" Name="extendsJavaDefSchemaPubTableBaseFactory">
+extends I$reference SchemaDef SchemaName$Pub$TableName$Factory</GenRule>
+
 	<GenRule GenDef="Table" Name="extendsJavaDefSchemaProtTableFactory">
-extends I$reference DefSchema SchemaName$Prot$TableName$Factory</GenRule>
+extends I$reference SchemaDef SchemaName$Prot$TableName$Factory$switch IsPublic yes reallyExtendsPubCommaJavaSchemaTableFactory default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyExtendsPubCommaJavaSchemaTableFactory"
+		>, I$reference SchemaDef SchemaName$Pub$TableName$Factory</GenRule>
 
 	<GenRule GenDef="Index" Name="declProtNewNonPrimaryIndexKey"
 		>$switch IsPrimaryIndex yes empty default declProtNewByIndexKey$</GenRule>
@@ -135,7 +141,7 @@ extends I$reference DefSchema SchemaName$Prot$TableName$Factory</GenRule>
 	 *
 	 *	@return	The new instance.
 	 */
-	public I$DefSchemaName$Prot$TableName$ newRec();
+	public I$DefSchemaName$Prot$TableName$ newProtRec();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtNewHRec"
@@ -149,7 +155,7 @@ extends I$reference DefSchema SchemaName$Prot$TableName$Factory</GenRule>
 	 *
 	 *	@return	The new instance.
 	 */
-	public I$DefSchemaName$Prot$TableName$H newHRec();
+	public I$DefSchemaName$Prot$TableName$H newProtHRec();
 </GenRule>
 
 </RuleSet>

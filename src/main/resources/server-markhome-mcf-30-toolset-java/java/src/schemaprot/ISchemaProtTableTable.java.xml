@@ -84,11 +84,11 @@ $declProtReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty defaul
 	
 	<GenRule GenDef="Table" Name="extendsProtJavaSchemaTableNameTable">$switch IsProtected yes reallyExtendsProtJavaSchemaTableName default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyExtendsProtJavaSchemaTableNameTable">
-extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
+extends I$reference SchemaDef SchemaName$Prot$TableName$Table$switch IsPublic yes reallyExtendsPubCommaJavaSchemaTableNameTable default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="extendsProtCommaJavaSchemaTableNameTable">$switch IsProtected yes reallyExtendsProtCommaJavaSchemaTableNameTable default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyExtendsProtCommaJavaSchemaTableNameTable">,
-	I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
+	I$reference SchemaDef SchemaName$Prot$TableName$Table$switch IsPublic yes reallyExtendsPubCommaJavaSchemaTableNameTable default empty$</GenRule>
 
 	<GenRule GenDef="ServerProc" Name="declProtServerMethod">$switch IsProtected yes reallyDeclProtServerMethod default empty$</GenRule>
 	<GenRule GenDef="ServerProc" Name="reallyDeclProtServerMethod"
@@ -96,12 +96,12 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 
 	<GenRule GenDef="ServerProc" Name="declProtClassServerProc">$switch IsProtected yes reallyDeclProtClassServerProc default empty$</GenRule>
 	<GenRule GenDef="ServerProc" Name="reallyDeclProtClassServerProc">
-	boolean $leadlower Name$( I$DefSchemaName$ProtSchemaObj schemaObj$iterate Params( each declServerMethodParam empty empty )$ );
+	public boolean prot$leadlower Name$( I$DefSchemaName$ProtSchemaObj schemaObj$iterate Params( each declServerMethodParam empty empty )$ );
 </GenRule>
 
 	<GenRule GenDef="ServerProc" Name="declProtInstServerProc">$switch IsProtected yes reallyDeclProtInstServerProc default empty$</GenRule>
 	<GenRule GenDef="ServerProc" Name="reallyDeclProtInstServerProc">
-	boolean $leadlower Name$( I$DefSchemaName$ProtSchemaObj schemaObj,
+	public boolean prot$leadlower Name$( I$DefSchemaName$ProtSchemaObj schemaObj,
 		I$DefSchemaName$Prot$TableName$Obj obj$iterate Params( each declServerMethodParam empty empty )$ );
 </GenRule>
 
@@ -115,12 +115,12 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 
 	<GenRule GenDef="ServerObjFunc" Name="declProtClassServerObjFunc">$switch IsProtected yes reallyDeclProtClassServerObjFunc default empty$</GenRule>
 	<GenRule GenDef="ServerObjFunc" Name="reallyDeclProtClassServerObjFunc">
-	*$reference RetTable DefSchemaName$Prot$reference RetTable Name$ $leadlower Name$( I$reference RetTable DefSchemaName$ProtSchemaObj schemaObj$iterate Params( each declProtServerMethodParam empty empty )$ );
+	public $reference RetTable DefSchemaName$Prot$reference RetTable Name$ prot$leadlower Name$( I$reference RetTable DefSchemaName$ProtSchemaObj schemaObj$iterate Params( each declProtServerMethodParam empty empty )$ );
 </GenRule>
 
 	<GenRule GenDef="ServerObjFunc" Name="declProtInstServerObjFunc">$switch IsProtected yes reallyDeclProtInstServerObjFunc default empty$</GenRule>
 	<GenRule GenDef="ServerObjFunc" Name="reallyDeclProtInstServerObjFunc">
-	I$reference RetTable DefSchemaName$Prot$reference RetTable Name$ $leadlower Name$( I$reference RetTable DefSchemaName$ProtSchemaObj schemaObj,
+	public I$reference RetTable DefSchemaName$Prot$reference RetTable Name$ prot$leadlower Name$( I$reference RetTable DefSchemaName$ProtSchemaObj schemaObj,
 		I$DefSchemaName$Prot$TableName$Obj obj$iterate Params( each declProtServerMethodParam empty empty )$ );
 </GenRule>
 
@@ -130,12 +130,12 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 
 	<GenRule GenDef="ServerListFunc" Name="declProtClassServerListFunc">$switch IsProtected yes reallyDeclProtClassServerListFunc default empty$</GenRule>
 	<GenRule GenDef="ServerListFunc" Name="reallyDeclProtClassServerListFunc">
-	I$reference RetTable DefSchemaName$Prot$reference RetTable Name$[] $leadlower Name$( I$reference RetTable DefSchemaName$ProtSchemaObj schemaObj$iterate Params( each declProtServerMethodParam empty empty )$ );
+	public I$reference RetTable DefSchemaName$Prot$reference RetTable Name$[] prot$leadlower Name$( I$reference RetTable DefSchemaName$ProtSchemaObj schemaObj$iterate Params( each declProtServerMethodParam empty empty )$ );
 </GenRule>
 
 	<GenRule GenDef="ServerListFunc" Name="declProtInstServerListFunc">$switch IsProtected yes reallyDeclProtInstServerListFunc default empty$</GenRule>
 	<GenRule GenDef="ServerListFunc" Name="reallyDeclProtInstServerListFunc">
-	I$reference RetTable DefSchemaName$Prot$reference RetTable Name$[] $leadlower Name$( I$reference RetTable DefSchemaName$ProtSchemaObj schemaObj,
+	public I$reference RetTable DefSchemaName$Prot$reference RetTable Name$[] prot$leadlower Name$( I$reference RetTable DefSchemaName$ProtSchemaObj schemaObj,
 		I$DefSchemaName$Prot$TableName$Obj obj$iterate Params( each declProtServerMethodParam empty empty )$ );
 </GenRule>
 
@@ -146,7 +146,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	void releasePreparedStatements();
+	public void protreleasePreparedStatements();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtReadTableDerivedByPKey">$switch IsProtected yes reallyDeclProtReadTableDerivedByPKey default empty$</GenRule>
@@ -161,7 +161,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 */
-	I$poptop Table DefSchemaName$Prot$poptop Table TableName$ readDerived( I$SecSchemaName$ProtAuthorization Authorization,
+	public I$poptop Table DefSchemaName$Prot$poptop Table TableName$ protreadDerived( I$SecSchemaName$ProtAuthorization Authorization,
 		$IProtCompactedPrimaryIndexClass$ PKey );
 </GenRule>
 
@@ -175,7 +175,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 */
-	I$poptop Table DefSchemaName$Prot$poptop Table TableName$ readDerived( I$SecSchemaName$ProtAuthorization Authorization$reference PrimaryKeyIndex iterate Columns( each declProtCommaColumnArg )$ );
+	public I$poptop Table DefSchemaName$Prot$poptop Table TableName$ protreadDerived( I$SecSchemaName$ProtAuthorization Authorization$reference PrimaryKeyIndex iterate Columns( each declProtCommaColumnArg )$ );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtLockTableDerivedByPKey">$switch IsProtected yes reallyDeclProtLockTableDerivedByPKey default empty$</GenRule>
@@ -190,7 +190,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 */
-	I$poptop Table DefSchemaName$Prot$poptop Table TableName$ lockDerived( I$SecSchemaName$ProtAuthorization Authorization,
+	public I$poptop Table DefSchemaName$Prot$poptop Table TableName$ protlockDerived( I$SecSchemaName$ProtAuthorization Authorization,
 		$IProtCompactedPrimaryIndexClass$ PKey );
 </GenRule>
 
@@ -203,7 +203,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return An array of derived record instances, potentially with 0 elements in the set.
 	 */
-	I$DefSchemaName$Prot$TableName$[] readProtAllDerived( I$SecSchemaName$ProtAuthorization Authorization );
+	public I$DefSchemaName$Prot$TableName$[] protreadProtAllDerived( I$SecSchemaName$ProtAuthorization Authorization );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtReadTableDerivedByIndexes">$switch IsProtected yes reallyDeclProtReadTableDerivedByIndexes default empty$</GenRule>
@@ -245,7 +245,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *	@return The record instance for the specified key, or null if there is
 	 *		no such existing key value.
 	 */
-	I$poptop Table DefSchemaName$Prot$poptop Table TableName$ readDerivedBy$declReadTableSuffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each declProtCommaColumnArg )$ );
+	public I$poptop Table DefSchemaName$Prot$poptop Table TableName$ protreadDerivedBy$declReadTableSuffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each declProtCommaColumnArg )$ );
 </GenRule>
 
 	<GenRule GenDef="Index" Name="declProtReadTableDerivedByDuplicateIndex">$switch IsProtected yes reallyDeclProtReadTableDerivedByDuplicateIndex default empty$</GenRule>
@@ -257,7 +257,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return An array of derived instances for the specified key, potentially with 0 elements in the set.
 	 */
-	I$DefSchemaName$Prot$poptop Table TableName$[] readDerivedBy$declProtReadTableSuffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each declProtCommaColumnArg )$ );
+	public I$DefSchemaName$Prot$poptop Table TableName$[] protreadDerivedBy$declProtReadTableSuffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each declProtCommaColumnArg )$ );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtReadTableRecByPKey">$switch IsProtected yes reallyDeclProtReadTableRecByPKey default empty$</GenRule>
@@ -274,7 +274,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	I$DefSchemaName$Prot$TableName$ readRec( I$SecSchemaName$ProtAuthorization Authorization,
+	public I$DefSchemaName$Prot$TableName$ protreadRec( I$SecSchemaName$ProtAuthorization Authorization,
 		$IProtCompactedPrimaryIndexClass$ PKey );
 </GenRule>
 
@@ -292,7 +292,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	I$DefSchemaName$Prot$TableName$ readRec( I$SecSchemaName$ProtAuthorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtCommaColumnArg )$ );
+	public I$DefSchemaName$Prot$TableName$ protreadRec( I$SecSchemaName$ProtAuthorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtCommaColumnArg )$ );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtLockTableRecByPKey">$switch IsProtected yes reallyDeclProtLockTableRecByPKey default empty$</GenRule>
@@ -309,7 +309,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	I$DefSchemaName$Prot$TableName$ lockRec( I$SecSchemaName$ProtAuthorization Authorization,
+	public I$DefSchemaName$Prot$TableName$ protlockRec( I$SecSchemaName$ProtAuthorization Authorization,
 		$IProtCompactedPrimaryIndexClass$ PKey );
 </GenRule>
 
@@ -322,7 +322,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return All the specific $TableName$ instances in the database accessible for the Authorization.
 	 */
-	I$DefSchemaName$Prot$TableName$[] readAllRec( I$SecSchemaName$ProtAuthorization Authorization );
+	public I$DefSchemaName$Prot$TableName$[] protreadAllRec( I$SecSchemaName$ProtAuthorization Authorization );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtReadTableRecByIndexes">$switch IsProtected yes reallyDeclProtReadTableRecByIndexes default empty$</GenRule>
@@ -381,7 +381,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	I$DefSchemaName$Prot$poptop Table TableName$ readRecBy$declProtReadTableSuffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each declProtCommaColumnArg )$ );
+	public I$DefSchemaName$Prot$poptop Table TableName$ protreadRecBy$declProtReadTableSuffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each declProtCommaColumnArg )$ );
 </GenRule>
 
 	<GenRule GenDef="Index" Name="declProtReadTableRecByDuplicateIndex">$switch IsProtected yes reallyDeclProtReadTableRecByDuplicateIndex default empty$</GenRule>
@@ -395,7 +395,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	I$DefSchemaName$Prot$poptop Table TableName$[] readRecBy$declProtReadTableSuffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each declProtCommaColumnArg )$ );
+	public I$DefSchemaName$Prot$poptop Table TableName$[] protreadRecBy$declProtReadTableSuffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each declProtCommaColumnArg )$ );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtPageAllTableRec">$switch IsProtected yes reallyDeclProtPageAllTableRec default empty$</GenRule>
@@ -407,7 +407,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return All the specific $TableName$ instances in the database accessible for the Authorization.
 	 */
-	I$DefSchemaName$Prot$TableName$[] pageAllRec( I$SecSchemaName$ProtAuthorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtCommaOptPriorArg )$ );
+	public I$DefSchemaName$Prot$TableName$[] protpageAllRec( I$SecSchemaName$ProtAuthorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtCommaOptPriorArg )$ );
 </GenRule>
 
 	<GenRule GenDef="Index" Name="declProtPageTableRecByDuplicateIndex">$switch IsProtected yes reallyDeclProtPageTableRecByDuplicateIndex default empty$</GenRule>
@@ -421,7 +421,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	I$DefSchemaName$Prot$poptop Table TableName$[] pageRecBy$declReadTableSuffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each declCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ );
+	public I$DefSchemaName$Prot$poptop Table TableName$[] protpageRecBy$declReadTableSuffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each declCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtMoveUpTableRec">$switch IsProtected yes reallyDeclProtMoveUpTableRec default empty$</GenRule>
@@ -431,7 +431,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return	The refreshed record after it has been moved
 	 */
-	I$poptop Table DefSchemaName$Prot$poptop Table TableName$ moveRecUp( I$SecSchemaName$ProtAuthorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtCommaColumnArg )$,
+	public I$poptop Table DefSchemaName$Prot$poptop Table TableName$ protmoveRecUp( I$SecSchemaName$ProtAuthorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtCommaColumnArg )$,
 		int revision );
 </GenRule>
 
@@ -442,7 +442,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return	The refreshed record after it has been moved
 	 */
-	I$poptop Table DefSchemaName$$poptop Table TableName$ moveRecDown( I$SecSchemaName$ProtAuthorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
+	public I$poptop Table DefSchemaName$$poptop Table TableName$ protmoveRecDown( I$SecSchemaName$ProtAuthorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$,
 		int revision );
 </GenRule>
 
@@ -486,7 +486,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	short next$Name$( I$SecSchemaName$ProtAuthorization Authorization,
+	public short protnext$Name$( I$SecSchemaName$ProtAuthorization Authorization,
 		$IProtCompactedPrimaryIndexClass$ PKey );
 
 	/**
@@ -496,7 +496,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	short next$Name$( I$SecSchemaName$ProtAuthorization Authorization$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implProtNextIdGenDeclAttr )$ );
+	public short protnext$Name$( I$SecSchemaName$ProtAuthorization Authorization$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implProtNextIdGenDeclAttr )$ );
 </GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implProtCommentKeyAttr">
@@ -516,7 +516,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	int next$Name$( I$SecSchemaName$ProtAuthorization Authorization,
+	public int protnext$Name$( I$SecSchemaName$ProtAuthorization Authorization,
 		$IProtCompactedPrimaryIndexClass$ PKey );
 
 	/**
@@ -526,7 +526,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	int next$Name$( I$SecSchemaName$ProtAuthorization Authorization$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implProtNextIdGenDeclAttr )$ );
+	public int protnext$Name$( I$SecSchemaName$ProtAuthorization Authorization$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implProtNextIdGenDeclAttr )$ );
 </GenRule>
 
 	<GenRule ScopeDef="Table" GenDef="Id64Gen" Name="declProtNextIdGen">
@@ -539,7 +539,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	long next$Name$( I$SecSchemaName$ProtAuthorization Authorization,
+	public long protbext$Name$( I$SecSchemaName$ProtAuthorization Authorization,
 		$IProtCompactedPrimaryIndexClass$ PKey );
 
 	/**
@@ -549,7 +549,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	long next$Name$( I$SecSchemaName$ProtAuthorization Authorization$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implProtNextIdGenDeclAttr )$ );
+	public long protnext$Name$( I$SecSchemaName$ProtAuthorization Authorization$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implProtNextIdGenDeclAttr )$ );
 </GenRule>
 
 	<GenRule ScopeDef="Table" GenDef="UuidGen" Name="declProtNextIdGen">
@@ -562,7 +562,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
-	UUID next$Name$( I$SecSchemaName$ProtAuthorization Authorization,
+	public UUID protnext$Name$( I$SecSchemaName$ProtAuthorization Authorization,
 		$IProtCompactedPrimaryIndexClass$ PKey );
 </GenRule>
 
@@ -575,7 +575,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@param	rec	The instance interface to be created.
 	 */
-	I$DefSchemaName$Prot$TableName$ create$TableName$( I$SecSchemaName$ProtAuthorization Authorization,
+	public I$DefSchemaName$Prot$TableName$ protcreate$TableName$( I$SecSchemaName$ProtAuthorization Authorization,
 		I$DefSchemaName$Prot$TableName$ rec );
 </GenRule>
 
@@ -587,7 +587,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@return	An array of the $TableName$ instances visible to the Authorization.
 	 */
-	I$DefSchemaName$Prot$TableName$[] readAll$TableName$( I$SecSchemaName$ProtAuthorization Authorization );
+	public I$DefSchemaName$Prot$TableName$[] protreadAll$TableName$( I$SecSchemaName$ProtAuthorization Authorization );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtUpdateTable">
@@ -599,7 +599,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@param	rec	The instance interface to be updated
 	 */
-	I$DefSchemaName$Prot$TableName$ update$TableName$( I$SecSchemaName$ProtAuthorization Authorization,
+	public I$DefSchemaName$Prot$TableName$ protupdate$TableName$( I$SecSchemaName$ProtAuthorization Authorization,
 		I$DefSchemaName$Prot$TableName$ rec );
 </GenRule>
 
@@ -611,7 +611,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@param	rec	The instance interface to be deleted.
 	 */
-	void delete$TableName$( I$SecSchemaName$ProtAuthorization Authorization,
+	public void protdelete$TableName$( I$SecSchemaName$ProtAuthorization Authorization,
 		I$DefSchemaName$Prot$TableName$ rec );$declProtDeleteTableByInheritedIndexes$
 </GenRule>
 
@@ -637,7 +637,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
 	 */
-	void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each implProtNextIdGenDeclAttr )$ );
+	public void protdelete$poptop Table TableName$By$Suffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each implProtNextIdGenDeclAttr )$ );
 
 	/**
 	 *	Delete the $poptop Table TableName$ instances identified by the key $Suffix$.
@@ -646,7 +646,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@param	argKey	The key identifying the instances to be deleted.
 	 */
-	void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$ProtAuthorization Authorization,
+	public void protdelete$poptop Table TableName$By$Suffix$( I$SecSchemaName$ProtAuthorization Authorization,
 		I$DefSchemaName$Prot$TableName$By$Suffix$Key argKey );</GenRule>
 
 	<GenRule GenDef="Index" Name="declProtDeleteTableByPrimaryIndex">$switch IsProtected yes reallyDeclProtDeleteTableByPrimaryIndex default empty$</GenRule>
@@ -658,7 +658,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@param	argKey	The primary key identifying the instance to be deleted.
 	 */
-	void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$ProtAuthorization Authorization,
+	public void protdelete$poptop Table TableName$By$Suffix$( I$SecSchemaName$ProtAuthorization Authorization,
 		$IProtCompactedPrimaryIndexClass$ argKey );</GenRule>
 
 	<GenRule GenDef="Index" Name="declProtDeleteTableByPrimaryIndexAttrs">$switch IsProtected yes reallyDeclProtDeleteTableByPrimaryIndexAttrs default empty$</GenRule>
@@ -668,6 +668,6 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 	 *
 	 *	@param	Authorization	The session authorization information.$iterate Columns( each implCommentKeyAttr empty empty )$
 	 */
-	void delete$poptop Table TableName$By$Suffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each implProtNextIdGenDeclAttr )$ );</GenRule>
+	public void protdelete$poptop Table TableName$By$Suffix$( I$SecSchemaName$ProtAuthorization Authorization$iterate Columns( each implProtNextIdGenDeclAttr )$ );</GenRule>
 
 </RuleSet>
