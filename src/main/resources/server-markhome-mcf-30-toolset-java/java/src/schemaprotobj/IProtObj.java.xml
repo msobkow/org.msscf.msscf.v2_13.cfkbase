@@ -86,24 +86,30 @@ public interface I$SchemaName$Prot$TableName$Obj$iterate TableRefs( first declIP
 	<GenRule GenDef="Table" Name="declIProtObjInheritSuperClass">
 	extends I$reference SuperClassRelation reference ToTable DefSchemaName$Prot$reference SuperClassRelation reference ToTable TableName$Obj</GenRule>
 
-	<GenRule GenDef="ServerProc" Name="declProtJavaObjServerMethod"
+	<GenRule GenDef="ServerProc" Name="declProtJavaObjServerMethod">$switch IsProtected yes reallyDeclProtJavaObjServerMethod default empty$</GenRule>
+	<GenRule GenDef="ServerProc" Name="reallyDeclProtJavaObjServerMethod"
 		>$switch IsInstanceMethod yes declProtJavaObjInstServerProc default empty$</GenRule>
 
-	<GenRule GenDef="ServerProc" Name="declProtJavaObjInstServerProc">
+	<GenRule GenDef="ServerProc" Name="declProtJavaObjInstServerProc">$switch IsProtected yes reallyDeclProtJavaObjInstServerProc default empty$</GenRule>
+	<GenRule GenDef="ServerProc" Name="reallyDeclProtJavaObjInstServerProc">
 	boolean $leadlower Name$($iterate Params( first declServerMethodParamNoComma each declServerMethodParam empty empty )$ );
 </GenRule>
 
-	<GenRule GenDef="ServerObjFunc" Name="declProtJavaObjServerMethod"
+	<GenRule GenDef="ServerObjFunc" Name="declProtJavaObjServerMethod">$switch IsProtected yes reallyDeclProtJavaObjServerMethod default empty$</GenRule>
+	<GenRule GenDef="ServerObjFunc" Name="reallyDeclProtJavaObjServerMethod"
 		>$switch IsInstanceMethod yes declProtJavaObjInstServerObjFunc default empty$</GenRule>
 
-	<GenRule GenDef="ServerObjFunc" Name="declProtJavaObjInstServerObjFunc">
+	<GenRule GenDef="ServerObjFunc" Name="declProtJavaObjInstServerObjFunc">$switch IsProtected yes reallyDeclProtJavaObjInstServerObjFunc default empty$</GenRule>
+	<GenRule GenDef="ServerObjFunc" Name="reallyDeclProtJavaObjInstServerObjFunc">
 	I$DefSchemaName$Prot$reference RetTable Name$Obj $leadlower Name$($iterate Params( first declServerMethodParamNoComma each declServerMethodParam empty empty )$ );
 </GenRule>
 
-	<GenRule GenDef="ServerListFunc" Name="declProtJavaObjServerMethod"
+	<GenRule GenDef="ServerListFunc" Name="declProtJavaObjServerMethod">$switch IsProtected yes reallyDeclProtJavaObjServerMethod default empty$</GenRule>
+	<GenRule GenDef="ServerListFunc" Name="reallyDeclProtJavaObjServerMethod"
 		>$switch IsInstanceMethod yes declProtJavaObjInstServerListFunc default empty$</GenRule>
 
-	<GenRule GenDef="ServerListFunc" Name="declProtJavaObjInstServerListFunc">
+	<GenRule GenDef="ServerListFunc" Name="declProtJavaObjInstServerListFunc">$switch IsProtected yes reallyDeclProtJavaObjInstServerListFunc default empty$</GenRule>
+	<GenRule GenDef="ServerListFunc" Name="reallyDeclProtJavaObjInstServerListFunc">
 	List&lt;I$DefSchemaName$Prot$reference RetTable Name$Obj&gt; $leadlower Name$($iterate Params( first declServerMethodParamNoComma each declServerMethodParam empty empty )$ );
 </GenRule>
 
@@ -245,7 +251,8 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	<GenRule GenDef="Relation" Name="maybeDeclIProtObjRelationCollectionAccessors"
 		>$switch RelationTypeTag Superclass empty default declIProtObjRelationCollectionAccessors$</GenRule>
 
-	<GenRule GenDef="Relation" Name="declIProtObjRelationSingletonAccessors">
+	<GenRule GenDef="Relation" Name="declIProtObjRelationSingletonAccessors">$switch IsProtected yes reallyDeclIProtObjRelationSingletonAccessors default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclIProtObjRelationSingletonAccessors">
 	/**
 	 *	Get the $lower OptionalOrRequired$ I$reference ToTable SchemaName$Prot$reference ToTable TableName$Obj instance referenced by the $Suffix$ key.
 	 *
@@ -261,7 +268,8 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$Obj get$OptionalOrRequired$$RelationTypeTag$$Suffix$( boolean forceRead );
 </GenRule>
 
-	<GenRule GenDef="Relation" Name="declIProtObjRelationCollectionAccessors">
+	<GenRule GenDef="Relation" Name="declIProtObjRelationCollectionAccessors">$switch IsProtected yes reallyDeclIProtObjRelationCollectionAccessors default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyDeclIProtObjRelationCollectionAccessors">
 	/**
 	 *	Get the array of $lower OptionalOrRequired$ I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$Obj array of instances referenced by the $Suffix$ key.
 	 *
@@ -277,17 +285,24 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	List&lt;I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$Obj&gt; get$OptionalOrRequired$$RelationTypeTag$$Suffix$( boolean forceRead );
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIProtObjColumnAccessors"
+	<GenRule GenDef="TableCol" Name="declIProtObjColumnAccessors">$switch IsProtected yes reallyDeclIProtObjColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnAccessors"
 		>$switch InSuperiorRelation yes declIProtObjColumnGetter default declIProtObjColumnGetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="declIProtObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIProtObjColumnBasePKeyGetter default declIProtObjColumnBaseDataGetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="declIProtObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIProtObjColumnBasePKeyGetter default declIProtObjColumnBaseDataGetter$$switch ColumnInPrimaryIndex yes declIProtObjColumnBasePKeySetter default declIProtObjColumnBaseDataSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="declIProtObjColumnGetter">$switch IsProtected yes reallyDeclIProtObjColumnGetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIProtObjColumnBasePKeyGetter default declIProtObjColumnBaseDataGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="declIProtObjColumnGetterSetter">$switch IsProtected yes reallyDeclIProtObjColumnGetterSetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIProtObjColumnBasePKeyGetter default declIProtObjColumnBaseDataGetter$$switch ColumnInPrimaryIndex yes declIProtObjColumnBasePKeySetter default declIProtObjColumnBaseDataSetter$</GenRule>
 
-	<GenRule GenDef="Atom" Name="declIProtObjColumnAccessors"
+	<GenRule GenDef="Atom" Name="declIProtObjColumnAccessors">$switch IsProtected yes reallyDeclIProtObjColumnAccessors default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnAccessors"
 		>$switch InSuperiorRelation yes declIProtObjColumnGetter default declIProtObjColumnGetter$</GenRule>
-	<GenRule GenDef="Atom" Name="declIProtObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIProtObjColumnBasePKeyGetter default declIProtObjColumnBaseDataGetter$</GenRule>
-	<GenRule GenDef="Atom" Name="declIProtObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIProtObjColumnBasePKeyGetter default declIProtObjColumnBaseDataGetter$$switch ColumnInPrimaryIndex yes declIProtObjColumnBasePKeySetter default declIProtObjColumnBaseDataSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="declIProtObjColumnGetter">$switch IsProtected yes reallyDeclIProtObjColumnGetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIProtObjColumnBasePKeyGetter default declIProtObjColumnBaseDataGetter$</GenRule>
+	<GenRule GenDef="Atom" Name="declIProtObjColumnGetterSetter">$switch IsProtected yes reallyDeclIProtObjColumnGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIProtObjColumnBasePKeyGetter default declIProtObjColumnBaseDataGetter$$switch ColumnInPrimaryIndex yes declIProtObjColumnBasePKeySetter default declIProtObjColumnBaseDataSetter$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIProtObjColumnBasePKeyGetter">
+	<GenRule GenDef="TableCol" Name="declIProtObjColumnBasePKeyGetter">$switch IsProtected yes reallyDeclIProtObjColumnBasePKeyGetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnBasePKeyGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implProtJavaAtomType$ attribute $Name$.
 	 *
@@ -296,7 +311,8 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	$implProtJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIProtObjColumnBasePKeySetter">
+	<GenRule GenDef="TableCol" Name="declIProtObjColumnBasePKeySetter">$switch IsProtected yes reallyDeclIProtObjColumnBasePKeySetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnBasePKeySetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implProtJavaAtomType$ attribute $Name$.
 	 *
@@ -305,7 +321,8 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	void set$implColumnAttrOptionality$$Name$($implProtJavaAtomType$ value);
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIProtObjColumnBasePKeyGetter">
+	<GenRule GenDef="Atom" Name="declIProtObjColumnBasePKeyGetter">$switch IsProtected yes reallyDeclIProtObjColumnBasePKeyGetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnBasePKeyGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implProtJavaAtomType$ attribute $Name$.
 	 *
@@ -314,7 +331,8 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	$implProtJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIProtObjColumnBasePKeySetter">
+	<GenRule GenDef="Atom" Name="declIProtObjColumnBasePKeySetter">$switch IsProtected yes reallyDeclIProtObjColumnBasePKeySetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnBasePKeySetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implProtJavaAtomType$ attribute $Name$.
 	 *
@@ -323,7 +341,8 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	void set$implColumnAttrOptionality$$Name$($implProtJavaAtomType$ value);
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIProtObjColumnBaseDataGetter">
+	<GenRule GenDef="TableCol" Name="declIProtObjColumnBaseDataGetter">$switch IsProtected yes reallyDeclIProtObjColumnBaseDataGetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnBaseDataGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implProtJavaAtomType$ attribute $Name$.
 	 *
@@ -332,7 +351,8 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	$implProtJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIProtObjColumnBaseDataSetter">
+	<GenRule GenDef="TableCol" Name="declIProtObjColumnBaseDataSetter">$switch IsProtected yes reallyDeclIProtObjColumnBaseDataSetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnBaseDataSetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implProtJavaAtomType$ attribute $Name$.
 	 *
@@ -341,7 +361,8 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	void set$implColumnAttrOptionality$$Name$($implProtJavaAtomType$ value);
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIProtObjColumnBaseDataGetter">
+	<GenRule GenDef="Atom" Name="declIProtObjColumnBaseDataGetter">$switch IsProtected yes reallyDeclIProtObjColumnBaseDataGetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnBaseDataGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implProtJavaAtomType$ attribute $Name$.
 	 *
@@ -350,7 +371,8 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	$implProtJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIProtObjColumnBaseDataSetter">
+	<GenRule GenDef="Atom" Name="declIProtObjColumnBaseDataSetter">$switch IsProtected yes reallyDeclIProtObjColumnBaseDataSetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnBaseDataSetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implProtJavaAtomType$ attribute $Name$.
 	 *

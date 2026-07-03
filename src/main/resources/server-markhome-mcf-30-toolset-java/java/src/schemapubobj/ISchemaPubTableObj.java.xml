@@ -161,31 +161,37 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 	<GenRule GenDef="Table" Name="declPubTableObjReadBySubIndexes"
 		>$switch HasSuperClassRelation yes declPubTableObjReadByInhIndexes default empty$$iterate Index( each declPubTableObjReadByInhNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadByThisNonPrimaryIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadByThisNonPrimaryIndex">$switch IsPublic yes reallyDeclPubTableObjReadByThisNonPrimaryIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadByThisNonPrimaryIndex"
 		>$switch IsPrimaryIndex yes empty default declPubTableObjReadByThisIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadByInhNonPrimaryIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadByInhNonPrimaryIndex">$switch IsPublic yes reallyDeclPubTableObjReadByInhNonPrimaryIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadByInhNonPrimaryIndex"
 		>$switch IsPrimaryIndex yes empty default declPubTableObjReadByInhIndex$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubTableObjReadByInhIndexes"
 		>$reference SuperClassRelation reference ToTable declPubTableObjReadBySubIndexes$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadByThisIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadByThisIndex">$switch IsPublic yes reallyDeclPubTableObjReadByThisIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadByThisIndex"
 		>$switch IsUnique
 			yes declPubTableObjReadByThisUniqueIndex
 			default declPubTableObjReadByThisDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadByInhIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadByInhIndex">$switch IsPublic yes reallyDeclPubTableObjReadByInhIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadByInhIndex"
 		>$switch IsUnique
 			yes declPubTableObjReadByInhUniqueIndex
 			default declPubTableObjReadByInhDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadByIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadByIndex">$switch IsPublic yes reallyDeclPubTableObjReadByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadByIndex"
 		>$switch IsUnique
 			yes declPubTableObjReadByUniqueIndex
 			default declPubTableObjReadByDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadByThisUniqueIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjReadByThisUniqueIndex">$switch IsPublic yes reallyDeclPubTableObjReadByThisUniqueIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadByThisUniqueIndex">
 	/**
 	 *	Get the $DefSchemaName$Pub$TableName$Obj instance for the unique $Suffix$ key.$iterate Columns( each implPubCommentKeyAttr empty empty )$
 	 *
@@ -204,7 +210,8 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 		boolean forceRead );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadByThisPrimaryIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjReadByThisPrimaryIndex">$switch IsPublic yes reallyDeclPubTableObjReadByThisPrimaryIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadByThisPrimaryIndex">
 	/**
 	 *	Get the $DefSchemaName$Pub$TableName$Obj instance for the primary key attributes.$reference Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPubCommentKeyAttr empty empty )$
 	 *
@@ -223,7 +230,8 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 		boolean forceRead );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadByInhUniqueIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjReadByInhUniqueIndex">$switch IsPublic yes reallyDeclPubTableObjReadByInhUniqueIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadByInhUniqueIndex">
 	/**
 	 *	Get the $DefSchemaName$Pub$TableName$Obj instance for the unique $Suffix$ key.$iterate Columns( each implPubCommentKeyAttr empty empty )$
 	 *
@@ -242,7 +250,8 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 		boolean forceRead );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadByThisDuplicateIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjReadByThisDuplicateIndex">$switch IsPublic yes reallyDeclPubTableObjReadByThisDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadByThisDuplicateIndex">
 	/**
 	 *	Get the map of $DefSchemaName$Pub$TableName$Obj instances sorted by their primary keys for the duplicate $Suffix$ key.$iterate Columns( each implPubCommentKeyAttr empty empty )$
 	 *
@@ -261,7 +270,8 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 		boolean forceRead );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadByInhDuplicateIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjReadByInhDuplicateIndex">$switch IsPublic yes reallyDeclPubTableObjReadByInhDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadByInhDuplicateIndex">
 	/**
 	 *	Get the map of $DefSchemaName$Pub$TableName$Obj instances sorted by their primary keys for the duplicate $Suffix$ key.$iterate Columns( each implPubCommentKeyAttr empty empty )$
 	 *
@@ -351,7 +361,8 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 	List&lt;I$poptop Table DefSchemaName$Pub$poptop Table TableName$Obj&gt; pageAll$poptop Table TableName$($reference BaseClass reference PrimaryKeyIndex iterate Columns( first declPubOptPriorArg each declPubCommaOptPriorArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubReadObjByIndex"
+	<GenRule GenDef="Index" Name="declPubReadObjByIndex">$switch IsPublic yes reallyDeclPubReadObjByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubReadObjByIndex"
 		>$switch IsUnique yes declPubReadObjByUniqueIndex default declPubReadObjByDuplicateIndex$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubReadObjByPKey">
@@ -403,7 +414,8 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 	I$DefSchemaName$Pub$TableName$Obj lock$TableName$( $IPubCompactedPrimaryIndexClass$ pkey );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubReadObjByUniqueIndex">
+	<GenRule GenDef="Index" Name="declPubReadObjByUniqueIndex">$switch IsPublic yes reallyDeclPubReadObjByUniqueIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubReadObjByUniqueIndex">
 	/**
 	 *	Read an instance identified by the specified unique $Suffix$ key attributes.$iterate Columns( each implPubCommentKeyAttr empty empty )$
 	 *
@@ -420,7 +432,8 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 		boolean forceRead );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubReadObjByDuplicateIndex">
+	<GenRule GenDef="Index" Name="declPubReadObjByDuplicateIndex">$switch IsPublic yes reallyDeclPubReadObjByDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubReadObjByDuplicateIndex">
 	/**
 	 *	Read a List of $TableName$-derived instances sorted by their primary keys,
 	 *	as identified by the duplicate $Suffix$ key attributes.$iterate Columns( each implPubCommentKeyAttr empty empty )$
@@ -447,7 +460,8 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 	<GenRule GenDef="Table" Name="declPubTableObjPageBySubIndex"
 		>$switch HasSuperClassRelation yes declPubTableObjPageByInhIndex default empty$$iterate Index( each declPubTableObjPageByThisNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjPageByThisNonPrimaryIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjPageByThisNonPrimaryIndex">$switch IsPublic yes reallyDeclPubTableObjPageByThisNonPrimaryIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjPageByThisNonPrimaryIndex"
 		>$switch IsPrimaryIndex yes empty default ifdup_declPubTableObjPageByIndex$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubTableObjPageByInhIndex"
@@ -461,10 +475,12 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 			yes empty
 			default declPubPageObjByDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubPageObjByIndex"
+	<GenRule GenDef="Index" Name="declPubPageObjByIndex">$switch IsPublic yes reallyDeclPubPageObjByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubPageObjByIndex"
 		>$switch IsUnique yes empty default declPubPageObjByDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubPageObjByDuplicateIndex">
+	<GenRule GenDef="Index" Name="declPubPageObjByDuplicateIndex">$switch IsPublic yes reallyDeclPubPageObjByDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubPageObjByDuplicateIndex">
 	/**
 	 *	Read a page of data as a List of $TableName$-derived instances sorted by their primary keys,
 	 *	as identified by the duplicate $Suffix$ key attributes.$iterate Columns( each implPubCommentKeyAttr empty empty )$
@@ -495,59 +511,69 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 	<GenRule GenDef="Table" Name="declPubTableObjDeleteBySubIndexes"
 		>$switch HasSuperClassRelation yes declPubTableObjDeleteByInhIndexes default empty$$iterate Index( each declPubTableObjDeleteByInhNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeleteByThisNonPrimaryIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeleteByThisNonPrimaryIndex">$switch IsPublic yes reallyDeclPubTableObjDeleteByThisNonPrimaryIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeleteByThisNonPrimaryIndex"
 		>$switch IsPrimaryIndex yes empty default declPubTableObjDeleteByThisIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeleteByInhNonPrimaryIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeleteByInhNonPrimaryIndex">$switch IsPublic yes reallyDeclPubTableObjDeleteByInhNonPrimaryIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeleteByInhNonPrimaryIndex"
 		>$switch IsPrimaryIndex yes empty default declPubTableObjDeleteByInhIndex$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubTableObjDeleteByInhIndexes"
 		>$reference SuperClassRelation reference ToTable declPubTableObjDeleteBySubIndexes$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeleteByThisIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeleteByThisIndex">$switch IsPublic yes reallyDeclPubTableObjDeleteByThisIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeleteByThisIndex"
 		>$switch IsUnique
 			yes declPubTableObjDeleteByThisUniqueIndex
 			default declPubTableObjDeleteByThisDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeleteByInhIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeleteByInhIndex">$switch IsPublic yes reallyDeclPubTableObjDeleteByInhIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeleteByInhIndex"
 		>$switch IsUnique
 			yes declPubTableObjDeleteByInhUniqueIndex
 			default declPubTableObjDeleteByInhDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeleteByIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeleteByIndex">$switch IsPublic yes reallyDeclPubTableObjDeleteByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeleteByIndex"
 		>$switch IsUnique
 			yes declPubTableObjDeleteByUniqueIndex
 			default declPubTableObjDeleteByDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeleteByThisUniqueIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjDeleteByThisUniqueIndex">$switch IsPublic yes reallyDeclPubTableObjDeleteByThisUniqueIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeleteByThisUniqueIndex">
 	/**
 	 *	Internal use only.$iterate Columns( each implPubCommentKeyAttr empty empty )$
 	 */
 	void delete$poptop Table TableName$By$Suffix$($iterate Columns( first declPubColumnArg each declPubCommaColumnArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeleteByThisPrimaryIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjDeleteByThisPrimaryIndex">$switch IsPublic yes reallyDeclPubTableObjDeleteByThisPrimaryIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeleteByThisPrimaryIndex">
 	/**
 	 *	Internal use only.$reference Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPubCommentKeyAttr empty empty )$
 	 */
 	void delete$poptop Table TableName$By$reference Table reference BaseClass reference PrimaryKeyIndex Suffix$( $iterate Columns( first declPubColumnArg each declPubCommaColumnArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeleteByInhUniqueIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjDeleteByInhUniqueIndex">$switch IsPublic yes reallyDeclPubTableObjDeleteByInhUniqueIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeleteByInhUniqueIndex">
 	/**
 	 *	Internal use only.$iterate Columns( each implPubCommentKeyAttr empty empty )$
 	 */
 	void delete$poptop Table TableName$By$Suffix$( $iterate Columns( first declPubColumnArg each declPubCommaColumnArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeleteByThisDuplicateIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjDeleteByThisDuplicateIndex">$switch IsPublic yes reallyDeclPubTableObjDeleteByThisDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeleteByThisDuplicateIndex">
 	/**
 	 *	Internal use only.$iterate Columns( each implPubCommentKeyAttr empty empty )$
 	 */
 	void delete$poptop Table TableName$By$Suffix$( $iterate Columns( first declPubColumnArg each declPubCommaColumnArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeleteByInhDuplicateIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjDeleteByInhDuplicateIndex">$switch IsPublic yes reallyDeclPubTableObjDeleteByInhDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeleteByInhDuplicateIndex">
 	/**
 	 *	Internal use only.$iterate Columns( each implPubCommentKeyAttr empty empty )$
 	 */
@@ -562,7 +588,8 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 	I$DefSchemaName$Pub$TableName$Obj readCached$TableName$( $IPubCompactedPrimaryIndexClass$ pkey );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubReadCachedObjByIndex"
+	<GenRule GenDef="Index" Name="declPubReadCachedObjByIndex">$switch IsPublic yes reallyDeclPubReadCachedObjByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubReadCachedObjByIndex"
 		>$switch IsUnique
 			yes declPubReadCachedObjByUniqueIndex
 			default declPubReadCachedObjByDuplicateIndex$</GenRule>
@@ -576,45 +603,55 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 	<GenRule GenDef="Table" Name="declPubTableObjReadCachedBySubIndexes"
 		>$switch HasSuperClassRelation yes declPubTableObjReadCachedByInhIndexes default empty$$iterate Index( each declPubTableObjReadCachedByInhNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByThisNonPrimaryIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByThisNonPrimaryIndex">$switch IsPublic yes reallyDeclPubTableObjReadCachedByThisNonPrimaryIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadCachedByThisNonPrimaryIndex"
 		>$switch IsPrimaryIndex yes empty default declPubTableObjReadCachedByThisIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByInhNonPrimaryIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByInhNonPrimaryIndex">$switch IsPublic yes reallyDeclPubTableObjReadCachedByInhNonPrimaryIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadCachedByInhNonPrimaryIndex"
 		>$switch IsPrimaryIndex yes empty default declPubTableObjReadCachedByInhIndex$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubTableObjReadCachedByInhIndexes"
 		>$reference SuperClassRelation reference ToTable declPubTableObjReadCachedBySubIndexes$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByThisIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByThisIndex">$switch IsPublic yes reallyDeclPubTableObjReadCachedByThisIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadCachedByThisIndex"
 		>$switch IsUnique
 			yes declPubTableObjReadCachedByThisUniqueIndex
 			default declPubTableObjReadCachedByThisDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByInhIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByInhIndex">$switch IsPublic yes reallyDeclPubTableObjReadCachedByInhIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadCachedByInhIndex"
 		>$switch IsUnique
 			yes declPubTableObjReadCachedByInhUniqueIndex
 			default declPubTableObjReadCachedByInhDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByIndex">$switch IsPublic yes reallyDeclPubTableObjReadCachedByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadCachedByIndex"
 		>$switch IsUnique
 			yes declPubTableObjReadCachedByUniqueIndex
 			default declPubTableObjReadCachedByDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByInhUniqueIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByInhUniqueIndex">$switch IsPublic yes reallyDeclPubTableObjReadCachedByInhUniqueIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadCachedByInhUniqueIndex"
 		>$declPubTableObjReadCachedByThisUniqueIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByThisUniqueIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByThisUniqueIndex">$switch IsPublic yes reallyDeclPubTableObjReadCachedByThisUniqueIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadCachedByThisUniqueIndex">
 	I$DefSchemaName$Pub$poptop Table TableName$Obj readCached$poptop Table TableName$By$Suffix$( $iterate Columns( first declPubColumnArg each declPubCommaColumnArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByThisDuplicateIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByThisDuplicateIndex">$switch IsPublic yes reallyDeclPubTableObjReadCachedByThisDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadCachedByThisDuplicateIndex">
 	List&lt;I$DefSchemaName$Pub$poptop Table TableName$Obj&gt; readCached$poptop Table TableName$By$Suffix$( $iterate Columns( first declPubColumnArg each declPubCommaColumnArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByInhDuplicateIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjReadCachedByInhDuplicateIndex">$switch IsPublic yes reallyDeclPubTableObjReadCachedByInhDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjReadCachedByInhDuplicateIndex"
 		>$declPubTableObjReadCachedByThisDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubReadCachedObjByDuplicateIndex">
+	<GenRule GenDef="Index" Name="declPubReadCachedObjByDuplicateIndex">$switch IsPublic yes reallyDeclPubReadCachedObjByDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubReadCachedObjByDuplicateIndex">
 	List&lt;I$DefSchemaName$Pub$poptop Table TableName$Obj&gt; readCached$poptop Table TableName$By$Suffix$( $iterate Columns( first declPubColumnArg each declPubCommaColumnArg )$ );
 </GenRule>
 
@@ -622,7 +659,8 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 	void deepDispose$TableName$( $IPubCompactedPrimaryIndexClass$ pkey );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubDeepDisposeObjByIndex"
+	<GenRule GenDef="Index" Name="declPubDeepDisposeObjByIndex">$switch IsPublic yes reallyDeclPubDeepDisposeObjByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubDeepDisposeObjByIndex"
 		>$switch IsUnique
 			yes declPubDeepDisposeObjByUniqueIndex
 			default declPubDeepDisposeObjByDuplicateIndex$</GenRule>
@@ -636,48 +674,58 @@ $declPubGetObjQualifyingClass$$declPubNewInstance$$declPubNewEditInstance$$switc
 	<GenRule GenDef="Table" Name="declPubTableObjDeepDisposeBySubIndexes"
 		>$switch HasSuperClassRelation yes declPubTableObjDeepDisposeByInhIndexes default empty$$iterate Index( each declPubTableObjDeepDisposeByInhNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByThisNonPrimaryIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByThisNonPrimaryIndex">$switch IsPublic yes reallyDeclPubTableObjDeepDisposeByThisNonPrimaryIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeepDisposeByThisNonPrimaryIndex"
 		>$switch IsPrimaryIndex yes empty default declPubTableObjDeepDisposeByThisIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByInhNonPrimaryIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByInhNonPrimaryIndex">$switch IsPublic yes reallyDeclPubTableObjDeepDisposeByInhNonPrimaryIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeepDisposeByInhNonPrimaryIndex"
 		>$switch IsPrimaryIndex yes empty default declPubTableObjDeepDisposeByInhIndex$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubTableObjDeepDisposeByInhIndexes"
 		>$reference SuperClassRelation reference ToTable declPubTableObjDeepDisposeBySubIndexes$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByThisIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByThisIndex">$switch IsPublic yes reallyDeclPubTableObjDeepDisposeByThisIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeepDisposeByThisIndex"
 		>$switch IsUnique
 			yes declPubTableObjDeepDisposeByThisUniqueIndex
 			default declPubTableObjDeepDisposeByThisDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByInhIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByInhIndex">$switch IsPublic yes reallyDeclPubTableObjDeepDisposeByInhIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeepDisposeByInhIndex"
 		>$switch IsUnique
 			yes declPubTableObjDeepDisposeByInhUniqueIndex
 			default declPubTableObjDeepDisposeByInhDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByIndex">$switch IsPublic yes reallyDeclPubTableObjDeepDisposeByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeepDisposeByIndex"
 		>$switch IsUnique
 			yes declPubTableObjDeepDisposeByUniqueIndex
 			default declPubTableObjDeepDisposeByDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByThisUniqueIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByThisUniqueIndex">$switch IsPublic yes reallyDeclPubTableObjDeepDisposeByThisUniqueIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeepDisposeByThisUniqueIndex">
 	void deepDispose$poptop Table TableName$By$Suffix$( $iterate Columns( first declPubColumnArg each declPubCommaColumnArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByInhUniqueIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByInhUniqueIndex">$switch IsPublic yes reallyDeclPubTableObjDeepDisposeByInhUniqueIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeepDisposeByInhUniqueIndex"
 		>$declPubTableObjDeepDisposeByThisUniqueIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByThisDuplicateIndex">
+	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByThisDuplicateIndex">$switch IsPublic yes reallyDeclPubTableObjDeepDisposeByThisDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeepDisposeByThisDuplicateIndex">
 	void deepDispose$poptop Table TableName$By$Suffix$( $iterate Columns( first declPubColumnArg each declPubCommaColumnArg )$ );
 </GenRule>
 
-	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByInhDuplicateIndex"
+	<GenRule GenDef="Index" Name="declPubTableObjDeepDisposeByInhDuplicateIndex">$switch IsPublic yes reallyDeclPubTableObjDeepDisposeByInhDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubTableObjDeepDisposeByInhDuplicateIndex"
 		>$declPubTableObjDeepDisposeByThisDuplicateIndex$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="declPubDeepDisposeObjByIndexPassArg"
 		>$Name$</GenRule>
 
-	<GenRule GenDef="Index" Name="declPubDeepDisposeObjByDuplicateIndex">
+	<GenRule GenDef="Index" Name="declPubDeepDisposeObjByDuplicateIndex">$switch IsPublic yes reallyDeclPubDeepDisposeObjByDuplicateIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubDeepDisposeObjByDuplicateIndex">
 	public void deepDispose$poptop Table TableName$By$Suffix$( $iterate Columns( first declPubColumnArg each declPubCommaColumnArg )$ );
 </GenRule>
 

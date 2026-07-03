@@ -71,23 +71,23 @@ public interface I$DefProtSchemaName$Schema$iterate SchemaRefs( first extendsPro
 
 	public static final String SCHEMA_NAME = "$SchemaName$";
 	public static final String DBSCHEMA_NAME = "$DbSchemaName$";$declProtApplicationContextAwareContext$
-	public static final $SecProtSchemaName$TableData TABLE_DATA[] = {$iterate DefSchemaProtectedRootTables( first walkISchemaProtTableDataEntry each commaWalkISchemaProtTableDataEntry empty empty )$};
-	public static final AtomicReference&lt;$SecProtSchemaName$TableData[]&gt; consolidatedProtTableData = new AtomicReference&lt;&gt;(null);
-	public static final $SecProtSchemaName$RoleInfo ROLE_INFO[] = {$iterate SchemaOrderedRoles( first declProtISchemaRoleInfoEntry each declProtCommaISchemaRoleInfoEntry empty empty )$};
-	public static final AtomicReference&lt;$SecProtSchemaName$RoleInfo[]&gt; consolidatedProtRoleInfo = new AtomicReference&lt;&gt;(null);
-	public static $SecProtSchemaName$TableData[] getProtTableData() {
+	public static final $SecPubSchemaName$TableData TABLE_DATA[] = {$iterate DefSchemaProtectedRootTables( first walkISchemaProtTableDataEntry each commaWalkISchemaProtTableDataEntry empty empty )$};
+	public static final AtomicReference&lt;$SecPubSchemaName$TableData[]&gt; consolidatedProtTableData = new AtomicReference&lt;&gt;(null);
+	public static final $SecPubSchemaName$RoleInfo ROLE_INFO[] = {$iterate SchemaOrderedRoles( first declProtISchemaRoleInfoEntry each declProtCommaISchemaRoleInfoEntry empty empty )$};
+	public static final AtomicReference&lt;$SecPubSchemaName$RoleInfo[]&gt; consolidatedProtRoleInfo = new AtomicReference&lt;&gt;(null);
+	public static $SecPubSchemaName$TableData[] getProtTableData() {
 		return TABLE_DATA;
 	}
 
-	public static $SecProtSchemaName$TableData[] getConsolidatedProtTableData() {
+	public static $SecPubSchemaName$TableData[] getConsolidatedProtTableData() {
 		if (consolidatedProtTableData.get() == null) {
-			ArrayList&lt;$SecProtSchemaName$TableData&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declProtISchemaAddRefTableData empty empty)$
-			for( $SecProtSchemaName$TableData data: TABLE_DATA) {
+			ArrayList&lt;$SecPubSchemaName$TableData&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declProtISchemaAddRefTableData empty empty)$
+			for( $SecPubSchemaName$TableData data: TABLE_DATA) {
 				lst.add(data);
 			}
-			$SecProtSchemaName$TableData arr[] = new $SecProtSchemaName$TableData[lst.size()];
+			$SecPubSchemaName$TableData arr[] = new $SecPubSchemaName$TableData[lst.size()];
 			int idx = 0;
-			for($SecProtSchemaName$TableData data: lst) {
+			for($SecPubSchemaName$TableData data: lst) {
 				arr[idx++] = data;
 			}
 			consolidatedProtTableData.compareAndSet(null, arr);
@@ -95,21 +95,21 @@ public interface I$DefProtSchemaName$Schema$iterate SchemaRefs( first extendsPro
 		return(consolidatedProtTableData.get());
 	}
 
-	public static $SecProtSchemaName$RoleInfo[] getProtRoleInfo() {
+	public static $SecPubSchemaName$RoleInfo[] getProtRoleInfo() {
 		return ROLE_INFO;
 	}
 
-	public static $SecProtSchemaName$RoleInfo[] getConsolidatedProtRoleInfo() {
+	public static $SecPubSchemaName$RoleInfo[] getConsolidatedProtRoleInfo() {
 		if (consolidatedProtRoleInfo.get() == null) {
-			ArrayList&lt;$SecProtSchemaName$RoleInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declProtISchemaAddRefRoleInfo empty empty)$
-			for( $SecProtSchemaName$RoleInfo info: ROLE_INFO) {
+			ArrayList&lt;$SecPubSchemaName$RoleInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declProtISchemaAddRefRoleInfo empty empty)$
+			for( $SecPubSchemaName$RoleInfo info: ROLE_INFO) {
 				lst.add(info);
 			}
 			// Dependency order is the natural order of role info comparison
-			lst.sort(new $SecProtSchemaName$RoleInfoDependencyComparator());
-			$SecProtSchemaName$RoleInfo arr[] = new $SecProtSchemaName$RoleInfo[lst.size()];
+			lst.sort(new $SecPubSchemaName$RoleInfoDependencyComparator());
+			$SecPubSchemaName$RoleInfo arr[] = new $SecPubSchemaName$RoleInfo[lst.size()];
 			int idx = 0;
-			for($SecProtSchemaName$RoleInfo info: lst) {
+			for($SecPubSchemaName$RoleInfo info: lst) {
 				arr[idx++] = info;
 			}
 			consolidatedProtRoleInfo.compareAndSet(null, arr);
@@ -121,7 +121,7 @@ $implProtApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs
 
 	<GenRule GenDef="SchemaRef" Name="importJavaProtPackageSchemaNameBuffDotFactoryService">$reference RefSchema importJavaProtPackageSchemaNameBuffDotFactoryService$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="importJavaProtPackageSchemaNameBuffDotFactoryService">
-		import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$prot.buff.$DefSchemaName$ProtBuffFactoryService;</GenRule>
+//import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$prot.buff.$DefSchemaName$ProtBuffFactoryService;</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="importJavaPubPackages">$reference RefSchema importJavaPubPackageSchemaName$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="importJavaPubPackages">$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackages empty empty )$$importJavaPubPackageSchemaName$</GenRule>
@@ -191,21 +191,21 @@ $implProtApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs
 
 	<GenRule GenDef="SchemaRef" Name="declProtISchemaAddRefTableData">$reference RefSchema declProtISchemaAddRefTableData$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declProtISchemaAddRefTableData">
-			for( $SecProtSchemaName$TableData data: I$DefProtSchemaName$Schema.getTableData()) {
+			for( $SecPubSchemaName$TableData data: I$DefProtSchemaName$Schema.getTableData()) {
 				lst.add(data);
 			}</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="declProtISchemaAddRefRoleInfo">$reference RefSchema declProtISchemaAddRefRoleInfo$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declProtISchemaAddRefRoleInfo">
-			for( $SecProtSchemaName$RoleInfo info: I$DefProtSchemaName$Schema.getRoleInfo()) {
+			for( $SecPubSchemaName$RoleInfo info: I$DefProtSchemaName$Schema.getRoleInfo()) {
 				lst.add(info);
 			}</GenRule>
 
-	<GenRule GenDef="Table" Name="walkISchemaProtTableDataEntry">new $SecProtSchemaName$TableData("$DefSchemaName$", "$TableName$", $switch HasSuperClassRelation yes emitISchemaTableDataEntrySuperName default emitNull$, $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", "$CodeVis$")$iterate TableSubClasses( each commaWalkISchemaProtTableDataEntry empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="walkISchemaProtTableDataEntry">new $SecPubSchemaName$TableData("$DefSchemaName$", "$TableName$", $switch HasSuperClassRelation yes emitISchemaTableDataEntrySuperName default emitNull$, $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", "$CodeVis$")$iterate TableSubClasses( each commaWalkISchemaProtTableDataEntry empty empty )$</GenRule>
 	<GenRule GenDef="Table" Name="commaWalkISchemaProtTableDataEntry">,
 		$walkISchemaProtTableDataEntry$</GenRule>
 
-	<GenRule GenDef="SchemaRole" Name="declProtISchemaRoleInfoEntry">new $SecProtSchemaName$RoleInfo("$Name$", "$RoleScope$", "$Enables$", "$Includes$")</GenRule>
+	<GenRule GenDef="SchemaRole" Name="declProtISchemaRoleInfoEntry">new $SecPubSchemaName$RoleInfo("$Name$", "$RoleScope$", "$Enables$", "$Includes$")</GenRule>
 	<GenRule GenDef="SchemaRole" Name="declProtCommaISchemaRoleInfoEntry">,
 		$declProtISchemaRoleInfoEntry$</GenRule>
 
@@ -328,8 +328,8 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 </GenRule>
 
 <GenRule GenDef="SchemaDef" Name="declProtSchemaBootstrap">
-	public void bootstrapSchema($SecProtSchemaName$TableData tableData[]);
-	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecProtSchemaName$TableData tableData[]);
+	public void bootstrapSchema($SecPubSchemaName$TableData tableData[]);
+	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]);
 </GenRule>
 
 <GenRule GenDef="Object" Name="declProtISchemaClassMapEntry">
