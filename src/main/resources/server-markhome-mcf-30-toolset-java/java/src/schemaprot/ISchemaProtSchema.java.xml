@@ -72,15 +72,15 @@ public interface I$DefProtSchemaName$Schema$iterate SchemaRefs( first extendsPro
 	public static final String SCHEMA_NAME = "$SchemaName$";
 	public static final String DBSCHEMA_NAME = "$DbSchemaName$";$declProtApplicationContextAwareContext$
 	public static final $SecPubSchemaName$TableData TABLE_DATA[] = {$iterate DefSchemaProtectedRootTables( first walkISchemaProtTableDataEntry each commaWalkISchemaProtTableDataEntry empty empty )$};
-	public static final AtomicReference&lt;$SecPubSchemaName$TableData[]&gt; consolidatedProtTableData = new AtomicReference&lt;&gt;(null);
+	public static final AtomicReference&lt;$SecPubSchemaName$TableData[]&gt; consolidatedTableData = new AtomicReference&lt;&gt;(null);
 	public static final $SecPubSchemaName$RoleInfo ROLE_INFO[] = {$iterate SchemaOrderedRoles( first declProtISchemaRoleInfoEntry each declProtCommaISchemaRoleInfoEntry empty empty )$};
-	public static final AtomicReference&lt;$SecPubSchemaName$RoleInfo[]&gt; consolidatedProtRoleInfo = new AtomicReference&lt;&gt;(null);
-	public static $SecPubSchemaName$TableData[] getProtTableData() {
+	public static final AtomicReference&lt;$SecPubSchemaName$RoleInfo[]&gt; consolidatedRoleInfo = new AtomicReference&lt;&gt;(null);
+	public static $SecPubSchemaName$TableData[] getTableData() {
 		return TABLE_DATA;
 	}
 
-	public static $SecPubSchemaName$TableData[] getConsolidatedProtTableData() {
-		if (consolidatedProtTableData.get() == null) {
+	public static $SecPubSchemaName$TableData[] getConsolidatedTableData() {
+		if (consolidatedTableData.get() == null) {
 			ArrayList&lt;$SecPubSchemaName$TableData&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declProtISchemaAddRefTableData empty empty)$
 			for( $SecPubSchemaName$TableData data: TABLE_DATA) {
 				lst.add(data);
@@ -90,17 +90,17 @@ public interface I$DefProtSchemaName$Schema$iterate SchemaRefs( first extendsPro
 			for($SecPubSchemaName$TableData data: lst) {
 				arr[idx++] = data;
 			}
-			consolidatedProtTableData.compareAndSet(null, arr);
+			consolidatedTableData.compareAndSet(null, arr);
 		}
-		return(consolidatedProtTableData.get());
+		return(consolidatedTableData.get());
 	}
 
-	public static $SecPubSchemaName$RoleInfo[] getProtRoleInfo() {
+	public static $SecPubSchemaName$RoleInfo[] getRoleInfo() {
 		return ROLE_INFO;
 	}
 
-	public static $SecPubSchemaName$RoleInfo[] getConsolidatedProtRoleInfo() {
-		if (consolidatedProtRoleInfo.get() == null) {
+	public static $SecPubSchemaName$RoleInfo[] getConsolidatedRoleInfo() {
+		if (consolidatedRoleInfo.get() == null) {
 			ArrayList&lt;$SecPubSchemaName$RoleInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declProtISchemaAddRefRoleInfo empty empty)$
 			for( $SecPubSchemaName$RoleInfo info: ROLE_INFO) {
 				lst.add(info);
@@ -112,9 +112,9 @@ public interface I$DefProtSchemaName$Schema$iterate SchemaRefs( first extendsPro
 			for($SecPubSchemaName$RoleInfo info: lst) {
 				arr[idx++] = info;
 			}
-			consolidatedProtRoleInfo.compareAndSet(null, arr);
+			consolidatedRoleInfo.compareAndSet(null, arr);
 		}
-		return(consolidatedProtRoleInfo.get());
+		return(consolidatedRoleInfo.get());
 	}
 $implProtApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declProtISchemaClassMapEntry )$$declProtISchemaClassMapData$$iterate SchemaRefs( each empty empty declProtISchemaSecurityAccessors )$$iterate Types( empty empty each declProtISchemaProtEnumType )$$iterate SchemaRefs( empty declProtISchemaSecurityAttrs each empty )$$implProtISchemaClassMapAccessors$$iterate SchemaRefs( first declProtNewSchema each empty empty declProtNewSchema )$$iterate Id16Generators( each declProtNextIdGen empty empty)$$iterate Id32Generators( each declProtNextIdGen empty empty)$$iterate Id64Generators( each declProtNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declProtNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declProtNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declProtNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declProtNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declProtNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declProtNextIdGen empty empty )$$iterate UuidGenerators( each declProtNextIdGen empty empty )$$iterate Uuid6Generators( each declProtNextIdGen empty empty )$$iterate SchemaRefs( each declProtSchemaFactoryAccessors empty empty )$$declProtSchemaFactoryAccessors$$iterate DefSchemaProtectedTables( each declProtTableMethods empty empty )$$iterate SchemaRefs( first declProtSchemaTablePermsAccessors each empty empty declProtSchemaTablePermsAccessors )$$declProtSchemaBootstrap$}
 </GenFile>
@@ -144,12 +144,12 @@ $implProtApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs
 	/**
 	 *	Get the factory for $DefSchemaName$Prot data objects.
 	 */
-	// public I$DefSchemaName$ProtFactory get$DefSchemaName$ProtFactory();
+	// public I$DefSchemaName$ProtFactory get$DefSchemaName$Factory();
 
 	/**
 	 *	Get the buffer factory for $DefSchemaName$Prot data buffers.
 	 */
-	// public $DefSchemaName$ProtBuffFactoryService get$DefSchemaName$ProtBuffFactory();
+	// public $DefSchemaName$ProtBuffFactoryService get$DefSchemaName$BuffFactory();
 </GenRule>
 
 	<GenRule GenDef="Object" Name="declProtISchemaSecurityAccessors">$poptop SchemaDef declProtISchemaSecurityAccessors$</GenRule>
