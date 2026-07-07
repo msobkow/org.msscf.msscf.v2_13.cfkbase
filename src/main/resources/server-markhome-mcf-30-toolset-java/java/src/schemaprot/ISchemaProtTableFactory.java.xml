@@ -11,7 +11,7 @@
  *	Version 3 or later.
  *
  *	Mark's Code Fractal CFKBase is free software: you can redistribute it and/or
- *	modify it under the terms of the GNU General Public License as published by
+ *	modify it under the terms of the GNU General Public License as protlished by
  *	the Free Software Foundation, either version 3 of the License, or
  *	(at your option) any later version.
  *
@@ -23,7 +23,7 @@
  *	You should have received a copy of the GNU General Public License
  *	along with Mark's Code Fractal CFKBase.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
  *
- *	If you wish to modify and use this code without publishing your changes,
+ *	If you wish to modify and use this code without protlishing your changes,
  *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
  *	for a commercial license at mark.sobkow@gmail.com
  * -->
@@ -33,7 +33,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xsi:schemaLocation="http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://mcf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java"
-	Name="src/schemaprot/ISchemaProtTableFactory.java"
+	Name="src/schemapub/ISchemaProtTableFactory.java"
 	Revision="3.0"
 	Descr="Java 25 Protected Factory interface for $TableName$.">
 
@@ -62,12 +62,12 @@ import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;$switch IsPublic yes importJavaPubPackages default empty$$poptop SchemaDef iterate SchemaRefs( each importJavaProtPackageSchemaName empty empty )$<!--$poptop SchemaDef iterate SchemaRefs( each importJavaProtPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaProtPackageSchemaNameObj$-->$tabletweak CafeProtTableFactoryImport$
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaProtPackageSchemaName empty empty )$
 
 /*
- *	I$SchemaName$Prot$TableName$Factory protected interface for $TableName$
+ *	I$SchemaName$Prot$TableName$Factory protlic interface for $TableName$
  */
-public interface I$SchemaName$Prot$TableName$Factory$switch HasDefSchema yes extendsJavaDefSchemaProtTableFactory default maybeExtendsJavaDefSchemaPubTableBaseFactory$
+public interface I$SchemaName$Prot$TableName$Factory$switch HasDefSchema yes extendsJavaDefSchemaProtTableFactory default empty empty empty$
 {$switch HasDefSchema yes declJavaDefSchemaProtTableFactoryInheritBody default declJavaDefSchemaProtTableFactoryBaseBody$}
 </GenFile>
 
@@ -78,14 +78,8 @@ public interface I$SchemaName$Prot$TableName$Factory$switch HasDefSchema yes ext
 $switch HasSuperClassRelation no declProtRecNewPKey default empty$$switch HasSuperClassRelation no declProtNewHPKey default empty$$iterate Index( each declProtNewNonPrimaryIndexKey )$$declProtNewRec$$declProtNewHRec$
 </GenRule>
 
-	<GenRule GenDef="Table" Name="maybeExtendsJavaDefSchemaPubTableBaseFactory">$switch IsPublic yes extendsJavaDefSchemaPubTableBaseFactory default empty$</GenRule>
-	<GenRule GenDef="Table" Name="extendsJavaDefSchemaPubTableBaseFactory">
-extends I$reference SchemaDef SchemaName$Pub$TableName$Factory</GenRule>
-
 	<GenRule GenDef="Table" Name="extendsJavaDefSchemaProtTableFactory">
-extends I$reference SchemaDef SchemaName$Prot$TableName$Factory$switch IsPublic yes reallyExtendsPubCommaJavaSchemaTableFactory default empty$</GenRule>
-	<GenRule GenDef="Table" Name="reallyExtendsPubCommaJavaSchemaTableFactory"
-		>, I$reference SchemaDef SchemaName$Pub$TableName$Factory</GenRule>
+extends I$reference DefSchema SchemaName$Prot$TableName$Factory</GenRule>
 
 	<GenRule GenDef="Index" Name="declProtNewNonPrimaryIndexKey"
 		>$switch IsPrimaryIndex yes empty default declProtNewByIndexKey$</GenRule>
@@ -93,7 +87,7 @@ extends I$reference SchemaDef SchemaName$Prot$TableName$Factory$switch IsPublic 
 	<GenRule GenDef="Index" Name="declProtNewByIndexKey">$switch IsProtected yes reallyDeclProtNewByIndexKey default empty$</GenRule>
 	<GenRule GenDef="Index" Name="reallyDeclProtNewByIndexKey">
 	/**
-	 *	Allocate a protected $Suffix$ key over public $TableName$ instances.
+	 *	Allocate a protected $Suffix$ key over protlic $TableName$ instances.
 	 *
 	 *	@return	The new instance.
 	 */
