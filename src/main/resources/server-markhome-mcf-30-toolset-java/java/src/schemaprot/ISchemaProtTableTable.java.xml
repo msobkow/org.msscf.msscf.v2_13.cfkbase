@@ -63,18 +63,18 @@ import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj emptye empty )$$importJavaPubPackageSchemaNameObj$$importJavaProtPackageSchemaNameObj$$tabletweak CafeProtTableImport$
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$importJavaProtPackageSchemaNameObj$$tabletweak CafeProtTableTableImport$
 
 /*
  *	$SchemaName$Prot$TableName$Table protlic database interface for $TableName$ has $ExplainCodeVis$.
  */
-public interface I$SchemaName$Prot$TableName$Table$iterate TableRefs( first extendsProtJavaSchemaTableNameTable each extendsProtCommaJavaSchemaTableNameTable empty empty )$$switch IsPublic yes commaProtPubTableNameTable default empty$
+public interface I$SchemaName$Prot$TableName$Table$switch HasSuperClassRelation yes extendsSuperProtJavaSchemaTableTableNameTableTable default maybeExtendsProtJavaSchemaTableNamePubTableTable$
 {
 	public static final String TABLE_NAME = "$TableName$";
 $declProtCreateTable$
 $declProtUpdateTable$
 $declProtDeleteTable$
-$declProtReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declProtReadTableDerivedByPKeyArgs$$declProtLockTableDerivedByPKey$$declProtReadAllTableDerived$$declProtReadTableDerivedByIndexes$$declProtReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declProtReadTableRecByPKeyArgs$$declProtLockTableRecByPKey$$declProtReadAllTableRec$$switch InheritsProtPageData yes declProtPageAllTableRec default empty$$declProtReadTableRecByIndexes$$switch InheritsProtPageData yes declProtPageTableRecByIndexes default empty$$switch HasChain yes declProtMoveUpTableRec default empty$$switch HasChain yes declProtMoveDownTableRec default empty$$iterate ServerMethods( each declProtServerMethod empty empty )$$tabletweak CafeProtTableInterface$}
+$declProtReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declProtReadTableDerivedByPKeyArgs$$declProtLockTableDerivedByPKey$$declProtReadAllTableDerived$$declProtReadTableDerivedByIndexes$$declProtReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declProtReadTableRecByPKeyArgs$$declProtLockTableRecByPKey$$declProtReadAllTableRec$$switch InheritsProtPageData yes declProtPageAllTableRec default empty$$declProtReadTableRecByIndexes$$switch InheritsProtPageData yes declProtPageTableRecByIndexes default empty$$switch HasChain yes declProtMoveUpTableRec default empty$$switch HasChain yes declProtMoveDownTableRec default empty$$iterate ServerMethods( each declProtServerMethod empty empty )$$tabletweak CafeProtTableTableInterface$}
 </GenFile>
 
 	<GenRule GenDef="Table" Name="commaProtPubTableNameTable">,
@@ -84,13 +84,19 @@ $declProtReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty defaul
 	<GenRule GenDef="Table" Name="reallyInheritsProtPageData">$switch PageData yes yes default maybeProtSuperPageData$</GenRule>
 	<GenRule GenDef="Table" Name="maybeProtSuperPageData">$switch HasSuperClassRelation yes superProtPageData default no$</GenRule>
 	<GenRule GenDef="Table" Name="superProtPageData">$reference SuperClassRelation reference ToTable InheritsProtPageData$</GenRule>
-	
-	<GenRule GenDef="Table" Name="extendsProtJavaSchemaTableNameTable">$switch IsProtected yes reallyExtendsProtJavaSchemaTableName default empty$</GenRule>
-	<GenRule GenDef="Table" Name="reallyExtendsProtJavaSchemaTableNameTable">
-extends I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 
-	<GenRule GenDef="Table" Name="extendsProtCommaJavaSchemaTableNameTable">$switch IsProtected yes reallyExtendsProtCommaJavaSchemaTableNameTable default empty$</GenRule>
-	<GenRule GenDef="Table" Name="reallyExtendsProtCommaJavaSchemaTableNameTable">,
+	<GenRule GenDef="Table" Name="extendsSuperProtJavaSchemaTableTableNameTableTable">$reallyExtendsSuperProtJavaSchemaTableTableNameTableTable$</GenRule>
+	<GenRule GenDef="Table" Name="reallyExtendsSuperProtJavaSchemaTableTableNameTableTable">
+extends I$reference SuperClassRelation reference ToTable reference SchemaDef SchemaName$Prot$reference SuperClassRelation reference ToTable TableName$Table$switch IsPublic yes commaExtendsProtJavaSchemaTableTableNamePubTableTable default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="maybeExtendsProtJavaSchemaTableNamePubTableTable">$switch IsPublic yes reallyExtendsProtJavaSchemaTableTableNamePubTableTable default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyExtendsProtJavaSchemaTableTableNamePubTableTable">
+extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
+	<GenRule GenDef="Table" Name="commaExtendsProtJavaSchemaTableTableNamePubTableTable">,
+	I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
+
+	<GenRule GenDef="Table" Name="extendsProtCommaJavaSchemaTableTableNameTableTable">$switch IsProtected yes reallyExtendsProtCommaJavaSchemaTableTableNameTableTable default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyExtendsProtCommaJavaSchemaTableTableNameTableTable">,
 	I$reference SchemaDef SchemaName$Prot$TableName$Table</GenRule>
 
 	<GenRule GenDef="ServerProc" Name="declProtServerMethod">$switch IsProtected yes reallyDeclProtServerMethod default empty$</GenRule>

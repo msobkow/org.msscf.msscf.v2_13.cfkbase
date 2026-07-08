@@ -11,7 +11,7 @@
  *	Version 3 or later.
  *
  *	Mark's Code Fractal CFKBase is free software: you can redistribute it and/or
- *	modify it under the terms of the GNU General Public License as protlished by
+ *	modify it under the terms of the GNU General Public License as published by
  *	the Free Software Foundation, either version 3 of the License, or
  *	(at your option) any later version.
  *
@@ -35,7 +35,7 @@
 	ToolSet="java"
 	Name="src/schemapub/ISchemaProtTable.java"
 	Revision="3.0"
-	Descr="Java 25 protlic interface for a $TableName$ record implementation">
+	Descr="Java 25 protected interface for a $TableName$ record implementation">
 
 	<GenRule GenDef="Table" Name="fileISchemaProtTableJava">$switch IsProtected yes reallyFileISchemaProtTableJava default empty$</GenRule>
 	<GenFile GenDef="Table" Name="reallyFileISchemaProtTableJava"
@@ -47,7 +47,7 @@
 		ExpansionClassName="I$SchemaName$Prot$TableName$Java"
 		ExpansionKeyName="I$SchemaName$Prot$TableName$Java"
 		ExpansionFileName="I$SchemaName$Prot$TableName$.java"
->// Description: Java 25 protlic interface for a $TableName$ record implementation
+>// Description: Java 25 protected interface for a $TableName$ record implementation
 
 $MssSourceLicense$
 
@@ -60,14 +60,12 @@ import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;
-import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaProtPackageSchemaName empty empty )$
-//import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$prot.*;
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$importJavaProtPackageSchemaNameObj$$tabletweak CafeProtTableImport$
 
 /**
  *	I$SchemaName$Prot$TableName$ persistence instances have $ExplainCodeVis$.
  */
-public interface I$SchemaName$Prot$TableName$$switch HasDefSchema yes extendSchemaProtRecTableRec default extendSchemaProtRecTableRecSuperRec$
+public interface I$SchemaName$Prot$TableName$$switch HasDefSchema yes throwErrorCannotExtendSchemaProtRecDefTablePubRec default maybeExtendSchemaProtRecTableRecSuperRec$
 {$switch HasDefSchema yes empty default declProtISchemaTableRecMinValues$$switch HasDefSchema yes empty default declProtISchemaTableRecMaxValues$$switch HasDefSchema yes empty default declProtISchemaTableRecInitValues$$switch HasDefSchema no declProtRecStaticClassCode default empty$
 $switch HasDefSchema no maybeDeclProtRecGetClassCode default empty$$switch HasDefSchema no maybeDeclProtRecOptImplAuditColumnAccessors default empty$$switch HasDefSchemaOrSuper no declProtColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no declProtRevisionGetterSetter default empty$$iterate Relation( each maybeDeclProtISchemaTableRelationGetter empty empty )$$iterate Relation( each maybeDeclProtISchemaTableRelationSetter empty empty )$$switch HasDefSchema no declProtDataGetterSetters default empty$$declProtEqualsObject$$declProtGetHashCode$$declProtCompareToObject$$declProtRecSet$$declProtSchemaRecTableToString$}
 </GenFile>
@@ -99,7 +97,10 @@ $switch HasDefSchema no maybeDeclProtRecGetClassCode default empty$$switch HasDe
 	<GenRule GenDef="Relation" Name="declProtISchemaTableRelationSetter">$switch IsProtected yes reallyDeclProtISchemaTableRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyDeclProtISchemaTableRelationSetter">
 	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj);
-	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declProtSetArgColumn each declProtCommaSetArgColumn)$);</GenRule>
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declProtSetArgColumn each declProtCommaSetArgColumn)$);$switch IsPublic yes reallyDeclProtISchemaTableRelationPubSetter default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="reallyDeclProtISchemaTableRelationPubSetter">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj);</GenRule>
 
 	<GenRule GenDef="Table" Name="declProtColumnOptAuditGetterSetters">$switch IsProtected yes reallyDeclProtColumnOptAuditGetterSetters default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyDeclProtColumnOptAuditGetterSetters"
@@ -213,7 +214,13 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtRec
 	<GenRule GenDef="Table" Name="declProtISchemaTableRecDataInitValues">$iterate DataColumns( each maybeDeclProtInitValue empty empty )$</GenRule>
 	<GenRule GenDef="Table" Name="declProtISchemaTableRecAllInitValues">$switch HasAuditColumns yes declProtAuditColumnInitValues default empty$$iterate Columns( each maybeDeclProtInitValue empty empty )$</GenRule>
 
-        <GenRule GenDef="Table" Name="declProtAuditColumnInitValues">
+        <GenRule GenDef="Table" Name="declProtAuditColumnInitValues">$switch IsPublic yes declProtAuditColumnInitInhValues default declProtAuditColumnInitLocalValues$</GenRule>
+        <GenRule GenDef="Table" Name="declProtAuditColumnInitInhValues">
+	public static final String S_INIT_CREATED_BY = I$DefSchemaName$Pub$TableName$.S_INIT_CREATED_BY;
+	public static final CFLibDbKeyHash256 INIT_CREATED_BY = I$DefSchemaName$Pub$TableName$.INIT_CREATED_BY;
+	public static final String S_INIT_UPDATED_BY = I$DefSchemaName$Pub$TableName$.S_INIT_UPDATED_BY;
+	public static final CFLibDbKeyHash256 INIT_UPDATED_BY = I$DefSchemaName$Pub$TableName$.INIT_UPDATED_BY;</GenRule>
+        <GenRule GenDef="Table" Name="declProtAuditColumnInitLocalValues">
 	public static final String S_INIT_CREATED_BY = "0000000000000000000000000000000000000000000000000000000000000000";
 	public static final CFLibDbKeyHash256 INIT_CREATED_BY = CFLibDbKeyHash256.fromHex(S_INIT_CREATED_BY);
 	public static final String S_INIT_UPDATED_BY = "0000000000000000000000000000000000000000000000000000000000000000";
@@ -222,11 +229,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtRec
 	<GenRule GenDef="Object" Name="declProtISchemaTableRecColumns"
 		>$popto Table declProtISchemaTableRecColumns$</GenRule>
 
-	<GenRule GenDef="Table" Name="extendSchemaProtRecTableRec"> extends I$reference DefSchema SchemaName$Prot$TableName$</GenRule>
-
-	<GenRule GenDef="Object" Name="extendSchemaProtRecTableRecSuperRec">$popto Table extendSchemaProtRecTableRecSuperRec$</GenRule>
-
-	<GenRule GenDef="Table" Name="extendSchemaProtRecTableRecSuperRec">$switch HasSuperClassRelation yes declProtRecInheritSuper default empty$</GenRule>
+	<GenRule GenDef="Table" Name="maybeExtendSchemaProtRecTableRecSuperRec">$switch HasSuperClassRelation yes declProtRecInheritSuperProtRec default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeDeclProtRecOptImplAuditColumnAccessors">$switch HasSuperClassRelation no declProtRecOptDeclAuditColumnAccessors default empty$</GenRule>
 	<GenRule GenDef="Table" Name="declProtRecOptDeclAuditColumnAccessors">$switch HasAuditColumns yes declProtColumnOptAuditGetterSetters default empty$</GenRule>
@@ -410,7 +413,8 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtRec
 	<GenRule GenDef="Table" Name="declProtDataGetterSetters"
 		>$iterate DataColumns( each declProtColumnGetterMaybeSetter empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declProtRecInheritSuper"> extends I$reference SuperClassRelation reference ToTable DefSchemaName$Prot$reference SuperClassRelation reference ToTable TableName$</GenRule>
+	<GenRule GenDef="Table" Name="declProtRecInheritSuperProtRec">$switch HasSuperClassRelation yes reallyDeclProtRecInheritSuperProtRec default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclProtRecInheritSuperProtRec"> extends I$reference SuperClassRelation reference ToTable DefSchemaName$Prot$reference SuperClassRelation reference ToTable TableName$</GenRule>
 
 	<GenRule GenDef="Table" Name="declProtEqualsObject">
 	@Override
@@ -429,11 +433,19 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtRec
 
 	<GenRule GenDef="Table" Name="declProtRecSet">
 	public void set( I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$ src );
-	public void set$TableName$( I$DefSchemaName$Prot$TableName$ src );$declProtRecSetHistory$</GenRule>
+	public void set$TableName$( I$DefSchemaName$Prot$TableName$ src );$switch IsPublic yes declProtRecSetPublic default empty$$declProtRecSetHistory$</GenRule>
+
+	<GenRule GenDef="Table" Name="declProtRecSetPublic">
+	public void set( I$reference BaseClass DefSchemaName$Pub$reference BaseClass TableName$ src );</GenRule>
 
 	<GenRule GenDef="Table" Name="declProtRecSetHistory">
 	public void set( I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$H src );
-	public void set$TableName$( I$DefSchemaName$Prot$TableName$H src );
+	public void set$TableName$( I$DefSchemaName$Prot$TableName$H src );$switch IsPublic yes declProtRecSetPublicHistory default empty$
+</GenRule>
+
+	<GenRule GenDef="Table" Name="declProtRecSetPublicHistory">
+	public void set( I$reference BaseClass DefSchemaName$Pub$reference BaseClass TableName$H src );
+	public void set$TableName$( I$DefSchemaName$Pub$TableName$H src );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtSchemaRecTableToString">$switch HasSuperClassRelation yes empty default declProtGetXmlAttrFragmentIfNoDefSchema$</GenRule>
