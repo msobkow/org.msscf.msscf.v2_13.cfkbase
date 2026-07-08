@@ -78,6 +78,8 @@ public class $SchemaName$PubAuthorization implements I$SchemaName$PubAuthorizati
 	<GenRule GenDef="SchemaDef" Name="implPubAuthorizationAttrSecId">
 	protected CFLibDbKeyHash256 secSessionId;
 	protected CFLibDbKeyHash256 secUserId;
+	protected CFLibDbKeyHash256 secClusterId;
+	protected CFLibDbKeyHash256 secTenantId;
 </GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implPubAuthorizationAttrCFLibUuid6">
@@ -86,18 +88,31 @@ public class $SchemaName$PubAuthorization implements I$SchemaName$PubAuthorizati
 </GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implPubAuthorizationConstructor">
-	public $SchemaName$PubAuthorization() {
+	public $DefSchemaName$PubAuthorization() {
 		authUuid6 = CFLibUuid6.generateUuid6();
 		authUuid6Str = authUuid6.toString();
 		secSessionId = CFLibDbKeyHash256.nullGet();
 		secUserId = CFLibDbKeyHash256.nullGet();
+		secClusterId = CFLibDbKeyHash256.nullGet();
+		secTenantId = CFLibDbKeyHash256.nullGet();
 	}
 
-	public $SchemaName$PubAuthorization(I$SchemaName$PubAuthorization src) {
+	public $DefSchemaName$PubAuthorization(CFLibUuid6 authUuid6, CFLibDbKeyHash256 secSessionId, CFLibDbKeyHash256 secUserId, CFLibDbKeyHash256 secClusterId, CFLibDbKeyHash256 secTenantId) {
+		this.authUuid6 = authUuid6;
+		this.authUuid6Str = this.authUuid6.toString();
+		this.secSessionId = secSessionId;
+		this.secUserId = secUserId;
+		this.secClusterId = secClusterId;
+		this.secTenantId = secTenantId;
+	}
+
+	public $DefSchemaName$PubAuthorization(I$DefSchemaName$PubAuthorization src) {
 		authUuid6 = new CFLibUuid6(src.getAuthUuid6().getBytes());
 		authUuid6Str = authUuid6.toString();
 		secSessionId = new CFLibDbKeyHash256(src.getSecSessionId());
 		secUserId = new CFLibDbKeyHash256(src.getSecUserId());
+		secClusterId = new CFLibDbKeyHash256(src.getSecClusterId());
+		secTenantId = new CFLibDbKeyHash256(src.getSecTenantId());
 	}
 </GenRule>
 
@@ -108,6 +123,14 @@ public class $SchemaName$PubAuthorization implements I$SchemaName$PubAuthorizati
 
 	public CFLibDbKeyHash256 getSecUserId() {
 		return( secUserId );
+	}
+
+	public CFLibDbKeyHash256 getSecClusterId() {
+		return( secClusterId );
+	}
+
+	public CFLibDbKeyHash256 getSecTenantId() {
+		return( secTenantId );
 	}
 </GenRule>
 

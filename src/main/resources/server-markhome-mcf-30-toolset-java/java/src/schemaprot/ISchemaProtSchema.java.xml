@@ -135,9 +135,31 @@ $implProtApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs
 //import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$prot.buff.$DefSchemaName$ProtBuffSchema;
 //import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$prot.buff.$DefSchemaName$ProtBuffFactoryService;</GenRule>
 
+	<GenRule GenDef="Relation" Name="ToTableHasDefSchema">$reference ToTable HasDefSchema$</GenRule>
+
 	<GenRule GenDef="Relation" Name="emitProtInterfaceDataType">$switch IsToIndexUnique yes emitProtInterfaceDataTypeSingleton default emitProtInterfaceDataTypeSet$</GenRule>
-	<GenRule GenDef="Relation" Name="emitProtInterfaceDataTypeSingleton">I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$</GenRule>
-	<GenRule GenDef="Relation" Name="emitProtInterfaceDataTypeSet">List&lt;I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$&gt;</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtInterfaceDataTypeSingleton">$switch ToTableHasDefSchema yes emitProtInterfaceDataTypePubSingleton default emitProtInterfaceDataTypeProtSingleton$</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtInterfaceDataTypePubSingleton">I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtInterfaceDataTypeProtSingleton">I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtInterfaceDataTypeSet">$switch ToTableHasDefSchema yes emitProtInterfaceDataTypePubSet default emitProtInterfaceDataTypeProtSet$</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtInterfaceDataTypePubSet">List&lt;I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$&gt;</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtInterfaceDataTypeProtSet">List&lt;I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$&gt;</GenRule>
+
+	<GenRule GenDef="Index" Name="emitProtInterfaceDataType">$switch IsUnique yes emitProtInterfaceDataTypeSingleton default emitProtInterfaceDataTypeSet$</GenRule>
+	<GenRule GenDef="Index" Name="emitProtInterfaceDataTypeSingleton">$switch HasDefSchema yes emitProtInterfaceDataTypePubSingleton default emitProtInterfaceDataTypeProtSingleton$</GenRule>
+	<GenRule GenDef="Index" Name="emitProtInterfaceDataTypePubSingleton">I$DefSchemaName$Pub$TableName$</GenRule>
+	<GenRule GenDef="Index" Name="emitProtInterfaceDataTypeProtSingleton">I$DefSchemaName$Prot$TableName$</GenRule>
+	<GenRule GenDef="Index" Name="emitProtInterfaceDataTypeSet">$switch HasDefSchema yes emitProtInterfaceDataTypePubSet default emitProtInterfaceDataTypeProtSet$</GenRule>
+	<GenRule GenDef="Index" Name="emitProtInterfaceDataTypePubSet">List&lt;I$DefSchemaName$Pub$TableName$&gt;</GenRule>
+	<GenRule GenDef="Index" Name="emitProtInterfaceDataTypeProtSet">List&lt;I$DefSchemaName$Prot$TableName$&gt;</GenRule>
+
+	<GenRule GenDef="Table" Name="emitProtInterfaceDataType">$emitProtInterfaceDataTypeSingleton$</GenRule>
+	<GenRule GenDef="Table" Name="emitProtInterfaceDataTypeSingleton">$switch HasDefSchema yes emitProtInterfaceDataTypePubSingleton default emitProtInterfaceDataTypeProtSingleton$</GenRule>
+	<GenRule GenDef="Table" Name="emitProtInterfaceDataTypePubSingleton">I$DefSchemaName$Pub$TableName$</GenRule>
+	<GenRule GenDef="Table" Name="emitProtInterfaceDataTypeProtSingleton">I$DefSchemaName$Prot$TableName$</GenRule>
+	<GenRule GenDef="Table" Name="emitProtInterfaceDataTypeSet">$switch HasDefSchema yes emitProtInterfaceDataTypePubSet default emitProtInterfaceDataTypeProtSet$</GenRule>
+	<GenRule GenDef="Table" Name="emitProtInterfaceDataTypePubSet">List&lt;I$DefSchemaName$Pub$TableName$&gt;</GenRule>
+	<GenRule GenDef="Table" Name="emitProtInterfaceDataTypeProtSet">List&lt;I$DefSchemaName$Prot$TableName$&gt;</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="declProtSchemaFactoryAccessors">$reference RefSchema declProtSchemaFactoryAccessors$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declProtSchemaFactoryAccessors">
