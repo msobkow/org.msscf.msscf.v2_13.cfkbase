@@ -84,13 +84,23 @@ public interface I$SchemaName$Prot$TableName$EditObj
 	<GenRule GenDef="Table" Name="reallyDeclIProtEditObjOptAuditAccessors"
 		>$switch HasAuditColumns yes declIProtEditObjAuditAccessors default empty$</GenRule>
 
+	<GenRule GenDef="Object" Name="emitProtObjInterfaceDataTypeSingletonSecUser">$poptop SchemaDef emitProtObjSchemaInterfaceDataTypeSingletonSecUser$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="emitProtObjSchemaInterfaceDataTypeSingletonSecUser">$iterate Tables( each emitProtObjTableInterfaceDataTypeSingletonSecUser empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="emitProtObjTableInterfaceDataTypeSingletonSecUser">$switch Name SecUser reallyEmitProtObjTableInterfaceDataTypeSingletonSecUser default empty$</GenRule>
+	<GenRule GenDef="Object" Name="reallyEmitProtObjTableInterfaceDataTypeSingletonSecUser">$emitProtObjInterfaceDataTypeSingleton$</GenRule>
+
+	<GenRule GenDef="Object" Name="emitProtObjInterfaceDataTypeSingletonSecSession">$poptop SchemaDef emitProtObjSchemaInterfaceDataTypeSingletonSecSession$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="emitProtObjSchemaInterfaceDataTypeSingletonSecSession">$iterate Tables( each emitProtObjTableInterfaceDataTypeSingletonSecSession empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="emitProtObjTableInterfaceDataTypeSingletonSecSession">$switch Name SecSession reallyEmitProtObjTableInterfaceDataTypeSingletonSecSession default empty$</GenRule>
+	<GenRule GenDef="Object" Name="reallyEmitProtObjTableInterfaceDataTypeSingletonSecSession">$emitProtObjInterfaceDataTypeSingleton$</GenRule>
+
 	<GenRule GenDef="Table" Name="declIProtEditObjAuditAccessors">
 	/**
 	 *	Set the user who created this instance.
 	 *
-	 *	@param	value	The I$SecSchemaName$ProtSecUserObj instance who created this instance.
+	 *	@param	value	The $emitProtObjInterfaceDataTypeSingletonSecUser$ instance who created this instance.
 	 */
-	void setCreatedBy( I$SecSchemaName$ProtSecUserObj value );
+	void setCreatedBy( $emitProtObjInterfaceDataTypeSingletonSecUser$ value );
 
 	/**
 	 *	Set the Calendar date-time this instance was created.
@@ -102,9 +112,9 @@ public interface I$SchemaName$Prot$TableName$EditObj
 	/**
 	 *	Set the user who updated this instance.
 	 *
-	 *	@param	value	The I$SecSchemaName$ProtSecUserObj instance who updated this instance.
+	 *	@param	value	The $emitProtObjInterfaceDataTypeSingletonSecUser$ instance who updated this instance.
 	 */
-	void setUpdatedBy( I$SecSchemaName$ProtSecUserObj value );
+	void setUpdatedBy( $emitProtObjInterfaceDataTypeSingletonSecUser$ value );
 
 	/**
 	 *	Set the Calendar date-time this instance was updated.
@@ -160,7 +170,7 @@ public interface I$SchemaName$Prot$TableName$EditObj
 	 *
 	 *	@return	The (potentially empty) list of $reference ToTable emitProtObjInterfaceDataTypePrefix$$reference ToTable TableName$Obj instances referenced by the $Suffix$ key.
 	 */
-	List&lt;$emitProtObjInterfaceDataType$&gt; get$OptionalOrRequired$$RelationTypeTag$$Suffix$();
+	$emitProtObjInterfaceDataType$ get$OptionalOrRequired$$RelationTypeTag$$Suffix$();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtEditObjColumnAccessors">$switch IsProtected yes reallyDeclIProtEditObjColumnAccessors default empty$</GenRule>
@@ -271,14 +281,14 @@ public interface I$SchemaName$Prot$TableName$EditObj
 	 *
 	 *	@return The created instance.
 	 */
-	I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$Obj create();
+	$emitProtObjInterfaceDataType$ create();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtEditObjUpdate">
 	/*
 	 *	Update the instance.
 	 */
-	I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$EditObj update();
+	$emitProtEditObjInterfaceDataType$ update();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtEditObjDelete"
@@ -300,7 +310,7 @@ public interface I$SchemaName$Prot$TableName$EditObj
 	 *
 	 *	@return The original, non-modifiable instance as a base I$SchemaName$Prot$TableName$Obj.
 	 */
-	I$DefSchemaName$Prot$TableName$Obj getOrig();
+	$emitProtObjInterfaceDataType$ getOrig();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtEditObjOrigAsCast"
@@ -310,9 +320,9 @@ public interface I$SchemaName$Prot$TableName$EditObj
 	/*
 	 *	Get the original for this edition cast as the specified type.
 	 *
-	 *	@return The original, non-modifiable instance cast to a I$DefSchemaName$Prot$TableName$Obj.
+	 *	@return The original, non-modifiable instance cast to a $emitProtObjInterfaceDataType$.
 	 */
-	I$DefSchemaName$Prot$TableName$Obj getOrigAs$TableName$();
+	$emitProtObjInterfaceDataType$ getOrigAs$TableName$();
 </GenRule>
 
 </RuleSet>
