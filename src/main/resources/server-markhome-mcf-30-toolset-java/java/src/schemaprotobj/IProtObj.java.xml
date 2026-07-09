@@ -69,7 +69,7 @@ public interface I$SchemaName$Prot$TableName$Obj$iterate TableRefs( first declIP
 </GenFile>
 
 	<GenRule GenDef="Table" Name="declIProtObjMethods"
-		>$switch HasSuperClassRelation yes empty default declIProtObjGetClassCode$$switch HasSuperClassRelation yes empty default declIProtObjRealise$$switch HasSuperClassRelation yes empty default declIProtObjForget$$switch HasSuperClassRelation yes empty default declIProtObjRead$$switch ThisHasChain yes declIProtObjMoveUp default empty$$switch ThisHasChain yes declIProtObjMoveDown default empty$$switch HasSuperClassRelation yes empty default declIProtObjBeginEdit$$switch HasSuperClassRelation yes empty default declIProtObjEndEdit$$switch HasSuperClassRelation yes empty default declIProtObjEditAccessors$$declIProtObjEditAsAccessors$$declIProtObjTableAccessors$$switch HasSuperClassRelation no declIProtObjSchemaAccessors default empty$$switch HasSuperClassRelation no declIProtObjRecAccessors default empty$$declIProtObjTableRecAccessors$$switch HasDefSchemaOrSuper no declIProtObjPKeyAccessors default empty$$switch HasSuperClassRelation no declIProtObjIsNewAccessors default empty$$iterate Relation( each declIProtObjRelationAccessors empty empty )$$iterate Columns( each declIProtObjColumnAccessors empty empty )$$switch HasSuperClassRelation yes empty default declIProtObjCopyPKeyToRec$$switch HasSuperClassRelation yes empty default declIProtObjCopyRecToPKey$$iterate ServerMethods( each declProtJavaObjServerMethod empty empty )$$JavaObjInterface$</GenRule>
+		>$switch HasSuperClassRelation yes empty default declIProtObjGetClassCode$$switch HasSuperClassRelation yes empty default declIProtObjRealise$$switch HasSuperClassRelation yes empty default declIProtObjForget$$switch HasSuperClassRelation yes empty default declIProtObjRead$$switch ThisHasChain yes declIProtObjMoveUp default empty$$switch ThisHasChain yes declIProtObjMoveDown default empty$$switch HasSuperClassRelation yes empty default declIProtObjBeginEdit$$switch HasSuperClassRelation yes empty default declIProtObjEndEdit$$switch HasSuperClassRelation yes empty default declIProtObjEditAccessors$$declIProtObjEditAsAccessors$$declIProtObjTableAccessors$$switch HasSuperClassRelation no declIProtObjSchemaAccessors default empty$$switch HasSuperClassRelation no declIProtObjRecAccessors default empty$$declIProtObjTableRecAccessors$$switch HasDefSchemaOrSuper no declIProtObjPKeyAccessors default empty$$switch HasSuperClassRelation no declIProtObjIsNewAccessors default empty$$iterate Relation( each declIProtObjRelationAccessors empty empty )$$iterate Columns( each declIProtObjColumnAccessors empty empty )$$switch HasSuperClassRelation yes empty default declIProtObjCopyPKeyToRec$$switch HasSuperClassRelation yes empty default declIProtObjCopyRecToPKey$$iterate ServerMethods( each declProtJavaObjServerMethod empty empty )$$tabletweak CafeObjInterface$</GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtObjInheritSchemaTableObjAndSuperclass">
 	extends I$reference SchemaDef SchemaName$Prot$TableName$Obj$poptop Table switch HasSuperClassRelation yes alsoIProtObjInheritSuperClass default empty$</GenRule>
@@ -165,7 +165,7 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	 *
 	 *	@return	The newly locked I$DefSchemaName$Prot$TableName$EditObj edition of this instance.
 	 */
-	I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$EditObj beginEdit();
+	$reference BaseClass emitProtEditObjInterfaceDataType$ beginEdit();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtObjEndEdit">
@@ -183,7 +183,7 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	 *
 	 *	@return	The I$DefSchemaName$Prot$TableName$EditObj edition of this instance.
 	 */
-	I$DefSchemaName$Prot$TableName$EditObj getEdit();
+	$reference BaseClass emitProtEditObjInterfaceDataType$ getEdit();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtObjEditAsAccessors">
@@ -192,7 +192,7 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	 *
 	 *	@return	The I$DefSchemaName$Prot$TableName$EditObj edition of this instance.
 	 */
-	I$DefSchemaName$Prot$TableName$EditObj getEditAs$TableName$();
+	$emitProtEditObjInterfaceDataType$ getEditAs$TableName$();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtObjIsNewAccessors">
@@ -241,14 +241,14 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	I$DefSchemaName$Prot$TableName$TableObj get$TableName$Table();
 </GenRule>
 
-	<GenRule GenDef="Relation" Name="declIProtObjRelationAccessors">$switch IsProtected yes reallyDeclIProtObjRelationAccessors default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyDeclIProtObjRelationAccessors"
-		>$switch RelationToIndexIsUnique yes maybeDeclIProtObjRelationSingletonAccessors default maybeDeclIProtObjRelationCollectionAccessors$</GenRule>
+	<GenRule GenDef="Relation" Name="declIProtObjRelationAccessors">$switch IsPublic yes seriouslyDeclIProtObjRelationAccessors default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="seriouslyDeclIProtObjRelationAccessors"
+		>$switch RelationToIndexIsUnique yes maybeDeclIProtObjRelationSingletonAccessors default maybeDeclIProtObjRelationDuplicateAccessors$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeDeclIProtObjRelationSingletonAccessors"
 		>$switch RelationTypeTag Superclass empty default declIProtObjRelationSingletonAccessors$</GenRule>
 
-	<GenRule GenDef="Relation" Name="maybeDeclIProtObjRelationCollectionAccessors"
+	<GenRule GenDef="Relation" Name="maybeDeclIProtObjRelationDuplicateAccessors"
 		>$switch RelationTypeTag Superclass empty default declIProtObjRelationCollectionAccessors$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declIProtObjRelationSingletonAccessors">$switch IsProtected yes reallyDeclIProtObjRelationSingletonAccessors default empty$</GenRule>
@@ -405,7 +405,7 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	 *
 	 *	@return	$DefSchemaName$Prot$TableName$Obj instance which should be subsequently referenced.
 	 */
-	I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$Obj realise();
+	$reference BaseClass emitProtObjInterfaceDataType$ realise();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtObjForget">
@@ -425,34 +425,34 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	 *	invoker.  You should lose all references to the original
 	 *	invoker.
 	 *
-	 *	@return	I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$Obj the reference to the created and realised instance.
+	 *	@return	$reference BaseClass emitProtObjInterfaceDataType$ the reference to the created and realised instance.
 	 */
-	I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$Obj create();
+	$reference BaseClass emitProtObjInterfaceDataType$ create();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtObjRead">
 	/**
 	 *	Re-read this instance by it's primary key.
 	 *
-	 *	@return	I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$Obj the reference to the cached or read (realised) instance.
+	 *	@return	$reference BaseClass emitProtObjInterfaceDataType$ the reference to the cached or read (realised) instance.
 	 */
-	I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$Obj read();
+	$reference BaseClass emitProtObjInterfaceDataType$ read();
 
 	/**
 	 *	Re-read this instance by it's primary key.
 	 *
-	 *	@return	I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$Obj the reference to the cached or read (realised) instance.
+	 *	@return	$reference BaseClass emitProtObjInterfaceDataType$ the reference to the cached or read (realised) instance.
 	 */
-	I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$Obj read( boolean forceRead );
+	$reference BaseClass emitProtObjInterfaceDataType$ read( boolean forceRead );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtObjMoveUp">
 	/**
 	 *	Move this object up in the chain and refresh the cache.
 	 *
-	 *	@return	I$reference BaseClass DefSchemaName$Prot$TableName$Obj the reference to the moved and refreshed instance.
+	 *	@return	$reference BaseClass emitProtObjInterfaceDataType$ the reference to the moved and refreshed instance.
 	 */
-	I$reference BaseClass DefSchemaName$Prot$TableName$Obj moveUp();
+	$reference BaseClass emitProtObjInterfaceDataType$ moveUp();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtObjMoveDown">
@@ -461,7 +461,7 @@ import server.markhome.mcf.v3_1.cfcore.MssCF.*;</GenRule>
 	 *
 	 *	@return	I$reference BaseClass DefSchemaName$Prot$TableName$Obj the reference to the moved and refreshed instance.
 	 */
-	I$reference BaseClass DefSchemaName$Prot$TableName$Obj moveDown();
+	$reference BaseClass emitProtObjInterfaceDataType$ moveDown();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtObjUpdate">
