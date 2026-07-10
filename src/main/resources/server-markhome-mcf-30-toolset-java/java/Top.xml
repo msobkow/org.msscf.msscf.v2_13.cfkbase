@@ -44,11 +44,6 @@
 	<GenRule GenDef="Object" Name="ExplainCodeVisPublic">CodeVis Public, meaning that any user interface or referencing schema can access it</GenRule>
 	<GenRule GenDef="Object" Name="ExplainCodeVisProtected">CodeVis Protected, meaning that any only user interfaces and application code specific to the defining schema can access it</GenRule>
 	<GenRule GenDef="Object" Name="ExplainCodeVisPrivate">CodeVis Private, meaning that only the back-end code for the schema implementation can access it, and even the code specific user interface cannot</GenRule>
-	<GenRule GenDef="Index" Name="PageData"
-		>$poptop Table PageData$</GenRule>
-	<GenRule GenDef="Index" Name="InheritsPageData"
-		>$poptop Table InheritsPageData$</GenRule>
-
 
 	<GenRule GenDef="MinorVersion" Name="top"
 		>$iterate SchemaDef( each schemaPubFiles )$$iterate SchemaDef( each schemaProtFiles )$$iterate SchemaDef( each schemaFiles )$</GenRule>
@@ -102,18 +97,6 @@
 		>$iterate SchemaTables( each validatePageData )$</GenRule>
 	<GenRule GenDef="Table" Name="validatePageData"
 		>$switch InheritsPageData yes checkPageDataNoSubclasses default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="InheritsPageData">$reference Table InheritsPageData$</GenRule>
-	<GenRule GenDef="Index" Name="InheritsPageData">$reference Table InheritsPageData$</GenRule>
-	<GenRule GenDef="IndexCol" Name="InheritsPageData">$reference FromTable InheritsPageData$</GenRule>
-	<GenRule GenDef="Relation" Name="InheritsPageData">$reference Table InheritsPageData$</GenRule>
-	<GenRule GenDef="RelationCol" Name="InheritsPageData">$reference FromTable InheritsPageData$</GenRule>
-	<GenRule ScopeDef="Table" GenDef="Atom" Name="InheritsPageData">$reference Table InheritsPageData$</GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="Atom" Name="InheritsPageData">no</GenRule>
-	<GenRule GenDef="SchemaTweak" Name="InheritsPageData">no</GenRule>
-	<GenRule GenDef="TableTweak" Name="InheritsPageData">$popto Table InheritsPageData$</GenRule>
-	<GenRule ScopeDef="Table" GenDef="ServerMethod" Name="InheritsPageData">$reference Table InheritsPageData$</GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="ServerMethod" Name="InheritsPageData">no</GenRule>
-
 	<GenRule GenDef="Table" Name="checkPageDataNoSubclasses"
 		>$switch HasSubClasses no checkPageDataNormalizedKey default FailAssertPageDataNotAllowedForTablesWithSubclasses$</GenRule>
 	<GenRule GenDef="Table" Name="checkPageDataNormalizedKey"

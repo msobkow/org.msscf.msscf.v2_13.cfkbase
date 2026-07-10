@@ -11,7 +11,7 @@
  *	Version 3 or later.
  *
  *	Mark's Code Fractal CFKBase is free software: you can redistribute it and/or
- *	modify it under the terms of the GNU General Public License as protlished by
+ *	modify it under the terms of the GNU General Public License as published by
  *	the Free Software Foundation, either version 3 of the License, or
  *	(at your option) any later version.
  *
@@ -23,7 +23,7 @@
  *	You should have received a copy of the GNU General Public License
  *	along with Mark's Code Fractal CFKBase.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
  *
- *	If you wish to modify and use this code without protlishing your changes,
+ *	If you wish to modify and use this code without publishing your changes,
  *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
  *	for a commercial license at mark.sobkow@gmail.com
  * -->
@@ -35,9 +35,7 @@
 	ToolSet="java"
 	Name="src/schema/ISchemaSchema.java"
 	Revision="3.0"
-	Descr="Java 25 private interface for a $SchemaName$ schema.">
-
-	<GenRule GenDef="Object" Name="IsPrivate">yes</GenRule>
+	Descr="Java 25 interface for a $SchemaName$ schema.">
 
 	<GenFile GenDef="SchemaDef" Name="fileSchemaISchemaJava"
 			GenerateOnce="false"
@@ -45,10 +43,10 @@
 		SourceBundle="java"
 		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
-		ExpansionClassName="I$DefSchemaName$SchemaJava"
-		ExpansionKeyName="I$DefSchemaName$SchemaJava"
-		ExpansionFileName="I$DefSchemaName$Schema.java"
->// Description: Java 25 private interface for a $SchemaName$ schema.
+		ExpansionClassName="I$SchemaName$SchemaJava"
+		ExpansionKeyName="I$SchemaName$SchemaJava"
+		ExpansionFileName="I$SchemaName$Schema.java"
+>// Description: Java 25 interface for a $SchemaName$ schema.
 
 $MssSourceLicense$
 
@@ -65,23 +63,24 @@ import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.text.StringEscapeUtils;$importsForPrivApplicationContextAware$$switch IsPublic yes importJavaPubPackages default empty$$switch IsProtected yes importJavaProtPackages default empty$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPackageDefSchemaNameBuffDotFactoryService$$schematweak CafePrivISchema$
+import org.apache.commons.text.StringEscapeUtils;$importsForApplicationContextAware$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaProtPackageSchemaName empty empty )$$importJavaProtPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameBuffDotFactoryService empty empty )$$importJavaPackageSchemaNameBuffDotFactoryService$
 
-public interface I$DefSchemaName$Schema$iterate SchemaRefs( first extendsPubPackageSchemaName each commaPubNewlinePackageSchemaName empty empty )$
+public interface I$SchemaName$Schema$iterate SchemaRefs( first extendsPackageSchemaName each commaNewlinePackageSchemaName empty empty )$
 {
 	public static final String SCHEMA_NAME = "$SchemaName$";
-	public static final String DBSCHEMA_NAME = "$DbSchemaName$";$declPrivApplicationContextAwareContext$
-	public static final $SecPubSchemaName$TableData TABLE_DATA[] = {$iterate DefSchemaRootTables( first walkISchemaPrivTableDataEntry each commaWalkISchemaPrivTableDataEntry empty empty )$};
+	public static final String DBSCHEMA_NAME = "$DbSchemaName$";$declApplicationContextAwareContext$
+	public static final $SecPubSchemaName$TableData TABLE_DATA[] = {$iterate DefSchemaRootTables( first walkISchemaTableDataEntry each walkCommaISchemaTableDataEntry )$};
 	public static final AtomicReference&lt;$SecPubSchemaName$TableData[]&gt; consolidatedTableData = new AtomicReference&lt;&gt;(null);
-	public static final $SecPubSchemaName$RoleInfo ROLE_INFO[] = {$iterate SchemaOrderedRoles( first declPrivISchemaRoleInfoEntry each declPrivCommaISchemaRoleInfoEntry empty empty )$};
+	public static final $SecPubSchemaName$RoleInfo ROLE_INFO[] = {$iterate SchemaOrderedRoles( first declISchemaRoleInfoEntry each declCommaISchemaRoleInfoEntry empty empty )$};
 	public static final AtomicReference&lt;$SecPubSchemaName$RoleInfo[]&gt; consolidatedRoleInfo = new AtomicReference&lt;&gt;(null);
+
 	public static $SecPubSchemaName$TableData[] getTableData() {
 		return TABLE_DATA;
 	}
 
 	public static $SecPubSchemaName$TableData[] getConsolidatedTableData() {
 		if (consolidatedTableData.get() == null) {
-			ArrayList&lt;$SecPubSchemaName$TableData&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declPrivISchemaAddRefTableData empty empty)$
+			ArrayList&lt;$SecPubSchemaName$TableData&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefTableData empty empty)$
 			for( $SecPubSchemaName$TableData data: TABLE_DATA) {
 				lst.add(data);
 			}
@@ -101,7 +100,7 @@ public interface I$DefSchemaName$Schema$iterate SchemaRefs( first extendsPubPack
 
 	public static $SecPubSchemaName$RoleInfo[] getConsolidatedRoleInfo() {
 		if (consolidatedRoleInfo.get() == null) {
-			ArrayList&lt;$SecPubSchemaName$RoleInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declPrivISchemaAddRefRoleInfo empty empty)$
+			ArrayList&lt;$SecPubSchemaName$RoleInfo&gt; lst = new ArrayList&lt;&gt;();$iterate SchemaRefs( each declISchemaAddRefRoleInfo empty empty)$
 			for( $SecPubSchemaName$RoleInfo info: ROLE_INFO) {
 				lst.add(info);
 			}
@@ -116,106 +115,64 @@ public interface I$DefSchemaName$Schema$iterate SchemaRefs( first extendsPubPack
 		}
 		return(consolidatedRoleInfo.get());
 	}
-$implPrivApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declPrivISchemaClassMapEntry )$$declPrivISchemaClassMapData$$iterate SchemaRefs( each empty empty declPrivISchemaSecurityAccessors )$$iterate Types( empty empty each declPrivISchemaPrivEnumType )$$iterate SchemaRefs( empty declPrivISchemaSecurityAttrs each empty )$$implPrivISchemaClassMapAccessors$$iterate SchemaRefs( first declPrivNewSchema each empty empty declPrivNewSchema )$$iterate Id16Generators( each declPrivNextIdGen empty empty)$$iterate Id32Generators( each declPrivNextIdGen empty empty)$$iterate Id64Generators( each declPrivNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declPrivNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declPrivNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declPrivNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declPrivNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declPrivNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declPrivNextIdGen empty empty )$$iterate UuidGenerators( each declPrivNextIdGen empty empty )$$iterate Uuid6Generators( each declPrivNextIdGen empty empty )$$iterate SchemaRefs( each declPrivSchemaFactoryAccessors empty empty )$$declPrivSchemaFactoryAccessors$$iterate DefSchemaTables( each declPrivTableMethods empty empty )$$iterate SchemaRefs( first declPrivSchemaTablePermsAccessors each empty empty declPrivSchemaTablePermsAccessors )$$declPrivSchemaBootstrap$}
+$implApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declISchemaClassMapEntry )$$declISchemaClassMapData$$iterate SchemaRefs( each empty empty declISchemaSecurityAccessors )$$iterate Types( empty empty each declISchemaEnumType )$$iterate SchemaRefs( empty declISchemaSecurityAttrs each empty )$$implISchemaClassMapAccessors$$iterate SchemaRefs( first declNewSchema each empty empty declNewSchema )$$iterate Id16Generators( each declNextIdGen empty empty)$$iterate Id32Generators( each declNextIdGen empty empty)$$iterate Id64Generators( each declNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declNextIdGen empty empty )$$iterate UuidGenerators( each declNextIdGen empty empty )$$iterate Uuid6Generators( each declNextIdGen empty empty )$$iterate SchemaRefs( each declSchemaFactoryAccessors empty empty )$$declSchemaFactoryAccessors$$iterate SchemaTables( each declTableMethods empty empty )$$iterate SchemaRefs( first declSchemaTablePermsAccessors each empty empty declSchemaTablePermsAccessors )$$declSchemaBootstrap$}
 </GenFile>
 
 	<GenRule GenDef="SchemaRef" Name="importJavaPackageSchemaNameBuffDotFactoryService">$reference RefSchema importJavaPackageSchemaNameBuffDotFactoryService$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="importJavaPackageSchemaNameBuffDotFactoryService">
+import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.buff.$DefSchemaName$BuffSchema;
 import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.buff.$DefSchemaName$BuffFactoryService;</GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="importJavaProtPackages">$reference RefSchema importJavaProtPackageSchemaName$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="importJavaProtPackages">$poptop SchemaDef iterate SchemaRefs( each importJavaProtPackages empty empty )$$importJavaProtPackageSchemaName$</GenRule>
-
-	<GenRule GenDef="Table" Name="importJavaProtPackages">$reference SchemaDef importJavaProtPackages$</GenRule>
-	<GenRule GenDef="Relation" Name="importJavaProtPackages">$reference Table importJavaProtPackages$</GenRule>
-	<GenRule GenDef="Index" Name="importJavaProtPackages">$reference Table importJavaProtPackages$</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="importJavaPackageDefSchemaNameBuffDotFactoryService">$reference RefSchema importJavaPackageDefSchemaNameBuffDotFactoryService$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="importJavaPackageDefSchemaNameBuffDotFactoryService">
-//import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.buff.$DefSchemaName$BuffSchema;
-//import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$.buff.$DefSchemaName$BuffFactoryService;</GenRule>
-
-	<GenRule GenDef="Relation" Name="emitPrivInterfaceDataType">$switch IsToIndexUnique yes emitPrivInterfaceDataTypeSingleton default emitPrivInterfaceDataTypeSet$</GenRule>
-	<GenRule GenDef="Relation" Name="emitPrivInterfaceDataTypeSingleton">$switch ToTableHasDefSchema yes emitPrivInterfaceDataTypeProtSingleton default emitPrivInterfaceDataTypePrivSingleton$</GenRule>
-	<GenRule GenDef="Relation" Name="emitPrivInterfaceDataTypeProtSingleton">I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$</GenRule>
-	<GenRule GenDef="Relation" Name="emitPrivInterfaceDataTypePrivSingleton">I$reference ToTable DefSchemaName$$reference ToTable TableName$</GenRule>
-	<GenRule GenDef="Relation" Name="emitPrivInterfaceDataTypeSet">$switch ToTableHasDefSchema yes emitPrivInterfaceDataTypeProtSet default emitPrivInterfaceDataTypePrivSet$</GenRule>
-	<GenRule GenDef="Relation" Name="emitPrivInterfaceDataTypeProtSet">List&lt;I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$&gt;</GenRule>
-	<GenRule GenDef="Relation" Name="emitPrivInterfaceDataTypePrivSet">List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$&gt;</GenRule>
-
-	<GenRule GenDef="Index" Name="emitPrivInterfaceDataType">$switch IsUnique yes emitPrivInterfaceDataTypeSingleton default emitPrivInterfaceDataTypeSet$</GenRule>
-	<GenRule GenDef="Index" Name="emitPrivInterfaceDataTypeSingleton">$switch HasDefSchema yes emitPrivInterfaceDataTypeProtSingleton default emitPrivInterfaceDataTypePrivSingleton$</GenRule>
-	<GenRule GenDef="Index" Name="emitPrivInterfaceDataTypeProtSingleton">I$DefSchemaName$Prot$TableName$</GenRule>
-	<GenRule GenDef="Index" Name="emitPrivInterfaceDataTypePrivSingleton">I$DefSchemaName$$TableName$</GenRule>
-	<GenRule GenDef="Index" Name="emitPrivInterfaceDataTypeSet">$switch HasDefSchema yes emitPrivInterfaceDataTypeProtSet default emitPrivInterfaceDataTypePrivSet$</GenRule>
-	<GenRule GenDef="Index" Name="emitPrivInterfaceDataTypeProtSet">List&lt;I$DefSchemaName$Prot$TableName$&gt;</GenRule>
-	<GenRule GenDef="Index" Name="emitPrivInterfaceDataTypePrivSet">List&lt;I$DefSchemaName$$TableName$&gt;</GenRule>
-
-	<GenRule GenDef="Table" Name="emitPrivInterfaceDataType">$emitPrivInterfaceDataTypeSingleton$</GenRule>
-	<GenRule GenDef="Table" Name="emitPrivInterfaceDataTypeSingleton">$switch HasDefSchema yes emitPrivInterfaceDataTypeProtSingleton default emitPrivInterfaceDataTypePrivSingleton$</GenRule>
-	<GenRule GenDef="Table" Name="emitPrivInterfaceDataTypeProtSingleton">I$DefSchemaName$Prot$TableName$</GenRule>
-	<GenRule GenDef="Table" Name="emitPrivInterfaceDataTypePrivSingleton">I$DefSchemaName$$TableName$</GenRule>
-	<GenRule GenDef="Table" Name="emitPrivInterfaceDataTypeSet">$switch HasDefSchema yes emitPrivInterfaceDataTypeProtSet default emitPrivInterfaceDataTypePrivSet$</GenRule>
-	<GenRule GenDef="Table" Name="emitPrivInterfaceDataTypeProtSet">List&lt;I$DefSchemaName$Prot$TableName$&gt;</GenRule>
-	<GenRule GenDef="Table" Name="emitPrivInterfaceDataTypePrivSet">List&lt;I$DefSchemaName$$TableName$&gt;</GenRule>
-
-	<GenRule GenDef="SchemaRef" Name="declPrivSchemaFactoryAccessors">$reference RefSchema declPrivSchemaFactoryAccessors$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="declPrivSchemaFactoryAccessors">
+	<GenRule GenDef="SchemaRef" Name="declSchemaFactoryAccessors">$reference RefSchema declSchemaFactoryAccessors$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declSchemaFactoryAccessors">
 	/**
 	 *	Get the factory for $DefSchemaName$ data objects.
 	 */
-	// public I$DefSchemaName$Factory get$DefSchemaName$Factory();
+	public I$DefSchemaName$Factory get$DefSchemaName$Factory();
 
 	/**
 	 *	Get the buffer factory for $DefSchemaName$ data buffers.
 	 */
-	// public $DefSchemaName$BuffFactoryService get$DefSchemaName$BuffFactory();
+	public $DefSchemaName$BuffFactoryService get$DefSchemaName$BuffFactory();
 </GenRule>
 
-	<GenRule GenDef="Object" Name="declPrivISchemaSecurityAccessors">$poptop SchemaDef declPrivISchemaSecurityAccessors$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="declPrivISchemaSecurityAccessors">
+	<GenRule GenDef="Object" Name="declISchemaSecurityAccessors">$poptop SchemaDef declISchemaSecurityAccessors$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declISchemaSecurityAccessors">
 	final static AtomicReference&lt;I$SecSchemaName$AuthorizationCallback&gt; authorizationCallback = new AtomicReference&lt;&gt;();
 	
-	public static I$SecPrivSchemaName$AuthorizationCallback getAuthorizationCallback() {
-		I$SecPrivSchemaName$AuthorizationCallback retval = authorizationCallback.get();
+	public static I$SecSchemaName$AuthorizationCallback getAuthorizationCallback() {
+		I$SecSchemaName$AuthorizationCallback retval = authorizationCallback.get();
 		if (retval == null) {
-			throw new CFLibNullArgumentException(I$SecPrivSchemaName$Schema.class, "getAuthorizationCallback", 0, "authorizationCallback.get()");
+			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "getAuthorizationCallback", 0, "authorizationCallback.get()");
 		}
 		return( retval );
 	}
 	
 	public static void setAuthorizationCallback(I$SecSchemaName$AuthorizationCallback callback) {
 		if (callback == null) {
-			throw new CFLibNullArgumentException(I$SecPrivSchemaName$Schema.class, "setAuthorizationCallback", 0, "callback");
+			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "setAuthorizationCallback", 0, "callback");
 		}
 		authorizationCallback.set(callback);
 	}
 
-	final static AtomicReference&lt;I$SecSchemaName$SecurityService&gt; securityService = new AtomicReference&lt;&gt;();
+	final static AtomicReference&lt;I$SecSchemaName$SecurityControl&gt; securityControl = new AtomicReference&lt;&gt;();
 	
-	public static I$SecPrivSchemaName$SecurityService getSecurityService() {
-		I$SecPrivSchemaName$SecurityService retval = securityService.get();
+	public static I$SecSchemaName$SecurityService getSecurityService() {
+		I$SecSchemaName$SecurityService retval = securityControl.get();
 		if (retval == null) {
-			throw new CFLibNullArgumentException(I$SecPrivSchemaName$Schema.class, "getSecurityService", 0, "securityService.get()");
+			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "getSecurityService", 0, "securityControl.get()");
 		}
 		return( retval );
 	}
 	
-	public static void setSecurityService(I$SecSchemaName$SecurityService service) {
-		if (service == null) {
-			throw new CFLibNullArgumentException(I$SecPrivSchemaName$Schema.class, "setSecurityService", 0, "service");
-		}
-		securityService.compareAndSet(null, service);
-	}
-
 	public static I$SecSchemaName$SecurityControl getSecurityControl() {
 		I$SecSchemaName$SecurityControl retval = securityControl.get();
 		if (retval == null) {
 			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "getSecurityService", 0, "securityControl.get()");
 		}
-		return retval;
+		return( retval );
 	}
-
+	
 	public static void setSecurityControl(I$SecSchemaName$SecurityControl control) {
 		if (control == null) {
 			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "setSecurityControl", 0, "control");
@@ -224,41 +181,44 @@ import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectNa
 	}
 </GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="declPrivISchemaAddRefTableData">$reference RefSchema declPrivISchemaAddRefTableData$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="declPrivISchemaAddRefTableData">
-			for( $SecPubSchemaName$TableData data: I$DefSchemaName$Schema.getTableData()) {
+	<GenRule GenDef="SchemaRef" Name="declISchemaAddRefTableData">$reference RefSchema declISchemaAddRefTableData$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declISchemaAddRefTableData">
+			for( $SecPubSchemaName$TableData data: I$SchemaName$Schema.getTableData()) {
 				lst.add(data);
 			}</GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="declPrivISchemaAddRefRoleInfo">$reference RefSchema declPrivISchemaAddRefRoleInfo$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="declPrivISchemaAddRefRoleInfo">
-			for( $SecPubSchemaName$RoleInfo info: I$DefSchemaName$Schema.getRoleInfo()) {
+	<GenRule GenDef="SchemaRef" Name="declISchemaAddRefRoleInfo">$reference RefSchema declISchemaAddRefRoleInfo$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declISchemaAddRefRoleInfo">
+			for( $SecPubSchemaName$RoleInfo info: I$SchemaName$Schema.getRoleInfo()) {
 				lst.add(info);
 			}</GenRule>
 
-	<GenRule GenDef="Table" Name="walkISchemaPrivTableDataEntry">new $SecPubSchemaName$TableData("$DefSchemaName$", "$TableName$", $switch HasSuperClassRelation yes emitISchemaTableDataEntrySuperName default emitNull$, $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", "$CodeVis$")$iterate TableSubClasses( each commaWalkISchemaPrivTableDataEntry empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="commaWalkISchemaPrivTableDataEntry">,
-		$walkISchemaPrivTableDataEntry$</GenRule>
+	<GenRule GenDef="Table" Name="walkISchemaTableDataEntry">new $SecPubSchemaName$TableData("$DefSchemaName$", "$TableName$", $switch HasSuperClassRelation yes emitISchemaTableDataEntrySuperName default emitNull$, $switch HasHistory yes emitTrue default emitFalse$, $switch IsMutable yes emitTrue default emitFalse$, "$SecScope$", "$CodeVis$")$iterate TableSubClasses( each walkCommaISchemaTableDataEntry empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="walkCommaISchemaTableDataEntry">,
+		$walkISchemaTableDataEntry$</GenRule>
 
-	<GenRule GenDef="SchemaRole" Name="declPrivISchemaRoleInfoEntry">new $SecPubSchemaName$RoleInfo("$Name$", "$RoleScope$", "$Enables$", "$Includes$")</GenRule>
-	<GenRule GenDef="SchemaRole" Name="declPrivCommaISchemaRoleInfoEntry">,
-		$declPrivISchemaRoleInfoEntry$</GenRule>
+	<GenRule GenDef="Object" Name="emitNull">null</GenRule>
+	<GenRule GenDef="Table" Name="emitISchemaTableDataEntrySuperName">"$reference SuperClassRelation reference ToTable TableName$"</GenRule>
 
-	<GenRule GenDef="Object" Name="importsForPrivApplicationContextAware">
+	<GenRule GenDef="SchemaRole" Name="declISchemaRoleInfoEntry">new $SecPubSchemaName$RoleInfo("$Name$", "$RoleScope$", "$Enables$", "$Includes$")</GenRule>
+	<GenRule GenDef="SchemaRole" Name="declCommaISchemaRoleInfoEntry">,
+		$declISchemaRoleInfoEntry$</GenRule>
+
+	<GenRule GenDef="Object" Name="importsForApplicationContextAware">
 import java.util.concurrent.atomic.*;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;</GenRule>
 
-	<GenRule GenDef="Object" Name="extendsPrivApplicationContextAware"> extends ApplicationContextAware</GenRule>
-	<GenRule GenDef="Object" Name="implementsPrivApplicationContextAware"> implements ApplicationContextAware</GenRule>
+	<GenRule GenDef="Object" Name="extendsApplicationContextAware"> extends ApplicationContextAware</GenRule>
+	<GenRule GenDef="Object" Name="implementsApplicationContextAware"> implements ApplicationContextAware</GenRule>
 
-	<GenRule GenDef="Object" Name="commaPrivApplicationContextAware">, ApplicationContextAware</GenRule>
+	<GenRule GenDef="Object" Name="commaApplicationContextAware">, ApplicationContextAware</GenRule>
 
-	<GenRule GenDef="Object" Name="declPrivApplicationContextAwareContext">
+	<GenRule GenDef="Object" Name="declApplicationContextAwareContext">
 	static final AtomicReference&lt;ApplicationContext&gt; arApplicationContext = new AtomicReference&lt;&gt;(null);</GenRule>
 
-	<GenRule GenDef="Object" Name="implPrivApplicationContextAwareSetApplicationContext">
+	<GenRule GenDef="Object" Name="implApplicationContextAwareSetApplicationContext">
 	@Override
 	public void setApplicationContext(final ApplicationContext applicationContext) throws BeansException {
 		arApplicationContext.compareAndSet(arApplicationContext.get(), applicationContext);
@@ -269,7 +229,7 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implPrivApplicationContextAwareDefaultSetApplicationContext">
+	<GenRule GenDef="Object" Name="implApplicationContextAwareDefaultSetApplicationContext">
 	public default void setApplicationContext(final ApplicationContext applicationContext) throws BeansException {
 		arApplicationContext.compareAndSet(arApplicationContext.get(), applicationContext);
 	}
@@ -279,14 +239,14 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="declPrivISchemaSecurityAttrs">
+	<GenRule GenDef="Object" Name="declISchemaSecurityAttrs">
 	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysClusterId = new AtomicReference&lt;&gt;();
 	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysTenantId = new AtomicReference&lt;&gt;();
 	static final AtomicReference&lt;CFLibDbKeyHash256&gt; systemId = new AtomicReference&lt;&gt;();
 
 	public static String getPasswordHash(String pw) {
 		if (pw == null || pw.isEmpty()) {
-			throw new CFLibNullArgumentException(I$SecPrivSchemaName$Schema.class, "getPasswordHash", 1, "pw");
+			throw new CFLibNullArgumentException(I$SecSchemaName$Schema.class, "getPasswordHash", 1, "pw");
 		}
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -307,7 +267,7 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 
 	public static void setSysClusterId(CFLibDbKeyHash256 argClusterId) {
 		if (argClusterId == null || argClusterId.isNull()) {
-			throw new CFLibNullArgumentException(I$DefSchemaName$Schema.class, "setSysClusterId", 1, "argClusterId");
+			throw new CFLibNullArgumentException(I$SchemaName$Schema.class, "setSysClusterId", 1, "argClusterId");
 		}
 		CFLibDbKeyHash256 oldid = sysClusterId.get();
 		if (oldid == null) {
@@ -317,7 +277,7 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 			sysClusterId.compareAndSet(oldid, argClusterId);
 		}
 		else {
-			throw new CFLibInvalidArgumentException(I$DefSchemaName$Schema.class, "setSysClusterId", "sysClusterId has already been set", "sysClusterId has already been set");
+			throw new CFLibInvalidArgumentException(I$SchemaName$Schema.class, "setSysClusterId", "sysClusterId has already been set", "sysClusterId has already been set");
 		}
 	}
 
@@ -327,7 +287,7 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 
 	public static void setSysTenantId(CFLibDbKeyHash256 argTenantId) {
 		if (argTenantId == null || argTenantId.isNull()) {
-			throw new CFLibNullArgumentException(I$DefSchemaName$Schema.class, "setSysTenantId", 1, "argTenantId");
+			throw new CFLibNullArgumentException(I$SchemaName$Schema.class, "setSysTenantId", 1, "argTenantId");
 		}
 		CFLibDbKeyHash256 oldid = sysTenantId.get();
 		if (oldid == null) {
@@ -337,7 +297,7 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 			sysTenantId.compareAndSet(oldid, argTenantId);
 		}
 		else {
-			throw new CFLibInvalidArgumentException(I$DefSchemaName$Schema.class, "setSysTenantId", "sysTenantId has already been set", "sysTenantId has already been set");
+			throw new CFLibInvalidArgumentException(I$SchemaName$Schema.class, "setSysTenantId", "sysTenantId has already been set", "sysTenantId has already been set");
 		}
 	}
 
@@ -347,7 +307,7 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 
 	public static void setSystemId(CFLibDbKeyHash256 argSystemId) {
 		if (argSystemId == null || argSystemId.isNull()) {
-			throw new CFLibNullArgumentException(I$DefSchemaName$Schema.class, "setSystemId", 1, "argSystemId");
+			throw new CFLibNullArgumentException(I$SchemaName$Schema.class, "setSystemId", 1, "argSystemId");
 		}
 		CFLibDbKeyHash256 oldid = systemId.get();
 		if (oldid == null) {
@@ -357,17 +317,17 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 			systemId.compareAndSet(oldid, argSystemId);
 		}
 		else {
-			throw new CFLibInvalidArgumentException(I$DefSchemaName$Schema.class, "setSystemId", "systemId has already been set", "systemId has already been set");
+			throw new CFLibInvalidArgumentException(I$SchemaName$Schema.class, "setSystemId", "systemId has already been set", "systemId has already been set");
 		}
 	}
 </GenRule>
 
-<GenRule GenDef="SchemaDef" Name="declPrivSchemaBootstrap">
+<GenRule GenDef="SchemaDef" Name="declSchemaBootstrap">
 	public void bootstrapSchema($SecPubSchemaName$TableData tableData[]);
 	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]);
 </GenRule>
 
-<GenRule GenDef="Object" Name="declPrivISchemaClassMapEntry">
+<GenRule GenDef="Object" Name="declISchemaClassMapEntry">
 	public static interface BackingRecConstructor {
 		public Object instantiate();
 	}
@@ -399,47 +359,47 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 	}
 </GenRule>
 
-	<GenRule GenDef="SchemaDef" Name="declPrivISchemaClassMapData">
-		final static ArrayList&lt;I$SecPrivSchemaName$Schema.ClassMapEntry&gt; entries = new ArrayList&lt;&gt;();
-		final static HashMap&lt;Integer,I$SecPrivSchemaName$Schema.ClassMapEntry&gt; mapBackingClassCodeToEntry = new HashMap&lt;&gt;();
-		final static HashMap&lt;Integer,I$SecPrivSchemaName$Schema.ClassMapEntry&gt; mapRuntimeClassCodeToEntry = new HashMap&lt;&gt;();
-		final static AtomicReference&lt;I$DefSchemaName$Schema&gt; backing$DefSchemaName$Schema = new AtomicReference&lt;&gt;();</GenRule>
+	<GenRule GenDef="SchemaDef" Name="declISchemaClassMapData">
+		final static ArrayList&lt;I$SecSchemaName$Schema.ClassMapEntry&gt; entries = new ArrayList&lt;&gt;();
+		final static HashMap&lt;Integer,I$SecSchemaName$Schema.ClassMapEntry&gt; mapBackingClassCodeToEntry = new HashMap&lt;&gt;();
+		final static HashMap&lt;Integer,I$SecSchemaName$Schema.ClassMapEntry&gt; mapRuntimeClassCodeToEntry = new HashMap&lt;&gt;();
+		final static AtomicReference&lt;I$SchemaName$Schema&gt; backing$SchemaName$ = new AtomicReference&lt;&gt;();</GenRule>
 
-	<GenRule GenDef="SchemaDef" Name="implPrivISchemaClassMapAccessors">
-		public static I$DefSchemaName$Schema getBacking$DefSchemaName$Schema() {
-			return( I$DefSchemaName$Schema.backing$DefSchemaName$Schema.get() );
+	<GenRule GenDef="SchemaDef" Name="implISchemaClassMapAccessors">
+		public static I$SchemaName$Schema getBacking$SchemaName$() {
+			return( I$SchemaName$Schema.backing$SchemaName$.get() );
 		}
 		
-		public static void setBacking$DefSchemaName$Schema(I$DefSchemaName$Schema backingSchema) {
-			I$DefSchemaName$Schema.backing$DefSchemaName$Schema.set(backingSchema);
+		public static void setBacking$SchemaName$(I$SchemaName$Schema backingSchema) {
+			I$SchemaName$Schema.backing$SchemaName$.set(backingSchema);
 		}
 		
-		public I$DefSchemaName$Schema get$DefSchemaName$Schema();
-		public void set$DefSchemaName$Schema(I$DefSchemaName$Schema schema);
+		public I$SchemaName$Schema get$SchemaName$Schema();
+		public void set$SchemaName$Schema(I$SchemaName$Schema schema);
 		
-		public static int doInitClassMapEntries(int value) {$iterate SchemaRefs( each invokePrivSuperISchemaInitClassMapEntries empty empty )$
-			if (I$DefSchemaName$Schema.entries.isEmpty()) {
-				I$SecPrivSchemaName$Schema.ClassMapEntry entry;$iterate DefSchemaTables( each maybePrivWireToISchemaEntries )$
-				for( I$SecPrivSchemaName$Schema.ClassMapEntry cur: I$DefSchemaName$Schema.entries) {
+		public static int doInitClassMapEntries(int value) {$iterate SchemaRefs( each invokeSuperISchemaInitClassMapEntries empty empty )$
+			if (I$SchemaName$Schema.entries.isEmpty()) {
+				I$SecSchemaName$Schema.ClassMapEntry entry;$iterate Tables( each maybeWireToISchemaEntries )$
+				for( I$SecSchemaName$Schema.ClassMapEntry cur: I$SchemaName$Schema.entries) {
 					cur.setRuntimeClassCode(value++);
 				}
-				I$DefSchemaName$Schema.mapBackingClassCodeToEntry.clear();
-				I$DefSchemaName$Schema.mapRuntimeClassCodeToEntry.clear();
-				for( I$SecPrivSchemaName$Schema.ClassMapEntry cur: I$DefSchemaName$Schema.entries) {
-					I$DefSchemaName$Schema.mapBackingClassCodeToEntry.put(cur.getBackingClassCode(), cur);
-					I$DefSchemaName$Schema.mapRuntimeClassCodeToEntry.put(cur.getRuntimeClassCode(), cur);
+				I$SchemaName$Schema.mapBackingClassCodeToEntry.clear();
+				I$SchemaName$Schema.mapRuntimeClassCodeToEntry.clear();
+				for( I$SecSchemaName$Schema.ClassMapEntry cur: I$SchemaName$Schema.entries) {
+					I$SchemaName$Schema.mapBackingClassCodeToEntry.put(cur.getBackingClassCode(), cur);
+					I$SchemaName$Schema.mapRuntimeClassCodeToEntry.put(cur.getRuntimeClassCode(), cur);
 				}
 			}
 			return(value);
 		}
 		
-		public static I$SecPrivSchemaName$Schema.ClassMapEntry getClassMapByBackingClassCode(int code) {
-			I$SecPrivSchemaName$Schema.ClassMapEntry entry;$iterate SchemaRefs( each tryPrivGetClassMapByBackingClassCode empty empty )$$tryPrivGetClassMapByBackingClassCode$
+		public static I$SecSchemaName$Schema.ClassMapEntry getClassMapByBackingClassCode(int code) {
+			I$SecSchemaName$Schema.ClassMapEntry entry;$iterate SchemaRefs( each tryGetClassMapByBackingClassCode empty empty )$$tryGetClassMapByBackingClassCode$
 			return( null );
 		}
 		
-		public static I$SecPrivSchemaName$Schema.ClassMapEntry getClassMapByRuntimeClassCode(int code) {
-			I$SecPrivSchemaName$Schema.ClassMapEntry entry;$iterate SchemaRefs( each tryPrivGetClassMapByRuntimeClassCode empty empty )$$tryPrivGetClassMapByRuntimeClassCode$
+		public static I$SecSchemaName$Schema.ClassMapEntry getClassMapByRuntimeClassCode(int code) {
+			I$SecSchemaName$Schema.ClassMapEntry entry;$iterate SchemaRefs( each tryGetClassMapByRuntimeClassCode empty empty )$$tryGetClassMapByRuntimeClassCode$
 			return( null );
 		}
 		
@@ -448,55 +408,50 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 		public void wireTableTableInstances();
 </GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="tryPrivGetClassMapByBackingClassCode">$reference RefSchema tryPrivGetClassMapByBackingClassCode$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="tryPrivGetClassMapByBackingClassCode">
-			entry = I$DefSchemaName$Schema.mapBackingClassCodeToEntry.get(code);
+	<GenRule GenDef="SchemaRef" Name="tryGetClassMapByBackingClassCode">$reference RefSchema tryGetClassMapByBackingClassCode$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="tryGetClassMapByBackingClassCode">
+			entry = I$SchemaName$Schema.mapBackingClassCodeToEntry.get(code);
 			if (entry != null) {
 				return( entry );
 			}</GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="tryPrivGetClassMapByRuntimeClassCode">$reference RefSchema tryPrivGetClassMapByRuntimeClassCode$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="tryPrivGetClassMapByRuntimeClassCode">
-			entry = I$DefSchemaName$Schema.mapRuntimeClassCodeToEntry.get(code);
+	<GenRule GenDef="SchemaRef" Name="tryGetClassMapByRuntimeClassCode">$reference RefSchema tryGetClassMapByRuntimeClassCode$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="tryGetClassMapByRuntimeClassCode">
+			entry = I$SchemaName$Schema.mapRuntimeClassCodeToEntry.get(code);
 			if (entry != null) {
 				return( entry );
 			}</GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="invokePrivSuperISchemaInitClassMapEntries">$reference RefSchema invokePrivSuperISchemaInitClassMapEntries$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="invokePrivSuperISchemaInitClassMapEntries">
-			value = I$DefSchemaName$Schema.doInitClassMapEntries(value);</GenRule>
+	<GenRule GenDef="SchemaRef" Name="invokeSuperISchemaInitClassMapEntries">$reference RefSchema invokeSuperISchemaInitClassMapEntries$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="invokeSuperISchemaInitClassMapEntries">
+			value = I$SchemaName$Schema.doInitClassMapEntries(value);</GenRule>
 
-	<GenRule GenDef="Table" Name="maybePrivWireToISchemaEntries">$switch IsPrivate yes reallyPrivWireToISchemaEntries default empty$</GenRule>
-	<GenRule GenDef="Table" Name="reallyPrivWireToISchemaEntries">$switch HasDefSchema yes empty default wirePrivToISchemaEntries$</GenRule>
-	<GenRule GenDef="Table" Name="wirePrivToISchemaEntries">
-				entry = new I$SecPrivSchemaName$Schema.ClassMapEntry(I$DefSchemaName$Schema.SCHEMA_NAME, "$TableName$", I$DefSchemaName$$TableName$.CLASS_CODE);
-				I$DefSchemaName$Schema.entries.add(entry);</GenRule>
+	<GenRule GenDef="Table" Name="maybeWireToISchemaEntries">$switch HasDefSchema yes empty default wireToISchemaEntries$</GenRule>
+	<GenRule GenDef="Table" Name="wireToISchemaEntries">
+				entry = new I$SecSchemaName$Schema.ClassMapEntry(I$SchemaName$Schema.SCHEMA_NAME, "$TableName$", I$DefSchemaName$$TableName$.CLASS_CODE);
+				I$SchemaName$Schema.entries.add(entry);</GenRule>
 
-	<GenRule GenDef="Object" Name="SecPrivSchemaName">$poptop SchemaDef iterate SchemaRefs( first emitSecSchemaPrivName each empty empty emitOnlySchemaPrivName )$</GenRule>
-	<GenRule GenDef="SchemaRef" Name="emitSecSchemaPrivName">$reference RefSchema DefSchemaName$</GenRule>
-	<GenRule GenDef="Object" Name="emitOnlySchemaPrivName">$poptop SchemaDef SchemaName$</GenRule>
-
-	<GenRule GenDef="Object" Name="DefDefSchemaName">$DefSchemaName$</GenRule>
-	<GenRule GenDef="Object" Name="DefSchemaName">$SchemaName$</GenRule>
+        <GenRule GenDef="Object" Name="SecSchemaName">$poptop SchemaDef iterate SchemaRefs( first emitSecSchemaName each empty empty emitOnlySchemaName )$</GenRule>
+        <GenRule GenDef="SchemaRef" Name="emitSecSchemaName">$reference RefSchema SchemaName$</GenRule>
+        <GenRule GenDef="Object" Name="emitOnlySchemaName">$poptop SchemaDef SchemaName$</GenRule>
         
-	<GenRule GenDef="EnumDef" Name="declPrivISchemaPrivEnumType">$switch IsPrivate yes reallyDeclPrivISchemaEnumType default empty$</GenRule>
-	<GenRule GenDef="EnumDef" Name="reallyDeclPrivISchemaEnumType"
-		>$switch HasDefSchema yes empty default reallyPrivDeclISchemaEnumType$</GenRule>
+	<GenRule GenDef="EnumDef" Name="declISchemaEnumType"
+		>$switch HasDefSchema yes empty default reallyDeclISchemaEnumType$</GenRule>
 
-	<GenRule GenDef="EnumDef" Name="reallyPrivDeclISchemaEnumType">
+	<GenRule GenDef="EnumDef" Name="reallyDeclISchemaEnumType">
 	public enum $Name$ {$iterate Tag( first declISchemaEnumTypeFirstTag each declISchemaEnumTypeEachTag )$
 	};
-$reallyPrivImplSchemaParseEnum$</GenRule>
-        
-	<GenRule GenDef="EnumDef" Name="implPrivSchemaParseEnum"
-		>$switch HasDefSchema yes empty default reallyPrivImplSchemaParseEnum$</GenRule>
+$reallyImplSchemaParseEnum$</GenRule>
 
-	<GenRule GenDef="EnumDef" Name="reallyPrivImplSchemaParseEnum"
-		>$implPrivSchemaParseEnumParse$$implPrivSchemaParseEnumOrdinal$</GenRule>
+	<GenRule GenDef="EnumDef" Name="implSchemaParseEnum"
+		>$switch HasDefSchema yes empty default reallyImplSchemaParseEnum$</GenRule>
 
-	<GenRule GenDef="Value" Name="implPrivSchemaParseEnum"></GenRule>
+	<GenRule GenDef="EnumDef" Name="reallyImplSchemaParseEnum"
+		>$implSchemaParseEnumParse$$implSchemaParseEnumOrdinal$</GenRule>
 
-	<GenRule GenDef="EnumDef" Name="implPrivSchemaParseEnumParse">
+	<GenRule GenDef="Value" Name="implSchemaParseEnum"></GenRule>
+
+	<GenRule GenDef="EnumDef" Name="implSchemaParseEnumParse">
 	static HashMap&lt;String,$Name$&gt; lookup$Name$ = new HashMap&lt;String,$Name$&gt;();
 
 	public static $Name$ parse$Name$( String value ) {
@@ -506,7 +461,7 @@ $reallyPrivImplSchemaParseEnum$</GenRule>
 
 	public static $Name$ parse$Name$( String fieldOrClassName, String value ) {
 		final String S_ProcName = "parse$Name$";
-		if( lookup$Name$.isEmpty() ) {$iterate Tag( each implPrivSchemaParseEnumAddTagToMap )$
+		if( lookup$Name$.isEmpty() ) {$iterate Tag( each implSchemaParseEnumAddTagToMap )$
 		}
 		$Name$ retval;
 		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
@@ -528,10 +483,10 @@ $reallyPrivImplSchemaParseEnum$</GenRule>
 	}
 </GenRule>
 
-	<GenRule GenDef="EnumTag" Name="implPrivSchemaParseEnumAddTagToMap">
+	<GenRule GenDef="EnumTag" Name="implSchemaParseEnumAddTagToMap">
 			lookup$popto EnumDef Name$.put( "$Name$", $popto EnumDef Name$.$Name$ );</GenRule>
 
-	<GenRule GenDef="EnumDef" Name="implPrivSchemaParseEnumOrdinal">
+	<GenRule GenDef="EnumDef" Name="implSchemaParseEnumOrdinal">
 	static HashMap&lt;Integer,$Name$&gt; lookupOrdinal$Name$ = new HashMap&lt;Integer,$Name$&gt;();
 
 	public static $Name$ ordinalTo$Name$( String fieldOrClassName, Short value ) {
@@ -562,14 +517,14 @@ $reallyPrivImplSchemaParseEnum$</GenRule>
 			retval = null;
 		}
 		else {
-			retval = ordinalTo$Name$( I$DefSchemaName$Schema.class.getName(), Integer.valueOf( value.shortValue() ) );
+			retval = ordinalTo$Name$( I$SchemaName$Schema.class.getName(), Integer.valueOf( value.shortValue() ) );
 		}
 		return( retval );
 	}
 
 	public static $Name$ ordinalTo$Name$( String fieldOrClassName, Integer value ) {
 		final String S_ProcName = "ordinalTo$Name$";
-		if( lookupOrdinal$Name$.isEmpty() ) {$iterate Tag( each implPrivSchemaParseEnumAddOrdinalTagToMap )$
+		if( lookupOrdinal$Name$.isEmpty() ) {$iterate Tag( each implSchemaParseEnumAddOrdinalTagToMap )$
 		}
 		$Name$ retval;
 		if( value == null ) {
@@ -591,7 +546,7 @@ $reallyPrivImplSchemaParseEnum$</GenRule>
 	}
 </GenRule>
 
-	<GenRule GenDef="EnumTag" Name="implPrivSchemaParseEnumAddOrdinalTagToMap">
+	<GenRule GenDef="EnumTag" Name="implSchemaParseEnumAddOrdinalTagToMap">
 			lookupOrdinal$popto EnumDef Name$.put( Integer.valueOf( $popto EnumDef Name$.$Name$.ordinal() ), $popto EnumDef Name$.$Name$ );</GenRule>
 
 	<GenRule GenDef="EnumTag" Name="declISchemaEnumTypeFirstTag">
@@ -600,39 +555,44 @@ $reallyPrivImplSchemaParseEnum$</GenRule>
 	<GenRule GenDef="EnumTag" Name="declISchemaEnumTypeEachTag">,
 		$Name$</GenRule>
 
-	<GenRule GenDef="Value" Name="declPrivISchemaPrivEnumType"></GenRule>
+	<GenRule GenDef="Value" Name="declISchemaEnumType"></GenRule>
 
-	<GenRule GenDef="Object" Name="extendsPrivSchemaSecurityControl">$poptop SchemaDef extendsPrivSchemaSecurityControl$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="extendsPrivSchemaSecurityControl">
-extends I$SecPrivSchemaName$SecurityControl</GenRule>
+	<GenRule GenDef="Object" Name="extendsSchemaSecurityControl">$poptop SchemaDef extendsSchemaSecurityControl$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="extendsSchemaSecurityControl">
+extends I$SecSchemaName$SecurityControl</GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="extendsPrivPackageSchemaName">
-extends I$PackageDefSchemaName$Schema</GenRule>
-	<GenRule GenDef="SchemaRef" Name="commaPrivNewlinePackageSchemaName">,
-	I$PackageDefSchemaName$Schema</GenRule>
+	<GenRule GenDef="SchemaRef" Name="extendsPackageSchemaName">
+extends I$PackageSchemaName$Schema</GenRule>
+	<GenRule GenDef="SchemaRef" Name="commaNewlinePackageSchemaName">,
+	I$PackageSchemaName$Schema</GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="declPrivNewSchema"
-		>$reference RefSchema declPrivNewSchema$</GenRule>
+	<GenRule GenDef="SchemaRef" Name="PackageSchemaName"
+		>$reference RefSchema PackageSchemaName$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="PackageSchemaName"
+		>$SchemaName$</GenRule>
 
-	<GenRule GenDef="SchemaDef" Name="declPrivNewSchema">
+	<GenRule GenDef="SchemaRef" Name="declNewSchema"
+		>$reference RefSchema declNewSchema$</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="declNewSchema">
 	/**
 	 *	Allocate a new schema instance.
 	 *
-	 *	@return	A new I$DefSchemaName$Schema instance.
+	 *	@return	A new I$SchemaName$Schema instance.
 	 */
 	public I$DefSchemaName$Schema newSchema();
 </GenRule>
 
-	<GenRule GenDef="Object" Name="declPrivNewSchema">
+	<GenRule GenDef="Object" Name="declNewSchema">
 	/**
 	 *	Allocate a new schema instance.
 	 *
-	 *	@return	A new I$DefSchemaName$Schema instance.
+	 *	@return	A new I$SchemaName$Schema instance.
 	 */
 	public I$DefSchemaName$Schema newSchema();
 </GenRule>
 
-	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="declPrivNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="declNextIdGen">
 	/**
 	 *	Get the next $Name$ identifier.
 	 *
@@ -642,7 +602,7 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	 */
 	public short next$Name$();
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="declPrivNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="declNextIdGen">
 	/**
 	 *	Get the next $Name$ identifier.
 	 *
@@ -652,7 +612,7 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	 */
 	public int next$Name$();
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="declPrivNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="declNextIdGen">
 	/**
 	 *	Get the next $Name$ identifier.
 	 *
@@ -662,7 +622,7 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	 */
 	public long next$Name$();
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="declPrivNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="declNextIdGen">
 	/**
 	 *	Get the next $Name$ identifier.
 	 *
@@ -672,7 +632,7 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	 */
 	public UUID next$Name$();
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="Uuid6Gen" Name="declPrivNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="Uuid6Gen" Name="declNextIdGen">
 	/**
 	 *	Get the next $Name$ identifier.
 	 *
@@ -682,7 +642,7 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	 */
 	public CFLibUuid6 next$Name$();
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash128Gen" Name="declPrivNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash128Gen" Name="declNextIdGen">
 	/**
 	 *	Get the next $Name$ identifier.
 	 *
@@ -692,7 +652,7 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	 */
 	public CFLibDbKeyHash128 next$Name$();
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash160Gen" Name="declPrivNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash160Gen" Name="declNextIdGen">
 	/**
 	 *	Get the next $Name$ identifier.
 	 *
@@ -702,7 +662,7 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	 */
 	public CFLibDbKeyHash160 next$Name$();
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash224Gen" Name="declPrivNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash224Gen" Name="declNextIdGen">
 	/**
 	 *	Get the next $Name$ identifier.
 	 *
@@ -712,7 +672,7 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	 */
 	public CFLibDbKeyHash224 next$Name$();
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash256Gen" Name="declPrivNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash256Gen" Name="declNextIdGen">
 	/**
 	 *	Get the next $Name$ identifier.
 	 *
@@ -722,7 +682,7 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	 */
 	public CFLibDbKeyHash256 next$Name$();
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash384Gen" Name="declPrivNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash384Gen" Name="declNextIdGen">
 	/**
 	 *	Get the next $Name$ identifier.
 	 *
@@ -732,7 +692,7 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	 */
 	public CFLibDbKeyHash384 next$Name$();
 </GenRule>
-	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash512Gen" Name="declPrivNextIdGen">
+	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash512Gen" Name="declNextIdGen">
 	/**
 	 *	Get the next $Name$ identifier.
 	 *
@@ -743,11 +703,10 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	public CFLibDbKeyHash512 next$Name$();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="declPrivTableMethods">$switch IsPrivate yes reallyDeclPrivTableMethods default empty$</GenRule>
-	<GenRule GenDef="Table" Name="reallyDeclPrivTableMethods"
-		>$declPrivSchemaTableTableAccessors$</GenRule>
+	<GenRule GenDef="Table" Name="declTableMethods"
+		>$declSchemaTableTableAccessors$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPrivSchemaTableTableAccessors">
+	<GenRule GenDef="Table" Name="declSchemaTableTableAccessors">
 	/**
 	 *	Get the $TableName$ Table interface for the schema.
 	 *
@@ -758,10 +717,10 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	public I$DefSchemaName$$TableName$Table getTable$TableName$();
 </GenRule>
 
-	<GenRule GenDef="SchemaRef" Name="declPrivSchemaTablePermsAccessors"
-		>$reference RefSchema declPrivSchemaTablePermsAccessors$</GenRule>
+	<GenRule GenDef="SchemaRef" Name="declSchemaTablePermsAccessors"
+		>$reference RefSchema declSchemaTablePermsAccessors$</GenRule>
 
-	<GenRule GenDef="SchemaDef" Name="declPrivSchemaTablePermsAccessors">
+	<GenRule GenDef="SchemaDef" Name="declSchemaTablePermsAccessors">
 	/**
 	 *	Get the Table Permissions interface for the schema.
 	 *
@@ -769,25 +728,25 @@ extends I$PackageDefSchemaName$Schema</GenRule>
 	 *
 	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	//public static I$SecPrivSchemaName$TablePerms getTablePerms();
+	//public static I$SecSchemaName$TablePerms getTablePerms();
 
 	/**
 	 *	Get the Table Permissions interface cast to this schema's implementation.
 	 *
 	 *	@return The Table Permissions interface for this schema.
 	 */
-	//public static I$SecPrivSchemaName$TablePerms get$SchemaName$TablePerms();
+	//public static I$SchemaName$TablePerms get$SchemaName$TablePerms();
 
 	/**
 	 *	Set the Table Permissions interface for the schema.  All fractal subclasses of
-	 *	the I$SecPrivSchemaName$TablePerms implement at least that interface plus their own
+	 *	the I$SecSchemaName$TablePerms implement at least that interface plus their own
 	 *	accessors.
 	 *
 	 *	@param	value	The Table Permissions interface to be used by the schema.
 	 *
 	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	//public static void setTablePerms( I$SecPrivSchemaName$TablePerms value );
+	//public static void setTablePerms( I$SecSchemaName$TablePerms value );
 </GenRule>
 
 </RuleSet>
