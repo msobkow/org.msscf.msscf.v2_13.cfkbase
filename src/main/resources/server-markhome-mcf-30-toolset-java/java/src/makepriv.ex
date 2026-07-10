@@ -18,6 +18,10 @@
 1,$s/protlic/public/g
 1,$s/\$Priv\$/$$/g
 1,$s/\$priv\$/$$/g
+1,$s/ubected/rotected/g
+1,$s/SecSchemaName\$ProtAuthorization/SecSchemaName$Authorization/g
+1,$s/protlished/published/g
+1,$s/protlishing/publishing/g
 w
 q
 
