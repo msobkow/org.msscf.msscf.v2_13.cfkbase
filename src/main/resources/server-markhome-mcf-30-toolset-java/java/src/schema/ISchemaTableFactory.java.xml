@@ -61,14 +61,18 @@ import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
-import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$importJavaProtPackageSchemaName$$importJavaProtPackageSchemaNameObj$$tabletweak CafeTableImport$
 
 /*
  *	I$SchemaName$$TableName$Factory interface for $TableName$
  */
-public interface I$SchemaName$$TableName$Factory$switch HasDefSchema yes extendsJavaDefSchemaTableFactory default empty empty empty$
+public interface I$SchemaName$$TableName$Factory$iterate TableRefs( first extendsJavaSchemaTableNameFactory each extendsCommaJavaSchemaTableNameFactory empty maybeExtendsProtFactory )$
 {$switch HasDefSchema yes declJavaDefSchemaTableFactoryInheritBody default declJavaDefSchemaTableFactoryBaseBody$}
 </GenFile>
+
+	<GenRule GenDef="Table" Name="extendsJavaSchemaTableNameFactory">$switch IsProtected yes maybeExtendsProtFactory default empty$</GenRule>
+	<GenRule GenDef="Table" Name="maybeExtendsProtFactory">$switch IsProtected yes reallyExtendsProtFactory default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyExtendsProtFactory"> extends I$DefSchemaName$Prot$TableName$Factory</GenRule>
 
 	<GenRule GenDef="Table" Name="declJavaDefSchemaTableFactoryInheritBody">
 </GenRule>
@@ -76,9 +80,6 @@ public interface I$SchemaName$$TableName$Factory$switch HasDefSchema yes extends
 	<GenRule GenDef="Table" Name="declJavaDefSchemaTableFactoryBaseBody">
 $switch HasSuperClassRelation no declRecNewPKey default empty$$switch HasSuperClassRelation no declNewHPKey default empty$$iterate Index( each declNewNonPrimaryIndexKey )$$declNewRec$$declNewHRec$
 </GenRule>
-
-	<GenRule GenDef="Table" Name="extendsJavaDefSchemaTableFactory">
-extends I$reference DefSchema SchemaName$$TableName$Factory</GenRule>
 
 	<GenRule GenDef="Index" Name="declNewNonPrimaryIndexKey"
 		>$switch IsPrimaryIndex yes empty default declNewByIndexKey$</GenRule>
@@ -90,6 +91,24 @@ extends I$reference DefSchema SchemaName$$TableName$Factory</GenRule>
 	 *	@return	The new instance.
 	 */
 	public I$DefSchemaName$$TableName$By$Suffix$Key newBy$Suffix$Key();
+$switch IsProtected yes reallyDeclAsProtectedByIndexKey default empty$</GenRule>
+
+	<GenRule GenDef="Index" Name="reallyDeclAsProtectedByIndexKey">
+	/**
+	 *	Allocate a protected $Suffix$ key from a private instance.
+	 *
+	 *	@return	The new instance.
+	 */
+	public I$DefSchemaName$Prot$TableName$By$Suffix$Key asProtected(I$DefSchemaName$$TableName$By$Suffix$Key src);
+$switch IsPublic yes reallyDeclAsPublicByIndexKey default empty$</GenRule>
+
+	<GenRule GenDef="Index" Name="reallyDeclAsPublicByIndexKey">
+	/**
+	 *	Allocate a public $Suffix$ key from a private instance.
+	 *
+	 *	@return	The new instance.
+	 */
+	public I$DefSchemaName$Pub$TableName$By$Suffix$Key asPublic(I$DefSchemaName$$TableName$By$Suffix$Key src);
 </GenRule>
 
 	<GenRule GenDef="Index" Name="RecCompactedIndexClass">$switch IsAtomic yes implJavaOptAtomType default RecIndexClassName$</GenRule>
@@ -111,6 +130,24 @@ extends I$reference DefSchema SchemaName$$TableName$Factory</GenRule>
 	 *	@return	The new instance.
 	 */
 	public I$DefSchemaName$$TableName$PKey newPKey();
+$switch IsProtected yes reallyDeclAsProtectedPKey default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="reallyDeclAsProtectedPKey">
+	/**
+	 *	Allocate a protected key for $TableName$ instances from a private key.
+	 *
+	 *	@return	The new instance.
+	 */
+	public I$DefSchemaName$Prot$TableName$PKey asProtected(I$DefSchemaName$$TableName$PKey src);
+$switch IsPublic yes reallyDeclAsPublicPKey default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="reallyDeclAsPublicPKey">
+	/**
+	 *	Allocate a public key for $TableName$ instances from a private key.
+	 *
+	 *	@return	The new instance.
+	 */
+	public I$DefSchemaName$Pub$TableName$PKey asPublic(I$DefSchemaName$$TableName$PKey src);
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declNewHPKey"
@@ -125,6 +162,24 @@ extends I$reference DefSchema SchemaName$$TableName$Factory</GenRule>
 	 *	@return	The new instance.
 	 */
 	I$DefSchemaName$$TableName$HPKey newHPKey();
+$switch IsProtected yes reallyDeclAsProtectedHPKey default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="reallyDeclAsProtectedHPKey">
+	/**
+	 *	Allocate a protected primary history key for $TableName$ instances from a private instance.
+	 *
+	 *	@return	The new instance.
+	 */
+	I$DefSchemaName$Prot$TableName$HPKey asProtected(I$DefSchemaName$$TableName$HPKey src);
+$switch IsPublic yes reallyDeclAsPublicHPKey default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="reallyDeclAsPublicHPKey">
+	/**
+	 *	Allocate a public primary history key for $TableName$ instances from a private instance.
+	 *
+	 *	@return	The new instance.
+	 */
+	I$DefSchemaName$Pub$TableName$HPKey asPublic(I$DefSchemaName$$TableName$HPKey src);
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declNewRec">
@@ -134,6 +189,24 @@ extends I$reference DefSchema SchemaName$$TableName$Factory</GenRule>
 	 *	@return	The new instance.
 	 */
 	public I$DefSchemaName$$TableName$ newRec();
+$switch IsProtected yes declAsProtectedRec default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="declAsProtectedRec">
+	/**
+	 *	Allocate a protected $TableName$ interface from a private interface.
+	 *
+	 *	@return	The new instance.
+	 */
+	public I$DefSchemaName$Prot$TableName$ asProtected(I$DefSchemaName$$TableName$ src);
+$switch IsPublic yes declAsPublicRec default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="declAsPublicRec">
+	/**
+	 *	Allocate a public $TableName$ interface from a private interface.
+	 *
+	 *	@return	The new instance.
+	 */
+	public I$DefSchemaName$Pub$TableName$ asPublic(I$DefSchemaName$$TableName$ src);
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declNewHRec"
@@ -148,6 +221,24 @@ extends I$reference DefSchema SchemaName$$TableName$Factory</GenRule>
 	 *	@return	The new instance.
 	 */
 	public I$DefSchemaName$$TableName$H newHRec();
+$switch IsProtected yes reallyDeclAsProtectedHRec default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="reallyDeclAsProtectedHRec">
+	/**
+	 *	Allocate a protected $TableName$ history interface implementation from a private interface.
+	 *
+	 *	@return	The new instance.
+	 */
+	public I$DefSchemaName$Prot$TableName$H asProtected(I$DefSchemaName$$TableName$H src);
+$switch IsPublic yes reallyDeclAsPublicHRec default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="reallyDeclAsPublicHRec">
+	/**
+	 *	Allocate a public $TableName$ history interface implementation from a private interface.
+	 *
+	 *	@return	The new instance.
+	 */
+	public I$DefSchemaName$Pub$TableName$H asPublic(I$DefSchemaName$$TableName$H src);
 </GenRule>
 
 </RuleSet>
