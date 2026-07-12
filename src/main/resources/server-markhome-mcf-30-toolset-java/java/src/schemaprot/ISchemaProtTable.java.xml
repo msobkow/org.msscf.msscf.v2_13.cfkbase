@@ -101,7 +101,15 @@ $switch HasDefSchema no maybeDeclProtRecGetClassCode default empty$$switch HasDe
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declProtSetArgColumn each declProtCommaSetArgColumn)$);</GenRule>
 
 	<GenRule GenDef="Relation" Name="reallyDeclProtISchemaTablePubRelationSetter">
-	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitPubInterfaceDataType$ argObj);</GenRule>
+	public default void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj) {
+		if (argObj == null) {
+			set$OptionalOrRequired$$RelationType$$Suffix$((I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$)null);
+		}
+		else {
+			set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first passArgObjArgColumn each declCommaPassArgObjArgColumn)$);
+		}
+	}
+</GenRule>
 
 	<GenRule GenDef="Table" Name="declProtColumnOptAuditGetterSetters">$switch IsProtected yes reallyDeclProtColumnOptAuditGetterSetters default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyDeclProtColumnOptAuditGetterSetters"

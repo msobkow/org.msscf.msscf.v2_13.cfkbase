@@ -262,18 +262,18 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		I$SecSchemaName$SecClusGrp secSysClusGroupSysAdmin,
 		I$SecSchemaName$SecTentGrp secSysTentGroupSysAdmin )
 	{
-		I$SecSchemaName$Schema.SecLevelEnum level;
+		I$SecPubSchemaName$Schema.SecLevelEnum level;
 		if (secScope.equalsIgnoreCase("global")) {
-			level = I$SecSchemaName$Schema.SecLevelEnum.Global;
+			level = I$SecPubSchemaName$Schema.SecLevelEnum.Global;
 		}
 		else if (secScope.toLowerCase().startsWith("cluster")) {
-			level = I$SecSchemaName$Schema.SecLevelEnum.Cluster;
+			level = I$SecPubSchemaName$Schema.SecLevelEnum.Cluster;
 		}
 		else if (secScope.toLowerCase().startsWith("tenant")) {
-			level = I$SecSchemaName$Schema.SecLevelEnum.Tenant;
+			level = I$SecPubSchemaName$Schema.SecLevelEnum.Tenant;
 		}
 		else {
-			level = I$SecSchemaName$Schema.SecLevelEnum.System;
+			level = I$SecPubSchemaName$Schema.SecLevelEnum.System;
 		}
 			
 		String lowerTableName = tableName.toLowerCase();
@@ -354,7 +354,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secGroupReadIncSystemAdmin = null;
 		}
 
-		if (secGroupRead != null &amp;&amp; level == I$SecSchemaName$Schema.SecLevelEnum.Global) {
+		if (secGroupRead != null &amp;&amp; level == I$SecPubSchemaName$Schema.SecLevelEnum.Global) {
 			secGroupReadIncPublic = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrpInc().readDerived(auth, secGroupReadID, publicGroup);
 		}
 		else {
@@ -490,7 +490,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secGroupReadIncSystemAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrpInc().createSecSysGrpInc(auth, secGroupReadIncSystemAdmin);
 		}
 
-		if (secGroupRead != null &amp;&amp; level == I$SecSchemaName$Schema.SecLevelEnum.Global &amp;&amp; secGroupReadIncPublic == null) {
+		if (secGroupRead != null &amp;&amp; level == I$SecPubSchemaName$Schema.SecLevelEnum.Global &amp;&amp; secGroupReadIncPublic == null) {
 			secGroupReadIncPublic = I$SecSchemaName$Schema.getBacking$SecSchemaName$().get$SecSchemaName$Factory().getFactorySecSysGrpInc().newRec();
 			secGroupReadIncPublic.setRequiredRevision(1);
 			secGroupReadIncPublic.setCreatedAt(now);
@@ -613,7 +613,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			}
 		}
 		
-		if (level == I$SecSchemaName$Schema.SecLevelEnum.Cluster || level == I$SecSchemaName$Schema.SecLevelEnum.Tenant) {
+		if (level == I$SecPubSchemaName$Schema.SecLevelEnum.Cluster || level == I$SecPubSchemaName$Schema.SecLevelEnum.Tenant) {
 			csecGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecClusGrp().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysClusterId(), createPermName);
 			if (csecGroupCreate != null) {
 				csecGroupCreateID = csecGroupCreate.getRequiredSecClusGrpId();
@@ -786,7 +786,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			}
 		}
 
-		if (level == I$SecSchemaName$Schema.SecLevelEnum.Tenant ) {
+		if (level == I$SecPubSchemaName$Schema.SecLevelEnum.Tenant ) {
 			tsecGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecTentGrp().readDerivedByUNameIdx(auth, I$SecSchemaName$Schema.getSysTenantId(), createPermName);
 			if (tsecGroupCreate != null) {
 				tsecGroupCreateID = tsecGroupCreate.getRequiredSecTentGrpId();
@@ -1242,7 +1242,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secSystemAdminGroup.setUpdatedAt(now);
 			secSystemAdminGroup.setUpdatedByUserId(systemUID);
 			secSystemAdminGroup.setRequiredName("systemadmin");
-			secSystemAdminGroup.setRequiredSecLevel(I$SecSchemaName$Schema.SecLevelEnum.System);
+			secSystemAdminGroup.setRequiredSecLevel(I$SecPubSchemaName$Schema.SecLevelEnum.System);
 			secSystemAdminGroup.setRequiredSecSysGrpId(secSystemAdminGroupID);
 			secSystemAdminGroup = ($SecSchemaName$JpaSecSysGrp)(secsysgrpService.create(secSystemAdminGroup));
 			secSystemAdminGroupID = secSystemAdminGroup.getRequiredSecSysGrpId();
@@ -1264,7 +1264,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			secSysGroupPublic.setUpdatedAt(now);
 			secSysGroupPublic.setUpdatedByUserId(systemUID);
 			secSysGroupPublic.setRequiredName("public");
-			secSysGroupPublic.setRequiredSecLevel(I$SecSchemaName$Schema.SecLevelEnum.System);
+			secSysGroupPublic.setRequiredSecLevel(I$SecPubSchemaName$Schema.SecLevelEnum.System);
 			secSysGroupPublic.setRequiredSecSysGrpId(secSysGroupPublicID);
 			secSysGroupPublic = ($SecSchemaName$JpaSecSysGrp)(secsysgrpService.create(secSysGroupPublic));
 			secSysGroupPublicID = secSysGroupPublic.getRequiredSecSysGrpId();

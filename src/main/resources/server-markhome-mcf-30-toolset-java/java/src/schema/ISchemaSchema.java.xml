@@ -436,8 +436,10 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
         <GenRule GenDef="Object" Name="emitOnlySchemaName">$poptop SchemaDef SchemaName$</GenRule>
         
 	<GenRule GenDef="EnumDef" Name="declISchemaEnumType"
-		>$switch HasDefSchema yes empty default reallyDeclISchemaEnumType$</GenRule>
+		>$switch HasDefSchema yes empty default maybeDeclISchemaEnumType$</GenRule>
 
+	<GenRule GenDef="EnumDef" Name="maybeDeclISchemaEnumType">$switch IsPublic yes empty default maybeDeclISchemaEnumTypeIfNotIsProtected$</GenRule>
+	<GenRule GenDef="EnumDef" Name="maybeDeclISchemaEnumTypeIfNotIsProtected">$switch IsProtected yes empty default reallyDeclISchemaEnumType$</GenRule>
 	<GenRule GenDef="EnumDef" Name="reallyDeclISchemaEnumType">
 	public enum $Name$ {$iterate Tag( first declISchemaEnumTypeFirstTag each declISchemaEnumTypeEachTag )$
 	};

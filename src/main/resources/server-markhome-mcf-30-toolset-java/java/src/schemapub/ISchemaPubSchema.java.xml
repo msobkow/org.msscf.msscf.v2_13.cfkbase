@@ -119,6 +119,30 @@ public interface I$DefPubSchemaName$Schema$iterate SchemaRefs( first extendsPubP
 $implPubApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declPubISchemaClassMapEntry )$$declPubISchemaClassMapData$$iterate SchemaRefs( each empty empty declPubISchemaSecurityAccessors )$$iterate Types( empty empty each declPubISchemaPubEnumType )$$iterate SchemaRefs( empty declPubISchemaSecurityAttrs each empty )$$implPubISchemaClassMapAccessors$$iterate SchemaRefs( first declPubNewSchema each empty empty declPubNewSchema )$$iterate Id16Generators( each declPubNextIdGen empty empty)$$iterate Id32Generators( each declPubNextIdGen empty empty)$$iterate Id64Generators( each declPubNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declPubNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declPubNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declPubNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declPubNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declPubNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declPubNextIdGen empty empty )$$iterate UuidGenerators( each declPubNextIdGen empty empty )$$iterate Uuid6Generators( each declPubNextIdGen empty empty )$$iterate SchemaRefs( each declPubSchemaFactoryAccessors empty empty )$$declPubSchemaFactoryAccessors$$iterate DefSchemaPublicTables( each declPubTableMethods empty empty )$$iterate SchemaRefs( first declPubSchemaTablePermsAccessors each empty empty declPubSchemaTablePermsAccessors )$$declPubSchemaBootstrap$}
 </GenFile>
 
+	<GenRule GenDef="SchemaRef" Name="EffSchemaName">$reference RefSchema SchemaName$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="EffSchemaName">$SchemaName$</GenRule>
+	<GenRule GenDef="Object" Name="EffSchemaName" >$switch HasDefSchema yes UseDefSchemaName default SchemaName$</GenRule>
+	<GenRule GenDef="Object" Name="UseDefSchemaName" >$reference DefSchema SchemaName$</GenRule>
+
+	<GenRule GenDef="SchemaRef" Name="EffCodeVisSchemaName">$reference RefSchema CodeVisSchemaName$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="EffCodeVisSchemaName">$CodeVisSchemaName$</GenRule>
+	<GenRule GenDef="Object" Name="EffCodeVisSchemaName" >$switch HasDefSchema yes UseDefCodeVisSchemaName default CodeVisSchemaName$</GenRule>
+	<GenRule GenDef="Object" Name="UseDefCodeVisSchemaName" >$reference DefSchema CodeVisSchemaName$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="CodeVisSchemaName">$reference TypeDef CodeVisSchemaName$</GenRule>
+	<GenRule GenDef="IndexCol" Name="CodeVisSchemaName">$reference Column CodeVisSchemaName$</GenRule>
+	<GenRule GenDef="RelationCol" Name="FromCodeVisSchemaName">$reference FromCol CodeVisSchemaName$</GenRule>
+	<GenRule GenDef="RelationCol" Name="ToCodeVisSchemaName">$reference ToCol CodeVisSchemaName$</GenRule>
+
+	<GenRule GenDef="Object" Name="CodeVisSchemaName">$switch CodeVis
+		null CodeVisSchemaNamePublic
+		Public CodeVisSchemaNamePublic
+		Protected CodeVisSchemaNameProtected
+		default CodeVisSchemaNamePrivate$</GenRule>
+	<GenRule GenDef="Object" Name="CodeVisSchemaNamePublic">I$DefSchemaName$PubSchema</GenRule>
+	<GenRule GenDef="Object" Name="CodeVisSchemaNameProtected">I$DefSchemaName$ProtSchema</GenRule>
+	<GenRule GenDef="Object" Name="CodeVisSchemaNamePrivate">I$DefSchemaName$Schema</GenRule>
+
 	<GenRule GenDef="SchemaRef" Name="importJavaPubPackageSchemaNameBuffDotFactoryService">$reference RefSchema importJavaPubPackageSchemaNameBuffDotFactoryService$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="importJavaPubPackageSchemaNameBuffDotFactoryService">
 //import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$pub.buff.$DefSchemaName$PubBuffFactoryService;</GenRule>
