@@ -360,7 +360,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		else {
 			secGroupReadIncPublic = null;
 		}
-		
+
 		secGroupUpdate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().readDerivedByUNameIdx(auth, updatePermName);
 		if (secGroupUpdate != null) {
 			secGroupUpdateID = secGroupUpdate.getRequiredSecSysGrpId();
@@ -1171,7 +1171,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			systemUser.setRequiredSecUserId(systemUID);
 			systemUser.setRequiredLoginId("system");
 			systemUser.setRequiredEMailAddress("system@" + fqdn);
-			systemUser.setRequiredAccountStatus(I$SecSchemaName$Schema.SecAccountStatusEnum.System);
+			systemUser.setRequiredAccountStatus(I$SecPubSchemaName$Schema.SecAccountStatusEnum.System);
 			systemUser = secuserService.create(systemUser);
 			systemUID = systemUser.getPKey();
 		}
@@ -1186,7 +1186,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			systemAdminUser.setRequiredSecUserId(systemAdminUID);
 			systemAdminUser.setRequiredLoginId("systemadmin");
 			systemAdminUser.setRequiredEMailAddress("systemadmin@" + fqdn);
-			systemAdminUser.setRequiredAccountStatus(I$SecSchemaName$Schema.SecAccountStatusEnum.ResettingPassword);
+			systemAdminUser.setRequiredAccountStatus(I$SecPubSchemaName$Schema.SecAccountStatusEnum.ResettingPassword);
 			systemAdminUser = secuserService.create(systemAdminUser);
 			systemAdminUID = systemAdminUser.getPKey();
 			
