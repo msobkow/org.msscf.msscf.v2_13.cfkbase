@@ -95,13 +95,23 @@ $switch HasDefSchema no maybeDeclRecGetClassCode default empty$$switch HasDefSch
 	<GenRule GenDef="Relation" Name="reallyDeclISchemaTableProtRelationSetter">
 	public default void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj) {
 		if (argObj == null) {
-			set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first passNull each commaPassNull )$);
+			set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first passNullOrDefault each commaPassNullOrDefault )$);
 		}
 		else {
 			set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first passArgObjArgColumn each declCommaPassArgObjArgColumn)$);
 		}
 	}
 $switch ToTableIsPublic yes reallyDeclISchemaTablePubRelationSetter default empty$</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="passNullOrDefault">$switch IsFromColRequired yes passFromDefault default passFromNull$</GenRule>
+	<GenRule GenDef="RelationCol" Name="passFromDefault">$switch FromColCodeVis null passFromPublic Public passFromPublic Protected passFromProtected Private passFromPrivate default passFromPublic$</GenRule>
+	<GenRule GenDef="RelationCol" Name="passFromPublic">I$reference FromTable DefSchemaName$Pub$reference FromTable Name$.$upper reference FromCol reference Column Name$_INIT_VAL</GenRule>
+	<GenRule GenDef="RelationCol" Name="passFromProtected">I$reference FromTable DefSchemaName$Prot$reference FromTable Name$.$upper reference FromCol reference Column Name$_INIT_VAL</GenRule>
+	<GenRule GenDef="RelationCol" Name="passFromPrivate">I$reference FromTable DefSchemaName$$reference FromTable Name$.$upper reference FromCol reference Column Name$_INIT_VAL</GenRule>
+	<GenRule GenDef="RelationCol" Name="passFromNull">($reference FromCol reference Column implOptJavaAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="FromColCodeVis">$reference FromCol reference Column CodeVis$</GenRule>
+	<GenRule GenDef="RelationCol" Name="commaPassNullOrDefault">,
+				$passNullOrDefault$</GenRule>
 
 	<GenRule GenDef="Object" Name="passNull">null</GenRule>
 	<GenRule GenDef="Object" Name="commaPassNull">, $passNull$</GenRule>
@@ -110,7 +120,7 @@ $switch ToTableIsPublic yes reallyDeclISchemaTablePubRelationSetter default empt
 	<GenRule GenDef="Relation" Name="reallyDeclISchemaTablePubRelationSetter">
 	public default void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj) {
 		if (argObj == null) {
-			set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first passNull each commaPassNull )$);
+			set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first passNullOrDefault each commaPassNullOrDefault )$);
 		}
 		else {
 			set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first passArgObjArgColumn each declCommaPassArgObjArgColumn)$);
