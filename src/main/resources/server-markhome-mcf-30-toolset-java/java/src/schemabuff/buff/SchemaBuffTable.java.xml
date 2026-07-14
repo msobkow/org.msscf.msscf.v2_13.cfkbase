@@ -184,21 +184,9 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaBuffTableNonCandidateRelationSetterRequired default implSchemaBuffTableNonCandidateRelationSetterOptional$
 	}
-$switch IsProtected yes implSchemaBuffTableProtRelationNonCandidateSetter default empty$
+
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {$iterate Columns(each implSchemaBuffTableSetAttrArgColumn)$
-	}
-</GenRule>
-
-	<GenRule GenDef="Relation" Name="implSchemaBuffTableProtRelationNonCandidateSetter">
-	@Override
-	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitProtInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaBuffTableProtNonCandidateRelationSetterRequired default implSchemaBuffTableProtNonCandidateRelationSetterOptional$
-	}
-$switch IsPublic yes implSchemaBuffTablePubRelationNonCandidateSetter default empty$</GenRule>
-
-	<GenRule GenDef="Relation" Name="implSchemaBuffTablePubRelationNonCandidateSetter">
-	@Override
-	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitPubInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaBuffTablePubNonCandidateRelationSetterRequired default implSchemaBuffTablePubNonCandidateRelationSetterOptional$
 	}
 </GenRule>
 
@@ -215,30 +203,6 @@ $switch IsPublic yes implSchemaBuffTablePubRelationNonCandidateSetter default em
 		else {$iterate Columns(each implSchemaBuffTableRelationSetterCopyToAttr)$
 		}</GenRule>
 
-	<GenRule GenDef="Relation" Name="implSchemaBuffTableProtNonCandidateRelationSetterRequired">
-		if(argObj == null) {$iterate Columns(each implSchemaBuffTableProtRelationSetterClearAttr)$
-		}
-		else {$iterate Columns(each implSchemaBuffTableProtRelationSetterCopyToAttr)$
-		}</GenRule>
-
-	<GenRule GenDef="Relation" Name="implSchemaBuffTablePubNonCandidateRelationSetterRequired">
-		if(argObj == null) {$iterate Columns(each implSchemaBuffTablePubRelationSetterClearAttr)$
-		}
-		else {$iterate Columns(each implSchemaBuffTablePubRelationSetterCopyToAttr)$
-		}</GenRule>
-
-	<GenRule GenDef="Relation" Name="implSchemaBuffTableProtNonCandidateRelationSetterOptional">
-		if(argObj == null) {$iterate Columns(each implSchemaBuffTableProtRelationSetterClearAttr)$
-		}
-		else {$iterate Columns(each implSchemaBuffTableProtRelationSetterCopyToAttr)$
-		}</GenRule>
-
-	<GenRule GenDef="Relation" Name="implSchemaBuffTablePubNonCandidateRelationSetterOptional">
-		if(argObj == null) {$iterate Columns(each implSchemaBuffTablePubRelationSetterClearAttr)$
-		}
-		else {$iterate Columns(each implSchemaBuffTablePubRelationSetterCopyToAttr)$
-		}</GenRule>
-
 	<GenRule GenDef="Relation" Name="maybeImplSchemaBuffTableRelationSetter">$switch ToTableHasDefSchema yes implSuperiorBuffTableNonCandidateRelationSetter default implSuperiorSchemaBuffTableRelationSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implSuperiorSchemaBuffTableRelationSetter">$switch IsSuperiorRelation yes implNotInPrimarySchemaBuffTableRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="implNotInPrimarySchemaBuffTableRelationSetter">$switch IsRelationInPrimaryIndex yes empty default implSchemaBuffTableRelationSetter$</GenRule>
@@ -248,44 +212,16 @@ $switch IsPublic yes implSchemaBuffTablePubRelationNonCandidateSetter default em
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj) {$switch IsRequired yes implSchemaBuffTableRelationSetterRequired default implSchemaBuffTableRelationSetterOptional$
 	}
-$switch IsProtected yes implSchemaBuffTableProtRelationSetter default empty$
+
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {$iterate Columns(each implSchemaBuffTableSetAttrArgColumn)$
 	}</GenRule>
-
-	<GenRule GenDef="Relation" Name="implSchemaBuffTableProtRelationSetter">
-	@Override
-	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj) {$switch IsRequired yes implSchemaBuffTableProtRelationSetterRequired default implSchemaBuffTableProtRelationSetterOptional$
-	}
-$switch IsPublic yes implSchemaBuffTablePubRelationSetter default empty$</GenRule>
-
-	<GenRule GenDef="Relation" Name="implSchemaBuffTablePubRelationSetter">
-	@Override
-	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj) {$switch IsRequired yes implSchemaBuffTablePubRelationSetterRequired default implSchemaBuffTablePubRelationSetterOptional$
-	}
-</GenRule>
 
 	<GenRule GenDef="Relation" Name="implSchemaBuffTableRelationSetterRequired">
 		if(argObj == null) {
 			throw new CFLibNullArgumentException(getClass(), "set$RelationType$$Suffix$", 1, "argObj");
 		}
 		else {$iterate Columns(each implSchemaBuffTableRelationSetterCopyToAttr)$
-		}
-	</GenRule>
-
-	<GenRule GenDef="Relation" Name="implSchemaBuffTableProtRelationSetterRequired">
-		if(argObj == null) {
-			throw new CFLibNullArgumentException(getClass(), "set$RelationType$$Suffix$", 1, "argObj");
-		}
-		else {$iterate Columns(each implSchemaBuffTableProtRelationSetterCopyToAttr)$
-		}
-	</GenRule>
-
-	<GenRule GenDef="Relation" Name="implSchemaBuffTablePubRelationSetterRequired">
-		if(argObj == null) {
-			throw new CFLibNullArgumentException(getClass(), "set$RelationType$$Suffix$", 1, "argObj");
-		}
-		else {$iterate Columns(each implSchemaBuffTablePubRelationSetterCopyToAttr)$
 		}
 	</GenRule>
 
