@@ -87,9 +87,21 @@ $switch HasDefSchema no maybeDeclRecGetClassCode default empty$$switch HasDefSch
 	<GenRule GenDef="Relation" Name="declNonCandidateNotInPrimaryISchemaTableRelationSetter">$switch IsRelationInPrimaryIndex yes empty default declNonCandidateUniqueISchemaTableRelationSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="declCandidateUniqueISchemaTableRelationSetter">$switch IsToIndexUnique yes declISchemaTableRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declNonCandidateUniqueISchemaTableRelationSetter">$switch IsToIndexUnique yes declISchemaTableRelationSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="declISchemaTableRelationSetter">
-	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj);$switch ToTableIsProtected yes maybeDeclISchemaTableProtRelationSetter default empty$
+	<GenRule GenDef="Relation" Name="declISchemaTableRelationSetter">$switch ToTableHasDefSchema yes declISchemaTableRelationSetterPublicWithSig default declISchemaTableRelationSetterPrivateWithSig$</GenRule>
+
+	<GenRule GenDef="Relation" Name="declISchemaTableRelationSetterSig">
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$);</GenRule>
+
+	<GenRule GenDef="Relation" Name="declISchemaTableRelationSetterPublicWithSig">$declISchemaTableRelationSetterSig$$declISchemaTableRelationSetterPub$</GenRule>
+
+	<GenRule GenDef="Relation" Name="declISchemaTableRelationSetterPrivateWithSig">$declISchemaTableRelationSetterSig$
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj);$switch ToTableIsProtected yes declISchemaTableRelationSetterProt default empty$$switch ToTableIsPublic yes declISchemaTableRelationSetterPub default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="declISchemaTableRelationSetterPub">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj);</GenRule>
+
+	<GenRule GenDef="Relation" Name="declISchemaTableRelationSetterProt">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj);</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeDeclISchemaTableProtRelationSetter">$switch ToTableHasDefSchema yes empty default reallyDeclISchemaTableProtRelationSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyDeclISchemaTableProtRelationSetter">
@@ -116,7 +128,7 @@ $switch ToTableIsPublic yes reallyDeclISchemaTablePubRelationSetter default empt
 	<GenRule GenDef="Object" Name="passNull">null</GenRule>
 	<GenRule GenDef="Object" Name="commaPassNull">, $passNull$</GenRule>
 
-	<GenRule GenDef="Relation" Name="maybeDeclISchemaTablePubRelationSetter">$switch IsPublic yes reallyDeclISchemaTablePubRelationSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="maybeDeclISchemaTablePubRelationSetter">$switch ToTableIsPublic yes reallyDeclISchemaTablePubRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyDeclISchemaTablePubRelationSetter">
 	public default void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj) {
 		if (argObj == null) {
