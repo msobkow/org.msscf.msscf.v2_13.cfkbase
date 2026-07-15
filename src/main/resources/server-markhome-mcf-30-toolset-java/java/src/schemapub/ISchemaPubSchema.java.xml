@@ -128,6 +128,17 @@ $implPubApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs(
 	<GenRule GenDef="Object" Name="EffSchemaName" >$switch HasDefSchema yes UseDefSchemaName default SchemaName$</GenRule>
 	<GenRule GenDef="Object" Name="UseDefSchemaName" >$reference DefSchema SchemaName$</GenRule>
 
+	<GenRule GenDef="Param" Name="EffCodeVisSchemaPrefix">$reference Type EffCodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="SchemaRef" Name="EffCodeVisSchemaPrefix">$reference RefSchema CodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="EffCodeVisSchemaPrefix">$CodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="TableCol" Name="EffCodeVisSchemaPrefix">$reference TypeDef EffCodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="IndexCol" Name="EffCodeVisSchemaPrefix">$reference Column EffCodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="RelationCol" Name="EffCodeVisSchemaPrefix">$FromEffCodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="RelationCol" Name="FromEffCodeVisSchemaPrefix">$reference FromCol EffCodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="RelationCol" Name="ToEffCodeVisSchemaPrefix">$reference ToCol EffCodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="Object" Name="EffCodeVisSchemaPrefix" >$switch HasDefSchema yes UseDefCodeVisSchemaPrefix default CodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="Object" Name="UseDefCodeVisSchemaPrefix" >$reference DefSchema CodeVisSchemaPrefix$</GenRule>
+
 	<GenRule GenDef="Param" Name="EffCodeVisSchemaName">$reference Type EffCodeVisSchemaName$</GenRule>
 	<GenRule GenDef="SchemaRef" Name="EffCodeVisSchemaName">$reference RefSchema CodeVisSchemaName$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="EffCodeVisSchemaName">$CodeVisSchemaName$</GenRule>
@@ -146,15 +157,23 @@ $implPubApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs(
 	<GenRule GenDef="RelationCol" Name="FromCodeVisSchemaName">$reference FromCol CodeVisSchemaName$</GenRule>
 	<GenRule GenDef="RelationCol" Name="ToCodeVisSchemaName">$reference ToCol CodeVisSchemaName$</GenRule>
 
-	<GenRule GenDef="Object" Name="CodeVisSchemaName">$switch CodeVis
-		null CodeVisSchemaNamePublic
-		Public CodeVisSchemaNamePublic
-		Protected CodeVisSchemaNameProtected
-		Private CodeVisSchemaNamePrivate
-		default CodeVisSchemaNamePublic$</GenRule>
-	<GenRule GenDef="Object" Name="CodeVisSchemaNamePublic">I$DefSchemaName$PubSchema</GenRule>
-	<GenRule GenDef="Object" Name="CodeVisSchemaNameProtected">I$DefSchemaName$ProtSchema</GenRule>
-	<GenRule GenDef="Object" Name="CodeVisSchemaNamePrivate">I$DefSchemaName$Schema</GenRule>
+	<GenRule GenDef="Param" Name="CodeVisSchemaPrefix">$reference Type CodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="TableCol" Name="CodeVisSchemaPrefix">$reference TypeDef CodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="IndexCol" Name="CodeVisSchemaPrefix">$reference Column CodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="RelationCol" Name="CodeVisSchemaPrefix">$FromCodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="RelationCol" Name="FromCodeVisSchemaPrefix">$reference FromCol CodeVisSchemaPrefix$</GenRule>
+	<GenRule GenDef="RelationCol" Name="ToCodeVisSchemaPrefix">$reference ToCol CodeVisSchemaPrefix$</GenRule>
+
+	<GenRule GenDef="Object" Name="CodeVisSchemaPrefix">$switch CodeVis
+		null CodeVisSchemaPrefixPublic
+		Public CodeVisSchemaPrefixPublic
+		Protected CodeVisSchemaPrefixProtected
+		Private CodeVisSchemaPrefixPrivate
+		default CodeVisSchemaPrefixPublic$</GenRule>
+	<GenRule GenDef="Object" Name="CodeVisSchemaPrefixPublic">$DefSchemaName$Pub</GenRule>
+	<GenRule GenDef="Object" Name="CodeVisSchemaPrefixProtected">$DefSchemaName$Prot</GenRule>
+	<GenRule GenDef="Object" Name="CodeVisSchemaPrefixPrivate">$DefSchemaName$</GenRule>
+	<GenRule GenDef="Object" Name="CodeVisSchemaName">I$CodeVisSchemaPrefix$Schema</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="importJavaPubPackageSchemaNameBuffDotFactoryService">$reference RefSchema importJavaPubPackageSchemaNameBuffDotFactoryService$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="importJavaPubPackageSchemaNameBuffDotFactoryService">
