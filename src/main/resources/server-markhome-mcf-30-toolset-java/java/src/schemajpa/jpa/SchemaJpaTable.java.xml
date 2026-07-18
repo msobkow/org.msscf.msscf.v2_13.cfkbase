@@ -165,7 +165,7 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaJpaTableEmbedPKeyAtomicCandidateRelationSetterRequired default implSchemaJpaTableEmbedPKeyCandidateRelationSetterOptional$
 	}
-
+$switch ToTableIsProtected yes implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterProt default empty$
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {
 		I$reference ToTable DefSchemaName$Schema targetBackingSchema = I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$();
@@ -180,11 +180,31 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 		set$OptionalOrRequired$$RelationType$$Suffix$(targetRec);
 	}</GenRule>
 
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterProt">$switch ToTableHasDefSchema yes empty default reallyImplSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterProt$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyImplSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterProt">
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj) {
+		set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first emitSchemaArgObjArg each commaEmitSchemaArgObjArg empty empty )$);
+	}
+$switch ToTableIsPublic yes implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterPub default empty$</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="emitSchemaArgObjArg">argObj.get$reference ToCol reference Column implColumnAttrOptionality$$reference ToCol reference Column Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="commaEmitSchemaArgObjArg">,
+			$emitSchemaArgObjArg$</GenRule>
+
+	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterPub">$switch ToTableHasDefSchema yes empty default reallyImplSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterPub$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyImplSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterPub">
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj) {
+		set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first emitSchemaArgObjArg each commaEmitSchemaArgObjArg empty empty )$);
+	}
+</GenRule>
+
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableEmbedPKeyRelationCompositeCandidateSetter">
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaJpaTableEmbedPKeyCompositeCandidateRelationSetterRequired default implSchemaJpaTableEmbedPKeyCompositeCandidateRelationSetterOptional$
 	}
-
+$switch ToTableIsProtected yes implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterProt default empty$
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {
 		I$reference ToTable DefSchemaName$Schema targetBackingSchema = I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$();
@@ -242,7 +262,7 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaJpaTableEmbedPKeyNonCandidateRelationSetterRequired default implSchemaJpaTableEmbedPKeyNonCandidateRelationSetterOptional$
 	}
-
+$switch ToTableIsProtected yes implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterProt default empty$
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {$iterate Columns(each implSchemaJpaTableSetAttrArgColumn)$
 	}</GenRule>
@@ -339,15 +359,6 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	<GenRule GenDef="RelationCol" Name="implSchemaJpaTableEmbedPKeySetNullvalRelationCol">
 				getPKey().set$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$(null);</GenRule>
 
-
-
-
-
-
-
-
-
-
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableWrapPKeyRelationGetterSetter">$switch IsCandidateRelation yes implSchemaJpaTableWrapPKeyRelationCandidateGetterSetter default implSchemaJpaTableWrapPKeyRelationNonCandidateGetterSetter$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implSchemaJpaTableWrapPKeyRelationCandidateGetterSetter">
@@ -361,7 +372,7 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {
 		pkey.set$OptionalOrRequired$$RelationType$$Suffix$(argObj);
 	}
-
+$switch ToTableIsProtected yes implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterProt default empty$
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {
 		pkey.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first passSetArgColumn each passCommaSetArgColumn)$);
@@ -381,7 +392,7 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {
 		pkey.set$OptionalOrRequired$$RelationType$$Suffix$(argObj);
 	}
-
+$switch ToTableIsProtected yes implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterProt default empty$
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {
 		pkey.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first passSetArgColumn each passCommaSetArgColumn)$);
@@ -425,7 +436,7 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaJpaTableCandidateRelationSetterRequired default implSchemaJpaTableCandidateRelationSetterOptional$
 	}
-
+$switch ToTableIsProtected yes implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterProt default empty$
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {
 		I$reference ToTable DefSchemaName$Schema targetBackingSchema = I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$();
@@ -455,7 +466,7 @@ $switch HasDefSchemaOrSuper yes implSchemaJpaTableJPAInhConstruct default implSc
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj) {$switch IsRequired yes implSchemaJpaTableNonCandidateRelationSetterRequired default implSchemaJpaTableNonCandidateRelationSetterOptional$
 	}
-
+$switch ToTableIsProtected yes implSchemaJpaTableEmbedPKeyRelationAtomicCandidateSetterProt default empty$
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$) {$iterate Columns(each implSchemaJpaTableSetAttrArgColumn)$
 	}
