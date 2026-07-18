@@ -163,10 +163,7 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 		}
 		else if (obj instanceof I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey rhs) {$implHPKeyCompareToAuditClusterId$$implHPKeyCompareToAuditStamp$$implHPKeyCompareToAuditActionId$$implHPKeyCompareToRequiredRevision$$implHPKeyCompareToAuditSessionId$$iterate Columns( each implCompareToAttr )$
 			return( 0 );
-		}
-		else if (obj instanceof I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$PKey rhs) {$iterate Columns( each implCompareToAttr )$
-			return( 0 );
-		}
+		}$switch IsPrimaryIndexKeyAtomic yes implHPKeyCompareToAtomicAttr default implHPKeyCompareToCompositeKey$
 		else if (obj instanceof I$SchemaName$$TableName$H) {
 			I$SchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;$implHPKeyCompareToAuditClusterId$$implHPKeyCompareToAuditStamp$$implHPKeyCompareToAuditActionId$$implHPKeyCompareToRequiredRevision$$implHPKeyCompareToAuditSessionId$$iterate Columns( each implCompareToAttr )$
 			return( 0 );
@@ -184,10 +181,22 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 	}
 </GenRule>
 
+	<GenRule GenDef="Index" Name="implHPKeyCompareToAtomicAttr"><!--
+		else if (obj instanceof $ICompactedPrimaryIndexClass$ rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareDirectlyToHAtomicRHS )$
+			return( 0 );
+		}--></GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implCompareDirectlyToHAtomicRHS"></GenRule>
+
+	<GenRule GenDef="Index" Name="implHPKeyCompareToCompositeKey">
+		else if (obj instanceof I$reference Table reference BaseClass DefSchemaName$$reference Table reference BaseClass TableName$PKey rhs) {$reference Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
+			return( 0 );
+		}</GenRule>
+
 	<GenRule GenDef="Index" Name="implHPKeyCompareToProt">
 		else if (obj instanceof I$reference Table reference BaseClass SchemaName$Prot$reference Table reference BaseClass TableName$HPKey rhs) {$implHPKeyCompareToAuditClusterId$$implHPKeyCompareToAuditStamp$$implHPKeyCompareToAuditActionId$$implHPKeyCompareToRequiredRevision$$implHPKeyCompareToAuditSessionId$$iterate Columns( each implCompareToAttr )$
 			return( 0 );
-		}
+		}$switch IsPrimaryIndexKeyAtomic yes implHPKeyCompareToAtomicAttrProt default implHPKeyCompareToCompositeKeyProt$
 		else if (obj instanceof I$reference Table reference BaseClass SchemaName$Prot$reference Table reference BaseClass TableName$PKey rhs) {$iterate Columns( each implCompareToAttr )$
 			return( 0 );
 		}
@@ -198,17 +207,38 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 			return( 0 );
 		}$switch TableIsPublic yes implHPKeyCompareToPub default empty$</GenRule>
 
+	<GenRule GenDef="Index" Name="implHPKeyCompareToAtomicAttrProt"><!--
+		else if (obj instanceof $ICompactedPrimaryIndexClass$ rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareDirectlyToHAtomicRHSProt )$
+			return( 0 );
+		}--></GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implCompareDirectlyToHAtomicRHSProt"></GenRule>
+
+	<GenRule GenDef="Index" Name="implHPKeyCompareToCompositeKeyProt">
+		else if (obj instanceof I$reference Table reference BaseClass DefSchemaName$Prot$reference Table reference BaseClass TableName$PKey rhs) {$reference Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
+			return( 0 );
+		}</GenRule>
+
 	<GenRule GenDef="Index" Name="implHPKeyCompareToPub">
 		else if (obj instanceof I$reference Table reference BaseClass SchemaName$Pub$reference Table reference BaseClass TableName$HPKey rhs) {$implHPKeyCompareToAuditClusterId$$implHPKeyCompareToAuditStamp$$implHPKeyCompareToAuditActionId$$implHPKeyCompareToRequiredRevision$$implHPKeyCompareToAuditSessionId$$iterate Columns( each implCompareToAttr )$
 			return( 0 );
-		}
-		else if (obj instanceof I$reference Table reference BaseClass SchemaName$Pub$reference Table reference BaseClass TableName$PKey rhs) {$iterate Columns( each implCompareToAttr )$
-			return( 0 );
-		}
+		}$switch IsPrimaryIndexKeyAtomic yes implHPKeyCompareToAtomicAttrPub default implHPKeyCompareToCompositeKeyPub$
 		else if (obj instanceof I$reference Table reference BaseClass SchemaName$Pub$TableName$H rhs) {$implHPKeyCompareToAuditClusterId$$implHPKeyCompareToAuditStamp$$implHPKeyCompareToAuditActionId$$implHPKeyCompareToRequiredRevision$$implHPKeyCompareToAuditSessionId$$iterate Columns( each implCompareToAttr )$
 			return( 0 );
 		}
 		else if (obj instanceof I$SchemaName$Pub$TableName$ rhs) {$iterate Columns(each implCompareToAttr empty empty )$
+			return( 0 );
+		}</GenRule>
+
+	<GenRule GenDef="Index" Name="implHPKeyCompareToAtomicAttrPub"><!--
+		else if (obj instanceof $ICompactedPrimaryIndexClass$ rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareDirectlyToHAtomicRHSPub )$
+			return( 0 );
+		}--></GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implCompareDirectlyToHAtomicRHSPub"></GenRule>
+
+	<GenRule GenDef="Index" Name="implHPKeyCompareToCompositeKeyPub">
+		else if (obj instanceof I$reference Table reference BaseClass DefSchemaName$Pub$reference Table reference BaseClass TableName$PKey rhs) {$reference Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
 			return( 0 );
 		}</GenRule>
 
@@ -289,10 +319,7 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 		}
 		else if (obj instanceof I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$HPKey rhs) {$implHPKeyEqualsAuditClusterId$$implHPKeyEqualsAuditStamp$$implHPKeyEqualsAuditActionId$$implHPKeyEqualsRequiredRevision$$implHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
-		}
-		else if (obj instanceof I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$PKey rhs) {$iterate Columns( each implEqualsCmpAttr )$
-			return( true );
-		}
+		}$switch IsPrimaryIndexKeyAtomic no implHPKeyEqualsPKey default empty$
 		else if (obj instanceof I$SchemaName$$TableName$H rhs) {$implHPKeyEqualsAuditClusterId$$implHPKeyEqualsAuditStamp$$implHPKeyEqualsAuditActionId$$implHPKeyEqualsRequiredRevision$$implHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
 		}
@@ -305,13 +332,15 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 	}
 </GenRule>
 
+	<GenRule GenDef="Index" Name="implHPKeyEqualsPKey">
+		else if (obj instanceof I$reference Table reference BaseClass SchemaName$$reference Table reference BaseClass TableName$PKey rhs) {$iterate Columns( each implEqualsCmpAttr )$
+			return( true );
+		}</GenRule>
+
 	<GenRule GenDef="Index" Name="implHPKeyEqualsProt">
 		else if (obj instanceof I$reference Table reference BaseClass SchemaName$Prot$reference Table reference BaseClass TableName$HPKey rhs) {$implHPKeyEqualsAuditClusterId$$implHPKeyEqualsAuditStamp$$implHPKeyEqualsAuditActionId$$implHPKeyEqualsRequiredRevision$$implHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
-		}
-		else if (obj instanceof I$reference Table reference BaseClass SchemaName$Prot$reference Table reference BaseClass TableName$PKey rhs) {$iterate Columns( each implEqualsCmpAttr )$
-			return( true );
-		}
+		}$switch IsPrimaryIndexKeyAtomic no implHPKeyEqualsPKeyProt default empty$
 		else if (obj instanceof I$SchemaName$Prot$TableName$H rhs) {$implHPKeyEqualsAuditClusterId$$implHPKeyEqualsAuditStamp$$implHPKeyEqualsAuditActionId$$implHPKeyEqualsRequiredRevision$$implHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
 		}
@@ -319,17 +348,24 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 			return( true );
 		}$switch TableIsPublic yes implHPKeyEqualsPub default empty$</GenRule>
 
+	<GenRule GenDef="Index" Name="implHPKeyEqualsPKeyProt">
+		else if (obj instanceof I$reference Table reference BaseClass SchemaName$Prot$reference Table reference BaseClass TableName$PKey rhs) {$iterate Columns( each implEqualsCmpAttr )$
+			return( true );
+		}</GenRule>
+
 	<GenRule GenDef="Index" Name="implHPKeyEqualsPub">
 		else if (obj instanceof I$reference Table reference BaseClass SchemaName$Pub$reference Table reference BaseClass TableName$HPKey rhs) {$implHPKeyEqualsAuditClusterId$$implHPKeyEqualsAuditStamp$$implHPKeyEqualsAuditActionId$$implHPKeyEqualsRequiredRevision$$implHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
-		}
-		else if (obj instanceof I$reference Table reference BaseClass SchemaName$Pub$reference Table reference BaseClass TableName$PKey rhs) {$iterate Columns( each implEqualsCmpAttr )$
-			return( true );
-		}
+		}$switch IsPrimaryIndexKeyAtomic no implHPKeyEqualsPKeyPub default empty$
 		else if (obj instanceof I$SchemaName$Pub$TableName$H rhs) {$implHPKeyEqualsAuditClusterId$$implHPKeyEqualsAuditStamp$$implHPKeyEqualsAuditActionId$$implHPKeyEqualsRequiredRevision$$implHPKeyEqualsAuditSessionId$$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
 		}
 		else if (obj instanceof I$SchemaName$Pub$TableName$ rhs) {$iterate Columns(each implEqualsCmpAttr empty empty )$
+			return( true );
+		}</GenRule>
+
+	<GenRule GenDef="Index" Name="implHPKeyEqualsPKeyPub">
+		else if (obj instanceof I$reference Table reference BaseClass SchemaName$Pub$reference Table reference BaseClass TableName$PKey rhs) {$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
 		}</GenRule>
 

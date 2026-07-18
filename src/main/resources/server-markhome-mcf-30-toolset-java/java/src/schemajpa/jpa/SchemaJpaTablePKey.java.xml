@@ -4097,10 +4097,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 		}
 		else if (obj == this) {
 			return( 0 );
-		}
-		else if (obj instanceof I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
-			return( 0 );
-		}
+		}$switch IsPrimaryIndexKeyAtomic yes implPKeyCompareToAtomicAttr default implPKeyCompareToCompositeKey$
 		else if (obj instanceof I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKeyH rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
 			return( 0 );
 		}
@@ -4113,6 +4110,18 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 		return( 0 );
 	}
 </GenRule>
+
+	<GenRule GenDef="Table" Name="implPKeyCompareToAtomicAttr">
+		else if (obj instanceof $ICompactedPrimaryIndexClass$ rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareDirectlyToAtomicRHS )$
+			return( 0 );
+		}</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implCompareDirectlyToAtomicRHS"></GenRule>
+
+	<GenRule GenDef="Table" Name="implPKeyCompareToCompositeKey">
+		else if (obj instanceof I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
+			return( 0 );
+		}</GenRule>
 
 	<GenRule GenDef="Table" Name="implPKeyCompareToProt">
 		else if (obj instanceof I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$PKey rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
