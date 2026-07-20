@@ -103,18 +103,6 @@ $switch HasDefSchema no maybeDeclRecGetClassCode default empty$$switch HasDefSch
 	<GenRule GenDef="Relation" Name="declISchemaTableRelationSetterProt">
 	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj);</GenRule>
 
-	<GenRule GenDef="Relation" Name="maybeDeclISchemaTableProtRelationSetter">$switch ToTableHasDefSchema yes empty default reallyDeclISchemaTableProtRelationSetter$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyDeclISchemaTableProtRelationSetter">
-	public default void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj) {
-		if (argObj == null) {
-			set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first passNullOrDefault each commaPassNullOrDefault )$);
-		}
-		else {
-			set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first passArgObjArgColumn each declCommaPassArgObjArgColumn)$);
-		}
-	}
-$switch ToTableIsPublic yes reallyDeclISchemaTablePubRelationSetter default empty$</GenRule>
-
 	<GenRule GenDef="RelationCol" Name="passNullOrDefault">$switch IsFromColRequired yes passFromDefault default passFromNull$</GenRule>
 	<GenRule GenDef="RelationCol" Name="passFromDefault">$switch FromColCodeVis null passFromPublic Public passFromPublic Protected passFromProtected Private passFromPrivate default passFromPublic$</GenRule>
 	<GenRule GenDef="RelationCol" Name="passFromPublic">I$reference FromTable DefSchemaName$Pub$reference FromTable Name$.$upper reference FromCol reference Column Name$_INIT_VAL</GenRule>
@@ -127,18 +115,6 @@ $switch ToTableIsPublic yes reallyDeclISchemaTablePubRelationSetter default empt
 
 	<GenRule GenDef="Object" Name="passNull">null</GenRule>
 	<GenRule GenDef="Object" Name="commaPassNull">, $passNull$</GenRule>
-
-	<GenRule GenDef="Relation" Name="maybeDeclISchemaTablePubRelationSetter">$switch ToTableIsPublic yes reallyDeclISchemaTablePubRelationSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyDeclISchemaTablePubRelationSetter">
-	public default void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj) {
-		if (argObj == null) {
-			set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first passNullOrDefault each commaPassNullOrDefault )$);
-		}
-		else {
-			set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first passArgObjArgColumn each declCommaPassArgObjArgColumn)$);
-		}
-	}
-</GenRule>
 
 	<GenRule GenDef="Table" Name="declColumnOptAuditGetterSetters"
 		>$switch HasAuditColumns yes declColumnAuditGetterSetters default empty$</GenRule>

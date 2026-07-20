@@ -4112,21 +4112,16 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implPKeyCompareToAtomicAttr">
-		else if (obj instanceof $ICompactedPrimaryIndexClass$ rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareDirectlyToAtomicRHS )$
+		else if (obj instanceof $ICompactedPrimaryIndexClass$ rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToRHS )$
 			return( 0 );
 		}</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implCompareDirectlyToAtomicRHS"></GenRule>
 
 	<GenRule GenDef="Table" Name="implPKeyCompareToCompositeKey">
 		else if (obj instanceof I$reference BaseClass DefSchemaName$$reference BaseClass TableName$PKey rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
 			return( 0 );
 		}</GenRule>
 
-	<GenRule GenDef="Table" Name="implPKeyCompareToProt">
-		else if (obj instanceof I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$PKey rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
-			return( 0 );
-		}
+	<GenRule GenDef="Table" Name="implPKeyCompareToProt">$switch IsPrimaryIndexKeyAtomic yes empty default implPKeyCompareToCompositeKeyProt$
 		else if (obj instanceof I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$PKeyH rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
 			return( 0 );
 		}
@@ -4137,10 +4132,12 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			return( 0 );
 		}$switch IsPublic yes implPKeyCompareToPub default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="implPKeyCompareToPub">
-		else if (obj instanceof I$reference BaseClass DefSchemaName$Pub$reference BaseClass TableName$PKey rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
+	<GenRule GenDef="Table" Name="implPKeyCompareToCompositeKeyProt">
+		else if (obj instanceof I$reference BaseClass DefSchemaName$Prot$reference BaseClass TableName$PKey rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
 			return( 0 );
-		}
+		}</GenRule>
+
+	<GenRule GenDef="Table" Name="implPKeyCompareToPub">$switch IsPrimaryIndexKeyAtomic yes empty default implPKeyCompareToCompositeKeyPub$
 		else if (obj instanceof I$reference BaseClass DefSchemaName$Pub$reference BaseClass TableName$PKeyH rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
 			return( 0 );
 		}
@@ -4151,8 +4148,16 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			return( 0 );
 		}</GenRule>
 
+	<GenRule GenDef="Table" Name="implPKeyCompareToCompositeKeyPub">
+		else if (obj instanceof I$reference BaseClass DefSchemaName$Pub$reference BaseClass TableName$PKey rhs) {$reference PrimaryKeyIndex iterate Columns( each implCompareToAttr )$
+			return( 0 );
+		}</GenRule>
+
 	<GenRule GenDef="Object" Name="implCompareToAttr"
 		>$switch IsNullable yes implCompareToOpt default implCompareToReq$</GenRule>
+
+	<GenRule GenDef="Object" Name="implCompareToRHS"
+		>$switch IsNullable yes implCompareToOptRHS default implCompareToReqRHS$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="GTAdjusted"
 		>$switch IsAscending yes AdjustedOne default AdjustedMinusOne$</GenRule>
@@ -4234,6 +4239,52 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			Uuid6Gen implCompareToOptUuid6Var
 			UuidDef implCompareToOptUuidVar
 			UuidGen implCompareToOptUuidVar
+			default error$</GenRule>
+
+	<GenRule GenDef="Object" Name="implCompareToOptRHS"
+		>$switch BaseModelAtomClass
+			BlobDef implCompareToOptRHSBlobVar
+			BoolDef implCompareToOptRHSBoolVar
+			EnumDef implCompareToOptRHSEnumVar
+			Int16Def implCompareToOptRHSInt16Var
+			Int32Def implCompareToOptRHSInt32Var
+			Int64Def implCompareToOptRHSInt64Var
+			UInt16Def implCompareToOptRHSUInt16Var
+			UInt32Def implCompareToOptRHSUInt32Var
+			UInt64Def implCompareToOptRHSUInt64Var
+			Id16Gen implCompareToOptRHSInt16Var
+			Id32Gen implCompareToOptRHSInt32Var
+			Id64Gen implCompareToOptRHSInt64Var
+			FloatDef implCompareToOptRHSFloatVar
+			DoubleDef implCompareToOptRHSDoubleVar
+			NumberDef implCompareToOptRHSNumberVar
+			StringDef implCompareToOptRHSStringVar
+			TokenDef implCompareToOptRHSStringVar
+			NmTokenDef implCompareToOptRHSNmTokenVar
+			NmTokensDef implCompareToOptRHSNmTokensVar
+			TextDef implCompareToOptRHSTextVar
+			DateDef implCompareToOptRHSDateVar
+			TimeDef implCompareToOptRHSTimeVar
+			TimestampDef implCompareToOptRHSTimestampVar
+			TZDateDef implCompareToOptRHSTZDateVar
+			TZTimeDef implCompareToOptRHSTZTimeVar
+			TZTimestampDef implCompareToOptRHSTZTimestampVar
+			DbKeyHash128Gen implCompareToOptRHSDbKeyHash128Var
+			DbKeyHash160Gen implCompareToOptRHSDbKeyHash160Var
+			DbKeyHash224Gen implCompareToOptRHSDbKeyHash224Var
+			DbKeyHash256Gen implCompareToOptRHSDbKeyHash256Var
+			DbKeyHash384Gen implCompareToOptRHSDbKeyHash384Var
+			DbKeyHash512Gen implCompareToOptRHSDbKeyHash512Var
+			DbKeyHash128Def implCompareToOptRHSDbKeyHash128Var
+			DbKeyHash160Def implCompareToOptRHSDbKeyHash160Var
+			DbKeyHash224Def implCompareToOptRHSDbKeyHash224Var
+			DbKeyHash256Def implCompareToOptRHSDbKeyHash256Var
+			DbKeyHash384Def implCompareToOptRHSDbKeyHash384Var
+			DbKeyHash512Def implCompareToOptRHSDbKeyHash512Var
+			Uuid6Def implCompareToOptRHSUuid6Var
+			Uuid6Gen implCompareToOptRHSUuid6Var
+			UuidDef implCompareToOptRHSUuidVar
+			UuidGen implCompareToOptRHSUuidVar
 			default error$</GenRule>
 
 	<GenRule GenDef="Object" Name="implCompareToOptBlobVar">
@@ -4470,6 +4521,240 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				}
 			}</GenRule>
 
+	<GenRule GenDef="Object" Name="implCompareToOptRHSBlobVar">
+			if( get$implColumnAttrOptionality$$Name$() != null ) {
+				if( rhs != null ) {
+					byte[] larr = get$implColumnAttrOptionality$$Name$();
+					byte[] rarr = rhs;
+					int llen = larr.length;
+					int rlen = rarr.length;
+					int idx = 0;
+					byte lval;
+					byte rval;
+					while( ( idx &lt; llen ) &amp;&amp; ( idx &lt; rlen ) ) {
+						lval = larr[idx];
+						rval = rarr[idx];
+						if( lval &lt; rval ) {
+							return( $LTAdjusted$ );
+						}
+						else if( lval &gt; rval ) {
+							return( $GTAdjusted$ );
+						}
+						idx ++;
+					}
+					if( llen &lt; rlen ) {
+						return( $LTAdjusted$ );
+					}
+					else if( llen &gt; rlen ) {
+						return( $GTAdjusted$ );
+					}
+				}
+				else {
+					return( $GTAdjusted$ );
+				}
+			}
+			else {
+				if( rhs != null ) {
+					return( $LTAdjusted$ );
+				}
+			}</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSBoolVar">
+			if( get$implColumnAttrOptionality$$Name$() != null ) {
+				$implJavaAtomType$ lhs$Name$ = get$implColumnAttrOptionality$$Name$();
+				if( rhs ) {
+					$implJavaAtomType$ rhs$Name$ = rhs;
+					if( lhs$Name$ ) {
+						if( ! rhs$Name$ ) {
+							return( $GTAdjusted$ );
+						}
+					}
+					else {
+						if( rhs$Name$ ) {
+							return( $LTAdjusted$ );
+						}
+					}
+				}
+				else {
+					return( $GTAdjusted$ );
+				}
+			}
+			else {
+				if( rhs != null ) {
+					return( $LTAdjusted$ );
+				}
+			}</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSEnumVar"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSInt16Var"
+		>$implCompareToOptRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSInt32Var"
+		>$implCompareToOptRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSInt64Var"
+		>$implCompareToOptRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSUInt16Var"
+		>$implCompareToOptRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSUInt32Var"
+		>$implCompareToOptRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSUInt64Var"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSFloatVar"
+		>$implCompareToOptRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSDoubleVar"
+		>$implCompareToOptRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSNumberVar"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSStringVar">
+			if( get$implColumnAttrOptionality$$Name$() != null ) {
+				if( rhs != null ) {
+					cmp = get$implColumnAttrOptionality$$Name$().compareTo( rhs );
+					if( cmp != 0 ) {
+						return( $CmpAdjusted$ );
+					}
+				}
+				else {
+					return( $GTAdjusted$ );
+				}
+			}
+			else {
+				if( rhs != null ) {
+					return( $LTAdjusted$ );
+				}
+			}</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSTokenVar">
+			if( get$implColumnAttrOptionality$$Name$() != null ) {
+				if( rhs != null ) {
+					cmp get$implColumnAttrOptionality$$Name$().compareTo( rhs );
+					if( cmp != 0 ) {
+						return( $CmpAdjusted$ );
+					}
+				}
+				else {
+					return( $GTAdjusted$ );
+				}
+			}
+			else {
+				if( rhs != null ) {
+					return( $LTAdjusted$ );
+				}
+			}</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSNmTokenVar">
+			if( get$implColumnAttrOptionality$$Name$() != null ) {
+				if( rhs != null ) {
+					cmp = get$implColumnAttrOptionality$$Name$().compareTo( rhs );
+					if( cmp != 0 ) {
+						return( $CmpAdjusted$ );
+					}
+				}
+				else {
+					return( $GTAdjusted$ );
+				}
+			}
+			else {
+				if( rhs != null ) {
+					return( $LTAdjusted$ );
+				}
+			}</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSNmTokensVar">
+			if( get$implColumnAttrOptionality$$Name$() != null ) {
+				if( rhs != null ) {
+					cmp = get$implColumnAttrOptionality$$Name$().compareTo( rhs );
+					if( cmp != 0 ) {
+						return( $CmpAdjusted$ );
+					}
+				}
+				else {
+					return( $GTAdjusted$ );
+				}
+			}
+			else {
+				if( rhs != null ) {
+					return( $LTAdjusted$ );
+				}
+			}</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSTextVar">
+			if( get$implColumnAttrOptionality$$Name$() != null ) {
+				if( rhs != null ) {
+					cmp = get$implColumnAttrOptionality$$Name$().compareTo( rhs );
+					if( cmp != 0 ) {
+						return( $CmpAdjusted$ );
+					}
+				}
+				else {
+					return( $GTAdjusted$ );
+				}
+			}
+			else {
+				if( rhs != null ) {
+					return( $LTAdjusted$ );
+				}
+			}</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSDateVar"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSTimeVar"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSTimestampVar"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSTZDateVar"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSTZTimeVar"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSTZTimestampVar"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSDbKeyHash128Var"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSDbKeyHash160Var"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSDbKeyHash224Var"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSDbKeyHash256Var"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSDbKeyHash384Var"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSDbKeyHash512Var"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSUuid6Var"
+		>$implCompareToOptRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToOptRHSUuidVar"
+		>$implCompareToOptRHSObj$</GenRule>
+
+	<GenRule GenDef="Object" Name="implCompareToOptRHSValue">
+			if( get$implColumnAttrOptionality$$Name$() != null ) {
+				$implJavaAtomType$ lhs$Name$ = get$implColumnAttrOptionality$$Name$();
+				if( rhs != null ) {
+					$implJavaAtomType$ rhs$Name$ = rhs;
+					cmp = lhs$Name$.compareTo( rhs$Name$ );
+					if( cmp != 0 ) {
+						return( $CmpAdjusted$ );
+					}
+				}
+				else {
+					return( $GTAdjusted$ );
+				}
+			}
+			else {
+				if( rhs != null ) {
+					return( $LTAdjusted$ );
+				}
+			}</GenRule>
+
+	<GenRule GenDef="Object" Name="implCompareToOptRHSObj">
+			if( get$implColumnAttrOptionality$$Name$() != null ) {
+				if( rhs != null ) {
+					cmp = get$implColumnAttrOptionality$$Name$().compareTo( rhs );
+					if( cmp != 0 ) {
+						return( $CmpAdjusted$ );
+					}
+				}
+				else {
+					return( $GTAdjusted$ );
+				}
+			}
+			else {
+				if( rhs != null ) {
+					return( $LTAdjusted$ );
+				}
+			}</GenRule>
+
 	<!-- GenRule GenDef="IndexCol" Name="implCompareToReq"
 		>$reference Column implCompareToReq$</GenRule -->
 
@@ -4639,6 +4924,186 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			else if (rhs.get$implColumnAttrOptionality$$Name$() != null) {
 				return( $LTAdjusted$ );
 			}</GenRule>
+
+	<!-- GenRule GenDef="IndexCol" Name="implCompareToReqRHS"
+		>$reference Column implCompareToReqRHS$</GenRule -->
+
+	<GenRule GenDef="Object" Name="implCompareToReqRHS"
+		>$switch BaseModelAtomClass
+			BlobDef implCompareToReqRHSBlobVar
+			BoolDef implCompareToReqRHSBoolVar
+			EnumDef implCompareToReqRHSEnumVar
+			Int16Def implCompareToReqRHSInt16Var
+			Int32Def implCompareToReqRHSInt32Var
+			Int64Def implCompareToReqRHSInt64Var
+			UInt16Def implCompareToReqRHSUInt16Var
+			UInt32Def implCompareToReqRHSUInt32Var
+			UInt64Def implCompareToReqRHSUInt64Var
+			Id16Gen implCompareToReqRHSInt16Var
+			Id32Gen implCompareToReqRHSInt32Var
+			Id64Gen implCompareToReqRHSInt64Var
+			FloatDef implCompareToReqRHSFloatVar
+			DoubleDef implCompareToReqRHSDoubleVar
+			NumberDef implCompareToReqRHSNumberVar
+			StringDef implCompareToReqRHSStringVar
+			TokenDef implCompareToReqRHSTokenVar
+			NmTokenDef implCompareToReqRHSNmTokenVar
+			NmTokensDef implCompareToReqRHSNmTokensVar
+			TextDef implCompareToReqRHSTextVar
+			DateDef implCompareToReqRHSDateVar
+			TimeDef implCompareToReqRHSTimeVar
+			TimestampDef implCompareToReqRHSTimestampVar
+			TZDateDef implCompareToReqRHSTZDateVar
+			TZTimeDef implCompareToReqRHSTZTimeVar
+			TZTimestampDef implCompareToReqRHSTZTimestampVar
+			DbKeyHash128Gen implCompareToReqRHSDbKeyHash128Var
+			DbKeyHash160Gen implCompareToReqRHSDbKeyHash160Var
+			DbKeyHash224Gen implCompareToReqRHSDbKeyHash224Var
+			DbKeyHash256Gen implCompareToReqRHSDbKeyHash256Var
+			DbKeyHash384Gen implCompareToReqRHSDbKeyHash384Var
+			DbKeyHash512Gen implCompareToReqRHSDbKeyHash512Var
+			DbKeyHash128Def implCompareToReqRHSDbKeyHash128Var
+			DbKeyHash160Def implCompareToReqRHSDbKeyHash160Var
+			DbKeyHash224Def implCompareToReqRHSDbKeyHash224Var
+			DbKeyHash256Def implCompareToReqRHSDbKeyHash256Var
+			DbKeyHash384Def implCompareToReqRHSDbKeyHash384Var
+			DbKeyHash512Def implCompareToReqRHSDbKeyHash512Var
+			Uuid6Def implCompareToReqRHSUuid6Var
+			Uuid6Gen implCompareToReqRHSUuid6Var
+			UuidDef implCompareToReqRHSUuidVar
+			UuidGen implCompareToReqRHSUuidVar
+			default error$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSBlobVar">
+			{
+				byte[] larr = get$implColumnAttrOptionality$$Name$();
+				byte[] rarr = rhs;
+				int llen = larr.length;
+				int rlen = rarr.length;
+				int idx = 0;
+				byte lval;
+				byte rval;
+				while( ( idx &lt; llen ) &amp;&amp; ( idx &lt; rlen ) ) {
+					lval = larr[idx];
+					rval = rarr[idx];
+					if( lval &lt; rval ) {
+						return( $LTAdjusted$ );
+					}
+					else if( lval &gt; rval ) {
+						return( $GTAdjusted$ );
+					}
+					idx ++;
+				}
+				if( llen &lt; rlen ) {
+					return( $LTAdjusted$ );
+				}
+				else if( llen &gt; rlen ) {
+					return( $GTAdjusted$ );
+				}
+			}</GenRule>
+
+	<GenRule GenDef="Object" Name="implCompareToReqRHSBoolVar">
+			if( get$implColumnAttrOptionality$$Name$() ) {
+				if( ! rhs ) {
+					return( $GTAdjusted$ );
+				}
+			}
+			else {
+				if( rhs ) {
+					return( $LTAdjusted$ );
+				}
+			}</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSEnumVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSInt16Var"
+		>$implCompareToReqRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSInt32Var"
+		>$implCompareToReqRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSInt64Var"
+		>$implCompareToReqRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSUInt16Var"
+		>$implCompareToReqRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSUInt32Var"
+		>$implCompareToReqRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSUInt64Var"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSFloatVar"
+		>$implCompareToReqRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSDoubleVar"
+		>$implCompareToReqRHSValue$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSNumberVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSStringVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSTokenVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSNmTokenVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSNmTokensVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSTextVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSDateVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSTimeVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSTimestampVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSTZDateVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSTZTimeVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSTZTimestampVar"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSDbKeyHash128Var"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSDbKeyHash160Var"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSDbKeyHash224Var"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSDbKeyHash256Var"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSDbKeyHash384Var"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSDbKeyHash512Var"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSUuid6Var"
+		>$implCompareToReqRHSObj$</GenRule>
+	<GenRule GenDef="Object" Name="implCompareToReqRHSUuidVar"
+		>$implCompareToReqRHSObj$</GenRule>
+
+	<GenRule GenDef="Object" Name="implCompareToReqRHSValue">
+			if( get$implColumnAttrOptionality$$Name$() &lt; rhs ) {
+				return( $LTAdjusted$ );
+			}
+			else if( get$implColumnAttrOptionality$$Name$() &gt; rhs ) {
+				return( $GTAdjusted$ );
+			}</GenRule>
+
+	<GenRule GenDef="Object" Name="implCompareToReqRHSObj">
+			if (get$implColumnAttrOptionality$$Name$() != null) {
+				if (rhs != null) {
+					cmp = get$implColumnAttrOptionality$$Name$().compareTo( rhs );
+					if( cmp != 0 ) {
+						return( $CmpAdjusted$ );
+					}
+				}
+				else {
+					return( $GTAdjusted$ );
+				}
+			}
+			else if (rhs != null) {
+				return( $LTAdjusted$ );
+			}</GenRule>
+
+
+
+
+
+
+
+
+
+
 
 	<GenRule GenDef="Index" Name="implPKeyToString">
 	@Override
