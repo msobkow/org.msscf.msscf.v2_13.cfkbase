@@ -80,6 +80,29 @@ public interface I$SchemaName$$TableName$PKey$switch HasDefSchema yes ISchemaTab
 {$switch HasDefSchema yes ISchemaTablePKeyExtendBaseDefBody default ISchemaTablePKeyImplBaseDefBody$}
 </GenFile>
 
+	<GenRule GenDef="Relation" Name="declSchemaTablePKeyRelationNonCandidateSetter">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($emitInterfaceDataType$ argObj);
+
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$);
+</GenRule>
+	
+	<GenRule GenDef="Relation" Name="declSchemaTablePKeyRelationGetter">$switch IsCandidateRelation yes declSchemaTablePKeyRelationCandidateGetter default declSchemaTablePKeyRelationNonCandidateGetter$</GenRule>
+
+	<GenRule GenDef="Relation" Name="declSchemaTablePKeyRelationCandidateGetter">
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();
+</GenRule>
+	
+	<GenRule GenDef="Relation" Name="declSchemaTablePKeyRelationNonCandidateGetter">
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();
+</GenRule>
+
+	<GenRule GenDef="RelationCol" Name="declSchemaTableSetAttrArgColumn">
+		$reference FromCol reference Column leadlower declColumnAttrOptionality$$reference FromCol reference Column Name$ = arg$reference FromCol reference Column Name$;</GenRule>
+
+
+
+
+
 	<GenRule GenDef="Relation" Name="ToIndexIsUnique"
 		>$reference ToIndex IsUnique$</GenRule>
 
