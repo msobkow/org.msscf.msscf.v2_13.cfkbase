@@ -1490,8 +1490,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	@Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=16 )</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implJpaPKeyColumnGetterSetter">$reference Column implJpaPKeyColumnGetterSetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implJpaPKeyColumnGetterSetter">$implColumnGetterSetter$</GenRule>
-	<GenRule GenDef="Atom" Name="implJpaPKeyColumnGetterSetter">$implColumnGetterSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implJpaPKeyColumnGetterSetter">$implColumnDirectGetterSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implJpaPKeyColumnGetterSetter">$implColumnDirectGetterSetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="derefReturnNull">
 			return null;</GenRule>
@@ -1528,6 +1528,12 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implColumnGetter">$switch IsNullable yes implOptGetter default implReqGetter$</GenRule>
 	<GenRule GenDef="Value" Name="implColumnSetter">$switch IsNullable yes implOptSetter default implReqSetter$</GenRule>
 	<GenRule GenDef="Value" Name="implColumnGetterSetter">$switch IsNullable yes implOptGetter default implReqGetter$$switch IsNullable yes implOptSetter default implReqSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implDirectColumnGetter">$switch IsNullable yes implOptDirectGetter default implReqDirectGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implDirectColumnSetter">$switch IsNullable yes implOptDirectSetter default implReqDirectSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implDirectColumnGetterSetter">$switch IsNullable yes implOptDirectGetter default implReqDirectGetter$$switch IsNullable yes implOptDirectSetter default implReqDirectSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implDirectColumnGetter">$reference Column implDirectColumnGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implDirectColumnSetter">$reference Column implDirectColumnSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implDirectColumnGetterSetter">$reference Column implDirectColumnGetterSetter$</GenRule>
 
 	<GenRule GenDef="Value" Name="implReqSetter"
 		>$switch BaseModelAtomClass
@@ -1713,13 +1719,213 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implOptTextGetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="Value" Name="implReqDirectSetter"
+		>$switch BaseModelAtomClass
+			BlobDef implReqDirectBlobSetter
+			BoolDef implReqDirectBoolSetter
+			EnumDef implReqDirectEnumSetter
+			Id16Gen implReqDirectInt16Setter
+			Id32Gen implReqDirectInt32Setter
+			Id64Gen implReqDirectInt64Setter
+			Int16Def implReqDirectInt16Setter
+			Int32Def implReqDirectInt32Setter
+			Int64Def implReqDirectInt64Setter
+			UInt16Def implReqDirectUInt16Setter
+			UInt32Def implReqDirectUInt32Setter
+			UInt64Def implReqDirectUInt64Setter
+			FloatDef implReqDirectFloatSetter
+			DoubleDef implReqDirectDoubleSetter
+			NumberDef implReqDirectNumberSetter
+			DateDef implReqDirectDateSetter
+			TimeDef implReqDirectTimeSetter
+			TimestampDef implReqDirectTimestampSetter
+			TZDateDef implReqDirectTZDateSetter
+			TZTimeDef implReqDirectTZTimeSetter
+			TZTimestampDef implReqDirectTZTimestampSetter
+			DbKeyHash128Gen implReqDirectDbKeyHash128Setter
+			DbKeyHash160Gen implReqDirectDbKeyHash160Setter
+			DbKeyHash224Gen implReqDirectDbKeyHash224Setter
+			DbKeyHash256Gen implReqDirectDbKeyHash256Setter
+			DbKeyHash384Gen implReqDirectDbKeyHash384Setter
+			DbKeyHash512Gen implReqDirectDbKeyHash512Setter
+			DbKeyHash128Def implReqDirectDbKeyHash128Setter
+			DbKeyHash160Def implReqDirectDbKeyHash160Setter
+			DbKeyHash224Def implReqDirectDbKeyHash224Setter
+			DbKeyHash256Def implReqDirectDbKeyHash256Setter
+			DbKeyHash384Def implReqDirectDbKeyHash384Setter
+			DbKeyHash512Def implReqDirectDbKeyHash512Setter
+			Uuid6Gen implReqDirectUuid6Setter
+			Uuid6Def implReqDirectUuid6Setter
+			UuidGen implReqDirectUuidSetter
+			UuidDef implReqDirectUuidSetter
+			StringDef implReqDirectStringSetter
+			TokenDef implReqDirectTokenSetter
+			NmTokenDef implReqDirectNmTokenSetter
+			NmTokensDef implReqDirectNmTokensSetter
+			TextDef implReqDirectTextSetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectSetter"
+		>$switch BaseModelAtomClass
+			BlobDef implOptDirectBlobSetter
+			BoolDef implOptDirectBoolSetter
+			EnumDef implOptDirectEnumSetter
+			Id16Gen implOptDirectInt16Setter
+			Id32Gen implOptDirectInt32Setter
+			Id64Gen implOptDirectInt64Setter
+			Int16Def implOptDirectInt16Setter
+			Int32Def implOptDirectInt32Setter
+			Int64Def implOptDirectInt64Setter
+			UInt16Def implOptDirectUInt16Setter
+			UInt32Def implOptDirectUInt32Setter
+			UInt64Def implOptDirectUInt64Setter
+			FloatDef implOptDirectFloatSetter
+			DoubleDef implOptDirectDoubleSetter
+			NumberDef implOptDirectNumberSetter
+			DateDef implOptDirectDateSetter
+			TimeDef implOptDirectTimeSetter
+			TimestampDef implOptDirectTimestampSetter
+			TZDateDef implOptDirectTZDateSetter
+			TZTimeDef implOptDirectTZTimeSetter
+			TZTimestampDef implOptDirectTZTimestampSetter
+			DbKeyHash128Gen implOptDirectDbKeyHash128Setter
+			DbKeyHash160Gen implOptDirectDbKeyHash160Setter
+			DbKeyHash224Gen implOptDirectDbKeyHash224Setter
+			DbKeyHash256Gen implOptDirectDbKeyHash256Setter
+			DbKeyHash384Gen implOptDirectDbKeyHash384Setter
+			DbKeyHash512Gen implOptDirectDbKeyHash512Setter
+			DbKeyHash128Def implOptDirectDbKeyHash128Setter
+			DbKeyHash160Def implOptDirectDbKeyHash160Setter
+			DbKeyHash224Def implOptDirectDbKeyHash224Setter
+			DbKeyHash256Def implOptDirectDbKeyHash256Setter
+			DbKeyHash384Def implOptDirectDbKeyHash384Setter
+			DbKeyHash512Def implOptDirectDbKeyHash512Setter
+			Uuid6Gen implOptDirectUuid6Setter
+			Uuid6Def implOptDirectUuid6Setter
+			UuidGen implOptDirectUuidSetter
+			UuidDef implOptDirectUuidSetter
+			StringDef implOptDirectStringSetter
+			TokenDef implOptDirectTokenSetter
+			NmTokenDef implOptDirectNmTokenSetter
+			NmTokensDef implOptDirectNmTokensSetter
+			TextDef implOptDirectTextSetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectGetter"
+		>$switch BaseModelAtomClass
+			BlobDef implReqDirectBlobGetter
+			BoolDef implReqDirectBoolGetter
+			EnumDef implReqDirectEnumGetter
+			Id16Gen implReqDirectInt16Getter
+			Id32Gen implReqDirectInt32Getter
+			Id64Gen implReqDirectInt64Getter
+			Int16Def implReqDirectInt16Getter
+			Int32Def implReqDirectInt32Getter
+			Int64Def implReqDirectInt64Getter
+			UInt16Def implReqDirectUInt16Getter
+			UInt32Def implReqDirectUInt32Getter
+			UInt64Def implReqDirectUInt64Getter
+			FloatDef implReqDirectFloatGetter
+			DoubleDef implReqDirectDoubleGetter
+			NumberDef implReqDirectNumberGetter
+			DateDef implReqDirectDateGetter
+			TimeDef implReqDirectTimeGetter
+			TimestampDef implReqDirectTimestampGetter
+			TZDateDef implReqDirectTZDateGetter
+			TZTimeDef implReqDirectTZTimeGetter
+			TZTimestampDef implReqDirectTZTimestampGetter
+			DbKeyHash128Gen implReqDirectDbKeyHash128Getter
+			DbKeyHash160Gen implReqDirectDbKeyHash160Getter
+			DbKeyHash224Gen implReqDirectDbKeyHash224Getter
+			DbKeyHash256Gen implReqDirectDbKeyHash256Getter
+			DbKeyHash384Gen implReqDirectDbKeyHash384Getter
+			DbKeyHash512Gen implReqDirectDbKeyHash512Getter
+			DbKeyHash128Def implReqDirectDbKeyHash128Getter
+			DbKeyHash160Def implReqDirectDbKeyHash160Getter
+			DbKeyHash224Def implReqDirectDbKeyHash224Getter
+			DbKeyHash256Def implReqDirectDbKeyHash256Getter
+			DbKeyHash384Def implReqDirectDbKeyHash384Getter
+			DbKeyHash512Def implReqDirectDbKeyHash512Getter
+			Uuid6Gen implReqDirectUuid6Getter
+			Uuid6Def implReqDirectUuid6Getter
+			UuidGen implReqDirectUuidGetter
+			UuidDef implReqDirectUuidGetter
+			StringDef implReqDirectStringGetter
+			TokenDef implReqDirectTokenGetter
+			NmTokenDef implReqDirectNmTokenGetter
+			NmTokensDef implReqDirectNmTokensGetter
+			TextDef implReqDirectTextGetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectGetter"
+		>$switch BaseModelAtomClass
+			BlobDef implOptDirectBlobGetter
+			BoolDef implOptDirectBoolGetter
+			EnumDef implOptDirectEnumGetter
+			Id16Gen implOptDirectInt16Getter
+			Id32Gen implOptDirectInt32Getter
+			Id64Gen implOptDirectInt64Getter
+			Int16Def implOptDirectInt16Getter
+			Int32Def implOptDirectInt32Getter
+			Int64Def implOptDirectInt64Getter
+			UInt16Def implOptDirectUInt16Getter
+			UInt32Def implOptDirectUInt32Getter
+			UInt64Def implOptDirectUInt64Getter
+			FloatDef implOptDirectFloatGetter
+			DoubleDef implOptDirectDoubleGetter
+			NumberDef implOptDirectNumberGetter
+			DateDef implOptDirectDateGetter
+			TimeDef implOptDirectTimeGetter
+			TimestampDef implOptDirectTimestampGetter
+			TZDateDef implOptDirectTZDateGetter
+			TZTimeDef implOptDirectTZTimeGetter
+			TZTimestampDef implOptDirectTZTimestampGetter
+			DbKeyHash128Gen implOptDirectDbKeyHash128Getter
+			DbKeyHash160Gen implOptDirectDbKeyHash160Getter
+			DbKeyHash224Gen implOptDirectDbKeyHash224Getter
+			DbKeyHash256Gen implOptDirectDbKeyHash256Getter
+			DbKeyHash384Gen implOptDirectDbKeyHash384Getter
+			DbKeyHash512Gen implOptDirectDbKeyHash512Getter
+			DbKeyHash128Def implOptDirectDbKeyHash128Getter
+			DbKeyHash160Def implOptDirectDbKeyHash160Getter
+			DbKeyHash224Def implOptDirectDbKeyHash224Getter
+			DbKeyHash256Def implOptDirectDbKeyHash256Getter
+			DbKeyHash384Def implOptDirectDbKeyHash384Getter
+			DbKeyHash512Def implOptDirectDbKeyHash512Getter
+			Uuid6Gen implOptDirectUuid6Getter
+			Uuid6Def implOptDirectUuid6Getter
+			UuidGen implOptDirectUuidGetter
+			UuidDef implOptDirectUuidGetter
+			StringDef implOptDirectStringGetter
+			TokenDef implOptDirectTokenGetter
+			NmTokenDef implOptDirectNmTokenGetter
+			NmTokensDef implOptDirectNmTokensGetter
+			TextDef implOptDirectTextGetter
+			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implReqBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
 	}
 </GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectBlobGetter">
+	@Override
+	public byte[] get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="pkeyValueGetter">$switch IsPrimaryIndexKeyAtomic yes directPKeyGetter default deferPKeyValueGetter$</GenRule>
+	<GenRule GenDef="Value" Name="directPKeyGetter">getPKey()</GenRule>
+	<GenRule GenDef="Value" Name="deferPKeyValueGetter">getPKey().get$implColumnAttrOptionality$$Name$()</GenRule>
+	<GenRule GenDef="Value" Name="directValueGetter">$lower implColumnAttrOptionality$$Name$</GenRule>
+
+	<GenRule GenDef="Value" Name="pkeyValueSetter">$switch IsPrimaryIndexKeyAtomic yes directPKeySetter default deferPKeyValueSetter$</GenRule>
+	<GenRule GenDef="Value" Name="directPKeySetter">setPKey( value )</GenRule>
+	<GenRule GenDef="Value" Name="deferPKeyValueSetter">getPKey().set$implColumnAttrOptionality$$Name$( value )</GenRule>
+	<GenRule GenDef="Value" Name="directValueSetter">$lower implColumnAttrOptionality$$Name$ = value</GenRule>
 
 	<GenRule GenDef="Value" Name="implReqBlobSetter">
 	@Override
@@ -1738,14 +1944,42 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				value.length,
 				$MaxLen$ );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectBlobSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( byte[] value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		else if( value.length &gt; $MaxLen$ ) {
+			throw new CFLibArgumentOverflowException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value.length",
+				value.length,
+				$MaxLen$ );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectBlobGetter">
+	@Override
+	public byte[] get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -1760,42 +1994,92 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				value.length,
 				$MaxLen$ );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectBlobSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( byte[] value ) {
+		if( value != null &amp;&amp; value.length &gt; $MaxLen$ ) {
+			throw new CFLibArgumentOverflowException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value.length",
+				value.length,
+				$MaxLen$ );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqBoolGetter">
 	@Override
 	public boolean get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectBoolGetter">
+	@Override
+	public boolean get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqBoolSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( boolean value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectBoolSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( boolean value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptBoolGetter">
 	@Override
 	public Boolean get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectBoolGetter">
+	@Override
+	public Boolean get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptBoolSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Boolean value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectBoolSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( Boolean value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectEnumGetter">
+	@Override
+	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -1808,168 +2092,342 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectEnumSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectEnumGetter">
+	@Override
+	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptEnumSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectEnumSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqInt16Getter">
 	@Override
 	public short get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectInt16Getter">
+	@Override
+	public short get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqInt16Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( short value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectInt16Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( short value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptInt16Getter">
 	@Override
 	public Short get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectInt16Getter">
+	@Override
+	public Short get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptInt16Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Short value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectInt16Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( Short value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqInt32Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectInt32Getter">
+	@Override
+	public int get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqInt32Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( int value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectInt32Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( int value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptInt32Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectInt32Getter">
+	@Override
+	public Integer get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptInt32Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Integer value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectInt32Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( Integer value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqInt64Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectInt64Getter">
+	@Override
+	public long get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqInt64Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( long value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectInt64Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( long value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptInt64Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectInt64Getter">
+	@Override
+	public Long get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptInt64Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Long value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectInt64Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( Long value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqUInt16Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectUInt16Getter">
+	@Override
+	public int get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqUInt16Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( int value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectUInt16Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( int value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptUInt16Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectUInt16Getter">
+	@Override
+	public Integer get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptUInt16Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Integer value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectUInt16Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( Integer value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqUInt32Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectUInt32Getter">
+	@Override
+	public long get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqUInt32Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( long value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectUInt32Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( long value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptUInt32Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectUInt32Getter">
+	@Override
+	public Long get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptUInt32Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Long value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectUInt32Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( Long value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectUInt64Getter">
+	@Override
+	public BigDecimal get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -1982,84 +2440,178 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = CFLibBigDecimalUtil.coerce( getClass().getName() + ".$Name$", 19, 0, value );
+		value = CFLibBigDecimalUtil.coerce( getClass().getName() + ".$Name$", 19, 0, value );
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectUInt64Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
+		value = CFLibBigDecimalUtil.coerce( getClass().getName() + ".$Name$", 19, 0, value );
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectUInt64Getter">
+	@Override
+	public BigDecimal get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptUInt64Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( BigDecimal value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		value = CFLibBigDecimalUtil.coerce( getClass().getName() + ".$Name$", 19, 0, value );
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectUInt64Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
+		value = CFLibBigDecimalUtil.coerce( getClass().getName() + ".$Name$", 19, 0, value );
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqFloatGetter">
 	@Override
 	public float get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectFloatGetter">
+	@Override
+	public float get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqFloatSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( float value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectFloatSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( float value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptFloatGetter">
 	@Override
 	public Float get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectFloatGetter">
+	@Override
+	public Float get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptFloatSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Float value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectFloatSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( Float value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqDoubleGetter">
 	@Override
 	public double get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDoubleGetter">
+	@Override
+	public double get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqDoubleSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( double value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDoubleSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( double value ) {$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDoubleGetter">
 	@Override
 	public Double get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDoubleGetter">
+	@Override
+	public Double get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDoubleSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( Double value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDoubleSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( Double value ) {$switch HasMinValue yes implOptSetterCheckMinValue default empty$$switch HasMaxValue yes implOptSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectNumberGetter">
+	@Override
+	public BigDecimal get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2072,28 +2624,66 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = CFLibBigDecimalUtil.coerce( getClass().getName() + ".$Name$", $Digits$, $Precis$, value );
+		value = CFLibBigDecimalUtil.coerce( getClass().getName() + ".$Name$", $Digits$, $Precis$, value );
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectNumberSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		value = CFLibBigDecimalUtil.coerce( getClass().getName() + ".$Name$", $Digits$, $Precis$, value );
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectNumberGetter">
+	@Override
+	public BigDecimal get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptNumberSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( BigDecimal value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		value = CFLibBigDecimalUtil.coerce( getClass().getName() + ".$Name$", $Digits$, $Precis$, value );
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectNumberSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
+		value = CFLibBigDecimalUtil.coerce( getClass().getName() + ".$Name$", $Digits$, $Precis$, value );
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDateGetter">
+	@Override
+	public LocalDate get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2106,28 +2696,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDateSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDateGetter">
+	@Override
+	public LocalDate get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDateSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDate value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDateSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTimeGetter">
+	@Override
+	public LocalTime get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2140,28 +2764,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTimeSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTimeGetter">
+	@Override
+	public LocalTime get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTimeSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalTime value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTimeSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTimestampGetter">
+	@Override
+	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2174,28 +2832,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTimestampSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTimestampGetter">
+	@Override
+	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTimestampSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTimestampSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTZDateGetter">
+	@Override
+	public LocalDate get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2208,28 +2900,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTZDateSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTZDateGetter">
+	@Override
+	public LocalDate get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTZDateSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDate value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTZDateSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTZTimeGetter">
+	@Override
+	public LocalTime get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2242,28 +2968,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTZTimeSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTZTimeGetter">
+	@Override
+	public LocalTime get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTZTimeSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalTime value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTZTimeSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTZTimestampGetter">
+	@Override
+	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2276,28 +3036,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTZTimestampSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}$switch HasMinValue yes implReqSetterCheckMinValue default empty$$switch HasMaxValue yes implReqSetterCheckMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTZTimestampGetter">
+	@Override
+	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTZTimestampSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTZTimestampSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value ) {$switch HasMinValue yes implReqSetterCheckObjectMinValue default empty$$switch HasMaxValue yes implReqSetterCheckObjectMaxValue default empty$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash128Getter">
+	@Override
+	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2310,28 +3104,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash128Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value ) {
+		if( value == null || value.isNull() ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash128Getter">
+	@Override
+	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDbKeyHash128Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash128Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash160Getter">
+	@Override
+	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2344,14 +3172,34 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash160Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value ) {
+		if( value == null || value.isNull() ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash160Getter">
+	@Override
+	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2364,14 +3212,34 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash160Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value ) {
+		if( value == null || value.isNull() ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash224Getter">
+	@Override
+	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2384,28 +3252,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash224Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value ) {
+		if( value == null || value.isNull() ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash224Getter">
+	@Override
+	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDbKeyHash224Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash224Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash256Getter">
+	@Override
+	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2418,28 +3320,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash256Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value ) {
+		if( value == null || value.isNull() ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash256Getter">
+	@Override
+	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDbKeyHash256Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash256Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash384Getter">
+	@Override
+	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2452,28 +3388,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash384Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value ) {
+		if( value == null || value.isNull() ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash384Getter">
+	@Override
+	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDbKeyHash384Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash384Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash512Getter">
+	@Override
+	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2486,28 +3456,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectDbKeyHash512Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value ) {
+		if( value == null || value.isNull() ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash512Getter">
+	@Override
+	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptDbKeyHash512Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectDbKeyHash512Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectUuid6Getter">
+	@Override
+	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2520,28 +3524,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectUuid6Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibUuid6 value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectUuid6Getter">
+	@Override
+	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptUuid6Setter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( CFLibUuid6 value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectUuid6Setter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( CFLibUuid6 value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectUuidGetter">
+	@Override
+	public UUID get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2554,28 +3592,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectUuidSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( UUID value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectUuidGetter">
+	@Override
+	public UUID get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptUuidSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( UUID value ) {
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectUuidSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( UUID value ) {
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectStringGetter">
+	@Override
+	public String get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2588,28 +3660,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}$implReqSetterCheckMaxLen$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectStringSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( String value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}$implReqSetterCheckMaxLen$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectStringGetter">
+	@Override
+	public String get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptStringSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectStringSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTokenGetter">
+	@Override
+	public String get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2622,28 +3728,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}$implReqSetterCheckMaxLen$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTokenSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( String value ) {
+		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}$implReqSetterCheckMaxLen$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTokenGetter">
+	@Override
+	public String get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTokenSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTokenSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectNmTokenGetter">
+	@Override
+	public String get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2656,28 +3796,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}$implReqSetterCheckMaxLen$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectNmTokenSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( String value ) {
+		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}$implReqSetterCheckMaxLen$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectNmTokenGetter">
+	@Override
+	public String get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptNmTokenSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectNmTokenSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectNmTokensGetter">
+	@Override
+	public String get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2690,28 +3864,62 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}$implReqSetterCheckMaxLen$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectNmTokensSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( String value ) {
+		if( ( value == null ) || ( value.length() &lt;= 0 ) ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}$implReqSetterCheckMaxLen$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectNmTokensGetter">
+	@Override
+	public String get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptNmTokensSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectNmTokensSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implReqTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTextGetter">
+	@Override
+	public String get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
@@ -2724,21 +3932,48 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				1,
 				"value" );
 		}$implReqSetterCheckMaxLen$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implReqDirectTextSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( String value ) {
+		if( value == null ) {
+			throw new CFLibNullArgumentException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value" );
+		}$implReqSetterCheckMaxLen$
+		$directValueSetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $lower implColumnAttrOptionality$$Name$ );
+		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTextGetter">
+	@Override
+	public String get$implColumnAttrOptionality$$Name$() {
+		return( $directValueGetter$ );
 	}
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implOptTextSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
-		$lower implColumnAttrOptionality$$Name$ = value;
+		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
+	}
+</GenRule>
+
+	<GenRule GenDef="Value" Name="implOptDirectTextSetter">
+	@Override
+	public void set$implColumnAttrOptionality$$Name$( String value ) {$implOptSetterCheckMaxLen$
+		$directValueSetter$;
 	}
 </GenRule>
 
