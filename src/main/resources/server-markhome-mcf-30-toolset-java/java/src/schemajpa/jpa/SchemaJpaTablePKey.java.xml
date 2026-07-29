@@ -1527,7 +1527,9 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 
 	<GenRule GenDef="Value" Name="implColumnGetter">$switch IsNullable yes implOptGetter default implReqGetter$</GenRule>
 	<GenRule GenDef="Value" Name="implColumnSetter">$switch IsNullable yes implOptSetter default implReqSetter$</GenRule>
-	<GenRule GenDef="Value" Name="implColumnGetterSetter">$switch IsNullable yes implOptGetter default implReqGetter$$switch IsNullable yes implOptSetter default implReqSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implColumnGetterSetter">$switch IsNullable yes implOptGetter default implReqGetter$$switch InSuperiorRelation yes empty default implColumnGetterSetterDecision$</GenRule>
+	<GenRule GenDef="Value" Name="implColumnGetterSetterDecision">$switch IsNullable yes implOptSetter default implReqSetter$</GenRule>
+
 	<GenRule GenDef="Value" Name="implDirectColumnGetter">$switch IsNullable yes implOptDirectGetter default implReqDirectGetter$</GenRule>
 	<GenRule GenDef="Value" Name="implDirectColumnSetter">$switch IsNullable yes implOptDirectSetter default implReqDirectSetter$</GenRule>
 	<GenRule GenDef="Value" Name="implDirectColumnGetterSetter">$switch IsNullable yes implOptDirectGetter default implReqDirectGetter$$switch IsNullable yes implOptDirectSetter default implReqDirectSetter$</GenRule>
