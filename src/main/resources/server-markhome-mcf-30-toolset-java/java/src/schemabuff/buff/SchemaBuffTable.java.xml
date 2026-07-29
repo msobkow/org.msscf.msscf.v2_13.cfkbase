@@ -114,6 +114,7 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 		}</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterCopyToAttr">$switch ColumnInPrimaryIndex yes implSchemaBuffTableRelationSetterCopyToPKeyAttr default implSchemaBuffTableRelationSetterCopyToNormalAttr$</GenRule>
+	<GenRule GenDef="RelationCol" Name="IsPrimaryIndexKeyAtomic">$reference FromCol reference Column IsPrimaryIndexKeyAtomic$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterCopyToPKeyAttr">$switch IsPrimaryIndexKeyAtomic yes implSchemaBuffTableRelationSetterCopyToPKey default implSchemaBuffTableRelationSetterCopyToPKeyViaSetter$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterCopyToPKey">
 			setPKey(argObj.get$reference ToCol reference Column implColumnAttrOptionality$$reference ToCol reference Column Name$());</GenRule>
@@ -306,8 +307,8 @@ $switch ToTableHasDefSchema yes empty default maybeImplSchemaBuffTableRelationSe
 	}
 $implBuffColumnAttrPKeyAttrAccessors$</GenRule>
 
-	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyAttrAccessors">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implNonSuperiorColumnGetterSetter empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnWrappers">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implPKeyWrapColumnGetterSetter empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyAttrAccessors">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter empty empty )$<!--$iterate SuperiorPrimaryKeyRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$--></GenRule>
+	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnWrappers">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter empty empty )$<!--$iterate SuperiorPrimaryKeyRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$--></GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implNonSuperiorColumnGetterSetter">$switch InSuperiorRelation yes implColumnGetter default implColumnGetterSetter$</GenRule>
 
