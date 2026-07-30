@@ -82,8 +82,9 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 	<GenRule GenDef="Table" Name="buffExtendDefSchemaBuffTableSuperBuff"
 		>$switch HasSuperClassRelation yes implBuffInheritSuper default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="implSchemaBuffTableSuperiorRelations">$iterate SuperiorRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="implSchemaBuffTableSubservientRelations">$iterate SubservientRelations(each implSchemaBuffTableRelationGetter empty empty)$</GenRule>
+	<GenRule GenDef="Table" Name="implSchemaBuffTableSuperiorRelations">$switch HasSuperClassRelation no implSchemaBuffTablePKeyRelations default empty$$iterate SuperiorDataRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implSchemaBuffTablePKeyRelations">$iterate SuperiorPrimaryKeyRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$$iterate SubservientPrimaryKeyRelations( each implSchemaBuffTableRelationGetter empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implSchemaBuffTableSubservientRelations">$iterate SubservientDataRelations(each implSchemaBuffTableRelationGetter empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeImplSchemaBuffTableRelationGetterSetter">$switch HasDefSchema yes empty default implSuperiorSchemaBuffTableRelationGetterSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implSuperiorSchemaBuffTableRelationGetterSetter">$switch IsSuperiorRelation yes implSchemaBuffTableRelationGetterSetter default implSchemaBuffTableRelationGetter$</GenRule>
@@ -91,7 +92,6 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 	<GenRule GenDef="Relation" Name="implSchemaBuffTableRelationGetterSetter">$implSchemaBuffTableRelationGetter$$switch IsFromIndexUnique yes maybeImplSchemaBuffTableRelationSetter default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeImplSchemaBuffTableRelationSetter">$switch ToTableHasDefSchema yes implBuffTablePubRelationSetter default implSchemaBuffTableNormalRelationSetter$</GenRule>
-	<GenRule GenDef="Relation" Name="implBuffTablePubRelationSetter">$switch IsSuperiorRelation yes implSuperiorSchemaBuffTableRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Object" Name="emitPub">Pub</GenRule>
 
 	<GenRule GenDef="Relation" Name="implSchemaBuffTableRelationSetterArgs">

@@ -71,6 +71,41 @@ public interface I$SchemaName$$TableName$$switch HasDefSchema yes extendSchemaRe
 $switch HasDefSchema no maybeDeclRecGetClassCode default empty$$switch HasDefSchema no maybeDeclRecOptImplAuditColumnAccessors default empty$$switch HasSuperClassRelation no declColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no declRevisionGetterSetter default empty$$iterate DataRelations( each maybeDeclISchemaTableRelationGetter empty empty )$$iterate DataRelations( each maybeDeclISchemaTableRelationSetter empty empty )$$switch HasDefSchema no declDataGetterSetters default empty$$declEqualsObject$$declGetHashCode$$declCompareToObject$$declSet$$declSchemaTableToString$}
 </GenFile>
 
+	<GenRule GenDef="Table" Name="declSchemaTableSuperiorRelations">$switch HasSuperClassRelation no declSchemaTablePKeyRelations default empty$$iterate SuperiorDataRelations( each maybeDeclISchemaTableRelationGetterSetter empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declSchemaTablePKeyRelations">$iterate SuperiorPrimaryKeyRelations( each maybeDeclISchemaTableRelationGetterSetter empty empty )$$iterate SubservientPrimaryKeyRelations( each declSchemaTableRelationGetter empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declSchemaTableSubservientRelations">$iterate SubservientDataRelations( each declSchemaTableRelationGetter empty empty )$</GenRule>
+
+	<GenRule GenDef="Relation" Name="maybeDeclISchemaTableRelationGetterSetter">$switch HasDefSchema yes empty default declSuperiorISchemaTableRelationGetterSetter$</GenRule>
+	<GenRule GenDef="Relation" Name="declSuperiorISchemaTableRelationGetterSetter">$switch IsSuperiorRelation yes declSchemaTableRelationGetterSetter default declSchemaTableRelationGetter$</GenRule>
+	
+	<GenRule GenDef="Relation" Name="declSchemaTableRelationGetterSetter">$declSchemaTableRelationGetter$$switch IsFromIndexUnique yes maybeDeclISchemaTableRelationSetter default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="maybeDeclISchemaTableRelationSetter">$switch ToTableHasDefSchema yes declTablePubRelationSetter default declSchemaTableNormalRelationSetter$</GenRule>
+
+	<GenRule GenDef="Relation" Name="declSchemaTableRelationSetterArgs">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declCommaSetArgColumn)$);
+</GenRule>
+
+	<GenRule GenDef="Relation" Name="declSchemaTablePubRelationSetter">$declSchemaTableRelationSetterArgs$
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj);
+</GenRule>
+
+	<GenRule GenDef="Relation" Name="declSchemaTableNormalRelationSetter">$declSchemaTableRelationSetterArgs$
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj);
+$switch ToTableIsProtected yes declSchemaTableRelationSetterProt default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="declSchemaTableRelationSetterProt">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj);
+$switch ToTableIsPublic yes declSchemaTableRelationSetterPub default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="declSchemaTableRelationSetterPub">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj);
+</GenRule>
+
+	<GenRule GenDef="Relation" Name="declSchemaTableRelationGetter">
+	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();
+</GenRule>
+
 	<GenRule GenDef="Table" Name="declEqualsObject">
 	public boolean equals( Object obj );
 </GenRule>
