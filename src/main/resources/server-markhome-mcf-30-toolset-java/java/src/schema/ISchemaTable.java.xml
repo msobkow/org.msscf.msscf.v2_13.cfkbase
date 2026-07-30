@@ -519,4 +519,22 @@ $switch HasDefSchema no maybeDeclRecGetClassCode default empty$$switch HasDefSch
 	<GenRule GenDef="Relation" Name="declSchemaTableRelationPubGetterList">
 	public List&lt;I$reference ToTable DefSchemaName$Pub$reference ToTable Name$&gt; get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
 
+ 	<GenRule GenDef="Relation" Name="declColumnAttrPKeyWrapRelationGetterSetter">$switch IsFromIndexUnique yes declColumnAttrPKeyWrapRelationSingletonGetterSetter default declColumnAttrPKeyWrapRelationDuplicateGetter$</GenRule>
+ 	<GenRule GenDef="Relation" Name="declColumnAttrPKeyWrapRelationSingletonGetterSetter">$switch ToTableHasDefSchema yes declColumnAttrPKeyWrapRelationSingletonPubGetterSetter default declColumnAttrPKeyWrapRelationSingletonNormalGetterSetter$</GenRule>
+ 	<GenRule GenDef="Relation" Name="declColumnAttrPKeyWrapRelationSingletonPubGetterSetter">
+		public I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ get$OptionalOrRequired$$RelationType$$Suffix$();$switch IsFromIndexUnique yes declColumnAttrPKeyWrapRelationSingletonSetterPub default empty$</GenRule>
+ 	<GenRule GenDef="Relation" Name="declColumnAttrPKeyWrapRelationSingletonNormalGetterSetter">
+	public I$reference ToTable DefSchemaName$$reference ToTable TableName$ get$OptionalOrRequired$$RelationType$$Suffix$();$switch IsFromIndexUnique yes declColumnAttrPKeyWrapRelationSingletonNormalSetter default empty$</GenRule>
+ 
+ 	<GenRule GenDef="Relation" Name="declColumnAttrPKeyWrapRelationSingletonNormalSetter">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$$reference ToTable TableName$ argObj);$switch ToTableIsProtected yes declColumnAttrPKeyWrapRelationSingletonSetterProt default empty$</GenRule>
+ 	<GenRule GenDef="Relation" Name="declColumnAttrPKeyWrapRelationSingletonSetterProt">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj);$switch ToTableIsPublic yes declColumnAttrPKeyWrapRelationSingletonSetterPub default empty$</GenRule>
+ 	<GenRule GenDef="Relation" Name="declColumnAttrPKeyWrapRelationSingletonSetterPub">
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj);</GenRule>
+ 
+ 	<GenRule GenDef="IndexCol" Name="declPKeyWrapColumnGetterSetter">$reallyDeclPKeyWrapColumnGetterSetter$</GenRule>
+ 	<GenRule GenDef="IndexCol" Name="reallyDeclPKeyWrapColumnGetterSetter">
+	public $reference Column implJavaAtomType$ get$reference Column implColumnAttrOptionality$$reference Column Name$();$switch InSuperiorRelation yes empty default declPKeyWrapColumnSetter$</GenRule>
+
 </RuleSet>
