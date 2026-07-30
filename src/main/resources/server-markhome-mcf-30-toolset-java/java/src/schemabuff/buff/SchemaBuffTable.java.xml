@@ -72,6 +72,12 @@ public class $SchemaName$Buff$TableName$$switch HasDefSchema yes buffExtendDefSc
 $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSchemaBuffTableBaseConstruct$$switch HasDefSchemaOrSuper no implBuffColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implBuffColumnOptAuditGetterSetters default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$implBuffGetClassCode$$implSchemaBuffTableSuperiorRelations$$implSchemaBuffTableSubservientRelations$$implBuffDataGetterSetters$$implBuffEquals$$implBuffGetHashCode$$implBuffCompareTo$$implBuffSet$$implSchemaBuffTableToString$}
 </GenFile>
 
+	<GenRule GenDef="Table" Name="implSchemaBuffTableSuperiorRelations">$switch HasSuperClassRelation no implSchemaBuffTableSuperiorPKeyRelations default empty$$iterate SuperiorDataRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implSchemaBuffTableSuperiorPKeyRelations">$iterate SuperiorPrimaryKeyRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$</GenRule>
+
+	<GenRule GenDef="Table" Name="implSchemaBuffTableSubservientRelations">$switch HasSuperClassRelation no implSchemaBuffTableSubservientPKeyRelations default empty$$iterate SubservientDataRelations( each implSchemaBuffTableRelationGetter empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implSchemaBuffTableSubservientPKeyRelations">$iterate SubservientPrimaryKeyRelations( each implSchemaBuffTableRelationGetter empty empty )$</GenRule>
+
 	<GenRule GenDef="Table" Name="buffExtendDefSchemaBuffTable">
 	extends $reference DefSchema SchemaName$Buff$TableName$
 	implements I$DefSchemaName$$TableName$</GenRule>
@@ -81,10 +87,6 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 
 	<GenRule GenDef="Table" Name="buffExtendDefSchemaBuffTableSuperBuff"
 		>$switch HasSuperClassRelation yes implBuffInheritSuper default empty$</GenRule>
-
-	<GenRule GenDef="Table" Name="implSchemaBuffTableSuperiorRelations">$switch HasSuperClassRelation no implSchemaBuffTablePKeyRelations default empty$$iterate SuperiorDataRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="implSchemaBuffTablePKeyRelations">$iterate SuperiorPrimaryKeyRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$$iterate SubservientPrimaryKeyRelations( each implSchemaBuffTableRelationGetter empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="implSchemaBuffTableSubservientRelations">$iterate SubservientDataRelations(each implSchemaBuffTableRelationGetter empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeImplSchemaBuffTableRelationGetterSetter">$switch HasDefSchema yes empty default implSuperiorSchemaBuffTableRelationGetterSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implSuperiorSchemaBuffTableRelationGetterSetter">$switch IsSuperiorRelation yes implSchemaBuffTableRelationGetterSetter default implSchemaBuffTableRelationGetter$</GenRule>
