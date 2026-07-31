@@ -229,7 +229,7 @@ $switch ToTableHasDefSchema yes empty default maybeImplSchemaBuffTableRelationSe
 	<GenRule GenDef="Table" Name="implColumnAttrBuffPKeyColumnAccessors">
 	@Override
 	public $reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$ getPKey() {
-		return get$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$();
+		return ($lower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);
 	}
 
 	@Override
@@ -512,7 +512,6 @@ $switch ToTableIsProtected yes implSchemaBuffTableRelationSetterProt default emp
 	protected $reference Column implJavaAtomType$ $lower reference Column implColumnAttrOptionality$$reference Column Name$;</GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaBuffTableBaseConstruct">
-	@Override
 	public $poptop SchemaDef SchemaName$Buff$TableName$() {$implBuffConstructorInitColumns$
 	}
 </GenRule>
@@ -526,7 +525,6 @@ $switch ToTableIsProtected yes implSchemaBuffTableRelationSetterProt default emp
 			return( super.equals(obj) );</GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaBuffTableInhConstruct">
-	@Override
 	public $poptop SchemaDef SchemaName$Buff$TableName$() {
 		super();$switch HasDefSchema yes empty default implBuffConstructorInitDataColumns$
 	}
@@ -562,10 +560,10 @@ $switch ToTableIsProtected yes implSchemaBuffTableRelationSetterProt default emp
 
 	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes implBuffColumnAttrPKeyColumnAccessors default implBuffColumnAttrPKeyInstanceAccessors$</GenRule>
 
-	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyAttrAccessors">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter empty empty )$<!--$iterate SuperiorPrimaryKeyRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$--></GenRule>
-	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnWrappers">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implColumnGetterSetter empty empty )$<!--$iterate SuperiorPrimaryKeyRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$--></GenRule>
+	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyAttrAccessors">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implBuffColumnGetterSetter empty empty )$<!--$iterate SuperiorPrimaryKeyRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$--></GenRule>
+	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnWrappers">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implBuffColumnGetterSetter empty empty )$<!--$iterate SuperiorPrimaryKeyRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$--></GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implNonSuperiorColumnGetterSetter">$switch InSuperiorRelation yes implColumnGetter default implColumnGetterSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implNonSuperiorColumnGetterSetter">$switch InSuperiorRelation yes implBuffColumnGetter default implBuffColumnGetterSetter$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implPKeyWrapColumnGetterSetter">$reallyImplPKeyWrapColumnGetterSetter$</GenRule>
 	<GenRule GenDef="IndexCol" Name="reallyImplPKeyWrapColumnGetterSetter">
@@ -583,7 +581,9 @@ $switch InSuperiorPrimaryKeyRelation yes empty default implPKeyWrapColumnSetter$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnAccessorsSetAttrOnlyIfNotNull">
-		this.$leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$ = $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$;</GenRule>
+		if($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns ( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$ != null) {
+			this.$leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$ = $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$;
+		}</GenRule>
 	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnAccessorsSetAttrDirect">
 		this.$leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$ = $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$;</GenRule>
 
@@ -700,7 +700,13 @@ $switch IsPrimaryIndexKeyAtomic yes empty default implBuffColumnAttrPKeyColumnWr
 	<GenRule GenDef="Table" Name="implBuffDataGetterSetters"
 		>$iterate DataColumns( each implBuffColumnGetterSetter empty empty )$</GenRule>
 
-	<GenRule GenDef="Value" Name="implBuffColumnGetterSetter">$implColumnGetter$$switch InSuperiorRelation yes empty default implColumnSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implBuffColumnGetterSetter">$implBuffColumnGetter$$switch InSuperiorRelation yes empty default implColumnSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implBuffColumnGetter">$implColumnGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implBuffColumnSetter">$implColumnSetter$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implBuffColumnGetterSetter">$reference Column implBuffColumnGetterSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implBuffColumnGetter">$reference Column implBuffColumnGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implBuffColumnSetter">$reference Column implBuffColumnSetter$</GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffInheritSuper">
 	extends $DefSchemaName$Buff$reference SuperClassRelation reference ToTable TableName$</GenRule>
