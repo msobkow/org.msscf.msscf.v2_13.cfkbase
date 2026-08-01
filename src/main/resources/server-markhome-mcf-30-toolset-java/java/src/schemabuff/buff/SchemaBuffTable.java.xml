@@ -143,7 +143,6 @@ $switch IsPrimaryIndexKeyAtomic yes empty default implColumnAttrBuffPKeyColumnWr
 	<GenRule GenDef="Table" Name="implSchemaBuffTableSubservientBuffPKeyRelations">$iterate SubservientPrimaryKeyRelations( each implSchemaBuffTableRelationGetter empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeImplSchemaBuffTableRelationGetterSetter">$switch HasDefSchema yes implSchemaBuffTableRelationGetterPubSetter default implSchemaBuffTableRelationGetterNormalSetter$</GenRule>
-	<GenRule GenDef="Relation" Name="implSchemaBuffTableRelationGetterPubSetter">$switch IsSuperiorRelation yes implSchemaBuffTableRelationGetterPubSetter default implSchemaBuffTableRelationPubGetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implSchemaBuffTableRelationGetterNormalSetter">$switch IsSuperiorRelation yes implSchemaBuffTableRelationGetterSetter default implSchemaBuffTableRelationGetter$</GenRule>
 	
 	<GenRule GenDef="Relation" Name="implSchemaBuffTableRelationGetterSetter">$implSchemaBuffTableRelationGetter$$switch IsToIndexUnique yes maybeImplSchemaBuffTableRelationSetter default empty$</GenRule>
@@ -424,23 +423,14 @@ $switch InSuperiorRelation yes empty default implBuffPKeyWrapColumnSetter$</GenR
 		else {$iterate Columns(each implSchemaBuffTableRelationSetterCopyToAttr)$
 		}</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterCopyToAttr">$switch ColumnInPrimaryIndex yes implSchemaBuffTableRelationSetterCopyToPKeyAttr default implSchemaBuffTableRelationSetterCopyToNormalAttr$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterCopyToAttr">
+			set$reference FromCol implColumnAttrOptionality$$reference FromCol Name$(argObj.get$reference ToCol reference Column implColumnAttrOptionality$$reference ToCol reference Column Name$());</GenRule>
 	<GenRule GenDef="RelationCol" Name="IsPrimaryIndexKeyAtomic">$reference FromCol reference Column IsPrimaryIndexKeyAtomic$</GenRule>
-	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterCopyToPKeyAttr">$switch IsPrimaryIndexKeyAtomic yes implSchemaBuffTableRelationSetterCopyToPKey default implSchemaBuffTableRelationSetterCopyToPKeyViaSetter$</GenRule>
-	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterCopyToPKey">
-			setPKey(argObj.get$reference ToCol reference Column implColumnAttrOptionality$$reference ToCol reference Column Name$());</GenRule>
-	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterCopyToPKeyViaSetter">
-			getPKey().set$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$(argObj.get$reference ToCol reference Column implColumnAttrOptionality$$reference ToCol reference Column Name$());</GenRule>
-	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterCopyToNormalAttr">
-			$reference FromCol reference Column leadlower implColumnAttrOptionality$$reference FromCol reference Column Name$ = argObj.get$reference ToCol reference Column implColumnAttrOptionality$$reference ToCol reference Column Name$();</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterClearAttr">$switch IsNullable yes reallyImplSchemaBuffTableRelationSetterClearAttr default commentImplSchemaBuffTableRelationSetterNoClearAttr$</GenRule>
-	<GenRule GenDef="RelationCol" Name="reallyImplSchemaBuffTableRelationSetterClearAttr">$switch ColumnInPrimaryIndex yes implSchemaBuffTableRelationSetterMaybeClearPKeyAttr default implSchemaBuffTableRelationSetterClearNormalAttr$</GenRule>
-	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterMaybeClearPKeyAttr">$switch IsPrimaryIndexKeyAtomic yes commentImplSchemaBuffTableRelationSetterNoClearPKey default implSchemaBuffTableRelationSetterClearPKeyAttrViaSetter$</GenRule>
-	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterClearPKeyAttrViaSetter">
-			getPKey().set$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$(null);</GenRule>
-	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterClearNormalAttr">
-			$reference FromCol reference Column leadlower implColumnAttrOptionality$$reference FromCol reference Column Name$ = null;</GenRule>
+	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterClearAttr">$switch ColumnInPrimaryIndex comment implSchemaBuffTableRelationSetterNoClearPKey default implSchemaBuffTableRelationSetterMaybeClearAttr$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableRelationSetterMaybeClearAttr">$switch IsNullable yes reallyImplSchemaBuffTableRelationSetterClearAttr default commentImplSchemaBuffTableRelationSetterNoClearAttr$</GenRule>
+	<GenRule GenDef="RelationCol" Name="reallyImplSchemaBuffTableRelationSetterClearAttr">
+			set$reference FromCol implColumnAttrOptionality$$reference FromCol Name$(null);</GenRule>
 	<GenRule GenDef="RelationCol" Name="commentImplSchemaBuffTableRelationSetterNoClearPKey">
 			// Leave primary key alone; primary keys are never nullable, even though a nullable object is used for them</GenRule>
 	<GenRule GenDef="RelationCol" Name="commentImplSchemaBuffTableRelationSetterNoClearAttr">
@@ -574,7 +564,7 @@ $switch ToTableIsProtected yes implSchemaBuffTableRelationSetterProt default emp
 	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyAttrAccessors">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implBuffColumnGetterSetter empty empty )$<!--$iterate SuperiorPrimaryKeyRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$--></GenRule>
 	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnWrappers">$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implBuffColumnGetterSetter empty empty )$<!--$iterate SuperiorPrimaryKeyRelations( each maybeImplSchemaBuffTableRelationGetterSetter empty empty )$--></GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implNonSuperiorColumnGetterSetter">$switch InSuperiorRelation yes implBuffColumnGetter default implBuffColumnGetterSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implNonSuperiorColumnGetterSetter">$implBuffColumnGetterSetter$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implPKeyWrapColumnGetterSetter">$reallyImplPKeyWrapColumnGetterSetter$</GenRule>
 	<GenRule GenDef="IndexCol" Name="reallyImplPKeyWrapColumnGetterSetter">$implBuffColumnGetterSetter$</GenRule>
@@ -700,10 +690,9 @@ $switch IsPrimaryIndexKeyAtomic yes empty default implBuffColumnAttrPKeyColumnWr
 	<GenRule GenDef="Table" Name="implBuffDataGetterSetters"
 		>$iterate DataColumns( each implBuffColumnGetterSetter empty empty )$</GenRule>
 
-	<GenRule GenDef="Value" Name="implBuffColumnGetterSetter">$implBuffColumnGetter$$switch InSuperiorRelation yes empty default implBuffColumnSetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implBuffColumnGetterSetter">$implBuffColumnGetter$$switch InSuperiorRelation yes empty default implBuffColumnSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implBuffColumnGetter">$implColumnGetter$</GenRule>
-	<GenRule GenDef="Object" Name="implBuffColumnSetter">$implColumnSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implBuffColumnGetterSetter">$implBuffColumnGetter$$implBuffColumnSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implBuffColumnGetter">$implColumnGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implBuffColumnSetter">$implColumnSetter$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implBuffColumnGetterSetter">$reference Column implBuffColumnGetterSetter$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implBuffColumnGetter">$reference Column implBuffColumnGetter$</GenRule>
