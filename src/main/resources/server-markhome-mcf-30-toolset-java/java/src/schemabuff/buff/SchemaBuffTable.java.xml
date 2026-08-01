@@ -72,6 +72,25 @@ public class $SchemaName$Buff$TableName$$switch HasDefSchema yes buffExtendDefSc
 $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSchemaBuffTableBaseConstruct$$switch HasSuperClassRelation no implColumnAttrBuffPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implBuffColumnOptAuditGetterSetters default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$implBuffGetClassCode$$implSchemaBuffTableSuperiorRelations$$implSchemaBuffTableSubservientRelations$$switch HasDefSchema no implBuffDataGetterSetters default empty$$implBuffEquals$$implBuffGetHashCode$$implBuffCompareTo$$implBuffSet$$implSchemaBuffTableToString$}
 </GenFile>
 
+	<GenRule GenDef="Value" Name="applyValueGetter">$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$</GenRule>
+	<GenRule GenDef="Value" Name="applyValueSetter">$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="applyValueGetter">$reference Column applyValueGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="applyValueSetter">$reference Column applyValueSetter$</GenRule>
+	<GenRule GenDef="RelationCol" Name="applyFromValueGetter">$reference FromCol reference Column applyValueGetter$</GenRule>
+	<GenRule GenDef="RelationCol" Name="applyFromValueSetter">$reference FromCol reference Column applyValueSetter$</GenRule>
+	<GenRule GenDef="RelationCol" Name="applyToValueGetter">$reference ToCol reference Column applyValueGetter$</GenRule>
+	<GenRule GenDef="RelationCol" Name="applyToValueSetter">$reference ToCol reference Column applyValueSetter$</GenRule>
+
+	<GenRule GenDef="Value" Name="pkeyValueGetter">$switch IsPrimaryIndexKeyAtomic yes directPKeyGetter default deferPKeyValueGetter$</GenRule>
+	<GenRule GenDef="Value" Name="directPKeyGetter">getPKey()</GenRule>
+	<GenRule GenDef="Value" Name="deferPKeyValueGetter">getPKey().get$implColumnAttrOptionality$$Name$()</GenRule>
+	<GenRule GenDef="Value" Name="directValueGetter">$lower implColumnAttrOptionality$$Name$</GenRule>
+
+	<GenRule GenDef="Value" Name="pkeyValueSetter">$switch IsPrimaryIndexKeyAtomic yes directPKeySetter default deferPKeyValueSetter$</GenRule>
+	<GenRule GenDef="Value" Name="directPKeySetter">setPKey( value )</GenRule>
+	<GenRule GenDef="Value" Name="deferPKeyValueSetter">getPKey().set$implColumnAttrOptionality$$Name$( value )</GenRule>
+	<GenRule GenDef="Value" Name="directValueSetter">$lower implColumnAttrOptionality$$Name$ = value</GenRule>
+
 	<GenRule GenDef="Table" Name="implColumnAttrBuffPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes implColumnAttrBuffPKeyColumnAccessors default implColumnAttrBuffPKeyInstanceAccessors$</GenRule>
 
 	<GenRule GenDef="Table" Name="implColumnAttrBuffPKeyInstanceAccessors">
@@ -330,14 +349,14 @@ $switch ToTableIsPublic yes implColumnAttrBuffPKeyWrapRelationSingletonSetterPub
 	<GenRule GenDef="IndexCol" Name="reallyImplBuffPKeyWrapColumnGetterSetter">
 	@Override
 	public $reference Column implJavaAtomType$ get$reference Column implColumnAttrOptionality$$reference Column Name$() {
-		return( getPKey().get$reference Column implColumnAttrOptionality$$reference Column Name$() );
+		return($applyValueGetter$);
 	}
 $switch InSuperiorRelation yes empty default implBuffPKeyWrapColumnSetter$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implBuffPKeyWrapColumnSetter">
 	@Override
 	public void set$reference Column implColumnAttrOptionality$$reference Column Name$($reference Column implJavaAtomType$ value) {
-		getPKey().set$reference Column implColumnAttrOptionality$$reference Column Name$(value);
+		$applyValueSetter$;
 	}
 </GenRule>
 
@@ -558,19 +577,8 @@ $switch ToTableIsProtected yes implSchemaBuffTableRelationSetterProt default emp
 	<GenRule GenDef="IndexCol" Name="implNonSuperiorColumnGetterSetter">$switch InSuperiorRelation yes implBuffColumnGetter default implBuffColumnGetterSetter$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implPKeyWrapColumnGetterSetter">$reallyImplPKeyWrapColumnGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="reallyImplPKeyWrapColumnGetterSetter">
-	@Override
-	public $reference Column implJavaAtomType$ get$reference Column implColumnAttrOptionality$$reference Column Name$() {
-		return( getPKey().get$reference Column implColumnAttrOptionality$$reference Column Name$() );
-	}
-$switch InSuperiorPrimaryKeyRelation yes empty default implPKeyWrapColumnSetter$</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implPKeyWrapColumnSetter">
-	@Override
-	public void set$reference Column implColumnAttrOptionality$$reference Column Name$($reference Column implJavaAtomType$ value) {
-		getPKey().set$reference Column implColumnAttrOptionality$$reference Column Name$(value);
-	}
-</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplPKeyWrapColumnGetterSetter">$implBuffColumnGetterSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPKeyWrapColumnSetter">$implBuffColumnSetter$</GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnAccessorsSetAttrOnlyIfNotNull">
 		if($leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns ( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$ != null) {
@@ -693,8 +701,9 @@ $switch IsPrimaryIndexKeyAtomic yes empty default implBuffColumnAttrPKeyColumnWr
 		>$iterate DataColumns( each implBuffColumnGetterSetter empty empty )$</GenRule>
 
 	<GenRule GenDef="Value" Name="implBuffColumnGetterSetter">$implBuffColumnGetter$$switch InSuperiorRelation yes empty default implBuffColumnSetter$</GenRule>
-	<GenRule GenDef="Value" Name="implBuffColumnGetter">$switch ColumnInPrimaryIndex yes implColumnGetter default implDirectColumnGetter$</GenRule>
-	<GenRule GenDef="Value" Name="implBuffColumnSetter">$switch ColumnInPrimaryIndex yes implColumnSetter default implDirectColumnSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implBuffColumnGetterSetter">$implBuffColumnGetter$$switch InSuperiorRelation yes empty default implBuffColumnSetter$</GenRule>
+	<GenRule GenDef="Object" Name="implBuffColumnGetter">$implColumnGetter$</GenRule>
+	<GenRule GenDef="Object" Name="implBuffColumnSetter">$implColumnSetter$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implBuffColumnGetterSetter">$reference Column implBuffColumnGetterSetter$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implBuffColumnGetter">$reference Column implBuffColumnGetter$</GenRule>
@@ -1157,17 +1166,17 @@ $implPubBuffSetHistory$</GenRule>
 	<GenRule GenDef="Object" Name="commaPubPassSrcFromCol">$switch IsPublic yes commaPassSrcFromCol default empty$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="maybeBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setBuffCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
-	<GenRule GenDef="IndexCol" Name="setBuffCopyPKeyAttrIfNotInSuperiorRelationship">$switch InSuperiorPrimaryKeyRelation yes empty default setBuffCopyPKeyAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="setBuffCopyPKeyAttrIfNotInSuperiorRelationship">$switch InSuperiorRelation yes empty default setBuffCopyPKeyAttr$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setBuffCopyPKeyAttr">
 		set$reference Column implColumnAttrOptionality$$reference Column Name$(src.get$reference Column implColumnAttrOptionality$$reference Column Name$());</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="maybeProtBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setProtBuffCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
-	<GenRule GenDef="IndexCol" Name="setProtBuffCopyPKeyAttrIfNotInSuperiorRelationship">$switch InSuperiorPrimaryKeyRelation yes empty default setProtBuffCopyPKeyAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="setProtBuffCopyPKeyAttrIfNotInSuperiorRelationship">$switch InSuperiorRelation yes empty default setProtBuffCopyPKeyAttr$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setProtBuffCopyPKeyAttr">
 		set$reference Column implColumnAttrOptionality$$reference Column Name$(src.get$reference Column implColumnAttrOptionality$$reference Column Name$());</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="maybePubBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setPubBuffCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
-	<GenRule GenDef="IndexCol" Name="setPubBuffCopyPKeyAttrIfNotInSuperiorRelationship">$switch InSuperiorPrimaryKeyRelation yes empty default setPubBuffCopyPKeyAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="setPubBuffCopyPKeyAttrIfNotInSuperiorRelationship">$switch InSuperiorRelation yes empty default setPubBuffCopyPKeyAttr$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setPubBuffCopyPKeyAttr">
 		set$reference Column implColumnAttrOptionality$$reference Column Name$(src.get$reference Column implColumnAttrOptionality$$reference Column Name$());</GenRule>
 
