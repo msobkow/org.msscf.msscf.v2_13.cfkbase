@@ -118,44 +118,23 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	<GenRule GenDef="Relation" Name="reallyDeclProtISchemaTablePKeyRelationGetter">
 	public $emitProtInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="declProtSetArgColumn">$switch IsProtected yes reallyDeclProtSetArgColumn default empty$</GenRule>
 	<GenRule GenDef="RelationCol" Name="reallyDeclProtSetArgColumn">$reference FromCol reference Column implProtJavaAtomType$ arg$reference FromCol reference Column Name$</GenRule>
-	<GenRule GenDef="RelationCol" Name="declProtCommaSetArgColumn">$switch IsProtected yes reallyDeclProtCommaSetArgColumn default empty$</GenRule>
 	<GenRule GenDef="RelationCol" Name="reallyDeclProtCommaSetArgColumn">,
 		$declProtSetArgColumn$</GenRule>
 
 	<GenRule GenDef="Table" Name="ISchemaProtTablePKeyExtendBaseDef">
 	extends I$DefSchemaName$Prot$TableName$PKey</GenRule>
 
-
-	<GenRule GenDef="IndexCol" Name="implProtColumnAttrOptionality"
-		>$switch IsNullable
-			yes implProtColumnAttrOptional
-			default implProtColumnAttrRequired$</GenRule>
-	<GenRule GenDef="Atom" Name="implProtColumnAttrOptionality"
-		>$switch IsNullable
-			yes implProtColumnAttrOptional
-			default implProtColumnAttrRequired$</GenRule>
-	<GenRule GenDef="TableCol" Name="implProtColumnAttrOptionality"
-		>$switch IsNullable
-			yes implProtColumnAttrOptional
-			default implProtColumnAttrRequired$</GenRule>
-
-	<GenRule GenDef="Object" Name="implProtColumnAttrOptional"
-		>Optional</GenRule>
-	<GenRule GenDef="Object" Name="implProtColumnAttrRequired"
-		>Required</GenRule>
-
 	<GenRule GenDef="IndexCol" Name="implProtColumnAttrComment">$switch IsProtected yes reallyImplProtColumnAttrComment default empty$</GenRule>
 	<GenRule GenDef="IndexCol" Name="reallyImplProtColumnAttrComment">
- *		$lower implProtColumnAttrOptionality$$Name$	$implProtColumnAttrOptionality$ object attribute $Name$.</GenRule>
+ *		$lower implColumnAttrOptionality$$Name$	$implColumnAttrOptionality$ object attribute $Name$.</GenRule>
 
 	<GenRule ScopeDef="Table" GenDef="Atom" Name="implProtColumnAttrComment">$switch IsProtected yes reallyImplProtColumnAttrComment default empty$</GenRule>
 	<GenRule ScopeDef="Table" GenDef="Atom" Name="reallyImplProtColumnAttrComment">
- *		$lower implProtColumnAttrOptionality$$Name$	$implProtColumnAttrOptionality$ object attribute $Name$.</GenRule>
+ *		$lower implColumnAttrOptionality$$Name$	$implColumnAttrOptionality$ object attribute $Name$.</GenRule>
 	<GenRule ScopeDef="Table" GenDef="TableCol" Name="implProtColumnAttrComment">$switch IsProtected yes reallyImplProtColumnAttrComment default empty$</GenRule>
 	<GenRule ScopeDef="Table" GenDef="TableCol" Name="reallyImplProtColumnAttrComment">
- *		$implProtColumnAttrOptionality$$Name$	$implProtColumnAttrOptionality$ object attribute $Name$.</GenRule>
+ *		$implColumnAttrOptionality$$Name$	$implColumnAttrOptionality$ object attribute $Name$.</GenRule>
 
 	<GenRule GenDef="Table" Name="implProtCompactedPrimaryIndexClassAttr">$switch IsProtected yes reallyImplProtCompactedPrimaryIndexClassAttr default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyImplProtCompactedPrimaryIndexClassAttr">$reference BaseClass reference PrimaryKeyIndex implProtCompactedPrimaryIndexClassAttr$</GenRule>
@@ -646,14 +625,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	<GenRule GenDef="Value" Name="declProtBlobInitValue"></GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqBlobGetter">
-	public byte[] get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public byte[] get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqBlobSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( byte[] value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( byte[] value );</GenRule>
 	
 	<GenRule GenDef="Value" Name="declProtOptBlobGetter">
-	public byte[] get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public byte[] get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptBlobSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( byte[] value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( byte[] value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtBoolMinValue"></GenRule>
 
@@ -666,14 +645,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public final static boolean $upper Name$_INIT_VALUE = $switch InitValue yes true default false$;</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqBoolGetter">
-	public boolean get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public boolean get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqBoolSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( boolean value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( boolean value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptBoolGetter">
-	public Boolean get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public Boolean get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptBoolSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( Boolean value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( Boolean value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtEnumMinValue">
 	public static final $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ $upper Name$_MIN_VALUE = $reference DataType EffCodeVisSchemaName$.$reference DataType Name$.$reference DataType iterate Tag( first declProtEnumMinValueEmitTagName each empty )$;</GenRule>
@@ -711,12 +690,12 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	<GenRule GenDef="Value" Name="declProtReqEnumGetter">
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqEnumSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptEnumGetter">
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptEnumSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtInt16MinValue">
 	public static final short $upper Name$_MIN_VALUE = (short)$MinValue$;</GenRule>
@@ -731,14 +710,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final short $upper Name$_INIT_VALUE = (short)$switch HasInitValue yes InitValue default Zero$;</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqInt16Getter">
-	public short get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public short get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqInt16Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( short value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( short value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptInt16Getter">
-	public Short get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public Short get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptInt16Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( Short value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( Short value );</GenRule>
 
 	<GenRule GenDef="Value" Name="maybeProtAddLForLong">$switch BaseModelAtomClass
 			Int64Def emitProtLForLong
@@ -761,14 +740,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final int $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqInt32Getter">
-	public int get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public int get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqInt32Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( int value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( int value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptInt32Getter">
-	public Integer get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public Integer get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptInt32Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( Integer value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( Integer value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtInt64MinValue">
 	public static final long $upper Name$_MIN_VALUE = $MinValue$L;</GenRule>
@@ -783,14 +762,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final long $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$L;</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqInt64Getter">
-	public long get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public long get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqInt64Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( long value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( long value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptInt64Getter">
-	public Long get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public Long get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptInt64Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( Long value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( Long value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtUInt16MinValue">
 	public static final int $upper Name$_MIN_VALUE = $MinValue$;</GenRule>
@@ -805,14 +784,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final int $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqUInt16Getter">
-	public int get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public int get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqUInt16Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( int value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( int value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptUInt16Getter">
-	public Integer get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public Integer get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptUInt16Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( Integer value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( Integer value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtUInt32MinValue">
 	public static final long $upper Name$_MIN_VALUE = $MinValue$L;</GenRule>
@@ -827,14 +806,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final long $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$L;</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqUInt32Getter">
-	public long get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public long get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqUInt32Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( long value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( long value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptUInt32Getter">
-	public Long get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public Long get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptUInt32Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( Long value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( Long value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtUInt64MinValue">
 	public static final BigDecimal $upper Name$_MIN_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Prot.$TableName$.$Name$", "$EffSchemaName$Prot.$TableName$.$Name$", 19, 0, "$MinValue$" );</GenRule>
@@ -849,14 +828,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final BigDecimal $upper Name$_INIT_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Prot.$TableName$.$Name$", "$EffSchemaName$Prot.$TableName$.$Name$", 19, 0, "$switch HasInitValue yes InitValue default Zero$" );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqUInt64Getter">
-	public BigDecimal get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public BigDecimal get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqUInt64Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptUInt64Getter">
-	public BigDecimal get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public BigDecimal get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptUInt64Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtFloatMinValue">
 	public static final float $upper Name$_MIN_VALUE = (float)$MinValue$;</GenRule>
@@ -871,14 +850,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final float $upper Name$_INIT_VALUE = (float)$switch HasInitValue yes InitValue default Zero$;</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqFloatGetter">
-	public float get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public float get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqFloatSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( float value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( float value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptFloatGetter">
-	public Float get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public Float get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptFloatSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( Float value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( Float value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtDoubleMinValue">
 	public static final double $upper Name$_MIN_VALUE = $MinValue$;</GenRule>
@@ -893,14 +872,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final double $upper Name$_INIT_VALUE = $switch HasInitValue yes InitValue default Zero$;</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqDoubleGetter">
-	public double get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public double get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqDoubleSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( double value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( double value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptDoubleGetter">
-	public Double get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public Double get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptDoubleSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( Double value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( Double value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtNumberMinValue">
 	public static final BigDecimal $upper Name$_MIN_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Prot.$TableName$.$Name$", "$EffSchemaName$Prot.$TableName$.$Name$", $Digits$, $Precis$, "$MinValue$" );</GenRule>
@@ -915,14 +894,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final BigDecimal $upper Name$_INIT_VALUE = CFLibBigDecimalUtil.parse( "$EffSchemaName$Prot.$TableName$.$Name$", "$EffSchemaName$Prot.$TableName$.$Name$", $Digits$, $Precis$, "$InitValue$" );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqNumberGetter">
-	public BigDecimal get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public BigDecimal get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqNumberSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptNumberGetter">
-	public BigDecimal get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public BigDecimal get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptNumberSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( BigDecimal value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtDateMinValue"></GenRule>
 
@@ -935,14 +914,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final LocalDate $upper Name$_INIT_VALUE = CFLib.getUTCLocalDate( 1970, 0, 1, 0, 0, 0 );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqDateGetter">
-	public LocalDate get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalDate get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqDateSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptDateGetter">
-	public LocalDate get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalDate get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptDateSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtTimeMinValue"></GenRule>
 
@@ -955,14 +934,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final LocalTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTime("00:00:00");</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqTimeGetter">
-	public LocalTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalTime get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqTimeSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptTimeGetter">
-	public LocalTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalTime get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptTimeSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtTimestampMinValue"></GenRule>
 
@@ -975,14 +954,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final LocalDateTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTimestamp("2020-01-01T00:00:00");</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqTimestampGetter">
-	public LocalDateTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalDateTime get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqTimestampSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptTimestampGetter">
-	public LocalDateTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalDateTime get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptTimestampSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtTZDateMinValue"></GenRule>
 
@@ -995,14 +974,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final LocalDate $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZDate("2020-01-01+00:00");</GenRule>
 
 	<GenRule GenDef="Value" Name="declReqProtTZDateGetter">
-	public LocalDate get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalDate get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqTZDateSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptTZDateGetter">
-	public LocalDate get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalDate get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptTZDateSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalDate value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtTZTimeMinValue"></GenRule>
 
@@ -1015,14 +994,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final LocalTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZTime("00:00:00+00:00");</GenRule>
 
 	<GenRule GenDef="Value" Name="declReqProtTZTimeGetter">
-	public LocalTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalTime get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqTZTimeSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptTZTimeGetter">
-	public LocalTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalTime get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptTZTimeSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtTZTimestampMinValue"></GenRule>
 
@@ -1035,14 +1014,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final LocalDateTime $upper Name$_INIT_VALUE = CFLibXmlUtil.parseTZTimestamp("2020-01-01T00:00:00+00:00");</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqTZTimestampGetter">
-	public LocalDateTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalDateTime get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqTZTimestampSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptTZTimestampGetter">
-	public LocalDateTime get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public LocalDateTime get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptTZTimestampSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( LocalDateTime value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtDbKeyHash128MinValue"></GenRule>
 	<GenRule GenDef="Value" Name="declProtDbKeyHash160MinValue"></GenRule>
@@ -1102,64 +1081,64 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final CFLibDbKeyHash512 $upper Name$_INIT_VALUE = CFLibDbKeyHash512.fromHex( S_$upper Name$_INIT_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash128Getter">
-	public CFLibDbKeyHash128 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash128Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash128Getter">
-	public CFLibDbKeyHash128 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash128Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash128 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash160Getter">
-	public CFLibDbKeyHash160 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash160Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash160Getter">
-	public CFLibDbKeyHash160 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash160Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash160 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash224Getter">
-	public CFLibDbKeyHash224 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash224Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash224Getter">
-	public CFLibDbKeyHash224 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash224Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash224 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash256Getter">
-	public CFLibDbKeyHash256 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash256Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash256Getter">
-	public CFLibDbKeyHash256 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash256Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash256 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash384Getter">
-	public CFLibDbKeyHash384 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash384Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash384Getter">
-	public CFLibDbKeyHash384 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash384Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash384 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash512Getter">
-	public CFLibDbKeyHash512 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqDbKeyHash512Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash512Getter">
-	public CFLibDbKeyHash512 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptDbKeyHash512Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibDbKeyHash512 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtUuid6MinValue"></GenRule>
 
@@ -1174,14 +1153,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final CFLibUuid6 $upper Name$_INIT_VALUE = CFLibUuid6.fromString( S_$upper Name$_INIT_VALUE );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqUuid6Getter">
-	public CFLibUuid6 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibUuid6 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqUuid6Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibUuid6 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibUuid6 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptUuid6Getter">
-	public CFLibUuid6 get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public CFLibUuid6 get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptUuid6Setter">
-	public void set$implProtColumnAttrOptionality$$Name$( CFLibUuid6 value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( CFLibUuid6 value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtUuidMinValue"></GenRule>
 
@@ -1194,14 +1173,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final UUID $upper Name$_INIT_VALUE = UUID.fromString( "$InitValue$" );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqUuidGetter">
-	public UUID get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public UUID get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqUuidSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( UUID value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( UUID value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptUuidGetter">
-	public UUID get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public UUID get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptUuidSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( UUID value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( UUID value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtStringMinValue"></GenRule>
 
@@ -1214,14 +1193,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqStringGetter">
-	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqStringSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptStringGetter">
-	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptStringSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtTokenMinValue"></GenRule>
 
@@ -1234,14 +1213,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqTokenGetter">
-	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqTokenSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptTokenGetter">
-	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptTokenSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtNmTokenMinValue"></GenRule>
 
@@ -1254,14 +1233,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqNmTokenGetter">
-	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqNmTokenSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptNmTokenGetter">
-	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptNmTokenSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtNmTokensMinValue"></GenRule>
 
@@ -1274,14 +1253,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqNmTokensGetter">
-	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqNmTokensSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptNmTokensGetter">
-	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptNmTokensSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtTextMinValue"></GenRule>
 
@@ -1294,14 +1273,14 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public static final String $upper Name$_INIT_VALUE = new String( "$InitValue$" );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtReqTextGetter">
-	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtReqTextSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Value" Name="declProtOptTextGetter">
-	public String get$implProtColumnAttrOptionality$$Name$();</GenRule>
+	public String get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declProtOptTextSetter">
-	public void set$implProtColumnAttrOptionality$$Name$( String value );</GenRule>
+	public void set$implColumnAttrOptionality$$Name$( String value );</GenRule>
 
 	<GenRule GenDef="Table" Name="declProtRecPKeyEquals">
 	@Override

@@ -66,7 +66,7 @@ import server.markhome.mcf.v3_1.cflib.dbutil.*;$poptop SchemaDef iterate SchemaR
 /**
  *	I$SchemaName$$TableName$ persistence instances have $ExplainCodeVis$.
  */
-public interface I$SchemaName$$TableName$$switch HasDefSchema yes extendSchemaRecTableRec default extendSchemaRecTableRecSuperRec$
+public interface I$SchemaName$$TableName$$switch HasDefSchema yes extendGenuineSchemaRecTableRec default extendGenuineSchemaRecTableRecSuperRec$
 {$switch HasDefSchema yes empty default declSchemaTableRecMinValues$$switch HasDefSchema yes empty default declSchemaTableRecMaxValues$$switch HasDefSchema yes empty default declSchemaTableRecInitValues$$switch HasDefSchema no declRecStaticClassCode default empty$
 $switch HasDefSchema no maybeDeclRecGetClassCode default empty$$switch HasDefSchema no maybeDeclRecOptImplAuditColumnAccessors default empty$$switch HasSuperClassRelation no declColumnAttrPKeyAccessors default empty$$switch HasDefSchemaOrSuper no declRevisionGetterSetter default empty$$declSchemaTableSuperiorRelations$$declSchemaTableSubservientRelations$$switch HasDefSchema no declDataGetterSetters default empty$$declEqualsObject$$declGetHashCode$$declCompareToObject$$declSet$$declSchemaTableToString$}
 </GenFile>
@@ -158,22 +158,12 @@ $switch IsToIndexUnique yes declSchemaTablePKeyColRelationSetter default empty$<
 
 	<GenRule GenDef="Relation" Name="maybeDeclSchemaTablePKeyColRelationSetter">$switch HasDefSchema yes declSuperiorSchemaTablePKeyColRelationSetterPub default declSuperiorSchemaTablePKeyColRelationSetterNormal$</GenRule>
 	<GenRule GenDef="Relation" Name="declSuperiorSchemaTablePKeyColRelationSetterNormal">$switch IsSuperiorRelation yes declPrimarySchemaTablePKeyColRelationSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="declPrimarySchemaTablePKeyColRelationSetter">$switch IsRelationInPrimaryIndex yes declSchemaTablePKeyColRelationSetter default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeDeclSchemaTableDataRelationGetterSetter">$switch IsRelationInPrimaryIndex no declSchemaTableRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declSuperiorSchemaTableDataRelationGetterSetter">$switch IsSuperiorRelation yes declDataSchemaTableDataRelationGetterSetter default declDataSchemaTableDataRelationGetter$</GenRule>
 	<GenRule GenDef="Relation" Name="declDataSchemaTableDataRelationGetterSetter">$switch IsRelationInPrimaryIndex no declSchemaTableRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaTableDataRelationGetter">$switch IsRelationInPrimaryIndex no declSchemaTableRelationGetter default empty$</GenRule>
 	
-	<GenRule GenDef="RelationCol" Name="passNullOrDefault">$switch IsFromColRequired yes passFromDefault default passFromNull$</GenRule>
-	<GenRule GenDef="RelationCol" Name="passFromDefault">$switch FromColCodeVis null passFromPublic Public passFromPublic Protected passFromProtected Private passFromPrivate default passFromPublic$</GenRule>
-	<GenRule GenDef="RelationCol" Name="passFromPublic">I$reference FromTable DefSchemaName$Pub$reference FromTable Name$.$upper reference FromCol reference Column Name$_INIT_VAL</GenRule>
-	<GenRule GenDef="RelationCol" Name="passFromProtected">I$reference FromTable DefSchemaName$Prot$reference FromTable Name$.$upper reference FromCol reference Column Name$_INIT_VAL</GenRule>
-	<GenRule GenDef="RelationCol" Name="passFromPrivate">I$reference FromTable DefSchemaName$$reference FromTable Name$.$upper reference FromCol reference Column Name$_INIT_VAL</GenRule>
-	<GenRule GenDef="RelationCol" Name="passFromNull">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
-	<GenRule GenDef="RelationCol" Name="FromColCodeVis">$reference FromCol reference Column CodeVis$</GenRule>
-	<GenRule GenDef="RelationCol" Name="commaPassNullOrDefault">,
-				$passNullOrDefault$</GenRule>
 	<GenRule GenDef="Value" Name="maybeDeclTableConstructorInitAttr">$switch InSuperiorDataRelation yes empty default declConstructorInitAttr$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaTableRelationNonCandidateGetter">
@@ -345,19 +335,6 @@ $declPubSetHistory$</GenRule>
 	public String toString();
 </GenRule>
 
-	<GenRule GenDef="Table" Name="MemberOfClassHierarchy"
-		>$switch HasSuperClassRelation yes yes default maybeMemberOfClassHierarchyJoinedBaseTable$</GenRule>
-	<GenRule GenDef="Table" Name="maybeMemberOfClassHierarchyJoinedBaseTable"
-		>$switch HasSubClasses yes yes default no$</GenRule>
-
-	<GenRule GenDef="Table" Name="HasDefSchemaOrSuper"
-		>$switch HasDefSchema yes yes default HasSuperClassRelation$</GenRule>
-
-	<GenRule GenDef="Table" Name="HasDefSchemaButNoSuper"
-		>$switch HasDefSchema yes HasDefSchemaButNoSuperOnlyIfNoSuper default no$</GenRule>
-	<GenRule GenDef="Table" Name="HasDefSchemaButNoSuperOnlyIfNoSuper"
-		>$switch HasSuperClassRelation no yes default no$</GenRule>
-
 	<GenRule GenDef="Table" Name="declSchemaTableRecMinValues"
 		>$switch HasSuperClassRelation yes declSchemaTableRecDataMinValues default declSchemaTableRecAllMinValues$</GenRule>
 	
@@ -373,28 +350,21 @@ $declPubSetHistory$</GenRule>
 	<GenRule GenDef="Table" Name="declSchemaTableRecInitValues"
 		>$switch HasSuperClassRelation yes declSchemaTableRecDataInitValues default declSchemaTableRecAllInitValues$</GenRule>
 	
-	<GenRule GenDef="Table" Name="declSchemaTableRecDataInitValues">$iterate DataColumns( each maybeDeclnitValue empty empty )$</GenRule>
-	<GenRule GenDef="Table" Name="declSchemaTableRecAllInitValues">$switch HasAuditColumns yes declAuditColumnInitValues default empty$$iterate Columns( each maybeDeclnitValue empty empty )$</GenRule>
-
-        <GenRule GenDef="Table" Name="declAuditColumnInitValues">
-	public static final String S_INIT_CREATED_BY = "0000000000000000000000000000000000000000000000000000000000000000";
-	public static final CFLibDbKeyHash256 INIT_CREATED_BY = CFLibDbKeyHash256.fromHex(S_INIT_CREATED_BY);
-	public static final String S_INIT_UPDATED_BY = "0000000000000000000000000000000000000000000000000000000000000000";
-	public static final CFLibDbKeyHash256 INIT_UPDATED_BY = CFLibDbKeyHash256.fromHex(S_INIT_UPDATED_BY);</GenRule>
+	<GenRule GenDef="Table" Name="declSchemaTableRecDataInitValues">$iterate DataColumns( each maybeDeclInitValue empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="declSchemaTableRecAllInitValues">$switch HasAuditColumns yes declAuditColumnInitValues default empty$$iterate Columns( each maybeDeclInitValue empty empty )$</GenRule>
 
 	<GenRule GenDef="Object" Name="declSchemaTableRecColumns"
 		>$popto Table declSchemaTableRecColumns$</GenRule>
 
-	<GenRule GenDef="Table" Name="extendSchemaRecTableRec"> extends I$reference DefSchema SchemaName$$TableName$</GenRule>
+	<GenRule GenDef="Table" Name="extendGenuineSchemaRecTableRec"> extends I$reference DefSchema SchemaName$$TableName$</GenRule>
 
-	<GenRule GenDef="Object" Name="extendSchemaRecTableRecSuperRec">$popto Table extendSchemaRecTableRecSuperRec$</GenRule>
+	<GenRule GenDef="Object" Name="extendGenuineSchemaRecTableRecSuperRec">$popto Table extendGenuineSchemaRecTableRecSuperRec$</GenRule>
 
-	<GenRule GenDef="Table" Name="extendSchemaRecTableRecSuperRec">$switch HasSuperClassRelation yes declInheritSuper default empty$</GenRule>
+	<GenRule GenDef="Table" Name="extendGenuineSchemaRecTableRecSuperRec">$switch HasSuperClassRelation yes declInheritSuper default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeDeclRecOptImplAuditColumnAccessors">$switch HasSuperClassRelation no declRecOptDeclAuditColumnAccessors default empty$</GenRule>
-	<GenRule GenDef="Table" Name="declRecOptDeclAuditColumnAccessors">$switch HasAuditColumns yes declColumnOptAuditGetterSetters default empty$</GenRule>
 
-	<GenRule GenDef="Value" Name="maybeDeclnitValue"
+	<GenRule GenDef="Value" Name="maybeDeclInitValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
 			BoolDef declInitValueIfSpecified
@@ -439,9 +409,6 @@ $declPubSetHistory$</GenRule>
 			NmTokensDef declInitValueIfSpecified
 			TextDef declInitValueIfSpecified
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
-
-	<GenRule GenDef="Value" Name="declInitValueIfSpecified"
-		>$switch HasInitValue yes declInitValue default empty$</GenRule>
 
 	<GenRule GenDef="Value" Name="maybeDeclMinValue"
 		>$switch BaseModelAtomClass
@@ -489,9 +456,6 @@ $declPubSetHistory$</GenRule>
 			TextDef empty
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
-	<GenRule GenDef="Value" Name="declMinValueIfSpecified"
-		>$switch HasMinValue yes declMinValue default empty$</GenRule>
-
 	<GenRule GenDef="Value" Name="maybeDeclMaxValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -538,31 +502,13 @@ $declPubSetHistory$</GenRule>
 			TextDef empty
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
-	<GenRule GenDef="Value" Name="declMaxValueIfSpecified"
-		>$switch HasMaxValue yes declMaxValue default empty$</GenRule>
-
-	<GenRule GenDef="Table" Name="declRecStaticClassCode">
-	public final static int CLASS_CODE = 0x$ClassCode$;
-	public final static String S_CLASS_CODE = "$ClassCode$";</GenRule>
-
 	<GenRule GenDef="Table" Name="maybeDeclRecGetClassCode">$switch HasSuperClassRelation yes empty default declRecGetClassCode$</GenRule>
-	<GenRule GenDef="Table" Name="declRecGetClassCode">
-	public int getClassCode();
-</GenRule>
-
-	<GenRule GenDef="Object" Name="emitOverride">
-	@Override</GenRule>
 	
 	<GenRule GenDef="Table" Name="maybeDeclRecOptAuditColumnAttrAccessors"
 		>$switch HasAuditColumns yes declRecAuditColumnAttrIfNoSchemaDefOrSuper default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="declRecAuditColumnAttrIfNoSchemaDefOrSuper">$switch HasSuperClassRelation yes empty default declAuditColumnAttrAccessorsIfNoDefSchema$</GenRule>
-	<GenRule GenDef="Table" Name="declAuditColumnAttrAccessorsIfNoDefSchema">$switch HasDefSchema yes empty default declAuditColumnAttrAccessors$</GenRule>
-
 	<GenRule GenDef="Table" Name="declColumnGetterSetters"
 		>$iterate Columns( each declNonSuperiorColumnGetterSetter )$</GenRule>
-
-	<GenRule GenDef="Table" Name="IsAtomicPrimaryIndexKeyNullable">$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone IsNullable first IsNullable each empty empty no )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeDeclSchemaTableRelationGetter">$switch RelationType Superclass empty Unknown empty default attemptDeclSchemaTableRelationGetter$</GenRule>
 	<GenRule GenDef="Relation" Name="attemptDeclSchemaTableRelationGetter">$switch IsRelationInPrimaryIndex yes empty default candidacyDeclSchemaTableRelationGetter$</GenRule>
