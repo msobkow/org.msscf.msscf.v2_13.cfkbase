@@ -105,7 +105,7 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	<GenRule GenDef="Relation" Name="declISchemaProtTablePKeyRelationSetter">$switch IsProtected yes reallyDeclProtISchemaTablePKeyRelationSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyDeclProtISchemaTablePKeyRelationSetter">
 	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj);
-	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declProtSetArgColumn each declProtCommaSetArgColumn)$);</GenRule>
+	public void set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns(first declSetArgColumn each declProtCommaSetArgColumn)$);</GenRule>
 
 
 	<GenRule GenDef="Relation" Name="maybeDeclProtISchemaTablePKeyRelationGetter">$switch IsProtected yes reallyMaybeDeclProtISchemaTablePKeyRelationGetter default empty$</GenRule>
@@ -117,10 +117,6 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	<GenRule GenDef="Relation" Name="declProtISchemaTablePKeyRelationGetter">$switch IsProtected yes reallyDeclProtISchemaTablePKeyRelationGetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyDeclProtISchemaTablePKeyRelationGetter">
 	public $emitProtInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
-
-	<GenRule GenDef="RelationCol" Name="reallyDeclProtSetArgColumn">$reference FromCol reference Column implProtJavaAtomType$ arg$reference FromCol reference Column Name$</GenRule>
-	<GenRule GenDef="RelationCol" Name="reallyDeclProtCommaSetArgColumn">,
-		$declProtSetArgColumn$</GenRule>
 
 	<GenRule GenDef="Table" Name="ISchemaProtTablePKeyExtendBaseDef">
 	extends I$DefSchemaName$Prot$TableName$PKey</GenRule>
