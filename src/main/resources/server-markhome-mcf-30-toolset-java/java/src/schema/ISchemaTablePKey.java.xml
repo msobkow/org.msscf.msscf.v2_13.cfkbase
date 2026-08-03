@@ -110,7 +110,7 @@ public interface I$SchemaName$$TableName$PKey$switch HasDefSchema yes ISchemaTab
 </GenRule>
 
 	<GenRule GenDef="Table" Name="ISchemaTablePKeyImplBaseDefBody">
-$reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declRecPKeyEquals$$declRecPKeyHashCode$$declRecPKeyCompareTo$$reference PrimaryKeyIndex declRecPKeyToString$</GenRule>
+$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declRecPKeyEquals$$declRecPKeyHashCode$$declRecPKeyCompareTo$$reference PrimaryKeyIndex declRecPKeyToString$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="declColumnGetterMaybeSetter">$reference Column declColumnGetterMaybeSetter$</GenRule>
 	<GenRule GenDef="TableCol" Name="declColumnGetterMaybeSetter">$switch InSuperiorRelation yes declColumnGetter default declColumnGetterSetter$</GenRule>
@@ -698,6 +698,27 @@ $reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declR
 	<GenRule GenDef="EnumTag" Name="declEnumInitValueUseFirstTagName"
 		>$Name$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="declEnumMinValue">
+	public static final $reference Column reference DataType EffCodeVisSchemaName$.$reference Column reference DataType Name$ $upper Name$_MIN_VALUE = $reference Column reference DataType EffCodeVisSchemaName$.$reference Column reference DataType Name$.$reference DataType iterate Tag( first declEnumMinValueEmitTagName each empty )$;</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declEnumMaxValue">
+	public static final $reference Column reference DataType EffCodeVisSchemaName$.$reference Column reference DataType Name$ $upper Name$_MAX_VALUE = $reference Column reference DataType EffCodeVisSchemaName$.$reference Column reference DataType Name$.$reference Column reference DataType iterate Tag( last declEnumMaxValueEmitTagName each empty )$;</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declEnumInitValue">
+	public static final $reference Column reference DataType EffCodeVisSchemaName$.$reference Column reference DataType Name$ $upper Name$_INIT_VALUE = $reference Column switch IsNullable yes declEnumInitValueNull default declEnumInitValueAlways$;</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declEnumInitValueNull"
+		>null</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declEnumInitValueAlways"
+		>$switch HasInitValue yes declEnumInitValueConvertOrdinal default declEnumInitValueUseFirst$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declEnumInitValueConvertOrdinal"
+		>$reference Column reference DataType EffCodeVisSchemaName$.ordinalTo$reference Column reference DataType Name$( $InitValue$ )</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="declEnumInitValueUseFirst"
+		>$reference Column reference DataType EffCodeVisSchemaName$.$reference Column reference DataType Name$.$reference Column reference DataType iterate Tag( first declEnumInitValueUseFirstTagName each empty )$</GenRule>
+
 	<GenRule GenDef="Value" Name="declReqEnumGetter">
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$();</GenRule>
 	<GenRule GenDef="Value" Name="declReqEnumSetter">
@@ -1220,8 +1241,8 @@ $reference PrimaryKeyIndex iterate Columns( each declColumnGetterSetter )$$declR
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declRecPKeyCompareTo">
-	//@Override
-	public int compareTo( Object rhs );
+//	//@Override
+//	public int compareTo( Object rhs );
 </GenRule>
 
 	<GenRule GenDef="Table" Name="emitPKeyHistoryClassNames">, $SchemaName$$TableName$HPKey, $SchemaName$$TableName$H</GenRule>
