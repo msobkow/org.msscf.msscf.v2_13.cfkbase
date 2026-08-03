@@ -4240,6 +4240,26 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				I$DefSchemaName$Pub$TableName$.$upper Name$_MIN_VALUE.toString() );
 		}</GenRule>
 
+	<GenRule GenDef="Object" Name="implPubOptSetterCheckGenericMaxValue">
+		if( value &gt; I$DefSchemaName$Pub$TableName$.$upper Name$_MAX_VALUE ) {
+			throw new CFLibArgumentOverflowException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value",
+				value,
+				I$DefSchemaName$Pub$TableName$.$upper Name$_MAX_VALUE );
+		}</GenRule>
+
+	<GenRule GenDef="Object" Name="implPubOptSetterCheckObjectMaxValue">
+		if( value.compareTo( I$DefSchemaName$Pub$TableName$.$upper Name$_MAX_VALUE ) &gt; 0 ) {
+			throw new CFLibArgumentOverflowException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value",
+				value.toString(),
+				I$DefSchemaName$Pub$TableName$.$upper Name$_MAX_VALUE.toString() );
+		}</GenRule>
+
 	<GenRule GenDef="Object" Name="implPubReqSetterCheckGenericMaxValue">
 		if( value &gt; I$DefSchemaName$Pub$TableName$.$upper Name$_MAX_VALUE ) {
 			throw new CFLibArgumentOverflowException( getClass(),
@@ -4364,6 +4384,26 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				"value",
 				value.toString(),
 				I$DefSchemaName$Prot$TableName$.$upper Name$_MAX_VALUE.toString() );
+		}</GenRule>
+
+	<GenRule GenDef="Object" Name="implPubReqSetterCheckGenericMinValue">
+		if( value &lt; I$DefSchemaName$Pub$TableName$.$upper Name$_MIN_VALUE ) {
+			throw new CFLibArgumentUnderflowException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value",
+				value,
+				I$DefSchemaName$Pub$TableName$.$upper Name$_MIN_VALUE );
+		}</GenRule>
+
+	<GenRule GenDef="Object" Name="implPubReqSetterCheckObjectMinValue">
+		if( value != null &amp;&amp; value.compareTo( I$DefSchemaName$Pub$TableName$.$upper Name$_MIN_VALUE ) &lt; 0 ) {
+			throw new CFLibArgumentUnderflowException( getClass(),
+				"set$implColumnAttrOptionality$$Name$",
+				1,
+				"value",
+				value.toString(),
+				I$DefSchemaName$Pub$TableName$.$upper Name$_MIN_VALUE.toString() );
 		}</GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqSetter"
@@ -9493,26 +9533,6 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			NmTokensDef implPubOptSetterCheckObjectMaxValue
 			TextDef implPubOptSetterCheckObjectMaxValue
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
-
-	<GenRule GenDef="Object" Name="implPubReqSetterCheckGenericMinValue">
-		if( value &lt; I$DefSchemaName$Pub$TableName$.$upper Name$_MIN_VALUE ) {
-			throw new CFLibArgumentUnderflowException( getClass(),
-				"set$implColumnAttrOptionality$$Name$",
-				1,
-				"value",
-				value,
-				I$DefSchemaName$Pub$TableName$.$upper Name$_MIN_VALUE );
-		}</GenRule>
-
-	<GenRule GenDef="Object" Name="implPubReqSetterCheckObjectMinValue">
-		if( value != null &amp;&amp; value.compareTo( I$DefSchemaName$Pub$TableName$.$upper Name$_MIN_VALUE ) &lt; 0 ) {
-			throw new CFLibArgumentUnderflowException( getClass(),
-				"set$implColumnAttrOptionality$$Name$",
-				1,
-				"value",
-				value.toString(),
-				I$DefSchemaName$Pub$TableName$.$upper Name$_MIN_VALUE.toString() );
-		}</GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqSetterCheckMinValue"
 		>$switch BaseModelAtomClass
