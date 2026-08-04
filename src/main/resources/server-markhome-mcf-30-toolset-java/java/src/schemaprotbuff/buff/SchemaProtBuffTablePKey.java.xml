@@ -256,17 +256,21 @@ $reference PrimaryKeyIndex implProtBuffPKeyConstructor$$reference PrimaryKeyInde
 	<GenRule GenDef="Object" Name="maybeImplProtConstructorInitAttr">$switch IsProtected yes reallyMaybeImplProtConstructorInitAttr default empty$</GenRule>
 	<GenRule GenDef="Object" Name="reallyMaybeImplProtConstructorInitAttr">$implProtConstructorInitAttr$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implProtConstructorInitAttr">$switch IsProtected yes reallyImplProtConstructorInitAttr default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implProtConstructorInitAttr">$reference Column switch IsProtected yes reallyImplProtConstructorInitAttr default empty$</GenRule>
 	<GenRule GenDef="IndexCol" Name="reallyImplProtConstructorInitAttr"
+		>$reference Column switch IsNullable yes implProtConstructorSetAttrNull default maybeImplProtConstructorInitValue$</GenRule>
+
+	<GenRule GenDef="Object" Name="implProtConstructorInitAttr">$reference Column switch IsProtected yes reallyImplProtConstructorInitAttr default empty$</GenRule>
+	<GenRule GenDef="Object" Name="reallyImplProtConstructorInitAttr"
 		>$switch IsNullable yes implProtConstructorSetAttrNull default maybeImplProtConstructorInitValue$</GenRule>
 
 	<GenRule GenDef="Object" Name="maybeImplProtConstructorInitValue">$switch IsProtected yes reallyMaybeImplProtConstructorInitValue default empty$</GenRule>
 	<GenRule GenDef="Object" Name="reallyMaybeImplProtConstructorInitValue"
 		>$switch HasInitValue yes implProtConstructorInitValue default empty$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="maybeImplProtConstructorInitValue">$switch IsProtected yes reallyMaybeImplProtConstructorInitValue default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeImplProtConstructorInitValue">$reference Column switch IsProtected yes reallyMaybeImplProtConstructorInitValue default empty$</GenRule>
 	<GenRule GenDef="IndexCol" Name="reallyMaybeImplProtConstructorInitValue"
-		>$switch HasInitValue yes implProtConstructorInitValue default empty$</GenRule>
+		>$reference Column switch HasInitValue yes implProtConstructorInitValue default empty$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implProtConstructorInitValue">$switch IsProtected yes reallyImplProtConstructorInitValue default empty$</GenRule>
 	<GenRule GenDef="IndexCol" Name="reallyImplProtConstructorInitValue"
@@ -390,37 +394,37 @@ $reference PrimaryKeyIndex implProtBuffPKeyConstructor$$reference PrimaryKeyInde
 
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash128Value">$switch HasInitValue yes implConstructorInitDbKeyHash128ValueFromHex default implConstructorInitDbKeyHash128ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash128ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash128.fromHex( I$DefSchemaName$Prot$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash128.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash128ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash128.nullGet();</GenRule>
 
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash160Value">$switch HasInitValue yes implConstructorInitDbKeyHash160ValueFromHex default implConstructorInitDbKeyHash160ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash160ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash160.fromHex( I$DefSchemaName$Prot$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash160.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash160ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash160.nullGet();</GenRule>
 
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash224Value">$switch HasInitValue yes implConstructorInitDbKeyHash224ValueFromHex default implConstructorInitDbKeyHash224ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash224ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash224.fromHex( I$DefSchemaName$Prot$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash224.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash224ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash224.nullGet();</GenRule>
 
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash256Value">$switch HasInitValue yes implConstructorInitDbKeyHash256ValueFromHex default implConstructorInitDbKeyHash256ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash256ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash256.fromHex( I$DefSchemaName$Prot$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash256.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash256ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash256.nullGet();</GenRule>
 
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash384Value">$switch HasInitValue yes implConstructorInitDbKeyHash384ValueFromHex default implConstructorInitDbKeyHash384ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash384ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash384.fromHex( I$DefSchemaName$Prot$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash384.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash384ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash384.nullGet();</GenRule>
 
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash512Value">$switch HasInitValue yes implConstructorInitDbKeyHash512ValueFromHex default implConstructorInitDbKeyHash512ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash512ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash512.fromHex( I$DefSchemaName$Prot$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash512.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implProtConstructorInitDbKeyHash512ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash512.nullGet();</GenRule>
 
@@ -438,7 +442,7 @@ $reference PrimaryKeyIndex implProtBuffPKeyConstructor$$reference PrimaryKeyInde
 
 	<GenRule GenDef="Table" Name="implProtPKeyGetHashCode">
 	@Override
-	public int hashCode() {$switch HasSuperClassRelation no implBuffGetHashCodeInitHashCode default implGetHashCodeInitSuper$$switch HasSuperClassRelation no implBuffGetHashCodeOptAuditColumns default empty$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implGetHashCodeAttr empty empty )$
+	public int hashCode() {$switch HasSuperClassRelation no implBuffGetHashCodeInitHashCode default implGetHashCodeInitSuper$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implGetHashCodeAttr empty empty )$
 		return( hashCode &amp; 0x7fffffff );
 	}
 </GenRule>

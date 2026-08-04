@@ -83,60 +83,56 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 
 	<GenRule GenDef="Object" Name="pkeyValueGetter">$switch IsPublic yes pkeyValuePubGetter default maybePKeyValueProtGetter$</GenRule>
 	<GenRule GenDef="Object" Name="maybePKeyValueProtGetter">$switch IsProtected yes pkeyValueProtGetter default pkeyValuePrivGetter$</GenRule>
-	<GenRule GenDef="Object" Name="directPKeyGetter">$switch IsPublic yes directPKeyPubGetter default maybeDirectPKeyProtGetter$</GenRule>
-	<GenRule GenDef="Object" Name="maybeDirectPKeyProtGetter">$switch IsProtected yes directPKeyProtGetter default directPKeyPrivGetter$</GenRule>
-	<GenRule GenDef="Object" Name="deferPKeyValueGetter">$switch IsPublic yes deferPKeyValuePubGetter default maybeDirectPKeyProtGetter$</GenRule>
+	<GenRule GenDef="Object" Name="deferPKeyValueGetter">$switch IsPublic yes deferPKeyValuePubGetter default maybeDeferPKeyValueProtGetter$</GenRule>
 	<GenRule GenDef="Object" Name="maybeDeferPKeyValueProtGetter">$switch IsProtected yes deferPKeyValueProtGetter default deferPKeyValuePrivGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="directValueGetter">$reference Column directValueGetter$</GenRule>
 	<GenRule GenDef="Object" Name="directValueGetter">$switch IsPublic yes directValuePubGetter default maybeDirectValueProtGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeDirectValueProtGetter">$reference Column maybeDirectValueProtGetter$</GenRule>
 	<GenRule GenDef="Object" Name="maybeDirectValueProtGetter">$switch IsProtected yes directValueProtGetter default directValuePrivGetter$</GenRule>
+
+	<GenRule GenDef="Object" Name="directValuePrivGetter">$lower implColumnAttrOptionality$$Name$</GenRule>
+	<GenRule GenDef="Object" Name="directValueProtGetter">$lower implColumnAttrOptionality$$Name$</GenRule>
+	<GenRule GenDef="Object" Name="directValuePubGetter">$lower implColumnAttrOptionality$$Name$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="directValuePrivGetter">$reference Column directValuePrivGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="directValueProtGetter">$reference Column directValueProtGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="directValuePubGetter">$reference Column directValuePubGetter$</GenRule>
 	
 	<GenRule GenDef="Object" Name="pkeyValueSetter">$switch IsPublic yes pkeyValuePubSetter default maybePKeyValueProtSetter$</GenRule>
 	<GenRule GenDef="Object" Name="maybePKeyValueProtSetter">$switch IsProtected yes pkeyValueProtSetter default pkeyValuePrivSetter$</GenRule>
-	<GenRule GenDef="Object" Name="directPKeySetter">$switch IsPublic yes directPKeyPubSetter default maybeDirectPKeyProtSetter$</GenRule>
-	<GenRule GenDef="Object" Name="maybeDirectPKeyProtSetter">$switch IsProtected yes directPKeyProtSetter default directPKeyPrivSetter$</GenRule>
 	<GenRule GenDef="Object" Name="deferPKeyValueSetter">$switch IsPublic yes deferPKeyValuePubSetter default maybeDeferPKeyValueProtSetter$</GenRule>
 	<GenRule GenDef="Object" Name="maybeDeferPKeyValueProtSetter">$switch IsProtected yes deferPKeyValueProtSetter default deferPKeyValuePrivSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="directValueSetter">$reference Column directValueSetter$</GenRule>
 	<GenRule GenDef="Object" Name="directValueSetter">$switch IsPublic yes directValuePubSetter default maybeDirectValueProtSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeDirectValueProtSetter">$reference Column maybeDirectValueProtSetter$</GenRule>
 	<GenRule GenDef="Object" Name="maybeDirectValueProtSetter">$switch IsProtected yes directValueProtSetter default directValuePrivSetter$</GenRule>j
 
-	<GenRule GenDef="Object" Name="pkeyValuePrivGetter">$switch IsPrimaryIndexKeyAtomic yes directPKeyGetter default deferPKeyValueGetter$</GenRule>
-	<GenRule GenDef="Object" Name="directPKeyPrivGetter">getPKey()</GenRule>
+	<GenRule GenDef="Object" Name="pkeyValuePrivGetter">$switch IsPrimaryIndexKeyAtomic yes directValueGetter default deferPKeyValueGetter$</GenRule>
 	<GenRule GenDef="Object" Name="deferPKeyValuePrivGetter">getPKey().get$implColumnAttrOptionality$$Name$()</GenRule>
-	<GenRule GenDef="Object" Name="directValuePrivGetter">$lower implColumnAttrOptionality$$Name$</GenRule>
 
-	<GenRule GenDef="Object" Name="pkeyValuePrivSetter">$switch IsPrimaryIndexKeyAtomic yes directPKeySetter default deferPKeyValueSetter$</GenRule>
-	<GenRule GenDef="Object" Name="directPKeyPrivSetter">$switch HasMinValue yes implSetterCheckMinValue default empty$$switch HasMaxValue yes implSetterCheckMaxValue default empty$
-		setPKey(value)</GenRule>
-	<GenRule GenDef="Object" Name="deferPKeyValuePrivSetter">$switch HasMinValue yes implSetterCheckMinValue default empty$$switch HasMaxValue yes implSetterCheckMaxValue default empty$
-		getPKey().set$implColumnAttrOptionality$$Name$(value)</GenRule>
-	<GenRule GenDef="Object" Name="directValuePrivSetter">$switch HasMinValue yes implSetterCheckMinValue default empty$$switch HasMaxValue yes implSetterCheckMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value</GenRule>
-
-	<GenRule GenDef="Object" Name="pkeyValueProtSetter">$switch IsPrimaryIndexKeyAtomic yes directPKeyProtSetter default deferPKeyValueProtSetter$</GenRule>
-	<GenRule GenDef="Object" Name="directPKeyProtSetter">$switch HasMinValue yes implSetterCheckProtMinValue default empty$$switch HasMaxValue yes implSetterCheckProtMaxValue default empty$
-		setPKey(value)</GenRule>
+	<GenRule GenDef="Object" Name="pkeyValueProtSetter">$switch IsPrimaryIndexKeyAtomic yes directValueProtSetter default deferPKeyValueProtSetter$</GenRule>
 	<GenRule GenDef="Object" Name="deferPKeyValueProtSetter">$switch HasMinValue yes implSetterCheckProtMinValue default empty$$switch HasMaxValue yes implSetterCheckProtMaxValue default empty$
 		getPKey().set$implColumnAttrOptionality$$Name$(value)</GenRule>
-	<GenRule GenDef="Object" Name="directValueProtSetter">$switch HasMinValue yes implSetterCheckProtMinValue default empty$$switch HasMaxValue yes implSetterCheckProtMaxValue default empty$
-		$lower implColumnAttrOptionality$$Name$ = value</GenRule>
-
 	<GenRule GenDef="Object" Name="pkeyValueProtGetter">$switch IsPublic yes pkeyValuePrivGetter default empty$</GenRule>
-	<GenRule GenDef="Object" Name="directPKeyProtGetter">$switch IsPublic yes directPKeyPrivGetter default empty$</GenRule>
 	<GenRule GenDef="Object" Name="deferPKeyValueProtGetter">$switch IsPublic yes deferPKeyValuePrivGetter default empty$</GenRule>
-	<GenRule GenDef="Object" Name="directValueProtGetter">$switch IsPublic yes directValuePrivGetter default empty$</GenRule>
 	
-	<GenRule GenDef="Object" Name="pkeyValuePubSetter">$switch IsPrimaryIndexKeyAtomic yes directPKeyPubSetter default deferPKeyValuePubSetter$</GenRule>
-	<GenRule GenDef="Object" Name="directPKeyPubSetter">$maybeCheckMinValue$$maybeCheckMaxValue$
-		setPKey(value)</GenRule>
+	<GenRule GenDef="Object" Name="pkeyValuePubSetter">$switch IsPrimaryIndexKeyAtomic yes directValuePubSetter default deferPKeyValuePubSetter$</GenRule>
 	<GenRule GenDef="Object" Name="deferPKeyValuePubSetter">$maybeCheckMinValue$$maybeCheckMaxValue$
 		getPKey().set$implColumnAttrOptionality$$Name$(value)</GenRule>
 	<GenRule GenDef="Object" Name="directValuePubSetter">$maybeCheckMinValue$$maybeCheckMaxValue$
 		$lower implColumnAttrOptionality$$Name$ = value</GenRule>
+	
+	<GenRule GenDef="Object" Name="directValueProtSetter">$maybeCheckMinValue$$maybeCheckMaxValue$
+		$lower implColumnAttrOptionality$$Name$ = value</GenRule>
+	
+	<GenRule GenDef="Object" Name="pkeyValuePrivSetter">$switch IsPrimaryIndexKeyAtomic yes directValuePrivSetter default deferPKeyValuePrivSetter$</GenRule>
+	<GenRule GenDef="Object" Name="deferPKeyValuePrivSetter">$maybeCheckMinValue$$maybeCheckMaxValue$
+		getPKey().set$implColumnAttrOptionality$$Name$(value)</GenRule>
+	<GenRule GenDef="Object" Name="directValuePrivSetter">$maybeCheckMinValue$$maybeCheckMaxValue$
+		$lower implColumnAttrOptionality$$Name$ = value</GenRule>
 
 	<GenRule GenDef="Object" Name="pkeyValuePubGetter">$switch IsPublic yes pkeyValuePrivGetter default empty$</GenRule>
-	<GenRule GenDef="Object" Name="directPKeyPubGetter">$switch IsPublic yes directPKeyPrivGetter default empty$</GenRule>
 	<GenRule GenDef="Object" Name="deferPKeyValuePubGetter">$switch IsPublic yes deferPKeyValuePrivGetter default empty$</GenRule>
-	<GenRule GenDef="Object" Name="directValuePubGetter">$switch IsPublic yes directValuePrivGetter default empty$</GenRule>
 
 	<GenRule GenDef="Object" Name="implSetterCheckMinValue">$switch IsPublic yes implPubSetterCheckMinValue default maybeSetterCheckProtMinValue$</GenRule>
 	<GenRule GenDef="Object" Name="maybeSetterCheckProtMinValue">$switch IsPublic yes implPubSetterCheckMinValue default implSetterCheckPrivMinValue$</GenRule>
@@ -651,8 +647,7 @@ $switch IsPrimaryIndexKeyAtomic yes empty default implBuffColumnAttrPKeyColumnWr
 	<GenRule GenDef="Index" Name="maybeBuffImplEqualsCmpKey"
 		>$switch IsPrimaryIndex yes empty default implBuffEqualsCmpKey$</GenRule>
 	<GenRule GenDef="Index" Name="implBuffEqualsCmpKey">
-		else if( obj instanceof I$DefSchemaName$$TableName$By$Suffix$Key ) {
-			I$DefSchemaName$$TableName$By$Suffix$Key rhs = (I$DefSchemaName$$TableName$By$Suffix$Key)obj;$iterate Columns( each implEqualsCmpAttr )$
+		else if( obj instanceof I$DefSchemaName$$TableName$By$Suffix$Key rhs ) {$iterate Columns( each implEqualsCmpAttr )$
 			return( true );
 		}</GenRule>
 
@@ -689,10 +684,14 @@ $switch IsPrimaryIndexKeyAtomic yes empty default implBuffColumnAttrPKeyColumnWr
 	<GenRule GenDef="Table" Name="implBuffOptAuditColumnAttr"
 		>$switch HasAuditColumns yes implBuffAuditColumnAttr default empty$</GenRule>
 
+	<GenRule GenDef="Object" Name="emitScopingMidfix">$switch CodeVis case Public Pub case Protected Prot default empty$</GenRule>
+	<GenRule GenDef="Object" Name="Pub">Pub</GenRule>
+	<GenRule GenDef="Object" Name="Prot">Prot</GenRule>
+
 	<GenRule GenDef="Table" Name="implBuffAuditColumnAttr">
-	protected CFLibDbKeyHash256 createdByUserId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$$TableName$.S_INIT_CREATED_BY);
+	protected CFLibDbKeyHash256 createdByUserId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$$emitScopingMidfix$$TableName$.S_INIT_CREATED_BY);
 	protected LocalDateTime createdAt = LocalDateTime.now();
-	protected CFLibDbKeyHash256 updatedByUserId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$$TableName$.S_INIT_UPDATED_BY);
+	protected CFLibDbKeyHash256 updatedByUserId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$$emitScopingMidfix$$TableName$.S_INIT_UPDATED_BY);
 	protected LocalDateTime updatedAt = LocalDateTime.now();</GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffColumnOptAuditGetterSetters"
@@ -786,8 +785,7 @@ $switch IsPrimaryIndexKeyAtomic yes empty default implBuffColumnAttrPKeyColumnWr
 	<GenRule GenDef="Index" Name="maybePubBuffImplEqualsCmpKey">$switch IsPublic yes maybeBuffImplEqualsCmpKey default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffEqualsHistory">
-		else if( obj instanceof I$DefSchemaName$$TableName$H ) {
-			I$SchemaName$$TableName$H rhs = (I$SchemaName$$TableName$H)obj;$iterate Columns( each implEqualsCmpAttr)$
+		else if( obj instanceof I$DefSchemaName$$TableName$H rhs ) {$iterate Columns( each implEqualsCmpAttr)$
 			return( true );
 		}
 		else if( obj instanceof I$DefSchemaName$$reference BaseClass TableName$HPKey ) {

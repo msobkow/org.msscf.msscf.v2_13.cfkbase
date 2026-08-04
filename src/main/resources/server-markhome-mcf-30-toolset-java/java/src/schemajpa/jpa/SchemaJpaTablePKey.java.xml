@@ -557,7 +557,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="emitJpaMappingAnnotationManyToOne">@ManyToOne</GenRule>
 	<GenRule GenDef="Object" Name="emitJpaMappingAnnotationManyToMany">@ManyToMany</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="maybeJpaTablePKeyImplJpaColumnAttr">$switch InSuperiorCandidatePrimaryKeyRelation yes empty default implJpaColumnAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeJpaTablePKeyImplJpaColumnAttr">$reference Column switch InSuperiorCandidatePrimaryKeyRelation yes empty default implJpaColumnAttr$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybeImplSchemaJpaTablePKeyRelationGetterSetter">$switch HasDefSchema yes empty default implInPrimarySchemaJpaTablePKeyRelationGetterSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="implSuperiorSchemaJpaTablePKeyRelationGetterSetter">$switch IsSuperiorRelation yes implInPrimarySchemaJpaTablePKeyRelationGetterSetter default empty$</GenRule>
@@ -805,7 +805,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implConstructorInitBoolValue">
 		$lower implColumnAttrOptionality$$Name$ = I$DefSchemaName$$TableName$.$upper Name$_INIT_VALUE;</GenRule>
 
-	<GenRule GenDef="Object" Name="implConstructorInitEnumValue">
+	<GenRule GenDef="IndexCol" Name="implConstructorInitEnumValue">$reference Column implConstructorInitEnumValue$</GenRule>
+	<GenRule GenDef="Value" Name="implConstructorInitEnumValue">
 		$lower implColumnAttrOptionality$$Name$ = I$DefSchemaName$$TableName$.$upper Name$_INIT_VALUE;</GenRule>
 
 	<GenRule GenDef="Object" Name="implConstructorInitInt16Value">
@@ -870,37 +871,37 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash128Value">$switch HasInitValue yes implConstructorInitDbKeyHash128ValueFromHex default implConstructorInitDbKeyHash128ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash128ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash128.fromHex( I$DefSchemaName$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash128.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash128ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash128.nullGet();</GenRule>
 
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash160Value">$switch HasInitValue yes implConstructorInitDbKeyHash160ValueFromHex default implConstructorInitDbKeyHash160ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash160ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash160.fromHex( I$DefSchemaName$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash160.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash160ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash160.nullGet();</GenRule>
 
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash224Value">$switch HasInitValue yes implConstructorInitDbKeyHash224ValueFromHex default implConstructorInitDbKeyHash224ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash224ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash224.fromHex( I$DefSchemaName$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash224.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash224ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash224.nullGet();</GenRule>
 
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash256Value">$switch HasInitValue yes implConstructorInitDbKeyHash256ValueFromHex default implConstructorInitDbKeyHash256ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash256ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash256.fromHex( I$DefSchemaName$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash256.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash256ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash256.nullGet();</GenRule>
 
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash384Value">$switch HasInitValue yes implConstructorInitDbKeyHash384ValueFromHex default implConstructorInitDbKeyHash384ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash384ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash384.fromHex( I$DefSchemaName$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash384.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash384ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash384.nullGet();</GenRule>
 
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash512Value">$switch HasInitValue yes implConstructorInitDbKeyHash512ValueFromHex default implConstructorInitDbKeyHash512ValueDefault$</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash512ValueFromHex">
-		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash512.fromHex( I$DefSchemaName$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
+		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash512.fromHex( I$DefSchemaName$$emitScopingMidfix$$TableName$.$upper Name$_INIT_VALUE.toString() );</GenRule>
 	<GenRule GenDef="Object" Name="implConstructorInitDbKeyHash512ValueDefault">
 		$lower implColumnAttrOptionality$$Name$ = CFLibDbKeyHash512.nullGet();</GenRule>
 
@@ -977,6 +978,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 
 	<GenRule GenDef="IndexCol" Name="IsJPAGenerated">$reference Column IsJPAGenerated$</GenRule>
 	<GenRule GenDef="TableCol" Name="IsJPAGenerated">$switch GenerateId yes maybeJPAGenerated default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeJPAGenerated">$reference Column maybeJPAGenerated$</GenRule>
 	<GenRule GenDef="TableCol" Name="maybeJPAGenerated"
 		>$switch BaseModelAtomClass
 			Id16Gen yes
@@ -1525,9 +1527,9 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implInternalPubColumnGetter">$implDirectColumnGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implInternalPubColumnSetter">$implDirectColumnSetter$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implInternalPubColumnGetterSetter">$implDirectColumnGetter$$implDirectColumnSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implInternalPubColumnGetter">$implDirectColumnGetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implInternalPubColumnSetter">$implDirectColumnSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implInternalPubColumnGetterSetter">$reference Column implDirectColumnGetter$$reference Column implDirectColumnSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implInternalPubColumnGetter">$reference Column implDirectColumnGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implInternalPubColumnSetter">$reference Column implDirectColumnSetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="implColumnGetterSetter">$switch IsPublic yes implPubColumnGetterSetter default maybeProtColumnGetterSetter$</GenRule>
 	<GenRule GenDef="Object" Name="maybeProtColumnGetterSetter">$switch IsProtected yes implProtColumnGetterSetter default implPrivColumnGetterSetter$</GenRule>
@@ -1586,40 +1588,41 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implDirectColumnSetter">$switch IsPublic yes implPubDirectColumnSetter default maybeProtDirectColumnSetter$</GenRule>
 	<GenRule GenDef="Object" Name="maybeProtDirectColumnSetter">$switch IsProtected yes implProtDirectColumnSetter default implPrivDirectColumnSetter$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implDirectColumnGetterSetter">$switch IsPublic yes implPubDirectColumnGetterSetter default maybeProtDirectColumnGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="maybeProtDirectColumnGetterSetter">$switch IsProtected yes implProtDirectColumnGetterSetter default implPrivDirectColumnGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implDirectColumnGetter">$switch IsPublic yes implPubDirectColumnGetter default maybeProtDirectColumnGetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="maybeProtDirectColumnGetter">$switch IsProtected yes implProtDirectColumnGetter default implPrivDirectColumnGetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implDirectColumnSetter">$switch IsPublic yes implPubDirectColumnSetter default maybeProtDirectColumnSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="maybeProtDirectColumnSetter">$switch IsProtected yes implProtDirectColumnSetter default implPrivDirectColumnSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implDirectColumnGetterSetter">$reference Column switch IsPublic yes implPubDirectColumnGetterSetter default maybeProtDirectColumnGetterSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeProtDirectColumnGetterSetter">$reference Column switch IsProtected yes implProtDirectColumnGetterSetter default implPrivDirectColumnGetterSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implDirectColumnGetter">$reference Column switch IsPublic yes implPubDirectColumnGetter default maybeProtDirectColumnGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeProtDirectColumnGetter">$reference Column switch IsProtected yes implProtDirectColumnGetter default implPrivDirectColumnGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implDirectColumnSetter">$reference Column switch IsPublic yes implPubDirectColumnSetter default maybeProtDirectColumnSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeProtDirectColumnSetter">$reference Column switch IsProtected yes implProtDirectColumnSetter default implPrivDirectColumnSetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="implPrivDirectColumnGetterSetter">$implPrivDirectColumnGetter$$implPrivDirectColumnSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPrivDirectColumnGetter">$switch IsNullable yes implOptDirectGetter default implReqDirectGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPrivDirectColumnSetter">$switch IsNullable yes implOptDirectSetter default implReqDirectSetter$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implPrivDirectColumnGetterSetter">$implPrivDirectColumnGetter$$implPrivDirectColumnSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPrivDirectColumnGetter">$switch IsNullable yes implOptDirectGetter default implReqDirectGetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPrivDirectColumnSetter">$switch IsNullable yes implOptDirectSetter default implReqDirectSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPrivDirectColumnGetterSetter">$reference Column implPrivDirectColumnGetter$$reference Column implPrivDirectColumnSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPrivDirectColumnGetter">$reference Column switch IsNullable yes implOptDirectGetter default implReqDirectGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPrivDirectColumnSetter">$reference Column switch IsNullable yes implOptDirectSetter default implReqDirectSetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="implProtDirectColumnGetterSetter">$implProtDirectColumnGetter$$implProtDirectColumnSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implProtDirectColumnSetter">$switch IsNullable yes implProtOptDirectSetter default implProtReqDirectSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implProtDirectColumnGetter">$switch IsNullable yes implProtOptDirectGetter default implProtReqDirectGetter$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implProtDirectColumnGetterSetter">$implProtDirectColumnGetter$$implProtDirectColumnSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implProtDirectColumnSetter">$switch IsNullable yes implProtOptDirectSetter default implProtReqDirectSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implProtDirectColumnGetter">$switch IsNullable yes implProtOptDirectGetter default implProtReqDirectGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implProtDirectColumnGetterSetter">$reference Column implProtDirectColumnGetter$$implProtDirectColumnSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implProtDirectColumnSetter">$reference Column switch IsNullable yes implProtOptDirectSetter default implProtReqDirectSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implProtDirectColumnGetter">$reference Column switch IsNullable yes implProtOptDirectGetter default implProtReqDirectGetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="implPubDirectColumnGetterSetter">$implPubDirectColumnGetter$$implPubDirectColumnSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPubDirectColumnSetter">$switch IsNullable yes implPubOptDirectSetter default implPubReqDirectSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPubDirectColumnGetter">$switch IsNullable yes implPubOptDirectGetter default implPubReqDirectGetter$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implPubDirectColumnGetterSetter">$implPubDirectColumnGetter$$implPubDirectColumnSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPubDirectColumnSetter">$switch IsNullable yes implPubOptDirectSetter default implPubReqDirectSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPubDirectColumnGetter">$switch IsNullable yes implPubOptDirectGetter default implPubReqDirectGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPubDirectColumnGetterSetter">$reference Column implPubDirectColumnGetter$$reference Column implPubDirectColumnSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPubDirectColumnSetter">$reference Column switch IsNullable yes implPubOptDirectSetter default implPubReqDirectSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPubDirectColumnGetter">$reference Column switch IsNullable yes implPubOptDirectGetter default implPubReqDirectGetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="ProtMaxLen">$switch IsProtected yes MaxLen default empty$</GenRule>
 	<GenRule GenDef="Object" Name="PubMaxLen">$switch IsPublic yes MaxLen default empty$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implReqSetter">$reference Column implReqSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implReqSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implReqBlobSetter
@@ -1666,6 +1669,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implReqTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implOptSetter">$reference Column implOptSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implOptSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implOptBlobSetter
@@ -1712,6 +1716,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implOptTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implReqGetter">$reference Column implReqGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implReqGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implReqBlobGetter
@@ -1758,6 +1763,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implReqTextGetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implOptGetter">$reference Column implOptGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implOptGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implOptBlobGetter
@@ -1804,6 +1810,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implOptTextGetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implReqDirectSetter">$refence Column implReqDirectSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implReqDirectSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implReqDirectBlobSetter
@@ -1850,6 +1857,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implReqDirectTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implOptDirectSetter">$reference Column implOptDirectSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implOptDirectSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implOptDirectBlobSetter
@@ -1896,6 +1904,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implOptDirectTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implReqDirectGetter">$reference Column implReqDirectGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implReqDirectGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implReqDirectBlobGetter
@@ -1942,6 +1951,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implReqDirectTextGetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implOptDirectGetter">$reference Column implOptDirectGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implOptDirectGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implOptDirectBlobGetter
@@ -2136,21 +2146,24 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implReqEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implReqEnumGetter">$reference Column implReqEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implReqEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implReqDirectEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implReqDirectEnumGetter">$reference Column implReqDirectEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implReqDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $directValueGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implReqEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implReqEnumSetter">$reference Column implReqEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implReqEnumSetter">
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		if( value == null ) {
 			throw new CFLibNullArgumentException( getClass(),
@@ -2162,7 +2175,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implReqDirectEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implReqDirectEnumSetter">$reference Column implReqDirectEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implReqDirectEnumSetter">
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		if( value == null ) {
 			throw new CFLibNullArgumentException( getClass(),
@@ -2174,28 +2188,32 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implOptEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implOptEnumGetter">$reference Column implOptEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implOptEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implOptDirectEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implOptDirectEnumGetter">$reference Column implOptDirectEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implOptDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $directValueGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implOptEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implOptEnumSetter">$reference Column implOptEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implOptEnumSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$;
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implOptDirectEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implOptDirectEnumSetter">$reference Column implOptDirectEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implOptDirectEnumSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		$directValueSetter$;
@@ -3952,6 +3970,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	}
 </GenRule>
 
+	<GenRule GenDef="IndexCol" Name="HasMaxLen">$reference Column HasMaxLen$</GenRule>
 	<GenRule GenDef="Object" Name="HasMaxLen">$switch BaseModelAtomClass
 			StringDef yes
 			TokenDef yes
@@ -4044,6 +4063,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="checkProtMaxValue">$switch IsNullable yes implProtOptSetterCheckMaxValue default implProtReqSetterCheckMaxValue$</GenRule>
 	<GenRule GenDef="Object" Name="checkPubMaxValue">$switch IsNullable yes implPubOptSetterCheckMaxValue default implPubReqSetterCheckMaxValue$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implReqSetterCheckMinValue">$reference Column implReqSetterCheckMinValue$</GenRule>
 	<GenRule GenDef="Object" Name="implReqSetterCheckMinValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -4110,6 +4130,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				I$DefSchemaName$$TableName$.$upper Name$_MIN_VALUE.toString() );
 		}</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implReqSetterCheckMaxValue">$reference Column implReqSetterCheckMaxValue$</GenRule>
 	<GenRule GenDef="Object" Name="implReqSetterCheckMaxValue"
 		>$switch BaseModelAtomClass
 			BoolDef empty
@@ -4174,6 +4195,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				I$DefSchemaName$$TableName$.$upper Name$_MAX_VALUE.toString() );
 		}</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implOptSetterCheckMinValue">$reference Column implOptSetterCheckMinValue$</GenRule>
 	<GenRule GenDef="Object" Name="implOptSetterCheckMinValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -4280,6 +4302,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				I$DefSchemaName$Pub$TableName$.$upper Name$_MAX_VALUE.toString() );
 		}</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implOptSetterCheckMaxValue">$reference Column implOptSetterCheckMaxValue$</GenRule>
 	<GenRule GenDef="Object" Name="implOptSetterCheckMaxValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -4406,6 +4429,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				I$DefSchemaName$Pub$TableName$.$upper Name$_MIN_VALUE.toString() );
 		}</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtReqSetter">$refernce Column implProtReqSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implProtReqSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implProtReqBlobSetter
@@ -4452,6 +4476,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implProtReqTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtOptSetter">$reference Column implProtOptSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implProtOptSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implProtOptBlobSetter
@@ -4498,6 +4523,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implProtOptTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtReqGetter">$reference Column implProtReqGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implProtReqGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implProtReqBlobGetter
@@ -4544,6 +4570,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implProtReqTextGetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtOptGetter">$reference Column implProtOptGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implProtOptGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implProtOptBlobGetter
@@ -4590,6 +4617,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implProtOptTextGetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtReqDirectSetter">$reference Column implProtReqDirectSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implProtReqDirectSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implProtReqDirectBlobSetter
@@ -4636,6 +4664,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implProtReqDirectTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtOptDirectSetter">$reference Column implProtOptDirectSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implProtOptDirectSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implProtOptDirectBlobSetter
@@ -4682,6 +4711,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implProtOptDirectTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtReqDirectGetter">$reference Column implProtReqDirectGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implProtReqDirectGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implProtReqDirectBlobGetter
@@ -4728,6 +4758,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implProtReqDirectTextGetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtOptDirectGetter">$reference Column implProtOptDirectGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implProtOptDirectGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implProtOptDirectBlobGetter
@@ -4922,21 +4953,24 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implProtReqEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implProtReqEnumGetter">$reference Column implProtReqEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implProtReqEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueProtGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implProtReqDirectEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implProtReqDirectEnumGetter">$reference Column implProtReqDirectEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implProtReqDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $directValueProtGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implProtReqEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implProtReqEnumSetter">$reference Column implProtReqEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implProtReqEnumSetter">
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		if( value == null ) {
 			throw new CFLibNullArgumentException( getClass(),
@@ -4948,7 +4982,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implProtReqDirectEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implProtReqDirectEnumSetter">$reference Column implProtReqDirectEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implProtReqDirectEnumSetter">
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		if( value == null ) {
 			throw new CFLibNullArgumentException( getClass(),
@@ -4960,28 +4995,32 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implProtOptEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implProtOptEnumGetter">$reference Column implProtOptEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implProtOptEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueProtGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implProtOptDirectEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implProtOptDirectEnumGetter">$reference Column implProtOptDirectEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implProtOptDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $directValueProtGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implProtOptEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implProtOptEnumSetter">$reference Column implProtOptEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implProtOptEnumSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		$switch ColumnInPrimaryIndex yes pkeyValueProtSetter default directValueProtSetter$;
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implProtOptDirectEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implProtOptDirectEnumSetter">$reference Column implProtOptDirectEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implProtOptDirectEnumSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		$directValueProtSetter$;
@@ -6862,7 +6901,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			}</GenRule>
 	<GenRule GenDef="Object" Name="implEqualsCmpOptBoolVar"
 		>$implEqualsCmpOptValue$</GenRule>
-	<GenRule GenDef="Object" Name="implEqualsCmpOptEnumVar">
+	<GenRule GenDef="IndexCol" Name="implEqualsCmpOptEnumVar">$reference Column implEqualsCmpOptEnumVar$</GenRule>
+	<GenRule GenDef="Value" Name="implEqualsCmpOptEnumVar">
 			if( get$implColumnAttrOptionality$$Name$() != null ) {
 				if( rhs.get$implColumnAttrOptionality$$Name$() != null ) {
 					if( ! get$implColumnAttrOptionality$$Name$().equals( rhs.get$implColumnAttrOptionality$$Name$() ) ) {
@@ -7225,6 +7265,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 		>$implEqualsCmpReqValue$</GenRule>
 	<GenRule GenDef="Object" Name="implEqualsCmpReqBoolVar"
 		>$implEqualsCmpReqValue$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implEqualsCmpReqEnumVar">$reference Column implEqualsCmpReqEnumVar$</GenRule>
 	<GenRule GenDef="Object" Name="implEqualsCmpReqEnumVar"
 		>$implEqualsCmpReqObj$</GenRule>
 	<GenRule GenDef="Object" Name="implEqualsCmpReqInt16Var"
@@ -7410,6 +7451,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 				}
 			}</GenRule>
 
+	<GenRule GenDef="Table" Name="implPKeyGetHashCode">$reference PrimaryKeyIndex implPKeyGetHashCode$</GenRule>
 	<GenRule GenDef="Index" Name="implPKeyGetHashCode">
 	@Override
 	public int hashCode() {
@@ -7488,7 +7530,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			hashCode = (hashCode * 4 ) + 3;
 		}</GenRule>
 
-	<GenRule GenDef="Object" Name="implGetHashCodeOptEnumVar">
+	<GenRule GenDef="IndexCol" Name="implGetHashCodeOptEnumVar">$reference Column implGetHashCodeOptEnumVar$</GenRule>
+	<GenRule GenDef="Value" Name="implGetHashCodeOptEnumVar">
 		if( get$implColumnAttrOptionality$$Name$() != null ) {
 			hashCode = ( hashCode * 0x10000 ) + get$implColumnAttrOptionality$$Name$().ordinal();
 		}
@@ -7690,7 +7733,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			hashCode = hashCode * 2;
 		}</GenRule>
 
-	<GenRule GenDef="Object" Name="implGetHashCodeReqEnumVar">
+	<GenRule GenDef="IndexCol" Name="implGetHashCodeReqEnumVar">$reference Column implGetHashCodeReqEnumVar$</GenRule>
+	<GenRule GenDef="Value" Name="implGetHashCodeReqEnumVar">
 		hashCode = ( hashCode * 0x10000 ) + get$implColumnAttrOptionality$$Name$().ordinal();</GenRule>
 
 	<GenRule GenDef="Object" Name="implGetHashCodeReqInt16Var">
@@ -7909,6 +7953,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<!-- GenRule GenDef="IndexCol" Name="implCompareToOpt"
 		>$reference Column implCompareToOpt$</GenRule -->
 
+	<GenRule GenDef="IndexCol" Name="implCompareToOpt">$reference Column implCompareToOpt$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToOpt"
 		>$switch BaseModelAtomClass
 			BlobDef implCompareToOptBlobVar
@@ -7955,6 +8000,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			UuidGen implCompareToOptUuidVar
 			default error$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implCompareToOptRHS">$reference Column implCompareToOptRHS$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToOptRHS"
 		>$switch BaseModelAtomClass
 			BlobDef implCompareToOptRHSBlobVar
@@ -8063,6 +8109,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 					return( $LTAdjusted$ );
 				}
 			}</GenRule>
+	<GenRule GenDef="IndexCol" Name="implCompareToOptEnumVar">$reference Column implCompareToOptEnumVar$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToOptEnumVar"
 		>$implCompareToOptObj$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToOptInt16Var"
@@ -8297,6 +8344,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 					return( $LTAdjusted$ );
 				}
 			}</GenRule>
+	<GenRule GenDef="IndexCol" Name="implCompareToOptRHSEnumVar">$reference Column implCompareToOptRHSEnumVar$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToOptRHSEnumVar"
 		>$implCompareToOptRHSObj$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToOptRHSInt16Var"
@@ -8472,6 +8520,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<!-- GenRule GenDef="IndexCol" Name="implCompareToReq"
 		>$reference Column implCompareToReq$</GenRule -->
 
+	<GenRule GenDef="IndexCol" Name="implCompareToReq">$reference Column implCompareToReq$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToReq"
 		>$switch BaseModelAtomClass
 			BlobDef implCompareToReqBlobVar
@@ -8556,6 +8605,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 					return( $LTAdjusted$ );
 				}
 			}</GenRule>
+	<GenRule GenDef="IndexCol" Name="implCompareToReqEnumVar">$reference Column implCompareToReqEnumVar$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToReqEnumVar"
 		>$implCompareToReqObj$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToReqInt16Var"
@@ -8642,6 +8692,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<!-- GenRule GenDef="IndexCol" Name="implCompareToReqRHS"
 		>$reference Column implCompareToReqRHS$</GenRule -->
 
+	<GenRule GenDef="IndexCol" Name="implCompareToReqRHS">$reference Column implCompareToReqRHS$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToReqRHS"
 		>$switch BaseModelAtomClass
 			BlobDef implCompareToReqRHSBlobVar
@@ -8726,6 +8777,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 					return( $LTAdjusted$ );
 				}
 			}</GenRule>
+	<GenRule GenDef="IndexCol" Name="implCompareToReqRHSEnumVar">$reference Column implCompareToReqRHSEnumVar$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToReqRHSEnumVar"
 		>$implCompareToReqRHSObj$</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToReqRHSInt16Var"
@@ -9124,6 +9176,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 		> + "\\"" + Base64.encodeBase64( get$implColumnAttrOptionality$$Name$() ) + "\\""</GenRule>
 	<GenRule GenDef="Object" Name="emitXmlReqBoolValue"
 		> + (( get$implColumnAttrOptionality$$Name$() ) ? "\\"true\\"" : "\\"false\\"" )</GenRule>
+	<GenRule GenDef="IndexCol" Name="emitXmlReqEnumValue">$reference Column emitXmlReqEnumValue$</GenRule>
 	<GenRule GenDef="Object" Name="emitXmlReqEnumValue"
 		> + "\\"" + get$implColumnAttrOptionality$$Name$().toString() + "\\""</GenRule>
 	<GenRule GenDef="Object" Name="emitXmlReqInt16Value"
@@ -9193,6 +9246,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 		> + ( ( get$implColumnAttrOptionality$$Name$() == null ) ? "null" : "\\"" + Base64.encodeBase64( get$implColumnAttrOptionality$$Name$() ) + "\\"" )</GenRule>
 	<GenRule GenDef="Object" Name="emitXmlOptBoolValue"
 		> + ( ( get$implColumnAttrOptionality$$Name$() == null ) ? "null" : ( ( get$implColumnAttrOptionality$$Name$() ) ? "\\"true\\"" : "\\"false\\"" ) )</GenRule>
+	<GenRule GenDef="IndexCol" Name="emitXmlOptEnumValue">$reference Column emitXmlOptEnumValue$</GenRule>
 	<GenRule GenDef="Object" Name="emitXmlOptEnumValue"
 		> + ( ( get$implColumnAttrOptionality$$Name$() == null ) ? "null" : "\\"" + get$implColumnAttrOptionality$$Name$().toString() + "\\"" )</GenRule>
 	<GenRule GenDef="Object" Name="emitXmlOptInt16Value"
@@ -9258,6 +9312,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="emitXmlOptUuidValue"
 		> + ( ( get$implColumnAttrOptionality$$Name$() == null ) ? "null" : "\\"" + get$implColumnAttrOptionality$$Name$().toString() + "\\"" )</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtOptSetterCheckMinValue">$reference Column implProtOptSetterCheckMinValue$</GenRule>
 	<GenRule GenDef="Object" Name="implProtOptSetterCheckMinValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -9304,6 +9359,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implProtOptSetterCheckObjectMinValue
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtOptSetterCheckMaxValue">$reference Column implProtOptSetterCheckMaxValue$</GenRule>
 	<GenRule GenDef="Object" Name="implProtOptSetterCheckMaxValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -9350,6 +9406,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implProtOptSetterCheckObjectMaxValue
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtReqSetterCheckMinValue">$reference Column implProtReqSetterCheckMinValue$</GenRule>
 	<GenRule GenDef="Object" Name="implProtReqSetterCheckMinValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -9396,6 +9453,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implProtReqSetterCheckObjectMinValue
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implProtReqSetterCheckMaxValue">$reference Column implProtReqSetterCheckMaxValue$</GenRule>
 	<GenRule GenDef="Object" Name="implProtReqSetterCheckMaxValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -9442,6 +9500,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implProtReqSetterCheckObjectMaxValue
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubOptSetterCheckMinValue">$reference Column implPubOptSetterCheckMinValue$</GenRule>
 	<GenRule GenDef="Object" Name="implPubOptSetterCheckMinValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -9488,6 +9547,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implPubOptSetterCheckObjectMinValue
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubOptSetterCheckMaxValue">$reference Column implPubOptSetterCheckMaxValue$</GenRule>
 	<GenRule GenDef="Object" Name="implPubOptSetterCheckMaxValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -9534,6 +9594,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implPubOptSetterCheckObjectMaxValue
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubReqSetterCheckMinValue">$reference Column implPubReqSetterCheckMinValue$</GenRule>
 	<GenRule GenDef="Object" Name="implPubReqSetterCheckMinValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -9580,6 +9641,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implPubReqSetterCheckObjectMinValue
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubReqSetterCheckMaxValue">$reference Column implPubReqSetterCheckMaxValue$</GenRule>
 	<GenRule GenDef="Object" Name="implPubReqSetterCheckMaxValue"
 		>$switch BaseModelAtomClass
 			BlobDef empty
@@ -9626,6 +9688,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implPubReqSetterCheckObjectMaxValue
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubReqSetter">$reference Column implPubReqSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPubReqSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implPubReqBlobSetter
@@ -9672,6 +9735,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implPubReqTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubOptSetter">$reference Column implPubOptSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPubOptSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implPubOptBlobSetter
@@ -9718,6 +9782,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implPubOptTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubReqGetter">$reference Column implPubReqGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPubReqGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implPubReqBlobGetter
@@ -9764,6 +9829,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implPubReqTextGetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubOptGetter">$reference Column implPubOptGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPubOptGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implPubOptBlobGetter
@@ -9810,6 +9876,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implPubOptTextGetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubReqDirectSetter">$reference Column implPubReqDirectSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPubReqDirectSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implPubReqDirectBlobSetter
@@ -9856,6 +9923,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implPubReqDirectTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubOptDirectSetter">$reference Column implPubOptDirectSetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPubOptDirectSetter"
 		>$switch BaseModelAtomClass
 			BlobDef implPubOptDirectBlobSetter
@@ -9902,6 +9970,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implPubOptDirectTextSetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubReqDirectGetter">$reference Column implPubReqDirectGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPubReqDirectGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implPubReqDirectBlobGetter
@@ -9948,6 +10017,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			TextDef implPubReqDirectTextGetter
 			default ErrorUnrecognizedBaseModelAtomClass$</GenRule>
 
+	<GenRule GenDef="IndexCol" Name="implPubOptDirectGetter">$reference Column implPubOptDirectGetter$</GenRule>
 	<GenRule GenDef="Object" Name="implPubOptDirectGetter"
 		>$switch BaseModelAtomClass
 			BlobDef implPubOptDirectBlobGetter
@@ -10142,21 +10212,24 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implPubReqEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implPubReqEnumGetter">$reference Column implPubReqEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implPubReqEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValuePubGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implPubReqDirectEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implPubReqDirectEnumGetter">$reference Column implPubReqDirectEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implPubReqDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $directValuePubGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implPubReqEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implPubReqEnumSetter">$reference Column implPubReqEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implPubReqEnumSetter">
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		if( value == null ) {
 			throw new CFLibNullArgumentException( getClass(),
@@ -10168,7 +10241,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implPubReqDirectEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implPubReqDirectEnumSetter">$reference Column implPubReqDirectEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implPubReqDirectEnumSetter">
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		if( value == null ) {
 			throw new CFLibNullArgumentException( getClass(),
@@ -10180,28 +10254,32 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implPubOptEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implPubOptEnumGetter">$reference Column implPubOptEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implPubOptEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValuePubGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implPubOptDirectEnumGetter">
+	<GenRule GenDef="IndexCol" Name="implPubOptDirectEnumGetter">$reference Column implPubOptDirectEnumGetter$</GenRule>
+	<GenRule GenDef="Value" Name="implPubOptDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
 		return( $directValuePubGetter$ );
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implPubOptEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implPubOptEnumSetter">$reference Column implPubOptEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implPubOptEnumSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		$switch ColumnInPrimaryIndex yes pkeyValuePubSetter default directValuePubSetter$;
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implPubOptDirectEnumSetter">
+	<GenRule GenDef="IndexCol" Name="implPubOptDirectEnumSetter">$reference Column implPubOptDirectEnumSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implPubOptDirectEnumSetter">
 	@Override
 	public void set$implColumnAttrOptionality$$Name$( $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ value ) {
 		$directValuePubSetter$;
