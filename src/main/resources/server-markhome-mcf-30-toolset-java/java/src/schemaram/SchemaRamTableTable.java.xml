@@ -1032,7 +1032,7 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 	}
 </GenRule>
 
-	<GenRule GenDef="IndexCol" Name="maybeImplRamCreateTablePKeyToBuff">$switch InSuperiorPrimaryKeyRelation yes empty default implRamCreateTablePKeyToBuff$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeImplRamCreateTablePKeyToBuff">$implRamCreateTablePKeyToBuff$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implRamCreateTablePKeyToBuff">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableAtomicPKeyToBuff default implRamCreateTableCompositePKeyToBuff$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implRamCreateTableAtomicPKeyToBuff">
 		Buff.set$reference Column Optionality$$reference Column Name$( pkey );</GenRule>
@@ -1884,11 +1884,11 @@ $iterate Columns( each implRamCreateTableInitKeyAttr )$</GenRule>
 	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysCopyId">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableKeysCopyAtomicId default implRamCreateTableKeysMaybeCopyCompositeId$</GenRule>
 	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysCopyAtomicId">
 		pkey = Buff.get$switch IsNullable yes implColumnAttrOptional default implColumnAttrRequired$$Name$();</GenRule>
-	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysMaybeCopyCompositeId">$switch InSuperiorPrimaryKeyRelation yes empty default implRamCreateTableKeysCopyCompositeId$</GenRule> 
+	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysMaybeCopyCompositeId">$implRamCreateTableKeysCopyCompositeId$</GenRule> 
 	<GenRule GenDef="TableCol" Name="implRamCreateTableKeysCopyCompositeId">
 		pkey.set$implColumnAttrOptionality$$Name$( Buff.get$switch IsNullable yes implColumnAttrOptional default implColumnAttrRequired$$Name$() );</GenRule>
 	<GenRule GenDef="Atom" Name="implRamCreateTableKeysCopyId">$switch IsPrimaryIndexKeyAtomic yes implRamCreateTableKeysCopyAtomicId default implRamCreateTableKeysMaybeCopyCompositeId$</GenRule>
-	<GenRule GenDef="Atom" Name="implRamCreateTableKeysMaybeCopyCompositeId">$switch InSuperiorPrimaryKeyRelation yes empty default implRamCreateTableKeysCopyCompositeId$</GenRule> 
+	<GenRule GenDef="Atom" Name="implRamCreateTableKeysMaybeCopyCompositeId">$implRamCreateTableKeysCopyCompositeId$</GenRule> 
 	<GenRule GenDef="Atom" Name="implRamCreateTableKeysCopyAtomicId">
 		pkey = Buff.get$switch IsNullable yes implColumnAttrOptional default implColumnAttrRequired$$Name$();</GenRule>
 	<GenRule GenDef="Atom" Name="implRamCreateTableKeysCopyCompositeId">

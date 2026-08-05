@@ -1218,8 +1218,8 @@ $implJpaSetHistory$</GenRule>
 	<GenRule GenDef="RelationCol" Name="commaPassSrcFromCol">,
 			$passSrcFromCol$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="maybeSetCopyPKeyAttr">$switch HasDefSchema yes empty default setCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
-	<GenRule GenDef="IndexCol" Name="setCopyPKeyAttrIfNotInSuperiorRelationship">$switch InSuperiorPrimaryKeyRelation yes empty default setCopyPKeyAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeSetCopyPKeyAttr">$setCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
+	<GenRule GenDef="IndexCol" Name="setCopyPKeyAttrIfNotInSuperiorRelationship">$setCopyPKeyAttr$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setCopyPKeyAttr">
 		set$reference Column implColumnAttrOptionality$$reference Column Name$(src.get$reference Column implColumnAttrOptionality$$reference Column Name$());</GenRule>
 
@@ -1231,7 +1231,7 @@ $implJpaSetHistory$</GenRule>
 	<GenRule GenDef="Relation" Name="setCopySchemaTableDataRelation">$switch ToTableHasDefSchema yes setCopySchemaTableNonCandidateRelationship default setCopySchemaTableCandidateRelationship$</GenRule>
 	<GenRule GenDef="Value" Name="maybeSetCopyDataAttr">$switch HasDefSchema yes empty default setCopyDataAttrIfNotInPrimaryKeyRelation$</GenRule>
 	<GenRule GenDef="Value" Name="setCopyDataAttrIfNotInPrimaryKeyRelation">$switch InPrimaryKeyRelation yes empty default setCopyNonSuperiorDataAttr$</GenRule>
-	<GenRule GenDef="Value" Name="setCopyNonSuperiorDataAttr">$switch InSuperiorRelation yes empty default setCopyDataAttr$</GenRule>
+	<GenRule GenDef="Value" Name="setCopyNonSuperiorDataAttr">$setCopyDataAttr$</GenRule>
 	<GenRule GenDef="Value" Name="setCopyDataAttr">
 		set$implColumnAttrOptionality$$Name$(src.get$implColumnAttrOptionality$$Name$());</GenRule>
 

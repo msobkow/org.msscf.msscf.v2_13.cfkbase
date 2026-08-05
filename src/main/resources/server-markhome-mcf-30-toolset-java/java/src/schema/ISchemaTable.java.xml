@@ -164,7 +164,7 @@ $switch IsToIndexUnique yes declSchemaTablePKeyColRelationSetter default empty$<
 	<GenRule GenDef="Relation" Name="declDataSchemaTableDataRelationGetterSetter">$switch IsRelationInPrimaryIndex no declSchemaTableRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaTableDataRelationGetter">$switch IsRelationInPrimaryIndex no declSchemaTableRelationGetter default empty$</GenRule>
 	
-	<GenRule GenDef="Value" Name="maybeDeclTableConstructorInitAttr">$switch InSuperiorDataRelation yes empty default declConstructorInitAttr$</GenRule>
+	<GenRule GenDef="Value" Name="maybeDeclTableConstructorInitAttr">$declConstructorInitAttr$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declSchemaTableRelationNonCandidateGetter">
 	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();
@@ -210,9 +210,9 @@ $switch ToTableIsProtected yes declSchemaJpaTableEmbedPKeyRelationAtomicCandidat
 	<GenRule GenDef="Table" Name="declColumnAttrPKeyAttrAccessors">$iterate SuperiorPrimaryKeyRelations( each declColumnAttrPKeyWrapRelationGetterSetter empty empty )$$iterate SubservientPrimaryKeyRelations( each declSchemaTablePKeyColRelationGetter empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declNonSuperiorColumnGetterSetter empty empty )$</GenRule>
 	<GenRule GenDef="Table" Name="declColumnAttrPKeyColumnWrappers">$iterate SuperiorPrimaryKeyRelations( each declColumnAttrPKeyWrapRelationGetterSetter empty empty )$$iterate SubservientPrimaryKeyRelations( each declSchemaTablePKeyColRelationGetter empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declPKeyWrapColumnGetterSetter empty empty )$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="declNonSuperiorColumnGetterSetter">$switch InSuperiorRelation yes declColumnGetter default declColumnGetterSetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="declNonSuperiorColumnGetterSetter">$switch InSuperiorRelation yes declColumnGetter default declColumnGetterSetter$</GenRule>
-	<GenRule GenDef="Atom" Name="declNonSuperiorColumnGetterSetter">$switch InSuperiorRelation yes declColumnGetter default declColumnGetterSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="declNonSuperiorColumnGetterSetter">$declColumnGetterSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="declNonSuperiorColumnGetterSetter">$declColumnGetterSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="declNonSuperiorColumnGetterSetter">$declColumnGetterSetter$</GenRule>
 
 	<GenRule GenDef="Relation" Name="declColumnAttrPKeyWrapRelationGetterSetter">$switch IsToIndexUnique yes declColumnAttrPKeyWrapRelationSingletonGetterSetter default declColumnAttrPKeyWrapRelationDuplicateGetter$</GenRule>
 	<GenRule GenDef="Relation" Name="declColumnAttrPKeyWrapRelationSingletonGetterSetter">$switch ToTableHasDefSchema yes declColumnAttrPKeyWrapRelationSingletonPubGetterSetter default declColumnAttrPKeyWrapRelationSingletonNormalGetterSetter$</GenRule>

@@ -294,7 +294,7 @@ $switch FromTableIsPublic yes implSchemaBuffTableBuffPKeyColRelationSetterPub de
 	<GenRule GenDef="Relation" Name="implDataSchemaBuffTableDataRelationGetterSetter">$switch IsRelationInPrimaryIndex no implSchemaBuffTableRelationGetterSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="implSchemaBuffTableDataRelationGetter">$switch IsRelationInPrimaryIndex no implSchemaBuffTableRelationGetter default empty$</GenRule>
 	
-	<GenRule GenDef="Value" Name="maybeImplBuffTableConstructorInitBuffAttr">$switch InSuperiorDataRelation yes empty default implConstructorInitBuffAttr$</GenRule>
+	<GenRule GenDef="Value" Name="maybeImplBuffTableConstructorInitBuffAttr">$implConstructorInitBuffAttr$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implSchemaBuffTableRelationNonCandidateGetter">
 	@Override
@@ -1205,17 +1205,17 @@ $implPubBuffSetHistory$</GenRule>
 	<GenRule GenDef="Object" Name="commaPubPassSrcFromCol">$switch IsPublic yes commaPassSrcFromCol default empty$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="maybeBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setBuffCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
-	<GenRule GenDef="IndexCol" Name="setBuffCopyPKeyAttrIfNotInSuperiorRelationship">$switch InSuperiorRelation yes empty default setBuffCopyPKeyAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="setBuffCopyPKeyAttrIfNotInSuperiorRelationship">$setBuffCopyPKeyAttr$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setBuffCopyPKeyAttr">
 		set$reference Column implColumnAttrOptionality$$reference Column Name$(src.get$reference Column implColumnAttrOptionality$$reference Column Name$());</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="maybeProtBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setProtBuffCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
-	<GenRule GenDef="IndexCol" Name="setProtBuffCopyPKeyAttrIfNotInSuperiorRelationship">$switch InSuperiorRelation yes empty default setProtBuffCopyPKeyAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="setProtBuffCopyPKeyAttrIfNotInSuperiorRelationship">$setProtBuffCopyPKeyAttr$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setProtBuffCopyPKeyAttr">
 		set$reference Column implColumnAttrOptionality$$reference Column Name$(src.get$reference Column implColumnAttrOptionality$$reference Column Name$());</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="maybePubBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setPubBuffCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
-	<GenRule GenDef="IndexCol" Name="setPubBuffCopyPKeyAttrIfNotInSuperiorRelationship">$switch InSuperiorRelation yes empty default setPubBuffCopyPKeyAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="setPubBuffCopyPKeyAttrIfNotInSuperiorRelationship">$setPubBuffCopyPKeyAttr$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setPubBuffCopyPKeyAttr">
 		set$reference Column implColumnAttrOptionality$$reference Column Name$(src.get$reference Column implColumnAttrOptionality$$reference Column Name$());</GenRule>
 
@@ -1233,7 +1233,7 @@ $implPubBuffSetHistory$</GenRule>
 	<GenRule GenDef="Relation" Name="setBuffCopySchemaTableDataRelation">$switch ToTableHasDefSchema yes setBuffCopySchemaTableNonCandidateRelationship default setBuffCopySchemaTableCandidateRelationship$</GenRule>
 	<GenRule GenDef="Value" Name="maybeBuffSetCopyDataAttr">$switch HasDefSchema yes empty default setBuffCopyDataAttrIfNotInPrimaryKeyRelation$</GenRule>
 	<GenRule GenDef="Value" Name="setBuffCopyDataAttrIfNotInPrimaryKeyRelation">$switch InPrimaryKeyRelation yes empty default setBuffCopyNonSuperiorDataAttr$</GenRule>
-	<GenRule GenDef="Value" Name="setBuffCopyNonSuperiorDataAttr">$switch InSuperiorRelation yes empty default setBuffCopyDataAttr$</GenRule>
+	<GenRule GenDef="Value" Name="setBuffCopyNonSuperiorDataAttr">$setBuffCopyDataAttr$</GenRule>
 	<GenRule GenDef="Value" Name="setBuffCopyDataAttr">
 		set$implColumnAttrOptionality$$Name$(src.get$implColumnAttrOptionality$$Name$());</GenRule>
 
@@ -1242,7 +1242,7 @@ $implPubBuffSetHistory$</GenRule>
 	<GenRule GenDef="Relation" Name="setProtBuffCopySchemaTableDataRelation">$switch ToTableHasDefSchema yes setProtBuffCopySchemaTableNonCandidateRelationship default setProtBuffCopySchemaTableCandidateRelationship$</GenRule>
 	<GenRule GenDef="Value" Name="maybeProtBuffSetCopyDataAttr">$switch HasDefSchema yes empty default setProtBuffCopyDataAttrIfNotInPrimaryKeyRelation$</GenRule>
 	<GenRule GenDef="Value" Name="setProtBuffCopyDataAttrIfNotInPrimaryKeyRelation">$switch InPrimaryKeyRelation yes empty default setProtBuffCopyNonSuperiorDataAttr$</GenRule>
-	<GenRule GenDef="Value" Name="setProtBuffCopyNonSuperiorDataAttr">$switch InSuperiorRelation yes empty default setProtBuffCopyDataAttr$</GenRule>
+	<GenRule GenDef="Value" Name="setProtBuffCopyNonSuperiorDataAttr">$setProtBuffCopyDataAttr$</GenRule>
 	<GenRule GenDef="Value" Name="setProtBuffCopyDataAttr">$switch IsProtected yes setBuffCopyDataAttr default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="maybePubBuffCopySetSchemaTableDataRelation">$switch HasDefSchema yes empty default setPubBuffCopySchemaTableInSuperiorDataRelation$</GenRule>
@@ -1250,7 +1250,7 @@ $implPubBuffSetHistory$</GenRule>
 	<GenRule GenDef="Relation" Name="setPubBuffCopySchemaTableDataRelation">$switch ToTableHasDefSchema yes setPubBuffCopySchemaTableNonCandidateRelationship default setPubBuffCopySchemaTableCandidateRelationship$</GenRule>
 	<GenRule GenDef="Value" Name="maybePubBuffSetCopyDataAttr">$switch HasDefSchema yes empty default setPubBuffCopyDataAttrIfNotInPrimaryKeyRelation$</GenRule>
 	<GenRule GenDef="Value" Name="setPubBuffCopyDataAttrIfNotInPrimaryKeyRelation">$switch InPrimaryKeyRelation yes empty default setPubBuffCopyNonSuperiorDataAttr$</GenRule>
-	<GenRule GenDef="Value" Name="setPubBuffCopyNonSuperiorDataAttr">$switch InSuperiorRelation yes empty default setPubBuffCopyDataAttr$</GenRule>
+	<GenRule GenDef="Value" Name="setPubBuffCopyNonSuperiorDataAttr">$setPubBuffCopyDataAttr$</GenRule>
 	<GenRule GenDef="Value" Name="setPubBuffCopyDataAttr">$switch IsPublic yes setBuffCopyDataAttr default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaBuffTableToString">
