@@ -93,15 +93,22 @@ public class $SchemaName$Jpa$TableName$PKey$switch HasDefSchema yes SchemaJpaTab
 	each implJpaColumnAttr )$
 $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex iterate Columns( each implJpaPKeyColumnGetterSetter )$$implPKeyEquals$$reference PrimaryKeyIndex implPKeyGetHashCode$$implPKeyCompareTo$$reference PrimaryKeyIndex implPKeyToString$</GenRule>
 
-	<GenRule GenDef="Object" Name="directValueGetter">$lower implColumnAttrOptionality$$Name$</GenRule>
+	<GenRule GenDef="Object" Name="directValueGetter">return($lower implColumnAttrOptionality$$Name$)</GenRule>
 	<GenRule GenDef="IndexCol" Name="directValueGetter">$reference Column directValueGetter$</GenRule>
-	<GenRule GenDef="Object" Name="directValueSetter">$lower implColumnAttrOptionality$$Name$</GenRule>
+	<GenRule GenDef="Object" Name="directValueSetter">$lower implColumnAttrOptionality$$Name$ = value</GenRule>
 	<GenRule GenDef="IndexCol" Name="directValueSetter">$reference Column directValueSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMember">$switch IsFromIndexUnique yes declSchemaJpaRelationMemberOneToSomething default declSchemaJpaRelationMemberManyToSomething$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToSomething">$switch IsToIndexUnique yes declSchemaJpaRelationMemberOneToOne default declSchemaJpaRelationMemberOneToMany$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberManyToSomething">$switch IsToIndexUnique yes declSchemaJpaRelationMemberManyToOne default declSchemaJpaRelationMemberManyToMany$</GenRule>
+	<GenRule GenDef="Value" Name="applyValueGetter">$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$</GenRule>
+	<GenRule GenDef="Value" Name="applyValueSetter">$switch ColumnInPrimaryIndex yes pkeyValueSetter default directValueSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="applyValueGetter">$reference Column applyValueGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="applyValueSetter">$reference Column applyValueSetter$</GenRule>
+	<GenRule GenDef="RelationCol" Name="applyFromValueGetter">$reference FromCol reference Column applyValueGetter$</GenRule>
+	<GenRule GenDef="RelationCol" Name="applyFromValueSetter">$reference FromCol reference Column applyValueSetter$</GenRule>
+	<GenRule GenDef="RelationCol" Name="applyToValueGetter">$reference ToCol reference Column applyValueGetter$</GenRule>
+	<GenRule GenDef="RelationCol" Name="applyToValueSetter">$reference ToCol reference Column applyValueSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="declSchemaJpaRelationMemberOneToOne">
-		
 	@OneToOne(fetch=FetchType.LAZY$declSchemaJpaRelationMemberOptionalClause$$switch JpaRequiresMappedBy yes emitJpaMappedBy default empty$)$switch JpaRequiresMappedBy yes declSchemaJpaRelationOneToOneMappedTags default declSchemaJpaRelationOneToOneUnmappedTags$
 	protected $emitMappingDataType$ $leadlower OptionalOrRequired$$RelationType$$Suffix$;</GenRule>
 	
@@ -2021,14 +2028,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2075,14 +2082,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2117,14 +2124,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqBoolGetter">
 	@Override
 	public boolean get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectBoolGetter">
 	@Override
 	public boolean get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2143,14 +2150,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptBoolGetter">
 	@Override
 	public Boolean get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectBoolGetter">
 	@Override
 	public Boolean get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2170,7 +2177,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implReqEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
@@ -2178,7 +2185,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implReqDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2212,7 +2219,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implOptEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
@@ -2220,7 +2227,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implOptDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2243,14 +2250,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqInt16Getter">
 	@Override
 	public short get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectInt16Getter">
 	@Override
 	public short get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2271,14 +2278,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptInt16Getter">
 	@Override
 	public Short get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectInt16Getter">
 	@Override
 	public Short get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2299,14 +2306,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqInt32Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectInt32Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2327,14 +2334,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptInt32Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectInt32Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2355,14 +2362,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqInt64Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectInt64Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2383,14 +2390,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptInt64Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectInt64Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2411,14 +2418,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqUInt16Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectUInt16Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2439,14 +2446,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptUInt16Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectUInt16Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2467,14 +2474,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqUInt32Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectUInt32Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2495,14 +2502,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptUInt32Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectUInt32Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2523,14 +2530,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2564,14 +2571,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2592,14 +2599,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqFloatGetter">
 	@Override
 	public float get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectFloatGetter">
 	@Override
 	public float get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2618,14 +2625,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptFloatGetter">
 	@Override
 	public Float get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectFloatGetter">
 	@Override
 	public Float get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2644,14 +2651,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqDoubleGetter">
 	@Override
 	public double get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectDoubleGetter">
 	@Override
 	public double get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2670,14 +2677,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptDoubleGetter">
 	@Override
 	public Double get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectDoubleGetter">
 	@Override
 	public Double get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2696,14 +2703,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2736,14 +2743,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2764,14 +2771,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2802,14 +2809,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2828,14 +2835,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2866,14 +2873,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2892,14 +2899,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2930,14 +2937,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2956,14 +2963,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -2994,14 +3001,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3020,14 +3027,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3058,14 +3065,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3084,14 +3091,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3122,14 +3129,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3148,14 +3155,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3186,14 +3193,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3212,14 +3219,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3250,14 +3257,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3288,14 +3295,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3326,14 +3333,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3352,14 +3359,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3390,14 +3397,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3416,14 +3423,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3454,14 +3461,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3480,14 +3487,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3518,14 +3525,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3544,14 +3551,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3582,14 +3589,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3608,14 +3615,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3646,14 +3653,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3672,14 +3679,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3710,14 +3717,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3736,14 +3743,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3774,14 +3781,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3800,14 +3807,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3838,14 +3845,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3864,14 +3871,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3902,14 +3909,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3928,14 +3935,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implReqTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implReqDirectTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -3966,14 +3973,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implOptTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implOptDirectTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -4828,14 +4835,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -4882,14 +4889,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -4924,14 +4931,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqBoolGetter">
 	@Override
 	public boolean get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectBoolGetter">
 	@Override
 	public boolean get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -4950,14 +4957,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptBoolGetter">
 	@Override
 	public Boolean get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectBoolGetter">
 	@Override
 	public Boolean get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -4977,7 +4984,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implProtReqEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
@@ -4985,7 +4992,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implProtReqDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5019,7 +5026,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implProtOptEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
@@ -5027,7 +5034,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implProtOptDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5050,14 +5057,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqInt16Getter">
 	@Override
 	public short get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectInt16Getter">
 	@Override
 	public short get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5078,14 +5085,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptInt16Getter">
 	@Override
 	public Short get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectInt16Getter">
 	@Override
 	public Short get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5106,14 +5113,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqInt32Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectInt32Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5134,14 +5141,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptInt32Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectInt32Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5162,14 +5169,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqInt64Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectInt64Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5190,14 +5197,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptInt64Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectInt64Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5218,14 +5225,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqUInt16Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectUInt16Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5246,14 +5253,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptUInt16Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectUInt16Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5274,14 +5281,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqUInt32Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectUInt32Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5302,14 +5309,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptUInt32Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectUInt32Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5330,14 +5337,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5371,14 +5378,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5399,14 +5406,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqFloatGetter">
 	@Override
 	public float get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectFloatGetter">
 	@Override
 	public float get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5425,14 +5432,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptFloatGetter">
 	@Override
 	public Float get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectFloatGetter">
 	@Override
 	public Float get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5451,14 +5458,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqDoubleGetter">
 	@Override
 	public double get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectDoubleGetter">
 	@Override
 	public double get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5477,14 +5484,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptDoubleGetter">
 	@Override
 	public Double get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectDoubleGetter">
 	@Override
 	public Double get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5503,14 +5510,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5543,14 +5550,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5571,14 +5578,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5609,14 +5616,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5635,14 +5642,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5673,14 +5680,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5699,14 +5706,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5737,14 +5744,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5763,14 +5770,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5801,14 +5808,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5827,14 +5834,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5865,14 +5872,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5891,14 +5898,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5929,14 +5936,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5955,14 +5962,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -5993,14 +6000,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6019,14 +6026,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6057,14 +6064,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6089,14 +6096,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6127,14 +6134,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6153,14 +6160,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6191,14 +6198,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6217,14 +6224,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6255,14 +6262,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6281,14 +6288,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6319,14 +6326,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6345,14 +6352,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6383,14 +6390,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6409,14 +6416,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6447,14 +6454,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6473,14 +6480,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6511,14 +6518,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6537,14 +6544,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6575,14 +6582,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6601,14 +6608,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6639,14 +6646,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6665,14 +6672,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6703,14 +6710,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6729,14 +6736,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtReqTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtReqDirectTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -6767,14 +6774,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implProtOptTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValueProtGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implProtOptDirectTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10081,14 +10088,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10135,14 +10142,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectBlobGetter">
 	@Override
 	public byte[] get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10177,14 +10184,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqBoolGetter">
 	@Override
 	public boolean get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectBoolGetter">
 	@Override
 	public boolean get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10203,14 +10210,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptBoolGetter">
 	@Override
 	public Boolean get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectBoolGetter">
 	@Override
 	public Boolean get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10230,7 +10237,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implPubReqEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
@@ -10238,7 +10245,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implPubReqDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10272,7 +10279,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implPubOptEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
@@ -10280,7 +10287,7 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Value" Name="implPubOptDirectEnumGetter">
 	@Override
 	public $reference DataType EffCodeVisSchemaName$.$reference DataType Name$ get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10303,14 +10310,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqInt16Getter">
 	@Override
 	public short get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectInt16Getter">
 	@Override
 	public short get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10331,14 +10338,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptInt16Getter">
 	@Override
 	public Short get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectInt16Getter">
 	@Override
 	public Short get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10359,14 +10366,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqInt32Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectInt32Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10387,14 +10394,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptInt32Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectInt32Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10415,14 +10422,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqInt64Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectInt64Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10443,14 +10450,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptInt64Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectInt64Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10471,14 +10478,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqUInt16Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectUInt16Getter">
 	@Override
 	public int get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10499,14 +10506,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptUInt16Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectUInt16Getter">
 	@Override
 	public Integer get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10527,14 +10534,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqUInt32Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectUInt32Getter">
 	@Override
 	public long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10555,14 +10562,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptUInt32Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectUInt32Getter">
 	@Override
 	public Long get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10583,14 +10590,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10624,14 +10631,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectUInt64Getter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10652,14 +10659,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqFloatGetter">
 	@Override
 	public float get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectFloatGetter">
 	@Override
 	public float get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10678,14 +10685,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptFloatGetter">
 	@Override
 	public Float get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectFloatGetter">
 	@Override
 	public Float get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10704,14 +10711,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqDoubleGetter">
 	@Override
 	public double get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectDoubleGetter">
 	@Override
 	public double get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10730,14 +10737,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptDoubleGetter">
 	@Override
 	public Double get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectDoubleGetter">
 	@Override
 	public Double get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10756,14 +10763,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10796,14 +10803,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectNumberGetter">
 	@Override
 	public BigDecimal get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10824,14 +10831,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10862,14 +10869,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10888,14 +10895,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10926,14 +10933,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10952,14 +10959,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -10990,14 +10997,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11016,14 +11023,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11054,14 +11061,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectTZDateGetter">
 	@Override
 	public LocalDate get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11080,14 +11087,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11118,14 +11125,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectTZTimeGetter">
 	@Override
 	public LocalTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11144,14 +11151,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11182,14 +11189,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectTZTimestampGetter">
 	@Override
 	public LocalDateTime get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11208,14 +11215,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11246,14 +11253,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectDbKeyHash128Getter">
 	@Override
 	public CFLibDbKeyHash128 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11272,14 +11279,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11310,14 +11317,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectDbKeyHash160Getter">
 	@Override
 	public CFLibDbKeyHash160 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11348,14 +11355,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11386,14 +11393,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectDbKeyHash224Getter">
 	@Override
 	public CFLibDbKeyHash224 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11412,14 +11419,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11450,14 +11457,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectDbKeyHash256Getter">
 	@Override
 	public CFLibDbKeyHash256 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11476,14 +11483,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11514,14 +11521,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectDbKeyHash384Getter">
 	@Override
 	public CFLibDbKeyHash384 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11540,14 +11547,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11578,14 +11585,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectDbKeyHash512Getter">
 	@Override
 	public CFLibDbKeyHash512 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11604,14 +11611,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11642,14 +11649,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectUuid6Getter">
 	@Override
 	public CFLibUuid6 get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11668,14 +11675,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11706,14 +11713,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectUuidGetter">
 	@Override
 	public UUID get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11732,14 +11739,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11770,14 +11777,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectStringGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11796,14 +11803,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11834,14 +11841,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11860,14 +11867,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11898,14 +11905,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectNmTokenGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11924,14 +11931,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11962,14 +11969,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectNmTokensGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -11988,14 +11995,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubReqTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubReqDirectTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
@@ -12026,14 +12033,14 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="Object" Name="implPubOptTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$ );
+		$switch ColumnInPrimaryIndex yes pkeyValuePubGetter default directValueGetter$;
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implPubOptDirectTextGetter">
 	@Override
 	public String get$implColumnAttrOptionality$$Name$() {
-		return( $directValueGetter$ );
+		$directValueGetter$;
 	}
 </GenRule>
 
