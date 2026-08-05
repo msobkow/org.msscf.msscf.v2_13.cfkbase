@@ -1502,8 +1502,8 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="IndexCol" Name="implColumnAttrJpaBindingUuid">
 	@Column( name="$DbColumnName$", nullable=$IsNullaBool$, length=16 )</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implJpaPKeyColumnGetterSetter">$reference Column implJpaPKeyColumnGetterSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implJpaPKeyColumnGetterSetter">$implColumnGetterSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaPKeyColumnGetterSetter">$reference Column implDirectGetterSetter$</GenRule>
+	<GenRule GenDef="Object" Name="implJpaPKeyColumnGetterSetter">$implDirectGetterSetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="derefReturnNull">
 			return null;</GenRule>
@@ -1592,59 +1592,17 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="IndexCol" Name="implPubColumnGetter">$switch IsPublic yes reallyImplPubColumnGetter default empty$</GenRule>
 	<GenRule GenDef="IndexCol" Name="reallyImplPubColumnGetter">$switch IsNullable yes implPubOptGetter default implPubReqGetter$</GenRule>
 
-	<GenRule GenDef="Object" Name="implDirectGetterSetter">$switch IsPublic yes implPubDirectGetterSetter default maybeProtDirectGetterSetter$</GenRule>
-	<GenRule GenDef="Object" Name="maybeProtDirectGetterSetter">$switch IsProtected yes implProtDirectGetter default implPrivDirectGetterSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implDirectGetter">$switch IsPublic yes implPubDirectGetter default maybeProtDirectGetter$</GenRule>
-	<GenRule GenDef="Object" Name="maybeProtDirectGetter">$switch IsProtected yes implProtDirectGetter default implPrivDirectGetter$</GenRule>
-	<GenRule GenDef="Object" Name="implDirectSetter">$switch IsPublic yes implPubDirectSetter default maybeProtDirectSetter$</GenRule>
-	<GenRule GenDef="Object" Name="maybeProtDirectSetter">$switch IsProtected yes implProtDirectSetter default implPrivDirectSetter$</GenRule>
+	<GenRule GenDef="Object" Name="implProtDirectGetterSetter">$switch IsProtected yes implDirectGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Object" Name="implPubDirectGetterSetter">$switch IsPublic yes implDirectGetterSetter default empty$</GenRule>
+	<GenRule GenDef="Object" Name="implDirectGetterSetter">$implDirectGetter$$implDirectSetter$</GenRule>
+	<GenRule GenDef="Object" Name="implDirectGetter">$switch IsNullable yes implOptDirectGetter default implReqDirectGetter$</GenRule>
+	<GenRule GenDef="Object" Name="implDirectSetter">$switch IsNullable yes implOptDirectSetter default implReqDirectSetter$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implDirectGetterSetter">$reference Column implDirectGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="maybeProtDirectGetterSetter">$reference Column maybeProtDirectGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implDirectGetter">$reference Column implDirectGetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="maybeProtDirectGetter">$reference Column maybeProtDirectGetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implDirectSetter">$reference Column implDirectSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="maybeProtDirectSetter">$reference Column maybeProtDirectSetter$</GenRule>
-
-	<GenRule GenDef="Object" Name="implPubDirectGetterSetter">$switch IsNullable yes implPubOptDirectGetterSetter default implPubReqDirectGetterSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPubOptDirectGetterSetter">$implPubOptDirectGetter$$implPubOptDirectSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPubReqDirectGetterSetter">$implPubReqDirectGetter$$implPubReqDirectSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implProtDirectGetterSetter">$switch IsNullable yes implProtOptDirectGetterSetter default implProtReqDirectGetterSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implProtOptDirectGetterSetter">$implProtOptDirectGetter$$implProtOptDirectSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implProtReqDirectGetterSetter">$implProtReqDirectGetter$$implProtReqDirectSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPrivDirectGetterSetter">$switch IsNullable yes implPrivOptDirectGetterSetter default implPrivReqDirectGetterSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPrivOptDirectGetterSetter">$implPrivOptDirectGetter$$implPrivOptDirectSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPrivReqDirectGetterSetter">$implPrivReqDirectGetter$$implPrivReqDirectSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPubDirectGetter">$switch IsNullable yes implPubOptDirectGetter default implPubReqDirectGetter$</GenRule>
-	<GenRule GenDef="Object" Name="implProtDirectGetter">$switch IsNullable yes implProtOptDirectGetter default implProtReqDirectGetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPrivDirectGetter">$switch IsNullable yes implPrivOptDirectGetter default implPrivReqDirectGetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPubDirectSetter">$switch IsNullable yes implPubOptDirectSetter default implPubReqDirectSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implProtDirectSetter">$switch IsNullable yes implProtOptDirectSetter default implProtReqDirectSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPrivDirectSetter">$switch IsNullable yes implPrivOptDirectSetter default implPrivReqDirectSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPrivReqDirectGetter">$implReqDirectGetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPrivReqDirectSetter">$implReqDirectSetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPrivOptDirectGetter">$implOptDirectGetter$</GenRule>
-	<GenRule GenDef="Object" Name="implPrivOptDirectSetter">$implOptDirectSetter$</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implPubDirectGetterSetter">$reference Column implPubDirectGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPubOptDirectGetterSetter">$reference Column implPubOptDirectGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPubReqDirectGetterSetter">$reference Column implPubReqDirectGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implProtDirectGetterSetter">$reference Column implProtDirectGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implProtOptDirectGetterSetter">$reference Column implProtOptDirectGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implProtReqDirectGetterSetter">$reference Column implProtReqDirectGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPrivDirectGetterSetter">$reference Column implPrivDirectGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPrivOptDirectGetterSetter">$reference Column implPrivOptDirectGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPrivReqDirectGetterSetter">$reference Column implPrivReqDirectGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPubDirectGetter">$reference Column implPubDirectGetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implProtDirectGetter">$reference Column implProtDirectGetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPrivDirectGetter">$reference Column implPrivDirectGetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPubDirectSetter">$reference Column implPubDirectSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implProtDirectSetter">$reference Column implProtDirectSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPrivDirectSetter">$reference Column implPrivDirectSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPrivReqDirectGetter">$reference Column implPrivReqDirectGetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPrivReqDirectSetter">$reference Column implPrivReqDirectSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPrivOptDirectGetter">$reference Column implPrivOptDirectGetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implPrivOptDirectSetter">$reference Column implPrivOptDirectSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implProtDirectGetterSetter">$reference Column switch IsProtected yes implDirectGetterSetter default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPubDirectGetterSetter">$reference Column switch IsPublic yes implDirectGetterSetter default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implDirectGetterSetter">$reference Column implDirectGetter$$reference Column implDirectSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implDirectGetter">$reference Column switch IsNullable yes implOptDirectGetter default implReqDirectGetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implDirectSetter">$reference Column switch IsNullable yes implOptDirectSetter default implReqDirectSetter$</GenRule>
 
 	<GenRule GenDef="Object" Name="ProtMaxLen">$switch IsProtected yes MaxLen default empty$</GenRule>
 	<GenRule GenDef="Object" Name="PubMaxLen">$switch IsPublic yes MaxLen default empty$</GenRule>
