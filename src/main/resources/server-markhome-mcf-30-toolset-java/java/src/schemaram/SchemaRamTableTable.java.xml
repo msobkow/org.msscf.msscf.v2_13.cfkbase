@@ -1330,7 +1330,7 @@ $implRamCreateTableInitChainLinksBody$
 	<GenRule GenDef="Object" Name="checkPointerHasValue"
 		>get$Optionality$$Name$() != null</GenRule>
 
-	<GenRule GenDef="Object" Name="derefPKeyValue"
+	<GenRule GenDef="Object" Name="derefPKey"
 		>$switch IsNullable yes derefPKeyIfNotNull default derefPKeyDirect$</GenRule>
 	<GenRule GenDef="Object" Name="derefPKeyIfNotNull"
 		>( $switch BaseModelAtomClass
@@ -1343,7 +1343,7 @@ $implRamCreateTableInitChainLinksBody$
 			Id64Gen derefPKeyCheckHasValue
 			FloatDef derefPKeyCheckHasValue
 			DoubleDef derefPKeyCheckHasValue
-			default derefPKeyCheckPointerNotNull$ ) ? ( "\\"" + xmlEncodeString( $derefPKeyValue$.ToString() + "\\"" ) : "null" </GenRule>
+			default derefPKeyCheckPointerNotNull$ ) ? ( "\\"" + xmlEncodeString( $derefPKey$.ToString() + "\\"" ) : "null" </GenRule>
 
 	<GenRule GenDef="Object" Name="derefValue"
 		>$switch IsNullable yes derefIfNotNull default derefDirect$</GenRule>
@@ -1366,7 +1366,7 @@ $implRamCreateTableInitChainLinksBody$
 	<GenRule GenDef="Object" Name="derefDotPointer"
 		>get$Optionality$$Name$()</GenRule>
 
-	<GenRule GenDef="TableCol" Name="derefPKeyValue"
+	<GenRule GenDef="TableCol" Name="derefPKey"
 		>$switch BaseModelAtomClass
 			BoolDef derefPKeyDotValue
 			Int16Def derefPKeyDotValue
@@ -1379,7 +1379,7 @@ $implRamCreateTableInitChainLinksBody$
 			DoubleDef derefPKeyDotValue
 			default derefPKeyDotPointer$</GenRule>
 
-	<GenRule GenDef="Atom" Name="derefPKeyValue"
+	<GenRule GenDef="Atom" Name="derefPKey"
 		>$switch BaseModelAtomClass
 			BoolDef derefPKeyDotValue
 			Int16Def derefPKeyDotValue
