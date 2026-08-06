@@ -666,17 +666,22 @@ $switch IsPrimaryIndexKeyAtomic yes empty default implBuffColumnAttrPKeyColumnWr
 	<GenRule GenDef="Table" Name="implBuffOptAuditColumnAttr"
 		>$switch HasAuditColumns yes implBuffAuditColumnAttr default empty$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="emitScopingMidfix">$reference Column switch CodeVis case Public Pub case Protected Prot default empty$</GenRule>
-	<GenRule GenDef="Value" Name="emitScopingMidfix">$switch CodeVis case Public Pub case Protected Prot default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="emitScopingMidfix">$reference Column switch CodeVis case Private checkForScopingSpecificallyPrivate case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
+	<GenRule GenDef="IndexCol" Name="checkForScopingSpecificallyPrivate">$reference Column switch IsSpecificallyPrivate yes Priv default checkForScopingSpecificallyProtected$</GenRule>
+	<GenRule GenDef="IndexCol" Name="checkForScopingSpecificallyProtected">$reference Column switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
+	<GenRule GenDef="Value" Name="emitScopingMidfix">$switch CodeVis case Private checkForScopingSpecificallyPrivate case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
+	<GenRule GenDef="Value" Name="checkForScopingSpecificallyPrivate">$switch IsSpecificallyPrivate yes Priv default checkForScopingSpecificallyProtected$</GenRule>
+	<GenRule GenDef="Value" Name="checkForScopingSpecificallyProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
 	<GenRule GenDef="Object" Name="Pub">Pub</GenRule>
 	<GenRule GenDef="Object" Name="Prot">Prot</GenRule>
+	<GenRule GenDef="Object" Name="Priv"></GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffAuditColumnAttr">
-	protected CFLibDbKeyHash256 createdByUserId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$PubSecUser.S_INIT_CREATED_BY.toString());
-	protected CFLibDbKeyHash256 createdBySessionId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$PubSecSession.S_INIT_CREATED_BY.toString());
+	protected CFLibDbKeyHash256 createdByUserId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$PubSecUser.S_INIT_CREATED_BY);
+	protected CFLibDbKeyHash256 createdBySessionId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$PubSecSession.S_SECSESSIONID_INIT_VALUE);
 	protected LocalDateTime createdAt = LocalDateTime.now();
-	protected CFLibDbKeyHash256 updatedByUserId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$PubSecUser.S_INIT_UPDATED_BY.toString());
-	protected CFLibDbKeyHash256 updatedBySessionId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$PubSecSession.S_INIT_UPDATED_BY.toString());
+	protected CFLibDbKeyHash256 updatedByUserId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$PubSecUser.S_INIT_UPDATED_BY);
+	protected CFLibDbKeyHash256 updatedBySessionId = CFLibDbKeyHash256.fromHex(I$DefSchemaName$PubSecSession.S_SECSESSIONID_INIT_VALUE);
 	protected LocalDateTime updatedAt = LocalDateTime.now();</GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffColumnOptAuditGetterSetters"
