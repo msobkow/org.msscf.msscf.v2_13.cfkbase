@@ -134,7 +134,7 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 	<GenRule GenDef="IndexCol" Name="implSetterCheckMaxValue">$reference Column implSetterCheckMaxValue$</GenRule>
 	<GenRule GenDef="IndexCol" Name="maybeSetterCheckProtMaxValue">$reference Column maybeSetterCheckProtMaxValue$</GenRule>
 	
-	<GenRule GenDef="Table" Name="implColumnAttrBuffPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes implColumnAttrBuffPKeyColumnAccessors default implColumnAttrBuffPKeyInstanceAccessors$</GenRule>
+	<GenRule GenDef="Table" Name="implColumnAttrBuffPKeyAccessors">$switch IsPrimaryIndexKeyAtomic yes implColumnAttrBuffPKeyColumnAccessors default implColumnAttrBuffPKeyInstanceAccessors$$reference BaseClass reference PrimaryIndex iterate Columns( lone implDirectGetterSetter each implColumnGetterSetter empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implColumnAttrBuffPKeyInstanceAccessors">
 	@Override
@@ -151,7 +151,7 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 			this.pkey = pkey;
 		}
 	}
-$switch IsPrimaryIndexKeyAtomic yes empty default implColumnAttrBuffPKeyColumnWrappers$</GenRule>
+</GenRule>
 
 	<GenRule GenDef="Relation" Name="implSchemaBuffTableRelationNormalGetter">$switch IsToIndexUnique yes implSchemaBuffTableRelationNormalGetterInst default implSchemaBuffTableRelationNormalGetterList$</GenRule>
 	<GenRule GenDef="Relation" Name="implSchemaBuffTableRelationNormalGetterInst">
@@ -387,8 +387,8 @@ $switch ToTableIsPublic yes implColumnAttrBuffPKeyWrapRelationSingletonSetterPub
 	}
 </GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implBuffPKeyWrapColumnGetterSetter">$implDirectGetterSetter$</GenRule>
-	<GenRule GenDef="Value" Name="implBuffPKeyWrapColumnGetterSetter">$implDirectGetterSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implBuffPKeyWrapColumnGetterSetter">$implBuffColumnSetter$</GenRule>
+	<GenRule GenDef="Value" Name="implBuffPKeyWrapColumnGetterSetter">$implBuffColumnSetter$</GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffPKeyGetterSetters">
 		>$switch HasSuperClassRelation no implColumnOptAuditGetterSetters default empty$$iterate Columns( each implNonSuperiorColumnGetterSetter )$</GenRule>
@@ -597,8 +597,8 @@ $switch ToTableIsProtected yes implSchemaBuffTableRelationSetterProt default emp
 
 	<GenRule GenDef="IndexCol" Name="implNonSuperiorColumnGetterSetter">$implBuffColumnGetterSetter$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implPKeyWrapColumnGetterSetter">$reallyImplPKeyWrapColumnGetterSetter$</GenRule>
-	<GenRule GenDef="IndexCol" Name="reallyImplPKeyWrapColumnGetterSetter">$implBuffColumnGetterSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPKeyWrapColumnGetterSetter">$implPKeyWrapColumnGetter$$implPKeyWrapColumnSetter$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implPKeyWrapColumnGetter">$implBuffColumnGetter$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implPKeyWrapColumnSetter">$implBuffColumnSetter$</GenRule>
 
 	<GenRule GenDef="Table" Name="implBuffColumnAttrPKeyColumnAccessorsSetAttrOnlyIfNotNull">
@@ -624,7 +624,7 @@ $switch ToTableIsProtected yes implSchemaBuffTableRelationSetterProt default emp
 		}
 		this.pkey = ($reference BaseClass reference PrimaryKeyIndex DefSchemaName$Buff$reference BaseClass reference PrimaryKeyIndex reference Table TableName$PKey)pkey;
 	}
-$switch IsPrimaryIndexKeyAtomic yes empty default implBuffColumnAttrPKeyColumnWrappers$</GenRule>
+</GenRule>
 
 	<GenRule GenDef="Index" Name="maybeBuffImplEqualsCmpKey"
 		>$switch IsPrimaryIndex yes empty default implBuffEqualsCmpKey$</GenRule>
@@ -666,9 +666,19 @@ $switch IsPrimaryIndexKeyAtomic yes empty default implBuffColumnAttrPKeyColumnWr
 	<GenRule GenDef="Table" Name="implBuffOptAuditColumnAttr"
 		>$switch HasAuditColumns yes implBuffAuditColumnAttr default empty$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="emitScopingMidfix">$reference Column switch CodeVis case Private checkForScopingSpecificallyPrivate case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
-	<GenRule GenDef="IndexCol" Name="checkForScopingSpecificallyPrivate">$reference Column switch IsSpecificallyPrivate yes Priv default checkForScopingSpecificallyProtected$</GenRule>
-	<GenRule GenDef="IndexCol" Name="checkForScopingSpecificallyProtected">$reference Column switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
+	<GenRule GenDef="Table" Name="emitScopingMidfix">$switch CodeVis case Private checkForScopingSpecificallyPrivate case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
+	<GenRule GenDef="Table" Name="checkForScopingSpecificallyPrivate">$switch IsSpecificallyPrivate yes Priv default checkForScopingSpecificallyProtected$</GenRule>
+	<GenRule GenDef="Table" Name="checkForScopingSpecificallyProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
+	<GenRule GenDef="Index" Name="emitScopingMidfix">$switch CodeVis case Private checkForScopingSpecificallyPrivate case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
+	<GenRule GenDef="Index" Name="checkForScopingSpecificallyPrivate">$switch IsSpecificallyPrivate yes Priv default checkForScopingSpecificallyProtected$</GenRule>
+	<GenRule GenDef="Index" Name="checkForScopingSpecificallyProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
+	<GenRule GenDef="IndexCol" Name="emitScopingMidfix">$reference Column emitScopingMidfix$</GenRule>
+	<GenRule GenDef="Relation" Name="emitScopingMidfix">$switch CodeVis case Private checkForScopingSpecificallyPrivate case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
+	<GenRule GenDef="Relation" Name="checkForScopingSpecificallyPrivate">$switch IsSpecificallyPrivate yes Priv default checkForScopingSpecificallyProtected$</GenRule>
+	<GenRule GenDef="Relation" Name="checkForScopingSpecificallyProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
+	<GenRule GenDef="RelationCol" Name="emitFromScopingMidfix">$reference FromCol reference Column emitScopingMidfix$</GenRule>
+	<GenRule GenDef="RelationCol" Name="emitToScopingMidfix">$reference ToCol reference Column emitScopingMidfix$</GenRule>
+
 	<GenRule GenDef="Value" Name="emitScopingMidfix">$switch CodeVis case Private checkForScopingSpecificallyPrivate case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
 	<GenRule GenDef="Value" Name="checkForScopingSpecificallyPrivate">$switch IsSpecificallyPrivate yes Priv default checkForScopingSpecificallyProtected$</GenRule>
 	<GenRule GenDef="Value" Name="checkForScopingSpecificallyProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
@@ -1192,18 +1202,16 @@ $implPubBuffSetHistory$</GenRule>
 	<GenRule GenDef="Object" Name="passPubSrcCol">$switch IsPublic yes passSrcCol default empty$</GenRule>
 	<GenRule GenDef="Object" Name="commaPubPassSrcFromCol">$switch IsPublic yes commaPassSrcFromCol default empty$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="maybeBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setBuffCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
-	<GenRule GenDef="IndexCol" Name="setBuffCopyPKeyAttrIfNotInSuperiorRelationship">$setBuffCopyPKeyAttr$</GenRule>
+	<!-- Primary key attributes always get set when copying an object, knowing that they'll be applied to the PKey object or intrinsic column specifically, regardless of the relationship interface that can also be used to alter primary key columns via invocation of the PKey attribute getters and setters involved in the relationship implementation.  In fact, many attributes should be producing "Internal" setters to force the programmer to use the relationship interfaces in preference to the attribute interfaces. Using the attribute interfaces actually breaks the JPA implementations; they have to be invoked via relationship setter. -->
+	<GenRule GenDef="IndexCol" Name="maybeBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setBuffCopyPKeyAttr$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setBuffCopyPKeyAttr">
 		set$reference Column implColumnAttrOptionality$$reference Column Name$(src.get$reference Column implColumnAttrOptionality$$reference Column Name$());</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="maybeProtBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setProtBuffCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
-	<GenRule GenDef="IndexCol" Name="setProtBuffCopyPKeyAttrIfNotInSuperiorRelationship">$setProtBuffCopyPKeyAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybeProtBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setProtBuffCopyPKeyAttr$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setProtBuffCopyPKeyAttr">
 		set$reference Column implColumnAttrOptionality$$reference Column Name$(src.get$reference Column implColumnAttrOptionality$$reference Column Name$());</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="maybePubBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setPubBuffCopyPKeyAttrIfNotInSuperiorRelationship$</GenRule>
-	<GenRule GenDef="IndexCol" Name="setPubBuffCopyPKeyAttrIfNotInSuperiorRelationship">$setPubBuffCopyPKeyAttr$</GenRule>
+	<GenRule GenDef="IndexCol" Name="maybePubBuffSetCopyPKeyAttr">$switch HasDefSchema yes empty default setPubBuffCopyPKey$</GenRule>
 	<GenRule GenDef="IndexCol" Name="setPubBuffCopyPKeyAttr">
 		set$reference Column implColumnAttrOptionality$$reference Column Name$(src.get$reference Column implColumnAttrOptionality$$reference Column Name$());</GenRule>
 
