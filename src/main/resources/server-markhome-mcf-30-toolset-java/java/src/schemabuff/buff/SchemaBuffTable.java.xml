@@ -666,22 +666,13 @@ $switch ToTableIsProtected yes implSchemaBuffTableRelationSetterProt default emp
 	<GenRule GenDef="Table" Name="implBuffOptAuditColumnAttr"
 		>$switch HasAuditColumns yes implBuffAuditColumnAttr default empty$</GenRule>
 
-	<GenRule GenDef="Table" Name="emitScopingMidfix">$switch CodeVis case Private checkForScopingSpecificallyPrivate case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
-	<GenRule GenDef="Table" Name="checkForScopingSpecificallyPrivate">$switch IsSpecificallyPrivate yes Priv default checkForScopingSpecificallyProtected$</GenRule>
-	<GenRule GenDef="Table" Name="checkForScopingSpecificallyProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
-	<GenRule GenDef="Index" Name="emitScopingMidfix">$switch CodeVis case Private checkForScopingSpecificallyPrivate case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
-	<GenRule GenDef="Index" Name="checkForScopingSpecificallyPrivate">$switch IsSpecificallyPrivate yes Priv default checkForScopingSpecificallyProtected$</GenRule>
-	<GenRule GenDef="Index" Name="checkForScopingSpecificallyProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
-	<GenRule GenDef="IndexCol" Name="emitScopingMidfix">$reference Column emitScopingMidfix$</GenRule>
-	<GenRule GenDef="Relation" Name="emitScopingMidfix">$switch CodeVis case Private checkForScopingSpecificallyPrivate case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
-	<GenRule GenDef="Relation" Name="checkForScopingSpecificallyPrivate">$switch IsSpecificallyPrivate yes Priv default checkForScopingSpecificallyProtected$</GenRule>
-	<GenRule GenDef="Relation" Name="checkForScopingSpecificallyProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
-	<GenRule GenDef="RelationCol" Name="emitFromScopingMidfix">$reference FromCol reference Column emitScopingMidfix$</GenRule>
-	<GenRule GenDef="RelationCol" Name="emitToScopingMidfix">$reference ToCol reference Column emitScopingMidfix$</GenRule>
+	<GenRule GenDef="Object" Name="emitScopingMidfix">$switch CodeVis case Private Priv case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
+	<GenRule GenDef="Object" Name="checkForScopingSpecificallyProtected">$switch IsSpecificallyProtected yes Prot default checkForScopingPublic$</GenRule>
+	<GenRule GenDef="Object" Name="checkForScopingPublic">$switch IsPublic yes Pub default Priv$</GenRule>
 
-	<GenRule GenDef="Value" Name="emitScopingMidfix">$switch CodeVis case Private checkForScopingSpecificallyPrivate case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
-	<GenRule GenDef="Value" Name="checkForScopingSpecificallyPrivate">$switch IsSpecificallyPrivate yes Priv default checkForScopingSpecificallyProtected$</GenRule>
-	<GenRule GenDef="Value" Name="checkForScopingSpecificallyProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
+	<GenRule GenDef="IndexCol" Name="emitScopingMidfix">$reference Column emitScopingMidfix$</GenRule>
+	<GenRule GenDef="RelationCol" Name="emitScopingMidfix">$reference FromCol reference Column emitScopingMidfix$</GenRule>
+
 	<GenRule GenDef="Object" Name="Pub">Pub</GenRule>
 	<GenRule GenDef="Object" Name="Prot">Prot</GenRule>
 	<GenRule GenDef="Object" Name="Priv"></GenRule>
