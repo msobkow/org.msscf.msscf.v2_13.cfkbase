@@ -675,9 +675,8 @@ $switch ToTableIsProtected yes implSchemaBuffTableRelationSetterProt default emp
 	<GenRule GenDef="Table" Name="implBuffOptAuditColumnAttr"
 		>$switch HasAuditColumns yes implBuffAuditColumnAttr default empty$</GenRule>
 
-	<GenRule GenDef="Object" Name="emitScopingMidfix">$switch CodeVis case Private Priv case Protected checkForScopingSpecificallyProtected default Pub$</GenRule>
-	<GenRule GenDef="Object" Name="checkForScopingSpecificallyProtected">$switch IsSpecificallyProtected yes Prot default checkForScopingPublic$</GenRule>
-	<GenRule GenDef="Object" Name="checkForScopingPublic">$switch IsPublic yes Pub default Priv$</GenRule>
+	<GenRule GenDef="Object" Name="emitScopingMidfix">$switch IsPrivate yes Priv default maybeSpecificallyScopingProtected$</GenRule>
+	<GenRule GenDef="Object" Name="maybeSpecificallyScopingProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="emitScopingMidfix">$reference Column emitScopingMidfix$</GenRule>
 	<GenRule GenDef="RelationCol" Name="emitScopingMidfix">$reference FromCol reference Column emitScopingMidfix$</GenRule>
