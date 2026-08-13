@@ -247,20 +247,67 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 	<GenRule GenDef="RelationCol" Name="commaPassArg">, $passArg$</GenRule>
 
 	<GenRule GenDef="Relation" Name="useSchemaBuffTableNarrowedRelationSetterArgsBody">
-		I$reference Narrowed reference ToTable DefSchemaName$$reference Narrowed reference ToTable TableName$ found = super.get$reference Narrowed OptionalOrRequired$$reference Narrowed RelationType$$reference Narrowed Suffix$($iterate Columns( first passArg each commaPassArg empty empty )$);
-		if (found == null || (found != null &amp;&amp; ((!found instanceof I$reference ToTable DefSchemaName$$reference ToTable TableName$)$reference ToTable switch IsProtected yes emitAndNotInstanceOfProtRec default empty$)) {
+		I$reference Narrowed reference ToTable DefSchemaName$Schema targetBackingSchema = I$reference Narrowed reference ToTable DefSchemaName$Schema.getBacking$reference Narrowed reference ToTable DefSchemaName$();
+		if (targetBackingSchema == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$-args", 0, "I$reference Narrowed reference ToTable DefSchemaName$Schema.getBacking$reference Narrowed reference ToTable DefSchemaName$()");
+		}
+		I$reference Narrowed reference ToTable DefSchemaName$$reference Narrowed reference ToTable TableName$Table targetTable = targetBackingSchema.getTable$reference Narrowed reference ToTable TableName$();
+		if (targetTable == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$reference Narrowed OptionalOrRequired$$reference Narrowed RelationType$$reference Narrowed Suffix$", 0, "I$reference Narrowed reference ToTable DefSchemaName$Schema.getBacking$reference Narrowed reference ToTable DefSchemaName$().getTable$reference Narrowed reference ToTable TableName$()");
+		}
+		I$reference Narrowed reference ToTable DefSchemaName$$reference Narrowed reference ToTable TableName$ found = targetTable.$switch IsToPrimaryIndexKey yes derefBuffTableRelationNarrowedPKeyReadDerivedViaArgs default derefBuffTableRelationNarrowedDataReadDerivedViaArgs$;$switch IsRequired yes implUseNarrowedArgsRequired default implUseNarrowedArgsOptional$</GenRule>
+
+	<GenRule GenDef="Relation" Name="derefBuffTableRelationNarrowedPKeyReadDerivedViaArgs">readDerived(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each commaPassArg empty empty)$)</GenRule>
+	<GenRule GenDef="Relation" Name="derefBuffTableRelationNarrowedDataReadDerivedViaArgs">readDerivedBy$reference Narrowed reference ToIndex declReadTableSuffix$(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each commaPassArg empty empty)$)</GenRule>
+
+	<GenRule GenDef="Relation" Name="derefBuffTableRelationPKeyReadDerivedViaArgs">readDerived(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each commaPassArg empty empty)$)</GenRule>
+	<GenRule GenDef="Relation" Name="derefBuffTableRelationDataReadDerivedViaArgs">readDerivedBy$reference ToIndex declReadTableSuffix$(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each commaPassArg empty empty)$)</GenRule>
+
+	<GenRule GenDef="Relation" Name="implUseNarrowedArgsRequired">
+		if (found == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$reference Narrowed OptionalOrRequired$$reference Narrowed RelationType$$reference Narrowed Suffix$-args", 0, "found");
+		}
+		else if (found instanceof I$reference ToTable DefSchemaName$$reference ToTable TableName$)$reference ToTable switch IsProtected yes emitOrIsInstanceOfProtRec default empty$) {
 			super.set$reference Narrowed OptionalOrRequired$$reference Narrowed RelationType$$reference Narrowed Suffix$($iterate Columns( first passArg each commaPassArg empty empty )$);$iterate Columns(each implSchemaBuffTableSetAttrArgColumn)$
 		}
 		else {
-			throw new CFLibUnsupportedClassException(getClass(), "set$reference Narrowed OptionalOrRequired$$reference Narrowed RelationType$$reference Narrowed Suffix$-args", "I$reference ToTable DefSchemaName$$reference ToTable TableName$$reference ToTable switch IsProtected yes emitCommaToProtRecTypeName default empty$", found);
+			throw new CFLibUnsupportedClassException(getClass(), "set$reference Narrowed OptionalOrRequired$$reference Narrowed RelationType$$reference Narrowed Suffix$-args", "found", found, "I$reference ToTable DefSchemaName$$reference ToTable TableName$$reference ToTable switch IsProtected yes emitCommaToProtRecTypeName default empty$");
+		}</GenRule>
+
+	<GenRule GenDef="Relation" Name="implUseNarrowedArgsOptional">
+		if (found == null || (found != null &amp;&amp; ((found instanceof I$reference ToTable DefSchemaName$$reference ToTable TableName$)$reference ToTable switch IsProtected yes emitOrIsInstanceOfProtRec default empty$))) {
+			super.set$reference Narrowed OptionalOrRequired$$reference Narrowed RelationType$$reference Narrowed Suffix$($iterate Columns( first passArg each commaPassArg empty empty )$);$iterate Columns(each implSchemaBuffTableSetAttrArgColumn)$
+		}
+		else {
+			throw new CFLibUnsupportedClassException(getClass(), "set$reference Narrowed OptionalOrRequired$$reference Narrowed RelationType$$reference Narrowed Suffix$-args", "found", found, "I$reference ToTable DefSchemaName$$reference ToTable TableName$$reference ToTable switch IsProtected yes emitCommaToProtRecTypeName default empty$");
 		}</GenRule>
 
 	<GenRule GenDef="Relation" Name="useSchemaBuffTableRelationSetterArgsBody">
-		I$reference ToTable DefSchemaName$$reference ToTable TableName$ found = get$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first passArg each commaPassArg empty empty )$);
-		if (found == null || (found != null &amp;&amp; ((!found instanceof I$reference ToTable DefSchemaName$$reference ToTable TableName$)$reference ToTable switch IsProtected yes emitAndNotInstanceOfProtRec default empty$)) {$iterate Columns(each implSchemaBuffTableSetAttrArgColumn)$
+		I$reference ToTable DefSchemaName$Schema targetBackingSchema = I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$();
+		if (targetBackingSchema == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$-args", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$()");
+		}
+		I$reference ToTable DefSchemaName$$reference ToTable TableName$Table targetTable = targetBackingSchema.getTable$reference ToTable TableName$();
+		if (targetTable == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$().getTable$reference ToTable TableName$()");
+		}
+		I$reference ToTable DefSchemaName$$reference ToTable TableName$ found = targetTable.$switch IsToPrimaryIndexKey yes derefBuffTableRelationPKeyReadDerivedViaArgs default derefBuffTableRelationDataReadDerivedViaArgs$;$switch IsRequired yes implUseArgsBodyRequired default implUseArgsBodyOptional$</GenRule>
+
+	<GenRule GenDef="Relation" Name="implUseArgsBodyRequired">
+		if (found == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$-args", 0, "found");
+		}
+		else if ((found instanceof I$reference ToTable DefSchemaName$$reference ToTable TableName$)$reference ToTable switch IsProtected yes emitOrIsInstanceOfProtRec default empty$) {$iterate Columns(each implSchemaBuffTableSetAttrArgColumn)$
 		}
 		else {
-			throw new CFLibUnsupportedClassException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$-args", "I$reference ToTable DefSchemaName$$reference ToTable TableName$$reference ToTable switch IsProtected yes emitCommaToProtRecTypeName default empty$", found);
+			throw new CFLibUnsupportedClassException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$-args", "found", found, "I$reference ToTable DefSchemaName$$reference ToTable TableName$$reference ToTable switch IsProtected yes emitCommaToProtRecTypeName default empty$");
+		}</GenRule>
+
+	<GenRule GenDef="Relation" Name="implUseArgsBodyOptional">
+		if (found == null || (found != null &amp;&amp; ((found instanceof I$reference ToTable DefSchemaName$$reference ToTable TableName$)$reference ToTable switch IsProtected yes emitOrIsInstanceOfProtRec default empty$))) {$iterate Columns(each implSchemaBuffTableSetAttrArgColumn)$
+		}
+		else {
+			throw new CFLibUnsupportedClassException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$-args", "found", found, "I$reference ToTable DefSchemaName$$reference ToTable TableName$$reference ToTable switch IsProtected yes emitCommaToProtRecTypeName default empty$");
 		}</GenRule>
 
 	<GenRule GenDef="Relation" Name="reimplSchemaBuffTableNarrowedRelationSetterArgs">
@@ -276,8 +323,8 @@ $switch HasDefSchemaOrSuper yes implSchemaBuffTableInhConstruct default implSche
 	<GenRule GenDef="Table" Name="emitCommaToProtRecTypeName">I$DefSchemaName$Prot$TableName$$switch IsPublic yes emitCommaToPubRecTypeName default empty$</GenRule>
 	<GenRule GenDef="Table" Name="emitCommaToPubRecTypeName">I$DefSchemaName$Pub$TableName$</GenRule>
 
-	<GenRule GenDef="Table" Name="emitAndNotInstanceOfProtRec"> &amp;&amp; (!found instanceof I$DefSchemaName$Prot$TableName$)$switch IsPublic yes emitAndNotInstanceOfPubRec default empty$</GenRule>
-	<GenRule GenDef="Table" Name="emitAndNotInstanceOfPubRec"> &amp;&amp; (!found instanceof I$DefSchemaName$Pub$TableName$)</GenRule>
+	<GenRule GenDef="Table" Name="emitOrIsInstanceOfProtRec"> || (found instanceof I$DefSchemaName$Prot$TableName$)$switch IsPublic yes emitOrIsInstanceOfPubRec default empty$</GenRule>
+	<GenRule GenDef="Table" Name="emitOrIsInstanceOfPubRec"> || (found instanceof I$DefSchemaName$Pub$TableName$)</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implCheckIfArgNullAndApplyToAllNull">
 		if(arg$Name$ == null$reference FromCol reference Column switch BaseModelAtomClass
