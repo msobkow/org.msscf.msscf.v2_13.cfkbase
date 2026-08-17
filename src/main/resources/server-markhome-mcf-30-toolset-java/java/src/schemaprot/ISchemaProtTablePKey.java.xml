@@ -1302,4 +1302,240 @@ $reference PrimaryKeyIndex iterate Columns( each declProtColumnGetterSetter )$$d
 	public String toString();
 </GenRule>
 
+	<GenRule GenDef="Param" Name="implIProtJavaAtomType">$switch IsProtected yes reallyImplIProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplIProtJavaAtomType">$switch IsNullable yes implIProtJavaOptAtomType default implIProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="Param" Name="implIProtJavaOptAtomType">$switch IsPublie yes reallyImplIProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplIProtJavaOptAtomType">$reference Type implIProtJavaOptAtomType$</GenRule>
+
+	<GenRule GenDef="Param" Name="implIProtJavaReqAtomType">$switch IsProtected yes reallyImplIProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplIProtJavaReqAtomType">$reference Type implIProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="Index" Name="implIProtJavaAtomType">$switch IsProtected yes reallyImplIProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplIProtJavaAtomType">$iterate Columns( lone implIProtJavaAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implIProtJavaOptAtomType">$switch IsProtected yes reallyImplIProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplIProtJavaOptAtomType">$iterate Columns( lone implIProtJavaOptAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implIProtJavaReqAtomType">$switch IsProtected yes reallyImplIProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplIProtJavaReqAtomType">$iterate Columns( lone implIProtJavaReqAtomType first empty each empty empty empty )$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implIProtJavaAtomType">$switch IsProtected yes reallyImplIProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplIProtJavaAtomType">$reference Column implIProtJavaAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implIProtJavaOptAtomType">$switch IsProtected yes reallyImplIProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplIProtJavaOptAtomType">$reference Column implIProtJavaOptAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implIProtJavaReqAtomType">$switch IsProtected yes reallyImplIProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplIProtJavaReqAtomType">$reference Column implIProtJavaReqAtomType$</GenRule>
+	<GenRule GenDef="Value" Name="implIProtJavaAtomType">$switch IsProtected yes reallyImplIProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyImplIProtJavaAtomType">$switch IsNullable yes implIProtJavaOptAtomType default implIProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="implIProtJavaOptAtomType">$switch IsProtected yes reallyImplIProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyImplIProtJavaOptAtomType">$reference DataType implIProtJavaOptAtomType$</GenRule>
+	<GenRule GenDef="TableCol" Name="implIProtJavaReqAtomType">$switch IsProtected yes reallyImplIProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyImplIProtJavaReqAtomType">$reference DataType implIProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="Atom" Name="implIProtJavaReqAtomType">$switch IsProtected yes reallyImplIProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="BlobDef" Name="reallyImplIProtJavaReqAtomType">byte[]</GenRule>
+	<GenRule GenDef="BoolDef" Name="reallyImplIProtJavaReqAtomType">boolean</GenRule>
+	<GenRule GenDef="EnumDef" Name="reallyImplIProtJavaReqAtomType">$EffCodeVisSchemaName$.$Name$</GenRule>
+	<GenRule GenDef="Int16Def" Name="reallyImplIProtJavaReqAtomType">short</GenRule>
+	<GenRule GenDef="Int32Def" Name="reallyImplIProtJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="Int64Def" Name="reallyImplIProtJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="Id16Gen" Name="reallyImplIProtJavaReqAtomType">short</GenRule>
+	<GenRule GenDef="Id32Gen" Name="reallyImplIProtJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="Id64Gen" Name="reallyImplIProtJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="UInt16Def" Name="reallyImplIProtJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="UInt32Def" Name="reallyImplIProtJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="UInt64Def" Name="reallyImplIProtJavaReqAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="FloatDef" Name="reallyImplIProtJavaReqAtomType">float</GenRule>
+	<GenRule GenDef="DoubleDef" Name="reallyImplIProtJavaReqAtomType">double</GenRule>
+	<GenRule GenDef="NumberDef" Name="reallyImplIProtJavaReqAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="StringDef" Name="reallyImplIProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="TextDef" Name="reallyImplIProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="DateDef" Name="reallyImplIProtJavaReqAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TimeDef" Name="reallyImplIProtJavaReqAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TimestampDef" Name="reallyImplIProtJavaReqAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="TokenDef" Name="reallyImplIProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="NmTokenDef" Name="reallyImplIProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="NmTokensDef" Name="reallyImplIProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="TZDateDef" Name="reallyImplIProtJavaReqAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TZTimeDef" Name="reallyImplIProtJavaReqAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TZTimestampDef" Name="reallyImplIProtJavaReqAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="DbKeyHash128Gen" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Gen" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Gen" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Gen" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Gen" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Gen" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash512</GenRule>
+	<GenRule GenDef="DbKeyHash128Def" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Def" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Def" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Def" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Def" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Def" Name="reallyImplIProtJavaReqAtomType">ICFLibKeyHash512</GenRule>
+	<GenRule GenDef="Uuid6Gen" Name="reallyImplIProtJavaReqAtomType">ICFLibUuid6</GenRule>
+	<GenRule GenDef="Uuid6Def" Name="reallyImplIProtJavaReqAtomType">ICFLibUuid6</GenRule>
+	<GenRule GenDef="UuidDef" Name="reallyImplIProtJavaReqAtomType">UUID</GenRule>
+	<GenRule GenDef="UuidGen" Name="reallyImplIProtJavaReqAtomType">UUID</GenRule>
+
+	<GenRule GenDef="Atom" Name="implIProtJavaOptAtomType">$switch IsProtected yes reallyImplIProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="BlobDef" Name="reallyImplIProtJavaOptAtomType">byte[]</GenRule>
+	<GenRule GenDef="BoolDef" Name="reallyImplIProtJavaOptAtomType">Boolean</GenRule>
+	<GenRule GenDef="EnumDef" Name="reallyImplIProtJavaOptAtomType">$EffCodeVisSchemaName$.$Name$</GenRule>
+	<GenRule GenDef="Int16Def" Name="reallyImplIProtJavaOptAtomType">Short</GenRule>
+	<GenRule GenDef="Int32Def" Name="reallyImplIProtJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="Int64Def" Name="reallyImplIProtJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="Id16Gen" Name="reallyImplIProtJavaOptAtomType">Short</GenRule>
+	<GenRule GenDef="Id32Gen" Name="reallyImplIProtJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="Id64Gen" Name="reallyImplIProtJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="UInt16Def" Name="reallyImplIProtJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="UInt32Def" Name="reallyImplIProtJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="UInt64Def" Name="reallyImplIProtJavaOptAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="FloatDef" Name="reallyImplIProtJavaOptAtomType">Float</GenRule>
+	<GenRule GenDef="DoubleDef" Name="reallyImplIProtJavaOptAtomType">Double</GenRule>
+	<GenRule GenDef="NumberDef" Name="reallyImplIProtJavaOptAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="StringDef" Name="reallyImplIProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="TextDef" Name="reallyImplIProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="DateDef" Name="reallyImplIProtJavaOptAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TimeDef" Name="reallyImplIProtJavaOptAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TimestampDef" Name="reallyImplIProtJavaOptAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="TokenDef" Name="reallyImplIProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="NmTokenDef" Name="reallyImplIProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="NmTokensDef" Name="reallyImplIProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="TZDateDef" Name="reallyImplIProtJavaOptAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TZTimeDef" Name="reallyImplIProtJavaOptAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TZTimestampDef" Name="reallyImplIProtJavaOptAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="DbKeyHash128Gen" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Gen" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Gen" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Gen" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Gen" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Gen" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash512</GenRule>
+	<GenRule GenDef="DbKeyHash128Def" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Def" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Def" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Def" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Def" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Def" Name="reallyImplIProtJavaOptAtomType">ICFLibKeyHash512</GenRule>
+	<GenRule GenDef="Uuid6Gen" Name="reallyImplIProtJavaOptAtomType">ICFLibUuid6</GenRule>
+	<GenRule GenDef="Uuid6Def" Name="reallyImplIProtJavaOptAtomType">ICFLibUuid6</GenRule>
+	<GenRule GenDef="UuidDef" Name="reallyImplIProtJavaOptAtomType">UUID</GenRule>
+	<GenRule GenDef="UuidGen" Name="reallyImplIProtJavaOptAtomType">UUID</GenRule>
+
+	<GenRule GenDef="Param" Name="implBuffProtJavaAtomType">$switch IsProtected yes reallyImplBuffProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplBuffProtJavaAtomType">$switch IsNullable yes implBuffProtJavaOptAtomType default implBuffProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="Param" Name="implBuffProtJavaOptAtomType">$switch IsPublie yes reallyImplBuffProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplBuffProtJavaOptAtomType">$reference Type implBuffProtJavaOptAtomType$</GenRule>
+
+	<GenRule GenDef="Param" Name="implBuffProtJavaReqAtomType">$switch IsProtected yes reallyImplBuffProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="Param" Name="reallyImplBuffProtJavaReqAtomType">$reference Type implBuffProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="Index" Name="implBuffProtJavaAtomType">$switch IsProtected yes reallyImplBuffProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplBuffProtJavaAtomType">$iterate Columns( lone implBuffProtJavaAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implBuffProtJavaOptAtomType">$switch IsProtected yes reallyImplBuffProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplBuffProtJavaOptAtomType">$iterate Columns( lone implBuffProtJavaOptAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implBuffProtJavaReqAtomType">$switch IsProtected yes reallyImplBuffProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyImplBuffProtJavaReqAtomType">$iterate Columns( lone implBuffProtJavaReqAtomType first empty each empty empty empty )$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implBuffProtJavaAtomType">$switch IsProtected yes reallyImplBuffProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplBuffProtJavaAtomType">$reference Column implBuffProtJavaAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implBuffProtJavaOptAtomType">$switch IsProtected yes reallyImplBuffProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplBuffProtJavaOptAtomType">$reference Column implBuffProtJavaOptAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implBuffProtJavaReqAtomType">$switch IsProtected yes reallyImplBuffProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplBuffProtJavaReqAtomType">$reference Column implBuffProtJavaReqAtomType$</GenRule>
+	<GenRule GenDef="Value" Name="implBuffProtJavaAtomType">$switch IsProtected yes reallyImplBuffProtJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Value" Name="reallyImplBuffProtJavaAtomType">$switch IsNullable yes implBuffProtJavaOptAtomType default implBuffProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="TableCol" Name="implBuffProtJavaOptAtomType">$switch IsProtected yes reallyImplBuffProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyImplBuffProtJavaOptAtomType">$reference DataType implBuffProtJavaOptAtomType$</GenRule>
+	<GenRule GenDef="TableCol" Name="implBuffProtJavaReqAtomType">$switch IsProtected yes reallyImplBuffProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyImplBuffProtJavaReqAtomType">$reference DataType implBuffProtJavaReqAtomType$</GenRule>
+
+	<GenRule GenDef="Atom" Name="implBuffProtJavaReqAtomType">$switch IsProtected yes reallyImplBuffProtJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="BlobDef" Name="reallyImplBuffProtJavaReqAtomType">byte[]</GenRule>
+	<GenRule GenDef="BoolDef" Name="reallyImplBuffProtJavaReqAtomType">boolean</GenRule>
+	<GenRule GenDef="EnumDef" Name="reallyImplBuffProtJavaReqAtomType">$EffCodeVisSchemaName$.$Name$</GenRule>
+	<GenRule GenDef="Int16Def" Name="reallyImplBuffProtJavaReqAtomType">short</GenRule>
+	<GenRule GenDef="Int32Def" Name="reallyImplBuffProtJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="Int64Def" Name="reallyImplBuffProtJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="Id16Gen" Name="reallyImplBuffProtJavaReqAtomType">short</GenRule>
+	<GenRule GenDef="Id32Gen" Name="reallyImplBuffProtJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="Id64Gen" Name="reallyImplBuffProtJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="UInt16Def" Name="reallyImplBuffProtJavaReqAtomType">int</GenRule>
+	<GenRule GenDef="UInt32Def" Name="reallyImplBuffProtJavaReqAtomType">long</GenRule>
+	<GenRule GenDef="UInt64Def" Name="reallyImplBuffProtJavaReqAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="FloatDef" Name="reallyImplBuffProtJavaReqAtomType">float</GenRule>
+	<GenRule GenDef="DoubleDef" Name="reallyImplBuffProtJavaReqAtomType">double</GenRule>
+	<GenRule GenDef="NumberDef" Name="reallyImplBuffProtJavaReqAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="StringDef" Name="reallyImplBuffProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="TextDef" Name="reallyImplBuffProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="DateDef" Name="reallyImplBuffProtJavaReqAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TimeDef" Name="reallyImplBuffProtJavaReqAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TimestampDef" Name="reallyImplBuffProtJavaReqAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="TokenDef" Name="reallyImplBuffProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="NmTokenDef" Name="reallyImplBuffProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="NmTokensDef" Name="reallyImplBuffProtJavaReqAtomType">String</GenRule>
+	<GenRule GenDef="TZDateDef" Name="reallyImplBuffProtJavaReqAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TZTimeDef" Name="reallyImplBuffProtJavaReqAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TZTimestampDef" Name="reallyImplBuffProtJavaReqAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="DbKeyHash128Gen" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Gen" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Gen" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Gen" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Gen" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Gen" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash512</GenRule>
+	<GenRule GenDef="DbKeyHash128Def" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Def" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Def" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Def" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Def" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Def" Name="reallyImplBuffProtJavaReqAtomType">CFLibKeyHash512</GenRule>
+	<GenRule GenDef="Uuid6Gen" Name="reallyImplBuffProtJavaReqAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="Uuid6Def" Name="reallyImplBuffProtJavaReqAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="UuidDef" Name="reallyImplBuffProtJavaReqAtomType">UUID</GenRule>
+	<GenRule GenDef="UuidGen" Name="reallyImplBuffProtJavaReqAtomType">UUID</GenRule>
+
+	<GenRule GenDef="Atom" Name="implBuffProtJavaOptAtomType">$switch IsProtected yes reallyImplBuffProtJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="BlobDef" Name="reallyImplBuffProtJavaOptAtomType">byte[]</GenRule>
+	<GenRule GenDef="BoolDef" Name="reallyImplBuffProtJavaOptAtomType">Boolean</GenRule>
+	<GenRule GenDef="EnumDef" Name="reallyImplBuffProtJavaOptAtomType">$EffCodeVisSchemaName$.$Name$</GenRule>
+	<GenRule GenDef="Int16Def" Name="reallyImplBuffProtJavaOptAtomType">Short</GenRule>
+	<GenRule GenDef="Int32Def" Name="reallyImplBuffProtJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="Int64Def" Name="reallyImplBuffProtJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="Id16Gen" Name="reallyImplBuffProtJavaOptAtomType">Short</GenRule>
+	<GenRule GenDef="Id32Gen" Name="reallyImplBuffProtJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="Id64Gen" Name="reallyImplBuffProtJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="UInt16Def" Name="reallyImplBuffProtJavaOptAtomType">Integer</GenRule>
+	<GenRule GenDef="UInt32Def" Name="reallyImplBuffProtJavaOptAtomType">Long</GenRule>
+	<GenRule GenDef="UInt64Def" Name="reallyImplBuffProtJavaOptAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="FloatDef" Name="reallyImplBuffProtJavaOptAtomType">Float</GenRule>
+	<GenRule GenDef="DoubleDef" Name="reallyImplBuffProtJavaOptAtomType">Double</GenRule>
+	<GenRule GenDef="NumberDef" Name="reallyImplBuffProtJavaOptAtomType">BigDecimal</GenRule>
+	<GenRule GenDef="StringDef" Name="reallyImplBuffProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="TextDef" Name="reallyImplBuffProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="DateDef" Name="reallyImplBuffProtJavaOptAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TimeDef" Name="reallyImplBuffProtJavaOptAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TimestampDef" Name="reallyImplBuffProtJavaOptAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="TokenDef" Name="reallyImplBuffProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="NmTokenDef" Name="reallyImplBuffProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="NmTokensDef" Name="reallyImplBuffProtJavaOptAtomType">String</GenRule>
+	<GenRule GenDef="TZDateDef" Name="reallyImplBuffProtJavaOptAtomType">LocalDate</GenRule>
+	<GenRule GenDef="TZTimeDef" Name="reallyImplBuffProtJavaOptAtomType">LocalTime</GenRule>
+	<GenRule GenDef="TZTimestampDef" Name="reallyImplBuffProtJavaOptAtomType">LocalDateTime</GenRule>
+	<GenRule GenDef="DbKeyHash128Gen" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Gen" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Gen" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Gen" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Gen" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Gen" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash512</GenRule>
+	<GenRule GenDef="DbKeyHash128Def" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash128</GenRule>
+	<GenRule GenDef="DbKeyHash160Def" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash160</GenRule>
+	<GenRule GenDef="DbKeyHash224Def" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash224</GenRule>
+	<GenRule GenDef="DbKeyHash256Def" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash256</GenRule>
+	<GenRule GenDef="DbKeyHash384Def" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash384</GenRule>
+	<GenRule GenDef="DbKeyHash512Def" Name="reallyImplBuffProtJavaOptAtomType">CFLibKeyHash512</GenRule>
+	<GenRule GenDef="Uuid6Gen" Name="reallyImplBuffProtJavaOptAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="Uuid6Def" Name="reallyImplBuffProtJavaOptAtomType">CFLibUuid6</GenRule>
+	<GenRule GenDef="UuidDef" Name="reallyImplBuffProtJavaOptAtomType">UUID</GenRule>
+	<GenRule GenDef="UuidGen" Name="reallyImplBuffProtJavaOptAtomType">UUID</GenRule>
+
 </RuleSet>

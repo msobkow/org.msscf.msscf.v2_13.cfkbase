@@ -37,11 +37,11 @@
 	Revision="3.0"
 	Descr="Java 25 interface for a $TableName$ primary key object.">
 
-	<GenRule GenDef="Index" Name="ICompactedIndexClass">$switch IsAtomic yes implJavaOptAtomType default IIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="ICompactedIndexClass">$switch IsAtomic yes implIJavaOptAtomType default IIndexClassName$</GenRule>
 	<GenRule GenDef="Index" Name="IIndexClassName">I$reference Table DefSchemaName$$reference Table TableName$By$Suffix$Key</GenRule>
 
 	<GenRule GenDef="Table" Name="ICompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex ICompactedPrimaryIndexClass$</GenRule>
-	<GenRule GenDef="Index" Name="ICompactedPrimaryIndexClass">$switch IsAtomic yes implJavaOptAtomType default IPrimaryIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="ICompactedPrimaryIndexClass">$switch IsAtomic yes implIJavaOptAtomType default IPrimaryIndexClassName$</GenRule>
 
 	<GenRule GenDef="Table" Name="IPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex IPrimaryIndexClassName$</GenRule>
 	<GenRule GenDef="Index" Name="IPrimaryIndexClassName">I$reference Table DefSchemaName$$reference Table TableName$PKey</GenRule>
@@ -132,7 +132,7 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declColumnG
 	<GenRule GenDef="Relation" Name="declISchemaTablePKeyRelationGetter">
 	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="declSetArgColumn">$reference FromCol reference Column implJavaAtomType$ arg$reference FromCol reference Column Name$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSetArgColumn">$reference FromCol reference Column implIJavaAtomType$ arg$reference FromCol reference Column Name$</GenRule>
 	<GenRule GenDef="RelationCol" Name="declCommaSetArgColumn">,
 		$declSetArgColumn$</GenRule>
 
@@ -188,110 +188,6 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declColumnG
 			Id64Gen yes
 			default no$</GenRule>
 	<GenRule GenDef="Atom" Name="IsGenerated">no</GenRule>
-
-	<GenRule GenDef="Param" Name="implJavaAtomType">$switch IsNullable yes implJavaOptAtomType default implJavaReqAtomType$</GenRule>
-
-	<GenRule GenDef="Param" Name="implJavaOptAtomType">$reference Type implJavaOptAtomType$</GenRule>
-
-	<GenRule GenDef="Param" Name="implJavaReqAtomType">$reference Type implJavaReqAtomType$</GenRule>
-
-	<GenRule GenDef="Index" Name="implJavaAtomType">$iterate Columns( lone implJavaAtomType first empty each empty empty empty )$</GenRule>
-	<GenRule GenDef="Index" Name="implJavaOptAtomType">$iterate Columns( lone implJavaOptAtomType first empty each empty empty empty )$</GenRule>
-	<GenRule GenDef="Index" Name="implJavaReqAtomType">$iterate Columns( lone implJavaReqAtomType first empty each empty empty empty )$</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implJavaAtomType">$reference Column implJavaAtomType$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implJavaOptAtomType">$reference Column implJavaOptAtomType$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implJavaReqAtomType">$reference Column implJavaReqAtomType$</GenRule>
-	<GenRule GenDef="Value" Name="implJavaAtomType" >$switch IsNullable yes implJavaOptAtomType default implJavaReqAtomType$</GenRule>
-
-	<GenRule GenDef="TableCol" Name="implJavaOptAtomType" >$reference DataType implJavaOptAtomType$</GenRule>
-	<GenRule GenDef="TableCol" Name="implJavaReqAtomType" >$reference DataType implJavaReqAtomType$</GenRule>
-
-	<GenRule GenDef="BlobDef" Name="implJavaReqAtomType">byte[]</GenRule>
-	<GenRule GenDef="BoolDef" Name="implJavaReqAtomType">boolean</GenRule>
-	<GenRule GenDef="EnumDef" Name="implJavaReqAtomType">$EffCodeVisSchemaName$.$Name$</GenRule>
-	<GenRule GenDef="Int16Def" Name="implJavaReqAtomType">short</GenRule>
-	<GenRule GenDef="Int32Def" Name="implJavaReqAtomType">int</GenRule>
-	<GenRule GenDef="Int64Def" Name="implJavaReqAtomType">long</GenRule>
-	<GenRule GenDef="Id16Gen" Name="implJavaReqAtomType">short</GenRule>
-	<GenRule GenDef="Id32Gen" Name="implJavaReqAtomType">int</GenRule>
-	<GenRule GenDef="Id64Gen" Name="implJavaReqAtomType">long</GenRule>
-	<GenRule GenDef="UInt16Def" Name="implJavaReqAtomType">int</GenRule>
-	<GenRule GenDef="UInt32Def" Name="implJavaReqAtomType">long</GenRule>
-	<GenRule GenDef="UInt64Def" Name="implJavaReqAtomType">BigDecimal</GenRule>
-	<GenRule GenDef="FloatDef" Name="implJavaReqAtomType">float</GenRule>
-	<GenRule GenDef="DoubleDef" Name="implJavaReqAtomType">double</GenRule>
-	<GenRule GenDef="NumberDef" Name="implJavaReqAtomType">BigDecimal</GenRule>
-	<GenRule GenDef="StringDef" Name="implJavaReqAtomType">String</GenRule>
-	<GenRule GenDef="TextDef" Name="implJavaReqAtomType">String</GenRule>
-	<GenRule GenDef="DateDef" Name="implJavaReqAtomType">LocalDate</GenRule>
-	<GenRule GenDef="TimeDef" Name="implJavaReqAtomType">LocalTime</GenRule>
-	<GenRule GenDef="TimestampDef" Name="implJavaReqAtomType">LocalDateTime</GenRule>
-	<GenRule GenDef="TokenDef" Name="implJavaReqAtomType">String</GenRule>
-	<GenRule GenDef="NmTokenDef" Name="implJavaReqAtomType">String</GenRule>
-	<GenRule GenDef="NmTokensDef" Name="implJavaReqAtomType">String</GenRule>
-	<GenRule GenDef="TZDateDef" Name="implJavaReqAtomType">LocalDate</GenRule>
-	<GenRule GenDef="TZTimeDef" Name="implJavaReqAtomType">LocalTime</GenRule>
-	<GenRule GenDef="TZTimestampDef" Name="implJavaReqAtomType">LocalDateTime</GenRule>
-	<GenRule GenDef="DbKeyHash128Gen" Name="implJavaReqAtomType">CFLibDbKeyHash128</GenRule>
-	<GenRule GenDef="DbKeyHash160Gen" Name="implJavaReqAtomType">CFLibDbKeyHash160</GenRule>
-	<GenRule GenDef="DbKeyHash224Gen" Name="implJavaReqAtomType">CFLibDbKeyHash224</GenRule>
-	<GenRule GenDef="DbKeyHash256Gen" Name="implJavaReqAtomType">CFLibDbKeyHash256</GenRule>
-	<GenRule GenDef="DbKeyHash384Gen" Name="implJavaReqAtomType">CFLibDbKeyHash384</GenRule>
-	<GenRule GenDef="DbKeyHash512Gen" Name="implJavaReqAtomType">CFLibDbKeyHash512</GenRule>
-	<GenRule GenDef="DbKeyHash128Def" Name="implJavaReqAtomType">CFLibDbKeyHash128</GenRule>
-	<GenRule GenDef="DbKeyHash160Def" Name="implJavaReqAtomType">CFLibDbKeyHash160</GenRule>
-	<GenRule GenDef="DbKeyHash224Def" Name="implJavaReqAtomType">CFLibDbKeyHash224</GenRule>
-	<GenRule GenDef="DbKeyHash256Def" Name="implJavaReqAtomType">CFLibDbKeyHash256</GenRule>
-	<GenRule GenDef="DbKeyHash384Def" Name="implJavaReqAtomType">CFLibDbKeyHash384</GenRule>
-	<GenRule GenDef="DbKeyHash512Def" Name="implJavaReqAtomType">CFLibDbKeyHash512</GenRule>
-	<GenRule GenDef="Uuid6Gen" Name="implJavaReqAtomType">CFLibUuid6</GenRule>
-	<GenRule GenDef="Uuid6Def" Name="implJavaReqAtomType">CFLibUuid6</GenRule>
-	<GenRule GenDef="UuidDef" Name="implJavaReqAtomType">UUID</GenRule>
-	<GenRule GenDef="UuidGen" Name="implJavaReqAtomType">UUID</GenRule>
-
-	<GenRule GenDef="BlobDef" Name="implJavaOptAtomType">byte[]</GenRule>
-	<GenRule GenDef="BoolDef" Name="implJavaOptAtomType">Boolean</GenRule>
-	<GenRule GenDef="EnumDef" Name="implJavaOptAtomType">$EffCodeVisSchemaName$.$Name$</GenRule>
-	<GenRule GenDef="Int16Def" Name="implJavaOptAtomType">Short</GenRule>
-	<GenRule GenDef="Int32Def" Name="implJavaOptAtomType">Integer</GenRule>
-	<GenRule GenDef="Int64Def" Name="implJavaOptAtomType">Long</GenRule>
-	<GenRule GenDef="Id16Gen" Name="implJavaOptAtomType">Short</GenRule>
-	<GenRule GenDef="Id32Gen" Name="implJavaOptAtomType">Integer</GenRule>
-	<GenRule GenDef="Id64Gen" Name="implJavaOptAtomType">Long</GenRule>
-	<GenRule GenDef="UInt16Def" Name="implJavaOptAtomType">Integer</GenRule>
-	<GenRule GenDef="UInt32Def" Name="implJavaOptAtomType">Long</GenRule>
-	<GenRule GenDef="UInt64Def" Name="implJavaOptAtomType">BigDecimal</GenRule>
-	<GenRule GenDef="FloatDef" Name="implJavaOptAtomType">Float</GenRule>
-	<GenRule GenDef="DoubleDef" Name="implJavaOptAtomType">Double</GenRule>
-	<GenRule GenDef="NumberDef" Name="implJavaOptAtomType">BigDecimal</GenRule>
-	<GenRule GenDef="StringDef" Name="implJavaOptAtomType">String</GenRule>
-	<GenRule GenDef="TextDef" Name="implJavaOptAtomType">String</GenRule>
-	<GenRule GenDef="DateDef" Name="implJavaOptAtomType">LocalDate</GenRule>
-	<GenRule GenDef="TimeDef" Name="implJavaOptAtomType">LocalTime</GenRule>
-	<GenRule GenDef="TimestampDef" Name="implJavaOptAtomType">LocalDateTime</GenRule>
-	<GenRule GenDef="TokenDef" Name="implJavaOptAtomType">String</GenRule>
-	<GenRule GenDef="NmTokenDef" Name="implJavaOptAtomType">String</GenRule>
-	<GenRule GenDef="NmTokensDef" Name="implJavaOptAtomType">String</GenRule>
-	<GenRule GenDef="TZDateDef" Name="implJavaOptAtomType">LocalDate</GenRule>
-	<GenRule GenDef="TZTimeDef" Name="implJavaOptAtomType">LocalTime</GenRule>
-	<GenRule GenDef="TZTimestampDef" Name="implJavaOptAtomType">LocalDateTime</GenRule>
-	<GenRule GenDef="DbKeyHash128Gen" Name="implJavaOptAtomType">CFLibDbKeyHash128</GenRule>
-	<GenRule GenDef="DbKeyHash160Gen" Name="implJavaOptAtomType">CFLibDbKeyHash160</GenRule>
-	<GenRule GenDef="DbKeyHash224Gen" Name="implJavaOptAtomType">CFLibDbKeyHash224</GenRule>
-	<GenRule GenDef="DbKeyHash256Gen" Name="implJavaOptAtomType">CFLibDbKeyHash256</GenRule>
-	<GenRule GenDef="DbKeyHash384Gen" Name="implJavaOptAtomType">CFLibDbKeyHash384</GenRule>
-	<GenRule GenDef="DbKeyHash512Gen" Name="implJavaOptAtomType">CFLibDbKeyHash512</GenRule>
-	<GenRule GenDef="DbKeyHash128Def" Name="implJavaOptAtomType">CFLibDbKeyHash128</GenRule>
-	<GenRule GenDef="DbKeyHash160Def" Name="implJavaOptAtomType">CFLibDbKeyHash160</GenRule>
-	<GenRule GenDef="DbKeyHash224Def" Name="implJavaOptAtomType">CFLibDbKeyHash224</GenRule>
-	<GenRule GenDef="DbKeyHash256Def" Name="implJavaOptAtomType">CFLibDbKeyHash256</GenRule>
-	<GenRule GenDef="DbKeyHash384Def" Name="implJavaOptAtomType">CFLibDbKeyHash384</GenRule>
-	<GenRule GenDef="DbKeyHash512Def" Name="implJavaOptAtomType">CFLibDbKeyHash512</GenRule>
-	<GenRule GenDef="Uuid6Gen" Name="implJavaOptAtomType">CFLibUuid6</GenRule>
-	<GenRule GenDef="Uuid6Def" Name="implJavaOptAtomType">CFLibUuid6</GenRule>
-	<GenRule GenDef="UuidDef" Name="implJavaOptAtomType">UUID</GenRule>
-	<GenRule GenDef="UuidGen" Name="implJavaOptAtomType">UUID</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="declColumnGetter">$reference Column declColumnGetter$</GenRule>
 
