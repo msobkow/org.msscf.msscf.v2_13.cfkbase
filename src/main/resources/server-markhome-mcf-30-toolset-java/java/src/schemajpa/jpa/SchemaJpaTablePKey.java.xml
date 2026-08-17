@@ -37,11 +37,11 @@
 	Revision="3.0"
 	Descr="Java 25 Spring JPA implementation of a $TableName$ primary key object.">
 
-	<GenRule GenDef="Index" Name="JpaCompactedIndexClass">$switch IsAtomic yes implJavaOptAtomType default JPAIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="JpaCompactedIndexClass">$switch IsAtomic yes implIJavaOptAtomType default JPAIndexClassName$</GenRule>
 	<GenRule GenDef="Index" Name="JPAIndexClassName">$reference Table DefSchemaName$$reference Table TableName$By$Suffix$Key</GenRule>
 
 	<GenRule GenDef="Table" Name="JpaCompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex JpaCompactedPrimaryIndexClass$</GenRule>
-	<GenRule GenDef="Index" Name="JpaCompactedPrimaryIndexClass">$switch IsAtomic yes implJavaOptAtomType default JPAPrimaryIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="JpaCompactedPrimaryIndexClass">$switch IsAtomic yes implIJavaOptAtomType default JPAPrimaryIndexClassName$</GenRule>
 
 	<GenRule GenDef="Table" Name="JPAPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex JPAPrimaryIndexClassName$</GenRule>
 	<GenRule GenDef="Index" Name="JPAPrimaryIndexClassName">$reference Table DefSchemaName$Jpa$reference Table TableName$PKey</GenRule>
@@ -967,20 +967,20 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="DbKeyHash512Col" Name="NullValueForType">CFLibDbKeyHash512.nullGet()</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implColumnAttr">
-	protected $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$;</GenRule>
+	protected $implIJavaAtomType$ $lower implColumnAttrOptionality$$Name$;</GenRule>
 
 	<GenRule GenDef="TableCol" Name="implColumnAttr">
-	protected $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$;</GenRule>
+	protected $implIJavaAtomType$ $lower implColumnAttrOptionality$$Name$;</GenRule>
 
 	<GenRule GenDef="Atom" Name="implColumnAttr">
-	protected $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$;</GenRule>
+	protected $implIJavaAtomType$ $lower implColumnAttrOptionality$$Name$;</GenRule>
 
 	<GenRule GenDef="Table" Name="implCompactedPrimaryIndexClassJPAAttr">$reference BaseClass reference PrimaryKeyIndex implCompactedPrimaryIndexClassJPAAttr$</GenRule>
 	<GenRule GenDef="Index" Name="implCompactedPrimaryIndexClassJPAAttr">$switch IsAtomic yes implColumnJPAIdAttr default implColumnJPAEmbeddedIdAttr$</GenRule>
 	<GenRule GenDef="Index" Name="implColumnJPAIdAttr">$iterate Columns( lone implColumnJPAIdAttr first empty each empty empty empty )$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implColumnJPAIdAttr">
 	@Id$switch IsJPAGenerated yes emitColumnJPAGenerated default empty$$implColumnAttrJpaBinding$
-	protected $reference Column implJavaAtomType$ $lower reference Column implColumnAttrOptionality$$reference Column Name$;</GenRule>
+	protected $reference Column implIJavaAtomType$ $lower reference Column implColumnAttrOptionality$$reference Column Name$;</GenRule>
 
 	<GenRule GenDef="Index" Name="implColumnJPAEmbeddedIdAttr">
 	// Embedded id's are package-accessible so that the Repository can dereference the attributes of the primary key$implJpaIndexAttributeOverrides$
@@ -1005,10 +1005,10 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	<GenRule GenDef="IndexCol" Name="implJpaColumnAttr">$reference Column implJpaColumnAttr$</GenRule>
 
 	<GenRule GenDef="TableCol" Name="implJpaColumnAttr">$implColumnAttrJpaBinding$
-	protected $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$;</GenRule>
+	protected $implIJavaAtomType$ $lower implColumnAttrOptionality$$Name$;</GenRule>
 
 	<GenRule GenDef="Atom" Name="implJpaColumnAttr">$implColumnAttrJpaBinding$
-	protected $implJavaAtomType$ $lower implColumnAttrOptionality$$Name$;</GenRule>
+	protected $implIJavaAtomType$ $lower implColumnAttrOptionality$$Name$;</GenRule>
 
 	<GenRule GenDef="Index" Name="implJpaIndexAttributeOverrides">
 	@AttributeOverrides({$iterate Columns( first implJpaAttributeColumnOverride each implJpaAttributeCommaColumnOverride )$
@@ -8065,9 +8065,9 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			}</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToOptBoolVar">
 			if( get$implColumnAttrOptionality$$Name$() != null ) {
-				$implJavaAtomType$ lhs$Name$ = get$implColumnAttrOptionality$$Name$();
+				$implIJavaAtomType$ lhs$Name$ = get$implColumnAttrOptionality$$Name$();
 				if( rhs.get$implColumnAttrOptionality$$Name$() ) {
-					$implJavaAtomType$ rhs$Name$ = rhs.get$implColumnAttrOptionality$$Name$();
+					$implIJavaAtomType$ rhs$Name$ = rhs.get$implColumnAttrOptionality$$Name$();
 					if( lhs$Name$ ) {
 						if( ! rhs$Name$ ) {
 							return( $GTAdjusted$ );
@@ -8225,9 +8225,9 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 
 	<GenRule GenDef="Object" Name="implCompareToOptValue">
 			if( get$implColumnAttrOptionality$$Name$() != null ) {
-				$implJavaAtomType$ lhs$Name$ = get$implColumnAttrOptionality$$Name$();
+				$implIJavaAtomType$ lhs$Name$ = get$implColumnAttrOptionality$$Name$();
 				if( rhs.get$implColumnAttrOptionality$$Name$() != null ) {
-					$implJavaAtomType$ rhs$Name$ = rhs.get$implColumnAttrOptionality$$Name$();
+					$implIJavaAtomType$ rhs$Name$ = rhs.get$implColumnAttrOptionality$$Name$();
 					cmp = lhs$Name$.compareTo( rhs$Name$ );
 					if( cmp != 0 ) {
 						return( $CmpAdjusted$ );
@@ -8300,9 +8300,9 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 			}</GenRule>
 	<GenRule GenDef="Object" Name="implCompareToOptRHSBoolVar">
 			if( get$implColumnAttrOptionality$$Name$() != null ) {
-				$implJavaAtomType$ lhs$Name$ = get$implColumnAttrOptionality$$Name$();
+				$implIJavaAtomType$ lhs$Name$ = get$implColumnAttrOptionality$$Name$();
 				if( rhs ) {
-					$implJavaAtomType$ rhs$Name$ = rhs;
+					$implIJavaAtomType$ rhs$Name$ = rhs;
 					if( lhs$Name$ ) {
 						if( ! rhs$Name$ ) {
 							return( $GTAdjusted$ );
@@ -8460,9 +8460,9 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 
 	<GenRule GenDef="Object" Name="implCompareToOptRHSValue">
 			if( get$implColumnAttrOptionality$$Name$() != null ) {
-				$implJavaAtomType$ lhs$Name$ = get$implColumnAttrOptionality$$Name$();
+				$implIJavaAtomType$ lhs$Name$ = get$implColumnAttrOptionality$$Name$();
 				if( rhs != null ) {
-					$implJavaAtomType$ rhs$Name$ = rhs;
+					$implIJavaAtomType$ rhs$Name$ = rhs;
 					cmp = lhs$Name$.compareTo( rhs$Name$ );
 					if( cmp != 0 ) {
 						return( $CmpAdjusted$ );

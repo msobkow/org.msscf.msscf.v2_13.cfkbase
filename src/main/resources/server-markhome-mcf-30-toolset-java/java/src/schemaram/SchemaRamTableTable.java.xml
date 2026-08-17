@@ -267,7 +267,7 @@ $reference Chain reference NextRel implRamMoveSetCurPrev$
 
 	<GenRule GenDef="Relation" Name="implRamMoveSetCurNull">
 			editCur.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassNull each implRamMoveCommaPassNull )$);</GenRule>
-	<GenRule GenDef="RelationCol" Name="implRamMovePassNull">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassNull">($reference FromCol reference Column implIJavaOptAtomType$)null</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassNull">, $implRamMovePassNull$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implRamMoveSetPrevCur">
@@ -282,7 +282,7 @@ $reference Chain reference NextRel implRamMoveSetCurPrev$
 
 	<GenRule GenDef="Relation" Name="implRamMoveSetPrevNull">
 			editPrev.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassPrevNull each implRamMoveCommaPassPrevNull )$);</GenRule>
-	<GenRule GenDef="RelationCol" Name="implRamMovePassPrevNull">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassPrevNull">($reference FromCol reference Column implIJavaOptAtomType$)null</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassPrevNull">, $implRamMovePassPrevNull$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implRamMoveSetCurPrev">
@@ -312,7 +312,7 @@ $reference Chain reference NextRel implRamMoveSetCurPrev$
 
 	<GenRule GenDef="Relation" Name="implRamMoveSetNextNull">
 			editNext.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamMovePassNextNull each implRamMoveCommaPassNextNull )$);</GenRule>
-	<GenRule GenDef="RelationCol" Name="implRamMovePassNextNull">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamMovePassNextNull">($reference FromCol reference Column implIJavaOptAtomType$)null</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamMoveCommaPassNextNull">, $implRamMovePassNextNull$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implRamMoveSetGrandnextCur">
@@ -597,7 +597,7 @@ $reference Chain reference NextRel implRamMoveSetNextCur$
 
 	<GenRule GenDef="IndexCol" Name="ifPKeyColumnRequiredButNullReturnNull">$switch IsNullable yes empty default ifRequiredPKeyColumnNullReturnNull$</GenRule>
 	<GenRule GenDef="IndexCol" Name="ifRequiredPKeyColumnNullReturnNull">
-		{	$implJavaOptAtomType$ test$Name$ = $Name$;
+		{	$implIJavaOptAtomType$ test$Name$ = $Name$;
 			if (test$Name$ == null) {
 				return( null );
 			}
@@ -1200,7 +1200,7 @@ $implRamCreateTableInitChainLinksBody$
 
 	<GenRule GenDef="Relation" Name="implRamCreateTableInitChainLinksClearPrev">
 				Buff.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamCreateTableInitChainLinksClearPrev each implRamCreateTableInitChainLinksCommaClearPrev )$);</GenRule>
-	<GenRule GenDef="RelationCol" Name="implRamCreateTableInitChainLinksClearPrev">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamCreateTableInitChainLinksClearPrev">($reference FromCol reference Column implIJavaOptAtomType$)null</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamCreateTableInitChainLinksCommaClearPrev">, $implRamCreateTableInitChainLinksClearPrev$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implRamCreateTableInitChainLinksAssignPrev">
@@ -2473,7 +2473,7 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 	<GenRule GenDef="Relation" Name="implRamDeleteTableReallyClearSubObjectLookupCols">
 			editSubobj.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamDeleteTableClearSubObjectPassFromCol each implRamDeleteTableClearSubObjectCommaPassFromCol )$);</GenRule>
 
-	<GenRule GenDef="Object" Name="implRamDeleteTableClearSubObjectPassFromCol">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="Object" Name="implRamDeleteTableClearSubObjectPassFromCol">($reference FromCol reference Column implIJavaOptAtomType$)null</GenRule>
 	<GenRule GenDef="Object" Name="implRamDeleteTableClearSubObjectCommaPassFromCol">, $implRamDeleteTableClearSubObjectPassFromCol$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableSubObjectWalkSaveEditBuff">
@@ -2641,12 +2641,12 @@ $iterate Index( each maybeImplRamDeleteTableRemoveIndexEntry )$$switch HasSuperC
 
 	<GenRule GenDef="Relation" Name="implRamDeleteTableClearRelationToAttr">
 						editBuff.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamDeleteTableClearRelationPassToAttr each implRamDeleteTableClearRelationCommaPassToAttr )$);</GenRule>
-	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationPassToAttr">($reference ToCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationPassToAttr">($reference ToCol reference Column implIJavaOptAtomType$)null</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationCommaPassToAttr">, $implRamDeleteTableClearRelationPassToAttr$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implRamDeleteTableClearRelationFromAttr">
 						editBuff.set$OptionalOrRequired$$RelationType$$Suffix$($iterate Columns( first implRamDeleteTableClearRelationPassFromAttr each implRamDeleteTableClearRelationCommaPassFromAttr )$);</GenRule>
-	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationPassFromAttr">($reference FromCol reference Column implJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationPassFromAttr">($reference FromCol reference Column implIJavaOptAtomType$)null</GenRule>
 	<GenRule GenDef="RelationCol" Name="implRamDeleteTableClearRelationCommaPassFromAttr">, $implRamDeleteTableClearRelationPassFromAttr$</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableUpdatePrev">
@@ -2760,16 +2760,16 @@ $reference Chain reference PrevRel iterate Columns( each implRamDeleteTableChain
 </GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implRamDeleteTableChainSelectPrevChainLink">
-		$reference FromCol implJavaAtomType$ prev$reference ToCol Name$ = existing.get$reference FromCol OptionalOrRequired$$reference FromCol Name$();</GenRule>
+		$reference FromCol implIJavaAtomType$ prev$reference ToCol Name$ = existing.get$reference FromCol OptionalOrRequired$$reference FromCol Name$();</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implRamDeleteTableChainSelectNextChainLink">
-		$reference FromCol implJavaAtomType$ next$reference ToCol Name$ = existing.get$reference FromCol OptionalOrRequired$$reference FromCol Name$();</GenRule>
+		$reference FromCol implIJavaAtomType$ next$reference ToCol Name$ = existing.get$reference FromCol OptionalOrRequired$$reference FromCol Name$();</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableFetchContainerKeys"
 		>$reference ContainerRelation iterate Columns( each implRamDeleteTableFetchContainerKey )$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="implRamDeleteTableFetchContainerKey">
-		$reference FromCol implJavaAtomType$ var$reference FromCol Name$ = existing.get$reference FromCol OptionalOrRequired$$reference FromCol Name$();</GenRule>
+		$reference FromCol implIJavaAtomType$ var$reference FromCol Name$ = existing.get$reference FromCol OptionalOrRequired$$reference FromCol Name$();</GenRule>
 
 	<GenRule GenDef="Table" Name="implRamDeleteTableFetchContainer">
 		$reference ContainerRelation reference ToTable EffSchemaName$Buff$reference ContainerRelation reference ToTable TableName$ container = ($reference ContainerRelation reference ToTable EffSchemaName$Buff$reference ContainerRelation reference ToTable TableName$)(schema.getTable$reference ContainerRelation reference ToTable TableName$().readDerivedBy$reference ContainerRelation reference ToIndex Suffix$( Authorization$reference ContainerRelation iterate Columns( each implRamDeleteTablePassCommaContainerVar )$ ));

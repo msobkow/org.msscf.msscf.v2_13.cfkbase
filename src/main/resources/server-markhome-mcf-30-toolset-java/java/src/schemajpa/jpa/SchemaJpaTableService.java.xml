@@ -281,7 +281,7 @@ $switch IsPrimaryIndexKeyAtomic yes empty default declJpaServiceDeleteByPKeyObj$
 $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 	<GenRule GenDef="Table" Name="declInheritedServiceTableFinders">$reference SuperClassRelation reference ToTable declServiceTableFinders$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="declJpaServiceGetArgument">$reference Column implJavaAtomType$ $leadlower reference Column implColumnAttrOptionality$$reference Column Name$</GenRule>
+	<GenRule GenDef="IndexCol" Name="declJpaServiceGetArgument">$reference Column implIJavaAtomType$ $leadlower reference Column implColumnAttrOptionality$$reference Column Name$</GenRule>
 	<GenRule GenDef="IndexCol" Name="commaDeclJpaServiceGetArgument">,
 		$declJpaServiceGetArgument$</GenRule>
 
@@ -346,7 +346,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="commaDeclJpaServiceArgument">,
 		$declJpaServiceArgument$</GenRule>
-	<GenRule GenDef="IndexCol" Name="declJpaServiceArgument">@Param("$reference Column leadlower Name$") $reference Column implJavaAtomType$ $leadlower reference Column implColumnAttrOptionality$$reference Column Name$</GenRule>
+	<GenRule GenDef="IndexCol" Name="declJpaServiceArgument">@Param("$reference Column leadlower Name$") $reference Column implIJavaAtomType$ $leadlower reference Column implColumnAttrOptionality$$reference Column Name$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="commaPassArgDirect">,
 			$passArgDirect$</GenRule>
@@ -606,7 +606,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			}</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="serviceCreateStashGenerated">
-		$implJavaAtomType$ original$reference Column implColumnAttrOptionality$$reference Column Name$ = data$serviceDerefPKeyMember$.get$reference Column implColumnAttrOptionality$$reference Column Name$();
+		$implIJavaAtomType$ original$reference Column implColumnAttrOptionality$$reference Column Name$ = data$serviceDerefPKeyMember$.get$reference Column implColumnAttrOptionality$$reference Column Name$();
 		boolean generated$reference Column implColumnAttrOptionality$$reference Column Name$ = false;</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="serviceDerefPKeyMember">$switch IsPrimaryIndexKeyAtomic yes empty default derefPKeyMember$</GenRule>
