@@ -61,6 +61,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import server.markhome.mcf.v3_1.cflib.keyhash.*;
 import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$
 //import $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$pub.*;
 
@@ -184,7 +185,7 @@ $switch IsToIndexUnique yes declPubSchemaTablePKeyColRelationSetter default empt
 	<GenRule GenDef="RelationCol" Name="passFromPublic">I$reference FromTable DefSchemaName$Pub$reference FromTable Name$.$upper reference FromCol reference Column Name$_INIT_VAL</GenRule>
 	<GenRule GenDef="RelationCol" Name="passFromProtected">I$reference FromTable DefSchemaName$Prot$reference FromTable Name$.$upper reference FromCol reference Column Name$_INIT_VAL</GenRule>
 	<GenRule GenDef="RelationCol" Name="passFromPrivate">I$reference FromTable DefSchemaName$$reference FromTable Name$.$upper reference FromCol reference Column Name$_INIT_VAL</GenRule>
-	<GenRule GenDef="RelationCol" Name="passFromNull">($reference FromCol reference Column implIJavaOptAtomType$)null</GenRule>
+	<GenRule GenDef="RelationCol" Name="passFromNull">($reference FromCol reference Column implIPubJavaOptAtomType$)null</GenRule>
 	<GenRule GenDef="RelationCol" Name="FromColCodeVis">$reference FromCol reference Column CodeVis$</GenRule>
 	<GenRule GenDef="RelationCol" Name="commaPassNullOrDefault">,
 				$passNullOrDefault$</GenRule>
@@ -236,8 +237,8 @@ $switch IsToIndexUnique yes potentiallyDeclPubSchemaTableRelationSetter default 
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declPubColumnAttrPKeyColumnAccessors">
-	public $reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implIJavaOptAtomType first empty each empty empty empty )$ getPKey();
-	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implIJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);$declPubColumnAttrPKeyAttrAccessors$</GenRule>
+	public $reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implIPubJavaOptAtomType first empty each empty empty empty )$ getPKey();
+	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implIPubJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);$declPubColumnAttrPKeyAttrAccessors$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubColumnAttrPKeyAttrAccessors">$iterate SuperiorPrimaryKeyRelations( each declPubColumnAttrPKeyWrapRelationGetterSetter empty empty )$$iterate SubservientPrimaryKeyRelations( each declPubSchemaTablePKeyColRelationGetter empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declPubNonSuperiorColumnGetterSetter empty empty )$</GenRule>
 	<GenRule GenDef="Table" Name="declPubColumnAttrPKeyColumnWrappers">$iterate SuperiorPrimaryKeyRelations( each declPubColumnAttrPKeyWrapRelationGetterSetter empty empty )$$iterate SubservientPrimaryKeyRelations( each declPubSchemaTablePKeyColRelationGetter empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declPubPKeyWrapColumnGetterSetter empty empty )$</GenRule>
@@ -264,11 +265,11 @@ $switch IsToIndexUnique yes declPubColumnAttrPKeyWrapRelationSingletonSetterPub 
 
 	<GenRule GenDef="IndexCol" Name="declPubPKeyWrapColumnGetterSetter">$inrealityDeclPubPKeyWrapColumnGetterSetter$</GenRule>
 	<GenRule GenDef="IndexCol" Name="inrealityDeclPubPKeyWrapColumnGetterSetter">
-	public $reference Column implIJavaAtomType$ get$reference Column implColumnAttrOptionality$$reference Column Name$();
+	public $reference Column implIPubJavaAtomType$ get$reference Column implColumnAttrOptionality$$reference Column Name$();
 $declPubPKeyWrapColumnSetter$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="declPubPKeyWrapColumnSetter">
-	public void set$reference Column implColumnAttrOptionality$$reference Column Name$($reference Column implIJavaAtomType$ value);
+	public void set$reference Column implColumnAttrOptionality$$reference Column Name$($reference Column implIPubJavaAtomType$ value);
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declPubGetClassCode">

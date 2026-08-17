@@ -61,6 +61,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
+import server.markhome.mcf.v3_1.cflib.keyhash.*;
 import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$importJavaProtPackageSchemaNameObj$$tabletweak CafeProtTableImport$
 
 /**
@@ -256,8 +257,8 @@ $switch FromTableIsProtected yes declProtSchemaJpaTableEmbedPKeyRelationAtomicCa
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtColumnAttrPKeyColumnAccessors">
-	public $reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implIJavaOptAtomType first empty each empty empty empty )$ getPKey();
-	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implIJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);$declProtColumnAttrPKeyAttrAccessors$</GenRule>
+	public $reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implIProtJavaOptAtomType first empty each empty empty empty )$ getPKey();
+	public void setPKey($reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implIProtJavaOptAtomType first empty each empty empty empty )$ $leadlower reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implColumnAttrOptionality first empty each empty empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone Name first empty each empty empty empty )$);$declProtColumnAttrPKeyAttrAccessors$</GenRule>
 
 	<GenRule GenDef="Table" Name="declProtColumnAttrPKeyAttrAccessors">$iterate SuperiorPrimaryKeyRelations( each declProtColumnAttrPKeyWrapRelationGetterSetter empty empty )$$iterate SubservientPrimaryKeyRelations( each declProtSchemaTablePKeyColRelationGetter empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtNonSuperiorColumnGetterSetter empty empty )$</GenRule>
 	<GenRule GenDef="Table" Name="declProtColumnAttrPKeyColumnWrappers">$iterate SuperiorPrimaryKeyRelations( each declProtColumnAttrPKeyWrapRelationGetterSetter empty empty )$$iterate SubservientPrimaryKeyRelations( each declProtSchemaTablePKeyColRelationGetter empty empty )$$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declProtPKeyWrapColumnGetterSetter empty empty )$</GenRule>
@@ -301,11 +302,11 @@ $switch FromTableIsPublic yes declProtColumnAttrPKeyWrapRelationSingletonSetterP
 
 	<GenRule GenDef="IndexCol" Name="declProtPKeyWrapColumnGetterSetter">$inrealityDeclPKeyWrapColumnGetterSetter$</GenRule>
 	<GenRule GenDef="IndexCol" Name="inrealityDeclPKeyWrapColumnGetterSetter">
-	public $reference Column implIJavaAtomType$ get$reference Column implColumnAttrOptionality$$reference Column Name$();
+	public $reference Column implIProtJavaAtomType$ get$reference Column implColumnAttrOptionality$$reference Column Name$();
 $declProtPKeyWrapColumnSetter$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="declProtPKeyWrapColumnSetter">
-	public void set$reference Column implColumnAttrOptionality$$reference Column Name$($reference Column implIJavaAtomType$ value);
+	public void set$reference Column implColumnAttrOptionality$$reference Column Name$($reference Column implIProtJavaAtomType$ value);
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declProtGetClassCode">
