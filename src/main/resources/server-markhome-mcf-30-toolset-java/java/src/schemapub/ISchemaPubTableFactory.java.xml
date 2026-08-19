@@ -72,6 +72,16 @@ public interface I$SchemaName$Pub$TableName$Factory$switch HasDefSchema yes exte
 {$switch HasDefSchema yes declJavaDefSchemaPubTableFactoryInheritBody default declJavaDefSchemaPubTableFactoryBaseBody$}
 </GenFile>
 
+	<GenRule GenDef="Index" Name="RecPubCompactedIndexClass">$switch ToTableIsPublic yes reallyRecPubCompactedIndexClass default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyRecPubCompactedIndexClass">$switch IsAtomic yes implIPubJavaOptAtomType default RecPubIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="RecPubIndexClassName">$switch ToTableIsPublic yes reallyRecPubIndexClassName default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyRecPubIndexClassName">$reference Table DefSchemaName$Pub$reference Table TableName$By$Suffix$Key</GenRule>
+
+	<GenRule GenDef="Table" Name="RecPubPrimaryIndexClassName">$switch IsPublic yes reallyRecPubPrimaryIndexClassName default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyRecPubPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex reallyRecPubPKeyClassName default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyRecPubPKeyClassName">$switch IsAtomic yes implIJavaOptColumnType default reallyRecPubPKeyActualClassName$</GenRule>
+	<GenRule GenDef="Index" Name="reallyRecPubPKeyActualClassName">$reference Table DefSchemaName$Pub$reference Table TableName$PKey</GenRule>
+
 	<GenRule GenDef="Table" Name="declJavaDefSchemaPubTableFactoryInheritBody">
 </GenRule>
 
@@ -95,14 +105,8 @@ extends I$reference DefSchema SchemaName$Pub$TableName$Factory</GenRule>
 	public I$DefSchemaName$Pub$TableName$By$Suffix$Key newPubBy$Suffix$Key();
 </GenRule>
 
-	<GenRule GenDef="Index" Name="RecPubCompactedIndexClass">$switch IsAtomic yes implIPubJavaOptAtomType default RecPubIndexClassName$</GenRule>
-	<GenRule GenDef="Index" Name="RecPubIndexClassName">$reference Table DefSchemaName$Pub$reference Table TableName$By$Suffix$Key</GenRule>
-
 	<GenRule GenDef="Table" Name="RecPubCompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex RecPubCompactedPrimaryIndexClass$</GenRule>
 	<GenRule GenDef="Index" Name="RecPubCompactedPrimaryIndexClass">$switch IsAtomic yes implIPubJavaOptAtomType default RecPubPrimaryIndexClassName$</GenRule>
-
-	<GenRule GenDef="Table" Name="RecPubPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex RecPubPrimaryIndexClassName$</GenRule>
-	<GenRule GenDef="Index" Name="RecPubPrimaryIndexClassName">$reference Table DefSchemaName$Pub$reference Table TableName$PKey</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubRecNewPKey"
 		>$switch HasDefSchema no ifNotAtomicDeclPubNewPKey default empty$</GenRule>

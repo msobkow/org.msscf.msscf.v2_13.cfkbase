@@ -120,9 +120,23 @@ public interface I$DefPubSchemaName$Schema$iterate SchemaRefs( first extendsPubP
 $implPubApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs( each empty empty declPubISchemaClassMapEntry )$$declPubISchemaClassMapData$$iterate SchemaRefs( each empty empty declPubISchemaSecurityAccessors )$$iterate Types( empty empty each declPubISchemaPubEnumType )$$iterate SchemaRefs( empty declPubISchemaSecurityAttrs each empty )$$implPubISchemaClassMapAccessors$$iterate SchemaRefs( first declPubNewSchema each empty empty declPubNewSchema )$$iterate Id16Generators( each declPubNextIdGen empty empty)$$iterate Id32Generators( each declPubNextIdGen empty empty)$$iterate Id64Generators( each declPubNextIdGen empty empty)$$iterate DbKeyHash128Generators( each declPubNextIdGen empty empty )$$iterate DbKeyHash160Generators( each declPubNextIdGen empty empty )$$iterate DbKeyHash224Generators( each declPubNextIdGen empty empty )$$iterate DbKeyHash256Generators( each declPubNextIdGen empty empty )$$iterate DbKeyHash384Generators( each declPubNextIdGen empty empty )$$iterate DbKeyHash512Generators( each declPubNextIdGen empty empty )$$iterate UuidGenerators( each declPubNextIdGen empty empty )$$iterate Uuid6Generators( each declPubNextIdGen empty empty )$$iterate SchemaRefs( each declPubSchemaFactoryAccessors empty empty )$$declPubSchemaFactoryAccessors$$iterate DefSchemaPublicTables( each declPubTableMethods empty empty )$$iterate SchemaRefs( first declPubSchemaTablePermsAccessors each empty empty declPubSchemaTablePermsAccessors )$$declPubSchemaBootstrap$}
 </GenFile>
 
-	<GenRule GenDef="Relation" Name="emitInterfaceDataType">$switch IsToIndexUnique yes emitInterfaceDataTypeSingleton default emitInterfaceDataTypeSet$</GenRule>
+	<GenRule GenDef="Relation" Name="emitInterfaceDataType">$switch ToIndexIsUnique yes emitInterfaceDataTypeSingleton default emitInterfaceDataTypeSet$</GenRule>
 	<GenRule GenDef="Relation" Name="emitInterfaceDataTypeSingleton">I$reference ToTable DefSchemaName$$reference ToTable TableName$</GenRule>
 	<GenRule GenDef="Relation" Name="emitInterfaceDataTypeSet">List&lt;I$reference ToTable DefSchemaName$$reference ToTable TableName$&gt;</GenRule>
+
+	<GenRule GenDef="Relation" Name="emitProtInterfaceDataType">$switch ToIndexIsProtected yes reallyEmitProtInterfaceDataType default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyEmitProtInterfaceDataType">$switch ToIndexIsUnique yes emitProtInterfaceDataTypeSingleton default emitProtInterfaceDataTypeSet$</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtInterfaceDataTypeSingleton">$switch ToIndexIsProtected yes reallyEmitProtInterfaceDataTypeSingleton default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyEmitProtInterfaceDataTypeSingleton">I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtInterfaceDataTypeSet">$switch ToTableIsProtected yes reallyEmitProtInterfaceDataTypeSet default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyEmitProtInterfaceDataTypeSet">List&lt;I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$&gt;</GenRule>
+
+	<GenRule GenDef="Relation" Name="emitPubInterfaceDataType">$switch ToIndexIsPublic yes reallyEmitPubInterfaceDataType default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyEmitPubInterfaceDataType">$switch ToIndexIsUnique yes emitPubInterfaceDataTypeSingleton default emitPubInterfaceDataTypeSet$</GenRule>
+	<GenRule GenDef="Relation" Name="emitPubInterfaceDataTypeSingleton">$switch ToIndexIsPublic yes reallyEmitPubInterfaceDataTypeSingleton default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyEmitPubInterfaceDataTypeSingleton">I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$</GenRule>
+	<GenRule GenDef="Relation" Name="emitPubInterfaceDataTypeSet">$switch ToTableIsPublic yes reallyEmitPubInterfaceDataTypeSet default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyEmitPubInterfaceDataTypeSet">List&lt;I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$&gt;</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="EffSchemaName">$reference RefSchema SchemaName$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="EffSchemaName">$SchemaName$</GenRule>
@@ -198,10 +212,6 @@ $implPubApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs(
 	<GenRule GenDef="SchemaRef" Name="importJavaPubPackageSchemaNameBuffDotFactoryService">$reference RefSchema importJavaPubPackageSchemaNameBuffDotFactoryService$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="importJavaPubPackageSchemaNameBuffDotFactoryService">
 //import $lower DefTopProjectName$.$lower DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$pub.buff.$DefSchemaName$PubBuffFactoryService;</GenRule>
-
-	<GenRule GenDef="Relation" Name="emitPubInterfaceDataType">$switch IsToIndexUnique yes emitPubInterfaceDataTypeSingleton default emitPubInterfaceDataTypeSet$</GenRule>
-	<GenRule GenDef="Relation" Name="emitPubInterfaceDataTypeSingleton">I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$</GenRule>
-	<GenRule GenDef="Relation" Name="emitPubInterfaceDataTypeSet">List&lt;I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$&gt;</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="declPubSchemaFactoryAccessors">$reference RefSchema declPubSchemaFactoryAccessors$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declPubSchemaFactoryAccessors">

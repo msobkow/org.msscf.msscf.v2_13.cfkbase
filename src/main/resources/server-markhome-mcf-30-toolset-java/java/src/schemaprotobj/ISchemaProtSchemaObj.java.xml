@@ -73,6 +73,30 @@ public interface I$ProtSchemaName$SchemaObj$iterate SchemaRefs( first extendProt
 	public void set$DefProtSchemaName$BackingStore(I$PubSchemaName$Schema $lower DefProtSchemaName$BackingStore);
 </GenRule>
 
+	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataType">$switch IsToIndexUnique yes emitProtObjInterfaceDataTypeSingleton default emitProtObjInterfaceDataTypeSet$</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypeSingleton">$switch ToTableHasDefSchema yes emitProtObjInterfaceDataTypePubSingleton default emitProtObjInterfaceDataTypeProtObjSingleton$</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypePubSingleton">$emitProtObjInterfaceDataTypePrefix$$reference ToTable TableName$Obj</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypeProtObjSingleton">$emitProtObjInterfaceDataTypePrefix$$reference ToTable TableName$Obj</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypeSet">$switch ToTableHasDefSchema yes emitProtObjInterfaceDataTypePubSet default emitProtObjInterfaceDataTypeProtObjSet$</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypePubSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$reference ToTable TableName$Obj&gt;</GenRule>
+	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypeProtObjSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$reference ToTable TableName$Obj&gt;</GenRule>
+
+	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataType">$switch IsUnique yes emitProtObjInterfaceDataTypeSingleton default emitProtObjInterfaceDataTypeSet$</GenRule>
+	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypeSingleton">$switch HasDefSchema yes emitProtObjInterfaceDataTypePubSingleton default emitProtObjInterfaceDataTypeProtObjSingleton$</GenRule>
+	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypePubSingleton">$emitProtObjInterfaceDataTypePrefix$$TableName$Obj</GenRule>
+	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypeProtObjSingleton">$emitProtObjInterfaceDataTypePrefix$$TableName$Obj</GenRule>
+	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypeSet">$switch HasDefSchema yes emitProtObjInterfaceDataTypePubSet default emitProtObjInterfaceDataTypeProtObjSet$</GenRule>
+	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypePubSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$TableName$Obj&gt;</GenRule>
+	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypeProtObjSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$TableName$Obj&gt;</GenRule>
+
+	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataType">$emitProtObjInterfaceDataTypeSingleton$</GenRule>
+	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypeSingleton">$switch HasDefSchema yes emitProtObjInterfaceDataTypePubSingleton default emitProtObjInterfaceDataTypeProtObjSingleton$</GenRule>
+	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypePubSingleton">$emitProtObjInterfaceDataTypePrefix$$TableName$Obj</GenRule>
+	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypeProtObjSingleton">$emitProtObjInterfaceDataTypePrefix$$TableName$Obj</GenRule>
+	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypeSet">$switch HasDefSchema yes emitProtObjInterfaceDataTypePubSet default emitProtObjInterfaceDataTypeProtObjSet$</GenRule>
+	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypePubSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$TableName$Obj&gt;</GenRule>
+	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypeProtObjSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$TableName$Obj&gt;</GenRule>
+
 	<GenRule GenDef="SchemaRef" Name="declProtISchemaSchemaObjBSProtAccessors">$reference RefSchema declProtISchemaSchemaObjBSProtAccessors$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="declProtISchemaSchemaObjBSProtAccessors">
 	public I$ProtSchemaName$Schema get$DefProtSchemaName$BackingStore();
@@ -102,30 +126,6 @@ public interface I$ProtSchemaName$SchemaObj$iterate SchemaRefs( first extendProt
 	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypePrefixSet">$switch HasDefSchema yes emitProtObjInterfaceDataTypePrefixPubSet default emitProtObjInterfaceDataTypePrefixProtObjSet$</GenRule>
 	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypePrefixPubSet">I$DefSchemaName$Pub</GenRule>
 	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypePrefixProtObjSet">I$DefSchemaName$Prot</GenRule>
-
-	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataType">$switch IsToIndexUnique yes emitProtObjInterfaceDataTypeSingleton default emitProtObjInterfaceDataTypeSet$</GenRule>
-	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypeSingleton">$switch ToTableHasDefSchema yes emitProtObjInterfaceDataTypePubSingleton default emitProtObjInterfaceDataTypeProtObjSingleton$</GenRule>
-	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypePubSingleton">$emitProtObjInterfaceDataTypePrefix$$reference ToTable TableName$Obj</GenRule>
-	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypeProtObjSingleton">$emitProtObjInterfaceDataTypePrefix$$reference ToTable TableName$Obj</GenRule>
-	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypeSet">$switch ToTableHasDefSchema yes emitProtObjInterfaceDataTypePubSet default emitProtObjInterfaceDataTypeProtObjSet$</GenRule>
-	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypePubSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$reference ToTable TableName$Obj&gt;</GenRule>
-	<GenRule GenDef="Relation" Name="emitProtObjInterfaceDataTypeProtObjSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$reference ToTable TableName$Obj&gt;</GenRule>
-
-	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataType">$switch IsUnique yes emitProtObjInterfaceDataTypeSingleton default emitProtObjInterfaceDataTypeSet$</GenRule>
-	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypeSingleton">$switch HasDefSchema yes emitProtObjInterfaceDataTypePubSingleton default emitProtObjInterfaceDataTypeProtObjSingleton$</GenRule>
-	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypePubSingleton">$emitProtObjInterfaceDataTypePrefix$$TableName$Obj</GenRule>
-	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypeProtObjSingleton">$emitProtObjInterfaceDataTypePrefix$$TableName$Obj</GenRule>
-	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypeSet">$switch HasDefSchema yes emitProtObjInterfaceDataTypePubSet default emitProtObjInterfaceDataTypeProtObjSet$</GenRule>
-	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypePubSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$TableName$Obj&gt;</GenRule>
-	<GenRule GenDef="Index" Name="emitProtObjInterfaceDataTypeProtObjSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$TableName$Obj&gt;</GenRule>
-
-	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataType">$emitProtObjInterfaceDataTypeSingleton$</GenRule>
-	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypeSingleton">$switch HasDefSchema yes emitProtObjInterfaceDataTypePubSingleton default emitProtObjInterfaceDataTypeProtObjSingleton$</GenRule>
-	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypePubSingleton">$emitProtObjInterfaceDataTypePrefix$$TableName$Obj</GenRule>
-	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypeProtObjSingleton">$emitProtObjInterfaceDataTypePrefix$$TableName$Obj</GenRule>
-	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypeSet">$switch HasDefSchema yes emitProtObjInterfaceDataTypePubSet default emitProtObjInterfaceDataTypeProtObjSet$</GenRule>
-	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypePubSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$TableName$Obj&gt;</GenRule>
-	<GenRule GenDef="Table" Name="emitProtObjInterfaceDataTypeProtObjSet">List&lt;$emitProtObjInterfaceDataTypePrefix$$TableName$Obj&gt;</GenRule>
 
 	<GenRule GenDef="Relation" Name="emitProtEditObjInterfaceDataType">$switch IsToIndexUnique yes emitProtEditObjInterfaceDataTypeSingleton default emitProtEditObjInterfaceDataTypeSet$</GenRule>
 	<GenRule GenDef="Relation" Name="emitProtEditObjInterfaceDataTypeSingleton">$switch ToTableHasDefSchema yes emitProtEditObjInterfaceDataTypePubSingleton default emitProtEditObjInterfaceDataTypeProtObjSingleton$</GenRule>

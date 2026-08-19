@@ -37,14 +37,18 @@
 	Revision="3.0"
 	Descr="Java 25 public interface for a $TableName$ primary key object.">
 
-	<GenRule GenDef="Index" Name="IPubCompactedIndexClass">$switch IsAtomic yes implPubJavaOptAtomType default IPubIndexClassName$</GenRule>
-	<GenRule GenDef="Index" Name="IPubIndexClassName">I$reference Table DefSchemaName$Pub$reference Table TableName$By$Suffix$Key</GenRule>
+	<GenRule GenDef="Index" Name="IPubCompactedIndexClass">$switch IsPublic yes reallyIPubCompactedIndexClass default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyIPubCompactedIndexClass">$switch IsAtomic yes implPubIJavaOptAtomType default IPubIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="IPubIndexClassName">$switch IsPublic yes reallyIPubIndexClassName default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyIPubIndexClassName">I$reference Table DefSchemaName$Pub$reference Table TableName$By$Suffix$Key</GenRule>
 
-	<GenRule GenDef="Table" Name="IPubCompactedPrimaryIndexClass">$reference BaseClass reference PrimaryKeyIndex IPubCompactedPrimaryIndexClass$</GenRule>
-	<GenRule GenDef="Index" Name="IPubCompactedPrimaryIndexClass">$switch IsAtomic yes implPubJavaOptAtomType default IPubPrimaryIndexClassName$</GenRule>
-
-	<GenRule GenDef="Table" Name="IPubPrimaryIndexClassName">$reference BaseClass reference PrimaryKeyIndex IPubPrimaryIndexClassName$</GenRule>
-	<GenRule GenDef="Index" Name="IPubPrimaryIndexClassName">I$SchemaName$Pub$TableName$PKey</GenRule>
+	<GenRule GenDef="Table" Name="IPubCompactedPrimaryIndexClass">$reference PrimaryKeyIndex switch IsPublic yes reallyIPubCompactedPrimaryIndexClass default empty$</GenRule>
+	<GenRule GenDef="Index" Name="IPubCompactedPrimaryIndexClass">$switch IsPublic yes reallyIPubCompactedPrimaryIndexClass default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyIPubCompactedPrimaryIndexClass">$switch IsAtomic yes implIPubJavaOptAtomType default IPubPrimaryIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="IPubPrimaryIndexClass">$switch IsPublic yes reallyIPubPrimaryIndexClass default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyIPubPrimaryIndexClass">$IPubPrimaryIndexClassName$</GenRule>
+	<GenRule GenDef="Index" Name="IPubPrimaryIndexClassName">$switch IsPublic yes reallyIPubPrimaryIndexClassName default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyIPubPrimaryIndexClassName">I$DefSchemaName$Pub$TableName$PKey</GenRule>
 
 	<GenRule GenDef="Table" Name="fileISchemaPubTablePKeyJava">$switch IsPublic yes forRealFileISchemaPubTablePKeyJava default empty$</GenRule>
 	<GenRule GenDef="Table" Name="forRealFileISchemaPubTablePKeyJava">$switch IsPrimaryIndexKeyAtomic yes empty default reallyIFileSchemaPubTablePKeyJava$</GenRule>
@@ -1221,8 +1225,6 @@ $reference PrimaryKeyIndex iterate Columns( each declPubColumnGetterSetter )$$de
 	//@Override
 	public int compareTo( Object rhs );
 </GenRule>
-
-	<GenRule GenDef="Table" Name="emitPubPKeyHistoryClassNames">, $SchemaName$Pub$TableName$HPKey, $SchemaName$Pub$TableName$H</GenRule>
 
 	<GenRule GenDef="Index" Name="declPubRecPKeyToString">
 	public String getXmlAttrFragment();
