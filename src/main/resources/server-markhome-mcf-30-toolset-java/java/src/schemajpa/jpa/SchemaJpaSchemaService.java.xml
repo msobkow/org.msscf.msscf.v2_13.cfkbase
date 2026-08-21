@@ -96,7 +96,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *	@param userLogin 
 	 *	@return null if the userLogin does not exist, is null, is empty, or is blank. Otherwise the DbKey for the user.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public CFLibDbKeyHash256 mapUserLoginToUserId(String userLogin) {
 		final String S_ProcName = "mapUserLoginToUserId";
 		if (userLogin == null || userLogin.isEmpty() || userLogin.isBlank()) {
@@ -117,7 +117,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *	@param userId
 	 *	@return null if the userId does not exist or is null. Otherwise the userLogin for the user.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public String mapUserIdToUserLogin(CFLibDbKeyHash256 userId) {
 		final String S_ProcName = "mapUserIdToUserLogin";
 		if (userId == null || userId.isNull()) {
@@ -144,7 +144,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public boolean probeMemberOfTenantGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, String permissionName) {
 		if (userId == null || userId.isNull()) {
 			return(false);
@@ -184,7 +184,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public boolean probeMemberOfClusterGroup(CFLibDbKeyHash256 userId, CFLibDbKeyHash256 clusterId, String permissionName) {
 		if (userId == null || userId.isNull()) {
 			return(false);
@@ -215,7 +215,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public boolean probeMemberOfSystemGroup(CFLibDbKeyHash256 userId, String permissionName) {
 		if (userId == null || userId.isNull()) {
 			return(false);
@@ -238,6 +238,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 </GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="JpaSchemaServiceBootstrap">
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapSchema($SecPubSchemaName$TableData tableData[]) {$iterate SchemaRefs( empty invokeJpaSchemaServiceBootstrapSecurity first invokeJpaSchemaServiceSecBootstrapSecurity each empty )$
 	}
 $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$iterate SchemaRefs( empty implJpaSchemaServiceBootstrapTableSecurity each empty )$$iterate SchemaRefs( empty implJpaSchemaServiceBootstrapAllTablesSecurity first implJpaSchemaServiceInvokeSuperAllTablesSecurity each empty )$
@@ -1297,10 +1298,12 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 </GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="implJpaSchemaServiceInvokeSuperAllTablesSecurity">
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapAllTablesSecurity($SecPubSchemaName$TableData tableData[]) {
 		bootstrapAllTablesSecurity(I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), tableData);
 	}
 
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapAllTablesSecurity(clusterId, tenantId, tableData);
 	}
@@ -1308,12 +1311,12 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 	<GenRule GenDef="Object" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">$popto SchemaDef implJpaSchemaServiceBootstrapAllTablesSecurity$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaServiceBootstrapAllTablesSecurity">
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapAllTablesSecurity($SecPubSchemaName$TableData tableData[]) {
 		bootstrapAllTablesSecurity(I$SecSchemaName$Schema.getSysClusterId(), I$SecSchemaName$Schema.getSysTenantId(), tableData);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 		LocalDateTime now = LocalDateTime.now();
 		I$SecSchemaName$SecSession bootstrapSession;
@@ -1379,7 +1382,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		}
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapAllTablesSecurity(I$SecSchemaName$Authorization auth,
 		CFLibDbKeyHash256 systemUID,
 		I$SecSchemaName$SecSession bootstrapSession,
@@ -1503,7 +1506,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	 *		@param parmLoginId The LoginId of the user being authorized.
 	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	long countSysSecurityPermsByLoginId(String parmPermName, String parmLoginId) {
 		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countSysSecurityPermsByLoginId", Long.class);
@@ -1526,7 +1529,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	 *		@param parmUserId The UserId of the user being authorized.
 	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	long countSysSecurityPermsByUserId(String parmPermName, CFLibDbKeyHash256 parmUserId) {
 		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countSysSecurityPermsByUserId", Long.class);
@@ -1550,7 +1553,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	 *		@param parmClusterId The ClusterId of the permission to be checked (not necessarily the user's current cluster)
 	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	long countClusSecurityPermsByLoginId(String parmPermName, String parmLoginId, CFLibDbKeyHash256 parmClusterId) {
 		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countClusSecurityPermsByLoginId", Long.class);
@@ -1575,7 +1578,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	 *		@param parmClusterId The ClusterId of the permission to be checked (not necessarily the user's current cluster)
 	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	long countClusSecurityPermsByUserId(String parmPermName, CFLibDbKeyHash256 parmUserId, CFLibDbKeyHash256 parmClusterId) {
 		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countClusSecurityPermsByUserId", Long.class);
@@ -1600,7 +1603,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	 *		@param parmTenantId The TenantId of the permission to be checked (not necessarily the user's current tenant)
 	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	long countTentSecurityPermsByLoginId(String parmPermName, String parmLoginId, CFLibDbKeyHash256 parmTenantId) {
 		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countTentSecurityPermsByLoginId", Long.class);
@@ -1625,7 +1628,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	 *		@param parmTenantId The TenantId of the permission to be checked (not necessarily the user's current tenant)
 	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
+	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	long countTentSecurityPermsByUserId(String parmPermName, CFLibDbKeyHash256 parmUserId, CFLibDbKeyHash256 parmTenantId) {
 		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countTentSecurityPermsByUserId", Long.class);
