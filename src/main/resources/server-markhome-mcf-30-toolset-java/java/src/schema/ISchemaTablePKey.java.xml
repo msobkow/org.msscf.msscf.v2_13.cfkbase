@@ -97,12 +97,15 @@ public interface I$SchemaName$$TableName$PKey$switch HasDefSchema yes ISchemaTab
 	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();
 </GenRule>
 
+	<GenRule GenDef="Value" Name="implSchemaBuffTableSetAttrArgColumn">$declSchemaTableSetAttrArgColumn$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implSchemaBuffTableSetAttrArgColumn">$reference Column implSchemaBuffTableSetAttrArgColumn$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableSetAttrArgColumn">$reference FromCol reference Column implSchemaBuffTableSetAttrArgColumn$</GenRule>
+
 	<GenRule GenDef="RelationCol" Name="declSchemaTableSetAttrArgColumn">
-		$reference FromCol reference Column leadlower declColumnAttrOptionality$$reference FromCol reference Column Name$ = arg$reference FromCol reference Column Name$;</GenRule>
-
-
-
-
+		$reference FromCol reference Column leadlower implColumnAttrOptionality$$reference FromCol reference Column Name$ = arg$reference FromCol reference Column Name$;</GenRule>
+	<GenRule GenDef="Value" Name="declSchemaTableSetAttrArgColumn">
+		$leadlower implColumnAttrOptionality$$Name$ = arg$Name$;</GenRule>
+	<GenRule GenDef="IndexCol" Name="declSchemaTableSetAttrArgColumn">$reference Colummn declSchemaTableSetAttrArgColumn$</GenRule>
 
 	<GenRule GenDef="Relation" Name="ToIndexIsUnique"
 		>$reference ToIndex IsUnique$</GenRule>
@@ -134,6 +137,12 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declColumnG
 	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="declSetArgColumn">$reference FromCol reference Column implIJavaAtomType$ arg$reference FromCol reference Column Name$</GenRule>
+	<GenRule GenDef="Value" Name="declSetArgColumn">$implIJavaAtomType$ arg$Name$</GenRule>
+	<GenRule GenDef="Value" Name="declCommaSetArgColumn">,
+		$declSetArgColumn$</GenRule>
+	<GenRule GenDef="IndexCol" Name="declSetArgColumn">$reference Column declSetArgColumn$</GenRule>
+	<GenRule GenDef="IndexCol" Name="declCommaSetArgColumn">$reference Column declCommaSetArgColumn$</GenRule>
+
 	<GenRule GenDef="RelationCol" Name="declCommaSetArgColumn">,
 		$declSetArgColumn$</GenRule>
 

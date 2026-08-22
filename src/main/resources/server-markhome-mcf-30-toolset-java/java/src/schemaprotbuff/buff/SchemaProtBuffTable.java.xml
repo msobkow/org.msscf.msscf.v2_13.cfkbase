@@ -42,8 +42,8 @@
 			GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
-		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$/src/main/java"
-		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.protbuff"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$prot"
 		ExpansionClassName="$SchemaName$ProtBuff$TableName$Java"
 		ExpansionKeyName="$SchemaName$ProtBuff$TableName$Java"
 		ExpansionFileName="$SchemaName$ProtBuff$TableName$.java"
@@ -73,6 +73,40 @@ public class $SchemaName$ProtBuff$TableName$$switch HasDefSchema yes buffExtendD
 {$switch HasDefSchemaOrSuper no implJustProtCompactedPrimaryIndexClassProtBuffAttr default empty$$switch HasDefSchema yes empty default declJustProtSchemaProtBuffTableColumns$
 $switch HasDefSchemaOrSuper yes implJustProtSchemaProtBuffTableInhConstruct default implJustProtSchemaProtBuffTableBaseConstruct$$switch HasSuperClassRelation no implJustProtColumnAttrProtBuffPKeyAccessors default empty$$switch HasDefSchemaOrSuper no implJustProtBuffColumnOptAuditGetterSetters default empty$$switch HasDefSchemaOrSuper no implRevisionGetterSetter default empty$$implJustProtBuffGetClassCode$$implJustProtSchemaProtBuffTableSuperiorRelations$$implJustProtSchemaProtBuffTableSubservientRelations$$switch HasDefSchema no implJustProtBuffDataGetterSetters default empty$$implJustProtBuffEquals$$implJustProtBuffGetHashCode$$implJustProtBuffCompareTo$$implJustProtBuffSet$$implJustProtSchemaProtBuffTableToString$}
 </GenFile>
+
+	<GenRule GenDef="Value" Name="implJustProtIJavaAtomType">$switch IsProtected yes implIJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJustProtIJavaAtomType">$reference Column implJustProtIJavaAtomType$</GenRule>
+
+	<GenRule GenDef="Table" Name="implJustProtHPKeyCompareToRequiredRevision">$implHPKeyCompareToRequiredRevision$</GenRule>
+
+	<GenRule GenDef="Value" Name="implJustProtColumnGetter">$switch IsProtected yes implColumnGetter default empty$</GenRule>
+	<GenRule GenDef="Value" Name="implJustProtColumnSetter">$switch IsProtected yes implColumnSetter default empty$</GenRule>
+
+	<GenRule GenDef="Table" Name="implJustProtPubHProtBuffSetWithCast">$switch IsProtected yes implHPubBuffSetWithCast default empty$</GenRule>
+
+    <GenRule GenDef="Table" Name="implHProtBuffSetWithCast">
+		if( src instanceof I$DefSchemaName$Prot$TableName$H ) {
+			set$TableName$( (I$DefSchemaName$Prot$TableName$H)src );
+		}
+		else {
+			throw new CFLibUnsupportedClassException( getClass(),
+					"set",
+					"src",
+					src,
+					"I$DefSchemaName$$TableName$H" );
+		}</GenRule>
+
+    <GenRule GenDef="Table" Name="implHPubBuffSetWithCast">
+		if( src instanceof I$DefSchemaName$Pub$TableName$H ) {
+			set$TableName$( (I$DefSchemaName$Pub$TableName$H)src );
+		}
+		else {
+			throw new CFLibUnsupportedClassException( getClass(),
+					"set",
+					"src",
+					src,
+					"I$DefSchemaName$$TableName$H" );
+		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implJustProtConstructorInitAttr">$switch IsProtected yes reallyImplJustProtConstructorInitAttr default empty$</GenRule>
 	<GenRule GenDef="Value" Name="reallyImplJustProtConstructorInitAttr">$implConstructorInitAttr$</GenRule>
@@ -108,7 +142,7 @@ $switch HasDefSchemaOrSuper yes implJustProtSchemaProtBuffTableInhConstruct defa
 	<GenRule GenDef="RelationCol" Name="declJustProtSetArgColumn">$reference FromCol reference Column declJustProtSetArgColumn$</GenRule>
 
 	<GenRule GenDef="Value" Name="implJustProtSchemaProtBuffTableSetAttrArgColumn">$switch IsProtected yes reallyImplJustProtSchemaProtBuffTableSetAttrArgColumn default empty$</GenRule>
-	<GenRule GenDef="Value" Name="reallyImplJustProtSchemaProtBuffTableSetAttrArgColumn">$implSchemaProtBuffTableSetAttrArgColumn$</GenRule>
+	<GenRule GenDef="Value" Name="reallyImplJustProtSchemaProtBuffTableSetAttrArgColumn">$implSchemaBuffTableSetAttrArgColumn$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implJustProtSchemaProtBuffTableSetAttrArgColumn">$reference Column implJustProtSchemaProtBuffTableSetAttrArgColumn$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJustProtSchemaProtBuffTableSetAttrArgColumn">$reference FromCol reference Column implJustProtSchemaProtBuffTableSetAttrArgColumn$</GenRule>
 
@@ -152,10 +186,8 @@ $switch HasDefSchemaOrSuper yes implJustProtSchemaProtBuffTableInhConstruct defa
 	<GenRule GenDef="IndexCol" Name="implJustProtDirectGetterSetter">$reference Column implJustProtDirectGetterSetter$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJustProtDirectGetterSetter">$reference FromCol reference Column implJustProtDirectGetterSetter$</GenRule>
 
-	<GenRule GenDef="Value" Name="implJustProtCommaSetPassAttrArgColumn">$switch IsProtected yes reallyImplJustProtCommaSetPassAttrArgColumn default empty$</GenRule>
-	<GenRule GenDef="Value" Name="reallyImplJustProtCommaSetPassAttrArgColumn">$implCommaSetPassAttrArgColumn$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implJustProtCommaSetPassAttrArgColumn">$reference Column implJustProtCommaSetPassAttrArgColumn$</GenRule>
-	<GenRule GenDef="RelationCol" Name="implJustProtCommaSetPassAttrArgColumn">$reference FromCol reference Column implJustProtCommaSetPassAttrArgColumn$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implJustProtCommaSetPassAttrArgColumn">$switch IsProtected yes reallyImplJustProtCommaSetPassAttrArgColumn default empty$</GenRule>
+	<GenRule GenDef="RelationCol" Name="reallyImplJustProtCommaSetPassAttrArgColumn">, get$reference FromCol implColumnAttrOptionality$$reference FromCol Name$()</GenRule>
 
 	<GenRule GenDef="Object" Name="pkeyJustProtGetter">$switch IsProtected yes reallyPkeyJustProtGetter default empty$</GenRule>
 	<GenRule GenDef="Object" Name="reallyPkeyJustProtGetter">$switch IsPrivate yes pkeyJustProtPrivGetter default maybeJustProtPKeyProtGetter$</GenRule>
@@ -660,10 +692,10 @@ $reimplJustProtSchemaProtBuffTableNarrowedPubRelationSetter$</GenRule>
 		I$reference Narrowed reference ToTable DefSchemaName$$reference Narrowed reference ToTable TableName$ found = targetTable.$switch IsToIndexPrimaryKeyIndex yes derefProtBuffTableRelationNarrowedPKeyReadDerivedViaArgs default derefProtBuffTableRelationNarrowedDataReadDerivedViaArgs$;$switch IsRequired yes implJustProtUseNarrowedArgsRequired default implJustProtUseNarrowedArgsOptional$</GenRule>
 
 	<GenRule GenDef="Relation" Name="derefProtBuffTableRelationNarrowedPKeyReadDerivedViaArgs">readDerived(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each commaPassArg empty empty)$)</GenRule>
-	<GenRule GenDef="Relation" Name="derefProtBuffTableRelationNarrowedDataReadDerivedViaArgs">readDerivedBy$reference Narrowed reference ToIndex declJustProtReadTableSuffix$(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each commaPassArg empty empty)$)</GenRule>
+	<GenRule GenDef="Relation" Name="derefProtBuffTableRelationNarrowedDataReadDerivedViaArgs">readDerivedBy$reference Narrowed reference ToIndex declReadTableSuffix$(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each commaPassArg empty empty)$)</GenRule>
 
 	<GenRule GenDef="Relation" Name="derefProtBuffTableRelationPKeyReadDerivedViaArgs">readDerived(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each commaPassArg empty empty)$)</GenRule>
-	<GenRule GenDef="Relation" Name="derefProtBuffTableRelationDataReadDerivedViaArgs">readDerivedBy$reference ToIndex declJustProtReadTableSuffix$(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each commaPassArg empty empty)$)</GenRule>
+	<GenRule GenDef="Relation" Name="derefProtBuffTableRelationDataReadDerivedViaArgs">readDerivedBy$reference ToIndex declReadTableSuffix$(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each commaPassArg empty empty)$)</GenRule>
 
 	<GenRule GenDef="Relation" Name="implJustProtUseNarrowedArgsRequired">$switch IsProtected yes reallyImplJustProtUseNarrowedArgsRequired default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyImplJustProtUseNarrowedArgsRequired">
@@ -1037,7 +1069,7 @@ $switch ToIndexIsPublic yes implJustProtColumnAttrProtBuffPKeyWrapRelationSingle
 
 	<GenRule GenDef="Table" Name="buffExtendDefSchemaProtBuffTable">
 	extends $reference DefSchema SchemaName$ProtBuff$TableName$
-	implJustProtements I$DefSchemaName$$TableName$</GenRule>
+	implements I$DefSchemaName$$TableName$</GenRule>
 
 	<GenRule GenDef="Object" Name="buffExtendDefSchemaProtBuffTableSuperProtBuff"
 		>$popto Table buffExtendDefSchemaProtBuffTableSuperProtBuff$</GenRule>
@@ -1276,7 +1308,7 @@ $switch ToIndexIsPublic yes implJustProtColumnAttrProtBuffPKeyWrapRelationSingle
 		}</GenRule>
 
 	<GenRule GenDef="Relation" Name="derefProtBuffTableRelationPKeyReadDerivedViaAttrs">readDerived(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each implJustProtCommaSetPassAttrArgColumn)$)</GenRule>
-	<GenRule GenDef="Relation" Name="derefProtBuffTableRelationDataReadDerivedViaAttrs">readDerivedBy$reference ToIndex declJustProtReadTableSuffix$(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each implJustProtCommaSetPassAttrArgColumn)$)</GenRule>
+	<GenRule GenDef="Relation" Name="derefProtBuffTableRelationDataReadDerivedViaAttrs">readDerivedBy$reference ToIndex declReadTableSuffix$(I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization()$iterate Columns(each implJustProtCommaSetPassAttrArgColumn)$)</GenRule>
 
 	<GenRule GenDef="Table" Name="declJustProtSchemaProtBuffTableColumns">$switch HasDefSchemaOrSuper no implJustProtBuffRequiredRevisionAttr default empty$$switch HasDefSchemaOrSuper no implJustProtBuffOptAuditColumnAttr default empty$$iterate Columns( each maybeJustProtDeclSchemaProtBuffTableDataColumn )$</GenRule>
 
@@ -1408,7 +1440,7 @@ $switch ToIndexIsPublic yes implJustProtColumnAttrProtBuffPKeyWrapRelationSingle
 	<GenRule GenDef="Table" Name="reallyMaybeJustProtImplementSchemaProtBuffTableComparable">$switch HasSuperClassRelation yes justImplementISchemaTable default implJustProtementSchemaProtBuffTableComparable$</GenRule>
 	<GenRule GenDef="Table" Name="implJustProtementSchemaProtBuffTableComparable">$switch IsProtected yes reallyImplJustProtementSchemaProtBuffTableComparable default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyImplJustProtementSchemaProtBuffTableComparable">
-	implJustProtements I$DefSchemaName$$TableName$, Comparable&lt;Object&gt;, Serializable</GenRule>
+	implements I$DefSchemaName$$TableName$, Comparable&lt;Object&gt;, Serializable</GenRule>
 
 	<GenRule GenDef="Index" Name="maybeJustProtProtBuffImplComparableToIndex"
 		>$switch IsPrimaryIndex yes empty default implJustProtBuffComparableToIndex$</GenRule>
@@ -2043,7 +2075,7 @@ $implJustProtPubProtBuffSetHistory$</GenRule>
 	<GenRule GenDef="Table" Name="reallyImplJustProtSchemaProtBuffTableToString">
 	@Override
 	public String getXmlAttrFragment() {
-		String ret = $switch HasSuperClassRelation yes implJustProtToStringEmitSuper default implToStringEmitPKeyXmlAttrFragment$$switch IsBaseTable yes implJustProtToStringEmitXmlClassCode default empty$$switch HasSuperClassRelation no implToStringEmitXmlRevision default empty$$iterate Columns( each implJustProtToStringEmitXmlAttr )$;
+		String ret = $switch HasSuperClassRelation yes implToStringEmitSuper default implToStringEmitPKeyXmlAttrFragment$$switch IsBaseTable yes implToStringEmitXmlClassCode default empty$$switch HasSuperClassRelation no implToStringEmitXmlRevision default empty$$iterate Columns( each implJustProtToStringEmitXmlAttr )$;
 		return( ret );
 	}
 
