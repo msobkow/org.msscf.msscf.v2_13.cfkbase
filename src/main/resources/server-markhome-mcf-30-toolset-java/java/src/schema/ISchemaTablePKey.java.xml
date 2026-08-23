@@ -136,15 +136,19 @@ $reference BaseClass reference PrimaryKeyIndex iterate Columns( each declColumnG
 	<GenRule GenDef="Relation" Name="declISchemaTablePKeyRelationGetter">
 	public $emitInterfaceDataType$ get$OptionalOrRequired$$RelationType$$Suffix$();</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="declSetArgColumn">$reference FromCol reference Column implIJavaAtomType$ arg$reference FromCol reference Column Name$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declSetArgColumn">$reference FromCol reference Column declSetArgColumn$</GenRule>
 	<GenRule GenDef="Value" Name="declSetArgColumn">$implIJavaAtomType$ arg$Name$</GenRule>
 	<GenRule GenDef="Value" Name="declCommaSetArgColumn">,
 		$declSetArgColumn$</GenRule>
 	<GenRule GenDef="IndexCol" Name="declSetArgColumn">$reference Column declSetArgColumn$</GenRule>
 	<GenRule GenDef="IndexCol" Name="declCommaSetArgColumn">$reference Column declCommaSetArgColumn$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="declCommaSetArgColumn">,
-		$declSetArgColumn$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implSetArgColumn">$reference FromCol reference Column implSetArgColumn$</GenRule>
+	<GenRule GenDef="Value" Name="implSetArgColumn">$implIJavaAtomType$ arg$Name$</GenRule>
+	<GenRule GenDef="Value" Name="implCommaSetArgColumn">,
+		$implSetArgColumn$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implSetArgColumn">$reference Column implSetArgColumn$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implCommaSetArgColumn">$reference Column implCommaSetArgColumn$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="passArgObjArgColumn">argObj.get$reference ToCol implColumnAttrOptionality$$reference ToCol Name$()</GenRule>
 	<GenRule GenDef="RelationCol" Name="declCommaPassArgObjArgColumn">,

@@ -76,7 +76,7 @@ $switch HasDefSchemaOrSuper yes implJustProtSchemaProtBuffTableInhConstruct defa
 
 	<GenRule GenDef="Relation" Name="implJustProtSchemaProtBuffTableProtRelationGetterMaybeSetter">$switch ToIndexIsProtected yes reallyImplJustProtSchemaProtBuffTableProtRelationGetterMaybeSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyImplJustProtSchemaProtBuffTableProtRelationGetterMaybeSetter">$switch IsToIndexUnique yes implJustProtSchemaProtBuffTableProtGetterProtSetter default implJustProtSchemaProtBuffTableProtRelationGetter$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyImplJustProtSchemaProtBuffTableProtRelationGetterMaybeSetterWithArgs">$switch IsToIndexUnique yes implJustProtSchemaProtBuffTableProtGetterProtSetter default implJustProtSchemaProtBuffTableProtRelationGetterWithArgs$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyImplJustProtSchemaProtBuffTableProtRelationGetterMaybeSetterWithArgs">$switch IsToIndexUnique yes reallyImplJustProtSchemaProtBuffTableProtRelationProtGetterProtSetterWithArgs default reallyImplJustProtSchemaProtBuffTableProtRelationGetterWithArgs$</GenRule>
 	<GenRule GenDef="Relation" Name="implJustProtSchemaProtBuffTableProtGetterProtSetter">$switch ToTableIsProtected yes reallyImplJustProtSchemaProtBuffTableProtGetterProtSetter default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyImplJustProtSchemaProtBuffTableProtGetterProtSetter">$implJustProtSchemaProtBuffTableProtRelationGetter$$implJustProtSchemaProtBuffTableProtRelationSetter$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyImplJustProtSchemaProtBuffTableProtGetterProtSetterWithArgs">$implJustProtSchemaProtBuffTableProtRelationGetterWithArgs$$implJustProtSchemaProtBuffTableProtRelationSetterWithArgs$</GenRule>
@@ -146,20 +146,19 @@ $switch HasDefSchemaOrSuper yes implJustProtSchemaProtBuffTableInhConstruct defa
 	<GenRule GenDef="IndexCol" Name="implJustProtToStringEmitXmlAttr">$reference Column implJustProtToStringEmitXmlAttr$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implJustProtToStringEmitXmlAttr">$reference FromCol reference Column implJustProtToStringEmitXmlAttr$</GenRule>
 
-	<GenRule GenDef="Value" Name="implJustProtSetArgColumn">$switch IsProtected yes reallyImplJustProtSetArgColumn default empty$</GenRule>
-	<GenRule GenDef="Value" Name="reallyImplJustProtSetArgColumn">$implSetArgColumn$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implJustProtSetArgColumn">$reference Column implJustProtSetArgColumn$</GenRule>
-	<GenRule GenDef="RelationCol" Name="implJustProtSetArgColumn">$reference FromCol reference Column implJustProtSetArgColumn$</GenRule>
-
-	<GenRule GenDef="Value" Name="declJustProtSetArgColumn">$switch IsProtected yes reallyDeclJustProtSetArgColumn default empty$</GenRule>
-	<GenRule GenDef="Value" Name="reallyDeclJustProtSetArgColumn">$declSetArgColumn$</GenRule>
-	<GenRule GenDef="IndexCol" Name="declJustProtSetArgColumn">$reference Column declJustProtSetArgColumn$</GenRule>
+	<GenRule GenDef="Value" Name="declJustProtSetArgColumn">$switch IsProtected yes declSetArgColumn default empty$</GenRule>
+	<GenRule GenDef="Value" Name="declJustProtCommaSetArgColumn">$switch IsProtected yes declCommaSetArgColumn default empty$</GenRule>
 	<GenRule GenDef="RelationCol" Name="declJustProtSetArgColumn">$reference FromCol reference Column declJustProtSetArgColumn$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declJustProtCommaSetArgColumn">$reference FromCol reference Column declJustProtCommaSetArgColumn$</GenRule>
+	<GenRule GenDef="IndexCol" Name="declJustProtSetArgColumn">$reference Column declJustProtSetArgColumn$</GenRule>
+	<GenRule GenDef="IndexCol" Name="declJustProtCommaSetArgColumn">$reference Column declJustProtCommaSetArgColumn$</GenRule>
 
-	<GenRule GenDef="Value" Name="implJustProtSchemaProtBuffTableSetAttrArgColumn">$switch IsProtected yes reallyImplJustProtSchemaProtBuffTableSetAttrArgColumn default empty$</GenRule>
-	<GenRule GenDef="Value" Name="reallyImplJustProtSchemaProtBuffTableSetAttrArgColumn">$implSchemaBuffTableSetAttrArgColumn$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implJustProtSchemaProtBuffTableSetAttrArgColumn">$reference Column implJustProtSchemaProtBuffTableSetAttrArgColumn$</GenRule>
-	<GenRule GenDef="RelationCol" Name="implJustProtSchemaProtBuffTableSetAttrArgColumn">$reference FromCol reference Column implJustProtSchemaProtBuffTableSetAttrArgColumn$</GenRule>
+	<GenRule GenDef="Value" Name="declJustPubSetArgColumn">$switch IsPublic yes declSetArgColumn default empty$</GenRule>
+	<GenRule GenDef="Value" Name="declJustPubCommaSetArgColumn">$switch IsPublic yes declCommaSetArgColumn default empty$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declJustPubSetArgColumn">$reference FromCol declJustPubSetArgColumn$</GenRule>
+	<GenRule GenDef="RelationCol" Name="declJustPubCommaSetArgColumn">$reference FromCol declJustPubCommaSetArgColumn$</GenRule>
+	<GenRule GenDef="IndexCol" Name="declJustPubSetArgColumn">$reference Column declJustPubSetArgColumn$</GenRule>
+	<GenRule GenDef="IndexCol" Name="declJustPubCommaSetArgColumn">$reference Column declJustPubCommaSetArgColumn$</GenRule>
 
 	<GenRule GenDef="Value" Name="implToStringEmitPKeyXmlAttrFragment">$switch IsProtected yes reallyImplJustProtToStringEmitPKeyXmlAttrFragment default empty$</GenRule>
 	<GenRule GenDef="Value" Name="reallyImplJustProtToStringEmitPKeyXmlAttrFragment">$implToStringEmitPKeyXmlAttrFragment$</GenRule>
