@@ -227,39 +227,35 @@ $reference PrimaryKeyIndex implBuffPKeyConstructor$$reference PrimaryKeyIndex it
 	}
 </GenRule>
 
-	<GenRule GenDef="Index" Name="implIJavaAtomType">$iterate Columns( lone implIJavaAtomType first implIJavaAtomType each implCommaIJavaAtomType empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implIJavaAtomType">$iterate Columns( lone implIJavaAtomType first implIJavaAtomType each empty empty empty )$</GenRule>
 	<GenRule GenDef="Index" Name="implCommaIJavaAtomType">,
 		$implIJavaAtomType$</GenRule>
-	<GenRule GenDef="Index" Name="implIJavaOptAtomType">$iterate Columns( lone implIJavaOptAtomType first implIJavaOptAtomType each implCommaIJavaOptAtomType empty empty )$</GenRule>
-	<GenRule GenDef="Index" Name="implIJavaReqAtomType">$iterate Columns( lone implIJavaReqAtomType first implIJavaReqAtomType each implCommaIJavaReqAtomType empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implIJavaOptAtomType">$iterate Columns( lone implIJavaOptAtomType first implIJavaOptAtomType each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implIJavaReqAtomType">$iterate Columns( lone implIJavaReqAtomType first implIJavaReqAtomType each empty empty empty )$</GenRule>
 
-	<GenRule GenDef="Relation" Name="implIJavaAtomType">$iterate Columns( lone implIJavaAtomType first implIJavaAtomType each implCommaIJavaAtomType empty empty )$</GenRule>
+	<GenRule GenDef="Relation" Name="implIJavaAtomType">$iterate Columns( lone implIJavaAtomType first implIJavaAtomType each empty empty empty )$</GenRule>
 	<GenRule GenDef="Relation" Name="implCommaIJavaAtomType">,
 		$implIJavaAtomType$</GenRule>
-	<GenRule GenDef="Relation" Name="implIJavaOptAtomType">$iterate Columns( lone implIJavaOptAtomType first implIJavaOptAtomType each implCommaIJavaOptAtomType empty empty )$</GenRule>
-	<GenRule GenDef="Relation" Name="implIJavaReqAtomType">$iterate Columns( lone implIJavaReqAtomType first implIJavaReqAtomType each implCommaIJavaReqAtomType empty empty )$</GenRule>
+	<GenRule GenDef="Relation" Name="implIJavaOptAtomType">$iterate Columns( lone implIJavaOptAtomType first implIJavaOptAtomType each empty empty empty )$</GenRule>
+	<GenRule GenDef="Relation" Name="implIJavaReqAtomType">$iterate Columns( lone implIJavaReqAtomType first implIJavaReqAtomType each empty empty empty )$</GenRule>
 
-	<GenRule GenDef="Param" Name="implIJavaAtomType">$reference ParamType implIJavaAtomType$</GenRule>
+	<GenRule GenDef="Param" Name="implIJavaAtomType">$reference ParamType switch IsNullable yes implIJavaOptAtomType default implIJavaReqAtomType$</GenRule>
 	<GenRule GenDef="Param" Name="implCommaIJavaAtomType">,
 		$implIJavaAtomType$</GenRule>
 	<GenRule GenDef="Param" Name="implIJavaOptAtomType">$reference ParamType implIJavaOptAtomType$</GenRule>
 	<GenRule GenDef="Param" Name="implIJavaReqAtomType">$reference ParamType implIJavaReqAtomType$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implIJavaAtomType">$reference Column implIJavaAtomType first implIJavaAtomType each implCommaIJavaAtomType empty empty )$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implIJavaAtomType">$reference Column switch IsNullable yes implIJavaOptAtomType default implIJavaReqAtomType$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implCommaIJavaAtomType">,
 		$implIJavaAtomType$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implIJavaOptAtomType">$reference Column implCommaIJavaOptAtomType empty empty )$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implIJavaReqAtomType">$reference Column implCommaIJavaReqAtomType empty empty )$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implIJavaOptAtomType">$reference Column implCommaIJavaOptAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implIJavaReqAtomType">$reference Column implCommaIJavaReqAtomType$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="implIJavaAtomType">$reference DataType switch IsNullable yes implIJavaOptAtomType default implIJavaReqAtomType$</GenRule>
-	<GenRule GenDef="TableCol" Name="implCommaIJavaAtomType">,
-		$implIJavaAtomType$</GenRule>
-	<GenRule GenDef="TableCol" Name="implIJavaOptAtomType">$reference DataType implCommaIJavaOptAtomType$</GenRule>
-	<GenRule GenDef="TableCol" Name="implIJavaReqAtomType">$reference DataType implCommaIJavaReqAtomType$</GenRule>
+	<GenRule GenDef="TableCol" Name="implIJavaAtomType">$switch IsNullable yes implIJavaOptAtomType default implIJavaReqAtomType$</GenRule>
 
 	<GenRule GenDef="Value" Name="implIJavaAtomType">$switch IsNullable yes implIJavaOptAtomType default implIJavaReqAtomType$</GenRule>
 
-	<GenRule GenDef="RelationCol" Name="implIJavaAtomType">$reference FromCol implIJavaAtomType$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implIJavaAtomType">$reference FromCol switch IsNullable yes implIJavaOptAtomType default implIJavaReqAtomType$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implCommaIJavaAtomType">,
 		$implIJavaAtomType$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implIJavaOptAtomType">$reference FromCol implIJavaOptAtomType$</GenRule>
