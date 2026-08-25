@@ -12016,23 +12016,29 @@ $reference PrimaryKeyIndex implJpaPKeyConstructor$$reference PrimaryKeyIndex ite
 	}
 </GenRule>
 
-	<GenRule GenDef="Param" Name="implJpaJavaAtomType">$switch IsNullable yes implJpaJavaOptAtomType default implJpaJavaReqAtomType$</GenRule>
+	<GenRule GenDef="Param" Name="implJpaJavaAtomType">$reference ParamType switch IsNullable yes implJpaJavaOptAtomType default implJpaJavaReqAtomType$</GenRule>
+	<GenRule GenDef="Param" Name="implCommaJpaJavaAtomType">,
+		$implJpaJavaAtomType$</GenRule>
+	<GenRule GenDef="Param" Name="implJpaJavaOptAtomType">$reference ParamType implJpaJavaOptAtomType$</GenRule>
+	<GenRule GenDef="Param" Name="implJpaJavaReqAtomType">$reference ParamType implJpaJavaReqAtomType$</GenRule>
 
-	<GenRule GenDef="Param" Name="implJpaJavaOptAtomType">$reference Type implJpaJavaOptAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaJavaAtomType">$reference Column switch IsNullable yes implJpaJavaOptAtomType default implJpaJavaReqAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implCommaJpaJavaAtomType">,
+		$implJpaJavaAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaJavaOptAtomType">$reference Column implCommaJpaJavaOptAtomType$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJpaJavaReqAtomType">$reference Column implCommaJpaJavaReqAtomType$</GenRule>
 
-	<GenRule GenDef="Param" Name="implJpaJavaReqAtomType">$reference Type implJpaJavaReqAtomType$</GenRule>
+	<GenRule GenDef="TableCol" Name="implJpaJavaAtomType">$switch IsNullable yes implJpaJavaOptAtomType default implJpaJavaReqAtomType$</GenRule>
+	<GenRule GenDef="TableCol" Name="implJpaJavaOptAtomType">$reference DataType implJpaJavaOptAtomType$</GenRule>
+	<GenRule GenDef="TableCol" Name="implJpaJavaReqAtomType">$reference DataType implJpaJavaReqAtomType$</GenRule>
 
-	<GenRule GenDef="Index" Name="implJpaJavaAtomType">$iterate Columns( lone implJpaJavaAtomType first empty each empty empty empty )$</GenRule>
-	<GenRule GenDef="Index" Name="implJpaJavaOptAtomType">$iterate Columns( lone implJpaJavaOptAtomType first empty each empty empty empty )$</GenRule>
-	<GenRule GenDef="Index" Name="implJpaJavaReqAtomType">$iterate Columns( lone implJpaJavaReqAtomType first empty each empty empty empty )$</GenRule>
+	<GenRule GenDef="Value" Name="implJpaJavaAtomType">$switch IsNullable yes implJpaJavaOptAtomType default implJpaJavaReqAtomType$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implJpaJavaAtomType">$reference Column implJpaJavaAtomType$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implJpaJavaOptAtomType">$reference Column implJpaJavaOptAtomType$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implJpaJavaReqAtomType">$reference Column implJpaJavaReqAtomType$</GenRule>
-	<GenRule GenDef="Value" Name="implJpaJavaAtomType" >$switch IsNullable yes implJpaJavaOptAtomType default implJpaJavaReqAtomType$</GenRule>
-
-	<GenRule GenDef="TableCol" Name="implJpaJavaOptAtomType" >$reference DataType implJpaJavaOptAtomType$</GenRule>
-	<GenRule GenDef="TableCol" Name="implJpaJavaReqAtomType" >$reference DataType implJpaJavaReqAtomType$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implJpaJavaAtomType">$reference FromCol switch IsNullable yes implJpaJavaOptAtomType default implJpaJavaReqAtomType$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implCommaJpaJavaAtomType">,
+		$implJpaJavaAtomType$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implJpaJavaOptAtomType">$reference FromCol implJpaJavaOptAtomType$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implJpaJavaReqAtomType">$reference FromCol implJpaJavaReqAtomType$</GenRule>
 
 	<GenRule GenDef="BlobDef" Name="implJpaJavaReqAtomType">byte[]</GenRule>
 	<GenRule GenDef="BoolDef" Name="implJpaJavaReqAtomType">boolean</GenRule>
