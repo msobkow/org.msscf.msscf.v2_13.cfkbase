@@ -98,8 +98,19 @@ public interface I$SchemaName$$TableName$PKey$switch HasDefSchema yes ISchemaTab
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implSchemaBuffTableSetAttrArgColumn">$declSchemaTableSetAttrArgColumn$</GenRule>
+	<GenRule GenDef="TableCol" Name="implSchemaBuffTableSetAttrArgColumn">$declSchemaTableSetAttrArgColumn$</GenRule>
 	<GenRule GenDef="IndexCol" Name="implSchemaBuffTableSetAttrArgColumn">$reference Column implSchemaBuffTableSetAttrArgColumn$</GenRule>
 	<GenRule GenDef="RelationCol" Name="implSchemaBuffTableSetAttrArgColumn">$reference FromCol reference Column implSchemaBuffTableSetAttrArgColumn$</GenRule>
+
+	<GenRule GenDef="Value" Name="implJustProtSchemaProtBuffTableSetAttrArgColumn">$switch IsProtected yes declSchemaTableSetAttrArgColumn default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="implJustProtSchemaProtBuffTableSetAttrArgColumn">$switch IsProtected yes declSchemaTableSetAttrArgColumn default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJustProtSchemaProtBuffTableSetAttrArgColumn">$reference Column implJustProtSchemaProtBuffTableSetAttrArgColumn$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implJustProtSchemaProtBuffTableSetAttrArgColumn">$reference FromCol implJustProtSchemaProtBuffTableSetAttrArgColumn$</GenRule>
+
+	<GenRule GenDef="Value" Name="implJustProtSchemaPubBuffTableSetAttrArgColumn">$switch IsProtected yes declSchemaTableSetAttrArgColumn default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="implJustProtSchemaPubBuffTableSetAttrArgColumn">$switch IsProtected yes declSchemaTableSetAttrArgColumn default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJustProtSchemaPubBuffTableSetAttrArgColumn">$reference Column implJustProtSchemaPubBuffTableSetAttrArgColumn$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implJustProtSchemaPubBuffTableSetAttrArgColumn">$reference FromCol implJustProtSchemaPubBuffTableSetAttrArgColumn$</GenRule>
 
 	<GenRule GenDef="RelationCol" Name="declSchemaTableSetAttrArgColumn">
 		$reference FromCol reference Column leadlower implColumnAttrOptionality$$reference FromCol reference Column Name$ = arg$reference FromCol reference Column Name$;</GenRule>

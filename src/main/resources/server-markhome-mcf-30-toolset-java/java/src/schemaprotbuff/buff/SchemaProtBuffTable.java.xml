@@ -426,6 +426,22 @@ $switch IsRequired yes implJustProtSchemaProtBuffTableNarrowedPubRelationSetterR
 	}
 </GenRule>
 
+	<GenRule GenDef="Relation" Name="implJustProtProtRelationSetterInst">$switch ToIndexIsProtected yes actuallyImplJustProtColumnAttrProtBuffPKeyWrapRelationProtSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="actuallyImplJustProtColumnAttrProtBuffPKeyWrapRelationProtSetter">
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable Name$ argObj) {
+$switch IsRequired yes implJustProtSchemaProtBuffTableProtRelationSetterRequired default implJustProtSchemaProtBuffTableProtRelationSetterOptional$
+	}
+$switch ToIndexIsPublic yes implJustProtPubRelationSetterInst default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="implJustProtPubRelationSetterInst">$switch ToIndexIsPublic yes actuallyImplJustProtColumnAttrProtBuffPKeyWrapRelationPubSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="actuallyImplJustProtColumnAttrProtBuffPKeyWrapRelationPubSetter">
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable Name$ argObj) {
+$switch IsRequired yes implJustProtSchemaProtBuffTablePubRelationSetterRequired default implJustProtSchemaProtBuffTablePubRelationSetterOptional$
+	}
+</GenRule>
+
 	<GenRule GenDef="Relation" Name="reimplJustProtSchemaProtBuffTableNarrowedProtRelationSetterArgs">$switch ToIndexIsProtected yes reallyReimplJustProtSchemaProtBuffTableNarrowedProtRelationSetterArgs default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyReimplJustProtSchemaProtBuffTableNarrowedProtRelationSetterArgs">
 	@Override
@@ -441,6 +457,9 @@ $reimplJustProtSchemaProtBuffTableNarrowedPubRelationSetter$</GenRule>
 $reimplJustProtSchemaProtBuffTableNarrowedPubRelationSetter$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implJustProtSchemaProtBuffTableProtRelationSetterArgs">$switch ToIndexIsProtected yes reallyImplJustProtSchemaProtBuffTableProtRelationSetterArgs default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="actuallyImplJustProtColumnAttrProtBuffPKeyWrapRelationProtGetter">$switch ToTableIsUnique yes actuallyImplJustProtColumnAttrProtBuffPKeyWrapSingletonProtGetter default actuallyImplJustProtColumnAttrProtBuffPKeyWrapDuplicateProtGetter$</GenRule>
+	<GenRule GenDef="Relation" Name="actuallyImplJustProtColumnAttrProtBuffPKeyWrapRelationPubGetter">$switch ToTableIsUnique yes actuallyImplJustProtColumnAttrProtBuffPKeyWrapSingletonPubGetter default actuallyImplJustProtColumnAttrProtBuffPKeyWrapDuplicatePubGetter$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implJustProtColumnAttrProtBuffPKeyWrapRelationDuplicateProtGetter">$switch IsProtected yes reallyImplJustProtSchemaProtBuffTableProtRelationGetterList default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="implJustProtColumnAttrProtBuffPKeyWrapRelationDuplicateProtGetterWithArgs">$switch IsProtected yes actuallyImplJustProtColumnAttrProtBuffPKeyWrapRelationDuplicateProtGetterWithArgs default empty$</GenRule>
@@ -560,7 +579,7 @@ $reimplJustProtSchemaProtBuffTableNarrowedPubRelationSetter$</GenRule>
 	<GenRule GenDef="Table" Name="reallyImplJustProtSchemaProtBuffTableSuperiorRelations">$iterate SuperiorDataRelations( each maybeJustProtImplSchemaProtBuffTableRelationProtGetterProtSetterWithArgs empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJustProtSchemaProtBuffTableSubservientRelations">$switch IsProtected yes reallyImplJustProtSchemaProtBuffTableSubservientRelations default empty$</GenRule>
-	<GenRule GenDef="Table" Name="reallyImplJustProtSchemaProtBuffTableSubservientRelations">$iterate SubservientDataRelations( each implJustProtSchemaProtBuffTableProtRelationProtGetterWithArgs empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="reallyImplJustProtSchemaProtBuffTableSubservientRelations">$iterate SubservientDataRelations( each implJustProtSchemaProtBuffTableProtRelationGetterWithArgs empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implJustProtImplSchemaProtBuffTableRelationProtGetterProtSetterWithArgs">$switch IsProtected yes reallyMaybeJustProtImplSchemaProtBuffTableRelationProtGetterProtSetterWithArgs default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="maybeJustProtImplSchemaProtBuffTableRelationProtGetterProtSetterWithArgs">$switch IsProtected yes reallyMaybeJustProtImplSchemaProtBuffTableRelationProtGetterProtSetterWithArgs default empty$</GenRule>
@@ -892,19 +911,28 @@ $implJustProtColumnAttrProtBuffPKeyWrapRelationSingletonPubSetter$</GenRule>
 $switch IsToIndexUnique yes implJustProtColumnAttrProtBuffPKeyWrapRelationSingletonProtSetter default empty$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implJustProtColumnAttrProtBuffPKeyWrapRelationSingletonProtSetter">$switch IsProtected yes reallyImplJustProtColumnAttrProtBuffPKeyWrapRelationSingletonProtSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyImplJustProtColumnAttrProtBuffPKeyWrapRelationSingletonProtSetter">
+	<GenRule GenDef="Relation" Name="reallyImplJustProtColumnAttrProtBuffPKeyWrapRelationSingletonProtSetter">$switch ToIndexIsUnique yes actuallyImplJustProtColumnAttrProtBuffPKeyWrapSingletonProtSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="actuallyImplJustProtColumnAttrProtBuffPKeyWrapSingletonProtSetter">
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj) {$switch IsRequired yes implJustProtSchemaProtBuffTableRelationSetterRequired default implJustProtSchemaProtBuffTableRelationSetterOptional$
 	}
-$switch ToIndexIsPublic yes implJustProtColumnAttrProtBuffPKeyWrapRelationSingletonSetterPub default empty$</GenRule>
+$switch ToIndexIsPublic yes actuallyImplJustProtColumnAttrProtBuffPKeyWrapSingletonPubSetter default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="implJustProtColumnAttrProtBuffPKeyWrapRelationSingletonPubSetter">$switch IsProtected yes reallyImplJustProtColumnAttrProtBuffPKeyWrapRelationSingletonPubSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyImplJustProtColumnAttrProtBuffPKeyWrapRelationSingletonPubSetter">$switch ToIndexIsUnique yes actuallyImplJustProtColumnAttrProtBuffPKeyWrapSingletonPubSetter default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="actuallyImplJustProtColumnAttrProtBuffPKeyWrapSingletonPubSetter">
+	@Override
+	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj) {$switch IsRequired yes implJustProtSchemaPubBuffTableRelationSetterRequired default implJustProtSchemaPubBuffTableRelationSetterOptional$
+	}
+</GenRule>
+
 	<GenRule GenDef="Relation" Name="implJustProtColumnAttrProtBuffPKeyWrapRelationSingletonSetterProt">$switch IsProtected yes reallyImplJustProtColumnAttrProtBuffPKeyWrapRelationSingletonSetterProt default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyImplJustProtColumnAttrProtBuffPKeyWrapRelationSingletonSetterProt">
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ argObj) {$switch IsRequired yes implJustProtSchemaProtBuffTableRelationSetterRequired default implJustProtSchemaProtBuffTableRelationSetterOptional$
 	}
 $switch ToIndexIsPublic yes implJustProtColumnAttrProtBuffPKeyWrapRelationSingletonPubSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="implJustProtColumnAttrProtBuffPKeyWrapRelationSingletonPubSetter">$switch IsProtected yes reallyImplJustProtColumnAttrProtBuffPKeyWrapRelationSingletonPubSetter default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyImplJustProtColumnAttrProtBuffPKeyWrapRelationSingletonPubSetter">
+	<GenRule GenDef="Relation" Name="actuallyImplJustProtColumnAttrProtBuffPKeyWrapRelationSingletonPubSetter">
 	@Override
 	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable TableName$ argObj) {$switch IsRequired yes implJustProtSchemaProtBuffTableRelationSetterRequired default implJustProtSchemaProtBuffTableRelationSetterOptional$
 	}
@@ -975,15 +1003,19 @@ $switch ToIndexIsPublic yes implJustProtColumnAttrProtBuffPKeyWrapRelationSingle
 
 	<GenRule GenDef="Object" Name="CRAP">CRAP</GenRule>
 	
-	<GenRule GenDef="Relation" Name="implJustProtSchemaProtBuffTablePubRelationSetterRequired">$switch IsProtected yes reallyImplJustProtSchemaProtBuffTablePubRelationSetterRequired default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implJustProtSchemaProtBuffTableProtRelationSetterRequired">$switch IsProtected yes reallyImplJustProtSchemaProtBuffTableProtRelationSetterRequired default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implJustProtSchemaProtBuffTablePubRelationSetterRequired">$switch IsPublic yes reallyImplJustProtSchemaProtBuffTablePubRelationSetterRequired default empty$</GenRule>
+	
+	<GenRule GenDef="Relation" Name="implJustProtSchemaProtBuffTableProtRelationSetterOptional">$switch IsProtected yes reallyImplJustProtSchemaProtBuffTableProtRelationSetterOptional default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="implJustProtSchemaProtBuffTablePubRelationSetterOptional">$switch IsPublic yes reallyImplJustProtSchemaProtBuffTablePubRelationSetterOptional default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyImplJustProtSchemaProtBuffTablePubRelationSetterRequired">
 		if(argObj == null) {
 			throw new CFLibNullArgumentException(getClass(), "set$RelationType$$Suffix$", 1, "argObj");
 		}
 		else {$iterate Columns(each implJustProtSchemaProtBuffTablePubRelationSetterCopyToAttr)$
 		}</GenRule>
-	<GenRule GenDef="Relation" Name="implJustProtSchemaProtBuffTableRelationSetterRequired">$switch IsProtected yes reallyImplJustProtSchemaProtBuffTableRelationSetterRequired default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyImplJustProtSchemaProtBuffTableRelationSetterRequired">
+	<GenRule GenDef="Relation" Name="implJustProtSchemaProtBuffTableRelationSetterRequired">$switch IsProtected yes reallyImplJustProtSchemaProtBuffTableProtRelationSetterRequired default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="reallyImplJustProtSchemaProtBuffTableProtRelationSetterRequired">
 		if(argObj == null) {
 			throw new CFLibNullArgumentException(getClass(), "set$RelationType$$Suffix$", 1, "argObj");
 		}
@@ -1017,7 +1049,6 @@ $switch ToIndexIsPublic yes implJustProtColumnAttrProtBuffPKeyWrapRelationSingle
 		else {$iterate Columns(each implJustProtSchemaProtBuffTableProtRelationSetterCopyToAttr)$
 		}</GenRule>
 
-	<GenRule GenDef="Relation" Name="implJustProtSchemaProtBuffTablePubRelationSetterOptional">$switch IsProtected yes reallyImplJustProtSchemaProtBuffTablePubRelationSetterOptional default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyImplJustProtSchemaProtBuffTablePubRelationSetterOptional">
 		if(argObj == null) {$iterate Columns(each implJustProtSchemaProtBuffTablePubRelationSetterClearAttr)$
 		}
@@ -1955,22 +1986,6 @@ $implJustProtPubProtBuffSetHistory$</GenRule>
 			return(results);
 		}</GenRule>
 
-	<GenRule GenDef="Relation" Name="implJustProtProtRelationSetterInst">$switch ToIndexIsProtected yes reallyImplJustProtProtRelationSetterInst default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyImplJustProtProtRelationSetterInst">
-	@Override
-	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Prot$reference ToTable Name$ argObj) {
-$switch IsRequired yes implJustProtSchemaProtBuffTableRelationSetterRequired default implJustProtSchemaProtBuffTableRelationSetterOptional$
-	}
-$switch ToIndexIsPublic yes implJustProtPubRelationSetterInst default empty$</GenRule>
-
-	<GenRule GenDef="Relation" Name="implJustProtPubRelationSetterInst">$switch ToIndexIsPublic yes reallyImplJustProtPubRelationSetterInst default empty$</GenRule>
-	<GenRule GenDef="Relation" Name="reallyImplJustProtPubRelationSetterInst">
-	@Override
-	public void set$OptionalOrRequired$$RelationType$$Suffix$(I$reference ToTable DefSchemaName$Pub$reference ToTable Name$ argObj) {
-$switch IsRequired yes implJustProtSchemaProtBuffTablePubRelationSetterRequired default implJustProtSchemaProtBuffTablePubRelationSetterOptional$
-	}
-</GenRule>
-
 	<GenRule GenDef="Relation" Name="implJustProtUseArgsRequired">$switch IsProtected yes reallyImplJustProtUseArgsRequired default empty$</GenRule>
 	<GenRule GenDef="Relation" Name="reallyImplJustProtUseArgsRequired">
 		if (found == null) {
@@ -2046,5 +2061,26 @@ $switch IsRequired yes implJustProtSchemaProtBuffTablePubRelationSetterRequired 
 		return(targetTable.$switch IsToIndexPrimaryKeyIndex yes derefProtBuffTableRelationPKeyReadDerivedViaAttrs default derefProtBuffTableRelationDataReadDerivedViaAttrs$);</GenRule>
 
 	<GenRule GenDef="Relation" Name="implJustProtColumnAttrProtBuffPKeyWrapRelationSingletonProtGetterBody">$switch IsProtected yes reallyImplJustProtSchemaProtBuffTablePubRelationGetterSingletonBody default empty$</GenRule>
+
+	<GenRule GenDef="Relation" Name="useSchemaProtBuffTableProtRelationSetterArgsBody">
+		I$reference ToTable DefSchemaName$Schema targetBacking$reference ToTable DefSchemaName$ = I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$();
+		if (targetBacking$reference ToTable DefSchemaName$ == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$-args", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$()");
+		}
+		I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$Table targetTable = targetBacking$reference ToTable DefSchemaName$.getTable$reference ToTable TableName$();
+		if (targetTable == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$().getTable$reference ToTable TableName$()");
+		}
+		I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ found = targetTable.$switch IsToIndexPrimaryKeyIndex yes derefProtBuffTableRelationPKeyReadDerivedViaArgs default derefProtBuffTableRelationDataReadDerivedViaArgs$;$switch IsRequired yes implJustProtUseArgsRequired default implJustProtUseArgsOptional$</GenRule>
+	<GenRule GenDef="Relation" Name="useSchemaProtBuffTablePubRelationSetterArgsBody">
+		I$reference ToTable DefSchemaName$Schema targetBacking$reference ToTable DefSchemaName$ = I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$();
+		if (targetBacking$reference ToTable DefSchemaName$ == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$-args", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$()");
+		}
+		I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$Table targetTable = targetBacking$reference ToTable DefSchemaName$.getTable$reference ToTable TableName$();
+		if (targetTable == null) {
+			throw new CFLibNullArgumentException(getClass(), "set$OptionalOrRequired$$RelationType$$Suffix$", 0, "I$reference ToTable DefSchemaName$Schema.getBacking$reference ToTable DefSchemaName$().getTable$reference ToTable TableName$()");
+		}
+		I$reference ToTable DefSchemaName$Prot$reference ToTable TableName$ found = targetTable.$switch IsToIndexPrimaryKeyIndex yes derefProtBuffTableRelationPKeyReadDerivedViaArgs default derefProtBuffTableRelationDataReadDerivedViaArgs$;$switch IsRequired yes implJustProtUseArgsRequired default implJustProtUseArgsOptional$</GenRule>
 
 </RuleSet>
