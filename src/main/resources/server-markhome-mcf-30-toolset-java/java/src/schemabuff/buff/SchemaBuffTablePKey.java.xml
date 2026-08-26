@@ -234,6 +234,13 @@ $reference PrimaryKeyIndex implBuffPKeyConstructor$$reference PrimaryKeyIndex it
 	<GenRule GenDef="Table" Name="implIJavaReqAtomType">$switch IsPrimaryIndexKeyAtomic yes actuallyImplIJavaReqAtomType default empty$</GenRule>
 	<GenRule GenDef="Table" Name="actuallyImplIJavaReqAtomType">$reference BaseClass reference PrimaryKeyIndex iterate Columns( lone implIJavaReqAtomType each empty empty empty )$</GenRule>
 
+	<GenRule GenDef="Index" Name="implIJavaAtomType">$switch IsAtomic yes actuallyImplIJavaAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="actuallyImplIJavaAtomType">$iterate Columns( lone implIJavaAtomType each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implIJavaOptAtomType">$switch IsAtomic yes actuallyImplIJavaOptAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="actuallyImplIJavaOptAtomType">$iterate Columns( lone implIJavaOptAtomType each empty empty empty )$</GenRule>
+	<GenRule GenDef="Index" Name="implIJavaReqAtomType">$switch IsAtomic yes actuallyImplIJavaReqAtomType default empty$</GenRule>
+	<GenRule GenDef="Index" Name="actuallyImplIJavaReqAtomType">$iterate Columns( lone implIJavaReqAtomType each empty empty empty )$</GenRule>
+
 	<GenRule GenDef="Param" Name="implIJavaAtomType">$reference ParamType switch IsNullable yes implIJavaOptAtomType default implIJavaReqAtomType$</GenRule>
 	<GenRule GenDef="Param" Name="implCommaIJavaAtomType">,
 		$implIJavaAtomType$</GenRule>
