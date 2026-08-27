@@ -1194,6 +1194,12 @@ $switch ToIndexIsPublic yes implColumnAttrBuffPKeyWrapRelationSingletonPubSetter
 	<GenRule GenDef="Object" Name="emitScopingMidfix">$switch IsPrivate yes Priv default maybeSpecificallyScopingProtected$</GenRule>
 	<GenRule GenDef="Object" Name="maybeSpecificallyScopingProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
 
+	<GenRule GenDef="Object" Name="emitProtScopingMidfix">$switch IsPrivate yes errorPrivDataInaccessible default maybeSpecificallyProtScopingProtected$</GenRule>
+	<GenRule GenDef="Object" Name="maybeSpecificallyProtScopingProtected">$switch IsSpecificallyProtected yes Prot default Pub$</GenRule>
+
+	<GenRule GenDef="Object" Name="emitPubScopingMidfix">$switch IsPrivate yes errorPrivDataInaccessible default maybeSpecificallyPubScopingProtected$</GenRule>
+	<GenRule GenDef="Object" Name="maybeSpecificallyPubScopingProtected">$switch IsSpecificallyProtected yes errorProtDataInaccessible default Pub$</GenRule>
+
 	<GenRule GenDef="IndexCol" Name="emitScopingMidfix">$reference Column emitScopingMidfix$</GenRule>
 	<GenRule GenDef="RelationCol" Name="emitScopingMidfix">$reference FromCol reference Column emitScopingMidfix$</GenRule>
 
