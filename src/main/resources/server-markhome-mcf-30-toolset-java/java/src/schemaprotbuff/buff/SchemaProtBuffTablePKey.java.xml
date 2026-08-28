@@ -477,9 +477,6 @@ $reference PrimaryKeyIndex implProtBuffPKeyConstructor$$reference PrimaryKeyInde
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implPubCompareToRHS">$switch IsPublic yes implCompareToRHS default empty$</GenRule>
-	<GenRule GenDef="Object" Name="implPubCompareToAttr">$switch IsPublic yes implCompareToAttr default empty$</GenRule>
-
 	<GenRule GenDef="Object" Name="implProtCompareToRHS">$switch IsProtected yes implCompareToRHS default empty$</GenRule>
 	<GenRule GenDef="Object" Name="implProtCompareToAttr">$switch IsProtected yes implCompareToAttr default empty$</GenRule>
 
@@ -523,43 +520,29 @@ $reference PrimaryKeyIndex implProtBuffPKeyConstructor$$reference PrimaryKeyInde
 	}
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="emitProtXmlAttrValue"
-		>$switch IsProtected yes reallyEmitProtXmlAttrValue default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="reallyEmitProtXmlAttrValue"
-		>$switch IsNullable yes emitProtXmlOptAttrValue default emitProtXmlReqAttrValue$</GenRule>
+	<GenRule GenDef="TableCol" Name="emitProtXmlAttrValue">$switch IsProtected yes reallyEmitProtXmlAttrValue default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyEmitProtXmlAttrValue">$switch IsNullable yes emitProtXmlOptAttrValue default emitProtXmlReqAttrValue$</GenRule>
 
-	<GenRule GenDef="Atom" Name="emitProtXmlAttrValue"
-		>$switch IsProtected yes reallyEmitProtXmlAttrValue default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="reallyEmitProtXmlAttrValue"
-		>$switch IsNullable yes emitProtXmlOptAttrValue default emitProtXmlReqAttrValue$</GenRule>
+	<GenRule GenDef="Atom" Name="emitProtXmlAttrValue">$switch IsProtected yes reallyEmitProtXmlAttrValue default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyEmitProtXmlAttrValue">$switch IsNullable yes emitProtXmlOptAttrValue default emitProtXmlReqAttrValue$</GenRule>
 
 	<GenRule GenDef="Object" Name="implProtToStringEmitXmlClassCode">
 			+ " classCode=\"" + getClassCode() + "\""</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implProtToStringEmitXmlAttr"
-		>$switch IsProtected yes reallyImplToStringEmitXmlAttr default empty$</GenRule>
-	<GenRule GenDef="IndexCol" Name="reallyImplToStringEmitXmlAttr">$switch IsNullable yes emitProtXmlOptAttrValue default emitProtXmlReqAttrValue$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implProtToStringEmitXmlAttr">$switch IsProtected yes reallyImplJustProtToStringEmitXmlAttr default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplJustProtToStringEmitXmlAttr">$reference Column switch IsNullable yes emitProtXmlOptAttrValue default emitProtXmlReqAttrValue$</GenRule>
+	<GenRule GenDef="TableCol" Name="implProtToStringEmitXmlAttr">$switch IsProtected yes reallyImplJustProtToStringEmitXmlAttr default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyImplJustProtToStringEmitXmlAttr">$switch IsNullable yes emitProtXmlOptAttrValue default emitProtXmlReqAttrValue$</GenRule>
+	<GenRule GenDef="Atom" Name="implProtToStringEmitXmlAttr">$switch IsProtected yes reallyImplJustProtToStringEmitXmlAttr default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyImplJustProtToStringEmitXmlAttr">$switch IsNullable yes emitProtXmlOptAttrValue default emitProtXmlReqAttrValue$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implJustProtToStringEmitXmlAttr">$reference FromCol reference Column implJustProtToStringEmitXmlAttr$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="implProtToStringEmitXmlAttr">$switch IsProtected yes reallyImplToStringEmitXmlAttr default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="reallyImplToStringEmitXmlAttr"
-		>$switch IsNullable yes emitProtXmlOptAttrValue default emitProtXmlReqAttrValue$</GenRule>
+	<GenRule GenDef="IndexCol" Name="emitProtXmlOptAttrValue">$switch IsProtected yes emitXmlOptAttrValue default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="emitProtXmlOptAttrValue">$switch IsProtected yes emitXmlOptAttrValue default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="emitProtXmlOptAttrValue">$switch IsProtected yes emitXmlOptAttrValue default empty$</GenRule>
 
-	<GenRule GenDef="Atom" Name="implProtToStringEmitXmlAttr">$switch IsProtected yes reallyImplToStringEmitXmlAttr default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="reallyImplToStringEmitXmlAttr"
-		>$switch IsNullable yes emitProtXmlOptAttrValue default emitProtXmlReqAttrValue$</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="emitProtXmlOptAttrValue"
-		>$switch IsProtected yes emitXmlOptAttrValue default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="emitProtXmlOptAttrValue"
-		>$switch IsProtected yes emitXmlOptAttrValue default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="emitProtXmlOptAttrValue"
-		>$switch IsProtected yes emitXmlOptAttrValue default empty$</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="emitProtXmlReqAttrValue"
-		>$switch IsProtected yes emitXmlReqAttrValue default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="emitProtXmlReqAttrValue"
-		>$switch IsProtected yes emitXmlReqAttrValue default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="emitProtXmlReqAttrValue"
-		>$switch IsProtected yes emitXmlReqAttrValue default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="emitProtXmlReqAttrValue">$switch IsProtected yes emitXmlReqAttrValue default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="emitProtXmlReqAttrValue">$switch IsProtected yes emitXmlReqAttrValue default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="emitProtXmlReqAttrValue">$switch IsProtected yes emitXmlReqAttrValue default empty$</GenRule>
 
 </RuleSet>
