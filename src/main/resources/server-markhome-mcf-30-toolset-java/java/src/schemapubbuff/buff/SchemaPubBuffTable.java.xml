@@ -159,12 +159,10 @@ $switch HasDefSchemaOrSuper yes implJustPubSchemaPubBuffTableInhConstruct defaul
 	<GenRule GenDef="RelationCol" Name="declJustPubSetArgColumn">$reference FromCol declJustPubSetArgColumn$</GenRule>
 	<GenRule GenDef="RelationCol" Name="declJustPubCommaSetArgColumn">$reference FromCol declJustPubCommaSetArgColumn$</GenRule>
 
-	<GenRule GenDef="Value" Name="implToStringEmitPKeyXmlAttrFragment">$switch IsPublic yes reallyImplJustPubToStringEmitPKeyXmlAttrFragment default empty$</GenRule>
+	<GenRule GenDef="Value" Name="implJustPubToStringEmitPKeyXmlAttrFragment">$switch IsPublic yes reallyImplJustPubToStringEmitPKeyXmlAttrFragment default empty$</GenRule>
 	<GenRule GenDef="Value" Name="reallyImplJustPubToStringEmitPKeyXmlAttrFragment">$implToStringEmitPKeyXmlAttrFragment$</GenRule>
-	<GenRule GenDef="TableCol" Name="implToStringEmitPKeyXmlAttrFragment">$switch IsPublic yes reallyImplJustPubToStringEmitPKeyXmlAttrFragment default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="reallyImplJustPubToStringEmitPKeyXmlAttrFragment">$implToStringEmitPKeyXmlAttrFragment$</GenRule>
-	<GenRule GenDef="IndexCol" Name="implToStringEmitPKeyXmlAttrFragment">$reference Column implToStringEmitPKeyXmlAttrFragment$</GenRule>
-	<GenRule GenDef="RelationCol" Name="implToStringEmitPKeyXmlAttrFragment">$reference FromCol reference Column implToStringEmitPKeyXmlAttrFragment$</GenRule>
+	<GenRule GenDef="IndexCol" Name="implJustPubToStringEmitPKeyXmlAttrFragment">$reference Column implJustPubToStringEmitPKeyXmlAttrFragment$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implJustPubToStringEmitPKeyXmlAttrFragment">$reference FromCol reference Column implJustPubToStringEmitPKeyXmlAttrFragment$</GenRule>
 
 	<GenRule GenDef="Value" Name="implJustPubGetHashCodeAttr">$switch IsPublic yes reallyImplJustPubGetHashCodeAttr default empty$</GenRule>
 	<GenRule GenDef="Value" Name="reallyImplJustPubGetHashCodeAttr">$implGetHashCodeAttr$</GenRule>
@@ -1073,9 +1071,9 @@ $switch ToIndexIsPublic yes implJustPubColumnAttrPubBuffPKeyWrapRelationSingleto
 	<GenRule GenDef="Table" Name="implJustPubBuffOptAuditColumnAttr"
 		>$switch HasAuditColumns yes implJustPubBuffAuditColumnAttr default empty$</GenRule>
 
-	<GenRule GenDef="Object" Name="emitJustPubScopingMidfix">$maybeJustPubSpecificallyScopingPubected$</GenRule>
-	<GenRule GenDef="Object" Name="maybeJustPubSpecificallyScopingPubected">$switch IsPublic yes reallyMaybeJustPubSpecificallyScopingPubected default empty$</GenRule>
-	<GenRule GenDef="Object" Name="reallyMaybeJustPubSpecificallyScopingPubected">$switch IsSpecificallyPubected yes Pub default Pub$</GenRule>
+	<GenRule GenDef="Object" Name="emitJustPubScopingMidfix">$maybeJustPubSpecificallyScopingPublic$</GenRule>
+	<GenRule GenDef="Object" Name="maybeJustPubSpecificallyScopingPublic">$switch IsPublic yes reallyMaybeJustPubSpecificallyScopingPublic default empty$</GenRule>
+	<GenRule GenDef="Object" Name="reallyMaybeJustPubSpecificallyScopingPublic">$switch IsSpecificallyPublic yes Pub default Pub$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="emitJustPubScopingMidfix">$reference Column emitJustPubScopingMidfix$</GenRule>
 	<GenRule GenDef="RelationCol" Name="emitJustPubScopingMidfix">$reference FromCol reference Column emitJustPubScopingMidfix$</GenRule>
@@ -1175,17 +1173,11 @@ $switch ToIndexIsPublic yes implJustPubColumnAttrPubBuffPKeyWrapRelationSingleto
 	}
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implJustPubBuffEqualsPubectedObjects">$switch IsPublic yes reallyImplJustPubBuffEqualsPubectedObjects default empty$</GenRule>
-	<GenRule GenDef="Table" Name="reallyImplJustPubBuffEqualsPubectedObjects">
+	<GenRule GenDef="Table" Name="implJustPubBuffEqualsPublicObjects">$switch IsPublic yes reallyImplJustPubBuffEqualsPublicObjects default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyImplJustPubBuffEqualsPublicObjects">
 		else if( obj instanceof I$DefSchemaName$Pub$TableName$ rhs ) {$switch HasSuperClassRelation no implJustPubBuffEqualsOptAuditColumns default empty$$iterate Columns( each implJustPubEqualsCmpAttr )$
 			return( true );
 		}$implJustPubBuffEqualsHistory$$iterate Index( each maybeJustPubBuffImplEqualsCmpKey )$$switch IsPublic yes implJustPubBuffEqualsPublicObjects default empty$</GenRule>
-
-	<GenRule GenDef="Table" Name="implJustPubBuffEqualsPublicObjects">$switch IsPublic yes reallyImplJustPubBuffEqualsPublicObjects default empty$</GenRule>
-	<GenRule GenDef="Table" Name="reallyImplJustPubBuffEqualsPublicObjects">
-		else if( obj instanceof I$DefSchemaName$Pub$TableName$ rhs ) {$switch HasSuperClassRelation no implJustPubBuffEqualsOptAuditColumns default empty$$iterate Columns( each implJustPubPubEqualsCmpAttr )$
-			return( true );
-		}$implJustPubPubPubBuffEqualsHistory$$iterate Index( each maybeJustPubPubPubBuffImplEqualsCmpKey )$</GenRule>
 
 	<GenRule GenDef="Index" Name="maybeJustPubPubPubBuffImplEqualsCmpKey">$switch IsPublic yes reallyMaybeJustPubPubPubBuffImplEqualsCmpKey default empty$</GenRule>
 	<GenRule GenDef="Index" Name="reallyMaybeJustPubPubPubBuffImplEqualsCmpKey">$switch IsPublic yes maybeJustPubBuffImplEqualsCmpKey default empty$</GenRule>
@@ -1602,7 +1594,7 @@ $implJustPubPubPubBuffSetHistory$</GenRule>
 	<GenRule GenDef="Table" Name="reallyImplJustPubSchemaPubBuffTableToString">
 	@Override
 	public String getXmlAttrFragment() {
-		String ret = $switch HasSuperClassRelation yes implToStringEmitSuper default implToStringEmitPKeyXmlAttrFragment$$switch IsBaseTable yes implToStringEmitXmlClassCode default empty$$switch HasSuperClassRelation no implToStringEmitXmlRevision default empty$$iterate Columns( each implJustPubToStringEmitXmlAttr )$;
+		String ret = $switch HasSuperClassRelation yes implToStringEmitSuper default implJustPubToStringEmitPKeyXmlAttrFragment$$switch IsBaseTable yes implToStringEmitXmlClassCode default empty$$switch HasSuperClassRelation no implToStringEmitXmlRevision default empty$$iterate Columns( each implJustPubToStringEmitXmlAttr )$;
 		return( ret );
 	}
 
