@@ -37,6 +37,15 @@
 	Revision="3.0"
 	Descr="Engine Verbs">
 
+	<GenRule GenDef="Table" Name="InheritsPageData">$switch PageData yes yes default maybeSuperPageData$</GenRule>
+	<GenRule GenDef="Table" Name="maybeSuperPageData">$switch HasSuperClassRelation yes superPageData default no$</GenRule>
+	<GenRule GenDef="Table" Name="superPageData">$reference SuperClassRelation reference ToTable InheritsPageData$</GenRule>
+	<GenRule GenDef="Index" Name="InheritsPageData">$reference Table InheritsPageData$</GenRule>
+	<GenRule GenDef="IndexCol" Name="InheritsPageData">$reference Index InheritsPageData$</GenRule>
+	<GenRule GenDef="TableCol" Name="InheritsPageData">$reference Table InheritsPageData$</GenRule>
+	<GenRule GenDef="Relation" Name="InheritsPageData">$reference FromTable InheritsPageData$</GenRule>
+	<GenRule GenDef="RelationCol" Name="InheritsPageData">$reference FromIndex InheritsPageData$</GenRule>
+
 	<GenRule GenDef="RelationCol" Name="IsFromColRequired">$reference FromCol IsRequired$</GenRule>
 	<GenRule GenDef="RelationCol" Name="IsToColRequired">$reference ToCol IsRequired$</GenRule>
 
