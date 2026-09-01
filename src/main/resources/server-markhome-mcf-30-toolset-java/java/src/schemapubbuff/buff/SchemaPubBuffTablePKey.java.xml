@@ -98,6 +98,22 @@ public class $SchemaName$Pub$TableName$PKey$switch HasDefSchema yes SchemaPubBuf
 {$switch HasDefSchema yes SchemaPubBuffTablePKeyExtendBaseDefBody default SchemaPubBuffTablePKeyImplBaseDefBody$}
 </GenFile>
 
+	<GenRule GenDef="IndexCol" Name="implPubToStringEmitXmlAttr">$switch IsPublic yes reallyImplJustPubToStringEmitXmlAttr default empty$</GenRule>
+	<GenRule GenDef="IndexCol" Name="reallyImplJustPubToStringEmitXmlAttr">$reference Column switch IsNullable yes emitPubXmlOptAttrValue default emitPubXmlReqAttrValue$</GenRule>
+	<GenRule GenDef="TableCol" Name="implPubToStringEmitXmlAttr">$switch IsPublic yes reallyImplJustPubToStringEmitXmlAttr default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyImplJustPubToStringEmitXmlAttr">$switch IsNullable yes emitPubXmlOptAttrValue default emitPubXmlReqAttrValue$</GenRule>
+	<GenRule GenDef="Atom" Name="implPubToStringEmitXmlAttr">$switch IsPublic yes reallyImplJustPubToStringEmitXmlAttr default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyImplJustPubToStringEmitXmlAttr">$switch IsNullable yes emitPubXmlOptAttrValue default emitPubXmlReqAttrValue$</GenRule>
+	<GenRule GenDef="RelationCol" Name="implJustPubToStringEmitXmlAttr">$reference FromCol reference Column implJustPubToStringEmitXmlAttr$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="emitPubXmlOptAttrValue">$switch IsPublic yes emitXmlOptAttrValue default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="emitPubXmlOptAttrValue">$switch IsPublic yes emitXmlOptAttrValue default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="emitPubXmlOptAttrValue">$switch IsPublic yes emitXmlOptAttrValue default empty$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="emitPubXmlReqAttrValue">$switch IsPublic yes emitXmlReqAttrValue default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="emitPubXmlReqAttrValue">$switch IsPublic yes emitXmlReqAttrValue default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="emitPubXmlReqAttrValue">$switch IsPublic yes emitXmlReqAttrValue default empty$</GenRule>
+
 	<GenRule GenDef="Table" Name="implPubPKeyEquals">
 	@Override
 	public boolean equals( Object obj ) {
@@ -499,31 +515,5 @@ $reference PrimaryKeyIndex implPubBuffPKeyConstructor$$reference PrimaryKeyIndex
 
 	<GenRule GenDef="Object" Name="implPubToStringEmitXmlClassCode">
 			+ " classCode=\"" + getClassCode() + "\""</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="implPubToStringEmitXmlAttr"
-		>$switch IsPublic yes reallyImplToStringEmitXmlAttr default empty$</GenRule>
-	<GenRule GenDef="IndexCol" Name="reallyImplToStringEmitXmlAttr">$switch IsNullable yes emitPubXmlOptAttrValue default emitPubXmlReqAttrValue$</GenRule>
-
-	<GenRule GenDef="TableCol" Name="implPubToStringEmitXmlAttr">$switch IsPublic yes reallyImplToStringEmitXmlAttr default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="reallyImplToStringEmitXmlAttr"
-		>$switch IsNullable yes emitPubXmlOptAttrValue default emitPubXmlReqAttrValue$</GenRule>
-
-	<GenRule GenDef="Atom" Name="implPubToStringEmitXmlAttr">$switch IsPublic yes reallyImplToStringEmitXmlAttr default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="reallyImplToStringEmitXmlAttr"
-		>$switch IsNullable yes emitPubXmlOptAttrValue default emitPubXmlReqAttrValue$</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="emitPubXmlOptAttrValue"
-		>$switch IsPublic yes emitXmlOptAttrValue default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="emitPubXmlOptAttrValue"
-		>$switch IsPublic yes emitXmlOptAttrValue default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="emitPubXmlOptAttrValue"
-		>$switch IsPublic yes emitXmlOptAttrValue default empty$</GenRule>
-
-	<GenRule GenDef="IndexCol" Name="emitPubXmlReqAttrValue"
-		>$switch IsPublic yes emitXmlReqAttrValue default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="emitPubXmlReqAttrValue"
-		>$switch IsPublic yes emitXmlReqAttrValue default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="emitPubXmlReqAttrValue"
-		>$switch IsPublic yes emitXmlReqAttrValue default empty$</GenRule>
 
 </RuleSet>
