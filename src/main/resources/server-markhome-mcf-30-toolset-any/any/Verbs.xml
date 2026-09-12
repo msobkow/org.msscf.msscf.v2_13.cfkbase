@@ -37,6 +37,16 @@
 	Revision="3.0"
 	Descr="Engine Verbs">
 
+	<GenRule GenDef="Object" Name="JavaPackageName">$reference DefSchema JavaPackageName$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="JavaPackageName">$reference MinorVersion JavaPackageName$.$lower Name$</GenRule>
+	<GenRule GenDef="MinorVersion" Name="JavaPackageName">$reference ParentMajVer JavaPackageName$.v$reference ParentMajVer lower Name$_$lower Name$</GenRule>
+	<GenRule GenDef="MajorVersion" Name="JavaPackageName">$reference ParentSPrj JavaPackageName$</GenRule>
+	<GenRule GenDef="SubProject" Name="JavaPackageName">$lower DomainName$.$lower TopProjectJustName$</GenRule>
+	<GenRule GenDef="Tenant" Name="JavaPackageName">$reference Cluster JavaPackageName$.$lower Name$</GenRule>
+
+	<GenRule GenDef="Object" Name="TldName">$popto Tld Name$</GenRule>
+	<GenRule GenDef="Object" Name="DomainName">$TopDomainName$</GenRule>
+
 	<GenRule GenDef="Table" Name="InheritsPageData">$switch PageData yes yes default maybeSuperPageData$</GenRule>
 	<GenRule GenDef="Table" Name="maybeSuperPageData">$switch HasSuperClassRelation yes superPageData default no$</GenRule>
 	<GenRule GenDef="Table" Name="superPageData">$reference SuperClassRelation reference ToTable InheritsPageData$</GenRule>
