@@ -61,7 +61,7 @@ import java.time.*;
 import java.util.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.keyhash.*;
-import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
+import server.markhome.mcf.v3_1.cflib.xml.MCFXmlUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;$importsForPubApplicationContextAware$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$
 $poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameBuffDotFactoryService empty empty )$$importJavaPubPackageSchemaNameBuffDotFactoryService$
@@ -232,14 +232,14 @@ $implPubApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs(
 	public static I$SecPubSchemaName$AuthorizationCallback getAuthorizationCallback() {
 		I$SecPubSchemaName$AuthorizationCallback retval = authorizationCallback.get();
 		if (retval == null) {
-			throw new CFLibNullArgumentException(I$SecPubSchemaName$Schema.class, "getAuthorizationCallback", 0, "authorizationCallback.get()");
+			throw new MCFNullArgumentException(I$SecPubSchemaName$Schema.class, "getAuthorizationCallback", 0, "authorizationCallback.get()");
 		}
 		return( retval );
 	}
 	
 	public static void setAuthorizationCallback(I$SecPubSchemaName$AuthorizationCallback callback) {
 		if (callback == null) {
-			throw new CFLibNullArgumentException(I$SecPubSchemaName$Schema.class, "setAuthorizationCallback", 0, "callback");
+			throw new MCFNullArgumentException(I$SecPubSchemaName$Schema.class, "setAuthorizationCallback", 0, "callback");
 		}
 		authorizationCallback.set(callback);
 	}
@@ -249,14 +249,14 @@ $implPubApplicationContextAwareDefaultSetApplicationContext$$iterate SchemaRefs(
 	public static I$SecPubSchemaName$SecurityService getSecurityService() {
 		I$SecPubSchemaName$SecurityService retval = securityService.get();
 		if (retval == null) {
-			throw new CFLibNullArgumentException(I$SecPubSchemaName$Schema.class, "getSecurityService", 0, "securityService.get()");
+			throw new MCFNullArgumentException(I$SecPubSchemaName$Schema.class, "getSecurityService", 0, "securityService.get()");
 		}
 		return( retval );
 	}
 	
 	public static void setSecurityService(I$SecPubSchemaName$SecurityService service) {
 		if (service == null) {
-			throw new CFLibNullArgumentException(I$SecPubSchemaName$Schema.class, "setSecurityService", 0, "service");
+			throw new MCFNullArgumentException(I$SecPubSchemaName$Schema.class, "setSecurityService", 0, "service");
 		}
 		securityService.compareAndSet(null, service);
 	}
@@ -320,13 +320,13 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 </GenRule>
 
 	<GenRule GenDef="Object" Name="declPubISchemaSecurityAttrs">
-	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysClusterId = new AtomicReference&lt;&gt;();
-	static final AtomicReference&lt;CFLibDbKeyHash256&gt; sysTenantId = new AtomicReference&lt;&gt;();
-	static final AtomicReference&lt;CFLibDbKeyHash256&gt; systemId = new AtomicReference&lt;&gt;();
+	static final AtomicReference&lt;MCFDbKeyHash256&gt; sysClusterId = new AtomicReference&lt;&gt;();
+	static final AtomicReference&lt;MCFDbKeyHash256&gt; sysTenantId = new AtomicReference&lt;&gt;();
+	static final AtomicReference&lt;MCFDbKeyHash256&gt; systemId = new AtomicReference&lt;&gt;();
 
 	public static String getPasswordHash(String pw) {
 		if (pw == null || pw.isEmpty()) {
-			throw new CFLibNullArgumentException(I$SecPubSchemaName$Schema.class, "getPasswordHash", 1, "pw");
+			throw new MCFNullArgumentException(I$SecPubSchemaName$Schema.class, "getPasswordHash", 1, "pw");
 		}
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -341,15 +341,15 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
         }
 	}
 
-	public static CFLibDbKeyHash256 getSysClusterId() {
+	public static MCFDbKeyHash256 getSysClusterId() {
 		return (sysClusterId.get());
 	}
 
-	public static void setSysClusterId(CFLibDbKeyHash256 argClusterId) {
+	public static void setSysClusterId(MCFDbKeyHash256 argClusterId) {
 		if (argClusterId == null || argClusterId.isNull()) {
-			throw new CFLibNullArgumentException(I$DefPubSchemaName$Schema.class, "setSysClusterId", 1, "argClusterId");
+			throw new MCFNullArgumentException(I$DefPubSchemaName$Schema.class, "setSysClusterId", 1, "argClusterId");
 		}
-		CFLibDbKeyHash256 oldid = sysClusterId.get();
+		MCFDbKeyHash256 oldid = sysClusterId.get();
 		if (oldid == null) {
 			sysClusterId.compareAndSet(null, argClusterId);
 		}
@@ -357,19 +357,19 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 			sysClusterId.compareAndSet(oldid, argClusterId);
 		}
 		else {
-			throw new CFLibInvalidArgumentException(I$DefPubSchemaName$Schema.class, "setSysClusterId", "sysClusterId has already been set", "sysClusterId has already been set");
+			throw new MCFInvalidArgumentException(I$DefPubSchemaName$Schema.class, "setSysClusterId", "sysClusterId has already been set", "sysClusterId has already been set");
 		}
 	}
 
-	public static CFLibDbKeyHash256 getSysTenantId() {
+	public static MCFDbKeyHash256 getSysTenantId() {
 		return (sysTenantId.get());
 	}
 
-	public static void setSysTenantId(CFLibDbKeyHash256 argTenantId) {
+	public static void setSysTenantId(MCFDbKeyHash256 argTenantId) {
 		if (argTenantId == null || argTenantId.isNull()) {
-			throw new CFLibNullArgumentException(I$DefPubSchemaName$Schema.class, "setSysTenantId", 1, "argTenantId");
+			throw new MCFNullArgumentException(I$DefPubSchemaName$Schema.class, "setSysTenantId", 1, "argTenantId");
 		}
-		CFLibDbKeyHash256 oldid = sysTenantId.get();
+		MCFDbKeyHash256 oldid = sysTenantId.get();
 		if (oldid == null) {
 			sysTenantId.compareAndSet(null, argTenantId);
 		}
@@ -377,19 +377,19 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 			sysTenantId.compareAndSet(oldid, argTenantId);
 		}
 		else {
-			throw new CFLibInvalidArgumentException(I$DefPubSchemaName$Schema.class, "setSysTenantId", "sysTenantId has already been set", "sysTenantId has already been set");
+			throw new MCFInvalidArgumentException(I$DefPubSchemaName$Schema.class, "setSysTenantId", "sysTenantId has already been set", "sysTenantId has already been set");
 		}
 	}
 
-	public static CFLibDbKeyHash256 getSystemId() {
+	public static MCFDbKeyHash256 getSystemId() {
 		return (systemId.get());
 	}
 
-	public static void setSystemId(CFLibDbKeyHash256 argSystemId) {
+	public static void setSystemId(MCFDbKeyHash256 argSystemId) {
 		if (argSystemId == null || argSystemId.isNull()) {
-			throw new CFLibNullArgumentException(I$DefPubSchemaName$Schema.class, "setSystemId", 1, "argSystemId");
+			throw new MCFNullArgumentException(I$DefPubSchemaName$Schema.class, "setSystemId", 1, "argSystemId");
 		}
-		CFLibDbKeyHash256 oldid = systemId.get();
+		MCFDbKeyHash256 oldid = systemId.get();
 		if (oldid == null) {
 			systemId.compareAndSet(null, argSystemId);
 		}
@@ -397,14 +397,14 @@ import org.springframework.context.ApplicationContextAware;</GenRule>
 			systemId.compareAndSet(oldid, argSystemId);
 		}
 		else {
-			throw new CFLibInvalidArgumentException(I$DefPubSchemaName$Schema.class, "setSystemId", "systemId has already been set", "systemId has already been set");
+			throw new MCFInvalidArgumentException(I$DefPubSchemaName$Schema.class, "setSystemId", "systemId has already been set", "systemId has already been set");
 		}
 	}
 </GenRule>
 
 <GenRule GenDef="SchemaDef" Name="declPubSchemaBootstrap">
 	public void bootstrapSchema($SecPubSchemaName$TableData tableData[]);
-	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]);
+	public void bootstrapAllTablesSecurity(MCFDbKeyHash256 clusterId, MCFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]);
 </GenRule>
 
 <GenRule GenDef="Object" Name="declPubISchemaClassMapEntry">
@@ -555,7 +555,7 @@ $reallyPubImplSchemaParseEnum$</GenRule>
 		else {
 			retval = lookup$Name$.get( value );
 			if( retval == null ) {
-				throw new CFLibInvalidArgumentException( fieldOrClassName,
+				throw new MCFInvalidArgumentException( fieldOrClassName,
 					fieldOrClassName,
 					S_ProcName,
 					2,
@@ -618,7 +618,7 @@ $reallyPubImplSchemaParseEnum$</GenRule>
 		else {
 			retval = lookupOrdinal$Name$.get( value );
 			if( retval == null ) {
-				throw new CFLibInvalidArgumentException( fieldOrClassName,
+				throw new MCFInvalidArgumentException( fieldOrClassName,
 					fieldOrClassName,
 					S_ProcName,
 					2,
@@ -768,7 +768,7 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
 	public short next$Name$();
 </GenRule>
@@ -778,7 +778,7 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
 	public int next$Name$();
 </GenRule>
@@ -788,7 +788,7 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
 	public long next$Name$();
 </GenRule>
@@ -798,7 +798,7 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
 	public UUID next$Name$();
 </GenRule>
@@ -808,9 +808,9 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFLibUuid6 next$Name$();
+	public IMCFUuid6 next$Name$();
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash128Gen" Name="declPubNextIdGen">
 	/**
@@ -818,9 +818,9 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
-	public CFLibDbKeyHash128 next$Name$();
+	public MCFDbKeyHash128 next$Name$();
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash160Gen" Name="declPubNextIdGen">
 	/**
@@ -828,9 +828,9 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
-	public CFLibDbKeyHash160 next$Name$();
+	public MCFDbKeyHash160 next$Name$();
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash224Gen" Name="declPubNextIdGen">
 	/**
@@ -838,9 +838,9 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
-	public CFLibDbKeyHash224 next$Name$();
+	public MCFDbKeyHash224 next$Name$();
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash256Gen" Name="declPubNextIdGen">
 	/**
@@ -848,9 +848,9 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
-	public CFLibDbKeyHash256 next$Name$();
+	public MCFDbKeyHash256 next$Name$();
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash384Gen" Name="declPubNextIdGen">
 	/**
@@ -858,9 +858,9 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
-	public CFLibDbKeyHash384 next$Name$();
+	public MCFDbKeyHash384 next$Name$();
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash512Gen" Name="declPubNextIdGen">
 	/**
@@ -868,9 +868,9 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
-	public CFLibDbKeyHash512 next$Name$();
+	public MCFDbKeyHash512 next$Name$();
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declPubTableMethods">$switch IsPublic yes reallyDeclPubTableMethods default empty$</GenRule>
@@ -883,7 +883,7 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The $TableName$ Table interface for the schema.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
 	public I$DefSchemaName$Pub$TableName$Table getTable$TableName$();
 </GenRule>
@@ -897,7 +897,7 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@return	The Table Permissions interface for the schema.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
 	//public static I$SecPubSchemaName$TablePerms getTablePerms();
 
@@ -915,7 +915,7 @@ import $JavaDefJpaPackageName$.*;</GenRule>
 	 *
 	 *	@param	value	The Table Permissions interface to be used by the schema.
 	 *
-	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws MCFNotSupportedException thrown by client-side implementations.
 	 */
 	//public static void setTablePerms( I$SecPubSchemaName$TablePerms value );
 </GenRule>

@@ -62,7 +62,7 @@ import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.keyhash.*;
-import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$switch HasDefSchema no importJavaProtPackageSchemaName default empty$$switch HasDefSchema no importJavaPackageSchemaName default empty$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$switch HasDefSchema no importJavaProtPackageSchemaNameObj default empty$$JavaObjImport$
+import server.markhome.mcf.v3_1.cflib.xml.MCFXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$switch HasDefSchema no importJavaProtPackageSchemaName default empty$$switch HasDefSchema no importJavaPackageSchemaName default empty$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$switch HasDefSchema no importJavaProtPackageSchemaNameObj default empty$$JavaObjImport$
 
 public class $SchemaName$$TableName$Obj
 $switch HasSuperClassRelation yes implObjExtendSuperClassImplements default implObjTabImplementsSpace$I$SchemaName$$TableName$Obj
@@ -176,23 +176,23 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 
 	<GenRule GenDef="Table" Name="implGetQualNamedObject">
 	@Override
-	public ICFLibAnyObj getNamedObject( Class qualifyingClass, String objName ) {
-		ICFLibAnyObj topContainer = getObjQualifier( qualifyingClass );
+	public IMCFAnyObj getNamedObject( Class qualifyingClass, String objName ) {
+		IMCFAnyObj topContainer = getObjQualifier( qualifyingClass );
 		if( topContainer == null ) {
 			return( null );
 		}
-		ICFLibAnyObj namedObject = topContainer.getNamedObject( objName );
+		IMCFAnyObj namedObject = topContainer.getNamedObject( objName );
 		return( namedObject );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implGetNamedObject">
 	@Override
-	public ICFLibAnyObj getNamedObject( String objName ) {
+	public IMCFAnyObj getNamedObject( String objName ) {
 		String nextName;
 		String remainingName;
-		ICFLibAnyObj subObj = null;
-		ICFLibAnyObj retObj;
+		IMCFAnyObj subObj = null;
+		IMCFAnyObj retObj;
 		int nextDot = objName.indexOf( '.' );
 		if( nextDot &gt;= 0 ) {
 			nextName = objName.substring( 0, nextDot );
@@ -355,19 +355,19 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Object" Name="implConvertNextNameToFloatOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Float.parseFloat(nextName) : null</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDoubleOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Double.parseDouble(nextName) : null</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToNumberOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Number.parseNumber(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDateOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibXmlUtil.parseDate(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToTimeOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibXmlUtil.parseTime(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToTimestampOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibXmlUtil.parseTimestamp(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToTZDateOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? : CFLibXmlUtil.parseTZDate(nextName) null</GenRule>`
-	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimeOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibXmlUtil.parseTZTime(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimestampOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibXmlUtil.parseTZTimestamp(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash128Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash128.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash160Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash160.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash224Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash224.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash256Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash256.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash384Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash384.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash512Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFLibDbKeyHash512.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToUuid6Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? ICFLibUuid6.fromString(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDateOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? MCFXmlUtil.parseDate(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTimeOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? MCFXmlUtil.parseTime(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTimestampOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? MCFXmlUtil.parseTimestamp(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZDateOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? : MCFXmlUtil.parseTZDate(nextName) null</GenRule>`
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimeOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? MCFXmlUtil.parseTZTime(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimestampOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? MCFXmlUtil.parseTZTimestamp(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash128Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? MCFDbKeyHash128.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash160Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? MCFDbKeyHash160.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash224Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? MCFDbKeyHash224.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash256Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? MCFDbKeyHash256.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash384Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? MCFDbKeyHash384.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash512Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? MCFDbKeyHash512.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUuid6Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? IMCFUuid6.fromString(nextName) : null</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUuidOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? UUID.fromString(nextName) : null</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetNamedObjectConvertNextNameToRequired">$switch BaseModelAtomClass
@@ -415,107 +415,107 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			TextDef implConvertNextNameToStringRequired
 			default ErrorUnrecognizedBaseModelAtomClassInObjKBase$</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToStringRequired">if (nextName == null) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = nextName</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToBoolRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Boolean.parseBoolean(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToEnumRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = $EffCodeVisSchemaName$.parse$Name$(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToInt16Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Short.parseShort(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToInt32Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Integer.parseInteger(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToInt64Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Long.parseLong(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUInt16Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Integer.parseInteger(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUInt32Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Long.parseLong(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUInt64Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Number.parseNumber(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToFloatRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Float.parseFloat(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDoubleRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Double.parseDouble(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToNumberRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Number.parseNumber(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDateRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibXmlUtil.parseDate(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = MCFXmlUtil.parseDate(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToTimeRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibXmlUtil.parseTime(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = MCFXmlUtil.parseTime(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToTimestampRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibXmlUtil.parseTimestamp(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = MCFXmlUtil.parseTimestamp(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToTZDateRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibXmlUtil.parseTZDate(nextName)</GenRule>`
+				$implIJavaAtomType$ natNextName = MCFXmlUtil.parseTZDate(nextName)</GenRule>`
 	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimeRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibXmlUtil.parseTZTime(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = MCFXmlUtil.parseTZTime(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimestampRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibXmlUtil.parseTZTimestamp(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = MCFXmlUtil.parseTZTimestamp(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash128Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibDbKeyHash128.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = MCFDbKeyHash128.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash160Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibDbKeyHash160.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = MCFDbKeyHash160.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash224Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibDbKeyHash224.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = MCFDbKeyHash224.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash256Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibDbKeyHash256.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = MCFDbKeyHash256.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash384Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibDbKeyHash384.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = MCFDbKeyHash384.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash512Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = CFLibDbKeyHash512.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = MCFDbKeyHash512.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUuid6Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = ICFLibUuid6.fromString(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = IMCFUuid6.fromString(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUuidRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new CFLibNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new MCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = UUID.fromString(nextName)</GenRule>
 	
@@ -558,8 +558,8 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 
 	<GenRule GenDef="Table" Name="implGetObjQualifier">
 	@Override
-	public ICFLibAnyObj getObjQualifier( Class qualifyingClass ) {
-		ICFLibAnyObj container = this;
+	public IMCFAnyObj getObjQualifier( Class qualifyingClass ) {
+		IMCFAnyObj container = this;
 		if( qualifyingClass != null ) {
 			while( container != null ) {
 				if( container instanceof I$SchemaName$ClusterObj ) {
@@ -596,7 +596,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	@Override
 	public String getObjQualifiedName() {
 		String qualName = getObjName();
-		ICFLibAnyObj container = getObjScope();
+		IMCFAnyObj container = getObjScope();
 		String containerName;
 		while( container != null ) {
 			if( container instanceof I$SecSchemaName$ClusterObj ) {
@@ -627,7 +627,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	@Override
 	public String getObjFullName() {
 		String fullName = getObjName();
-		ICFLibAnyObj container = getObjScope();
+		IMCFAnyObj container = getObjScope();
 		String containerName;
 		while( container != null ) {
 			if( container instanceof I$SecSchemaName$ClusterObj ) {
@@ -781,7 +781,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		objName = Short.toString( val );</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash128ReqName">
-		CFLibDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -789,7 +789,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash160ReqName">
-		CFLibDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -797,7 +797,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash224ReqName">
-		CFLibDbKeyHash224 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash224 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -805,7 +805,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash256ReqName">
-		CFLibDbKeyHash256 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash256 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -813,7 +813,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash384ReqName">
-		CFLibDbKeyHash384 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash384 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -821,7 +821,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash512ReqName">
-		CFLibDbKeyHash512 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash512 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -829,7 +829,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUuid6ReqName">
-		ICFLibUuid6 val = rec.get$OptionalOrRequired$$Name$();
+		IMCFUuid6 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -838,7 +838,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash128OptName">
-		CFLibDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -846,7 +846,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash160OptName">
-		CFLibDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -854,7 +854,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash224OptName">
-		CFLibDbKeyHash224 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash224 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -862,7 +862,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash256OptName">
-		CFLibDbKeyHash256 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash256 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -870,7 +870,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash384OptName">
-		CFLibDbKeyHash384 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash384 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -878,7 +878,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash512OptName">
-		CFLibDbKeyHash512 val = rec.get$OptionalOrRequired$$Name$();
+		MCFDbKeyHash512 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -886,7 +886,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUuid6OptName">
-		ICFLibUuid6 val = rec.get$OptionalOrRequired$$Name$();
+		IMCFUuid6 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -983,7 +983,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDateReqName">
 		LocalDate val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatDate(val);
+			objName = MCFXmlUtil.formatDate(val);
 		}
 		else {
 			objName = "";
@@ -991,7 +991,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDateOptName">
 		LocalDate val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatDate(val);
+			objName = MCFXmlUtil.formatDate(val);
 		}
 		else {
 			objName = "";
@@ -1000,7 +1000,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTimeReqName">
 		LocalTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatTime(val);
+			objName = MCFXmlUtil.formatTime(val);
 		}
 		else {
 			objName = "";
@@ -1008,7 +1008,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTimeOptName">
 		LocalTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatTime(val);
+			objName = MCFXmlUtil.formatTime(val);
 		}
 		else {
 			objName = "";
@@ -1017,7 +1017,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTimestampReqName">
 		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatTimestamp(val);
+			objName = MCFXmlUtil.formatTimestamp(val);
 		}
 		else {
 			objName = "";
@@ -1025,7 +1025,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTimestampOptName">
 		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatTimestamp(val);
+			objName = MCFXmlUtil.formatTimestamp(val);
 		}
 		else {
 			objName = "";
@@ -1034,7 +1034,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZDateReqName">
 		LocalDate val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatTZDate(val);
+			objName = MCFXmlUtil.formatTZDate(val);
 		}
 		else {
 			objName = "";
@@ -1042,7 +1042,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZDateOptName">
 		LocalDate val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatTZDate(val);
+			objName = MCFXmlUtil.formatTZDate(val);
 		}
 		else {
 			objName = "";
@@ -1051,7 +1051,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimeReqName">
 		LocalTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatTZTime(val);
+			objName = MCFXmlUtil.formatTZTime(val);
 		}
 		else {
 			objName = "";
@@ -1059,7 +1059,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimeOptName">
 		LocalTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatTZTime(val);
+			objName = MCFXmlUtil.formatTZTime(val);
 		}
 		else {
 			objName = "";
@@ -1068,7 +1068,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimestampReqName">
 		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatTZTimestamp(val);
+			objName = MCFXmlUtil.formatTZTimestamp(val);
 		}
 		else {
 			objName = "";
@@ -1076,7 +1076,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimestampOptName">
 		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = CFLibXmlUtil.formatTZTimestamp(val);
+			objName = MCFXmlUtil.formatTZTimestamp(val);
 		}
 		else {
 			objName = "";
@@ -1093,7 +1093,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 
 	<GenRule GenDef="Table" Name="implGetObjScopeNull">
 	@Override
-	public ICFLibAnyObj getObjScope() {
+	public IMCFAnyObj getObjScope() {
 		return( null );
 	}
 </GenRule>
@@ -1103,14 +1103,14 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 
 	<GenRule GenDef="Table" Name="implGetScopeViaSingleContainerTld">
 	@Override
-	public ICFLibAnyObj getObjScope() {
+	public IMCFAnyObj getObjScope() {
 		return( getRequiredContainerTenant() );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implGetScopeViaSingleContainerNormal">
 	@Override
-	public ICFLibAnyObj getObjScope() {$iterate ContainerRelations( first implGetScopeViaSingleContainerBody each empty empty maybeImplGetObjScopeViaSingleInheritedContainerBody )$
+	public IMCFAnyObj getObjScope() {$iterate ContainerRelations( first implGetScopeViaSingleContainerBody each empty empty maybeImplGetObjScopeViaSingleInheritedContainerBody )$
 	}
 </GenRule>
 
@@ -1135,7 +1135,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 
 	<GenRule GenDef="Table" Name="implGetScopeViaMultipleContainer">
 	@Override
-	public ICFLibAnyObj getObjScope() {$iterate ContainerRelations( first implGetScopeViaMultipleContainerBody each empty empty empty )$
+	public IMCFAnyObj getObjScope() {$iterate ContainerRelations( first implGetScopeViaMultipleContainerBody each empty empty empty )$
 	}
 </GenRule>
 
@@ -1164,7 +1164,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	@Override
 	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$EditObj beginEdit() {
 		if( edit != null ) {
-			throw new CFLibEditAlreadyOpenException( getClass(), "beginEdit" );
+			throw new MCFEditAlreadyOpenException( getClass(), "beginEdit" );
 		}
 		I$DefSchemaName$$TableName$Obj lockobj;
 		if( getIsNew() ) {
@@ -1835,7 +1835,7 @@ $			if( ! anyMissing ) {
 	@Override
 	public void setRec( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ value ) {
 		if( ! ( ( value == null ) || ! ( value instanceof I$DefSchemaName$$TableName$ ) ) ) {
-			throw new CFLibUnsupportedClassException( getClass(),
+			throw new MCFUnsupportedClassException( getClass(),
 				"setRec",
 				"value",
 				value,

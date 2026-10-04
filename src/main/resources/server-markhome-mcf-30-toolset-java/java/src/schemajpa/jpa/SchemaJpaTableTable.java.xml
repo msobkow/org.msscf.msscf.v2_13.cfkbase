@@ -92,13 +92,13 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	<GenRule GenDef="Table" Name="implJpaConstructTable">
 	public $SchemaName$Jpa$TableName$Table(I$DefSchemaName$Schema schema) {
 		if( schema == null ) {
-			throw new CFLibNullArgumentException(getClass(), "constructor", 1, "schema" );
+			throw new MCFNullArgumentException(getClass(), "constructor", 1, "schema" );
 		}
 		if (schema instanceof $SchemaName$JpaSchema) {
 			this.schema = ($SchemaName$JpaSchema)schema;
 		}
 		else {
-			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "$SchemaName$JpaSchema");
+			throw new MCFUnsupportedClassException(getClass(), "constructor", "schema", schema, "$SchemaName$JpaSchema");
 		}
 	}
 </GenRule>
@@ -111,7 +111,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	@Override
 	public boolean $leadlower Name$( I$DefSchemaName$SchemaObj schemaObj$iterate Params( each implJpaServerMethodParam empty empty )$ )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "$leadlower Name$");
+		throw new MCFNotImplementedYetException(getClass(), "$leadlower Name$");
 	}
 </GenRule>
 
@@ -120,7 +120,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	public boolean $leadlower Name$( I$DefSchemaName$SchemaObj schemaObj,
 		I$DefSchemaName$$TableName$Obj obj$iterate Params( each implJpaServerMethodParam empty empty )$ )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "$leadlower Name$");
+		throw new MCFNotImplementedYetException(getClass(), "$leadlower Name$");
 	}
 </GenRule>
 
@@ -139,7 +139,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	public I$reference RetTable DefSchemaName$$reference RetTable Name$ $leadlower Name$( I$reference RetTable DefSchemaName$SchemaObj schemaObj,
 		I$DefSchemaName$$TableName$Obj obj$iterate Params( each implJpaServerMethodParam empty empty )$ )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "$leadlower Name$");
+		throw new MCFNotImplementedYetException(getClass(), "$leadlower Name$");
 	}
 </GenRule>
 
@@ -150,7 +150,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	@Override
 	public I$reference RetTable DefSchemaName$$reference RetTable Name$[] $leadlower Name$( I$reference RetTable DefSchemaName$SchemaObj schemaObj$iterate Params( each implJpaServerMethodParam empty empty )$ )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "$leadlower Name$");
+		throw new MCFNotImplementedYetException(getClass(), "$leadlower Name$");
 	}
 </GenRule>
 
@@ -159,7 +159,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	public I$reference RetTable DefSchemaName$$reference RetTable Name$[] $leadlower Name$( I$reference RetTable DefSchemaName$SchemaObj schemaObj,
 		I$DefSchemaName$$TableName$Obj obj$iterate Params( each implJpaServerMethodParam empty empty )$ )
 	{
-		throw new CFLibNotImplementedYetException(getClass(), "$leadlower Name$");
+		throw new MCFNotImplementedYetException(getClass(), "$leadlower Name$");
 	}
 </GenRule>
 
@@ -186,20 +186,20 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	<GenRule GenDef="Table" Name="methJpaTableCanCreateTableName">
 	protected boolean canCreate$TableName$(String S_ProcName, I$SecSchemaName$Authorization Authorization) {
 		if (Authorization == null) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
 		}
 		boolean permissionGranted = false;
-		CFLibDbKeyHash256 authUserId = Authorization.getSecUserId();$poptop Table tabletweak CafePreCreateTableSecurity$$poptop SchemaDef schematweak CafePreCreateSchemaSecurity$
+		MCFDbKeyHash256 authUserId = Authorization.getSecUserId();$poptop Table tabletweak CafePreCreateTableSecurity$$poptop SchemaDef schematweak CafePreCreateSchemaSecurity$
 		if ((!permissionGranted) &amp;&amp; (authUserId == null || authUserId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
 		}
 		// Check for "system" user
-		CFLibDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
+		MCFDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
 		if ((!permissionGranted) &amp;&amp; (systemId != null &amp;&amp; !systemId.isNull() &amp;&amp; systemId.equals(authUserId))) {
 			permissionGranted = true;
 		}
 		else if ((!permissionGranted) &amp;&amp; (systemId == null || systemId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
 		}$switch SecScope
 			TenantGroup implJpaTableTenantCreateSecurityChecks
 			Tenant implJpaTableTenantCreateSecurityChecks
@@ -215,7 +215,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	<GenRule GenDef="Table" Name="implJpaTableCreateSecurityChecks">
 		boolean permissionGranted = canCreate$TableName$(S_ProcName, Authorization);
 		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, "create$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+			throw new MCFPermissionDeniedException(getClass(), S_ProcName, "create$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
 		}
 </GenRule>
 
@@ -224,20 +224,20 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	<GenRule GenDef="Table" Name="methJpaTableCanReadTableName">
 	protected boolean canRead$TableName$(String S_ProcName, I$SecSchemaName$Authorization Authorization) {
 		if (Authorization == null) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
 		}
 		boolean permissionGranted = false;
-		CFLibDbKeyHash256 authUserId = Authorization.getSecUserId();$poptop Table tabletweak CafePreReadTableSecurity$$poptop SchemaDef schematweak CafePreReadSchemaSecurity$
+		MCFDbKeyHash256 authUserId = Authorization.getSecUserId();$poptop Table tabletweak CafePreReadTableSecurity$$poptop SchemaDef schematweak CafePreReadSchemaSecurity$
 		if ((!permissionGranted) &amp;&amp; (authUserId == null || authUserId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
 		}
 		// Check for "system" user
-		CFLibDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
+		MCFDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
 		if ((!permissionGranted) &amp;&amp; (systemId != null &amp;&amp; !systemId.isNull() &amp;&amp; systemId.equals(authUserId))) {
 			permissionGranted = true;
 		}
 		else if ((!permissionGranted) &amp;&amp; (systemId == null || systemId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
 		}$switch SecScope
 			TenantGroup implJpaTableTenantReadSecurityChecks
 			Tenant implJpaTableTenantReadSecurityChecks
@@ -253,7 +253,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	<GenRule GenDef="Table" Name="implJpaTableReadSecurityChecks">
 		boolean permissionGranted = canRead$TableName$(S_ProcName, Authorization);
 		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, "read$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+			throw new MCFPermissionDeniedException(getClass(), S_ProcName, "read$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
 		}
 </GenRule>
 
@@ -263,26 +263,26 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 			permissionGranted = canRead$poptop Table TableName$(S_ProcName, Authorization);
 		}
 		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, "read$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$poptop Table TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+			throw new MCFPermissionDeniedException(getClass(), S_ProcName, "read$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$poptop Table TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="methJpaTableCanUpdateTableName">
 	protected boolean canUpdate$TableName$(String S_ProcName, I$SecSchemaName$Authorization Authorization) {
 		if (Authorization == null) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
 		}
 		boolean permissionGranted = false;
-		CFLibDbKeyHash256 authUserId = Authorization.getSecUserId();$poptop Table tabletweak CafePreUpdateTableSecurity$$poptop SchemaDef schematweak CafePreUpdateSchemaSecurity$
+		MCFDbKeyHash256 authUserId = Authorization.getSecUserId();$poptop Table tabletweak CafePreUpdateTableSecurity$$poptop SchemaDef schematweak CafePreUpdateSchemaSecurity$
 		if ((!permissionGranted) &amp;&amp; (authUserId == null || authUserId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
 		}
 		// Check for "system" user
-		CFLibDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
+		MCFDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
 		if ((!permissionGranted) &amp;&amp; (systemId != null &amp;&amp; !systemId.isNull() &amp;&amp; systemId.equals(authUserId))) {
 			permissionGranted = true;
 		}
 		else if ((!permissionGranted) &amp;&amp; (systemId == null || systemId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
 		}$switch SecScope
 			TenantGroup implJpaTableTenantUpdateSecurityChecks
 			Tenant implJpaTableTenantUpdateSecurityChecks
@@ -298,7 +298,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	<GenRule GenDef="Table" Name="implJpaTableUpdateSecurityChecks">
 		boolean permissionGranted = canUpdate$TableName$(S_ProcName, Authorization);
 		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, "update$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+			throw new MCFPermissionDeniedException(getClass(), S_ProcName, "update$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
 		}
 </GenRule>
 
@@ -307,20 +307,20 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	<GenRule GenDef="Table" Name="methJpaTableCanDeleteTableName">
 	protected boolean canDelete$TableName$(String S_ProcName, I$SecSchemaName$Authorization Authorization) {
 		if (Authorization == null) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
 		}
 		boolean permissionGranted = false;
-		CFLibDbKeyHash256 authUserId = Authorization.getSecUserId();$poptop Table tabletweak CafePreDeleteTableSecurity$$poptop SchemaDef schematweak CafePreDeleteSchemaSecurity$
+		MCFDbKeyHash256 authUserId = Authorization.getSecUserId();$poptop Table tabletweak CafePreDeleteTableSecurity$$poptop SchemaDef schematweak CafePreDeleteSchemaSecurity$
 		if ((!permissionGranted) &amp;&amp; (authUserId == null || authUserId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
 		}
 		// Check for "system" user
-		CFLibDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
+		MCFDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
 		if ((!permissionGranted) &amp;&amp; (systemId != null &amp;&amp; !systemId.isNull() &amp;&amp; systemId.equals(authUserId))) {
 			permissionGranted = true;
 		}
 		else if ((!permissionGranted) &amp;&amp; (systemId == null || systemId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
 		}$switch SecScope
 			TenantGroup implJpaTableTenantDeleteSecurityChecks
 			Tenant implJpaTableTenantDeleteSecurityChecks
@@ -336,7 +336,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	<GenRule GenDef="Table" Name="implJpaTableDeleteSecurityChecks">
 		boolean permissionGranted = canDelete$TableName$(S_ProcName, Authorization);
 		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, "delete$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+			throw new MCFPermissionDeniedException(getClass(), S_ProcName, "delete$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
 		}
 </GenRule>
 
@@ -345,20 +345,20 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	<GenRule GenDef="Table" Name="methJpaTableCanMutateTableName">
 	protected boolean canMutate$TableName$(String S_ProcName, I$SecSchemaName$Authorization Authorization) {
 		if (Authorization == null) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "Authorization");
 		}
 		boolean permissionGranted = false;
-		CFLibDbKeyHash256 authUserId = Authorization.getSecUserId();$poptop Table tabletweak CafePreMutateTableSecurity$$poptop SchemaDef schematweak CafePreMutateSchemaSecurity$
+		MCFDbKeyHash256 authUserId = Authorization.getSecUserId();$poptop Table tabletweak CafePreMutateTableSecurity$$poptop SchemaDef schematweak CafePreMutateSchemaSecurity$
 		if ((!permissionGranted) &amp;&amp; (authUserId == null || authUserId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "Authorization.getSecUserId()");
 		}
 		// Check for "system" user
-		CFLibDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
+		MCFDbKeyHash256 systemId = I$SecSchemaName$Schema.getSystemId();
 		if ((!permissionGranted) &amp;&amp; (systemId != null &amp;&amp; !systemId.isNull() &amp;&amp; systemId.equals(authUserId))) {
 			permissionGranted = true;
 		}
 		else if ((!permissionGranted) &amp;&amp; (systemId == null || systemId.isNull())) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
+			throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "I$SecSchemaName$Schema.getSystemId()");
 		}$switch SecScope
 			TenantGroup implJpaTableTenantMutateSecurityChecks
 			Tenant implJpaTableTenantMutateSecurityChecks
@@ -374,7 +374,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	<GenRule GenDef="Table" Name="implJpaTableMutateSecurityChecks">
 		boolean permissionGranted = canMutate$TableName$(S_ProcName, Authorization);
 		if (!permissionGranted) {
-			throw new CFLibPermissionDeniedException(getClass(), S_ProcName, "mutate$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
+			throw new MCFPermissionDeniedException(getClass(), S_ProcName, "mutate$poptop Table lower TableName$", I$SchemaName$Schema.SCHEMA_NAME, I$SchemaName$$TableName$Table.TABLE_NAME, Authorization.getAuthUuid6().toString());//"Permission '%4$$s' denied attempting to access %1$$s.%2$$s for user id %3$$s"
 		}
 </GenRule>
 
@@ -479,8 +479,8 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantGroupFilterRetval">$implJpaTableTenantFilterRetval$
 		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableTenantFindForRetval$
-			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
-			CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
+			MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
+			MCFDbKeyHash256 effTenantId = tenant.getRequiredId();
 			String effDataGroupName = "toberetrieved";
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
 				retval = null;
@@ -489,8 +489,8 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 
 		<GenRule GenDef="Table" Name="implJpaTableTenantFilterRetval">
 		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableTenantFindForRetval$
-			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
-			CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
+			MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
+			MCFDbKeyHash256 effTenantId = tenant.getRequiredId();
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
 				retval = null;
 			}
@@ -498,7 +498,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterGroupFilterRetval">$implJpaTableClusterFilterRetval$
 		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableClusterFindForRetval$
-			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
+			MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
 			String effDataGroupName = "toberetrieved";
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
 				retval = null;
@@ -507,7 +507,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 
 		<GenRule GenDef="Table" Name="implJpaTableClusterFilterRetval">
 		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableClusterFindForRetval$
-			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
+			MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
 				retval = null;
 			}
@@ -569,8 +569,8 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableTenantFindForRetval$
-				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
-				CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
+				MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
+				MCFDbKeyHash256 effTenantId = tenant.getRequiredId();
 				String effDataGroupName = "toberetrieved";
 				if (I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
 					finallist.add(retval);
@@ -583,8 +583,8 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableTenantFindForRetval$
-				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
-				CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
+				MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
+				MCFDbKeyHash256 effTenantId = tenant.getRequiredId();
 				if (I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
 					finallist.add(retval);
 				}
@@ -596,7 +596,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableClusterFindForRetval$
-				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
+				MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
 				String effDataGroupName = "toberetrieved";
 				if (I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
 					finallist.add(retval);
@@ -609,7 +609,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableClusterFindForRetval$
-				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
+				MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
 				if (I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
 					finallist.add(retval);
 				}
@@ -629,8 +629,8 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 
 		<GenRule GenDef="Index" Name="implJpaTableTenantGroupFilterRetval">$implJpaTableTenantFilterRetval$
 		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableTenantFindForRetval$
-			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
-			CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
+			MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
+			MCFDbKeyHash256 effTenantId = tenant.getRequiredId();
 			String effDataGroupName = "toberetrieved";
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
 				retval = null;
@@ -639,8 +639,8 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 
 		<GenRule GenDef="Index" Name="implJpaTableTenantFilterRetval">
 		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableTenantFindForRetval$
-			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
-			CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
+			MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
+			MCFDbKeyHash256 effTenantId = tenant.getRequiredId();
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
 				retval = null;
 			}
@@ -648,7 +648,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 
 		<GenRule GenDef="Index" Name="implJpaTableClusterGroupFilterRetval">$implJpaTableClusterFilterRetval$
 		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableClusterFindForRetval$
-			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
+			MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
 			String effDataGroupName = "toberetrieved";
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
 				retval = null;
@@ -657,7 +657,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 
 		<GenRule GenDef="Index" Name="implJpaTableClusterFilterRetval">
 		if(retval != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {$implJpaTableClusterFindForRetval$
-			CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
+			MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
 			if (!I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
 				retval = null;
 			}
@@ -693,8 +693,8 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableTenantFindForRetval$
-				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
-				CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
+				MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
+				MCFDbKeyHash256 effTenantId = tenant.getRequiredId();
 				String effDataGroupName = "toberetrieved";
 				if (I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, effDataGroupName)) {
 					finallist.add(retval);
@@ -707,8 +707,8 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableTenantFindForRetval$
-				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
-				CFLibDbKeyHash256 effTenantId = tenant.getRequiredId();
+				MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
+				MCFDbKeyHash256 effTenantId = tenant.getRequiredId();
 				if (I$SecSchemaName$Schema.getSecurityService().isMemberOfTenantGroup(Authorization.getSecUserId(), effClusterId, effTenantId, "read$poptop Table lower TableName$")) {
 					finallist.add(retval);
 				}
@@ -720,7 +720,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableClusterFindForRetval$
-				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
+				MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
 				String effDataGroupName = "toberetrieved";
 				if (I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, effDataGroupName)) {
 					finallist.add(retval);
@@ -733,7 +733,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		if(retlist != null &amp;&amp; !I$SecSchemaName$Schema.getSystemId().equals(Authorization.getSecUserId())) {
 			ArrayList&lt;$DefSchemaName$Jpa$poptop Table TableName$&gt; finallist = new ArrayList&lt;&gt;();
 			for (var retval: retlist) {$implJpaTableClusterFindForRetval$
-				CFLibDbKeyHash256 effClusterId = cluster.getRequiredId();
+				MCFDbKeyHash256 effClusterId = cluster.getRequiredId();
 				if (I$SecSchemaName$Schema.getSecurityService().isMemberOfClusterGroup(Authorization.getSecUserId(), effClusterId, "read$poptop Table lower TableName$")) {
 					finallist.add(retval);
 				}
@@ -874,14 +874,14 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws	MCFNotSupportedException thrown by client-side implementations.
 	 */
 	@Override
 	public I$DefSchemaName$$TableName$ readRec( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey )
 	{
 		final String S_ProcName = "readRec";$implJpaTableReadSecurityChecks$
-		throw new CFLibNotImplementedYetException(getClass(), "readRec");
+		throw new MCFNotImplementedYetException(getClass(), "readRec");
 	}
 </GenRule>
 
@@ -896,13 +896,13 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws	MCFNotSupportedException thrown by client-side implementations.
 	 */
 	@Override
 	public I$DefSchemaName$$TableName$ readRec( I$SecSchemaName$Authorization Authorization$reference PrimaryKeyIndex iterate Columns( each implJpaCommaColumnArg )$ )
 	{
 		final String S_ProcName = "readRec";$implJpaTableReadSecurityChecks$
-		throw new CFLibNotImplementedYetException(getClass(), "readRec-args");
+		throw new MCFNotImplementedYetException(getClass(), "readRec-args");
 	}
 </GenRule>
 
@@ -917,14 +917,14 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws	MCFNotSupportedException thrown by client-side implementations.
 	 */
 	@Override
 	public I$DefSchemaName$$TableName$ lockRec( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey )
 	{
 		final String S_ProcName = "lockRec";$implJpaTableUpdateSecurityChecks$
-		throw new CFLibNotImplementedYetException(getClass(), "lockRec");
+		throw new MCFNotImplementedYetException(getClass(), "lockRec");
 	}
 </GenRule>
 
@@ -939,7 +939,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	@Override
 	public I$DefSchemaName$$TableName$[] readAllRec( I$SecSchemaName$Authorization Authorization ) {
 		final String S_ProcName = "readAllRec";$implJpaTableReadSecurityChecks$
-		throw new CFLibNotImplementedYetException(getClass(), "readAllRec");
+		throw new MCFNotImplementedYetException(getClass(), "readAllRec");
 	}
 
 </GenRule>
@@ -986,13 +986,13 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	 *	@return The record instance for the specified key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws	MCFNotSupportedException thrown by client-side implementations.
 	 */
 	@Override
 	public I$DefSchemaName$$poptop Table TableName$ readRecBy$implJpaReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
 		final String S_ProcName = "readRecBy$implJpaReadTableSuffix$";$implJpaTableReadSecurityChecks$
-		throw new CFLibNotImplementedYetException(getClass(), "readRecBy$implJpaReadTableSuffix$");
+		throw new MCFNotImplementedYetException(getClass(), "readRecBy$implJpaReadTableSuffix$");
 	}
 </GenRule>
 
@@ -1004,13 +1004,13 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	 *
 	 *	@return An array of derived record instances for the specified key, potentially with 0 elements in the set.
 	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws	MCFNotSupportedException thrown by client-side implementations.
 	 */
 	@Override
 	public I$DefSchemaName$$poptop Table TableName$[] readRecBy$implJpaReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$ )
 	{
 		final String S_ProcName = "readRecBy$implJpaReadTableSuffix$";$implJpaTableReadSecurityChecks$
-		throw new CFLibNotImplementedYetException(getClass(), "readRecBy$implJpaReadTableSuffix$");
+		throw new MCFNotImplementedYetException(getClass(), "readRecBy$implJpaReadTableSuffix$");
 	}
 </GenRule>
 
@@ -1026,7 +1026,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	public I$DefSchemaName$$TableName$[] pageAllRec( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaCommaOptPriorArg )$ )
 	{
 		final String S_ProcName = "pageAllRec";$implJpaTableReadSecurityChecks$
-		throw new CFLibNotImplementedYetException(getClass(), "pageAllRec");
+		throw new MCFNotImplementedYetException(getClass(), "pageAllRec");
 	}
 </GenRule>
 
@@ -1038,13 +1038,13 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	 *
 	 *	@return An array of derived record instances for the specified key, potentially with 0 elements in the set.
 	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
+	 *	@throws	MCFNotSupportedException thrown by client-side implementations.
 	 */
 	@Override
 	public I$DefSchemaName$$poptop Table TableName$[] pageRecBy$implJpaReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each implJpaCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each implJpaCommaOptPriorArg )$ )
 	{
 		final String S_ProcName = "pageRecBy$implJpaReadTableSuffix$";$implJpaTableReadSecurityChecks$
-		throw new CFLibNotImplementedYetException(getClass(), "pageRecBy$implJpaReadTableSuffix$");
+		throw new MCFNotImplementedYetException(getClass(), "pageRecBy$implJpaReadTableSuffix$");
 	}
 </GenRule>
 
@@ -1059,7 +1059,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		int revision )
 	{
 		final String S_ProcName = "moveRecUp";$implJpaTableUpdateSecurityChecks$
-		throw new CFLibNotImplementedYetException(getClass(), "moveRecUp");
+		throw new MCFNotImplementedYetException(getClass(), "moveRecUp");
 	}
 </GenRule>
 
@@ -1074,7 +1074,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 		int revision )
 	{
 		final String S_ProcName = "moveRecDown";$implJpaTableUpdateSecurityChecks$
-		throw new CFLibNotImplementedYetException(getClass(), "moveRecDown");
+		throw new MCFNotImplementedYetException(getClass(), "moveRecDown");
 	}
 </GenRule>
 
@@ -1133,14 +1133,14 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	{
 		final String S_ProcName = "create$TableName$";$implJpaTableCreateSecurityChecks$
 		if (rec == null) {
-			throw new CFLibNullArgumentException(getClass(), "create$TableName$", 1, "rec");
+			throw new MCFNullArgumentException(getClass(), "create$TableName$", 1, "rec");
 		}
 		else if (rec instanceof $DefSchemaName$Jpa$TableName$) {
 			$DefSchemaName$Jpa$TableName$ jparec = ($DefSchemaName$Jpa$TableName$)rec;$switch IsBaseTableAudited yes implJpaTableCreateInitAuditColumns default empty$
 			$DefSchemaName$Jpa$TableName$ retval = schema.getJpaHooksSchema().get$poptop Table TableName$Service().create(jparec);$implJpaTableFilterAndReturnRetval$
 		}
 		else {
-			throw new CFLibUnsupportedClassException(getClass(), "create$TableName$", "rec", rec, "$DefSchemaName$Jpa$TableName$");
+			throw new MCFUnsupportedClassException(getClass(), "create$TableName$", "rec", rec, "$DefSchemaName$Jpa$TableName$");
 		}
 	}
 </GenRule>
@@ -1162,7 +1162,7 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	@Override
 	public I$DefSchemaName$$TableName$[] readAll$TableName$( I$SecSchemaName$Authorization Authorization ) {
 		final String S_ProcName = "readAll$TableName$";$implJpaTableReadSecurityChecks$
-		throw new CFLibNotImplementedYetException(getClass(), "readAll$TableName$");
+		throw new MCFNotImplementedYetException(getClass(), "readAll$TableName$");
 	}
 
 </GenRule>
@@ -1182,14 +1182,14 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 	{
 		final String S_ProcName = "update$TableName$";$implJpaTableUpdateSecurityChecks$
 		if (rec == null) {
-			throw new CFLibNullArgumentException(getClass(), "update$TableName$", 1, "rec");
+			throw new MCFNullArgumentException(getClass(), "update$TableName$", 1, "rec");
 		}
 		else if (rec instanceof $DefSchemaName$Jpa$TableName$) {
 			$DefSchemaName$Jpa$TableName$ jparec = ($DefSchemaName$Jpa$TableName$)rec;$switch IsBaseTableAudited yes implJpaTableUpdateInitAuditColumns default empty$
 			$DefSchemaName$Jpa$TableName$ retval = schema.getJpaHooksSchema().get$poptop Table TableName$Service().update(jparec);$implJpaTableFilterAndReturnRetval$
 		}
 		else {
-			throw new CFLibUnsupportedClassException(getClass(), "update$TableName$", "rec", rec, "$DefSchemaName$Jpa$TableName$");
+			throw new MCFUnsupportedClassException(getClass(), "update$TableName$", "rec", rec, "$DefSchemaName$Jpa$TableName$");
 		}
 	}
 </GenRule>
@@ -1219,10 +1219,10 @@ $implJpaConstructTable$$methJpaTableCanCreateTableName$$methJpaTableCanReadTable
 			schema.getJpaHooksSchema().get$poptop Table TableName$Service().deleteBy$reference BaseClass reference PrimaryKeyIndex Suffix$(jparec.getPKey());
 		}
 		else {
-			throw new CFLibUnsupportedClassException(getClass(), "delete$TableName$", "rec", rec, "$DefSchemaName$Jpa$TableName$");
+			throw new MCFUnsupportedClassException(getClass(), "delete$TableName$", "rec", rec, "$DefSchemaName$Jpa$TableName$");
 		}
 
-		throw new CFLibNotImplementedYetException(getClass(), "delete$TableName$");
+		throw new MCFNotImplementedYetException(getClass(), "delete$TableName$");
 	}
 $implJpaDeleteTableByInheritedIndexes$
 </GenRule>

@@ -62,7 +62,7 @@ import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.keyhash.*;
-import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$switch HasDefSchema no importJavaProtPackageSchemaName default empty$$switch HasDefSchema no importJavaPackageSchemaName default empty$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$switch HasDefSchema no importJavaProtPackageSchemaNameObj default empty$$JavaEditObjImport$
+import server.markhome.mcf.v3_1.cflib.xml.MCFXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$switch HasDefSchema no importJavaProtPackageSchemaName default empty$$switch HasDefSchema no importJavaPackageSchemaName default empty$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$switch HasDefSchema no importJavaProtPackageSchemaNameObj default empty$$JavaEditObjImport$
 
 public class $SchemaName$$TableName$EditObj$switch HasSuperClassRelation yes implEditObjInheritSuperClass default empty$
 	implements I$SchemaName$$TableName$EditObj
@@ -122,14 +122,14 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 	<GenRule GenDef="Table" Name="implEditObjMoveUp">
 	@Override
 	public I$reference BaseClass DefSchemaName$$reference Chain reference Table TableName$Obj moveUp() {
-		throw new CFLibCannotMoveEditedObjectException( getClass(),	"moveUp" );
+		throw new MCFCannotMoveEditedObjectException( getClass(),	"moveUp" );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjMoveDown">
 	@Override
 	public I$reference BaseClass DefSchemaName$$reference Chain reference Table TableName$Obj moveDown() {
-		throw new CFLibCannotMoveEditedObjectException( getClass(),	"moveDown" );
+		throw new MCFCannotMoveEditedObjectException( getClass(),	"moveDown" );
 	}
 </GenRule>
 
@@ -152,7 +152,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 	<GenRule GenDef="Table" Name="implEditObjBeginEdit">
 	@Override
 	public I$DefSchemaName$$TableName$EditObj beginEdit() {
-		throw new CFLibEditAlreadyOpenException( getClass(), "beginEdit" );
+		throw new MCFEditAlreadyOpenException( getClass(), "beginEdit" );
 	}
 </GenRule>
 
@@ -286,7 +286,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 		if( value == null ) {$poptop Relation implEditObjInvokeNarrowestSingletonNullAccessor$
 		}
 		else if( ! ( value instanceof I$poptop Relation reference ToTable DefSchemaName$$poptop Relation reference ToTable TableName$Obj ) ) {
-			throw new CFLibUnsupportedClassException( getClass(),
+			throw new MCFUnsupportedClassException( getClass(),
 				"set$OptionalOrRequired$$RelationTypeTag$$Suffix$",
 				"value",
 				value,
@@ -314,7 +314,7 @@ $switch HasSuperClassRelation no implEditObjOptSetAuditColumns default empty$$im
 			super.set$OptionalOrRequired$$RelationTypeTag$$Suffix$( null );
 		}$poptop Table implEditObjInvokeMultipleByClass$
 		else {
-			throw new CFLibUnsupportedClassException( getClass(),
+			throw new MCFUnsupportedClassException( getClass(),
 				"set$OptionalOrRequired$$RelationTypeTag$$Suffix$",
 				"value",
 				value,
@@ -790,7 +790,7 @@ $		}
 	public I$DefSchemaName$$TableName$Obj read() {
 		I$DefSchemaName$$TableName$Obj retval = getOrigAs$TableName$().read();
 		if( retval != orig ) {
-			throw new CFLibStaleCacheDetectedException( getClass(),	"read" );
+			throw new MCFStaleCacheDetectedException( getClass(),	"read" );
 		}
 		copyOrigToRec();
 		return( retval );
@@ -800,7 +800,7 @@ $		}
 	public I$DefSchemaName$$TableName$Obj read( boolean forceRead ) {
 		I$DefSchemaName$$TableName$Obj retval = getOrigAs$TableName$().read( forceRead );
 		if( retval != orig ) {
-			throw new CFLibStaleCacheDetectedException( getClass(),	"read" );
+			throw new MCFStaleCacheDetectedException( getClass(),	"read" );
 		}
 		copyOrigToRec();
 		return( retval );
@@ -869,7 +869,7 @@ $		}
 
 	<GenRule GenDef="Table" Name="implEditObjDeleteCheckNotNew">
 		if( getIsNew() ) {
-			throw new CFLibCannotDeleteNewInstanceException( getClass(), "delete" );
+			throw new MCFCannotDeleteNewInstanceException( getClass(), "delete" );
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="implEditObjCopyPKeyToRec">

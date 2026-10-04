@@ -67,7 +67,7 @@ import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.keyhash.*;
 import server.markhome.mcf.v3_1.cflib.inz.Inz;
-import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
+import server.markhome.mcf.v3_1.cflib.xml.MCFXmlUtil;
 $poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaJpaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.jpa.$DefSchemaName$JpaHooksSchema;
 $poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameBuffDotFactoryService empty empty )$$importJavaPackageSchemaNameBuffDotFactoryService$
@@ -127,11 +127,11 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 		if ( $lower DefSchemaName$JpaHooksSchema == null ) {
 			ApplicationContext ctx = I$DefSchemaName$Schema.getApplicationContext();
 			if (ctx == null) {
-				throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "I$DefSchemaName$Schema.getApplicationContext()");
+				throw new MCFNullArgumentException(getClass(), S_ProcName, 0, "I$DefSchemaName$Schema.getApplicationContext()");
 			}
 			try {
 				if (!ctx.isTypeMatch(S_BeanName, $DefSchemaName$JpaHooksSchema.class)) {
-					throw new CFLibInvalidStateException(getClass(), S_ProcName,
+					throw new MCFInvalidStateException(getClass(), S_ProcName,
 						String.format(Inz.s("cflib.common.ACBeanTypeFailure"), S_BeanName, S_BeanClassName),
 						String.format(Inz.x("cflib.common.ACBeanTypeFailure"), S_BeanName, S_BeanClassName));
 				}
@@ -140,7 +140,7 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 					// Need to manually construct and register instance; the plumbing is presumed to happen automagically via createBean()
 					$lower DefSchemaName$JpaHooksSchema = ($DefSchemaName$JpaHooksSchema)(ctx.getAutowireCapableBeanFactory().createBean($DefSchemaName$JpaHooksSchema.class));
 					if ($lower DefSchemaName$JpaHooksSchema == null) {
-						throw new CFLibInvalidStateException( getClass(), S_ProcName,
+						throw new MCFInvalidStateException( getClass(), S_ProcName,
 							String.format(Inz.s("cflib.common.ACAutowireBeanInstanceCreationFailure"),	S_BeanClassName),
 							 String.format(Inz.x("cflib.common.ACAutowireBeanInstanceCreationFailure"), S_BeanClassName));
 					}
@@ -148,7 +148,7 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 			}
 			catch (BeansException ex) {
 				$lower DefSchemaName$JpaHooksSchema = null;
-				throw new CFLibInvalidStateException(getClass(), S_ProcName, 
+				throw new MCFInvalidStateException(getClass(), S_ProcName, 
 					String.format(Inz.s("cflib.common.CaughtWhileTryingToResolve"), ex.getClass().getName(), S_BeanClassName, S_MemberName, ex.getMessage()),
 					String.format(Inz.x("cflib.common.CaughtWhileTryingToResolve"), ex.getClass().getName(), S_BeanClassName, S_MemberName, ex.getLocalizedMessage()),
 					ex);
@@ -168,7 +168,7 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 		getSchemaService().bootstrapSchema(tableData);
 	}
 
-	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity(MCFDbKeyHash256 clusterId, MCFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 		getSchemaService().bootstrapAllTablesSecurity(clusterId, tenantId, tableData);
 	}
 </GenRule>
@@ -178,7 +178,7 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapSchema(tableData);
 	}
 
-	public void bootstrapAllTablesSecurity(CFLibDbKeyHash256 clusterId, CFLibDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity(MCFDbKeyHash256 clusterId, MCFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapAllTablesSecurity(clusterId, tenantId, tableData);
 	}
 </GenRule>
@@ -232,7 +232,7 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 			});
 		}
 		else {
-			throw new CFLibNullArgumentException($SchemaName$JpaSchema.class, "wireRecConstructors", 0, "I$SchemaName$Schema.getClassMapByBackingClassCode(I$DefSchemaName$$TableName$.CLASS_CODE)[" + I$DefSchemaName$$TableName$.CLASS_CODE + "]");
+			throw new MCFNullArgumentException($SchemaName$JpaSchema.class, "wireRecConstructors", 0, "I$SchemaName$Schema.getClassMapByBackingClassCode(I$DefSchemaName$$TableName$.CLASS_CODE)[" + I$DefSchemaName$$TableName$.CLASS_CODE + "]");
 		}
 	</GenRule>
 
@@ -245,60 +245,60 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="implNextIdGen">
 	@Override
 	public short next$Name$() {
-		throw new CFLibNotImplementedYetException( getClass(), "next$Name$" );
+		throw new MCFNotImplementedYetException( getClass(), "next$Name$" );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="implNextIdGen">
 	@Override
 	public int next$Name$() {
-		throw new CFLibNotImplementedYetException( getClass(), "next$Name$" );
+		throw new MCFNotImplementedYetException( getClass(), "next$Name$" );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="implNextIdGen">
 	@Override
 	public long next$Name$() {
-		throw new CFLibNotImplementedYetException( getClass(), "next$Name$" );
+		throw new MCFNotImplementedYetException( getClass(), "next$Name$" );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash128Gen" Name="implNextIdGen">
 	@Override
-	public CFLibDbKeyHash128 next$Name$() {
-		CFLibDbKeyHash128 retval = new CFLibDbKeyHash128(0);
+	public MCFDbKeyHash128 next$Name$() {
+		MCFDbKeyHash128 retval = new MCFDbKeyHash128(0);
 		return( retval );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash160Gen" Name="implNextIdGen">
 	@Override
-	public CFLibDbKeyHash160 next$Name$() {
-		CFLibDbKeyHash160 retval = new CFLibDbKeyHash160(0);
+	public MCFDbKeyHash160 next$Name$() {
+		MCFDbKeyHash160 retval = new MCFDbKeyHash160(0);
 		return( retval );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash224Gen" Name="implNextIdGen">
 	@Override
-	public CFLibDbKeyHash224 next$Name$() {
-		CFLibDbKeyHash224 retval = new CFLibDbKeyHash224(0);
+	public MCFDbKeyHash224 next$Name$() {
+		MCFDbKeyHash224 retval = new MCFDbKeyHash224(0);
 		return( retval );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash256Gen" Name="implNextIdGen">
 	@Override
-	public CFLibDbKeyHash256 next$Name$() {
-		CFLibDbKeyHash256 retval = new CFLibDbKeyHash256(0);
+	public MCFDbKeyHash256 next$Name$() {
+		MCFDbKeyHash256 retval = new MCFDbKeyHash256(0);
 		return( retval );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash384Gen" Name="implNextIdGen">
 	@Override
-	public CFLibDbKeyHash384 next$Name$() {
-		CFLibDbKeyHash384 retval = new CFLibDbKeyHash384(0);
+	public MCFDbKeyHash384 next$Name$() {
+		MCFDbKeyHash384 retval = new MCFDbKeyHash384(0);
 		return( retval );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash512Gen" Name="implNextIdGen">
 	@Override
-	public CFLibDbKeyHash512 next$Name$() {
-		CFLibDbKeyHash512 retval = new CFLibDbKeyHash512(0);
+	public MCFDbKeyHash512 next$Name$() {
+		MCFDbKeyHash512 retval = new MCFDbKeyHash512(0);
 		return( retval );
 	}
 </GenRule>
@@ -311,8 +311,8 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Uuid6Gen" Name="implNextIdGen">
 	@Override
-	public ICFLibUuid6 next$Name$() {
-		ICFLibUuid6 retval = ICFLibUuid6.generate();
+	public IMCFUuid6 next$Name$() {
+		IMCFUuid6 retval = IMCFUuid6.generate();
 		return( retval );
 	}
 </GenRule>
@@ -339,7 +339,7 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 	<GenRule GenDef="Object" Name="implJpaReturnLocalGetTablePerms">tablePerms</GenRule>
 	<GenRule GenDef="Object" Name="implJpaLocalSetTablePerms">
 		if(value == null) {
-			throw new CFLibNullArgumentException($DefSchemaName$JpaSchema.class, "setTablePerms", 1, "value");
+			throw new MCFNullArgumentException($DefSchemaName$JpaSchema.class, "setTablePerms", 1, "value");
 		}
 		tablePerms = value;</GenRule>
 
@@ -365,14 +365,14 @@ $poptop SchemaDef iterate SchemaTables( each initJpaSchemaTableTableMember )$
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaNewSchema">
 	@Override
 	public I$poptop SchemaDef SchemaName$Schema newSchema() {
-		throw new CFLibMustOverrideException( getClass(), "newSchema" );
+		throw new MCFMustOverrideException( getClass(), "newSchema" );
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implJpaSchemaNewSchema">
 	@Override
 	public I$poptop SchemaDef SchemaName$Schema newSchema() {
-		throw new CFLibMustOverrideException( getClass(), "newSchema" );
+		throw new MCFMustOverrideException( getClass(), "newSchema" );
 	}
 </GenRule>
 

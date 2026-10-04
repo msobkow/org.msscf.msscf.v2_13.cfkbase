@@ -61,7 +61,7 @@ import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.keyhash.*;
-import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$importJavaProtPackageSchemaName$$importJavaProtPackageSchemaNameObj$$importJavaPackageSchemaName$$importJavaPackageSchemaNameObj$$tabletweak CafeTableImport$
+import server.markhome.mcf.v3_1.cflib.xml.MCFXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$importJavaProtPackageSchemaName$$importJavaProtPackageSchemaNameObj$$importJavaPackageSchemaName$$importJavaPackageSchemaNameObj$$tabletweak CafeTableImport$
 
 /**
  *	$SchemaName$Buff$TableName$HPKey History Primary Key for $TableName$$reference PrimaryKeyIndex iterate Columns( each implColumnAttrComment )$
@@ -71,11 +71,11 @@ public class $poptop SchemaDef SchemaName$Buff$TableName$HPKey$switch HasDefSche
 </GenFile>
 
 	<GenRule GenDef="Table" Name="SchemaTableBuffHPKeyImplDefBody">
-	protected CFLibDbKeyHash256 auditClusterId;
+	protected MCFDbKeyHash256 auditClusterId;
 	protected LocalDateTime auditStamp;
 	protected short auditActionId;
 	protected int requiredRevision;
-	protected CFLibDbKeyHash256 auditSessionId;
+	protected MCFDbKeyHash256 auditSessionId;
 $reference PrimaryKeyIndex iterate Columns( each implColumnAttr )$
 $reference PrimaryKeyIndex implBuffHPKeyConstructor$$poptop SchemaDef implAuditClusterIdGetterSetter$$poptop SchemaDef implAuditStampGetterSetter$$poptop SchemaDef implAuditActionIdGetterSetter$$poptop SchemaDef implRevisionGetterSetter$$poptop SchemaDef implAuditSessionIdGetterSetter$$reference PrimaryKeyIndex iterate Columns( each implDirectGetterSetter )$$reference PrimaryKeyIndex implHPKeyEquals$$reference PrimaryKeyIndex implHPKeyGetHashCode$$reference PrimaryKeyIndex implHPKeyCompareTo$$reference PrimaryKeyIndex implBuffHPKeyToString$</GenRule>
 
@@ -91,7 +91,7 @@ $reference PrimaryKeyIndex implBuffHPKeyConstructor$$poptop SchemaDef implAuditC
 		auditStamp = LocalDateTime.now();
 		auditActionId = 0;
 		requiredRevision = 1;
-		auditSessionId = CFLibDbKeyHash256.nullGet();$iterate Columns( each implConstructorInitAttr )$
+		auditSessionId = MCFDbKeyHash256.nullGet();$iterate Columns( each implConstructorInitAttr )$
 	}
 </GenRule>
 
@@ -99,7 +99,7 @@ $reference PrimaryKeyIndex implBuffHPKeyConstructor$$poptop SchemaDef implAuditC
 	@Override
 	public String getXmlAttrFragment() {
 		String ret = " auditClusterId=\"" + (auditClusterId != null ? auditClusterId.toString() : "null") + "\\""
-			+ " auditStamp=\\"" + (auditStamp != null ? CFLibXmlUtil.formatTimestamp(auditStamp) : "null") + "\\""
+			+ " auditStamp=\\"" + (auditStamp != null ? MCFXmlUtil.formatTimestamp(auditStamp) : "null") + "\\""
 			+ " auditAction=\\"" + auditActionId + "\\""
 			+ " revision=\\"" + requiredRevision + "\\""
 			+ " auditSessionId=\\"" + (getAuditSessionId() != null ? getAuditSessionId().toString() : "null") + "\\""$iterate Columns( each implToStringEmitXmlAttr )$;

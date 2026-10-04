@@ -60,7 +60,7 @@ import jakarta.persistence.*;
 import server.markhome.mcf.v3_1.cflib.*;
 import server.markhome.mcf.v3_1.cflib.dbutil.*;
 import server.markhome.mcf.v3_1.cflib.keyhash.*;
-import server.markhome.mcf.v3_1.cflib.xml.CFLibXmlUtil;
+import server.markhome.mcf.v3_1.cflib.xml.MCFXmlUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -377,7 +377,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			return $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.save(data);
 		}
 		catch(Exception ex) {$reference BaseClass reference PrimaryKeyIndex iterate Columns(each maybeServiceCreateRestoreGenerated)$
-			throw new CFLibDbException(getClass(),
+			throw new MCFDbException(getClass(),
 				S_ProcName,
 				ex);
 		}
@@ -405,7 +405,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Table" Name="declServiceCreateEnsurePKeyObjNotNull">
 		if (data.getPKey() == null) {
-			throw new CFLibNullArgumentException(getClass(),
+			throw new MCFNullArgumentException(getClass(),
 				S_ProcName,
 				0,
 				"data.getPKey()");
@@ -428,9 +428,9 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 		}$declServiceCreateEnsurePKeyObjNotNull$$serviceCheckDataValid$
 		// Ensure the entity exists and that the revision matches
 		$poptop Table SchemaName$Jpa$poptop Table TableName$ existing = $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.findById(($JpaCompactedPrimaryIndexClass$)(data.getPKey()))
-			.orElseThrow(() -> new CFLibCollisionDetectedException(getClass(), S_ProcName, data.getPKey()));
+			.orElseThrow(() -> new MCFCollisionDetectedException(getClass(), S_ProcName, data.getPKey()));
 		if (existing.getRequiredRevision() != data.getRequiredRevision()) {
-			throw new CFLibCollisionDetectedException(getClass(), S_ProcName, data.getPKey());
+			throw new MCFCollisionDetectedException(getClass(), S_ProcName, data.getPKey());
 		}$serviceUpdateApplyDataToExisting$$switch IsBaseTableAudited yes serviceUpdateInitAuditColumns default empty$
 		// Save the changes we've made
 		return $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.save(existing);
@@ -472,7 +472,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 	<GenRule GenDef="Relation" Name="serviceDontCheckRequiredSuperiorRelation"></GenRule>
 	<GenRule GenDef="Relation" Name="serviceReallyCheckRequiredSuperiorRelation">
 		if (data.get$OptionalOrRequired$$RelationType$$Suffix$() == null) {
-			throw new CFLibUnresolvedRelationException(getClass(),
+			throw new MCFUnresolvedRelationException(getClass(),
 				S_ProcName,
 				"$RelationType$",
 				"$RelationType$",
@@ -533,7 +533,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceEnsureColObjNotNull">
 		if(data.get$implColumnAttrOptionality$$Name$() == null) {
-			throw new CFLibNullArgumentException(getClass(),
+			throw new MCFNullArgumentException(getClass(),
 				S_ProcName,
 				0,
 				"data.$leadlower implColumnAttrOptionality$$Name$");
@@ -541,7 +541,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceEnsureColDbHashNotNull">
 		if(data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-			throw new CFLibNullArgumentException(getClass(),
+			throw new MCFNullArgumentException(getClass(),
 				S_ProcName,
 				0,
 				"data.$leadlower implColumnAttrOptionality$$Name$");
@@ -567,32 +567,32 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash128">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new CFLibDbKeyHash128(0));
+				data.set$implColumnAttrOptionality$$Name$(new MCFDbKeyHash128(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash160">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new CFLibDbKeyHash160(0));
+				data.set$implColumnAttrOptionality$$Name$(new MCFDbKeyHash160(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash224">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new CFLibDbKeyHash224(0));
+				data.set$implColumnAttrOptionality$$Name$(new MCFDbKeyHash224(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash256">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new CFLibDbKeyHash256(0));
+				data.set$implColumnAttrOptionality$$Name$(new MCFDbKeyHash256(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash384">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new CFLibDbKeyHash384(0));
+				data.set$implColumnAttrOptionality$$Name$(new MCFDbKeyHash384(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash512">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new CFLibDbKeyHash512(0));
+				data.set$implColumnAttrOptionality$$Name$(new MCFDbKeyHash512(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateUuid">
@@ -602,7 +602,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateUuid6">
 			if (data.get$implColumnAttrOptionality$$Name$() == null) {
-				data.set$implColumnAttrOptionality$$Name$(CFLibUuid6.generateUuid6());
+				data.set$implColumnAttrOptionality$$Name$(MCFUuid6.generateUuid6());
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 
@@ -670,7 +670,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceReqCheckGenericMinValue">
 		if( data.get$implColumnAttrOptionality$$Name$() &lt; I$DefSchemaName$$TableName$.$upper Name$_MIN_VALUE ) {
-			throw new CFLibArgumentUnderflowException( getClass(),
+			throw new MCFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -680,7 +680,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceReqCheckObjectMinValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MIN_VALUE) &lt; 0) {
-			throw new CFLibArgumentUnderflowException( getClass(),
+			throw new MCFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -734,7 +734,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceReqCheckGenericMaxValue">
 		if( data.get$implColumnAttrOptionality$$Name$() &gt; I$DefSchemaName$$TableName$.$upper Name$_MAX_VALUE ) {
-			throw new CFLibArgumentOverflowException( getClass(),
+			throw new MCFArgumentOverflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -744,7 +744,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceReqCheckObjectMaxValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MIN_VALUE) &gt; 0) {
-			throw new CFLibArgumentOverflowException( getClass(),
+			throw new MCFArgumentOverflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -800,7 +800,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceOptCheckGenericMinValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; data.get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MIN_VALUE) &lt; 0) {
-			throw new CFLibArgumentUnderflowException( getClass(),
+			throw new MCFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -809,7 +809,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 		}</GenRule>
 	<GenRule GenDef="Value" Name="serviceOptCheckObjectMinValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; data.get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MIN_VALUE) &lt; 0) {
-			throw new CFLibArgumentUnderflowException( getClass(),
+			throw new MCFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -865,7 +865,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceOptCheckGenericMaxValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; data.get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MAX_VALUE) &gt; 0) {
-			throw new CFLibArgumentOverflowException( getClass(),
+			throw new MCFArgumentOverflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -874,7 +874,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 		}</GenRule>
 	<GenRule GenDef="Value" Name="serviceOptCheckObjectMaxValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; data.get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MAX_VALUE) &gt; 0) {
-			throw new CFLibArgumentOverflowException( getClass(),
+			throw new MCFArgumentOverflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
