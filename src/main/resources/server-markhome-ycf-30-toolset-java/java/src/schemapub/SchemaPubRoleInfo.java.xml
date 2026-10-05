@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Yorkton Code Fractal YCFCore 3.1 Code Fractal Knowledge Base
+ *
+ *	Copyright 2016-2026 Mark Stephen Sobkow
+ *
+ *	This file is part of Yorkton Code Fractal YCFCore.
+ *
+ *	Yorkton Code Fractal YCFCore is available under dual commercial license from
+ *	Mark Stephen Sobkow, or under the terms of the GNU General Public License,
+ *	Version 3 or later.
+ *
+ *	Yorkton Code Fractal YCFCore is free software: you can redistribute it and/or
+ *	modify it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	Yorkton Code Fractal YCFCore is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with Yorkton Code Fractal YCFCore.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+	xmlns="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	ToolSet="java"
+	Name="src/schemapub/SchemaPubRoleInfo.java"
+	Revision="3.0"
+	Descr="Java Schema Public RoleInfo Implementation">
+
+	<GenFile GenDef="SchemaDef" Name="fileSchemaPubRoleInfoJava"
+		GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackageName$"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackageName$/$reference ManufacturingSchema lower SchemaName$-pub/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub"
+		ExpansionClassName="$SecPubSchemaName$RoleInfoJava"
+		ExpansionKeyName="$SecPubSchemaName$RoleInfoJava"
+		ExpansionFileName="$SecPubSchemaName$RoleInfo.java"
+>// Description: Java 25 $SchemaName$ Public Role Information Implementation
+
+$MssSourceLicense$
+
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SecPubSchemaName$;
+
+import java.io.Serializable;
+
+/*
+ *	The $SecPubSchemaName$RoleInfo objects are passed in to the $SecSchemaName$ schema implementation to be bound
+ *	to the security system.  Their natural order is to compare by dependency first, and by name second.
+ */
+public class $SecPubSchemaName$RoleInfo implements Serializable, Comparable&lt;$SecPubSchemaName$RoleInfo&gt;
+{
+	protected final String roleName;
+	protected final String roleScope;
+	protected final String enables;
+	protected final String includes;
+
+	public $SecPubSchemaName$RoleInfo(String roleName, String roleScope, String enables, String includes) {
+		this.roleName = roleName;
+		this.roleScope = roleScope;
+		this.enables = enables;
+		this.includes = includes;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public String getRoleScope() {
+		return roleScope;
+	}
+
+	public String getEnables() {
+		return enables;
+	}
+
+	public String getIncludes() {
+		return includes;
+	}
+	
+	@Override
+	public int compareTo( $SecPubSchemaName$RoleInfo rhs ) {
+		if( rhs == null ) {
+			return( 1 );
+		}
+		else {
+			String lhsName = getRoleName();
+			String rhsName = rhs.getRoleName();
+
+			String lhsEnables = getEnables();
+			String rhsEnables = rhs.getEnables();
+			String lhsEnablesArr[] = lhsEnables.split(" ");
+			String rhsEnablesArr[] = rhsEnables.split(" ");
+			boolean rhsEnablesLhs = false;
+			boolean lhsEnablesRhs = false;
+			for (String v: lhsEnablesArr) {
+				if (rhsName.equals(v)) {
+					lhsEnablesRhs = true;
+					break;
+				}
+			}
+			for (String v: rhsEnablesArr) {
+				if (lhsName.equals(v)) {
+					rhsEnablesLhs = true;
+					break;
+				}
+			}
+
+			String lhsIncludes = getIncludes();
+			String rhsIncludes = rhs.getIncludes();
+			String lhsIncludesArr[] = lhsIncludes.split(" ");
+			String rhsIncludesArr[] = rhsIncludes.split(" ");
+			boolean rhsIncludesLhs = false;
+			boolean lhsIncludesRhs = false;
+			for (String v: lhsIncludesArr) {
+				if (rhsName.equals(v)) {
+					lhsIncludesRhs = true;
+					break;
+				}
+			}
+			for (String v: rhsIncludesArr) {
+				if (lhsName.equals(v)) {
+					rhsIncludesLhs = true;
+					break;
+				}
+			}
+
+			int ret;
+
+			if (lhsEnablesRhs) {
+				if (rhsEnablesLhs) {
+					if (lhsIncludesRhs) {
+						if (rhsIncludesLhs) {
+							ret = lhsName.compareTo(rhsName);
+						}
+						else {
+							ret = 1;
+						}
+					}
+					else {
+						if (rhsIncludesLhs) {
+							ret = -1;
+						}
+						else {
+							ret = lhsName.compareTo(rhsName);
+						}
+					}
+				}
+				else {
+					ret = 1;
+				}
+			}
+			else {
+				if (rhsEnablesLhs) {
+					ret = -1;
+				}
+				else {
+					if (lhsIncludesRhs) {
+						if (rhsIncludesLhs) {
+							ret = lhsName.compareTo(rhsName);
+						}
+						else {
+							ret = 1;
+						}
+					}
+					else {
+						if (rhsIncludesLhs) {
+							ret = -1;
+						}
+						else {
+							ret = lhsName.compareTo(rhsName);
+						}
+					}
+				}
+			}
+			return( ret );
+		}
+	}
+}
+</GenFile>
+
+</RuleSet>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Yorkton Code Fractal YCFCore 3.1 Code Fractal Knowledge Base
+ *
+ *	Copyright 2016-2026 Mark Stephen Sobkow
+ *
+ *	This file is part of Yorkton Code Fractal YCFCore.
+ *
+ *	Yorkton Code Fractal YCFCore is available under dual commercial license from
+ *	Mark Stephen Sobkow, or under the terms of the GNU General Public License,
+ *	Version 3 or later.
+ *
+ *	Yorkton Code Fractal YCFCore is free software: you can redistribute it and/or
+ *	modify it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	Yorkton Code Fractal YCFCore is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with Yorkton Code Fractal YCFCore.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+	xmlns="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	ToolSet="java"
+	Name="src/schemaramtest/spring/SchemaRamTestStartupListener.java"
+	Revision="3.0"
+	Descr="Java 25 Main for test creation of the Ram storage for the schema">
+
+	<GenRule GenDef="SchemaRef" Name="fileSchemaRamTestTestSchemaJava">$reference RefSchema fileSchemaRamTestTestSchemaJava$</GenRule>
+
+	<GenFile GenDef="SchemaDef" Name="fileSchemaRamTestTestSchemaJava"
+		GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackageName$"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackageName$/$reference ManufacturingSchema lower SchemaName$-ramtest/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$ramtest.spring"
+		ExpansionClassName="$SchemaName$RamTestTestSchemaJava"
+		ExpansionKeyName="$SchemaName$RamTestTestSchemaJava"
+		ExpansionFileName="$SchemaName$RamTestTestSchema.java">
+// Description: Spring Ram storage tests for $SchemaName$ for the RamTest program
+
+$MssSourceLicense$
+
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$ramtest.spring;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Service;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+
+import server.markhome.ycf.*;
+import server.markhome.ycf.dbutil.*;
+$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$importJavaPackageSchemaName$<!--$poptop SchemaDef iterate SchemaRefs(each importJavaPubBuffPackageSchemaName empty empty )$$importJavaPubBuffPackageSchemaName$-->$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$poptop SchemaDef iterate SchemaRefs( each importJavaBuffPackageSchemaName empty empty )$$importJavaBuffPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaRamPackageSchemaName empty empty )$$importJavaRamPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$importJavaPackageSchemaNameObj$
+
+@Service("RamTest$DefSchemaName$")
+public class $SchemaName$RamTestTestSchema {
+    
+    public String performTests(EntityManager em) {
+		StringBuffer messages = new StringBuffer("Starting $SchemaName$ tests...\n");$iterate SchemaRefs( empty implRamTestSchemaYCFSecure each empty )$$iterate Tables( each maybeRamTestSchemaTableSelectAll )$
+		messages.append("$SchemaName$ tests complete\n");
+		return( messages.toString() );
+	}
+$iterate SchemaRefs( empty implRamTestSchemaYCFSecureUtilityMethods each empty )$}</GenFile>
+
+<GenRule GenDef="Object" Name="implRamTestSchemaYCFSecure">$popto SchemaDef reallyImplRamTestSchemaYCFSecure$</GenRule>
+<GenRule GenDef="SchemaDef" Name="reallyImplRamTestSchemaYCFSecure">
+		{
+			try {
+				LocalDateTime now = LocalDateTime.now();
+				YCFDbKeyHash256 adminpid = new YCFDbKeyHash256("f012301230123012301230123012301230123012301230123012301230123012");
+				YCFDbKeyHash256 mgrpid =   new YCFDbKeyHash256("fabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabc");
+				I$SecSchemaName$SecUser secUserResults = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecUser().readDerived(null, adminpid);
+				if( secUserResults == null ) {
+					$SecSchemaName$BuffSecUser newuser = ($SecSchemaName$BuffSecUser)(I$SecSchemaName$Schema.getBacking$SecSchemaName$().get$SecSchemaName$Factory().getFactorySecUser().newRec());
+					newuser.setCreatedByUserId( adminpid );
+					newuser.setCreatedAt( now );
+					newuser.setUpdatedByUserId( adminpid );
+					newuser.setUpdatedAt( now );
+					newuser.setPKey(adminpid);
+					newuser.setRequiredSecUserId( adminpid );
+					newuser.setRequiredRevision( 1 );
+					newuser.setRequiredLoginId( "admin" );
+					newuser.setRequiredEMailAddress("admin@localhost");
+					<!--newuser.setRequiredPasswordHash( computeSHA256("changeoninstall") );-->
+					I$SecSchemaName$SecUser secUserCreated = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecUser().createSecUser(null, newuser);
+					if (secUserCreated == null) {
+						messages.append("Error creating secuser admin - null returned\n");
+					}
+					else {
+						messages.append("Created admin user: " + secUserCreated.toString() + "\n");
+					}
+				}
+				else {
+					messages.append("Admin user already exists: " + secUserResults.toString() + "\n");
+				}
+			}
+			catch (Exception e) {
+				String msg = "ERROR: performTests() Caught and rethrew " + e.getClass().getCanonicalName() + " while modifying or creating the 'admin' user - " + e.getMessage();
+				messages.append(msg);
+				System.err.println(msg);
+				e.printStackTrace(System.err);
+			}
+		}
+</GenRule>
+
+<GenRule GenDef="Object" Name="implRamTestSchemaYCFSecureUtilityMethods">
+	// From Google's AI
+    /**
+     * Computes the SHA-256 hash of a given string and returns it as a hex string.
+     *
+     * @param text The input string to hash.
+     * @return The SHA-256 hash in hexadecimal format.
+     */
+    public static String computeSHA256(String text) {
+        try {
+            // Step 1: Get a MessageDigest instance for SHA-256
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            // Step 2: Convert the input string to bytes using UTF-8 encoding
+            byte[] hashBytes = digest.digest(text.getBytes(StandardCharsets.UTF_8));
+
+            // Step 3: Convert the byte array to a hexadecimal string
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                // Convert byte to hex (ensure two characters per byte)
+                String hex = Integer.toHexString(0xff &amp; b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            // Handle the case where the algorithm is not available (highly unlikely for SHA-256)
+            throw new RuntimeException("SHA-256 algorithm not available", e);
+        }
+    }
+</GenRule>
+<GenRule GenDef="Table" Name="maybeRamTestSchemaTableSelectAll">$switch HasDefSchema yes empty default ramTestSchemaTableSelectAll$</GenRule>
+<GenRule GenDef="Table" Name="ramTestSchemaTableSelectAll">
+		I$DefSchemaName$$TableName$[] $leadlower TableName$Results = I$DefSchemaName$Schema.getBacking$DefSchemaName$().getTable$TableName$().readAllDerived(null);
+		if ($leadlower TableName$Results == null) {
+			messages.append("Erroneously retrieved null for I$DefSchemaName$Schema.get$TableName$Table().readAllDerived(null)\n");
+		}
+		else {
+			messages.append("Retrieved " + $leadlower TableName$Results.length + " entities from $DefSchemaName$.$TableName$\n");
+		}
+</GenRule>
+
+</RuleSet>

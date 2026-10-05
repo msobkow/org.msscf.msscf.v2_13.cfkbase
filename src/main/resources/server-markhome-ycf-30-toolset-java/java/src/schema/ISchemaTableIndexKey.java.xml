@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Yorkton Code Fractal YCFCore 3.1 Code Fractal Knowledge Base
+ *
+ *	Copyright 2016-2026 Mark Stephen Sobkow
+ *
+ *	This file is part of Yorkton Code Fractal YCFCore.
+ *
+ *	Yorkton Code Fractal YCFCore is available under dual commercial license from
+ *	Mark Stephen Sobkow, or under the terms of the GNU General Public License,
+ *	Version 3 or later.
+ *
+ *	Yorkton Code Fractal YCFCore is free software: you can redistribute it and/or
+ *	modify it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	Yorkton Code Fractal YCFCore is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with Yorkton Code Fractal YCFCore.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+	xmlns="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	ToolSet="java"
+	Name="src/schema/ISchemaTableIndexKey.java"
+	Revision="3.0"
+	Descr="Java 25 interface for a $TableName$ by $Suffix$ index key object">
+
+	<GenRule GenDef="Index" Name="fileISchemaTableIndexKeyJava"
+		>$switch IsPrimaryIndex yes empty default implFileISchemaTableIndexKeyJava$</GenRule>
+
+	<GenFile GenDef="Index" Name="implFileISchemaTableIndexKeyJava"
+		GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackageName$/$reference ManufacturingSchema lower SchemaName$-core/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$"
+		ExpansionClassName="I$SchemaName$$TableName$By$Suffix$KeyJava"
+		ExpansionKeyName="I$SchemaName$$TableName$By$Suffix$KeyJava"
+		ExpansionFileName="I$SchemaName$$TableName$By$Suffix$Key.java"
+>// Description: Java 25 interface for a $TableName$ by $Suffix$ index key object
+
+$MssSourceLicense$
+
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$;
+
+import java.io.Serializable;
+import java.math.*;
+import java.time.*;
+import java.util.*;
+import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.text.StringEscapeUtils;
+import server.markhome.ycf.*;
+import server.markhome.ycf.dbutil.*;
+import server.markhome.ycf.YCFXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$importJavaProtPackageSchemaName$$importJavaProtPackageSchemaNameObj$$reference Table tabletweak CafeTableImport$
+
+/**
+ *	I$SchemaName$$TableName$By$Suffix$Keys has $ExplainCodeVis$.
+ */
+public interface I$SchemaName$$TableName$By$Suffix$Key$switch HasDefSchema yes extendISchemaTableBySuffixKey default empty$
+{$switch HasDefSchema yes empty default declIndexKeYCFCoreColumns$$switch HasDefSchema yes empty default declIndexKeyEquals$$switch HasDefSchema yes empty default declIndexKeyGetHashCode$$switch HasDefSchema yes empty default declIndexKeyCompareTo$$switch HasDefSchema yes empty default declIndexKeyToString$}
+</GenFile>
+
+	<GenRule GenDef="Index" Name="declIndexKeYCFCoreColumns"
+		>$iterate Columns( each declColumnGetterSetter )$</GenRule>
+
+	<GenRule GenDef="Index" Name="declSchemaTableBySuffixKeyColumnAttr"
+		>$iterate Columns( each declColumnAttr )$</GenRule>
+
+	<GenRule GenDef="Index" Name="extendSchemaTableBySuffixKey">
+	extends I$reference DefSchema SchemaName$$TableName$By$Suffix$Key</GenRule>
+
+	<GenRule GenDef="Index" Name="declIndexKeyEquals">
+	@Override
+	public boolean equals( Object obj );
+</GenRule>
+
+	<GenRule GenDef="Index" Name="declIndexKeyGetHashCode">
+	@Override
+	public int hashCode();
+</GenRule>
+
+	<GenRule GenDef="Index" Name="declIndexKeyCompareTo">
+	//@Override
+	public int compareTo( Object obj );
+</GenRule>
+
+	<GenRule GenDef="Index" Name="declIndexKeyToString">
+	public String getXmlAttrFragment();
+
+	@Override
+	public String toString();
+</GenRule>
+
+</RuleSet>

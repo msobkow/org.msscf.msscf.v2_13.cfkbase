@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Yorkton Code Fractal YCFCore 3.1 Code Fractal Knowledge Base
+ *
+ *	Copyright 2016-2026 Mark Stephen Sobkow
+ *
+ *	This file is part of Yorkton Code Fractal YCFCore.
+ *
+ *	Yorkton Code Fractal YCFCore is available under dual commercial license from
+ *	Mark Stephen Sobkow, or under the terms of the GNU General Public License,
+ *	Version 3 or later.
+ *
+ *	Yorkton Code Fractal YCFCore is free software: you can redistribute it and/or
+ *	modify it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	Yorkton Code Fractal YCFCore is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with Yorkton Code Fractal YCFCore.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+		xmlns="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xsi:schemaLocation="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	ToolSet="java+javafx"
+	Name="src/schemajavafx/SchemaJavaFXTableAddForm.java"
+	Revision="3.0"
+	Descr="Java 25 JavaFX Add Form for Table">
+
+	<GenFile GenDef="Table" Name="fileSchemaJavaFXTableAddFormJava"
+		GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackageName$/$reference ManufacturingSchema lower SchemaName$-javafx/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$javafx"
+		ExpansionClassName="$SchemaName$JavaFX$TableName$TableAddFormJava"
+		ExpansionKeyName="$SchemaName$JavaFX$TableName$TableAddFormJava"
+		ExpansionFileName="$SchemaName$JavaFX$TableName$AddForm.java"
+>// Description: Java 25 JavaFX Add Form implementation for $TableName$.
+
+$MssSourceLicense$
+
+package $lower DefTopProjectName$.$DefVUnderVersion$.$lower DefSubProjectName$.$lower DefSchemaName$javafx;
+
+import java.time.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import server.markhome.ycf.*;
+import server.markhome.ycf.dbutil.*;
+import server.markhome.ycf.Inz;
+import server.markhome.ycf.javafx.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$
+
+/**
+ *	$SchemaName$JavaFX$TableName$AddForm JavaFX Add Form implementation
+ *	for $TableName$.
+ */
+public class $SchemaName$JavaFX$TableName$AddForm
+extends YCFBorderPane
+implements I$DefSchemaName$JavaFX$TableName$PaneCommon,
+	IYCFForm
+{
+	public static String S_FormName = "Add $EffLabel$";
+	protected IYCFFormManager ycfFormManager = null;
+	protected I$SchemaName$JavaFXSchema javafxSchema = null;
+	protected IYCFFormClosedCallback formClosedCallback = null;
+	protected boolean allowSave = true;
+	protected YCFSplitPane javafxAddPane = null;
+	protected YCFButton buttonSave = null;
+	protected YCFButton buttonCancel = null;
+	protected YCFButton buttonClose = null;
+	protected ScrollPane scrollMenu = null;
+	protected YCFHBox hboxMenu = null;
+$implConstructJavaFXTableAddForm$$implGetSetYCFFormManager$$implSchemaJavaFXTableAddFormForceCancelAndClose$$implGetJavaFXSchema$$implAddFormGetSetJavaFXFocus$$implAddFormGetFrameHBoxMenu$$implSetPaneModeAddForm$}
+</GenFile>
+
+	<GenRule GenDef="Table" Name="implSchemaJavaFXTableAddFormForceCancelAndClose">
+	public void forceCancelAndClose() {
+		I$DefSchemaName$$TableName$Obj focus = getJavaFXFocusAs$TableName$();
+		if( focus != null ) {
+			I$SchemaName$$TableName$EditObj editObj = (I$SchemaName$$TableName$EditObj)focus.getEdit();
+			if( editObj != null ) {
+				if( editObj.getIsNew() ) {
+					editObj.endEdit();
+					editObj = null;
+					setJavaFXFocus( null );
+					setPaneMode( YCFPane.PaneMode.Unknown );
+				}
+				else {
+					editObj.endEdit();
+					editObj = null;
+					setPaneMode( YCFPane.PaneMode.View );
+				}
+			}
+		}
+		if( ycfFormManager != null ) {
+			if( ycfFormManager.getCurrentForm() == this ) {
+				ycfFormManager.closeCurrentForm();
+			}
+		}
+		if( formClosedCallback != null ) {
+			formClosedCallback.formClosed( null );
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implSetPaneModeAddForm">
+	public void setPaneMode( YCFPane.PaneMode value ) {
+		YCFPane.PaneMode oldMode = getPaneMode();
+		if( oldMode == value ) {
+			return;
+		}
+		try {
+			super.setPaneMode( value );
+			((I$DefSchemaName$JavaFX$TableName$PaneCommon)javafxAddPane).setPaneMode( value );
+		}
+		catch( Throwable t ) {
+			super.setPaneMode( oldMode );
+			((I$DefSchemaName$JavaFX$TableName$PaneCommon)javafxAddPane).setPaneMode( oldMode );
+			throw t;
+		}
+		if( value == YCFPane.PaneMode.View ) {$implSetPaneModeAddFormModeView$
+		}
+		else if( value == YCFPane.PaneMode.Edit ) {$implSetPaneModeAddFormModeEdit$
+		}
+		else if( value == YCFPane.PaneMode.Add ) {$implSetPaneModeAddFormModeAdd$
+		}
+		else {$implSetPaneModeAddFormModeOther$
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implSetPaneModeAddFormModeAdd">
+			if( buttonSave != null ) {
+				buttonSave.setDisable( false );
+			}
+			if( buttonCancel != null ) {
+				buttonCancel.setDisable( false );
+			}
+			if( buttonClose != null ) {
+				buttonClose.setDisable( false );
+			}</GenRule>
+
+	<GenRule GenDef="Table" Name="implSetPaneModeAddFormModeView">
+			if( buttonSave != null ) {
+				buttonSave.setDisable( true );
+			}
+			if( buttonCancel != null ) {
+				buttonCancel.setDisable( false );
+			}
+			if( buttonClose != null ) {
+				buttonClose.setDisable( true );
+			}</GenRule>
+
+	<GenRule GenDef="Table" Name="implSetPaneModeAddFormModeEdit">
+			if( buttonSave != null ) {
+				buttonSave.setDisable( false );
+			}
+			if( buttonCancel != null ) {
+				buttonCancel.setDisable( false );
+			}
+			if( buttonClose != null ) {
+				buttonClose.setDisable( false );
+			}</GenRule>
+
+	<GenRule GenDef="Table" Name="implSetPaneModeAddFormModeOther">
+			if( buttonSave != null ) {
+				buttonSave.setDisable( true );
+			}
+			if( buttonCancel != null ) {
+				buttonCancel.setDisable( false );
+			}
+			if( buttonClose != null ) {
+				buttonClose.setDisable( true );
+			}</GenRule>
+
+	<GenRule GenDef="Table" Name="implConstructJavaFXTableAddForm">
+	public $SchemaName$JavaFX$TableName$AddForm( IYCFFormManager formManager, I$SchemaName$JavaFXSchema argSchema, I$DefSchemaName$$TableName$Obj argFocus, IYCFFormClosedCallback closeCallback, boolean argAllowSave ) {
+		super();
+		final String S_ProcName = "construct-schema-focus";
+		allowSave = argAllowSave;
+		if( formManager == null ) {
+			throw new YCFLibNullArgumentException( getClass(),
+				S_ProcName,
+				1,
+				"formManager" );
+		}
+		ycfFormManager = formManager;
+		formClosedCallback = closeCallback;
+		if( argSchema == null ) {
+			throw new YCFLibNullArgumentException( getClass(),
+				S_ProcName,
+				2,
+				"argSchema" );
+		}
+		// argFocus is optional; focus may be set later during execution as
+		// conditions of the runtime change.
+		javafxSchema = argSchema;
+		javaFXFocus = argFocus;
+		if( ( argFocus != null ) &amp;&amp; ( ! argFocus.getIsNew() ) ) {
+			argFocus = (I$SchemaName$$TableName$Obj)argFocus.read( true );
+			javaFXFocus = argFocus;
+		}
+		javafxAddPane = argSchema.get$TableName$Factory().newAddPane( ycfFormManager, argFocus );
+
+		scrollMenu = new ScrollPane();
+		scrollMenu.setVbarPolicy( ScrollBarPolicy.NEVER );
+		scrollMenu.setHbarPolicy( ScrollBarPolicy.AS_NEEDED );
+		scrollMenu.setFitToHeight( true );
+		scrollMenu.setContent( getHBoxMenu() );
+
+		setTop( scrollMenu );
+		setCenter( javafxAddPane );
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implAddFormGetSetJavaFXFocus">
+	public IYCFLibAnyObj getJavaFXFocus() {
+		IYCFLibAnyObj obj;
+		if( javafxAddPane != null ) {
+			obj = javafxAddPane.getJavaFXFocus();
+		}
+		else {
+			obj = null;
+		}
+		return( obj );
+	}
+
+	public void setJavaFXFocus( IYCFLibAnyObj value ) {
+		final String S_ProcName = "setJavaFXFocus";
+		if( ( value == null ) || ( value instanceof I$DefSchemaName$$TableName$Obj ) ) {
+			super.setJavaFXFocus( value );
+		}
+		else {
+			throw new YCFLibUnsupportedClassException( getClass(),
+				S_ProcName,
+				"value",
+				value,
+				"I$DefSchemaName$$TableName$Obj" );
+		}
+		((I$DefSchemaName$JavaFX$TableName$PaneCommon)javafxAddPane).setJavaFXFocus( value );
+		I$SchemaName$$TableName$Obj argFocus = (I$SchemaName$$TableName$Obj)value;
+		if( ( argFocus != null ) &amp;&amp; ( ! argFocus.getIsNew() ) ) {
+			argFocus = (I$SchemaName$$TableName$Obj)argFocus.read( true );
+			super.setJavaFXFocus( argFocus );
+		}
+	}
+
+	public I$DefSchemaName$$TableName$Obj getJavaFXFocusAs$TableName$() {
+		return( (I$DefSchemaName$$TableName$Obj)getJavaFXFocus() );
+	}
+
+	public void setJavaFXFocusAs$TableName$( I$DefSchemaName$$TableName$Obj value ) {
+		setJavaFXFocus( value );
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implAddFormGetFrameHBoxMenu">
+	public YCFHBox getHBoxMenu() {
+		if( hboxMenu == null ) {
+			hboxMenu = new YCFHBox( 10 );$implJavaFXAddFormMenuButtonSave$$implJavaFXAddFormMenuButtonClose$$implJavaFXAddFormMenuButtonCancel$
+		}
+		return( hboxMenu );
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implJavaFXAddFormMenuButtonSave">
+			buttonSave = new YCFButton();
+			buttonSave.setMinWidth( 200 );
+			buttonSave.setText( "Save" );
+			buttonSave.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
+				@Override public void handle( ActionEvent e ) {
+					final String S_ProcName = "handle";
+					try {
+						I$DefSchemaName$$TableName$Obj focus = getJavaFXFocusAs$TableName$();
+						if( focus != null ) {
+							I$SchemaName$$TableName$EditObj editObj = (I$SchemaName$$TableName$EditObj)( focus.getEdit() );
+							if( editObj != null ) {
+								setPaneMode( YCFPane.PaneMode.Update );
+							}
+							else {
+								throw new YCFLibUsageException( getClass(),
+									S_ProcName,
+									Inz.x("ycflib.common.CannotSaveUneditedObject"),
+									Inz.s("ycflib.common.CannotSaveUneditedObject") );
+							}
+						}
+						// If an object was added, the focus will change to the persisted instance
+						focus = getJavaFXFocusAs$TableName$();
+						YCFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( ycfFormManager, focus, formClosedCallback, true );
+						((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( YCFPane.PaneMode.View );
+						ycfFormManager.closeCurrentForm();
+						ycfFormManager.pushForm( frame );
+					}
+					catch( Throwable t ) {
+						YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+					}
+				}
+			});
+			if( allowSave ) {
+				hboxMenu.getChildren().add( buttonSave );
+			}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implJavaFXAddFormMenuButtonClose">
+			buttonClose = new YCFButton();
+			buttonClose.setMinWidth( 200 );
+			buttonClose.setText( "Close" );
+			buttonClose.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
+				@Override public void handle( ActionEvent e ) {
+					final String S_ProcName = "handle";
+					try {
+						I$DefSchemaName$$TableName$Obj focus = getJavaFXFocusAs$TableName$();
+						if( focus != null ) {
+							I$SchemaName$$TableName$EditObj editObj = (I$SchemaName$$TableName$EditObj)( focus.getEdit() );
+							if( editObj != null ) {
+								setPaneMode( YCFPane.PaneMode.Update );
+							}
+							else {
+								throw new YCFLibUsageException( getClass(),
+									S_ProcName,
+									Inz.x("ycflib.common.CannotSaveUneditedObject"),
+									Inz.s("ycflib.common.CannotSaveUneditedObject") );
+							}
+						}
+						// If an object was added, the focus will change to the persisted instance
+						focus = getJavaFXFocusAs$TableName$();
+						ycfFormManager.closeCurrentForm();
+						if( formClosedCallback != null ) {
+							formClosedCallback.formClosed( focus );
+						}
+					}
+					catch( Throwable t ) {
+						YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+					}
+				}
+			});
+			hboxMenu.getChildren().add( buttonClose );
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implJavaFXAddFormMenuButtonCancel">
+			buttonCancel = new YCFButton();
+			buttonCancel.setMinWidth( 200 );
+			buttonCancel.setText( "Cancel" );
+			buttonCancel.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
+				@Override public void handle( ActionEvent e ) {
+					final String S_ProcName = "handle";
+					try {
+						I$DefSchemaName$$TableName$Obj focus = getJavaFXFocusAs$TableName$();
+						if( focus != null ) {
+							I$SchemaName$$TableName$EditObj editObj = (I$SchemaName$$TableName$EditObj)focus.getEdit();
+							if( editObj != null ) {
+								if( editObj.getIsNew() ) {
+									editObj.endEdit();
+									editObj = null;
+									setJavaFXFocus( null );
+									setPaneMode( YCFPane.PaneMode.Unknown );
+								}
+								else {
+									editObj.endEdit();
+									editObj = null;
+									setPaneMode( YCFPane.PaneMode.View );
+								}
+							}
+						}
+						ycfFormManager.closeCurrentForm();
+						if( formClosedCallback != null ) {
+							formClosedCallback.formClosed( null );
+						}
+					}
+					catch( Throwable t ) {
+						YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+					}
+				}
+			});
+			hboxMenu.getChildren().add( buttonCancel );
+</GenRule>
+
+</RuleSet>

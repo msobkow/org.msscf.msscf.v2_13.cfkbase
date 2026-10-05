@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Yorkton Code Fractal YCFCore 3.1 Code Fractal Knowledge Base
+ *
+ *	Copyright 2016-2026 Mark Stephen Sobkow
+ *
+ *	This file is part of Yorkton Code Fractal YCFCore.
+ *
+ *	Yorkton Code Fractal YCFCore is available under dual commercial license from
+ *	Mark Stephen Sobkow, or under the terms of the GNU General Public License,
+ *	Version 3 or later.
+ *
+ *	Yorkton Code Fractal YCFCore is free software: you can redistribute it and/or
+ *	modify it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	Yorkton Code Fractal YCFCore is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with Yorkton Code Fractal YCFCore.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+	xmlns="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	ToolSet="java"
+	Name="src/schema/buff/SchemaBuffTableFactoryService.java"
+	Revision="2.13"
+	Descr="Java 25 Factory service implementation for $TableName$ buffers">
+
+	<GenFile GenDef="Table" Name="fileSchemaBuffTableFactoryServiceJava"
+		GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackageName$"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackageName$/$reference ManufacturingSchema lower SchemaName$-core/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.buff"
+		ExpansionClassName="$SchemaName$Buff$TableName$FactoryServiceJava"
+		ExpansionKeyName="$SchemaName$Buff$TableName$FactoryServiceJava"
+		ExpansionFileName="$SchemaName$Buff$TableName$FactoryService.java">
+// Description: Java 25 Factory service implementation for $TableName$ buffers
+
+$MssSourceLicense$
+
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.buff;
+
+import java.lang.reflect.*;
+import java.net.*;
+import java.rmi.*;
+import java.sql.*;
+import java.text.*;
+import java.time.*;
+import java.util.*;
+import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.text.StringEscapeUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import server.markhome.ycf.*;
+import server.markhome.ycf.dbutil.*;
+import server.markhome.ycf.YCFXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$importJavaProtPackageSchemaName$$importJavaProtPackageSchemaNameObj$$importJavaPackageSchemaName$$importJavaPackageSchemaNameObj$$tabletweak CafeTableImport$
+
+/*
+ *	Java 25 Factory service implementation for $TableName$ buffers.
+ */
+@Service("$lower DefDbSchemaName$Buff$TableName$FactoryService")
+public class $SchemaName$Buff$TableName$FactoryService
+	implements I$SchemaName$$TableName$Factory
+{$implBuffFactoryServiceConstruct$$implBuffFactoryServiceMethods$}
+</GenFile>
+
+	<GenRule GenDef="Table" Name="implBuffFactoryServiceMethods"
+		>$switch HasSuperClassRelation no implBuffNewPKey default empty$$switch HasSuperClassRelation no maybeImplBuffNewHPKey default empty$$iterate Index( each implBuffNewNonPrimaryIndexKey )$$implBuffNewRec$$implBuffNewHRec$</GenRule>
+
+	<GenRule GenDef="Table" Name="implBuffFactoryServiceConstruct">
+	public $poptop SchemaDef SchemaName$Buff$TableName$FactoryService() {
+	}
+</GenRule>
+
+	<GenRule GenDef="Index" Name="implBuffNewNonPrimaryIndexKey"
+		>$switch IsPrimaryIndex yes empty default implBuffNewIndexKey$</GenRule>
+
+	<GenRule GenDef="Index" Name="implBuffNewIndexKey">
+	@Override
+	public I$DefSchemaName$$TableName$By$Suffix$Key newBy$Suffix$Key() {
+		I$DefSchemaName$$TableName$By$Suffix$Key key =
+			new $DefSchemaName$Buff$TableName$By$Suffix$Key();
+		return( key );
+	}
+
+	public $DefSchemaName$Buff$TableName$By$Suffix$Key ensureBy$Suffix$Key(I$DefSchemaName$$TableName$By$Suffix$Key key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof $DefSchemaName$Buff$TableName$By$Suffix$Key) {
+			return( ($DefSchemaName$Buff$TableName$By$Suffix$Key)key );
+		}
+		else {
+			$DefSchemaName$Buff$TableName$By$Suffix$Key mapped = new $DefSchemaName$Buff$TableName$By$Suffix$Key();$iterate Columns( each implBuffCopyKeyAttrToMapped )$
+			return( mapped );
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Relation" Name="maybeEnsureBuffCopySuperiorRelation">$switch IsSuperiorPrimaryKeyRelation yes ensureBuffCopySuperiorRelation default empty$</GenRule>
+	<GenRule GenDef="Relation" Name="ensureBuffCopySuperiorRelation">
+			mapped.set$OptionalOrRequired$$RelationType$$Suffix$( $iterate Columns( first passKeyAttr each commaPassKeyAttr )$ );</GenRule>
+	<GenRule GenDef="RelationCol" Name="passKeyAttr">key.get$reference FromCol reference Column implColumnAttrOptionality$$reference FromCol reference Column Name$()</GenRule>
+	<GenRule GenDef="RelationCol" Name="commaPassKeyAttr">,
+				$passKeyAttr$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="maybeImplBuffCopyKeyAttrToMapped">$implBuffCopyKeyAttrToMapped$</GenRule>
+	<GenRule GenDef="TableCol" Name="maybeImplBuffCopyKeyAttrToMapped">$implBuffCopyKeyAttrToMapped$</GenRule>
+	<GenRule GenDef="Atom" Name="maybeImplBuffCopyKeyAttrToMapped">$implBuffCopyKeyAttrToMapped$</GenRule>
+
+	<GenRule GenDef="IndexCol" Name="implBuffCopyKeyAttrToMapped">
+			mapped.set$implColumnAttrOptionality$$Name$( key.get$implColumnAttrOptionality$$Name$() );</GenRule>
+	<GenRule GenDef="TableCol" Name="implBuffCopyKeyAttrToMapped">
+			mapped.set$implColumnAttrOptionality$$Name$( key.get$implColumnAttrOptionality$$Name$() );</GenRule>
+	<GenRule GenDef="Atom" Name="implBuffCopyKeyAttrToMapped">
+			mapped.set$implColumnAttrOptionality$$Name$( key.get$implColumnAttrOptionality$$Name$() );</GenRule>
+
+    <GenRule GenDef="Table" Name="implBuffNewPKey"
+            >$switch HasDefSchema no ifNotAtomicBuffImplNewPKey default empty$</GenRule>
+    <GenRule GenDef="Table" Name="ifNotAtomicBuffImplNewPKey">$switch IsPrimaryIndexKeyAtomic yes empty default reallyBuffImplNewPKey$</GenRule>
+    <GenRule GenDef="Table" Name="reallyBuffImplNewPKey">
+    @Override
+    public I$DefSchemaName$$reference BaseClass TableName$PKey newPKey() {
+        I$DefSchemaName$$reference BaseClass TableName$PKey pkey =
+            new $DefSchemaName$Buff$reference BaseClass TableName$PKey();
+        return( pkey );
+    }
+
+	public $DefSchemaName$Buff$reference BaseClass TableName$PKey ensurePKey(I$DefSchemaName$$reference BaseClass TableName$PKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof $DefSchemaName$Buff$reference BaseClass TableName$PKey) {
+			return( ($DefSchemaName$Buff$reference BaseClass TableName$PKey)key );
+		}
+		else {
+			$DefSchemaName$Buff$reference BaseClass TableName$PKey mapped = new $DefSchemaName$Buff$reference BaseClass TableName$PKey();$reference BaseClass reference PrimaryKeyIndex iterate Columns( each maybeImplBuffCopyKeyAttrToMapped )$
+			return( mapped );
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="maybeImplBuffNewHPKey">$implBuffNewHPKey$</GenRule>
+	
+	<GenRule GenDef="Table" Name="implBuffNewHPKey">
+	@Override
+	public I$DefSchemaName$$reference BaseClass TableName$HPKey newHPKey() {
+		I$DefSchemaName$$reference BaseClass TableName$HPKey hpkey =
+			new $DefSchemaName$Buff$reference BaseClass TableName$HPKey();
+		return( hpkey );
+	}
+
+	public $DefSchemaName$Buff$reference BaseClass TableName$HPKey ensureHPKey(I$DefSchemaName$$reference BaseClass TableName$HPKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if( key instanceof $DefSchemaName$Buff$reference BaseClass TableName$HPKey) {
+			return( ($DefSchemaName$Buff$reference BaseClass TableName$HPKey)key );
+		}
+		else {
+			$DefSchemaName$Buff$reference BaseClass TableName$HPKey mapped = new $DefSchemaName$Buff$reference BaseClass TableName$HPKey();
+			mapped.setAuditClusterId(key.getAuditClusterId());
+			mapped.setAuditActionId(key.getAuditActionId());
+			mapped.setAuditSessionId(key.getAuditSessionId());
+			mapped.setAuditStamp(key.getAuditStamp());$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implBuffCopyKeyAttrToMapped )$
+			return( mapped );
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="implBuffNewRec">
+	@Override
+	public I$DefSchemaName$$TableName$ newRec() {
+		I$DefSchemaName$$TableName$ rec =
+			new $DefSchemaName$Buff$TableName$();
+		return( rec );
+	}
+
+	public $DefSchemaName$Buff$TableName$ ensureRec(I$DefSchemaName$$TableName$ rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof $DefSchemaName$Buff$TableName$) {
+			return (($DefSchemaName$Buff$TableName$)rec);
+		}
+		else {	
+			switch (rec.getClassCode()) {
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Buff$TableName$ mapped = new $DefSchemaName$Buff$TableName$();
+					mapped.set(rec);
+					return(mapped); }$iterate TableSubClasses( each SchemaBuffTableFactoryServiceEnsureRec empty empty )$
+				default:
+					throw new YCFUnsupportedClassException(getClass(), "ensureRec",
+						"Unsupported class code " + rec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$",
+						"Unsupported class code " + rec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$");
+			}
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="SchemaBuffTableFactoryServiceEnsureRec">
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Buff$TableName$ mapped = new $DefSchemaName$Buff$TableName$();
+					mapped.set((I$DefSchemaName$$TableName$)rec);
+					return(mapped); }$iterate TableSubClasses( each SchemaBuffTableFactoryServiceEnsureRec empty empty )$</GenRule>
+
+	<GenRule GenDef="Table" Name="implBuffNewHRec">
+	@Override
+	public I$DefSchemaName$$TableName$H newHRec() {
+		I$DefSchemaName$$TableName$H hrec =
+			new $DefSchemaName$Buff$TableName$H();
+		return( hrec );
+	}
+
+	public $DefSchemaName$Buff$TableName$H ensureHRec(I$DefSchemaName$$TableName$H hrec) {
+		if( hrec == null ) {
+			return( null );
+		}
+		else if (hrec instanceof $DefSchemaName$Buff$TableName$H) {
+			return (($DefSchemaName$Buff$TableName$H)hrec);
+		}
+		else {	
+			switch (hrec.getClassCode()) {
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Buff$TableName$H mapped = new $DefSchemaName$Buff$TableName$H();
+					mapped.set(hrec);
+					return(mapped); }$iterate TableSubClasses( each SchemaBuffTableFactoryServiceEnsureHRec empty empty )$
+				default:
+					throw new YCFUnsupportedClassException(getClass(), "ensureHRec",
+						"Unsupported class code " + hrec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$",
+						"Unsupported class code " + hrec.getClassCode() + " is not a derivative of $DefSchemaName$$TableName$");
+			}
+		}
+	}
+</GenRule>
+
+	<GenRule GenDef="Table" Name="SchemaBuffTableFactoryServiceEnsureHRec">
+				case I$DefSchemaName$$TableName$.CLASS_CODE: {
+					$DefSchemaName$Buff$TableName$H mapped = new $DefSchemaName$Buff$TableName$H();
+					mapped.set((I$DefSchemaName$$TableName$H)hrec);
+					return(mapped); }$iterate TableSubClasses( each SchemaBuffTableFactoryServiceEnsureHRec empty empty )$</GenRule>
+
+</RuleSet>
