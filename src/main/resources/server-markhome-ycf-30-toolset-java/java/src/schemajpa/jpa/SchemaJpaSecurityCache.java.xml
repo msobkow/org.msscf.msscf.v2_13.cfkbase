@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Yorkton Code Fractal YCFCore 3.1 Code Fractal Knowledge Base
+ *
+ *	Copyright 2016-2026 Mark Stephen Sobkow
+ *
+ *	This file is part of Yorkton Code Fractal YCFCore.
+ *
+ *	Yorkton Code Fractal YCFCore is available under dual commercial license from
+ *	Mark Stephen Sobkow, or under the terms of the GNU General Public License,
+ *	Version 3 or later.
+ *
+ *	Yorkton Code Fractal YCFCore is free software: you can redistribute it and/or
+ *	modify it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	Yorkton Code Fractal YCFCore is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with Yorkton Code Fractal YCFCore.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+	xmlns="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	ToolSet="java"
+	Name="src/schema/SchemaJpaSecurityCache.java"
+	Revision="3.0"
+	Descr="Java SchemaName JpaSecurityCache Implementation">
+
+	<GenFile GenDef="SchemaDef" Name="fileSchemaJpaSecurityCacheJava"
+		GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackageName$"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackageName$/$reference ManufacturingSchema lower SchemaName$-jpa/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa"
+		ExpansionClassName="$SchemaName$JpaSecurityCacheJava"
+		ExpansionKeyName="$SchemaName$JpaSecurityCacheJava"
+		ExpansionFileName="$SchemaName$JpaSecurityCache.java"
+>// Description: Java 25 $SchemaName$ JPA Security Cache Implementation
+
+$MssSourceLicense$
+
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.jpa;
+
+import server.markhome.ycf.*;
+import server.markhome.ycf.dbutil.*;
+import $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$.*;
+
+/*
+ *	The $SchemaName$JpaSecurityCache is the implementation of a security cache specialized to access the JPA security
+ *	tables their Repositories rather than through the secured Service implementations. Otherwise the cache would end
+ *	up querying itself as to whether it is allowed to update itself.
+ *
+ *	In practice, there is only one instance of the JPA security cache running on the security server, and accessed
+ *	remotely by the application servers. Only during initial development of the code base will the applications talk
+ *	directly to this JPA implementation.
+ */
+public class $SchemaName$JpaSecurityCache extends $SchemaName$SecurityCache
+{
+	/**
+	 *	Construct a JPA security cache instance.
+	 *	There should only be one security cache instance in a service process, registered with the
+	 *	I$SchemaName$Schema static methods accordingly so that all the code in process can find it.
+	 */
+	public $SchemaName$JpaSecurityCache() {
+		super();
+	}
+
+	/***** Backend methods to be implemented by concrete subclass */
+
+	/**
+	 *	Map the userLogin string to a userId DbKey.
+	 *
+	 *	@param userLogin 
+	 *	@return null if the userLogin does not exist, is null, is empty, or is blank. Otherwise the DbKey for the user.
+	 */
+	@Override
+	public YCFDbKeyHash256 mapUserLoginToUserId(String userLogin) {
+		return((($SchemaName$JpaSchema)(I$SchemaName$Schema.getBacking$SchemaName$())).getSchemaService().mapUserLoginToUserId(userLogin));
+	}
+
+	/**
+	 *	Map the userId DbKey to the userLogin string.
+	 *
+	 *	@param userId
+	 *	@return null if the userId does not exist or is null. Otherwise the userLogin for the user.
+	 */
+	@Override
+	public String mapUserIdToUserLogin(YCFDbKeyHash256 userId) {
+		return((($SchemaName$JpaSchema)(I$SchemaName$Schema.getBacking$SchemaName$())).getSchemaService().mapUserIdToUserLogin(userId));
+	}
+
+	/**
+	 *	Probe the back-end SecRole*, SecTent* security tables, then the SecClus* security tables, and finally the SecSys* tables
+	 *	in order until a probe authorizes the users access to the permission role or group.  The probed value is then "acquired" by
+	 *	the cache and kept until it expires or is forgotten by the cache.
+	 *
+	 *	@param userId The user id for the SecUser object this query is for.
+	 *	@param clusterId The cluster id of the cluster that contains the tenant being queried.
+	 *	@param tenantId The tenant id being queried.
+	 *	@param permissionName The name of the permission role or group being queried.
+	 *
+	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
+	 */
+	@Override
+	public boolean probeMemberOfTenantGroup(YCFDbKeyHash256 userId, YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, String permissionName) {
+		return((($SchemaName$JpaSchema)(I$SchemaName$Schema.getBacking$SchemaName$())).getSchemaService().probeMemberOfTenantGroup(userId, clusterId, tenantId, permissionName));
+	}
+
+	/**
+	 *	Probe the back-end SecRole*, SecClus* security tables, and finally the SecSys* tables in order until a probe authorizes
+	 *	the users access to the permission role or group.  The probed value is then "acquired" by the cache and kept until it
+	 *	expires or is forgotten by the cache.
+	 *
+	 *	@param userId The user id for the SecUser object this query is for.
+	 *	@param clusterId The cluster id of the cluster that contains the tenant being queried.
+	 *	@param permissionName The name of the permission role or group being queried.
+	 *
+	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
+	 */
+	@Override
+	public boolean probeMemberOfClusterGroup(YCFDbKeyHash256 userId, YCFDbKeyHash256 clusterId, String permissionName) {
+		return((($SchemaName$JpaSchema)(I$SchemaName$Schema.getBacking$SchemaName$())).getSchemaService().probeMemberOfClusterGroup(userId, clusterId, permissionName));
+	}
+
+	/**
+	 *	Probe the back-end SecRole*, and SecSys* tables until a probe authorizes the users access to the permission role or group.
+	 *	The probed value is then "acquired" by the cache and kept until it expires or is forgotten by the cache.
+	 *
+	 *	@param userId The user id for the SecUser object this query is for.
+	 *	@param permissionName The name of the permission role or group being queried.
+	 *
+	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
+	 */
+	@Override
+	public boolean probeMemberOfSystemGroup(YCFDbKeyHash256 userId, String permissionName) {
+		return((($SchemaName$JpaSchema)(I$SchemaName$Schema.getBacking$SchemaName$())).getSchemaService().probeMemberOfSystemGroup(userId, permissionName));
+	}
+}
+</GenFile>
+
+</RuleSet>

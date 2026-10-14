@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *	Yorkton Code Fractal YCFCore 3.1 Code Fractal Knowledge Base
+ *
+ *	Copyright 2016-2026 Mark Stephen Sobkow
+ *
+ *	This file is part of Yorkton Code Fractal YCFCore.
+ *
+ *	Yorkton Code Fractal YCFCore is available under dual commercial license from
+ *	Mark Stephen Sobkow, or under the terms of the GNU General Public License,
+ *	Version 3 or later.
+ *
+ *	Yorkton Code Fractal YCFCore is free software: you can redistribute it and/or
+ *	modify it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	Yorkton Code Fractal YCFCore is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with Yorkton Code Fractal YCFCore.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+ *
+ *	If you wish to modify and use this code without publishing your changes,
+ *	or integrate it with proprietary code, please contact Mark Stephen Sobkow
+ *	for a commercial license at mark.sobkow@gmail.com
+ * -->
+<RuleSet
+	xmlns="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+	ToolSet="java"
+	Name="src/schemapub/SchemaPubAuthorization.java"
+	Revision="3.0"
+	Descr="Java SchemaName Public Authorization Implementation">
+
+	<GenFile GenDef="SchemaDef" Name="fileSchemaPubAuthorizationJava"
+		GenerateOnce="false"
+		ModuleName="$reference ManufacturingSchema lower JavaPackageName$"
+		SourceBundle="java"
+		BasePackageName="$reference ManufacturingSchema lower JavaPackageName$/$reference ManufacturingSchema lower SchemaName$-pub/src/main/java"
+		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub"
+		ExpansionClassName="$SchemaName$PubAuthorizationJava"
+		ExpansionKeyName="$SchemaName$PubAuthorizationJava"
+		ExpansionFileName="$SchemaName$PubAuthorization.java"
+>// Description: Java 25 $SchemaName$ Public Authorization Implementation
+
+$MssSourceLicense$
+
+package $reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$pub;
+
+import java.lang.reflect.*;
+import java.io.*;
+import java.net.*;
+import java.sql.*;
+import java.text.*;
+import java.util.*;
+import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.text.StringEscapeUtils;
+import server.markhome.ycf.*;
+
+/*
+ *	A $SchemaName$PubAuthorization is a public authorization ticket
+ *	for the system providing services.  Most modern authorizations
+ *	are based on OAuth2 tickets, but I haven't gotten there yet.
+ */
+public class $SchemaName$PubAuthorization implements I$SchemaName$PubAuthorization, Serializable
+{$SchemaPubAuthorizationImplBody$}
+</GenFile>
+
+	<GenRule GenDef="SchemaDef" Name="SchemaPubAuthorizationImplBody"
+		>$implPubAuthorizationAttrIYCFUuid6$$implPubAuthorizationAttrSecId$$implPubAuthorizationConstructor$$implPubAuthorizationIYCFUuid6Accessors$$implPubAuthorizationSecIdAccessors$</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="implPubAuthorizationAttrSecId">
+	protected YCFDbKeyHash256 secSessionId;
+	protected YCFDbKeyHash256 secUserId;
+	protected YCFDbKeyHash256 secClusterId;
+	protected YCFDbKeyHash256 secTenantId;
+</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="implPubAuthorizationAttrIYCFUuid6">
+	protected IYCFUuid6 authUuid6;
+	protected String authUuid6Str;
+</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="implPubAuthorizationConstructor">
+	public $DefSchemaName$PubAuthorization() {
+		authUuid6 = YCFUuid6.generateUuid6();
+		authUuid6Str = authUuid6.toString();
+		secSessionId = YCFDbKeyHash256.nullGet();
+		secUserId = YCFDbKeyHash256.nullGet();
+		secClusterId = YCFDbKeyHash256.nullGet();
+		secTenantId = YCFDbKeyHash256.nullGet();
+	}
+
+	public $DefSchemaName$PubAuthorization(IYCFUuid6 authUuid6, YCFDbKeyHash256 secSessionId, YCFDbKeyHash256 secUserId, YCFDbKeyHash256 secClusterId, YCFDbKeyHash256 secTenantId) {
+		this.authUuid6 = authUuid6;
+		this.authUuid6Str = this.authUuid6.toString();
+		this.secSessionId = secSessionId;
+		this.secUserId = secUserId;
+		this.secClusterId = secClusterId;
+		this.secTenantId = secTenantId;
+	}
+
+	public $DefSchemaName$PubAuthorization(I$DefSchemaName$PubAuthorization src) {
+		authUuid6 = new YCFUuid6(src.getAuthUuid6().getBytes());
+		authUuid6Str = authUuid6.toString();
+		secSessionId = new YCFDbKeyHash256(src.getSecSessionId());
+		secUserId = new YCFDbKeyHash256(src.getSecUserId());
+		secClusterId = new YCFDbKeyHash256(src.getSecClusterId());
+		secTenantId = new YCFDbKeyHash256(src.getSecTenantId());
+	}
+</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="implPubAuthorizationSecIdAccessors">
+	public YCFDbKeyHash256 getSecSessionId() {
+		return( secSessionId );
+	}
+
+	public YCFDbKeyHash256 getSecUserId() {
+		return( secUserId );
+	}
+
+	public YCFDbKeyHash256 getSecClusterId() {
+		return( secClusterId );
+	}
+
+	public YCFDbKeyHash256 getSecTenantId() {
+		return( secTenantId );
+	}
+</GenRule>
+
+	<GenRule GenDef="SchemaDef" Name="implPubAuthorizationIYCFUuid6Accessors">
+	public IYCFUuid6 getAuthUuid6() {
+		return( authUuid6 );
+	}
+
+	public String getAuthUuid6Str() {
+		return( authUuid6Str );
+	}
+</GenRule>
+
+</RuleSet>
