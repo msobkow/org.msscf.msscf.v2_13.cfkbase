@@ -53,13 +53,13 @@ import java.net.InetAddress;
 import java.util.*;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.codec.binaryCFCore64;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;$importsForApplicationContextAware$
 import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;
 import server.markhome.ycf.Inz;
-import server.markhome.ycf.YCFXmlUtil;
+import server.markhome.ycf.CFXmlUtil;
 $poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaJpaPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.jpa.$DefSchemaName$JpaHooksSchema;
 $poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameBuffDotFactoryService empty empty )$$importJavaPackageSchemaNameBuffDotFactoryService$
@@ -119,11 +119,11 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 		if ( $lower DefSchemaName$JpaHooksSchema == null ) {
 			ApplicationContext ctx = I$DefSchemaName$Schema.getApplicationContext();
 			if (ctx == null) {
-				throw new YCFNullArgumentException(getClass(), S_ProcName, 0, "I$DefSchemaName$Schema.getApplicationContext()");
+				throw new CFNullArgumentException(getClass(), S_ProcName, 0, "I$DefSchemaName$Schema.getApplicationContext()");
 			}
 			try {
 				if (!ctx.isTypeMatch(S_BeanName, $DefSchemaName$JpaHooksSchema.class)) {
-					throw new YCFInvalidStateException(getClass(), S_ProcName,
+					throw new CFInvalidStateException(getClass(), S_ProcName,
 						String.format(Inz.s("ycflib.common.ACBeanTypeFailure"), S_BeanName, S_BeanClassName),
 						String.format(Inz.x("ycflib.common.ACBeanTypeFailure"), S_BeanName, S_BeanClassName));
 				}
@@ -132,7 +132,7 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 					// Need to manually construct and register instance; the plumbing is presumed to happen automagically via createBean()
 					$lower DefSchemaName$JpaHooksSchema = ($DefSchemaName$JpaHooksSchema)(ctx.getAutowireCapableBeanFactory().createBean($DefSchemaName$JpaHooksSchema.class));
 					if ($lower DefSchemaName$JpaHooksSchema == null) {
-						throw new YCFInvalidStateException( getClass(), S_ProcName,
+						throw new CFInvalidStateException( getClass(), S_ProcName,
 							String.format(Inz.s("ycflib.common.ACAutowireBeanInstanceCreationFailure"),	S_BeanClassName),
 							 String.format(Inz.x("ycflib.common.ACAutowireBeanInstanceCreationFailure"), S_BeanClassName));
 					}
@@ -140,7 +140,7 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 			}
 			catch (BeansException ex) {
 				$lower DefSchemaName$JpaHooksSchema = null;
-				throw new YCFInvalidStateException(getClass(), S_ProcName, 
+				throw new CFInvalidStateException(getClass(), S_ProcName, 
 					String.format(Inz.s("ycflib.common.CaughtWhileTryingToResolve"), ex.getClass().getName(), S_BeanClassName, S_MemberName, ex.getMessage()),
 					String.format(Inz.x("ycflib.common.CaughtWhileTryingToResolve"), ex.getClass().getName(), S_BeanClassName, S_MemberName, ex.getLocalizedMessage()),
 					ex);
@@ -160,7 +160,7 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 		getSchemaService().bootstrapSchema(tableData);
 	}
 
-	public void bootstrapAllTablesSecurity(YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity(CFDbKeyHash256 clusterId, CFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 		getSchemaService().bootstrapAllTablesSecurity(clusterId, tenantId, tableData);
 	}
 </GenRule>
@@ -170,7 +170,7 @@ $implJpaSchemaMoreMethods$<!--$implJpaSchemaXmlEncodeString$-->$implSchemaBootst
 		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapSchema(tableData);
 	}
 
-	public void bootstrapAllTablesSecurity(YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity(CFDbKeyHash256 clusterId, CFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapAllTablesSecurity(clusterId, tenantId, tableData);
 	}
 </GenRule>
@@ -224,7 +224,7 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 			});
 		}
 		else {
-			throw new YCFNullArgumentException($SchemaName$JpaSchema.class, "wireRecConstructors", 0, "I$SchemaName$Schema.getClassMapByBackingClassCode(I$DefSchemaName$$TableName$.CLASS_CODE)[" + I$DefSchemaName$$TableName$.CLASS_CODE + "]");
+			throw new CFNullArgumentException($SchemaName$JpaSchema.class, "wireRecConstructors", 0, "I$SchemaName$Schema.getClassMapByBackingClassCode(I$DefSchemaName$$TableName$.CLASS_CODE)[" + I$DefSchemaName$$TableName$.CLASS_CODE + "]");
 		}
 	</GenRule>
 
@@ -237,60 +237,60 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 	<GenRule ScopeDef="SchemaDef" GenDef="Id16Gen" Name="implNextIdGen">
 	@Override
 	public short next$Name$() {
-		throw new YCFNotImplementedYetException( getClass(), "next$Name$" );
+		throw new CFNotImplementedYetException( getClass(), "next$Name$" );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="implNextIdGen">
 	@Override
 	public int next$Name$() {
-		throw new YCFNotImplementedYetException( getClass(), "next$Name$" );
+		throw new CFNotImplementedYetException( getClass(), "next$Name$" );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="implNextIdGen">
 	@Override
 	public long next$Name$() {
-		throw new YCFNotImplementedYetException( getClass(), "next$Name$" );
+		throw new CFNotImplementedYetException( getClass(), "next$Name$" );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash128Gen" Name="implNextIdGen">
 	@Override
-	public YCFDbKeyHash128 next$Name$() {
-		YCFDbKeyHash128 retval = new YCFDbKeyHash128(0);
+	public CFDbKeyHash128 next$Name$() {
+		CFDbKeyHash128 retval = new CFDbKeyHash128(0);
 		return( retval );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash160Gen" Name="implNextIdGen">
 	@Override
-	public YCFDbKeyHash160 next$Name$() {
-		YCFDbKeyHash160 retval = new YCFDbKeyHash160(0);
+	public CFDbKeyHash160 next$Name$() {
+		CFDbKeyHash160 retval = new CFDbKeyHash160(0);
 		return( retval );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash224Gen" Name="implNextIdGen">
 	@Override
-	public YCFDbKeyHash224 next$Name$() {
-		YCFDbKeyHash224 retval = new YCFDbKeyHash224(0);
+	public CFDbKeyHash224 next$Name$() {
+		CFDbKeyHash224 retval = new CFDbKeyHash224(0);
 		return( retval );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash256Gen" Name="implNextIdGen">
 	@Override
-	public YCFDbKeyHash256 next$Name$() {
-		YCFDbKeyHash256 retval = new YCFDbKeyHash256(0);
+	public CFDbKeyHash256 next$Name$() {
+		CFDbKeyHash256 retval = new CFDbKeyHash256(0);
 		return( retval );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash384Gen" Name="implNextIdGen">
 	@Override
-	public YCFDbKeyHash384 next$Name$() {
-		YCFDbKeyHash384 retval = new YCFDbKeyHash384(0);
+	public CFDbKeyHash384 next$Name$() {
+		CFDbKeyHash384 retval = new CFDbKeyHash384(0);
 		return( retval );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash512Gen" Name="implNextIdGen">
 	@Override
-	public YCFDbKeyHash512 next$Name$() {
-		YCFDbKeyHash512 retval = new YCFDbKeyHash512(0);
+	public CFDbKeyHash512 next$Name$() {
+		CFDbKeyHash512 retval = new CFDbKeyHash512(0);
 		return( retval );
 	}
 </GenRule>
@@ -303,8 +303,8 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Uuid6Gen" Name="implNextIdGen">
 	@Override
-	public IYCFUuid6 next$Name$() {
-		IYCFUuid6 retval = IYCFUuid6.generate();
+	public ICFUuid6 next$Name$() {
+		ICFUuid6 retval = ICFUuid6.generate();
 		return( retval );
 	}
 </GenRule>
@@ -331,7 +331,7 @@ $iterate SchemaRefs( each implJpaSchemaGetSchemaNameSchema empty empty )$$implJp
 	<GenRule GenDef="Object" Name="implJpaReturnLocalGetTablePerms">tablePerms</GenRule>
 	<GenRule GenDef="Object" Name="implJpaLocalSetTablePerms">
 		if(value == null) {
-			throw new YCFNullArgumentException($DefSchemaName$JpaSchema.class, "setTablePerms", 1, "value");
+			throw new CFNullArgumentException($DefSchemaName$JpaSchema.class, "setTablePerms", 1, "value");
 		}
 		tablePerms = value;</GenRule>
 
@@ -357,14 +357,14 @@ $poptop SchemaDef iterate SchemaTables( each initJpaSchemaTableTableMember )$
 	<GenRule GenDef="SchemaDef" Name="implJpaSchemaNewSchema">
 	@Override
 	public I$poptop SchemaDef SchemaName$Schema newSchema() {
-		throw new YCFMustOverrideException( getClass(), "newSchema" );
+		throw new CFMustOverrideException( getClass(), "newSchema" );
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implJpaSchemaNewSchema">
 	@Override
 	public I$poptop SchemaDef SchemaName$Schema newSchema() {
-		throw new YCFMustOverrideException( getClass(), "newSchema" );
+		throw new CFMustOverrideException( getClass(), "newSchema" );
 	}
 </GenRule>
 

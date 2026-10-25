@@ -50,7 +50,7 @@ import java.sql.*;
 import java.text.*;
 import java.time.*;
 import java.util.*;
-import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.codec.binaryCFCore64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$switch HasDefSchema no importJavaProtPackageSchemaName default empty$$switch HasDefSchema no importJavaPackageSchemaName default empty$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$switch HasDefSchema no importJavaProtPackageSchemaNameObj default empty$$JavaObjImport$
@@ -73,7 +73,7 @@ public interface I$SchemaName$$TableName$Obj$iterate TableRefs( first declIObjIn
 		I$reference SchemaDef SchemaName$$TableName$Obj</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeDeclIObjInheritSuperClass"
-		>$switch HasSuperClassRelation yes declIObjInheritSuperClass default MaybeExtendIYCFAnyObj$</GenRule>
+		>$switch HasSuperClassRelation yes declIObjInheritSuperClass default MaybeExtendICFAnyObj$</GenRule>
 
 	<GenRule GenDef="Table" Name="declIObjInheritSuperClass">
 	extends I$reference SuperClassRelation reference ToTable DefSchemaName$$reference SuperClassRelation reference ToTable TableName$Obj</GenRule>
@@ -137,13 +137,13 @@ public interface I$SchemaName$$TableName$Obj$iterate TableRefs( first declIObjIn
 	 */
 	LocalDateTime getUpdatedAt();</GenRule>
 
-	<GenRule GenDef="Object" Name="ImportYCFCore">
-import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
+	<GenRule GenDef="Object" Name="ImportCFCore">
+import server.markhome.ycf.v3_1.ycfcore.MssCF.*;</GenRule>
 
-	<GenRule GenDef="Table" Name="MaybeExtendIYCFAnyObj">$ExtendIYCFAnyObj$</GenRule>
+	<GenRule GenDef="Table" Name="MaybeExtendICFAnyObj">$ExtendICFAnyObj$</GenRule>
 
-	<GenRule GenDef="Table" Name="ExtendIYCFAnyObj">
-	extends IYCFAnyObj</GenRule>
+	<GenRule GenDef="Table" Name="ExtendICFAnyObj">
+	extends ICFAnyObj</GenRule>
 
 	<GenRule GenDef="Table" Name="declIObjBeginEdit">
 	/**
@@ -158,7 +158,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	/**
 	 *	End this edition of this $TableName$ instance.
 	 *
-	 *	@throws	YCFNotSupportedException if you try to end a read-only view.
+	 *	@throws	CFNotSupportedException if you try to end a read-only view.
 	 */
 	void endEdit();
 </GenRule>
@@ -270,15 +270,15 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 
 	<GenRule GenDef="TableCol" Name="declIObjColumnAccessors"
 		>$switch InSuperiorRelation yes declIObjColumnGetter default declIObjColumnGetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="declIObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIObjColumYCFCorePKeyGetter default declIObjColumYCFCoreDataGetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="declIObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIObjColumYCFCorePKeyGetter default declIObjColumYCFCoreDataGetter$$switch ColumnInPrimaryIndex yes declIObjColumYCFCorePKeySetter default declIObjColumYCFCoreDataSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="declIObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIObjColumCFCorePKeyGetter default declIObjColumCFCoreDataGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="declIObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIObjColumCFCorePKeyGetter default declIObjColumCFCoreDataGetter$$switch ColumnInPrimaryIndex yes declIObjColumCFCorePKeySetter default declIObjColumCFCoreDataSetter$</GenRule>
 
 	<GenRule GenDef="Atom" Name="declIObjColumnAccessors"
 		>$switch InSuperiorRelation yes declIObjColumnGetter default declIObjColumnGetter$</GenRule>
-	<GenRule GenDef="Atom" Name="declIObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIObjColumYCFCorePKeyGetter default declIObjColumYCFCoreDataGetter$</GenRule>
-	<GenRule GenDef="Atom" Name="declIObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIObjColumYCFCorePKeyGetter default declIObjColumYCFCoreDataGetter$$switch ColumnInPrimaryIndex yes declIObjColumYCFCorePKeySetter default declIObjColumYCFCoreDataSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="declIObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIObjColumCFCorePKeyGetter default declIObjColumCFCoreDataGetter$</GenRule>
+	<GenRule GenDef="Atom" Name="declIObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIObjColumCFCorePKeyGetter default declIObjColumCFCoreDataGetter$$switch ColumnInPrimaryIndex yes declIObjColumCFCorePKeySetter default declIObjColumCFCoreDataSetter$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIObjColumYCFCorePKeyGetter">
+	<GenRule GenDef="TableCol" Name="declIObjColumCFCorePKeyGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implIJavaAtomType$ attribute $Name$.
 	 *
@@ -287,7 +287,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	$implIJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIObjColumYCFCorePKeySetter">
+	<GenRule GenDef="TableCol" Name="declIObjColumCFCorePKeySetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implIJavaAtomType$ attribute $Name$.
 	 *
@@ -296,7 +296,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	void set$implColumnAttrOptionality$$Name$($implIJavaAtomType$ value);
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIObjColumYCFCorePKeyGetter">
+	<GenRule GenDef="Atom" Name="declIObjColumCFCorePKeyGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implIJavaAtomType$ attribute $Name$.
 	 *
@@ -305,7 +305,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	$implIJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIObjColumYCFCorePKeySetter">
+	<GenRule GenDef="Atom" Name="declIObjColumCFCorePKeySetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implIJavaAtomType$ attribute $Name$.
 	 *
@@ -314,7 +314,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	void set$implColumnAttrOptionality$$Name$($implIJavaAtomType$ value);
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIObjColumYCFCoreDataGetter">
+	<GenRule GenDef="TableCol" Name="declIObjColumCFCoreDataGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implIJavaAtomType$ attribute $Name$.
 	 *
@@ -323,7 +323,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	$implIJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIObjColumYCFCoreDataSetter">
+	<GenRule GenDef="TableCol" Name="declIObjColumCFCoreDataSetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implIJavaAtomType$ attribute $Name$.
 	 *
@@ -332,7 +332,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	void set$implColumnAttrOptionality$$Name$($implIJavaAtomType$ value);
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIObjColumYCFCoreDataGetter">
+	<GenRule GenDef="Atom" Name="declIObjColumCFCoreDataGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implIJavaAtomType$ attribute $Name$.
 	 *
@@ -341,7 +341,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	$implIJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIObjColumYCFCoreDataSetter">
+	<GenRule GenDef="Atom" Name="declIObjColumCFCoreDataSetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implIJavaAtomType$ attribute $Name$.
 	 *
@@ -437,7 +437,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	/**
 	 *	Update this instance.
 	 *
-	 *	@throws	YCFNotSupportedException if invoked on a read-only instance.
+	 *	@throws	CFNotSupportedException if invoked on a read-only instance.
 	 */
 	void update();
 </GenRule>
@@ -446,7 +446,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	/**
 	 *	Delete this instance.
 	 *
-	 *	@throws	YCFNotSupportedException if invoked on a read-only instance.
+	 *	@throws	CFNotSupportedException if invoked on a read-only instance.
 	 */
 	void deleteInstance();
 </GenRule>

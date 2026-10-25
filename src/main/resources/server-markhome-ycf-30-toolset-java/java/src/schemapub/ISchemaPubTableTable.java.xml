@@ -53,7 +53,7 @@ import java.sql.*;
 import java.text.*;
 import java.time.*;
 import java.util.*;
-import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.codec.binaryCFCore64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.ycf.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPubPackageSchemaNameObj$$tabletweak CafePubTableTableImport$
 
@@ -136,7 +136,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	/**
 	 *	Release any prepared statements allocated by this instance.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
 	public void pubreleasePreparedStatements();
 </GenRule>
@@ -200,14 +200,14 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubReadTableDerivedByIndexes">$switch IsPublic yes reallyDeclPubReadTableDerivedByIndexes default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyDeclPubReadTableDerivedByIndexes"
-		>$switch HasSuperClassRelation yes declPubReadTableDerivedByInhIndexes default declPubReadTableDerivedBYCFCoreIndexes$</GenRule>
+		>$switch HasSuperClassRelation yes declPubReadTableDerivedByInhIndexes default declPubReadTableDerivedBCFCoreIndexes$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubReadTableDerivedByInhIndexes">$switch IsPublic yes reallyDeclPubReadTableDerivedByInhIndexes default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyDeclPubReadTableDerivedByInhIndexes"
 		>$reference SuperClassRelation reference ToTable declPubReadTableDerivedByIndexes$$iterate Index( each declPubReadTableDerivedByNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPubReadTableDerivedBYCFCoreIndexes">$switch IsPublic yes reallyDeclPubReadTableDerivedBYCFCoreIndexes default empty$</GenRule>
-	<GenRule GenDef="Table" Name="reallyDeclPubReadTableDerivedBYCFCoreIndexes"
+	<GenRule GenDef="Table" Name="declPubReadTableDerivedBCFCoreIndexes">$switch IsPublic yes reallyDeclPubReadTableDerivedBCFCoreIndexes default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubReadTableDerivedBCFCoreIndexes"
 		>$iterate Index( each declPubReadTableDerivedByIndex )$</GenRule>
 
 	<GenRule GenDef="Index" Name="declPubReadTableDerivedByNonPrimaryIndex">$switch IsPublic yes reallyDeclPubReadTableDerivedByNonPrimaryIndex default empty$</GenRule>
@@ -222,9 +222,9 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 
 	<GenRule GenDef="Index" Name="declPubReadTableSuffix">$switch IsPublic yes reallyDeclPubReadTableSuffix default empty$</GenRule>
 	<GenRule GenDef="Index" Name="reallyDeclPubReadTableSuffix"
-		>$switch IsPrimaryIndex yes declPubReadTablYCFCorePrimarySuffix default Suffix$</GenRule>
-	<GenRule GenDef="Index" Name="declPubReadTablYCFCorePrimarySuffix">$switch IsPublic yes reallyDeclPubReadTablYCFCorePrimarySuffix default empty$</GenRule>
-	<GenRule GenDef="Index" Name="reallyDeclPubReadTablYCFCorePrimarySuffix"
+		>$switch IsPrimaryIndex yes declPubReadTablCFCorePrimarySuffix default Suffix$</GenRule>
+	<GenRule GenDef="Index" Name="declPubReadTablCFCorePrimarySuffix">$switch IsPublic yes reallyDeclPubReadTablCFCorePrimarySuffix default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallyDeclPubReadTablCFCorePrimarySuffix"
 		>$reference Table reference BaseClass reference PrimaryKeyIndex Suffix$</GenRule>
 
 	<GenRule GenDef="Index" Name="declPubReadTableDerivedByUniqueIndex">$switch IsPublic yes reallyDeclPubReadTableDerivedByUniqueIndex default empty$</GenRule>
@@ -264,7 +264,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	public I$DefSchemaName$Pub$TableName$ pubreadRec( I$SecSchemaName$PubAuthorization Authorization,
 		$IPubCompactedPrimaryIndexClass$ PKey );
@@ -282,7 +282,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	public I$DefSchemaName$Pub$TableName$ pubreadRec( I$SecSchemaName$PubAuthorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declPubCommaColumnArg )$ );
 </GenRule>
@@ -299,7 +299,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	public I$DefSchemaName$Pub$TableName$ publockRec( I$SecSchemaName$PubAuthorization Authorization,
 		$IPubCompactedPrimaryIndexClass$ PKey );
@@ -319,14 +319,14 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubReadTableRecByIndexes">$switch IsPublic yes reallyDeclPubReadTableRecByIndexes default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyDeclPubReadTableRecByIndexes"
-		>$switch HasSuperClassRelation yes declPubReadTableRecByInhIndexes default declPubReadTableRecBYCFCoreIndexes$</GenRule>
+		>$switch HasSuperClassRelation yes declPubReadTableRecByInhIndexes default declPubReadTableRecBCFCoreIndexes$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubReadTableRecByInhIndexes">$switch IsPublic yes reallyDeclPubReadTableRecByInhIndexes default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyDeclPubReadTableRecByInhIndexes"
 		>$reference SuperClassRelation reference ToTable declPubReadTableRecByIndexes$$iterate Index( each declPubReadTableRecByNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPubReadTableRecBYCFCoreIndexes">$switch IsPublic yes reallyDeclPubReadTableRecBYCFCoreIndexes default empty$</GenRule>
-	<GenRule GenDef="Table" Name="reallyDeclPubReadTableRecBYCFCoreIndexes"
+	<GenRule GenDef="Table" Name="declPubReadTableRecBCFCoreIndexes">$switch IsPublic yes reallyDeclPubReadTableRecBCFCoreIndexes default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubReadTableRecBCFCoreIndexes"
 		>$iterate Index( each declPubReadTableRecByIndex )$</GenRule>
 
 	<GenRule GenDef="Index" Name="declPubReadTableRecByNonPrimaryIndex">$switch IsPublic yes reallyDeclPubReadTableRecByNonPrimaryIndex default empty$</GenRule>
@@ -339,14 +339,14 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubPageTableRecByIndexes">$switch IsPublic yes reallyDeclPubPageTableRecByIndexes default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyDeclPubPageTableRecByIndexes"
-		>$switch HasSuperClassRelation yes declPubPageTableRecByInhIndexes default declPubPageTableRecBYCFCoreIndexes$</GenRule>
+		>$switch HasSuperClassRelation yes declPubPageTableRecByInhIndexes default declPubPageTableRecBCFCoreIndexes$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubPageTableRecByInhIndexes">$switch IsPublic yes reallyDeclPubPageTableRecByInhIndexes default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyDeclPubPageTableRecByInhIndexes"
 		>$reference SuperClassRelation reference ToTable declPubPageTableRecByIndexes$$iterate Index( each declPubPageTableRecByNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPubPageTableRecBYCFCoreIndexes">$switch IsPublic yes reallyDeclPubPageTableRecBYCFCoreIndexes default empty$</GenRule>
-	<GenRule GenDef="Table" Name="reallyDeclPubPageTableRecBYCFCoreIndexes"
+	<GenRule GenDef="Table" Name="declPubPageTableRecBCFCoreIndexes">$switch IsPublic yes reallyDeclPubPageTableRecBCFCoreIndexes default empty$</GenRule>
+	<GenRule GenDef="Table" Name="reallyDeclPubPageTableRecBCFCoreIndexes"
 		>$iterate Index( each declPubPageTableRecByNonPrimaryIndex )$</GenRule>
 
 	<GenRule GenDef="Index" Name="declPubPageTableRecByNonPrimaryIndex">$switch IsPublic yes reallyDeclPubPageTableRecByNonPrimaryIndex default empty$</GenRule>
@@ -371,7 +371,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	 *	@return The record instance for the specified key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	public I$DefSchemaName$Pub$poptop Table TableName$ pubreadRecBy$declPubReadTableSuffix$( I$SecSchemaName$PubAuthorization Authorization$iterate Columns( each declPubCommaColumnArg )$ );
 </GenRule>
@@ -385,7 +385,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	 *
 	 *	@return An array of derived record instances for the specified key, potentially with 0 elements in the set.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	public I$DefSchemaName$Pub$poptop Table TableName$[] pubreadRecBy$declPubReadTableSuffix$( I$SecSchemaName$PubAuthorization Authorization$iterate Columns( each declPubCommaColumnArg )$ );
 </GenRule>
@@ -411,7 +411,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	 *
 	 *	@return An array of derived record instances for the specified key, potentially with 0 elements in the set.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	public I$DefSchemaName$Pub$poptop Table TableName$[] pubpageRecBy$declReadTableSuffix$( I$SecSchemaName$PubAuthorization Authorization$iterate Columns( each declCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ );
 </GenRule>
@@ -474,7 +474,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance generating the id.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -484,7 +484,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	/**
 	 *	Get the next $Name$ id generator value.$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCommentKeyAttr empty empty )$
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -504,7 +504,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance generating the id.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -514,7 +514,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	/**
 	 *	Get the next $Name$ id generator value.$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCommentKeyAttr empty empty )$
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -527,7 +527,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance generating the id.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -537,7 +537,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	/**
 	 *	Get the next $Name$ id generator value.$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCommentKeyAttr empty empty )$
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -550,7 +550,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance generating the id.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -608,12 +608,12 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declPubDeleteTableByInheritedIndexes"
-		>$switch HasSuperClassRelation yes declPubDeleteTableByInhIndexes default declPubDeleteTableBYCFCoreIndexes$</GenRule>
+		>$switch HasSuperClassRelation yes declPubDeleteTableByInhIndexes default declPubDeleteTableBCFCoreIndexes$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPubDeleteTableByInhIndexes"
 		>$iterate Index( each declPubDeleteTableByNonPrimaryIndex empty empty )$$reference SuperClassRelation reference ToTable declPubDeleteTableByInheritedIndexes$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPubDeleteTableBYCFCoreIndexes"
+	<GenRule GenDef="Table" Name="declPubDeleteTableBCFCoreIndexes"
 		>$iterate Index( each declPubDeleteTableBySpecialIndex empty empty )$</GenRule>
 
 	<GenRule GenDef="Index" Name="declPubDeleteTableByNonPrimaryIndex"

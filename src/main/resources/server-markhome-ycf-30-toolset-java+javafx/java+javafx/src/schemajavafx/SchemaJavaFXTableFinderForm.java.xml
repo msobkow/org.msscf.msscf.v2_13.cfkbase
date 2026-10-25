@@ -45,25 +45,25 @@
  *	for $TableName$.
  */
 public class $SchemaName$JavaFX$TableName$FinderForm
-extends YCFBorderPane
+extends CFBorderPane
 implements I$DefSchemaName$JavaFX$TableName$PaneCommon,
-	IYCFForm
+	ICFForm
 {
 	public static String S_FormName = "Find $EffLabel$";
-	protected IYCFFormManager ycfFormManager = null;
+	protected ICFFormManager ycfFormManager = null;
 	protected I$SchemaName$JavaFXSchema javafxSchema = null;
 	protected boolean javafxIsInitializing = true;$switch HasContainer yes maybeDeclJavaFXTableFinderFormContainingTenantOrCluster default empty$
 	protected ScrollPane scrollMenu = null;
-	protected YCFHBox hboxMenu = null;$switch TableName Cluster empty default implJavaFXTableFinderFormDeclMenuAdd$$switch TableName Cluster empty default declAddButtons$$declSchemaJavaFXTableFinderFormCommonButtons$$switch InheritsPageData yes declJavaFXTableFinderFormMemberPageCallback default declJavaFXTableFinderFormList$
+	protected CFHBox hboxMenu = null;$switch TableName Cluster empty default implJavaFXTableFinderFormDeclMenuAdd$$switch TableName Cluster empty default declAddButtons$$declSchemaJavaFXTableFinderFormCommonButtons$$switch InheritsPageData yes declJavaFXTableFinderFormMemberPageCallback default declJavaFXTableFinderFormList$
 	protected ObservableList&lt;I$DefSchemaName$$TableName$Obj&gt; observableListOf$TableName$ = null;$switch HasSubClasses yes declJavaFXTableListPaneClassTableColumn default empty$$declJavaFXTableListPaneAttributeTableColumns$$declJavaFXTableListPaneMasterTableColumns$$declJavaFXTableListPaneParentTableColumns$$declJavaFXTableListPaneLookupTableColumns$
 	protected TableView&lt;I$DefSchemaName$$TableName$Obj&gt; dataTable = null;
-$switch InheritsPageData yes classJavaFXTableFinderFormListTabRefListPageData default empty$$implSchemaJavaFXTableFinderFormViewEditClosedCallback$$implSchemaJavaFXTableFinderFormDeleteCallback$$implConstructJavaFXTableFinderForm$$implGetSetYCFFormManager$$implSchemaJavaFXTableFinderFormForceCancelAndClose$$implGetJavaFXSchema$$implJavaFXFinderFormGetHBoxMenu$$implJavaFXFinderFormGetSetJavaFXFocus$$implJavaFXFinderFormAdjustFinderButtons$$classJavaFXTableFinderFormListTableByQualNameComparator$$switch InheritsPageData yes empty default implJavaFXTableFinderFormLoadData$$implJavaFXTableFinderFormRefreshMe$}
+$switch InheritsPageData yes classJavaFXTableFinderFormListTabRefListPageData default empty$$implSchemaJavaFXTableFinderFormViewEditClosedCallback$$implSchemaJavaFXTableFinderFormDeleteCallback$$implConstructJavaFXTableFinderForm$$implGetSetCFFormManager$$implSchemaJavaFXTableFinderFormForceCancelAndClose$$implGetJavaFXSchema$$implJavaFXFinderFormGetHBoxMenu$$implJavaFXFinderFormGetSetJavaFXFocus$$implJavaFXFinderFormAdjustFinderButtons$$classJavaFXTableFinderFormListTableByQualNameComparator$$switch InheritsPageData yes empty default implJavaFXTableFinderFormLoadData$$implJavaFXTableFinderFormRefreshMe$}
 </GenFile>
 
 	<GenRule GenDef="Table" Name="declJavaFXTableFinderFormMemberPageCallback">
 	protected I$SchemaName$JavaFX$TableName$PageCallback pageCallback = null;
-	protected YCFButton buttonRefresh = null;
-	protected YCFButton buttonMoreData = null;
+	protected CFButton buttonRefresh = null;
+	protected CFButton buttonMoreData = null;
 	protected boolean endOfData = true;</GenRule>
 
 	<GenRule GenDef="Table" Name="declJavaFXTableFinderFormList">
@@ -91,14 +91,14 @@ $switch InheritsPageData yes classJavaFXTableFinderFormListTabRefListPageData de
 	<GenRule GenDef="Table" Name="pageJavaFXTableFinderFormContainingTenant">
 			if( containingTenant == null ) {
 				I$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
-				YCFLibDbKeyHash256 containingTenantId = auth.getSecTenantId();
+				CFLibDbKeyHash256 containingTenantId = auth.getSecTenantId();
 				containingTenant = schemaObj.getTenantTableObj().readTenantByIdIdx( containingTenantId );
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="pageJavaFXTableFinderFormContainingCluster">
 			if( containingCluster == null ) {
 				I$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
-				YCFLibDbKeyHash256 containingClusterId = auth.getSecClusterId();
+				CFLibDbKeyHash256 containingClusterId = auth.getSecClusterId();
 				containingCluster = schemaObj.getClusterTableObj().readClusterByIdIdx( containingClusterId );
 			}</GenRule>
 
@@ -121,12 +121,12 @@ $switch InheritsPageData yes classJavaFXTableFinderFormListTabRefListPageData de
 					$implJavaFXTableFinderFormPassPriorArg$</GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaJavaFXTableFinderFormViewEditClosedCallback">
-	class ViewEditClosedCallback implements IYCFFormClosedCallback {
+	class ViewEditClosedCallback implements ICFFormClosedCallback {
 		public ViewEditClosedCallback() {
 		}
 
 		@Override
-		public void formClosed( IYCFLibAnyObj affectedObject ) {
+		public void formClosed( ICFLibAnyObj affectedObject ) {
 			if( affectedObject != null ) {
 				refreshMe();
 			}
@@ -135,7 +135,7 @@ $switch InheritsPageData yes classJavaFXTableFinderFormListTabRefListPageData de
 
 	protected ViewEditClosedCallback viewEditClosedCallback = null;
 
-	public IYCFFormClosedCallback getViewEditClosedCallback() {
+	public ICFFormClosedCallback getViewEditClosedCallback() {
 		if( viewEditClosedCallback == null ) {
 			viewEditClosedCallback = new ViewEditClosedCallback();
 		}
@@ -144,19 +144,19 @@ $switch InheritsPageData yes classJavaFXTableFinderFormListTabRefListPageData de
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implSchemaJavaFXTableFinderFormDeleteCallback">
-	class DeleteCallback implements IYCFDeleteCallback {
+	class DeleteCallback implements ICFDeleteCallback {
 		public DeleteCallback() {
 		}
 
 		@Override
-		public void deleted( IYCFLibAnyObj deletedObject ) {
+		public void deleted( ICFLibAnyObj deletedObject ) {
 			if( deletedObject != null ) {
 				refreshMe();
 			}
 		}
 
 		@Override
-		public void formClosed( IYCFLibAnyObj affectedObject ) {
+		public void formClosed( ICFLibAnyObj affectedObject ) {
 			if( affectedObject != null ) {
 				refreshMe();
 			}
@@ -165,7 +165,7 @@ $switch InheritsPageData yes classJavaFXTableFinderFormListTabRefListPageData de
 
 	protected DeleteCallback deleteCallback = null;
 
-	public IYCFDeleteCallback getDeleteCallback() {
+	public ICFDeleteCallback getDeleteCallback() {
 		if( deleteCallback == null ) {
 			deleteCallback = new DeleteCallback();
 		}
@@ -183,15 +183,15 @@ $switch InheritsPageData yes classJavaFXTableFinderFormListTabRefListPageData de
 	}
 </GenRule>
 
-	<GenRule GenDef="Object" Name="implGetSetYCFFormManager">
-	public IYCFFormManager getYCFFormManager() {
+	<GenRule GenDef="Object" Name="implGetSetCFFormManager">
+	public ICFFormManager getCFFormManager() {
 		return( ycfFormManager );
 	}
 
-	public void setYCFFormManager( IYCFFormManager value ) {
-		final String S_ProcName = "setYCFFormManager";
+	public void setCFFormManager( ICFFormManager value ) {
+		final String S_ProcName = "setCFFormManager";
 		if( value == null ) {
-			throw new YCFLibNullArgumentException( getClass(),
+			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
 				1,
 				"value" );
@@ -201,10 +201,10 @@ $switch InheritsPageData yes classJavaFXTableFinderFormListTabRefListPageData de
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declSchemaJavaFXTableFinderFormCommonButtons">
-	protected YCFButton buttonViewSelected = null;
-	protected YCFButton buttonEditSelected = null;
-	protected YCFButton buttonClose = null;
-	protected YCFButton buttonDeleteSelected = null;</GenRule>
+	protected CFButton buttonViewSelected = null;
+	protected CFButton buttonEditSelected = null;
+	protected CFButton buttonClose = null;
+	protected CFButton buttonDeleteSelected = null;</GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaJavaFXTableFinderFormPreamble"
 >// Description: Java 25 JavaFX Finder Form implementation for $TableName$.
@@ -237,23 +237,23 @@ import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;
 import server.markhome.ycf.Inz;
 import server.markhome.ycf.javafx.*;
-import org.apache.commons.codec.binaryYCFCore64;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$
+import org.apache.commons.codec.binaryCFCore64;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implJavaFXTableFinderFormDeclMenuAdd">
-	protected YCFVBox vboxMenuAdd = null;
+	protected CFVBox vboxMenuAdd = null;
 	protected ScrollPane scrollMenuAdd = null;
-	protected YCFButton buttonAdd = null;
-	protected YCFButton buttonCancelAdd = null;</GenRule>
+	protected CFButton buttonAdd = null;
+	protected CFButton buttonCancelAdd = null;</GenRule>
 
 	<GenRule GenDef="Table" Name="implJavaFXFinderFormGetSetJavaFXFocus">
-	public void setJavaFXFocus( IYCFLibAnyObj value ) {
+	public void setJavaFXFocus( ICFLibAnyObj value ) {
 		final String S_ProcName = "setJavaFXFocus";
 		if( ( value == null ) || ( value instanceof I$DefSchemaName$$TableName$Obj ) ) {
 			super.setJavaFXFocus( value );
 		}
 		else {
-			throw new YCFLibUnsupportedClassException( getClass(),
+			throw new CFLibUnsupportedClassException( getClass(),
 				S_ProcName,
 				"value",
 				value,
@@ -275,24 +275,24 @@ import org.apache.commons.codec.binaryYCFCore64;$poptop SchemaDef iterate Schema
 		>$switch IsInstantiable yes reallyDeclAddButton default empty$$iterate TableSubClasses( each declAddButtons empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="reallyDeclAddButton">
-	protected YCFButton buttonAdd$TableName$ = null;</GenRule>
+	protected CFButton buttonAdd$TableName$ = null;</GenRule>
 
 	<GenRule GenDef="Table" Name="commaNameSubClass"
 		>, I$SchemaName$$TableName$Obj$iterate TableSubClasses( each commaNameSubClass empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implConstructJavaFXTableFinderForm">
-	public $SchemaName$JavaFX$TableName$FinderForm( IYCFFormManager formManager, I$SchemaName$JavaFXSchema argSchema ) {
+	public $SchemaName$JavaFX$TableName$FinderForm( ICFFormManager formManager, I$SchemaName$JavaFXSchema argSchema ) {
 		super();
 		final String S_ProcName = "construct-schema-focus";
 		if( formManager == null ) {
-			throw new YCFLibNullArgumentException( getClass(),
+			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
 				1,
 				"formManager" );
 		}
 		ycfFormManager = formManager;
 		if( argSchema == null ) {
-			throw new YCFLibNullArgumentException( getClass(),
+			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
 				2,
 				"argSchema" );
@@ -317,10 +317,10 @@ import org.apache.commons.codec.binaryYCFCore64;$poptop SchemaDef iterate Schema
 	<GenRule GenDef="Table" Name="implJavaFXFinderFormConstructPageCallback">
 		pageCallback = new PageData$TableName$List();</GenRule>
 
-	<GenRule GenDef="Table" Name="implJavaFXFinderFormGetHBoxMenu">$implJavaFXTableListPaneCompareYCFButtonByText$
-	public YCFHBox getHBoxMenu() {
+	<GenRule GenDef="Table" Name="implJavaFXFinderFormGetHBoxMenu">$implJavaFXTableListPaneCompareCFButtonByText$
+	public CFHBox getHBoxMenu() {
 		if( hboxMenu == null ) {
-			hboxMenu = new YCFHBox( 10 );
+			hboxMenu = new CFHBox( 10 );
 $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefresh default empty$$switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonMoreData default empty$$implJavaFXFinderFormMenuBarAddAddItemOrMenu$$implJavaFXFinderFormMenuButtonViewSelected$$implJavaFXFinderFormMenuButtonEditSelected$$switch TableName Cluster empty default implJavaFXFinderFormGetHBoxMenuAddDeleteSelected$$implJavaFXFinderFormMenuButtonClose$
 		}
 		return( hboxMenu );
@@ -328,7 +328,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefresh">
-			buttonRefresh = new YCFButton();
+			buttonRefresh = new CFButton();
 			buttonRefresh.setMinWidth( 200 );
 			buttonRefresh.setText( "Refresh" );
 			buttonRefresh.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
@@ -338,7 +338,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 						refreshMe();
 					}
 					catch( Throwable t ) {
-						YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+						CFConsole.formException( S_FormName, ((CFButton)e.getSource()).getText(), t );
 					}
 				}
 			});
@@ -346,7 +346,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implJavaFXTableFinderFormGetPanelHBoxMenuButtonMoreData">
-			buttonMoreData = new YCFButton();
+			buttonMoreData = new CFButton();
 			buttonMoreData.setMinWidth( 200 );
 			buttonMoreData.setText( "MoreData" );
 			buttonMoreData.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
@@ -383,7 +383,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 						adjustFinderButtons();
 					}
 					catch( Throwable t ) {
-						YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+						CFConsole.formException( S_FormName, ((CFButton)e.getSource()).getText(), t );
 					}
 				}
 			});
@@ -391,7 +391,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implJavaFXFinderFormMenuButtonViewSelected">
-			buttonViewSelected = new YCFButton();
+			buttonViewSelected = new CFButton();
 			buttonViewSelected.setMinWidth( 200 );
 			buttonViewSelected.setText( "View Selected" );
 			buttonViewSelected.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
@@ -400,7 +400,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 					try {
 						I$SchemaName$SchemaObj schemaObj = (I$SchemaName$SchemaObj)javafxSchema.getSchema();
 						if( schemaObj == null ) {
-							throw new YCFLibNullArgumentException( getClass(),
+							throw new CFLibNullArgumentException( getClass(),
 								S_ProcName,
 								0,
 								"schemaObj" );
@@ -411,12 +411,12 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 							I$SecSchemaName$Schema.ClassMapEntry entry = I$DefSchemaName$Schema.getClassMapByRuntimeClassCode(classCode);
 							int backingClassCode = entry.getBackingClassCode();
 							if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-								YCFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( ycfFormManager, selectedInstance, getViewEditClosedCallback(), false );
-								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( YCFPane.PaneMode.View );
+								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( ycfFormManager, selectedInstance, getViewEditClosedCallback(), false );
+								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
 								ycfFormManager.pushForm( frame );
 							}$implViewSelectedActionActionPerformedWalkSubClasses$
 							else {
-								throw new YCFLibUnsupportedClassException( getClass(),
+								throw new CFLibUnsupportedClassException( getClass(),
 									S_ProcName,
 									"selectedInstance",
 									selectedInstance,
@@ -425,7 +425,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 						}
 					}
 					catch( Throwable t ) {
-						YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+						CFConsole.formException( S_FormName, ((CFButton)e.getSource()).getText(), t );
 					}
 				}
 			});
@@ -438,13 +438,13 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 	<GenRule GenDef="Table" Name="implViewSelectedActionActionPerformedWireSubClass">
 							else if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)selectedInstance;
-								YCFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( ycfFormManager, obj, getViewEditClosedCallback(), false );
-								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( YCFPane.PaneMode.View );
+								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( ycfFormManager, obj, getViewEditClosedCallback(), false );
+								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
 								ycfFormManager.pushForm( frame );
 							}$implViewSelectedActionActionPerformedWalkSubClasses$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJavaFXFinderFormMenuButtonEditSelected">
-			buttonEditSelected = new YCFButton();
+			buttonEditSelected = new CFButton();
 			buttonEditSelected.setMinWidth( 200 );
 			buttonEditSelected.setText( "Edit Selected" );
 			buttonEditSelected.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
@@ -453,7 +453,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 					try {
 						I$SchemaName$SchemaObj schemaObj = (I$SchemaName$SchemaObj)javafxSchema.getSchema();
 						if( schemaObj == null ) {
-							throw new YCFLibNullArgumentException( getClass(),
+							throw new CFLibNullArgumentException( getClass(),
 								S_ProcName,
 								0,
 								"schemaObj" );
@@ -464,12 +464,12 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 							I$SecSchemaName$Schema.ClassMapEntry entry = I$DefSchemaName$Schema.getClassMapByRuntimeClassCode(classCode);
 							int backingClassCode = entry.getBackingClassCode();
 							if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-								YCFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( ycfFormManager, selectedInstance, getViewEditClosedCallback(), false );
-								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( YCFPane.PaneMode.Edit );
+								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( ycfFormManager, selectedInstance, getViewEditClosedCallback(), false );
+								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.Edit );
 								ycfFormManager.pushForm( frame );
 							}$classEditSelectedActionActionPerformedWalkSubClasses$
 							else {
-								throw new YCFLibUnsupportedClassException( getClass(),
+								throw new CFLibUnsupportedClassException( getClass(),
 									S_ProcName,
 									"selectedInstance",
 									selectedInstance,
@@ -478,7 +478,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 						}
 					}
 					catch( Throwable t ) {
-						YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+						CFConsole.formException( S_FormName, ((CFButton)e.getSource()).getText(), t );
 					}
 				}
 			});
@@ -491,13 +491,13 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 	<GenRule GenDef="Table" Name="classEditSelectedActionActionPerformedWireSubClass">
 							else if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)selectedInstance;
-								YCFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( ycfFormManager, obj, getViewEditClosedCallback(), false );
-								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( YCFPane.PaneMode.Edit );
+								CFBorderPane frame = javafxSchema.get$TableName$Factory().newViewEditForm( ycfFormManager, obj, getViewEditClosedCallback(), false );
+								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.Edit );
 								ycfFormManager.pushForm( frame );
 							}$implViewSelectedActionActionPerformedWalkSubClasses$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJavaFXFinderFormMenuButtonClose">
-			buttonClose = new YCFButton();
+			buttonClose = new CFButton();
 			buttonClose.setMinWidth( 200 );
 			buttonClose.setText( "Close" );
 			buttonClose.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
@@ -507,7 +507,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 						ycfFormManager.closeCurrentForm();
 					}
 					catch( Throwable t ) {
-						YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+						CFConsole.formException( S_FormName, ((CFButton)e.getSource()).getText(), t );
 					}
 				}
 			});
@@ -517,7 +517,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 		>$switch HasSubClasses yes implJavaFXFinderFormMenuAdd default implMaybeJavaFXFinderFormItemAdd$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJavaFXFinderFormGetHBoxMenuAddDeleteSelected">
-			buttonDeleteSelected = new YCFButton();
+			buttonDeleteSelected = new CFButton();
 			buttonDeleteSelected.setMinWidth( 200 );
 			buttonDeleteSelected.setText( "Delete Selected" );
 			buttonDeleteSelected.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
@@ -526,7 +526,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 					try {
 						I$SchemaName$SchemaObj schemaObj = (I$SchemaName$SchemaObj)javafxSchema.getSchema();
 						if( schemaObj == null ) {
-							throw new YCFLibNullArgumentException( getClass(),
+							throw new CFLibNullArgumentException( getClass(),
 								S_ProcName,
 								0,
 								"schemaObj" );
@@ -537,12 +537,12 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 							I$SecSchemaName$Schema.ClassMapEntry entry = I$DefSchemaName$Schema.getClassMapByRuntimeClassCode(classCode);
 							int backingClassCode = entry.getBackingClassCode();
 							if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
-								YCFBorderPane frame = javafxSchema.get$TableName$Factory().newAskDeleteForm( ycfFormManager, selectedInstance, getDeleteCallback() );
-								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( YCFPane.PaneMode.View );
+								CFBorderPane frame = javafxSchema.get$TableName$Factory().newAskDeleteForm( ycfFormManager, selectedInstance, getDeleteCallback() );
+								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
 								ycfFormManager.pushForm( frame );
 							}$classDeleteSelectedActionActionPerformedWalkSubClasses$
 							else {
-								throw new YCFLibUnsupportedClassException( getClass(),
+								throw new CFLibUnsupportedClassException( getClass(),
 									S_ProcName,
 									"selectedInstance",
 									selectedInstance,
@@ -551,7 +551,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 						}
 					}
 					catch( Throwable t ) {
-						YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+						CFConsole.formException( S_FormName, ((CFButton)e.getSource()).getText(), t );
 					}
 				}
 			});
@@ -564,8 +564,8 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 	<GenRule GenDef="Table" Name="classDeleteSelectedActionActionPerformedWireSubClass">
 							else if( entry.getSchemaName().equals("$DefSchemaName$") &amp;&amp; backingClassCode == I$DefSchemaName$$TableName$.CLASS_CODE ) {
 								I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)selectedInstance;
-								YCFBorderPane frame = javafxSchema.get$TableName$Factory().newAskDeleteForm( ycfFormManager, obj, getDeleteCallback() );
-								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( YCFPane.PaneMode.View );
+								CFBorderPane frame = javafxSchema.get$TableName$Factory().newAskDeleteForm( ycfFormManager, obj, getDeleteCallback() );
+								((I$DefSchemaName$JavaFX$TableName$PaneCommon)frame).setPaneMode( CFPane.PaneMode.View );
 								ycfFormManager.pushForm( frame );
 							}$classDeleteSelectedActionActionPerformedWalkSubClasses$</GenRule>
 
@@ -573,23 +573,23 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 		>$switch TableName Cluster empty default implJavaFXFinderFormMenuReallyAdd$</GenRule>
 
 	<GenRule GenDef="Table" Name="implJavaFXFinderFormMenuReallyAdd">
-					LinkedList&lt;YCFButton&gt; list = new LinkedList&lt;YCFButton&gt;();
+					LinkedList&lt;CFButton&gt; list = new LinkedList&lt;CFButton&gt;();
 
-					vboxMenuAdd = new YCFVBox( 10 );$iterate TableSubClasses( each implJavaFXFinderFormAddActions empty empty )$
+					vboxMenuAdd = new CFVBox( 10 );$iterate TableSubClasses( each implJavaFXFinderFormAddActions empty empty )$
 
 					int len = list.size();
-					YCFButton arr[] = new YCFButton[len];
-					Iterator&lt;YCFButton&gt; iter = list.iterator();
+					CFButton arr[] = new CFButton[len];
+					Iterator&lt;CFButton&gt; iter = list.iterator();
 					int idx = 0;
 					while( iter.hasNext() ) {
 						arr[idx++] = iter.next();
 					}
-					Arrays.sort( arr, new CompareYCFButtonByText() );
+					Arrays.sort( arr, new CompareCFButtonByText() );
 					for( idx = 0; idx &lt; len; idx ++ ) {
 						vboxMenuAdd.getChildren().add( arr[idx] );
 					}
 
-					buttonCancelAdd = new YCFButton();
+					buttonCancelAdd = new CFButton();
 					buttonCancelAdd.setMinWidth( 200 );
 					buttonCancelAdd.setText( "Cancel Add" );
 					buttonCancelAdd.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
@@ -600,7 +600,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 								adjustFinderButtons();
 							}
 							catch( Throwable t ) {
-								YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+								CFConsole.formException( S_FormName, ((CFButton)e.getSource()).getText(), t );
 							}
 						}
 					});
@@ -614,7 +614,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 					scrollMenuAdd.setVbarPolicy( ScrollBarPolicy.AS_NEEDED );
 					scrollMenuAdd.setContent( vboxMenuAdd );
 
-			buttonAdd = new YCFButton();
+			buttonAdd = new CFButton();
 			buttonAdd.setMinWidth( 200 );
 			buttonAdd.setText( "Add..." );
 			buttonAdd.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
@@ -625,7 +625,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 						adjustFinderButtons();
 					}
 					catch( Throwable t ) {
-						YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+						CFConsole.formException( S_FormName, ((CFButton)e.getSource()).getText(), t );
 					}
 				}
 			});
@@ -640,7 +640,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 		>$switch IsInstantiable yes reallyImplJavaFXFinderFormItemAdd default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="reallyImplJavaFXFinderFormItemAdd">
-			buttonAdd$TableName$ = new YCFButton();
+			buttonAdd$TableName$ = new CFButton();
 			buttonAdd$TableName$.setMinWidth( 200 );
 			buttonAdd$TableName$.setText( "Add $EffLabel$..." );
 			buttonAdd$TableName$.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
@@ -649,7 +649,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 					try {
 						I$SchemaName$SchemaObj schemaObj = (I$SchemaName$SchemaObj)javafxSchema.getSchema();
 						if( schemaObj == null ) {
-							throw new YCFLibNullArgumentException( getClass(),
+							throw new CFLibNullArgumentException( getClass(),
 								S_ProcName,
 								0,
 								"schemaObj" );
@@ -657,18 +657,18 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 						I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)schemaObj.get$TableName$TableObj().newInstance();
 						I$SchemaName$$TableName$EditObj edit = (I$SchemaName$$TableName$EditObj)( obj.beginEdit() );
 						if( edit == null ) {
-							throw new YCFLibNullArgumentException( getClass(),
+							throw new CFLibNullArgumentException( getClass(),
 								S_ProcName,
 								0,
 								"edit" );
 						}$switch HasContainer yes implClassJavaFXTableFinderFormActionAddBindContainer default empty$
-						YCFBorderPane frame = javafxSchema.get$TableName$Factory().newAddForm( ycfFormManager, obj, getViewEditClosedCallback(), true );
+						CFBorderPane frame = javafxSchema.get$TableName$Factory().newAddForm( ycfFormManager, obj, getViewEditClosedCallback(), true );
 						I$DefSchemaName$JavaFX$TableName$PaneCommon jpanelCommon = (I$SchemaName$JavaFX$TableName$PaneCommon)frame;
-						jpanelCommon.setPaneMode( YCFPane.PaneMode.Add );
+						jpanelCommon.setPaneMode( CFPane.PaneMode.Add );
 						ycfFormManager.pushForm( frame );
 					}
 					catch( Throwable t ) {
-						YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+						CFConsole.formException( S_FormName, ((CFButton)e.getSource()).getText(), t );
 					}
 				}
 			});
@@ -696,7 +696,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 		>$switch IsInstantiable yes reallyImplJavaFXFinderFormAddAction default empty$$iterate TableSubClasses( each implJavaFXFinderFormAddActions empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="reallyImplJavaFXFinderFormAddAction">
-						buttonAdd$TableName$ = new YCFButton();
+						buttonAdd$TableName$ = new CFButton();
 						buttonAdd$TableName$.setMinWidth( 200 );
 						buttonAdd$TableName$.setText( "Add $TableName$..." );
 						buttonAdd$TableName$.setOnAction( new EventHandler&lt;ActionEvent&gt;() {
@@ -705,7 +705,7 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 								try {
 									I$SchemaName$SchemaObj schemaObj = (I$SchemaName$SchemaObj)javafxSchema.getSchema();
 									if( schemaObj == null ) {
-										throw new YCFLibNullArgumentException( getClass(),
+										throw new CFLibNullArgumentException( getClass(),
 											S_ProcName,
 											0,
 											"schemaObj" );
@@ -713,20 +713,20 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 									I$SchemaName$$TableName$Obj obj = (I$SchemaName$$TableName$Obj)schemaObj.get$TableName$TableObj().newInstance();
 									I$SchemaName$$TableName$EditObj edit = (I$SchemaName$$TableName$EditObj)( obj.beginEdit() );
 									if( edit == null ) {
-										throw new YCFLibNullArgumentException( getClass(),
+										throw new CFLibNullArgumentException( getClass(),
 											S_ProcName,
 											0,
 											"edit" );
 									}$switch HasContainer yes implClassJavaFXTableFinderFormActionAddBindContainer default empty$
-									YCFBorderPane frame = javafxSchema.get$TableName$Factory().newAddForm( ycfFormManager, obj, getViewEditClosedCallback(), true );
+									CFBorderPane frame = javafxSchema.get$TableName$Factory().newAddForm( ycfFormManager, obj, getViewEditClosedCallback(), true );
 									I$DefSchemaName$JavaFX$TableName$PaneCommon jpanelCommon = (I$SchemaName$JavaFX$TableName$PaneCommon)frame;
-									jpanelCommon.setPaneMode( YCFPane.PaneMode.Add );
+									jpanelCommon.setPaneMode( CFPane.PaneMode.Add );
 									ycfFormManager.pushForm( frame );
 									setLeft( null );
 									adjustFinderButtons();
 								}
 								catch( Throwable t ) {
-									YCFConsole.formException( S_FormName, ((YCFButton)e.getSource()).getText(), t );
+									CFConsole.formException( S_FormName, ((CFButton)e.getSource()).getText(), t );
 								}
 							}
 						});
@@ -859,14 +859,14 @@ $switch InheritsPageData yes implJavaFXTableFinderFormGetPanelHBoxMenuButtonRefr
 	<GenRule GenDef="Table" Name="loadJavaFXTableFinderFormContainingTenant">
 		if( ( containingTenant == null ) || forceReload ) {
 			I$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
-			YCFLibDbKeyHash256 containingTenantId = auth.getSecTenantId();
+			CFLibDbKeyHash256 containingTenantId = auth.getSecTenantId();
 			containingTenant = schemaObj.getTenantTableObj().readTenantByIdIdx( containingTenantId );
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="loadJavaFXTableFinderFormContainingCluster">
 		if( ( containingCluster == null ) || forceReload ) {
 			I$SecSchemaName$Authorization auth = schemaObj.getAuthorization();
-			YCFLibDbKeyHash256 containingClusterId = auth.getSecClusterId();
+			CFLibDbKeyHash256 containingClusterId = auth.getSecClusterId();
 			containingCluster = schemaObj.getClusterTableObj().readClusterByIdIdx( containingClusterId );
 		}</GenRule>
 

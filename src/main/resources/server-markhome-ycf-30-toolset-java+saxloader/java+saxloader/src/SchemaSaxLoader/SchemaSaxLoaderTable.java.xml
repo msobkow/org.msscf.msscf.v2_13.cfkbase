@@ -50,7 +50,7 @@ import java.sql.*;
 import java.text.*;
 import java.time.*;
 import java.util.*;
-import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.codec.binaryCFCore64;
 import org.xml.sax.*;
 import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;
@@ -62,7 +62,7 @@ import server.markhome.ycf.*;$poptop SchemaDef iterate SchemaRefs( each importJa
  *	for $TableName$.
  */
 public class $SchemaName$SaxLoader$TableName$
-	extends YCFLibXmlCoreElementHandler
+	extends CFLibXmlCoreElementHandler
 {$implConstructSaxLoaderTable$$implTableStartElement$$implTableEndElement$}
 </GenFile>
 
@@ -90,11 +90,11 @@ public class $SchemaName$SaxLoader$TableName$
 		try {
 			assert qName.equals( "$TableName$" );
 $implTableRetrieveSchemaObj$
-			YCFLibXmlCoreContext curContext = getParser().getCurContext();
+			CFLibXmlCoreContext curContext = getParser().getCurContext();
 
 			I$SecSchemaName$ClusterObj useCluster = saxLoader.getUseCluster();
 			if( useCluster == null ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"saxLoader.useCluster" );
@@ -124,11 +124,11 @@ $implTableRetrieveSchemaObj$
 		try {
 			assert qName.equals( "$TableName$" );
 $implTableRetrieveSchemaObj$
-			YCFLibXmlCoreContext curContext = getParser().getCurContext();
+			CFLibXmlCoreContext curContext = getParser().getCurContext();
 
 			I$SecSchemaName$TenantObj useTenant = saxLoader.getUseTenant();
 			if( useTenant == null ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"saxLoader.useTenant" );
@@ -178,16 +178,16 @@ $implTableRetrieveSchemaObj$$implTableConsEditBuff$$implTableExtractAttrs$$implT
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implTableDeclPKeyAttrs">
-		// Primary Key Attributes for Constant Enum support$switch HasSuperClassRelation yes implTableDeclPKeyInhAttrs default implTableDeclPKeYCFCoreAttrs$</GenRule>
+		// Primary Key Attributes for Constant Enum support$switch HasSuperClassRelation yes implTableDeclPKeyInhAttrs default implTableDeclPKeCFCoreAttrs$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableDeclPKeYCFCoreAttrs"
+	<GenRule GenDef="Table" Name="implTableDeclPKeCFCoreAttrs"
 		>$reference PrimaryKeyIndex iterate Columns( each implTableDeclNonIdPKeyAttr )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableDeclPKeyInhAttrs"
 		>$reference SuperclassRelation reference ToTable implTableDeclPKeyDecisionAttrs$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableDeclPKeyDecisionAttrs"
-		>$switch HasSuperClassRelation yes implTableDeclPKeyInhAttrs default implTableDeclPKeYCFCoreAttrs$</GenRule>
+		>$switch HasSuperClassRelation yes implTableDeclPKeyInhAttrs default implTableDeclPKeCFCoreAttrs$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implTableDeclNonIdPKeyAttr"
 		>$switch Name Id empty default implTableDeclEmitPKeyAttr$</GenRule>
@@ -222,9 +222,9 @@ $implTableRetrieveSchemaObj$$implTableConsEditBuff$$implTableExtractAttrs$$implT
 		I$SchemaName$$TableName$Obj origBuff = null;
 		I$SchemaName$$TableName$EditObj editBuff = null;$implTableDeclLookupRelationAttrs$$implTableDeclLateResolverReferences$
 		try {$implTableRetrieveSchemaObj$
-			YCFLibXmlCoreContext curContext = getParser().getCurContext();
+			CFLibXmlCoreContext curContext = getParser().getCurContext();
 			if( curContext == null ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"curContext" );
@@ -232,7 +232,7 @@ $implTableRetrieveSchemaObj$$implTableConsEditBuff$$implTableExtractAttrs$$implT
 
 			Object obj = curContext.getNamedValue( "Object" );
 			if( obj == null ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"obj" );
@@ -241,7 +241,7 @@ $implTableRetrieveSchemaObj$$implTableConsEditBuff$$implTableExtractAttrs$$implT
 				origBuff = (I$SchemaName$$TableName$Obj)obj;
 			}
 			else {
-				throw new YCFLibUnsupportedClassException( getClass(),
+				throw new CFLibUnsupportedClassException( getClass(),
 					S_ProcName,
 					"obj",
 					obj,
@@ -275,12 +275,12 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 		}</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableResolveLateReferences"
-		>$switch HasSuperClassRelation yes implTableResolveLateReferencesSuper default implTableResolveLateReferenceYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableResolveLateReferencesSuper default implTableResolveLateReferenceCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableResolveLateReferencesSuper"
 		>$reference SuperClassRelation reference ToTable implTableResolveLateReferences$$iterate Relation( each implTableMaybeResolveLateResolver empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableResolveLateReferenceYCFCore">$iterate Relation( each implTableMaybeResolveLateResolver empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implTableResolveLateReferenceCFCore">$iterate Relation( each implTableMaybeResolveLateResolver empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implTableMaybeResolveLateResolver"
 		>$switch RelationTypeTag
@@ -292,7 +292,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 			Components empty
 			Details empty
 			Children empty
-			default ErrorUnrecognizedRelationTypeTagInSaxLoaderTableYCFCore$</GenRule>
+			default ErrorUnrecognizedRelationTypeTagInSaxLoaderTableCFCore$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implTableResolveLateNamedSingletonRelation"
 		>$switch IsToIndexUnique yes implTableResolveNonChainedLateNamedRelation default empty$</GenRule>
@@ -315,7 +315,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 				ref$Suffix$ = (I$reference ToTable SchemaName$$reference ToTable TableName$Obj)( origBuff.getNamedObject( schemaObj.get$reference ToTable TableName$TableObj().getObjQualifyingClass(),
 					attr$Suffix$ ) );
 				if( ref$Suffix$ == null ) {
-					throw new YCFLibNullArgumentException( getClass(),
+					throw new CFLibNullArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"Resolve $Suffix$ reference qualified name \"" + attr$Suffix$ + "\" to table $reference ToTable TableName$" );
@@ -340,7 +340,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 			if( ( attr$Suffix$ != null ) &amp;&amp; ( attr$Suffix$.length() &gt; 0 ) ) {
 				ref$Suffix$ = (I$reference ToTable SchemaName$$reference ToTable TableName$Obj)( schemaObj.get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToTable reference InheritedLookupIndex Suffix$( $reference ToTable reference InheritedLookupIndex iterate Columns( each implTableResolveNamedRefPassArgComma last empty )$attr$Suffix$ ) );
 				if( ref$Suffix$ == null ) {
-					throw new YCFLibNullArgumentException( getClass(),
+					throw new CFLibNullArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"Resolve $Suffix$ reference named \"" + attr$Suffix$ + "\" to table $reference ToTable TableName$" );
@@ -361,12 +361,12 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implTableDeclLookupRelationAttrs"
-		>$switch HasSuperClassRelation yes implTableDeclLookupRelationAttrsSuper default implTableDeclLookupRelationAttrYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableDeclLookupRelationAttrsSuper default implTableDeclLookupRelationAttrCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableDeclLookupRelationAttrsSuper"
 		>$reference SuperClassRelation reference ToTable implTableDeclLookupRelationAttrs$$iterate Relation( each implTableMaybeDeclNamedRelationAttr empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableDeclLookupRelationAttrYCFCore">$iterate Relation( each implTableMaybeDeclNamedRelationAttr empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implTableDeclLookupRelationAttrCFCore">$iterate Relation( each implTableMaybeDeclNamedRelationAttr empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implTableMaybeDeclNamedRelationAttr"
 		>$switch RelationTypeTag
@@ -378,7 +378,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 			Components empty
 			Details empty
 			Children empty
-			default ErrorUnrecognizedRelationTypeTagInSaxLoaderTableYCFCore$</GenRule>
+			default ErrorUnrecognizedRelationTypeTagInSaxLoaderTableCFCore$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implTableDeclNamedSingletonRelationAttr"
 		>$switch IsToIndexUnique yes implTableDeclNonChainedNamedRelationAttr default empty$</GenRule>
@@ -410,12 +410,12 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 		>$switch IsLateResolver yes implTableDeclRef default empty$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableGetLookupRelationAttrs"
-		>$switch HasSuperClassRelation yes implTableGetLookupRelationAttrsSuper default implTableGetLookupRelationAttrYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableGetLookupRelationAttrsSuper default implTableGetLookupRelationAttrCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableGetLookupRelationAttrsSuper"
 		>$reference SuperClassRelation reference ToTable implTableGetLookupRelationAttrs$$iterate Relation( each implTableMaybeGetNamedRelationAttr empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableGetLookupRelationAttrYCFCore">$iterate Relation( each implTableMaybeGetNamedRelationAttr empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implTableGetLookupRelationAttrCFCore">$iterate Relation( each implTableMaybeGetNamedRelationAttr empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implTableMaybeGetNamedRelationAttr"
 		>$switch RelationTypeTag
@@ -427,7 +427,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 			Components empty
 			Children empty
 			Details empty
-			default ErrorUnrecognizedRelationTypeTagInSaxLoaderTableYCFCore$</GenRule>
+			default ErrorUnrecognizedRelationTypeTagInSaxLoaderTableCFCore$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implTableGetNamedSingletonRelationAttr"
 		>$switch IsToIndexUnique yes implTableGetNonChainedNamedRelationAttr default empty$</GenRule>
@@ -468,7 +468,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 	<GenRule GenDef="Table" Name="implTableRetrieveSchemaObj">
 			$SchemaName$SaxLoader saxLoader = ($SchemaName$SaxLoader)getParser();
 			if( saxLoader == null ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"getParser()" );
@@ -476,7 +476,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 
 			I$SchemaName$SchemaObj schemaObj = saxLoader.getSchemaObj();
 			if( schemaObj == null ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"getParser().getSchemaObj()" );
@@ -573,12 +573,12 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 			editBuff.get$poptop Table TableName$Buff().set$OptionalOrRequired$$Name$( nat$Name$ );</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableCopyAttrs"
-		>$switch HasSuperClassRelation yes implTableCopyAttrsSuper default implTableCopyAttrYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableCopyAttrsSuper default implTableCopyAttrCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableCopyAttrsSuper"
 		>$reference SuperClassRelation reference ToTable implTableCopyAttrs$$iterate Columns( each implTableCopyDataAttr )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableCopyAttrYCFCore">$iterate Columns( each implTableCopyDataAttr )$</GenRule>
+	<GenRule GenDef="Table" Name="implTableCopyAttrCFCore">$iterate Columns( each implTableCopyDataAttr )$</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableCopyDataAttr"
 		>$switch ColumnInPrimaryIndex yes empty default implTableCopyNonIdAttr$</GenRule>
@@ -593,13 +593,13 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 						edit$poptop Table TableName$.set$OptionalOrRequired$$Name$( editBuff.get$OptionalOrRequired$$Name$() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableApplyAttrs"
-		>$switch HasSuperClassRelation yes implTableApplyAttrsSuper default implTableApplyAttrYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableApplyAttrsSuper default implTableApplyAttrCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableApplyAttrsSuper"
 		>$reference SuperClassRelation reference ToTable implTableApplyAttrs$
 			// $TableName$ References$implTableApplyReferences$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableApplyAttrYCFCore">
+	<GenRule GenDef="Table" Name="implTableApplyAttrCFCore">
 				// Apply $TableName$ Attributes$iterate Columns( each implTableApplyNonIdPKeyAttr )$
 				// $TableName$ References$implTableApplyReferences$</GenRule>
 
@@ -671,14 +671,14 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implTableApplyInsertAttrs"
-		>$switch HasSuperClassRelation yes implTableApplyInsertAttrsSuper default implTableApplyInsertAttrYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableApplyInsertAttrsSuper default implTableApplyInsertAttrCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableApplyInsertAttrsSuper"
 		>$reference SuperClassRelation reference ToTable implTableApplyInsertAttrs$
 			// Apply $TableName$ Attributes$iterate Columns( each implTableApplyDataInsertAttr )$
 			// Apply $TableName$ References$implTableApplyInsertReferences$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableApplyInsertAttrYCFCore">
+	<GenRule GenDef="Table" Name="implTableApplyInsertAttrCFCore">
 			// Apply $TableName$ Attributes$iterate Columns( each implTableApplyDataInsertAttr )$
 			// Apply $TableName$ References$implTableApplyInsertReferences$</GenRule>
 
@@ -741,7 +741,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 			DbKeyHash512Def implTableApplyNatVar
 			Uuid6Gen implTableApplyNatVar
 			Uuid6Def implTableApplyNatVar
-			default ErrorUnrecognizeYCFCoreModelAtomClass$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableApplyNatVar"
 		>nat$Name$</GenRule>
@@ -769,14 +769,14 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 		edit$poptop Table Name$.set$OptionalOrRequired$$RelationTypeTag$$Suffix$( ref$Suffix$ );</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableDeclAttrs"
-		>$switch HasSuperClassRelation yes implTableDeclAttrsSuper default implTableDeclAttrYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableDeclAttrsSuper default implTableDeclAttrCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableDeclAttrsSuper"
 		>$reference SuperClassRelation reference ToTable implTableDeclAttrs$
 		// $TableName$ Attributes$iterate Columns( each implTableDeclDataAttr )$$iterate Relation( each implTableMaybeDeclRelationAttr empty empty )$
 		// $TableName$ References$implTableDeclReferences$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableDeclAttrYCFCore">
+	<GenRule GenDef="Table" Name="implTableDeclAttrCFCore">
 		// $TableName$ Attributes$iterate Columns( each implTableDeclDataAttr )$$iterate Relation( each implTableMaybeDeclRelationAttr empty empty )$
 		// $TableName$ References$implTableDeclReferences$</GenRule>
 
@@ -824,7 +824,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 				attrLocalName = attrs.getLocalName( idxAttr );
 				if( attrLocalName.equals( "Id" ) ) {
 					if( attrId != null ) {
-						throw new YCFLibUniqueIndexViolationException( getClass(),
+						throw new CFLibUniqueIndexViolationException( getClass(),
 							S_ProcName,
 							S_LocalName,
 							attrLocalName );
@@ -835,7 +835,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 					// ignored
 				}
 				else {
-					throw new YCFLibUnrecognizedAttributeException( getClass(),
+					throw new CFLibUnrecognizedAttributeException( getClass(),
 						S_ProcName,
 						getParser().getLocationInfo(),
 						attrLocalName );
@@ -844,9 +844,9 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implTableParsePKeyAttrs"
-		>$switch HasSuperClassRelation yes implTableParsePKeyInhAttrs default implTableParsePKeYCFCoreAttrs$</GenRule>
+		>$switch HasSuperClassRelation yes implTableParsePKeyInhAttrs default implTableParsePKeCFCoreAttrs$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableParsePKeYCFCoreAttrs"
+	<GenRule GenDef="Table" Name="implTableParsePKeCFCoreAttrs"
 		>$reference PrimaryKeyIndex iterate Columns( each implTableParseNonIdPKeyAttr )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableParsePKeyInhAttrs"
@@ -858,7 +858,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 	<GenRule GenDef="IndexCol" Name="implTableParseEmitPKeyAttr">
 				else if( attrLocalName.equals( "$Name$" ) ) {
 					if( attr$Name$ != null ) {
-						throw new YCFLibUniqueIndexViolationException( getClass(),
+						throw new CFLibUniqueIndexViolationException( getClass(),
 							S_ProcName,
 							S_LocalName,
 							attrLocalName );
@@ -867,12 +867,12 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 				}</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableParseAttrs"
-		>$switch HasSuperClassRelation yes implTableParseAttrsSuper default implTableParseAttrYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableParseAttrsSuper default implTableParseAttrCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableParseAttrsSuper"
 		>$reference SuperClassRelation reference ToTable implTableParseAttrs$$iterate Columns( each implTableParseDataAttr )$$iterate Relation( each implTableMaybeParseRelationAttr empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableParseAttrYCFCore">$iterate Columns( each implTableParseDataAttr )$$iterate Relation( each implTableMaybeParseRelationAttr empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implTableParseAttrCFCore">$iterate Columns( each implTableParseDataAttr )$$iterate Relation( each implTableMaybeParseRelationAttr empty empty )$</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableParseDataAttr"
 		>$switch ColumnInPrimaryIndex yes empty default implTableParseNonIdAttr$</GenRule>
@@ -889,7 +889,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 	<GenRule GenDef="Value" Name="implTableParseAnAttr">
 				else if( attrLocalName.equals( "$Name$" ) ) {
 					if( attr$Name$ != null ) {
-						throw new YCFLibUniqueIndexViolationException( getClass(),
+						throw new CFLibUniqueIndexViolationException( getClass(),
 							S_ProcName,
 							S_LocalName,
 							attrLocalName );
@@ -916,7 +916,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 	<GenRule GenDef="Relation" Name="implTableParseRelationAttr">
 				else if( attrLocalName.equals( "$Suffix$" ) ) {
 					if( attr$Suffix$ != null ) {
-						throw new YCFLibUniqueIndexViolationException( getClass(),
+						throw new CFLibUniqueIndexViolationException( getClass(),
 							S_ProcName,
 							S_LocalName,
 							attrLocalName );
@@ -929,9 +929,9 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implTableCheckReqPKeyAttrs"
-		>$switch HasSuperClassRelation yes implTableCheckReqPKeyInhAttrs default implTableCheckReqPKeYCFCoreAttrs$</GenRule>
+		>$switch HasSuperClassRelation yes implTableCheckReqPKeyInhAttrs default implTableCheckReqPKeCFCoreAttrs$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableCheckReqPKeYCFCoreAttrs"
+	<GenRule GenDef="Table" Name="implTableCheckReqPKeCFCoreAttrs"
 		>$reference PrimaryKeyIndex iterate Columns( each implTableCheckReqEmitPKeyAttr )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableCheckReqPKeyInhAttrs"
@@ -951,7 +951,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 
 	<GenRule GenDef="Value" Name="implHandlerReallyCheckReqStringAttr">
 			if( attr$Name$ == null ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$" );
@@ -959,7 +959,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 
 	<GenRule GenDef="Value" Name="implHandlerReallyCheckReqValueAttr">
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$" );
@@ -969,12 +969,12 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 		>$reference Column implHandlerReallyCheckReqAttr$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableCheckReqAttrs"
-		>$switch HasSuperClassRelation yes implTableCheckReqAttrsSuper default implTableCheckReqAttrYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableCheckReqAttrsSuper default implTableCheckReqAttrCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableCheckReqAttrsSuper"
 		>$reference SuperClassRelation reference ToTable implTableCheckReqAttrs$$iterate Columns( each implTableCheckReqDataAttr )$$iterate Relation( each implTableMaybeCheckReqRelationAttr empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableCheckReqAttrYCFCore">$iterate Columns( each implTableCheckReqNonIdPKeyAttr )$$iterate Relation( each implTableMaybeCheckReqRelationAttr empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implTableCheckReqAttrCFCore">$iterate Columns( each implTableCheckReqNonIdPKeyAttr )$$iterate Relation( each implTableMaybeCheckReqRelationAttr empty empty )$</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableCheckReqDataAttr"
 		>$switch ColumnInPrimaryIndex yes empty default implTableCheckReqNonIdAttr$</GenRule>
@@ -1015,7 +1015,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 
 	<GenRule GenDef="Relation" Name="implTableReallyCheckReqRelationAttr">
 			if( ( attr$Suffix$ == null ) || ( attr$Suffix$.length() &lt;= 0 ) ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Suffix$" );
@@ -1023,17 +1023,17 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 
 	<GenRule GenDef="Table" Name="implTablePutNamedAttributes">
 			// Save named attributes to context
-			YCFLibXmlCoreContext curContext = getParser().getCurContext();
+			CFLibXmlCoreContext curContext = getParser().getCurContext();
 			curContext.putNamedValue( "Id", attrId );$implTablePutNamedAttrs$
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implTablePutNamedAttrs"
-		>$switch HasSuperClassRelation yes implTablePutNamedAttrsSuper default implTablePutNamedAttrYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTablePutNamedAttrsSuper default implTablePutNamedAttrCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTablePutNamedAttrsSuper"
 		>$reference SuperClassRelation reference ToTable implTablePutNamedAttrs$$iterate Columns( each implTablePutNamedDataAttr )$$iterate Relation( each implTableMaybePutNamedRelationAttr empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTablePutNamedAttrYCFCore">$iterate Columns( each implTablePutNamedDataAttr )$$iterate Relation( each implTableMaybePutNamedRelationAttr empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implTablePutNamedAttrCFCore">$iterate Columns( each implTablePutNamedDataAttr )$$iterate Relation( each implTableMaybePutNamedRelationAttr empty empty )$</GenRule>
 
 	<GenRule GenDef="Value" Name="implTablePutNamedDataAttr"
 		>$switch ColumnInPrimaryIndex yes empty default implTablePutNamedNonIdAttr$</GenRule>
@@ -1072,7 +1072,7 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 	<GenRule GenDef="Table" Name="implTableGetScopeObj">
 			// Get the scope/container object
 
-			YCFLibXmlCoreContext parentContext = curContext.getPrevContext();
+			CFLibXmlCoreContext parentContext = curContext.getPrevContext();
 			Object scopeObj;
 			if( parentContext != null ) {
 				scopeObj = parentContext.getNamedValue( "Object" );
@@ -1088,12 +1088,12 @@ $implTableResolveLateReferences$$JavaSaxLoaderEndElement$
 $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableConvertNatId$$implTableConvertAttrs$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableConvertPKeyAttrs"
-		>$switch HasSuperClassRelation yes implTableConvertInhPKeyAttrs default implTableConverYCFCorePKeyAttrs$</GenRule>
+		>$switch HasSuperClassRelation yes implTableConvertInhPKeyAttrs default implTableConverCFCorePKeyAttrs$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableConvertInhPKeyAttrs"
 		>$reference SuperclassRelation reference ToTable implTableConvertPKeyAttrs$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableConverYCFCorePKeyAttrs"
+	<GenRule GenDef="Table" Name="implTableConverCFCorePKeyAttrs"
 		>$reference PrimaryKeyIndex iterate Columns( each implTableConvertColPKeyAttrs )$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="implTableConvertColPKeyAttrs"
@@ -1143,7 +1143,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			DbKeyHash512Def implTableConvertColDbKeyHash512Value
 			Uuid6Gen implTableConvertColUuid6Value
 			Uuid6Def implTableConvertColUuid6Value
-			default ErrorUnrecognizeYCFCoreModelAtomClass$
+			default ErrorUnrecognizeCFCoreModelAtomClass$
 			editBuff.getPKey().set$OptionalOrRequired$$Name$( nat$Name$ );
 			editBuff.get$poptop Table TableName$Buff().set$OptionalOrRequired$$Name$( nat$Name$ );
 </GenRule>
@@ -1162,7 +1162,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				nat$Name$ = false;
 			}
 			else {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$" );
@@ -1179,7 +1179,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				nat$Name$ = Boolean.valueOf( false );
 			}
 			else {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$" );
@@ -1240,7 +1240,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			nat$Name$ = Long.parseLong( attr$Name$ );</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertColUInt64Value">
-			nat$Name$ = YCFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", 19, 0, attr$Name$ );</GenRule>
+			nat$Name$ = CFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", 19, 0, attr$Name$ );</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertColFloatValue"
 		>$switch IsNullable yes implTableConvertColOptFloatValue default implTableConvertColReqFloatValue$</GenRule>
@@ -1261,7 +1261,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			nat$Name$ = Double.parseDouble( attr$Name$ );</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertColNumberValue">
-			nat$Name$ = YCFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", $Digits$, $Precis$, attr$Name$ );</GenRule>
+			nat$Name$ = CFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", $Digits$, $Precis$, attr$Name$ );</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertColStringValue">
 			nat$Name$ = attr$Name$;</GenRule>
@@ -1280,10 +1280,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColDateValue">
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseDate( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseDate( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1292,10 +1292,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColTimeValue">
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseTime( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseTime( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1304,10 +1304,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColTimestampValue">
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseTimestamp( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseTimestamp( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1316,10 +1316,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColTZDateValue">
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseTZDate( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseTZDate( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1328,10 +1328,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColTZTimeValue">
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseTZTime( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseTZTime( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1340,10 +1340,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColTZTimestampValue">
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseTZTimestamp( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseTZTimestamp( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1355,10 +1355,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash128Value">
 			try {
-				nat$Name$ = YCFLibDbKeyHash128.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash128.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1367,10 +1367,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash160Value">
 			try {
-				nat$Name$ = YCFLibDbKeyHash160.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash160.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1379,10 +1379,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash224Value">
 			try {
-				nat$Name$ = YCFLibDbKeyHash224.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash224.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1391,10 +1391,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash256Value">
 			try {
-				nat$Name$ = YCFLibDbKeyHash256.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash256.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1404,10 +1404,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash384Value">
 			try {
-				nat$Name$ = YCFLibDbKeyHash384.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash384.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1416,10 +1416,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColDbKeyHash512Value">
 			try {
-				nat$Name$ = YCFLibDbKeyHash512.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash512.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1428,10 +1428,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 
 	<GenRule GenDef="Value" Name="implTableConvertColUuid6Value">
 			try {
-				nat$Name$ = YCFLibUuid6.fromString( attr$Name$ );
+				nat$Name$ = CFLibUuid6.fromString( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1448,12 +1448,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			}</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableConvertAttrs"
-		>$switch HasSuperClassRelation yes implTableConvertAttrsSuper default implTableConvertAttrYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableConvertAttrsSuper default implTableConvertAttrCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableConvertAttrsSuper"
 		>$reference SuperClassRelation reference ToTable implTableConvertAttrs$$iterate Columns( each implTableConvertDataAttr )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableConvertAttrYCFCore">$iterate Columns( each implTableConvertDataAttr )$</GenRule>
+	<GenRule GenDef="Table" Name="implTableConvertAttrCFCore">$iterate Columns( each implTableConvertDataAttr )$</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertDataAttr"
 		>$switch ColumnInPrimaryIndex yes empty default implTableConvertNonIdAttr$</GenRule>
@@ -1515,7 +1515,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			DbKeyHash512Def implTableConvertReqDbKeyHash512
 			Uuid6Gen implTableConvertReqUuid6
 			Uuid6Def implTableConvertReqUuid6
-			default ErrorUnrecognizeYCFCoreModelAtomClass$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptAttr"
 		>$switch BaseModelAtomClass
@@ -1561,10 +1561,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			DbKeyHash512Def implTableConvertOptDbKeyHash512
 			Uuid6Gen implTableConvertOptUuid6
 			Uuid6Def implTableConvertOptUuid6
-			default ErrorUnrecognizeYCFCoreModelAtomClass$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqBlob">
-			byte[] nat$Name$ = Base64.decodYCFCore64( attr$Name$.getBytes() );
+			byte[] nat$Name$ = Base64.decodCFCore64( attr$Name$.getBytes() );
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqBool">
@@ -1576,10 +1576,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				nat$Name$ = false;
 			}
 			else {
-				throw new YCFLibUsageException( getClass(),
+				throw new CFLibUsageException( getClass(),
 					S_ProcName,
-					String.format(Inz.x("ycflib.xml.YCFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$),
-					String.format(Inz.s("ycflib.xml.YCFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$));
+					String.format(Inz.x("ycflib.xml.CFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$),
+					String.format(Inz.s("ycflib.xml.CFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$));
 			}
 </GenRule>
 
@@ -1608,7 +1608,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqUInt64">
-			BigDecimal nat$Name$ = YCFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", 19, 0, attr$Name$ );
+			BigDecimal nat$Name$ = CFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", 19, 0, attr$Name$ );
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqFloat">
@@ -1620,16 +1620,16 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqNumber">
-			BigDecimal nat$Name$ = YCFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", $Digits$, $Precis$, attr$Name$ );
+			BigDecimal nat$Name$ = CFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", $Digits$, $Precis$, attr$Name$ );
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqDate">
 			LocalDate nat$Name$;
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseDate( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseDate( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1640,10 +1640,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 	<GenRule GenDef="Value" Name="implTableConvertReqTime">
 			LocalTime nat$Name$;
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseTime( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseTime( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1654,10 +1654,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 	<GenRule GenDef="Value" Name="implTableConvertReqTimestamp">
 			LocalDateTime nat$Name$;
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseTimestamp( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseTimestamp( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1668,10 +1668,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 	<GenRule GenDef="Value" Name="implTableConvertReqTZDate">
 			LocalDate nat$Name$;
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseTZDate( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseTZDate( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1682,10 +1682,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 	<GenRule GenDef="Value" Name="implTableConvertReqTZTime">
 			LocalTime nat$Name$;
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseTZTime( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseTZTime( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1696,10 +1696,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 	<GenRule GenDef="Value" Name="implTableConvertReqTZTimestamp">
 			LocalDateTime nat$Name$;
 			try {
-				nat$Name$ = YCFLibXmlUtil.parseTZTimestamp( attr$Name$ );
+				nat$Name$ = CFLibXmlUtil.parseTZTimestamp( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1708,12 +1708,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash128">
-			YCFLibDbKeyHash128 nat$Name$;
+			CFLibDbKeyHash128 nat$Name$;
 			try {
-				nat$Name$ = YCFLibDbKeyHash128.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash128.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1722,12 +1722,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash160">
-			YCFLibDbKeyHash160 nat$Name$;
+			CFLibDbKeyHash160 nat$Name$;
 			try {
-				nat$Name$ = YCFLibDbKeyHash160.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash160.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1736,12 +1736,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash224">
-			YCFLibDbKeyHash224 nat$Name$;
+			CFLibDbKeyHash224 nat$Name$;
 			try {
-				nat$Name$ = YCFLibDbKeyHash224.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash224.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1750,12 +1750,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash256">
-			YCFLibDbKeyHash256 nat$Name$;
+			CFLibDbKeyHash256 nat$Name$;
 			try {
-				nat$Name$ = YCFLibDbKeyHash256.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash256.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1764,12 +1764,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash384">
-			YCFLibDbKeyHash384 nat$Name$;
+			CFLibDbKeyHash384 nat$Name$;
 			try {
-				nat$Name$ = YCFLibDbKeyHash384.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash384.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1778,12 +1778,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqDbKeyHash512">
-			YCFLibDbKeyHash512 nat$Name$;
+			CFLibDbKeyHash512 nat$Name$;
 			try {
-				nat$Name$ = YCFLibDbKeyHash512.fromHex( attr$Name$ );
+				nat$Name$ = CFLibDbKeyHash512.fromHex( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1792,12 +1792,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertReqUuid6">
-			YCFLibUuid6 nat$Name$;
+			CFLibUuid6 nat$Name$;
 			try {
-				nat$Name$ = YCFLibUuid6.fromString( attr$Name$ );
+				nat$Name$ = CFLibUuid6.fromString( attr$Name$ );
 			}
 			catch( RuntimeException e ) {
-				throw new YCFLibInvalidArgumentException( getClass(),
+				throw new CFLibInvalidArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"$Name$",
@@ -1822,7 +1822,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				nat$Name$ = new byte[0];
 			}
 			else {
-				nat$Name$ = Base64.decodYCFCore64( attr$Name$.getBytes() );
+				nat$Name$ = Base64.decodCFCore64( attr$Name$.getBytes() );
 			}
 </GenRule>
 
@@ -1838,10 +1838,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				nat$Name$ = false;
 			}
 			else {
-				throw new YCFLibUsageException( getClass(),
+				throw new CFLibUsageException( getClass(),
 					S_ProcName,
-					String.format(Inz.x("ycflib.xml.YCFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$),
-					String.format(Inz.s("ycflib.xml.YCFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$));
+					String.format(Inz.x("ycflib.xml.CFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$),
+					String.format(Inz.s("ycflib.xml.CFLibXmlUtil.XmlBooleanInvalid"), "$Name$", attr$Name$));
 			}
 </GenRule>
 
@@ -1911,7 +1911,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				nat$Name$ = null;
 			}
 			else {
-				nat$Name$= YCFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", 19, 0, attr$Name$ );
+				nat$Name$= CFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", 19, 0, attr$Name$ );
 			}
 </GenRule>
 
@@ -1941,7 +1941,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				nat$Name$ = null;
 			}
 			else {
-				nat$Name$= YCFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", $Digits$, $Precis$, attr$Name$ );
+				nat$Name$= CFLibBigDecimalUtil.parse( "$EffSchemaName$.$TableName$.$Name$", "$EffSchemaName$.$TableName$.$Name$", $Digits$, $Precis$, attr$Name$ );
 			}
 </GenRule>
 
@@ -1952,10 +1952,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibXmlUtil.parseDate( attr$Name$ );
+					nat$Name$ = CFLibXmlUtil.parseDate( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -1971,10 +1971,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibXmlUtil.parseTime( attr$Name$ );
+					nat$Name$ = CFLibXmlUtil.parseTime( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -1990,10 +1990,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibXmlUtil.parseTimestamp( attr$Name$ );
+					nat$Name$ = CFLibXmlUtil.parseTimestamp( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -2009,10 +2009,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibXmlUtil.parseTZDate( attr$Name$ );
+					nat$Name$ = CFLibXmlUtil.parseTZDate( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -2028,10 +2028,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibXmlUtil.parseTZTime( attr$Name$ );
+					nat$Name$ = CFLibXmlUtil.parseTZTime( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -2047,10 +2047,10 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibXmlUtil.parseTZTimestamp( attr$Name$ );
+					nat$Name$ = CFLibXmlUtil.parseTZTimestamp( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -2060,16 +2060,16 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash128">
-			YCFLibDbKeyHash128 nat$Name$;
+			CFLibDbKeyHash128 nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibDbKeyHash128.fromHex( attr$Name$ );
+					nat$Name$ = CFLibDbKeyHash128.fromHex( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -2079,16 +2079,16 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash160">
-			YCFLibDbKeyHash160 nat$Name$;
+			CFLibDbKeyHash160 nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibDbKeyHash128.fromHex( attr$Name$ );
+					nat$Name$ = CFLibDbKeyHash128.fromHex( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -2098,16 +2098,16 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash224">
-			YCFLibDbKeyHash224 nat$Name$;
+			CFLibDbKeyHash224 nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibDbKeyHash224.fromHex( attr$Name$ );
+					nat$Name$ = CFLibDbKeyHash224.fromHex( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -2117,16 +2117,16 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash256">
-			YCFLibDbKeyHash256 nat$Name$;
+			CFLibDbKeyHash256 nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibDbKeyHash256.fromHex( attr$Name$ );
+					nat$Name$ = CFLibDbKeyHash256.fromHex( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -2136,16 +2136,16 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash384">
-			YCFLibDbKeyHash128 nat$Name$;
+			CFLibDbKeyHash128 nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibDbKeyHash384.fromHex( attr$Name$ );
+					nat$Name$ = CFLibDbKeyHash384.fromHex( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -2155,16 +2155,16 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptDbKeyHash512">
-			YCFLibDbKeyHash512 nat$Name$;
+			CFLibDbKeyHash512 nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibDbKeyHash512.fromHex( attr$Name$ );
+					nat$Name$ = CFLibDbKeyHash512.fromHex( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -2174,16 +2174,16 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Value" Name="implTableConvertOptUuid6">
-			YCFLibUuid6 nat$Name$;
+			CFLibUuid6 nat$Name$;
 			if( ( attr$Name$ == null ) || ( attr$Name$.length() &lt;= 0 ) ) {
 				nat$Name$ = null;
 			}
 			else {
 				try {
-					nat$Name$ = YCFLibUuid6.fromString( attr$Name$ );
+					nat$Name$ = CFLibUuid6.fromString( attr$Name$ );
 				}
 				catch( RuntimeException e ) {
-					throw new YCFLibInvalidArgumentException( getClass(),
+					throw new CFLibInvalidArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"$Name$",
@@ -2224,7 +2224,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			// Resolve and apply required Container reference
 
 			if( scopeObj == null ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"scopeObj" );
@@ -2234,7 +2234,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				editBuff.set$reference ContainerRelation OptionalOrRequired$$reference ContainerRelation RelationTypeTag$$reference ContainerRelation Suffix$( ref$reference ContainerRelation Suffix$ );$switch HasOwner yes implTableReadContainerOwner default empty$
 			}
 			else {
-				throw new YCFLibUnsupportedClassException( getClass(),
+				throw new CFLibUnsupportedClassException( getClass(),
 					S_ProcName,
 					"scopeObj",
 					scopeObj,
@@ -2269,7 +2269,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				editBuff.set$reference ContainerRelation OptionalOrRequired$$reference ContainerRelation RelationTypeTag$$reference ContainerRelation Suffix$( ref$reference ContainerRelation Suffix$ );$switch HasOwner yes implTableReadContainerOwner default empty$
 			}
 			else {
-				throw new YCFLibUnsupportedClassException( getClass(),
+				throw new CFLibUnsupportedClassException( getClass(),
 					S_ProcName,
 					"scopeObj",
 					scopeObj,
@@ -2292,7 +2292,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 					editBuff.set$reference OwnerRelation OptionalOrRequired$$reference OwnerRelation RelationTypeTag$$reference OwnerRelation Suffix$( ref$reference OwnerRelation Suffix$ );
 				}
 				else {
-					throw new YCFLibNullArgumentException( getClass(),
+					throw new CFLibNullArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"Owner&lt;$reference OwnerRelation Suffix$&gt;" );
@@ -2301,12 +2301,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implTableResolveEarlyNamedLookupRefs"
-		>$switch HasSuperClassRelation yes implTableResolveEarlyNamedLookupRefsSuper default implTableResolveEarlyNamedLookupRefYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableResolveEarlyNamedLookupRefsSuper default implTableResolveEarlyNamedLookupRefCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableResolveEarlyNamedLookupRefsSuper"
 		>$reference SuperClassRelation reference ToTable implTableResolveEarlyNamedLookupRefs$$iterate Relation( each implTableMaybeResolveEarlyNamedRef empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableResolveEarlyNamedLookupRefYCFCore">$iterate Relation( each implTableMaybeResolveEarlyNamedRef empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implTableResolveEarlyNamedLookupRefCFCore">$iterate Relation( each implTableMaybeResolveEarlyNamedRef empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implTableMaybeResolveEarlyNamedRef"
 		>$switch RelationTypeTag
@@ -2318,7 +2318,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			Components empty
 			Children empty
 			Details empty
-			default ErrorUnrecognizedRelationTypeTagInSaxLoaderTableYCFCore$</GenRule>
+			default ErrorUnrecognizedRelationTypeTagInSaxLoaderTableCFCore$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implTableResolveEarlyNamedRefSingletonRelation"
 		>$switch IsToIndexUnique yes implTableResolveEarlyNamedRefNonChainedRelation default empty$</GenRule>
@@ -2344,7 +2344,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				ref$Suffix$ = (I$reference ToTable SchemaName$$reference ToTable TableName$Obj)(editBuff.getNamedObject( schemaObj.get$reference ToTable TableName$TableObj().getObjQualifyingClass(),
 					attr$Suffix$ ) );
 				if( ref$Suffix$ == null ) {
-					throw new YCFLibNullArgumentException( getClass(),
+					throw new CFLibNullArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"Resolve $Suffix$ reference qualified name \"" + attr$Suffix$ + "\" to table $reference ToTable TableName$" );
@@ -2361,7 +2361,7 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 			if( ( attr$Suffix$ != null ) &amp;&amp; ( attr$Suffix$.length() &gt; 0 ) ) {
 				ref$Suffix$ = (I$reference ToTable SchemaName$$reference ToTable TableName$Obj)schemaObj.get$reference ToTable TableName$TableObj().read$reference ToTable TableName$By$reference ToTable reference InheritedLookupIndex Suffix$( $reference ToTable reference InheritedLookupIndex iterate Columns( each implTableResolveNamedRefPassArgComma last empty )$attr$Suffix$ );
 				if( ref$Suffix$ == null ) {
-					throw new YCFLibNullArgumentException( getClass(),
+					throw new CFLibNullArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"Resolve $Suffix$ reference named \"" + attr$Suffix$ + "\" to table $reference ToTable TableName$" );
@@ -2378,12 +2378,12 @@ $switch PrimaryKeyIsConstEnum yes implTableConvertPKeyAttrs default implTableCon
 				</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableCopyNamedLookupRefs"
-		>$switch HasSuperClassRelation yes implTableCopyNamedLookupRefsSuper default implTableCopyNamedLookupRefYCFCore$</GenRule>
+		>$switch HasSuperClassRelation yes implTableCopyNamedLookupRefsSuper default implTableCopyNamedLookupRefCFCore$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableCopyNamedLookupRefsSuper"
 		>$reference SuperClassRelation reference ToTable implTableCopyNamedLookupRefs$$iterate Relation( each implTableMaybeCopyNamedRef empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableCopyNamedLookupRefYCFCore">$iterate Relation( each implTableMaybeCopyNamedRef empty empty )$</GenRule>
+	<GenRule GenDef="Table" Name="implTableCopyNamedLookupRefCFCore">$iterate Relation( each implTableMaybeCopyNamedRef empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implTableMaybeCopyNamedRef"
 		>$switch RelationTypeTag

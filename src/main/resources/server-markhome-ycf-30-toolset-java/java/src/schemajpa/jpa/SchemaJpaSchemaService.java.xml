@@ -53,8 +53,8 @@ import java.util.*;
 import jakarta.persistence.*;
 import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;
-import server.markhome.ycf.YCFXmlUtil;
-import org.apache.commons.codec.binaryYCFCore64;
+import server.markhome.ycf.CFXmlUtil;
+import org.apache.commons.codec.binaryCFCore64;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -89,7 +89,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *	@return null if the userLogin does not exist, is null, is empty, or is blank. Otherwise the DbKey for the user.
 	 */
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	public YCFDbKeyHash256 mapUserLoginToUserId(String userLogin) {
+	public CFDbKeyHash256 mapUserLoginToUserId(String userLogin) {
 		final String S_ProcName = "mapUserLoginToUserId";
 		if (userLogin == null || userLogin.isEmpty() || userLogin.isBlank()) {
 			return(null);
@@ -110,7 +110,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *	@return null if the userId does not exist or is null. Otherwise the userLogin for the user.
 	 */
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	public String mapUserIdToUserLogin(YCFDbKeyHash256 userId) {
+	public String mapUserIdToUserLogin(CFDbKeyHash256 userId) {
 		final String S_ProcName = "mapUserIdToUserLogin";
 		if (userId == null || userId.isNull()) {
 			return(null);
@@ -137,7 +137,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	public boolean probeMemberOfTenantGroup(YCFDbKeyHash256 userId, YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, String permissionName) {
+	public boolean probeMemberOfTenantGroup(CFDbKeyHash256 userId, CFDbKeyHash256 clusterId, CFDbKeyHash256 tenantId, String permissionName) {
 		if (userId == null || userId.isNull()) {
 			return(false);
 		}
@@ -177,7 +177,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	public boolean probeMemberOfClusterGroup(YCFDbKeyHash256 userId, YCFDbKeyHash256 clusterId, String permissionName) {
+	public boolean probeMemberOfClusterGroup(CFDbKeyHash256 userId, CFDbKeyHash256 clusterId, String permissionName) {
 		if (userId == null || userId.isNull()) {
 			return(false);
 		}
@@ -208,7 +208,7 @@ $JpaSchemaServiceBootstrap$$iterate SchemaRefs( empty implSchemaJpaServiceSecuri
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	public boolean probeMemberOfSystemGroup(YCFDbKeyHash256 userId, String permissionName) {
+	public boolean probeMemberOfSystemGroup(CFDbKeyHash256 userId, String permissionName) {
 		if (userId == null || userId.isNull()) {
 			return(false);
 		}
@@ -283,50 +283,50 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		String publicGroup = secSysGroupPublic.getRequiredName();
 		
 		I$SecSchemaName$SecSysGrp secGroupCreate;
-		YCFDbKeyHash256 secGroupCreateID;
+		CFDbKeyHash256 secGroupCreateID;
 		I$SecSchemaName$SecSysGrpInc secGroupCreateIncSystemAdmin;
 		I$SecSchemaName$SecSysGrp secGroupRead;
-		YCFDbKeyHash256 secGroupReadID;
+		CFDbKeyHash256 secGroupReadID;
 		I$SecSchemaName$SecSysGrpInc secGroupReadIncSystemAdmin;
 		I$SecSchemaName$SecSysGrpInc secGroupReadIncPublic;
 		I$SecSchemaName$SecSysGrp secGroupUpdate;
-		YCFDbKeyHash256 secGroupUpdateID;
+		CFDbKeyHash256 secGroupUpdateID;
 		I$SecSchemaName$SecSysGrpInc secGroupUpdateIncSystemAdmin;
 		I$SecSchemaName$SecSysGrp secGroupDelete;
-		YCFDbKeyHash256 secGroupDeleteID;
+		CFDbKeyHash256 secGroupDeleteID;
 		I$SecSchemaName$SecSysGrpInc secGroupDeleteIncSystemAdmin;
 		I$SecSchemaName$SecSysGrp secGroupRestore;
-		YCFDbKeyHash256 secGroupRestoreID;
+		CFDbKeyHash256 secGroupRestoreID;
 		I$SecSchemaName$SecSysGrpInc secGroupRestoreIncSystemAdmin;
 		I$SecSchemaName$SecSysGrp secGroupMutate;
-		YCFDbKeyHash256 secGroupMutateID;
+		CFDbKeyHash256 secGroupMutateID;
 		I$SecSchemaName$SecSysGrpInc secGroupMutateIncSystemAdmin;
 
 		I$SecSchemaName$SecClusGrp csecGroupCreate;
-		YCFDbKeyHash256 csecGroupCreateID;
+		CFDbKeyHash256 csecGroupCreateID;
 		I$SecSchemaName$SecClusGrp csecGroupRead;
-		YCFDbKeyHash256 csecGroupReadID;
+		CFDbKeyHash256 csecGroupReadID;
 		I$SecSchemaName$SecClusGrp csecGroupUpdate;
-		YCFDbKeyHash256 csecGroupUpdateID;
+		CFDbKeyHash256 csecGroupUpdateID;
 		I$SecSchemaName$SecClusGrp csecGroupDelete;
-		YCFDbKeyHash256 csecGroupDeleteID;
+		CFDbKeyHash256 csecGroupDeleteID;
 		I$SecSchemaName$SecClusGrp csecGroupRestore;
-		YCFDbKeyHash256 csecGroupRestoreID;
+		CFDbKeyHash256 csecGroupRestoreID;
 		I$SecSchemaName$SecClusGrp csecGroupMutate;
-		YCFDbKeyHash256 csecGroupMutateID;
+		CFDbKeyHash256 csecGroupMutateID;
 		
 		I$SecSchemaName$SecTentGrp tsecGroupCreate;
-		YCFDbKeyHash256 tsecGroupCreateID;
+		CFDbKeyHash256 tsecGroupCreateID;
 		I$SecSchemaName$SecTentGrp tsecGroupRead;
-		YCFDbKeyHash256 tsecGroupReadID;
+		CFDbKeyHash256 tsecGroupReadID;
 		I$SecSchemaName$SecTentGrp tsecGroupUpdate;
-		YCFDbKeyHash256 tsecGroupUpdateID;
+		CFDbKeyHash256 tsecGroupUpdateID;
 		I$SecSchemaName$SecTentGrp tsecGroupDelete;
-		YCFDbKeyHash256 tsecGroupDeleteID;
+		CFDbKeyHash256 tsecGroupDeleteID;
 		I$SecSchemaName$SecTentGrp tsecGroupRestore;
-		YCFDbKeyHash256 tsecGroupRestoreID;
+		CFDbKeyHash256 tsecGroupRestoreID;
 		I$SecSchemaName$SecTentGrp tsecGroupMutate;
-		YCFDbKeyHash256 tsecGroupMutateID;
+		CFDbKeyHash256 tsecGroupMutateID;
 
 		secGroupCreate = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().readDerivedByUNameIdx(auth, createPermName);
 		if (secGroupCreate != null) {
@@ -410,25 +410,25 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		}
 
 		if (secGroupCreateID == null || secGroupCreateID.isNull()) {
-			secGroupCreateID = new YCFDbKeyHash256(0);
+			secGroupCreateID = new CFDbKeyHash256(0);
 		}
 		if (secGroupReadID == null || secGroupReadID.isNull()) {
-			secGroupReadID = new YCFDbKeyHash256(0);
+			secGroupReadID = new CFDbKeyHash256(0);
 		}
 		if (secGroupUpdateID == null || secGroupUpdateID.isNull()) {
-			secGroupUpdateID = new YCFDbKeyHash256(0);
+			secGroupUpdateID = new CFDbKeyHash256(0);
 		}
 		if (secGroupDeleteID == null || secGroupDeleteID.isNull()) {
-			secGroupDeleteID = new YCFDbKeyHash256(0);
+			secGroupDeleteID = new CFDbKeyHash256(0);
 		}
 		if (hasHistory) {
 			if (secGroupRestoreID == null || secGroupRestoreID.isNull()) {
-				secGroupRestoreID = new YCFDbKeyHash256(0);
+				secGroupRestoreID = new CFDbKeyHash256(0);
 			}
 		}
 		if (isMutable) {
 			if (secGroupMutateID == null || secGroupMutateID.isNull()) {
-				secGroupMutateID = new YCFDbKeyHash256(0);
+				secGroupMutateID = new CFDbKeyHash256(0);
 			}
 		}
 
@@ -669,25 +669,25 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			}
 
 			if (csecGroupCreateID == null || csecGroupCreateID.isNull()) {
-				csecGroupCreateID = new YCFDbKeyHash256(0);
+				csecGroupCreateID = new CFDbKeyHash256(0);
 			}
 			if (csecGroupReadID == null || csecGroupReadID.isNull()) {
-				csecGroupReadID = new YCFDbKeyHash256(0);
+				csecGroupReadID = new CFDbKeyHash256(0);
 			}
 			if (csecGroupUpdateID == null || csecGroupUpdateID.isNull()) {
-				csecGroupUpdateID = new YCFDbKeyHash256(0);
+				csecGroupUpdateID = new CFDbKeyHash256(0);
 			}
 			if (csecGroupDeleteID == null || csecGroupDeleteID.isNull()) {
-				csecGroupDeleteID = new YCFDbKeyHash256(0);
+				csecGroupDeleteID = new CFDbKeyHash256(0);
 			}
 			if (hasHistory) {
 				if (csecGroupRestoreID == null || csecGroupRestoreID.isNull()) {
-					csecGroupRestoreID = new YCFDbKeyHash256(0);
+					csecGroupRestoreID = new CFDbKeyHash256(0);
 				}
 			}
 			if (isMutable) {
 				if (csecGroupMutateID == null || csecGroupMutateID.isNull()) {
-					csecGroupMutateID = new YCFDbKeyHash256(0);
+					csecGroupMutateID = new CFDbKeyHash256(0);
 				}
 			}
 
@@ -842,25 +842,25 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			}
 
 			if (tsecGroupCreateID == null || tsecGroupCreateID.isNull()) {
-				tsecGroupCreateID = new YCFDbKeyHash256(0);
+				tsecGroupCreateID = new CFDbKeyHash256(0);
 			}
 			if (tsecGroupReadID == null || tsecGroupReadID.isNull()) {
-				tsecGroupReadID = new YCFDbKeyHash256(0);
+				tsecGroupReadID = new CFDbKeyHash256(0);
 			}
 			if (tsecGroupUpdateID == null || tsecGroupUpdateID.isNull()) {
-				tsecGroupUpdateID = new YCFDbKeyHash256(0);
+				tsecGroupUpdateID = new CFDbKeyHash256(0);
 			}
 			if (tsecGroupDeleteID == null || tsecGroupDeleteID.isNull()) {
-				tsecGroupDeleteID = new YCFDbKeyHash256(0);
+				tsecGroupDeleteID = new CFDbKeyHash256(0);
 			}
 			if (hasHistory) {
 				if (tsecGroupRestoreID == null || tsecGroupRestoreID.isNull()) {
-					tsecGroupRestoreID = new YCFDbKeyHash256(0);
+					tsecGroupRestoreID = new CFDbKeyHash256(0);
 				}
 			}
 			if (isMutable) {
 				if (tsecGroupMutateID == null || tsecGroupMutateID.isNull()) {
-					tsecGroupMutateID = new YCFDbKeyHash256(0);
+					tsecGroupMutateID = new CFDbKeyHash256(0);
 				}
 			}
 
@@ -960,21 +960,21 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapSecurity() {
 		$SecSchemaName$JpaSysCluster sysCluster;
-		YCFDbKeyHash256 systemClusterID;
+		CFDbKeyHash256 systemClusterID;
 		$SecSchemaName$JpaCluster systemCluster;
 		$SecSchemaName$JpaSecUser systemUser;
-		YCFDbKeyHash256 systemUID;
+		CFDbKeyHash256 systemUID;
 		$SecSchemaName$JpaSecUser systemAdminUser;
-		YCFDbKeyHash256 systemAdminUID;
+		CFDbKeyHash256 systemAdminUID;
 		$SecSchemaName$JpaSecSession bootstrapSession;
-		YCFDbKeyHash256 bootstrapSessionID;
+		CFDbKeyHash256 bootstrapSessionID;
 		$SecSchemaName$JpaTenant systemTenant;
-		YCFDbKeyHash256 systemTenantID;
+		CFDbKeyHash256 systemTenantID;
 		$SecSchemaName$JpaSecSysGrp secSystemAdminGroup;
-		YCFDbKeyHash256 secSystemAdminGroupID;
+		CFDbKeyHash256 secSystemAdminGroupID;
 		$SecSchemaName$JpaSecSysGrpMemb secSystemAdminGroupMembSystemAdmin;
 		$SecSchemaName$JpaSecSysGrp secSysGroupPublic;
-		YCFDbKeyHash256 secSysGroupPublicID;
+		CFDbKeyHash256 secSysGroupPublicID;
 		$SecSchemaName$JpaSecSysGrpInc secSysGroupPublicIncSystemAdmin;
 		systemUser = secuserService.findByULoginIdx("system");
 		if (systemUser != null) {
@@ -989,12 +989,12 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				}
 			});
 			$SecSchemaName$Authorization auth = ($SecSchemaName$Authorization)I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization();
-			auth.setAuthUuid6(YCFUuid6.generateUuid6());
+			auth.setAuthUuid6(CFUuid6.generateUuid6());
 			auth.setSecUserId(systemUID);
 		
 			systemAdminUser = secuserService.findByULoginIdx("systemadmin");
 			if (systemAdminUser == null) {
-				throw new YCFNullArgumentException(getClass(), "bootstrapSecurity", 0, "findByULoginIdx('systemadmin')");
+				throw new CFNullArgumentException(getClass(), "bootstrapSecurity", 0, "findByULoginIdx('systemadmin')");
 			}
 			systemAdminUID = systemAdminUser.getRequiredSecUserId();
 
@@ -1003,16 +1003,16 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 				sysCluster = sysClusters.get(0);
 				systemClusterID = sysCluster.getRequiredClusterId();
 				if(systemClusterID == null || systemClusterID.isNull()) {
-					throw new YCFNullArgumentException(getClass(), "bootstrapSecurity", 0, "systemClusterID");
+					throw new CFNullArgumentException(getClass(), "bootstrapSecurity", 0, "systemClusterID");
 				}
 				systemCluster = clusterService.find(systemClusterID);
 				if (systemCluster == null) {
-					throw new YCFNullArgumentException(getClass(), "bootstrapSecurity", 0, "systemCluster");
+					throw new CFNullArgumentException(getClass(), "bootstrapSecurity", 0, "systemCluster");
 				}
 				systemTenant = tenantService.findByUNameIdx(systemClusterID, "system");
 				if( systemTenant == null) {
 					systemTenantID = null;
-					throw new YCFNullArgumentException(getClass(), "bootstrapSecurity", 0, "systemTenant");
+					throw new CFNullArgumentException(getClass(), "bootstrapSecurity", 0, "systemTenant");
 				}
 				else {
 					systemTenantID = systemTenant.getPKey();
@@ -1028,7 +1028,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 						}
 					}
 					if (bootstrapSession == null) {
-						throw new YCFNullArgumentException(getClass(), "bootstrapSecurity", 0, "bootstrapSession");
+						throw new CFNullArgumentException(getClass(), "bootstrapSecurity", 0, "bootstrapSession");
 					}
 				}
 				bootstrapSessionID = bootstrapSession.getPKey();
@@ -1039,28 +1039,28 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 				secSystemAdminGroup = ($SecSchemaName$JpaSecSysGrp)(secsysgrpService.findByUNameIdx( "systemadmin"));
 				if (secSystemAdminGroup == null) {
-					throw new YCFNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSystemAdminGroup");
+					throw new CFNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSystemAdminGroup");
 				}
 				secSystemAdminGroupID = secSystemAdminGroup.getRequiredSecSysGrpId();
 
 				secSysGroupPublic = ($SecSchemaName$JpaSecSysGrp)(secsysgrpService.findByUNameIdx( "public"));
 				if (secSysGroupPublic == null) {
-					throw new YCFNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSysGroupPublic");
+					throw new CFNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSysGroupPublic");
 				}
 				secSysGroupPublicID = secSysGroupPublic.getRequiredSecSysGrpId();
 
 				secSystemAdminGroupMembSystemAdmin = ($SecSchemaName$JpaSecSysGrpMemb)(secsysgrpmembService.find(secSystemAdminGroupID, systemUser.getRequiredLoginId()));
 				if (secSystemAdminGroupMembSystemAdmin == null) {
-					throw new YCFNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSystemAdminGroupMembSystemAdmin");
+					throw new CFNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSystemAdminGroupMembSystemAdmin");
 				}
 
 				secSysGroupPublicIncSystemAdmin = ($SecSchemaName$JpaSecSysGrpInc)(secsysgrpincService.find(secSysGroupPublicID, secSystemAdminGroup.getRequiredName()));
 				if (secSysGroupPublicIncSystemAdmin == null) {
-					throw new YCFNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSysGroupPublicIncSystemAdmin");
+					throw new CFNullArgumentException(getClass(), "bootstrapSecurity", 0, "secSysGroupPublicIncSystemAdmin");
 				}
 			}
 			else {
-				throw new YCFNullArgumentException(getClass(), "bootstrapSecurity", 0, "SysClusterSingleton");
+				throw new CFNullArgumentException(getClass(), "bootstrapSecurity", 0, "SysClusterSingleton");
 			}
 		}
 		else {
@@ -1083,37 +1083,37 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 		}
 		LocalDateTime now = LocalDateTime.now();
 		if (systemUID == null || systemUID.isNull()) {
-			systemUID = new YCFDbKeyHash256(0);
+			systemUID = new CFDbKeyHash256(0);
 		}
 		if (systemAdminUID == null || systemAdminUID.isNull()) {
-			systemAdminUID = new YCFDbKeyHash256(0);
+			systemAdminUID = new CFDbKeyHash256(0);
 		}
 		if (bootstrapSessionID == null || bootstrapSessionID.isNull()) {
-			bootstrapSessionID = new YCFDbKeyHash256(0);
+			bootstrapSessionID = new CFDbKeyHash256(0);
 		}
 		if (systemClusterID == null || systemClusterID.isNull()) {
-			systemClusterID = new YCFDbKeyHash256(0);
+			systemClusterID = new CFDbKeyHash256(0);
 		}
 		if (systemTenantID == null || systemTenantID.isNull()) {
-			systemTenantID = new YCFDbKeyHash256(0);
+			systemTenantID = new CFDbKeyHash256(0);
 		}
 		if (secSystemAdminGroupID == null || secSystemAdminGroupID.isNull()) {
-			secSystemAdminGroupID = new YCFDbKeyHash256(0);
+			secSystemAdminGroupID = new CFDbKeyHash256(0);
 		}
 		if (secSysGroupPublicID == null || secSysGroupPublicID.isNull()) {
-			secSysGroupPublicID = new YCFDbKeyHash256(0);
+			secSysGroupPublicID = new CFDbKeyHash256(0);
 		}
 		if (I$SecSchemaName$Schema.getSysClusterId() == null || I$SecSchemaName$Schema.getSysClusterId().isNull()) {
 			I$SecSchemaName$Schema.setSysClusterId(systemClusterID);
 		}
 		else if ( ! I$SecSchemaName$Schema.getSysClusterId().equals( systemClusterID )) {
-			throw new YCFInvalidArgumentException(getClass(), "bootstrapSecurity", "Previously set system cluster id disagrees with new system cluster id", "Previously set system cluster id disagrees with new system cluster id");
+			throw new CFInvalidArgumentException(getClass(), "bootstrapSecurity", "Previously set system cluster id disagrees with new system cluster id", "Previously set system cluster id disagrees with new system cluster id");
 		}
 		if (I$SecSchemaName$Schema.getSysTenantId() == null || I$SecSchemaName$Schema.getSysTenantId().isNull()) {
 			I$SecSchemaName$Schema.setSysTenantId(systemTenantID);
 		}
 		else if ( ! I$SecSchemaName$Schema.getSysTenantId().equals( systemTenantID )) {
-			throw new YCFInvalidArgumentException(getClass(), "bootstrapSecurity", "Previously set system tenant id disagrees with new system tenant id", "Previously set system tenant id disagrees with new system tenant id");
+			throw new CFInvalidArgumentException(getClass(), "bootstrapSecurity", "Previously set system tenant id disagrees with new system tenant id", "Previously set system tenant id disagrees with new system tenant id");
 		}
 		if (!systemUID.equals(I$SecSchemaName$Schema.getSystemId())) {
 			I$SecSchemaName$Schema.setSystemId(systemUID);
@@ -1135,7 +1135,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 			}
 		});
 		$SecSchemaName$Authorization auth = ($SecSchemaName$Authorization)I$SecSchemaName$Schema.getAuthorizationCallback().getEffectiveAuthorization();
-		auth.setAuthUuid6(YCFUuid6.generateUuid6());
+		auth.setAuthUuid6(CFUuid6.generateUuid6());
 		auth.setSecUserId(systemUID);
 		auth.setSecSessionId(bootstrapSessionID);
 		auth.setSecClusterId(systemClusterID);
@@ -1296,7 +1296,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	}
 
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	public void bootstrapAllTablesSecurity(YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity(CFDbKeyHash256 clusterId, CFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapAllTablesSecurity(clusterId, tenantId, tableData);
 	}
 </GenRule>
@@ -1309,15 +1309,15 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	}
 
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	public void bootstrapAllTablesSecurity(YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity(CFDbKeyHash256 clusterId, CFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 		LocalDateTime now = LocalDateTime.now();
 		I$SecSchemaName$SecSession bootstrapSession;
-		YCFDbKeyHash256 bootstrapSessionID = new YCFDbKeyHash256(0);
-		YCFDbKeyHash256 systemUID = I$SecSchemaName$Schema.getSystemId();
+		CFDbKeyHash256 bootstrapSessionID = new CFDbKeyHash256(0);
+		CFDbKeyHash256 systemUID = I$SecSchemaName$Schema.getSystemId();
 
 		$SecSchemaName$Authorization auth = new $SecSchemaName$Authorization();
 		auth.setSecUserId(systemUID);
-		auth.setAuthUuid6(YCFUuid6.generateUuid6());
+		auth.setAuthUuid6(CFUuid6.generateUuid6());
 		auth.setSecClusterId(clusterId);
 		auth.setSecTenantId(tenantId);
 		auth.setSecSessionId(bootstrapSessionID);
@@ -1342,22 +1342,22 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 		I$SecSchemaName$SecSysGrp secSystemAdminGroup = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().readDerivedByUNameIdx( auth, "systemadmin");
 		if (secSystemAdminGroup == null) {
-			throw new YCFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secSystemAdminGroup");
+			throw new CFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secSystemAdminGroup");
 		}
 
 		I$SecSchemaName$SecSysGrp secSysGroupPublic = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().readDerivedByUNameIdx( auth, "public");
 		if (secSysGroupPublic == null) {
-			throw new YCFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secSysGroupPublic");
+			throw new CFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secSysGroupPublic");
 		}
 		
 		I$SecSchemaName$Cluster secCluster = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableCluster().readDerived(auth, clusterId);
 		if (secCluster == null) {
-			throw new YCFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secCluster&lt;" + clusterId.toString() + "&gt;");
+			throw new CFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secCluster&lt;" + clusterId.toString() + "&gt;");
 		}
 		
 		I$SecSchemaName$Tenant secTenant = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableTenant().readDerived(auth, tenantId);
 		if (secTenant == null) {
-			throw new YCFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secTenant&lt;" + tenantId.toString() + "&gt;");
+			throw new CFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secTenant&lt;" + tenantId.toString() + "&gt;");
 		}
 	
 		bootstrapAllTablesSecurity(auth, systemUID, bootstrapSession, secSystemAdminGroup, secSysGroupPublic, secCluster, secTenant, tableData);
@@ -1376,7 +1376,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
 	public void bootstrapAllTablesSecurity(I$SecSchemaName$Authorization auth,
-		YCFDbKeyHash256 systemUID,
+		CFDbKeyHash256 systemUID,
 		I$SecSchemaName$SecSession bootstrapSession,
 		I$SecSchemaName$SecSysGrp secSystemAdminGroup,
 		I$SecSchemaName$SecSysGrp secSysGroupPublic,
@@ -1386,18 +1386,18 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	{
 		LocalDateTime now = LocalDateTime.now();
 
-		YCFDbKeyHash256 bootstrapSessionID = bootstrapSession.getRequiredSecSessionId();
+		CFDbKeyHash256 bootstrapSessionID = bootstrapSession.getRequiredSecSessionId();
 		if (secSystemAdminGroup == null) {
-			throw new YCFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secSystemAdminGroup");
+			throw new CFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secSystemAdminGroup");
 		}
 		if (secSysGroupPublic == null) {
-			throw new YCFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secSysGroupPublic");
+			throw new CFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secSysGroupPublic");
 		}
 		if (secCluster == null) {
-			throw new YCFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secCluster");
+			throw new CFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secCluster");
 		}
 		if (secTenant == null) {
-			throw new YCFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secTenant");
+			throw new CFNullArgumentException(getClass(), "bootstrapAllTablesSecurity", 0, "secTenant");
 		}
 
 		I$SecSchemaName$SecSysGrp secSysClusGroupSysAdmin = I$SecSchemaName$Schema.getBacking$SecSchemaName$().getTableSecSysGrp().readDerivedByUNameIdx(auth, secCluster.getRequiredDescription().toLowerCase() + "clusteradmin");
@@ -1522,7 +1522,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
 	 */
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	long countSysSecurityPermsByUserId(String parmPermName, YCFDbKeyHash256 parmUserId) {
+	long countSysSecurityPermsByUserId(String parmPermName, CFDbKeyHash256 parmUserId) {
 		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countSysSecurityPermsByUserId", Long.class);
 		query.setParameter("parmPermName", parmPermName);
@@ -1546,7 +1546,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
 	 */
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	long countClusSecurityPermsByLoginId(String parmPermName, String parmLoginId, YCFDbKeyHash256 parmClusterId) {
+	long countClusSecurityPermsByLoginId(String parmPermName, String parmLoginId, CFDbKeyHash256 parmClusterId) {
 		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countClusSecurityPermsByLoginId", Long.class);
 		query.setParameter("parmPermName", parmPermName);
@@ -1571,7 +1571,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
 	 */
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	long countClusSecurityPermsByUserId(String parmPermName, YCFDbKeyHash256 parmUserId, YCFDbKeyHash256 parmClusterId) {
+	long countClusSecurityPermsByUserId(String parmPermName, CFDbKeyHash256 parmUserId, CFDbKeyHash256 parmClusterId) {
 		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countClusSecurityPermsByUserId", Long.class);
 		query.setParameter("parmPermName", parmPermName);
@@ -1596,7 +1596,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
 	 */
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	long countTentSecurityPermsByLoginId(String parmPermName, String parmLoginId, YCFDbKeyHash256 parmTenantId) {
+	long countTentSecurityPermsByLoginId(String parmPermName, String parmLoginId, CFDbKeyHash256 parmTenantId) {
 		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countTentSecurityPermsByLoginId", Long.class);
 		query.setParameter("parmPermName", parmPermName);
@@ -1621,7 +1621,7 @@ $iterate SchemaRefs( empty implJpaSchemaServiceBootstrapSecurity each empty )$$i
 	 *		@return The number of authorizations for the specified permission and user, with an 8-level deep union in play.
 	 */
 	@Transactional(propagation = Propagation.MANDATORY, noRollbackFor = NoResultException.class, transactionManager = "$lower DefDbSchemaName$TransactionManager")
-	long countTentSecurityPermsByUserId(String parmPermName, YCFDbKeyHash256 parmUserId, YCFDbKeyHash256 parmTenantId) {
+	long countTentSecurityPermsByUserId(String parmPermName, CFDbKeyHash256 parmUserId, CFDbKeyHash256 parmTenantId) {
 		EntityManager em = $lower DefDbSchemaName$EntityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		TypedQuery&lt;Long&gt; query = em.createNamedQuery("$leadlower DbSchemaName$$TableName$.countTentSecurityPermsByUserId", Long.class);
 		query.setParameter("parmPermName", parmPermName);

@@ -51,7 +51,7 @@ import java.sql.*;
 import java.text.*;
 import java.time.*;
 import java.util.*;
-import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.codec.binaryCFCore64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;
@@ -75,7 +75,7 @@ public interface I$SchemaName$Prot$TableName$Obj$iterate TableRefs( first declIP
 		I$reference SchemaDef SchemaName$Prot$TableName$Obj</GenRule>
 
 	<GenRule GenDef="Table" Name="maybeDeclIProtObjInheritSuperClass"
-		>$switch HasSuperClassRelation yes declIProtObjInheritSuperClass default MaybeExtendProtIYCFAnyObj$</GenRule>
+		>$switch HasSuperClassRelation yes declIProtObjInheritSuperClass default MaybeExtendProtICFAnyObj$</GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtObjInheritSuperClass">
 	extends I$reference SuperClassRelation reference ToTable DefSchemaName$Prot$reference SuperClassRelation reference ToTable TableName$Obj</GenRule>
@@ -145,13 +145,13 @@ public interface I$SchemaName$Prot$TableName$Obj$iterate TableRefs( first declIP
 	 */
 	LocalDateTime getUpdatedAt();</GenRule>
 
-	<GenRule GenDef="Object" Name="ProtImportYCFCore">
-import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
+	<GenRule GenDef="Object" Name="ProtImportCFCore">
+import server.markhome.ycf.v3_1.ycfcore.MssCF.*;</GenRule>
 
-	<GenRule GenDef="Table" Name="MaybeExtendProtIYCFAnyObj">$ExtendProtIYCFAnyObj$</GenRule>
+	<GenRule GenDef="Table" Name="MaybeExtendProtICFAnyObj">$ExtendProtICFAnyObj$</GenRule>
 
-	<GenRule GenDef="Table" Name="ExtendProtIYCFAnyObj">
-	extends IYCFAnyObj</GenRule>
+	<GenRule GenDef="Table" Name="ExtendProtICFAnyObj">
+	extends ICFAnyObj</GenRule>
 
 	<GenRule GenDef="Table" Name="declIProtObjBeginEdit">
 	/**
@@ -166,7 +166,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	/**
 	 *	End this edition of this $TableName$ instance.
 	 *
-	 *	@throws	YCFNotSupportedException if you try to end a read-only view.
+	 *	@throws	CFNotSupportedException if you try to end a read-only view.
 	 */
 	void endEdit();
 </GenRule>
@@ -283,20 +283,20 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnAccessors"
 		>$switch InSuperiorRelation yes declIProtObjColumnGetter default declIProtObjColumnGetter$</GenRule>
 	<GenRule GenDef="TableCol" Name="declIProtObjColumnGetter">$switch IsProtected yes reallyDeclIProtObjColumnGetter default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIProtObjColumYCFCorePKeyGetter default declIProtObjColumYCFCoreDataGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIProtObjColumCFCorePKeyGetter default declIProtObjColumCFCoreDataGetter$</GenRule>
 	<GenRule GenDef="TableCol" Name="declIProtObjColumnGetterSetter">$switch IsProtected yes reallyDeclIProtObjColumnGetterSetter default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIProtObjColumYCFCorePKeyGetter default declIProtObjColumYCFCoreDataGetter$$switch ColumnInPrimaryIndex yes declIProtObjColumYCFCorePKeySetter default declIProtObjColumYCFCoreDataSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIProtObjColumCFCorePKeyGetter default declIProtObjColumCFCoreDataGetter$$switch ColumnInPrimaryIndex yes declIProtObjColumCFCorePKeySetter default declIProtObjColumCFCoreDataSetter$</GenRule>
 
 	<GenRule GenDef="Atom" Name="declIProtObjColumnAccessors">$switch IsProtected yes reallyDeclIProtObjColumnAccessors default empty$</GenRule>
 	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnAccessors"
 		>$switch InSuperiorRelation yes declIProtObjColumnGetter default declIProtObjColumnGetter$</GenRule>
 	<GenRule GenDef="Atom" Name="declIProtObjColumnGetter">$switch IsProtected yes reallyDeclIProtObjColumnGetter default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIProtObjColumYCFCorePKeyGetter default declIProtObjColumYCFCoreDataGetter$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnGetter">$switch ColumnInPrimaryIndex	yes declIProtObjColumCFCorePKeyGetter default declIProtObjColumCFCoreDataGetter$</GenRule>
 	<GenRule GenDef="Atom" Name="declIProtObjColumnGetterSetter">$switch IsProtected yes reallyDeclIProtObjColumnGetterSetter default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIProtObjColumYCFCorePKeyGetter default declIProtObjColumYCFCoreDataGetter$$switch ColumnInPrimaryIndex yes declIProtObjColumYCFCorePKeySetter default declIProtObjColumYCFCoreDataSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes declIProtObjColumCFCorePKeyGetter default declIProtObjColumCFCoreDataGetter$$switch ColumnInPrimaryIndex yes declIProtObjColumCFCorePKeySetter default declIProtObjColumCFCoreDataSetter$</GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIProtObjColumYCFCorePKeyGetter">$switch IsProtected yes reallyDeclIProtObjColumYCFCorePKeyGetter default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumYCFCorePKeyGetter">
+	<GenRule GenDef="TableCol" Name="declIProtObjColumCFCorePKeyGetter">$switch IsProtected yes reallyDeclIProtObjColumCFCorePKeyGetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumCFCorePKeyGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implIProtJavaAtomType$ attribute $Name$.
 	 *
@@ -305,8 +305,8 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	$implIProtJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIProtObjColumYCFCorePKeySetter">$switch IsProtected yes reallyDeclIProtObjColumYCFCorePKeySetter default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumYCFCorePKeySetter">
+	<GenRule GenDef="TableCol" Name="declIProtObjColumCFCorePKeySetter">$switch IsProtected yes reallyDeclIProtObjColumCFCorePKeySetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumCFCorePKeySetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implIProtJavaAtomType$ attribute $Name$.
 	 *
@@ -315,8 +315,8 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	void set$implColumnAttrOptionality$$Name$($implIProtJavaAtomType$ value);
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIProtObjColumYCFCorePKeyGetter">$switch IsProtected yes reallyDeclIProtObjColumYCFCorePKeyGetter default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumYCFCorePKeyGetter">
+	<GenRule GenDef="Atom" Name="declIProtObjColumCFCorePKeyGetter">$switch IsProtected yes reallyDeclIProtObjColumCFCorePKeyGetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumCFCorePKeyGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implIProtJavaAtomType$ attribute $Name$.
 	 *
@@ -325,8 +325,8 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	$implIProtJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIProtObjColumYCFCorePKeySetter">$switch IsProtected yes reallyDeclIProtObjColumYCFCorePKeySetter default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumYCFCorePKeySetter">
+	<GenRule GenDef="Atom" Name="declIProtObjColumCFCorePKeySetter">$switch IsProtected yes reallyDeclIProtObjColumCFCorePKeySetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumCFCorePKeySetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implIProtJavaAtomType$ attribute $Name$.
 	 *
@@ -335,8 +335,8 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	void set$implColumnAttrOptionality$$Name$($implIProtJavaAtomType$ value);
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIProtObjColumYCFCoreDataGetter">$switch IsProtected yes reallyDeclIProtObjColumYCFCoreDataGetter default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumYCFCoreDataGetter">
+	<GenRule GenDef="TableCol" Name="declIProtObjColumCFCoreDataGetter">$switch IsProtected yes reallyDeclIProtObjColumCFCoreDataGetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumCFCoreDataGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implIProtJavaAtomType$ attribute $Name$.
 	 *
@@ -345,8 +345,8 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	$implIProtJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="TableCol" Name="declIProtObjColumYCFCoreDataSetter">$switch IsProtected yes reallyDeclIProtObjColumYCFCoreDataSetter default empty$</GenRule>
-	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumYCFCoreDataSetter">
+	<GenRule GenDef="TableCol" Name="declIProtObjColumCFCoreDataSetter">$switch IsProtected yes reallyDeclIProtObjColumCFCoreDataSetter default empty$</GenRule>
+	<GenRule GenDef="TableCol" Name="reallyDeclIProtObjColumCFCoreDataSetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implIProtJavaAtomType$ attribute $Name$.
 	 *
@@ -355,8 +355,8 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	void set$implColumnAttrOptionality$$Name$($implIProtJavaAtomType$ value);
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIProtObjColumYCFCoreDataGetter">$switch IsProtected yes reallyDeclIProtObjColumYCFCoreDataGetter default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumYCFCoreDataGetter">
+	<GenRule GenDef="Atom" Name="declIProtObjColumCFCoreDataGetter">$switch IsProtected yes reallyDeclIProtObjColumCFCoreDataGetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumCFCoreDataGetter">
 	/**
 	 *	Get the $lower implColumnAttrOptionality$ $implIProtJavaAtomType$ attribute $Name$.
 	 *
@@ -365,8 +365,8 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	$implIProtJavaAtomType$ get$implColumnAttrOptionality$$Name$();
 </GenRule>
 
-	<GenRule GenDef="Atom" Name="declIProtObjColumYCFCoreDataSetter">$switch IsProtected yes reallyDeclIProtObjColumYCFCoreDataSetter default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumYCFCoreDataSetter">
+	<GenRule GenDef="Atom" Name="declIProtObjColumCFCoreDataSetter">$switch IsProtected yes reallyDeclIProtObjColumCFCoreDataSetter default empty$</GenRule>
+	<GenRule GenDef="Atom" Name="reallyDeclIProtObjColumCFCoreDataSetter">
 	/**
 	 *	Set the $lower implColumnAttrOptionality$ $implIProtJavaAtomType$ attribute $Name$.
 	 *
@@ -462,7 +462,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	/**
 	 *	Update this instance.
 	 *
-	 *	@throws	YCFNotSupportedException if invoked on a read-only instance.
+	 *	@throws	CFNotSupportedException if invoked on a read-only instance.
 	 */
 	void update();
 </GenRule>
@@ -471,7 +471,7 @@ import server.markhome.ycf.v3_1.ycfcore.MssYCF.*;</GenRule>
 	/**
 	 *	Delete this instance.
 	 *
-	 *	@throws	YCFNotSupportedException if invoked on a read-only instance.
+	 *	@throws	CFNotSupportedException if invoked on a read-only instance.
 	 */
 	void deleteInstance();
 </GenRule>

@@ -69,7 +69,7 @@ import $reference ManufacturingSchema lower JavaPackage$.$reference Manufacturin
  */
 abstract public class $SchemaName$SecurityCache implements I$SchemaName$SecurityControl, I$SchemaName$SecurityService
 {
-	private ConcurrentHashMap&lt;YCFDbKeyHash256,UserEntry&gt; userById = new ConcurrentHashMap&lt;&gt;();
+	private ConcurrentHashMap&lt;CFDbKeyHash256,UserEntry&gt; userById = new ConcurrentHashMap&lt;&gt;();
 	private ConcurrentHashMap&lt;String,UserEntry&gt; userByLogin = new ConcurrentHashMap&lt;&gt;();
 
 	/**
@@ -88,7 +88,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 *	@param userLogin 
 	 *	@return null if the userLogin does not exist, is null, is empty, or is blank. Otherwise the DbKey for the user.
 	 */
-	public abstract YCFDbKeyHash256 mapUserLoginToUserId(String userLogin);
+	public abstract CFDbKeyHash256 mapUserLoginToUserId(String userLogin);
 
 	/**
 	 *	Map the userId DbKey to the userLogin string.
@@ -96,7 +96,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 *	@param userId
 	 *	@return null if the userId does not exist or is null. Otherwise the userLogin for the user.
 	 */
-	public abstract String mapUserIdToUserLogin(YCFDbKeyHash256 userId);
+	public abstract String mapUserIdToUserLogin(CFDbKeyHash256 userId);
 
 	/**
 	 *	Probe the back-end SecRole*, SecTent* security tables, then the SecClus* security tables, and finally the SecSys* tables
@@ -110,7 +110,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 *
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
-	public abstract boolean probeMemberOfTenantGroup(YCFDbKeyHash256 userId, YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, String permissionName);
+	public abstract boolean probeMemberOfTenantGroup(CFDbKeyHash256 userId, CFDbKeyHash256 clusterId, CFDbKeyHash256 tenantId, String permissionName);
 
 	/**
 	 *	Probe the back-end SecRole*, SecClus* security tables, and finally the SecSys* tables in order until a probe authorizes
@@ -123,7 +123,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 *
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
-	public abstract boolean probeMemberOfClusterGroup(YCFDbKeyHash256 userId, YCFDbKeyHash256 clusterId, String permissionName);
+	public abstract boolean probeMemberOfClusterGroup(CFDbKeyHash256 userId, CFDbKeyHash256 clusterId, String permissionName);
 
 	/**
 	 *	Probe the back-end SecRole*, and SecSys* tables until a probe authorizes the users access to the permission role or group.
@@ -134,7 +134,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 *
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
-	public abstract boolean probeMemberOfSystemGroup(YCFDbKeyHash256 userId, String permissionName);
+	public abstract boolean probeMemberOfSystemGroup(CFDbKeyHash256 userId, String permissionName);
 
 	/***** I$SchemaName$SecurityService implementation */
 
@@ -151,7 +151,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
 	@Override
-	public boolean isMemberOfTenantGroup(String userLogin, YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, String permissionName) {
+	public boolean isMemberOfTenantGroup(String userLogin, CFDbKeyHash256 clusterId, CFDbKeyHash256 tenantId, String permissionName) {
 		UserEntry entry = resolveUserEntry(userLogin);
 		if( entry == null ) {
 			return( false );
@@ -172,7 +172,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 *	@return true if the user is a member of the tenant role or group, the equivalent cluster admin role or group, or the equivalent system admin role or group, otherwise false.
 	 */
 	@Override
-	public boolean isMemberOfTenantGroup(YCFDbKeyHash256 userId, YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, String permissionName) {
+	public boolean isMemberOfTenantGroup(CFDbKeyHash256 userId, CFDbKeyHash256 clusterId, CFDbKeyHash256 tenantId, String permissionName) {
 		UserEntry entry = resolveUserEntry(userId);
 		if( entry == null ) {
 			return( false );
@@ -192,7 +192,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 *	@return true if the user is a member of the cluster role or group or the equivalent system admin role or group, otherwise false.
 	 */
 	@Override
-	public boolean isMemberOfClusterGroup(String userLogin, YCFDbKeyHash256 clusterId, String permissionName) {
+	public boolean isMemberOfClusterGroup(String userLogin, CFDbKeyHash256 clusterId, String permissionName) {
 		UserEntry entry = resolveUserEntry(userLogin);
 		if( entry == null ) {
 			return( false );
@@ -212,7 +212,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 *	@return true if the user is a member of the cluster role or group or the equivalent system admin role or group, otherwise false.
 	 */
 	@Override
-	public boolean isMemberOfClusterGroup(YCFDbKeyHash256 userId, YCFDbKeyHash256 clusterId, String permissionName) {
+	public boolean isMemberOfClusterGroup(CFDbKeyHash256 userId, CFDbKeyHash256 clusterId, String permissionName) {
 		UserEntry entry = resolveUserEntry(userId);
 		if( entry == null ) {
 			return( false );
@@ -246,7 +246,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 *	@return true if the user is a member of the specified system role or group, otherwise false.
 	 */
 	@Override
-	public boolean isMemberOfSystemGroup(YCFDbKeyHash256 userId, String permissionName) {
+	public boolean isMemberOfSystemGroup(CFDbKeyHash256 userId, String permissionName) {
 		UserEntry entry = resolveUserEntry(userId);
 		if( entry == null ) {
 			return( false );
@@ -264,7 +264,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 */
 	@Override
 	public boolean registerInterest(I$SecSchemaName$ProtSecurityControl securityControl) {
-		throw new YCFNotImplementedYetException(getClass(), "registerInterest");
+		throw new CFNotImplementedYetException(getClass(), "registerInterest");
 	}
 
 	/**
@@ -276,7 +276,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 */
 	@Override
 	public boolean forgetInterest(I$SecSchemaName$ProtSecurityControl securityControl) {
-		throw new YCFNotImplementedYetException(getClass(), "forgetInterest");
+		throw new CFNotImplementedYetException(getClass(), "forgetInterest");
 	}
 
 	/**
@@ -288,7 +288,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 */
 	@Override
 	public boolean isInterested(I$SecSchemaName$ProtSecurityControl securityControl) {
-		throw new YCFNotImplementedYetException(getClass(), "isInterested");
+		throw new CFNotImplementedYetException(getClass(), "isInterested");
 	}
 
 	/**
@@ -296,7 +296,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 */
 	@Override
 	public void forgetAllInterests() {
-		throw new YCFNotImplementedYetException(getClass(), "forgetAllInterests");
+		throw new CFNotImplementedYetException(getClass(), "forgetAllInterests");
 	}
 
 	/***** I$SchemaName$SecurityControl implementation */
@@ -323,19 +323,19 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	 *	@param permissionNames List of permission name strings
 	 */
 	public void forgetAbout(List&lt;String&gt; userLogins,
-		List&lt;YCFDbKeyHash256&gt; userIds,
-		List&lt;YCFDbKeyHash256&gt; clusterIds,
-		List&lt;YCFDbKeyHash256&gt; tenantIds,
+		List&lt;CFDbKeyHash256&gt; userIds,
+		List&lt;CFDbKeyHash256&gt; clusterIds,
+		List&lt;CFDbKeyHash256&gt; tenantIds,
 		List&lt;String&gt; permissionNames)
 	{
-		throw new YCFNotImplementedYetException(getClass(), "forgetAbout");
+		throw new CFNotImplementedYetException(getClass(), "forgetAbout");
 	}
 
 	/**
 	 *	Forget about everything; reset the controlled cache.  Does not forget interest registrations.
 	 */
 	public void forgetAll() {
-		throw new YCFNotImplementedYetException(getClass(), "forgetAll");
+		throw new CFNotImplementedYetException(getClass(), "forgetAll");
 	}
 
 	/***** Internal Implementation Classes And Methods *****/
@@ -346,7 +346,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 		}
 		UserEntry entry = userByLogin.get(userLogin);
 		if (entry == null) {
-			YCFDbKeyHash256 userId = mapUserLoginToUserId(userLogin);
+			CFDbKeyHash256 userId = mapUserLoginToUserId(userLogin);
 			if (userId != null &amp;&amp; !userId.isNull()) {
 				entry = new UserEntry();
 				entry.userId = userId;
@@ -361,7 +361,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 		return( entry );
 	}
 
-	private UserEntry resolveUserEntry(YCFDbKeyHash256 userId) {
+	private UserEntry resolveUserEntry(CFDbKeyHash256 userId) {
 		if (userId == null || userId.isNull()) {
 			return( null );
 		}
@@ -383,7 +383,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 	}
 
 	class UserEntry {
-		YCFDbKeyHash256 userId;
+		CFDbKeyHash256 userId;
 		String userLogin;
 		long acquiredMillis;
 		long lastUsedMillis;
@@ -391,7 +391,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 		ConcurrentHashMap&lt;String,KeyedPermission&gt; clusPerms = new ConcurrentHashMap&lt;&gt;();
 		ConcurrentHashMap&lt;String,KeyedPermission&gt; tentPerms = new ConcurrentHashMap&lt;&gt;();
 
-		boolean isMemberOfTenantGroup(YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, String permissionName) {
+		boolean isMemberOfTenantGroup(CFDbKeyHash256 clusterId, CFDbKeyHash256 tenantId, String permissionName) {
 			KeyedPermission keyperm = tentPerms.get(permissionName);
 			if (keyperm == null) {
 				boolean result = probeMemberOfTenantGroup(userId, clusterId, tenantId, permissionName);
@@ -422,7 +422,7 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 			}
 		}
 
-		boolean isMemberOfClusterGroup(YCFDbKeyHash256 clusterId, String permissionName) {
+		boolean isMemberOfClusterGroup(CFDbKeyHash256 clusterId, String permissionName) {
 			KeyedPermission keyperm = clusPerms.get(permissionName);
 			if (keyperm == null) {
 				boolean result = probeMemberOfClusterGroup(userId, clusterId, permissionName);
@@ -473,18 +473,18 @@ abstract public class $SchemaName$SecurityCache implements I$SchemaName$Security
 		}
 	}
 
-	class PermissioYCFCore {
+	class PermissioCFCore {
 		String permissionName; // key
 		long acquiredMillis;
 		long lastUsedMillis;
 	}
 
-	class SysPermission extends PermissioYCFCore {
+	class SysPermission extends PermissioCFCore {
 		boolean granted;
 	}
 
-	class KeyedPermission extends PermissioYCFCore {
-		ConcurrentHashMap&lt;YCFDbKeyHash256,Boolean&gt; keyMap = new ConcurrentHashMap&lt;&gt;();
+	class KeyedPermission extends PermissioCFCore {
+		ConcurrentHashMap&lt;CFDbKeyHash256,Boolean&gt; keyMap = new ConcurrentHashMap&lt;&gt;();
 	}
 }
 </GenFile>

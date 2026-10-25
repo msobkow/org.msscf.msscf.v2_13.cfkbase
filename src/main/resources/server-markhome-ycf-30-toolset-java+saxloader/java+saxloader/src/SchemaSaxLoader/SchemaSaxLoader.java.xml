@@ -47,7 +47,7 @@ package $reference ManufacturingSchema lower JavaPackage$.$reference Manufacturi
 $SchemaSaxLoaderImports$
 
 public class $SchemaName$SaxLoader
-	extends YCFLibXmlCoreSaxParser
+	extends CFLibXmlCoreSaxParser
 	implements ContentHandler
 {
 $implSchemaSaxLoaderSchemaConstants$
@@ -92,7 +92,7 @@ import java.text.*;
 import java.util.*;
 import javax.naming.*;
 import javax.sql.*;
-import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.codec.binaryCFCore64;
 import org.xml.sax.*;
 
 import server.markhome.ycf.*;
@@ -168,7 +168,7 @@ $iterate SchemaTables( each implSchemaSaxLoaderDeclLoaderBehaviour empty empty )
 </GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLoaderConstructorLogger">
-	public $SchemaName$SaxLoader( IYCFLibMessageLog logger ) {
+	public $SchemaName$SaxLoader( ICFLibMessageLog logger ) {
 		super( logger );
 		setRootElementHandler( getSaxRootHandler() );
 		initParser();
@@ -244,12 +244,12 @@ $iterate SchemaTables( each implSchemaSaxLoaderDeclLoaderBehaviour empty empty )
 	}</GenRule>
 
 	<GenRule GenDef="Table" Name="implAttrWireElementHandler"
-		>$switch HasSuperClassRelation yes implAttrWireSuperElementHandler default implAttrWirYCFCoreElementHandler$</GenRule>
+		>$switch HasSuperClassRelation yes implAttrWireSuperElementHandler default implAttrWirCFCoreElementHandler$</GenRule>
 
 	<GenRule GenDef="Table" Name="implAttrWireSuperElementHandler"
 		>$reference SuperClassRelation reference ToTable implAttrWireElementHandler$$iterate Columns( each implXmlElementNameAttrWireElementHandler empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implAttrWirYCFCoreElementHandler"
+	<GenRule GenDef="Table" Name="implAttrWirCFCoreElementHandler"
 		>$iterate Columns( each implXmlElementNameAttrWireElementHandler empty empty )$</GenRule>
 
 	<GenRule GenDef="Value" Name="implXmlElementNameAttrWireElementHandler"
@@ -262,12 +262,12 @@ $iterate SchemaTables( each implSchemaSaxLoaderDeclLoaderBehaviour empty empty )
 			$leadlower poptop Table TableName$Handler.addElementHandler( "$XmlElementName$", get$TableName$$XmlElementName$Handler() );</GenRule>
 
 	<GenRule GenDef="Table" Name="implComponentWireElementHandler"
-		>$switch HasSuperClassRelation yes implComponentWireInhElementHandler default implComponentWirYCFCoreElementHandler$</GenRule>
+		>$switch HasSuperClassRelation yes implComponentWireInhElementHandler default implComponentWirCFCoreElementHandler$</GenRule>
 
 	<GenRule GenDef="Table" Name="implComponentWireInhElementHandler"
 		>$reference SuperClassRelation reference ToTable implComponentWireElementHandler$$iterate Relation( each implComponentWireElementHandler empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implComponentWirYCFCoreElementHandler"
+	<GenRule GenDef="Table" Name="implComponentWirCFCoreElementHandler"
 		>$iterate Relation( each implComponentWireElementHandler empty empty )$</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLoaderGetRootElementHandler">
@@ -318,7 +318,7 @@ $iterate SchemaTables( each implSchemaSaxLoaderDeclLoaderBehaviour empty empty )
 	 *	$SchemaName$SaxRootHandler XML SAX Root Element Handler implementation
 	 */
 	public class $SchemaName$SaxRootHandler
-		extends YCFLibXmlCoreElementHandler
+		extends CFLibXmlCoreElementHandler
 	{$implConstructSaxRootHandler$$implSaxRootHandlerStartElement$$implSaxRootHandlerEndElement$	}
 </GenRule>
 
@@ -354,7 +354,7 @@ $iterate SchemaTables( each implSchemaSaxLoaderDeclLoaderBehaviour empty empty )
 	 *	$SchemaName$SaxDocHandler XML SAX Doc Element Handler implementation
 	 */
 	public class $SchemaName$SaxDocHandler
-		extends YCFLibXmlCoreElementHandler
+		extends CFLibXmlCoreElementHandler
 	{$implConstructSaxDocHandler$$implSaxDocHandlerStartElement$$implSaxDocHandlerEndElement$	}
 </GenRule>
 

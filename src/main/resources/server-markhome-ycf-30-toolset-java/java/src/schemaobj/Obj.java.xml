@@ -50,11 +50,11 @@ import java.sql.*;
 import java.text.*;
 import java.time.*;
 import java.util.*;
-import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.codec.binaryCFCore64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;
-import server.markhome.ycf.YCFXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$switch HasDefSchema no importJavaProtPackageSchemaName default empty$$switch HasDefSchema no importJavaPackageSchemaName default empty$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$switch HasDefSchema no importJavaProtPackageSchemaNameObj default empty$$JavaObjImport$
+import server.markhome.ycf.CFXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$switch HasDefSchema no importJavaProtPackageSchemaName default empty$$switch HasDefSchema no importJavaPackageSchemaName default empty$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$switch HasDefSchema no importJavaProtPackageSchemaNameObj default empty$$JavaObjImport$
 
 public class $SchemaName$$TableName$Obj
 $switch HasSuperClassRelation yes implObjExtendSuperClassImplements default implObjTabImplementsSpace$I$SchemaName$$TableName$Obj
@@ -168,23 +168,23 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 
 	<GenRule GenDef="Table" Name="implGetQualNamedObject">
 	@Override
-	public IYCFAnyObj getNamedObject( Class qualifyingClass, String objName ) {
-		IYCFAnyObj topContainer = getObjQualifier( qualifyingClass );
+	public ICFAnyObj getNamedObject( Class qualifyingClass, String objName ) {
+		ICFAnyObj topContainer = getObjQualifier( qualifyingClass );
 		if( topContainer == null ) {
 			return( null );
 		}
-		IYCFAnyObj namedObject = topContainer.getNamedObject( objName );
+		ICFAnyObj namedObject = topContainer.getNamedObject( objName );
 		return( namedObject );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implGetNamedObject">
 	@Override
-	public IYCFAnyObj getNamedObject( String objName ) {
+	public ICFAnyObj getNamedObject( String objName ) {
 		String nextName;
 		String remainingName;
-		IYCFAnyObj subObj = null;
-		IYCFAnyObj retObj;
+		ICFAnyObj subObj = null;
+		ICFAnyObj retObj;
 		int nextDot = objName.indexOf( '.' );
 		if( nextDot &gt;= 0 ) {
 			nextName = objName.substring( 0, nextDot );
@@ -211,12 +211,12 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		>$switch TableName Tenant implGetNamedObjectOnlyProbeTldComponent default implGetNamedObjectProbeXsdComponents$</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetNamedObjectOnlyProbeTldComponent"
-		>$switch HasSuperClassRelation yes implGetNamedObjectOnlyProbeInhTldComponent default implGetNamedObjectOnlyProbYCFCoreTldComponent$</GenRule>
+		>$switch HasSuperClassRelation yes implGetNamedObjectOnlyProbeInhTldComponent default implGetNamedObjectOnlyProbCFCoreTldComponent$</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetNamedObjectOnlyProbeInhTldComponent"
 		>$reference SuperClassRelation reference ToTable implGetNamedObjectOnlyProbeTldComponent$$iterate Relation( each implGetNamedObjectOnlyProbeTldComponent empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implGetNamedObjectOnlyProbYCFCoreTldComponent"
+	<GenRule GenDef="Table" Name="implGetNamedObjectOnlyProbCFCoreTldComponent"
 		>$iterate Relation( each implGetNamedObjectOnlyProbeTldComponent empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implGetNamedObjectOnlyProbeTldComponent"
@@ -238,12 +238,12 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		>$<!--switch ToTableName Tld -->implGetNamedObjectProbeXsdComponentByName<!-- default empty-->$</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetNamedObjectProbeXsdComponents"
-		>$switch HasSuperClassRelation yes implGetNamedObjectProbeSuperXsdComponents default implGetNamedObjectProbYCFCoreXsdComponents$</GenRule>
+		>$switch HasSuperClassRelation yes implGetNamedObjectProbeSuperXsdComponents default implGetNamedObjectProbCFCoreXsdComponents$</GenRule>
 
 	<GenRule GenDef="Table" Name="implGetNamedObjectProbeSuperXsdComponents"
 		>$reference SuperClassRelation reference ToTable implGetNamedObjectProbeComponents$$iterate Relation( each implGetNamedObjectProbeComponent empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implGetNamedObjectProbYCFCoreXsdComponents"
+	<GenRule GenDef="Table" Name="implGetNamedObjectProbCFCoreXsdComponents"
 		>$iterate Relation( each implGetNamedObjectProbeComponent empty empty )$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implGetNamedObjectProbeComponent"
@@ -292,7 +292,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetNamedObjectConvertNextNameToIntrinsic">$switch IsNullable yes implGetNamedObjectConvertNextNameToOptional default implGetNamedObjectConvertNextNameToRequired$</GenRule>
 	
 	<GenRule GenDef="Value" Name="implGetNamedObjectConvertNextNameToOptional">$switch BaseModelAtomClass
-			BlobDef ErrorCannotConvertNextNameToBlobInObjYCFCore
+			BlobDef ErrorCannotConvertNextNameToBlobInObjCFCore
 			BoolDef implConvertNextNameToBoolOptional
 			EnumDef implConvertNextNameToEnumOptional
 			Id16Gen implConvertNextNameToInt16Optional
@@ -334,7 +334,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			NmTokenDef implConvertNextNameToStringOptional
 			NmTokensDef implConvertNextNameToStringOptional
 			TextDef implConvertNextNameToStringOptional
-			default ErrorUnrecognizeYCFCoreModelAtomClassInObjYCFCore$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClassInObjCFCore$</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToStringOptional">$implIJavaAtomType$ natNextName = nextName</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToBoolOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Boolean.parseBoolean(nextName) : null</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToEnumOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? $EffCodeVisSchemaName$.parse$Name$(nextName): null</GenRule>
@@ -347,23 +347,23 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Object" Name="implConvertNextNameToFloatOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Float.parseFloat(nextName) : null</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDoubleOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Double.parseDouble(nextName) : null</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToNumberOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? Number.parseNumber(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDateOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? YCFXmlUtil.parseDate(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToTimeOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? YCFXmlUtil.parseTime(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToTimestampOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? YCFXmlUtil.parseTimestamp(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToTZDateOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? : YCFXmlUtil.parseTZDate(nextName) null</GenRule>`
-	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimeOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? YCFXmlUtil.parseTZTime(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimestampOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? YCFXmlUtil.parseTZTimestamp(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash128Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? YCFDbKeyHash128.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash160Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? YCFDbKeyHash160.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash224Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? YCFDbKeyHash224.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash256Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? YCFDbKeyHash256.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash384Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? YCFDbKeyHash384.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash512Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? YCFDbKeyHash512.fromHex(nextName) : null</GenRule>
-	<GenRule GenDef="Object" Name="implConvertNextNameToUuid6Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? IYCFUuid6.fromString(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDateOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFXmlUtil.parseDate(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTimeOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFXmlUtil.parseTime(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTimestampOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFXmlUtil.parseTimestamp(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZDateOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? : CFXmlUtil.parseTZDate(nextName) null</GenRule>`
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimeOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFXmlUtil.parseTZTime(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimestampOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFXmlUtil.parseTZTimestamp(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash128Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFDbKeyHash128.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash160Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFDbKeyHash160.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash224Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFDbKeyHash224.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash256Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFDbKeyHash256.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash384Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFDbKeyHash384.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash512Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? CFDbKeyHash512.fromHex(nextName) : null</GenRule>
+	<GenRule GenDef="Object" Name="implConvertNextNameToUuid6Optional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? ICFUuid6.fromString(nextName) : null</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUuidOptional">$implIJavaAtomType$ natNextName = ((nextName != null) &amp;&amp; !nextName.isEmpty()) ? UUID.fromString(nextName) : null</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetNamedObjectConvertNextNameToRequired">$switch BaseModelAtomClass
-			BlobDef ErrorCannotConvertNextNameToBlobInObjYCFCore
+			BlobDef ErrorCannotConvertNextNameToBlobInObjCFCore
 			BoolDef implConvertNextNameToBoolRequired
 			EnumDef implConvertNextNameToEnumRequired
 			Id16Gen implConvertNextNameToInt16Required
@@ -405,109 +405,109 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			NmTokenDef implConvertNextNameToStringRequired
 			NmTokensDef implConvertNextNameToStringRequired
 			TextDef implConvertNextNameToStringRequired
-			default ErrorUnrecognizeYCFCoreModelAtomClassInObjYCFCore$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClassInObjCFCore$</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToStringRequired">if (nextName == null) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = nextName</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToBoolRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Boolean.parseBoolean(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToEnumRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = $EffCodeVisSchemaName$.parse$Name$(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToInt16Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Short.parseShort(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToInt32Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Integer.parseInteger(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToInt64Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Long.parseLong(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUInt16Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Integer.parseInteger(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUInt32Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Long.parseLong(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUInt64Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Number.parseNumber(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToFloatRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Float.parseFloat(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDoubleRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Double.parseDouble(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToNumberRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = Number.parseNumber(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDateRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFXmlUtil.parseDate(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = CFXmlUtil.parseDate(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToTimeRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFXmlUtil.parseTime(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = CFXmlUtil.parseTime(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToTimestampRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFXmlUtil.parseTimestamp(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = CFXmlUtil.parseTimestamp(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToTZDateRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFXmlUtil.parseTZDate(nextName)</GenRule>`
+				$implIJavaAtomType$ natNextName = CFXmlUtil.parseTZDate(nextName)</GenRule>`
 	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimeRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFXmlUtil.parseTZTime(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = CFXmlUtil.parseTZTime(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToTZTimestampRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFXmlUtil.parseTZTimestamp(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = CFXmlUtil.parseTZTimestamp(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash128Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFDbKeyHash128.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = CFDbKeyHash128.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash160Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFDbKeyHash160.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = CFDbKeyHash160.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash224Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFDbKeyHash224.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = CFDbKeyHash224.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash256Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFDbKeyHash256.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = CFDbKeyHash256.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash384Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFDbKeyHash384.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = CFDbKeyHash384.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToDbKeyHash512Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = YCFDbKeyHash512.fromHex(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = CFDbKeyHash512.fromHex(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUuid6Required">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
-				$implIJavaAtomType$ natNextName = IYCFUuid6.fromString(nextName)</GenRule>
+				$implIJavaAtomType$ natNextName = ICFUuid6.fromString(nextName)</GenRule>
 	<GenRule GenDef="Object" Name="implConvertNextNameToUuidRequired">if (nextName == null || (nextName != null &amp;&amp; nextName.isEmpty())) {
-					throw new YCFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
+					throw new CFNullArgumentException(getClass(), "getNamedObject", 0, "Required$Name$");
 				}
 				$implIJavaAtomType$ natNextName = UUID.fromString(nextName)</GenRule>
 	
@@ -550,8 +550,8 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 
 	<GenRule GenDef="Table" Name="implGetObjQualifier">
 	@Override
-	public IYCFAnyObj getObjQualifier( Class qualifyingClass ) {
-		IYCFAnyObj container = this;
+	public ICFAnyObj getObjQualifier( Class qualifyingClass ) {
+		ICFAnyObj container = this;
 		if( qualifyingClass != null ) {
 			while( container != null ) {
 				if( container instanceof I$SchemaName$ClusterObj ) {
@@ -588,7 +588,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	@Override
 	public String getObjQualifiedName() {
 		String qualName = getObjName();
-		IYCFAnyObj container = getObjScope();
+		ICFAnyObj container = getObjScope();
 		String containerName;
 		while( container != null ) {
 			if( container instanceof I$SecSchemaName$ClusterObj ) {
@@ -619,7 +619,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	@Override
 	public String getObjFullName() {
 		String fullName = getObjName();
-		IYCFAnyObj container = getObjScope();
+		ICFAnyObj container = getObjScope();
 		String containerName;
 		while( container != null ) {
 			if( container instanceof I$SecSchemaName$ClusterObj ) {
@@ -651,7 +651,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcReqName"
 		>$switch BaseModelAtomClass
-			BlobDef ErrorUnsupporteYCFCoreModelAtomClass
+			BlobDef ErrorUnsupporteCFCoreModelAtomClass
 			BoolDef implGetObjNameCalcBoolReqName
 			EnumDef implGetObjNameCalcInt16ReqName
 			Id16Gen implGetObjNameCalcInt16ReqName
@@ -678,14 +678,14 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			UInt16Def implGetObjNameCalcUInt16ReqName
 			UInt32Def implGetObjNameCalcUInt32ReqName
 			UInt64Def implGetObjNameCalcUInt64ReqName
-			FloatDef ErrorUnsupporteYCFCoreModelAtomClass
-			DoubleDef ErrorUnsupporteYCFCoreModelAtomClass
-			NumberDef ErrorUnsupporteYCFCoreModelAtomClass
+			FloatDef ErrorUnsupporteCFCoreModelAtomClass
+			DoubleDef ErrorUnsupporteCFCoreModelAtomClass
+			NumberDef ErrorUnsupporteCFCoreModelAtomClass
 			StringDef implGetObjNameCalcStringReqName
 			TokenDef implGetObjNameCalcStringReqName
 			NmTokenDef implGetObjNameCalcStringReqName
-			NmTokensDef ErrorUnsupporteYCFCoreModelAtomClass
-			TextDef ErrorUnsupporteYCFCoreModelAtomClass
+			NmTokensDef ErrorUnsupporteCFCoreModelAtomClass
+			TextDef ErrorUnsupporteCFCoreModelAtomClass
 			DateDef implGetObjNameCalcDateReqName
 			TimeDef implGetObjNameCalcTimeReqName
 			TimestampDef implGetObjNameCalcTimestampReqName
@@ -693,11 +693,11 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			TZTimeDef implGetObjNameCalcTZTimeReqName
 			TZTimestampDef implGetObjNameCalcTZTimestampReqName
 			UuidDef implGetObjNameCalcUuidReqName
-			default ErrorUnrecognizeYCFCoreModelAtomClass$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcOptName"
 		>$switch BaseModelAtomClass
-			BlobDef ErrorUnsupporteYCFCoreModelAtomClass
+			BlobDef ErrorUnsupporteCFCoreModelAtomClass
 			BoolDef implGetObjNameCalcBoolOptName
 			Id16Gen implGetObjNameCalcInt16OptName
 			Id32Gen implGetObjNameCalcInt32OptName
@@ -723,21 +723,21 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			UInt16Def implGetObjNameCalcUInt16OptName
 			UInt32Def implGetObjNameCalcUInt32OptName
 			UInt64Def implGetObjNameCalcUInt64OptName
-			FloatDef ErrorUnsupporteYCFCoreModelAtomClass
-			DoubleDef ErrorUnsupporteYCFCoreModelAtomClass
-			NumberDef ErrorUnsupporteYCFCoreModelAtomClass
+			FloatDef ErrorUnsupporteCFCoreModelAtomClass
+			DoubleDef ErrorUnsupporteCFCoreModelAtomClass
+			NumberDef ErrorUnsupporteCFCoreModelAtomClass
 			StringDef implGetObjNameCalcStringOptName
 			TokenDef implGetObjNameCalcStringOptName
 			NmTokenDef implGetObjNameCalcStringOptName
-			NmTokensDef ErrorUnsupporteYCFCoreModelAtomClass
-			TextDef ErrorUnsupporteYCFCoreModelAtomClass
+			NmTokensDef ErrorUnsupporteCFCoreModelAtomClass
+			TextDef ErrorUnsupporteCFCoreModelAtomClass
 			TimeDef implGetObjNameCalcTimeOptName
 			TimestampDef implGetObjNameCalcTimestampOptName
 			TZDateDef implGetObjNameCalcTZDateOptName
 			TZTimeDef implGetObjNameCalcTZTimeOptName
 			TZTimestampDef implGetObjNameCalcTZTimestampOptName
 			UuidDef implGetObjNameCalcUuidOptName
-			default ErrorUnrecognizeYCFCoreModelAtomClass$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcBoolReqName">
 		if( rec.get$OptionalOrRequired$$Name$() ) {
@@ -773,7 +773,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		objName = Short.toString( val );</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash128ReqName">
-		YCFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -781,7 +781,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash160ReqName">
-		YCFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -789,7 +789,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash224ReqName">
-		YCFDbKeyHash224 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash224 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -797,7 +797,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash256ReqName">
-		YCFDbKeyHash256 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash256 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -805,7 +805,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash384ReqName">
-		YCFDbKeyHash384 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash384 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -813,7 +813,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash512ReqName">
-		YCFDbKeyHash512 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash512 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -821,7 +821,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUuid6ReqName">
-		IYCFUuid6 val = rec.get$OptionalOrRequired$$Name$();
+		ICFUuid6 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -830,7 +830,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		}</GenRule>
 
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash128OptName">
-		YCFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -838,7 +838,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash160OptName">
-		YCFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash128 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -846,7 +846,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash224OptName">
-		YCFDbKeyHash224 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash224 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -854,7 +854,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash256OptName">
-		YCFDbKeyHash256 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash256 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -862,7 +862,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash384OptName">
-		YCFDbKeyHash384 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash384 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -870,7 +870,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDbKeyHash512OptName">
-		YCFDbKeyHash512 val = rec.get$OptionalOrRequired$$Name$();
+		CFDbKeyHash512 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -878,7 +878,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 			objName = "";
 		}</GenRule>
 	<GenRule GenDef="Value" Name="implGetObjNameCalcUuid6OptName">
-		IYCFUuid6 val = rec.get$OptionalOrRequired$$Name$();
+		ICFUuid6 val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
 			objName = val.toString();
 		}
@@ -975,7 +975,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDateReqName">
 		LocalDate val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatDate(val);
+			objName = CFXmlUtil.formatDate(val);
 		}
 		else {
 			objName = "";
@@ -983,7 +983,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcDateOptName">
 		LocalDate val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatDate(val);
+			objName = CFXmlUtil.formatDate(val);
 		}
 		else {
 			objName = "";
@@ -992,7 +992,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTimeReqName">
 		LocalTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatTime(val);
+			objName = CFXmlUtil.formatTime(val);
 		}
 		else {
 			objName = "";
@@ -1000,7 +1000,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTimeOptName">
 		LocalTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatTime(val);
+			objName = CFXmlUtil.formatTime(val);
 		}
 		else {
 			objName = "";
@@ -1009,7 +1009,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTimestampReqName">
 		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatTimestamp(val);
+			objName = CFXmlUtil.formatTimestamp(val);
 		}
 		else {
 			objName = "";
@@ -1017,7 +1017,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTimestampOptName">
 		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatTimestamp(val);
+			objName = CFXmlUtil.formatTimestamp(val);
 		}
 		else {
 			objName = "";
@@ -1026,7 +1026,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZDateReqName">
 		LocalDate val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatTZDate(val);
+			objName = CFXmlUtil.formatTZDate(val);
 		}
 		else {
 			objName = "";
@@ -1034,7 +1034,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZDateOptName">
 		LocalDate val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatTZDate(val);
+			objName = CFXmlUtil.formatTZDate(val);
 		}
 		else {
 			objName = "";
@@ -1043,7 +1043,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimeReqName">
 		LocalTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatTZTime(val);
+			objName = CFXmlUtil.formatTZTime(val);
 		}
 		else {
 			objName = "";
@@ -1051,7 +1051,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimeOptName">
 		LocalTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatTZTime(val);
+			objName = CFXmlUtil.formatTZTime(val);
 		}
 		else {
 			objName = "";
@@ -1060,7 +1060,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimestampReqName">
 		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatTZTimestamp(val);
+			objName = CFXmlUtil.formatTZTimestamp(val);
 		}
 		else {
 			objName = "";
@@ -1068,7 +1068,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	<GenRule GenDef="Value" Name="implGetObjNameCalcTZTimestampOptName">
 		LocalDateTime val = rec.get$OptionalOrRequired$$Name$();
 		if (val != null) {
-			objName = YCFXmlUtil.formatTZTimestamp(val);
+			objName = CFXmlUtil.formatTZTimestamp(val);
 		}
 		else {
 			objName = "";
@@ -1085,7 +1085,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 
 	<GenRule GenDef="Table" Name="implGetObjScopeNull">
 	@Override
-	public IYCFAnyObj getObjScope() {
+	public ICFAnyObj getObjScope() {
 		return( null );
 	}
 </GenRule>
@@ -1095,14 +1095,14 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 
 	<GenRule GenDef="Table" Name="implGetScopeViaSingleContainerTld">
 	@Override
-	public IYCFAnyObj getObjScope() {
+	public ICFAnyObj getObjScope() {
 		return( getRequiredContainerTenant() );
 	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implGetScopeViaSingleContainerNormal">
 	@Override
-	public IYCFAnyObj getObjScope() {$iterate ContainerRelations( first implGetScopeViaSingleContainerBody each empty empty maybeImplGetObjScopeViaSingleInheritedContainerBody )$
+	public ICFAnyObj getObjScope() {$iterate ContainerRelations( first implGetScopeViaSingleContainerBody each empty empty maybeImplGetObjScopeViaSingleInheritedContainerBody )$
 	}
 </GenRule>
 
@@ -1127,7 +1127,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 
 	<GenRule GenDef="Table" Name="implGetScopeViaMultipleContainer">
 	@Override
-	public IYCFAnyObj getObjScope() {$iterate ContainerRelations( first implGetScopeViaMultipleContainerBody each empty empty empty )$
+	public ICFAnyObj getObjScope() {$iterate ContainerRelations( first implGetScopeViaMultipleContainerBody each empty empty empty )$
 	}
 </GenRule>
 
@@ -1156,7 +1156,7 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 	@Override
 	public I$reference BaseClass DefSchemaName$$reference BaseClass TableName$EditObj beginEdit() {
 		if( edit != null ) {
-			throw new YCFEditAlreadyOpenException( getClass(), "beginEdit" );
+			throw new CFEditAlreadyOpenException( getClass(), "beginEdit" );
 		}
 		I$DefSchemaName$$TableName$Obj lockobj;
 		if( getIsNew() ) {
@@ -1297,8 +1297,8 @@ $implSchemaObjMethods$$iterate ServerMethods( each implJavaObjServerMethod empty
 		<!--$reference ToIndex implToIndexSuffix$</GenRule -->
 	<GenRule GenDef="Index" Name="implToIndexSuffix"
 		>$Suffix$</GenRule>
-		<!-->$switch IsPrimaryIndex yes implToIndeYCFCorePrimarySuffix default Suffix$</GenRule-->
-	<GenRule GenDef="Index" Name="implToIndeYCFCorePrimarySuffix"
+		<!-->$switch IsPrimaryIndex yes implToIndeCFCorePrimarySuffix default Suffix$</GenRule-->
+	<GenRule GenDef="Index" Name="implToIndeCFCorePrimarySuffix"
 		>$reference BaseClass reference PrimaryKeyIndex Suffix$</GenRule>
 
 	<GenRule GenDef="Relation" Name="implObjRelationSingletonAccessors">
@@ -1435,36 +1435,36 @@ $			if( ! anyMissing ) {
 
 	<GenRule GenDef="TableCol" Name="implObjColumnAccessors"
 		>$switch InSuperiorRelation yes implObjColumnGetter default implObjColumnGetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implObjColumnGetter">$switch ColumnInPrimaryIndex	yes implObjColumYCFCorePKeyGetter default implObjColumnDataGetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implObjColumnSetter">$switch ColumnInPrimaryIndex yes implObjColumYCFCorePKeySetter default implObjColumnDataSetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes implObjColumYCFCorePKeyGetter default implObjColumnDataGetter$$switch ColumnInPrimaryIndex yes implObjColumYCFCorePKeySetter default implObjColumnDataSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnGetter">$switch ColumnInPrimaryIndex	yes implObjColumCFCorePKeyGetter default implObjColumnDataGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnSetter">$switch ColumnInPrimaryIndex yes implObjColumCFCorePKeySetter default implObjColumnDataSetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes implObjColumCFCorePKeyGetter default implObjColumnDataGetter$$switch ColumnInPrimaryIndex yes implObjColumCFCorePKeySetter default implObjColumnDataSetter$</GenRule>
 
 	<GenRule GenDef="Atom" Name="implObjColumnAccessors"
 		>$switch InSuperiorRelation yes implObjColumnGetter default implObjColumnGetter$</GenRule>
-	<GenRule GenDef="Atom" Name="implObjColumnGetter">$switch ColumnInPrimaryIndex	yes implObjColumYCFCorePKeyGetter default implObjColumnDataGetter$</GenRule>
-	<GenRule GenDef="Atom" Name="implObjColumnSetter">$switch ColumnInPrimaryIndex yes implObjColumYCFCorePKeySetter default implObjColumnDataSetter$</GenRule>
-	<GenRule GenDef="Atom" Name="implObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes implObjColumYCFCorePKeyGetter default implObjColumnDataGetter$$switch ColumnInPrimaryIndex yes implObjColumYCFCorePKeySetter default implObjColumnDataSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnGetter">$switch ColumnInPrimaryIndex	yes implObjColumCFCorePKeyGetter default implObjColumnDataGetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnSetter">$switch ColumnInPrimaryIndex yes implObjColumCFCorePKeySetter default implObjColumnDataSetter$</GenRule>
+	<GenRule GenDef="Atom" Name="implObjColumnGetterSetter">$switch ColumnInPrimaryIndex yes implObjColumCFCorePKeyGetter default implObjColumnDataGetter$$switch ColumnInPrimaryIndex yes implObjColumCFCorePKeySetter default implObjColumnDataSetter$</GenRule>
 
-	<GenRule ScopeDef="Table" GenDef="TableCol" Name="IYCFCoreTable"
-		>$popto Table IYCFCoreTable$</GenRule>
-	<GenRule ScopeDef="Table" GenDef="Atom" Name="IYCFCoreTable"
-		>$popto Table IYCFCoreTable$</GenRule>
+	<GenRule ScopeDef="Table" GenDef="TableCol" Name="ICFCoreTable"
+		>$popto Table ICFCoreTable$</GenRule>
+	<GenRule ScopeDef="Table" GenDef="Atom" Name="ICFCoreTable"
+		>$popto Table ICFCoreTable$</GenRule>
 
 	<GenRule GenDef="TableCol" Name="HasSuperClassRelation"
 		>$reference Table HasSuperClassRelation$</GenRule>
 	<GenRule GenDef="Atom" Name="HasSuperClassRelation"
 		>$reference Table HasSuperClassRelation$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implObjColumYCFCorePKeyGetter">$reference Column implObjColumYCFCorePKeyGetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implObjColumYCFCorePKeyGetter"
+	<GenRule GenDef="IndexCol" Name="implObjColumCFCorePKeyGetter">$reference Column implObjColumCFCorePKeyGetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumCFCorePKeyGetter"
 		>$switch HasSuperClassRelation no implObjColumnROPKeyAccessor default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="implObjColumYCFCorePKeyGetter"
+	<GenRule GenDef="Atom" Name="implObjColumCFCorePKeyGetter"
 		>$switch HasSuperClassRelation no implObjColumnROPKeyAccessor default empty$</GenRule>
 
-	<GenRule GenDef="IndexCol" Name="implObjColumYCFCorePKeySetter">$reference Column implObjColumYCFCorePKeySetter$</GenRule>
-	<GenRule GenDef="TableCol" Name="implObjColumYCFCorePKeySetter"
+	<GenRule GenDef="IndexCol" Name="implObjColumCFCorePKeySetter">$reference Column implObjColumCFCorePKeySetter$</GenRule>
+	<GenRule GenDef="TableCol" Name="implObjColumCFCorePKeySetter"
 		>$switch HasSuperClassRelation no implObjColumnRWPKeyAccessor default empty$</GenRule>
-	<GenRule GenDef="Atom" Name="implObjColumYCFCorePKeySetter"
+	<GenRule GenDef="Atom" Name="implObjColumCFCorePKeySetter"
 		>$switch HasSuperClassRelation no implObjColumnRWPKeyAccessor default empty$</GenRule>
 
 	<GenRule GenDef="TableCol" Name="implObjColumnROAccessor"
@@ -1827,7 +1827,7 @@ $			if( ! anyMissing ) {
 	@Override
 	public void setRec( I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ value ) {
 		if( ! ( ( value == null ) || ! ( value instanceof I$DefSchemaName$$TableName$ ) ) ) {
-			throw new YCFUnsupportedClassException( getClass(),
+			throw new CFUnsupportedClassException( getClass(),
 				"setRec",
 				"value",
 				value,
@@ -1839,12 +1839,12 @@ $			if( ! anyMissing ) {
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implObjTableSetRecClearRelations"
-		>$switch HasSuperClassRelation yes implObjTableSetRecClearInhRelations default implObjTableSetRecCleaYCFCoreRelations$</GenRule>
+		>$switch HasSuperClassRelation yes implObjTableSetRecClearInhRelations default implObjTableSetRecCleaCFCoreRelations$</GenRule>
 
 	<GenRule GenDef="Table" Name="implObjTableSetRecClearInhRelations"
 		>$reference SuperClassRelation reference ToTable implObjTableSetRecClearRelations$$iterate Relation( each implObjConstructorInitRelationAttr empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implObjTableSetRecCleaYCFCoreRelations"
+	<GenRule GenDef="Table" Name="implObjTableSetRecCleaCFCoreRelations"
 		>$iterate Relation( each implObjConstructorInitRelationAttr empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="implObjTableRecAccessors">

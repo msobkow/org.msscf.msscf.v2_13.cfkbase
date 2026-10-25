@@ -52,7 +52,7 @@ import java.sql.*;
 import java.text.*;
 import java.time.*;
 import java.util.*;
-import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.codec.binaryCFCore64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;
@@ -121,7 +121,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	/**
 	 *	Release any prepared statements allocated by this instance.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
 	void releasePreparedStatements();
 </GenRule>
@@ -180,12 +180,12 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declReadTableDerivedByIndexes"
-		>$switch HasSuperClassRelation yes declReadTableDerivedByInhIndexes default declReadTableDerivedBYCFCoreIndexes$</GenRule>
+		>$switch HasSuperClassRelation yes declReadTableDerivedByInhIndexes default declReadTableDerivedBCFCoreIndexes$</GenRule>
 
 	<GenRule GenDef="Table" Name="declReadTableDerivedByInhIndexes"
 		>$reference SuperClassRelation reference ToTable declReadTableDerivedByIndexes$$iterate Index( each declReadTableDerivedByNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declReadTableDerivedBYCFCoreIndexes"
+	<GenRule GenDef="Table" Name="declReadTableDerivedBCFCoreIndexes"
 		>$iterate Index( each declReadTableDerivedByIndex )$</GenRule>
 
 	<GenRule GenDef="Index" Name="declReadTableDerivedByNonPrimaryIndex"
@@ -197,8 +197,8 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 			default declReadTableDerivedByDuplicateIndex$</GenRule>
 
 	<GenRule GenDef="Index" Name="declReadTableSuffix"
-		>$switch IsPrimaryIndex yes declReadTablYCFCorePrimarySuffix default Suffix$</GenRule>
-	<GenRule GenDef="Index" Name="declReadTablYCFCorePrimarySuffix"
+		>$switch IsPrimaryIndex yes declReadTablCFCorePrimarySuffix default Suffix$</GenRule>
+	<GenRule GenDef="Index" Name="declReadTablCFCorePrimarySuffix"
 		>$reference Table reference BaseClass reference PrimaryKeyIndex Suffix$</GenRule>
 
 	<GenRule GenDef="Index" Name="declReadTableDerivedByUniqueIndex">
@@ -235,7 +235,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	I$DefSchemaName$$TableName$ readRec( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey );
@@ -252,7 +252,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	I$DefSchemaName$$TableName$ readRec( I$SecSchemaName$Authorization Authorization$reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaColumnArg )$ );
 </GenRule>
@@ -268,7 +268,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *	@return The record instance for the specified primary key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	I$DefSchemaName$$TableName$ lockRec( I$SecSchemaName$Authorization Authorization,
 		$ICompactedPrimaryIndexClass$ PKey );
@@ -286,12 +286,12 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declReadTableRecByIndexes"
-		>$switch HasSuperClassRelation yes declReadTableRecByInhIndexes default declReadTableRecBYCFCoreIndexes$</GenRule>
+		>$switch HasSuperClassRelation yes declReadTableRecByInhIndexes default declReadTableRecBCFCoreIndexes$</GenRule>
 
 	<GenRule GenDef="Table" Name="declReadTableRecByInhIndexes"
 		>$reference SuperClassRelation reference ToTable declReadTableRecByIndexes$$iterate Index( each declReadTableRecByNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declReadTableRecBYCFCoreIndexes"
+	<GenRule GenDef="Table" Name="declReadTableRecBCFCoreIndexes"
 		>$iterate Index( each declReadTableRecByIndex )$</GenRule>
 
 	<GenRule GenDef="Index" Name="declReadTableRecByNonPrimaryIndex"
@@ -301,12 +301,12 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 		>$declReadTableRecByIndex$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPageTableRecByIndexes"
-		>$switch HasSuperClassRelation yes declPageTableRecByInhIndexes default declPageTableRecBYCFCoreIndexes$</GenRule>
+		>$switch HasSuperClassRelation yes declPageTableRecByInhIndexes default declPageTableRecBCFCoreIndexes$</GenRule>
 
 	<GenRule GenDef="Table" Name="declPageTableRecByInhIndexes"
 		>$reference SuperClassRelation reference ToTable declPageTableRecByIndexes$$iterate Index( each declPageTableRecByNonPrimaryIndex )$</GenRule>
 
-	<GenRule GenDef="Table" Name="declPageTableRecBYCFCoreIndexes"
+	<GenRule GenDef="Table" Name="declPageTableRecBCFCoreIndexes"
 		>$iterate Index( each declPageTableRecByNonPrimaryIndex )$</GenRule>
 
 	<GenRule GenDef="Index" Name="declPageTableRecByNonPrimaryIndex"
@@ -327,7 +327,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *	@return The record instance for the specified key, or null if there is
 	 *		no such existing key value.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	I$DefSchemaName$$poptop Table TableName$ readRecBy$declReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ );
 </GenRule>
@@ -340,7 +340,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@return An array of derived record instances for the specified key, potentially with 0 elements in the set.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	I$DefSchemaName$$poptop Table TableName$[] readRecBy$declReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$ );
 </GenRule>
@@ -364,7 +364,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@return An array of derived record instances for the specified key, potentially with 0 elements in the set.
 	 *
-	 *	@throws	YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws	CFNotSupportedException thrown by client-side implementations.
 	 */
 	I$DefSchemaName$$poptop Table TableName$[] pageRecBy$declReadTableSuffix$( I$SecSchemaName$Authorization Authorization$iterate Columns( each declCommaColumnArg )$$poptop Table reference BaseClass reference PrimaryKeyIndex iterate Columns( each declCommaOptPriorArg )$ );
 </GenRule>
@@ -425,7 +425,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance generating the id.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -435,7 +435,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	/**
 	 *	Get the next $Name$ id generator value.$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCommentKeyAttr empty empty )$
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -455,7 +455,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance generating the id.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -465,7 +465,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	/**
 	 *	Get the next $Name$ id generator value.$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCommentKeyAttr empty empty )$
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -478,7 +478,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance generating the id.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -488,7 +488,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	/**
 	 *	Get the next $Name$ id generator value.$reference Dispenser reference BaseClass reference PrimaryKeyIndex iterate Columns( each implCommentKeyAttr empty empty )$
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -501,7 +501,7 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 	 *
 	 *	@param	PKey	The primary key of the $TableName$ instance generating the id.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 *
 	 *	@return The next id value as generated by the cluster database.
 	 */
@@ -559,12 +559,12 @@ extends I$reference SchemaDef SchemaName$$TableName$Table</GenRule>
 </GenRule>
 
 	<GenRule GenDef="Table" Name="declDeleteTableByInheritedIndexes"
-		>$switch HasSuperClassRelation yes declDeleteTableByInhIndexes default declDeleteTableBYCFCoreIndexes$</GenRule>
+		>$switch HasSuperClassRelation yes declDeleteTableByInhIndexes default declDeleteTableBCFCoreIndexes$</GenRule>
 
 	<GenRule GenDef="Table" Name="declDeleteTableByInhIndexes"
 		>$iterate Index( each declDeleteTableByNonPrimaryIndex empty empty )$$reference SuperClassRelation reference ToTable declDeleteTableByInheritedIndexes$</GenRule>
 
-	<GenRule GenDef="Table" Name="declDeleteTableBYCFCoreIndexes"
+	<GenRule GenDef="Table" Name="declDeleteTableBCFCoreIndexes"
 		>$iterate Index( each declDeleteTableBySpecialIndex empty empty )$</GenRule>
 
 	<GenRule GenDef="Index" Name="declDeleteTableByNonPrimaryIndex"

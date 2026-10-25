@@ -51,11 +51,11 @@ import java.time.*;
 import java.util.*;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.codec.binaryCFCore64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;
-import server.markhome.ycf.YCFXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
+import server.markhome.ycf.CFXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.*;$poptop SchemaDef iterate SchemaRefs( each importJavaJpaPackageSchemaName empty empty )$
 
 /**
@@ -66,7 +66,7 @@ public class $poptop SchemaDef SchemaName$Jpa$TableName$HPKey$switch HasDefSchem
 </GenFile>
 
 	<GenRule GenDef="Table" Name="SchemaTableHPKeyImplDefBody">$switch BaseHasHistory yes emitSchemaTableHPKeyImplDefBodyAuditClusterIdPreamble default empty$
-	protected YCFDbKeyHash256 auditClusterId;
+	protected CFDbKeyHash256 auditClusterId;
 $switch BaseHasHistory yes emitSchemaTableHPKeyImplDefBodyAuditStampPreamble default empty$
 	protected LocalDateTime auditStamp;
 $switch BaseHasHistory yes emitSchemaTableHPKeyImplDefBodyAuditActionPreamble default empty$
@@ -74,13 +74,13 @@ $switch BaseHasHistory yes emitSchemaTableHPKeyImplDefBodyAuditActionPreamble de
 $switch BaseHasHistory yes emitSchemaTableHPKeyImplDefBodyRequiredRevisionPreamble default empty$
 	protected int requiredRevision;
 $switch BaseHasHistory yes emitSchemaTableHPKeyImplDefBodyAuditSessionIdPreamble default empty$
-	protected YCFDbKeyHash256 auditSessionId;
+	protected CFDbKeyHash256 auditSessionId;
 $switch BaseHasHistory yes emitSchemaTableHPKeyImplJpaColumns default emitSchemaTableHPKeyImplColumns$
 $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClusterIdGetterSetter$$poptop SchemaDef implAuditStampGetterSetter$$poptop SchemaDef implAuditActionIdGetterSetter$$poptop SchemaDef implRevisionGetterSetter$$poptop SchemaDef implAuditSessionIdGetterSetter$$reference PrimaryKeyIndex iterate Columns( each implInternalPubColumnGetterSetter )$$reference PrimaryKeyIndex implHPKeyEquals$$reference PrimaryKeyIndex implHPKeyGetHashCode$$reference PrimaryKeyIndex implHPKeyCompareTo$$reference PrimaryKeyIndex implHPKeyToString$</GenRule>
 
 	<GenRule GenDef="Table" Name="emitSchemaTableHPKeyImplDefBodyAuditClusterIdPreamble">
 	@AttributeOverrides({
-		@AttributeOverride(name="bytes", column=@Column(name="auditClusterId", nullable=false, length=YCFDbKeyHash256.HASH_LENGTH) )
+		@AttributeOverride(name="bytes", column=@Column(name="auditClusterId", nullable=false, length=CFDbKeyHash256.HASH_LENGTH) )
 	})</GenRule>
 
 	<GenRule GenDef="Table" Name="emitSchemaTableHPKeyImplJpaColumns">$reference PrimaryKeyIndex iterate Columns( each implJpaColumnAttr )$</GenRule>
@@ -100,16 +100,16 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 
 	<GenRule GenDef="Table" Name="emitSchemaTableHPKeyImplDefBodyAuditSessionIdPreamble">
 	@AttributeOverrides({
-		@AttributeOverride(name="bytes", column=@Column(name="auditSessionId", nullable=false, length=YCFDbKeyHash256.HASH_LENGTH) )
+		@AttributeOverride(name="bytes", column=@Column(name="auditSessionId", nullable=false, length=CFDbKeyHash256.HASH_LENGTH) )
 	})</GenRule>
 
 	<GenRule GenDef="Index" Name="implJpaHPKeyAttributeOverrides">
 	@AttributeOverrides({
-		@AttributeOverride(name="auditClusterId", column = @Column( name="auditClusterId", nullable=false, length=YCFDbKeyHash256.HASH_LENGTH ) ),
+		@AttributeOverride(name="auditClusterId", column = @Column( name="auditClusterId", nullable=false, length=CFDbKeyHash256.HASH_LENGTH ) ),
 		@AttributeOverride(name="auditStamp", column = @Column( name="auditStamp", nullable=false ) ),
 		@AttributeOverride(name="auditAction", column = @Column( name="auditAction", nullable=false ) ),
 		@AttributeOverride(name="requiredRevision", column = @Column( name="requiredRevision", nullable=false ) ),
-		@AttributeOverride(name="auditSessionId", column = @Column( name="auditSessionId", nullable=false, length=YCFDbKeyHash256.HASH_LENGTH ) )$iterate Columns( each implJpaAttributeCommaColumnOverride )$
+		@AttributeOverride(name="auditSessionId", column = @Column( name="auditSessionId", nullable=false, length=CFDbKeyHash256.HASH_LENGTH ) )$iterate Columns( each implJpaAttributeCommaColumnOverride )$
 	})</GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaTableHPKeyImplementsComparable">
@@ -121,7 +121,7 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 		auditStamp = LocalDateTime.now();
 		auditActionId = 0;
 		requiredRevision = 1;
-		auditSessionId = YCFDbKeyHash256.nullGet();$iterate Columns( each implConstructorInitAttr )$
+		auditSessionId = CFDbKeyHash256.nullGet();$iterate Columns( each implConstructorInitAttr )$
 	}
 </GenRule>
 
@@ -165,7 +165,7 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 			return( 0 );
 		}$switch TableIsProtected yes implHPKeyCompareToProt default empty$
 		else {
-			throw new YCFUnsupportedClassException( getClass(),
+			throw new CFUnsupportedClassException( getClass(),
 				"compareTo",
 				"obj",
 				obj,
@@ -416,7 +416,7 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 	@Override
 	public String getXmlAttrFragment() {
 		String ret = " auditClusterId=\"" + (auditClusterId != null ? auditClusterId.toString() : "null" ) + "\\""
-			+ " auditStamp=\\"" + (auditStamp != null ? YCFXmlUtil.formatTimestamp(auditStamp) : "null") + "\\""
+			+ " auditStamp=\\"" + (auditStamp != null ? CFXmlUtil.formatTimestamp(auditStamp) : "null") + "\\""
 			+ " auditAction=\\"" + auditActionId + "\\""
 			+ " requiredRevision=\\"" + requiredRevision + "\\""
 			+ " auditSessionId=\\"" + (getAuditSessionId() != null ? getAuditSessionId().toString() : "null") + "\\""$iterate Columns( each implToStringEmitXmlAttr )$;
@@ -432,12 +432,12 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 
 	<GenRule GenDef="Object" Name="implAuditClusterIdGetterSetter">
 	@Override
-	public YCFDbKeyHash256 getAuditClusterId() {
+	public CFDbKeyHash256 getAuditClusterId() {
 		return( auditClusterId );
 	}
 
 	@Override
-	public void setAuditClusterId( YCFDbKeyHash256 value ) {
+	public void setAuditClusterId( CFDbKeyHash256 value ) {
 		auditClusterId = value;
 	}
 </GenRule>
@@ -468,12 +468,12 @@ $reference PrimaryKeyIndex implHPKeyConstructor$$poptop SchemaDef implAuditClust
 
 	<GenRule GenDef="Object" Name="implAuditSessionIdGetterSetter">
 	@Override
-	public YCFDbKeyHash256 getAuditSessionId() {
+	public CFDbKeyHash256 getAuditSessionId() {
 		return( auditSessionId );
 	}
 
 	@Override
-	public void setAuditSessionId( YCFDbKeyHash256 value ) {
+	public void setAuditSessionId( CFDbKeyHash256 value ) {
 		auditSessionId = value;
 	}
 </GenRule>

@@ -52,8 +52,8 @@ import java.util.*;
 import jakarta.persistence.*;
 import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;
-import server.markhome.ycf.YCFXmlUtil;
-import org.apache.commons.codec.binaryYCFCore64;
+import server.markhome.ycf.CFXmlUtil;
+import org.apache.commons.codec.binaryCFCore64;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -130,8 +130,8 @@ $iterate Index(each maybeDeclJpaServiceLocker empty empty)$</GenRule>
 
 	<GenRule GenDef="Table" Name="declInheritedServiceTableLockers">$reference SuperClassRelation reference ToTable declServiceTableLockers$</GenRule>
 
-	<GenRule GenDef="Index" Name="maybeDeclJpaServiceLocker">$switch IsPrimaryIndex yes maybeDeclJpaServiceLockerIYCFCoreTable default declJpaServiceLock$</GenRule>
-	<GenRule GenDef="Index" Name="maybeDeclJpaServiceLockerIYCFCoreTable">$switch TableHasSuperClassRelation yes empty default declJpaServiceLockPKey$</GenRule>
+	<GenRule GenDef="Index" Name="maybeDeclJpaServiceLocker">$switch IsPrimaryIndex yes maybeDeclJpaServiceLockerICFCoreTable default declJpaServiceLock$</GenRule>
+	<GenRule GenDef="Index" Name="maybeDeclJpaServiceLockerICFCoreTable">$switch TableHasSuperClassRelation yes empty default declJpaServiceLockPKey$</GenRule>
 
 	<GenRule GenDef="Index" Name="declJpaServiceLockPKey">
 	/**
@@ -219,8 +219,8 @@ $iterate Index(each maybeDeclJpaServiceDeleter empty empty)$</GenRule>
 
 	<GenRule GenDef="Table" Name="declInheritedServiceTableDeleters">$reference SuperClassRelation reference ToTable declServiceTableDeleters$</GenRule>
 
-	<GenRule GenDef="Index" Name="maybeDeclJpaServiceDeleter">$switch IsPrimaryIndex yes maybeDeclJpaServiceDeleterIYCFCoreTable default declJpaServiceDelete$</GenRule>
-	<GenRule GenDef="Index" Name="maybeDeclJpaServiceDeleterIYCFCoreTable">$switch TableHasSuperClassRelation yes empty default declJpaServiceDeleteByPKey$</GenRule>
+	<GenRule GenDef="Index" Name="maybeDeclJpaServiceDeleter">$switch IsPrimaryIndex yes maybeDeclJpaServiceDeleterICFCoreTable default declJpaServiceDelete$</GenRule>
+	<GenRule GenDef="Index" Name="maybeDeclJpaServiceDeleterICFCoreTable">$switch TableHasSuperClassRelation yes empty default declJpaServiceDeleteByPKey$</GenRule>
 
 	<GenRule GenDef="Index" Name="declJpaServiceDeleteByPKey">
 	/**
@@ -369,7 +369,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			return $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.save(data);
 		}
 		catch(Exception ex) {$reference BaseClass reference PrimaryKeyIndex iterate Columns(each maybeServiceCreateRestoreGenerated)$
-			throw new YCFDbException(getClass(),
+			throw new CFDbException(getClass(),
 				S_ProcName,
 				ex);
 		}
@@ -397,7 +397,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Table" Name="declServiceCreateEnsurePKeyObjNotNull">
 		if (data.getPKey() == null) {
-			throw new YCFNullArgumentException(getClass(),
+			throw new CFNullArgumentException(getClass(),
 				S_ProcName,
 				0,
 				"data.getPKey()");
@@ -420,9 +420,9 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 		}$declServiceCreateEnsurePKeyObjNotNull$$serviceCheckDataValid$
 		// Ensure the entity exists and that the revision matches
 		$poptop Table SchemaName$Jpa$poptop Table TableName$ existing = $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.findById(($JpaCompactedPrimaryIndexClass$)(data.getPKey()))
-			.orElseThrow(() -> new YCFCollisionDetectedException(getClass(), S_ProcName, data.getPKey()));
+			.orElseThrow(() -> new CFCollisionDetectedException(getClass(), S_ProcName, data.getPKey()));
 		if (existing.getRequiredRevision() != data.getRequiredRevision()) {
-			throw new YCFCollisionDetectedException(getClass(), S_ProcName, data.getPKey());
+			throw new CFCollisionDetectedException(getClass(), S_ProcName, data.getPKey());
 		}$serviceUpdateApplyDataToExisting$$switch IsTableAudited yes serviceUpdateInitAuditColumns default empty$
 		// Save the changes we've made
 		return $lower poptop Table DefDbSchemaName$$poptop Table TableName$Repository.save(existing);
@@ -464,7 +464,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 	<GenRule GenDef="Relation" Name="serviceDontCheckRequiredSuperiorRelation"></GenRule>
 	<GenRule GenDef="Relation" Name="serviceReallyCheckRequiredSuperiorRelation">
 		if (data.get$OptionalOrRequired$$RelationType$$Suffix$() == null) {
-			throw new YCFUnresolvedRelationException(getClass(),
+			throw new CFUnresolvedRelationException(getClass(),
 				S_ProcName,
 				"$RelationType$",
 				"$RelationType$",
@@ -521,11 +521,11 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			Uuid6Def serviceEnsureColObjNotNull
 			UuidGen serviceEnsureColObjNotNull
 			UuidDef serviceEnsureColObjNotNull
-			default ErrorUnrecognizeYCFCoreModelAtomClass$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceEnsureColObjNotNull">
 		if(data.get$implColumnAttrOptionality$$Name$() == null) {
-			throw new YCFNullArgumentException(getClass(),
+			throw new CFNullArgumentException(getClass(),
 				S_ProcName,
 				0,
 				"data.$leadlower implColumnAttrOptionality$$Name$");
@@ -533,7 +533,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceEnsureColDbHashNotNull">
 		if(data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-			throw new YCFNullArgumentException(getClass(),
+			throw new CFNullArgumentException(getClass(),
 				S_ProcName,
 				0,
 				"data.$leadlower implColumnAttrOptionality$$Name$");
@@ -555,36 +555,36 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			DbKeyHash512Gen serviceCreateGenerateDbKeyHash512
 			UuidGen serviceCreateGenerateUuid
 			Uuid6Gen serviceCreateGenerateUuid6
-			default ErrorUnrecognizeYCFCoreModelAtomClass$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClass$</GenRule>
 
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash128">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new YCFDbKeyHash128(0));
+				data.set$implColumnAttrOptionality$$Name$(new CFDbKeyHash128(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash160">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new YCFDbKeyHash160(0));
+				data.set$implColumnAttrOptionality$$Name$(new CFDbKeyHash160(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash224">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new YCFDbKeyHash224(0));
+				data.set$implColumnAttrOptionality$$Name$(new CFDbKeyHash224(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash256">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new YCFDbKeyHash256(0));
+				data.set$implColumnAttrOptionality$$Name$(new CFDbKeyHash256(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash384">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new YCFDbKeyHash384(0));
+				data.set$implColumnAttrOptionality$$Name$(new CFDbKeyHash384(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateDbKeyHash512">
 			if (data.get$implColumnAttrOptionality$$Name$() == null || data.get$implColumnAttrOptionality$$Name$().isNull()) {
-				data.set$implColumnAttrOptionality$$Name$(new YCFDbKeyHash512(0));
+				data.set$implColumnAttrOptionality$$Name$(new CFDbKeyHash512(0));
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateUuid">
@@ -594,7 +594,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			}</GenRule>
 	<GenRule GenDef="IndexCol" Name="serviceCreateGenerateUuid6">
 			if (data.get$implColumnAttrOptionality$$Name$() == null) {
-				data.set$implColumnAttrOptionality$$Name$(YCFUuid6.generateUuid6());
+				data.set$implColumnAttrOptionality$$Name$(CFUuid6.generateUuid6());
 				generated$implColumnAttrOptionality$$Name$ = true;
 			}</GenRule>
 
@@ -658,11 +658,11 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			NmTokenDef empty
 			NmTokensDef empty
 			TextDef empty
-			default ErrorUnrecognizeYCFCoreModelAtomClass$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceReqCheckGenericMinValue">
 		if( data.get$implColumnAttrOptionality$$Name$() &lt; I$DefSchemaName$$TableName$.$upper Name$_MIN_VALUE ) {
-			throw new YCFArgumentUnderflowException( getClass(),
+			throw new CFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -672,7 +672,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceReqCheckObjectMinValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MIN_VALUE) &lt; 0) {
-			throw new YCFArgumentUnderflowException( getClass(),
+			throw new CFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -722,11 +722,11 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			Uuid6Def empty
 			UuidGen empty
 			UuidDef empty
-			default ErrorUnrecognizeYCFCoreModelAtomClass$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceReqCheckGenericMaxValue">
 		if( data.get$implColumnAttrOptionality$$Name$() &gt; I$DefSchemaName$$TableName$.$upper Name$_MAX_VALUE ) {
-			throw new YCFArgumentOverflowException( getClass(),
+			throw new CFArgumentOverflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -736,7 +736,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceReqCheckObjectMaxValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MIN_VALUE) &gt; 0) {
-			throw new YCFArgumentOverflowException( getClass(),
+			throw new CFArgumentOverflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -788,11 +788,11 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			NmTokenDef serviceOptCheckObjectMinValue
 			NmTokensDef serviceOptCheckObjectMinValue
 			TextDef serviceOptCheckObjectMinValue
-			default ErrorUnrecognizeYCFCoreModelAtomClass$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceOptCheckGenericMinValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; data.get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MIN_VALUE) &lt; 0) {
-			throw new YCFArgumentUnderflowException( getClass(),
+			throw new CFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -801,7 +801,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 		}</GenRule>
 	<GenRule GenDef="Value" Name="serviceOptCheckObjectMinValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; data.get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MIN_VALUE) &lt; 0) {
-			throw new YCFArgumentUnderflowException( getClass(),
+			throw new CFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -853,11 +853,11 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 			NmTokenDef serviceOptCheckObjectMaxValue
 			NmTokensDef serviceOptCheckObjectMaxValue
 			TextDef serviceOptCheckObjectMaxValue
-			default ErrorUnrecognizeYCFCoreModelAtomClass$</GenRule>
+			default ErrorUnrecognizeCFCoreModelAtomClass$</GenRule>
 
 	<GenRule GenDef="Value" Name="serviceOptCheckGenericMaxValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; data.get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MAX_VALUE) &gt; 0) {
-			throw new YCFArgumentOverflowException( getClass(),
+			throw new CFArgumentOverflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",
@@ -866,7 +866,7 @@ $iterate Index(each maybeDeclJpaServiceFinder empty empty)$</GenRule>
 		}</GenRule>
 	<GenRule GenDef="Value" Name="serviceOptCheckObjectMaxValue">
 		if( data.get$implColumnAttrOptionality$$Name$() != null &amp;&amp; data.get$implColumnAttrOptionality$$Name$().compareTo(I$DefSchemaName$$TableName$.$upper Name$_MAX_VALUE) &gt; 0) {
-			throw new YCFArgumentOverflowException( getClass(),
+			throw new CFArgumentOverflowException( getClass(),
 				S_ProcName,
 				0,
 				"get$implColumnAttrOptionality$$Name$()",

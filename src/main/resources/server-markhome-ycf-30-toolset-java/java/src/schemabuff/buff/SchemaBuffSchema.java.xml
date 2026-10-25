@@ -55,7 +55,7 @@ import java.util.*;
 import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;
 import org.apache.commons.text.StringEscapeUtils;
-import server.markhome.ycf.YCFXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$importJavaProtPackageSchemaName$$importJavaProtPackageSchemaNameObj$$importJavaPackageSchemaName$$importJavaPackageSchemaNameObj$$schematweak CafeSchemaImport$
+import server.markhome.ycf.CFXmlUtil;$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaName empty empty )$$importJavaPubPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPubPackageSchemaNameObj empty empty )$$importJavaPubPackageSchemaNameObj$$importJavaProtPackageSchemaName$$importJavaProtPackageSchemaNameObj$$importJavaPackageSchemaName$$importJavaPackageSchemaNameObj$$schematweak CafeSchemaImport$
 import $reference ManufacturingSchema lower JavaPackage$.$lower reference ManufacturingSchema SchemaName$.buff.$DefSchemaName$BuffHooksSchema;
 
 public class $SchemaName$BuffSchema
@@ -118,7 +118,7 @@ $implBuffSchemaClassMapInitializers$$implSchemaBuffHooksSchemaAccessors$$iterate
 	public void bootstrapSchema($SecPubSchemaName$TableData tableData[]) {
 	}
 	
-	public void bootstrapAllTablesSecurity(YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity(CFDbKeyHash256 clusterId, CFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 	}
 </GenRule>
 
@@ -127,7 +127,7 @@ $implBuffSchemaClassMapInitializers$$implSchemaBuffHooksSchemaAccessors$$iterate
 		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapSchema(tableData);
 	}
 	
-	public void bootstrapAllTablesSecurity(YCFDbKeyHash256 clusterId, YCFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
+	public void bootstrapAllTablesSecurity(CFDbKeyHash256 clusterId, CFDbKeyHash256 tenantId, $SecPubSchemaName$TableData tableData[]) {
 		I$SecSchemaName$Schema.getBacking$SecSchemaName$().bootstrapAllTablesSecurity(clusterId, tenantId, tableData);
 	}
 </GenRule>
@@ -136,37 +136,37 @@ $implBuffSchemaClassMapInitializers$$implSchemaBuffHooksSchemaAccessors$$iterate
 	<GenRule GenDef="SchemaDef" Name="implSchemaBuffBootstrapSecurity">
 	/**
 		$DefSchemaName$BuffSysCluster sysCluster;
-		YCFDbKeyHash256 systemClusterID;
+		CFDbKeyHash256 systemClusterID;
 		$DefSchemaName$BuffCluster systemCluster;
 		$DefSchemaName$BuffSecUser systemUser;
-		YCFDbKeyHash256 systemUID;
+		CFDbKeyHash256 systemUID;
 		$DefSchemaName$BuffSecSession bootstrapSession;
-		YCFDbKeyHash256 bootstrapSessionID;
+		CFDbKeyHash256 bootstrapSessionID;
 		$DefSchemaName$BuffTenant systemTenant;
-		YCFDbKeyHash256 systemTenantID;
+		CFDbKeyHash256 systemTenantID;
 		I$DefSchemaName$SysCluster[] sysClusters = getTableSysCluster().readAllDerived(null);
 		if (sysClusters != null &amp;&amp; sysClusters.length == 1) {
 			sysCluster = ($DefSchemaName$BuffSysCluster)(sysClusters[0]);
 			systemClusterID = sysCluster.getRequiredClusterId();
 			if(systemClusterID == null || systemClusterID.isNull()) {
-				throw new YCFNullArgumentException(getClass(), "bootstrapSchema", 0, "systemClusterID");
+				throw new CFNullArgumentException(getClass(), "bootstrapSchema", 0, "systemClusterID");
 			}
 			systemCluster = ($DefSchemaName$BuffCluster)(getTableCluster().readDerived(null, systemClusterID));
 			if (systemCluster == null) {
-				throw new YCFNullArgumentException(getClass(), "bootstrapSchema", 0, "systemCluster");
+				throw new CFNullArgumentException(getClass(), "bootstrapSchema", 0, "systemCluster");
 			}
 			systemUID = systemCluster.getCreatedByUserId();
 			if (systemUID == null || systemUID.isNull()) {
-				throw new YCFNullArgumentException(getClass(), "bootstrapSchema", 0, "systemUID");
+				throw new CFNullArgumentException(getClass(), "bootstrapSchema", 0, "systemUID");
 			}
 			systemUser = ($DefSchemaName$BuffSecUser)(getTableSecUser().readDerived(null, systemUID));
 			if( systemUser == null) {
-				throw new YCFNullArgumentException(getClass(), "bootstrapSchema", 0, "systemUser");
+				throw new CFNullArgumentException(getClass(), "bootstrapSchema", 0, "systemUser");
 			}
 			systemTenant = ($DefSchemaName$BuffTenant)(getTableTenant().readDerivedByUNameIdx(null, systemClusterID, "system"));
 			if( systemTenant == null) {
 				systemTenantID = null;
-				throw new YCFNullArgumentException(getClass(), "bootstrapSchema", 0, "systemTenant");
+				throw new CFNullArgumentException(getClass(), "bootstrapSchema", 0, "systemTenant");
 			}
 			else {
 				systemTenantID = systemTenant.getPKey();
@@ -182,7 +182,7 @@ $implBuffSchemaClassMapInitializers$$implSchemaBuffHooksSchemaAccessors$$iterate
 					}
 				}
 				if (bootstrapSession == null) {
-					throw new YCFNullArgumentException(getClass(), "bootstrapSchema", 0, "bootstrapSession");
+					throw new CFNullArgumentException(getClass(), "bootstrapSchema", 0, "bootstrapSession");
 				}
 			}
 			bootstrapSessionID = bootstrapSession.getPKey();
@@ -200,34 +200,34 @@ $implBuffSchemaClassMapInitializers$$implSchemaBuffHooksSchemaAccessors$$iterate
 		}
 		LocalDateTime now = LocalDateTime.now();
 		if (systemUID == null || systemUID.isNull()) {
-			systemUID = new YCFDbKeyHash256(0);
+			systemUID = new CFDbKeyHash256(0);
 		}
 		if (bootstrapSessionID == null || bootstrapSessionID.isNull()) {
-			bootstrapSessionID = new YCFDbKeyHash256(0);
+			bootstrapSessionID = new CFDbKeyHash256(0);
 		}
 		if (systemClusterID == null || systemClusterID.isNull()) {
-			systemClusterID = new YCFDbKeyHash256(0);
+			systemClusterID = new CFDbKeyHash256(0);
 		}
 		if (systemTenantID == null || systemTenantID.isNull()) {
-			systemTenantID = new YCFDbKeyHash256(0);
+			systemTenantID = new CFDbKeyHash256(0);
 		}
 		if (I$SecSchemaName$Schema.getSysClusterId() == null || I$SecSchemaName$Schema.getSysClusterId().isNull()) {
 			I$SecSchemaName$Schema.setSysClusterId(systemClusterID);
 		}
 		else if ( ! I$SecSchemaName$Schema.getSysClusterId().equals( systemClusterID )) {
-			throw new YCFInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system cluster id disagrees with new system cluster id", "Previously set system cluster id disagrees with new system cluster id");
+			throw new CFInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system cluster id disagrees with new system cluster id", "Previously set system cluster id disagrees with new system cluster id");
 		}
 		if (I$SecSchemaName$Schema.getSysTenantId() == null || I$SecSchemaName$Schema.getSysTenantId().isNull()) {
 			I$SecSchemaName$Schema.setSysTenantId(systemTenantID);
 		}
 		else if ( ! I$SecSchemaName$Schema.getSysTenantId().equals( systemTenantID )) {
-			throw new YCFInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system tenant id disagrees with new system tenant id", "Previously set system tenant id disagrees with new system tenant id");
+			throw new CFInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system tenant id disagrees with new system tenant id", "Previously set system tenant id disagrees with new system tenant id");
 		}
 		if (I$SecSchemaName$Schema.getSystemId() == null || I$SecSchemaName$Schema.getSystemId().isNull()) {
 			I$SecSchemaName$Schema.setSystemId(systemUID);
 		}
 		else if ( ! I$SecSchemaName$Schema.getSystemId().equals( systemUID )) {
-			throw new YCFInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system admin id disagrees with new system admin id", "Previously set system admin id disagrees with new system admin id");
+			throw new CFInvalidArgumentException(getClass(), "bootstrapSchema", "Previously set system admin id disagrees with new system admin id", "Previously set system admin id disagrees with new system admin id");
 		}
 
 		String fqdn;
@@ -309,7 +309,7 @@ $implBuffSchemaClassMapInitializers$$implSchemaBuffHooksSchemaAccessors$$iterate
 
 	@Override
 	public void wireTableTableInstances() {
-		throw new YCFMustOverrideException(getClass(), "wireTableTableInstances");
+		throw new CFMustOverrideException(getClass(), "wireTableTableInstances");
 	}
 $iterate SchemaRefs( each implBuffSchemaGetSchemaNameSchema empty empty )$$implBuffSchemaGetSchemaNameSchema$</GenRule>
 
@@ -340,7 +340,7 @@ $iterate SchemaRefs( each implBuffSchemaGetSchemaNameSchema empty empty )$$implB
 			});
 		}
 		else {
-			throw new YCFNullArgumentException($SchemaName$BuffSchema.class, "wireRecConstructors", 0, "I$SchemaName$Schema.getClassMapByBackingClassCode(I$DefSchemaName$$TableName$.CLASS_CODE)[" + I$DefSchemaName$$TableName$.CLASS_CODE + "]");
+			throw new CFNullArgumentException($SchemaName$BuffSchema.class, "wireRecConstructors", 0, "I$SchemaName$Schema.getClassMapByBackingClassCode(I$DefSchemaName$$TableName$.CLASS_CODE)[" + I$DefSchemaName$$TableName$.CLASS_CODE + "]");
 		}
 	</GenRule>
 
@@ -369,7 +369,7 @@ $iterate SchemaRefs( each implBuffSchemaGetSchemaNameSchema empty empty )$$implB
 	<GenRule GenDef="Object" Name="implBuffReturnLocalGetTablePerms">tablePerms</GenRule>
 	<GenRule GenDef="Object" Name="implBuffLocalSetTablePerms">
 		if(value == null) {
-			throw new YCFNullArgumentException($DefSchemaName$BuffSchema.class, "setTablePerms", 1, "value");
+			throw new CFNullArgumentException($DefSchemaName$BuffSchema.class, "setTablePerms", 1, "value");
 		}
 		tablePerms = value;</GenRule>
 
@@ -394,13 +394,13 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 
 	<GenRule GenDef="SchemaDef" Name="implBuffSchemaNewSchema">
 	public I$poptop SchemaDef SchemaName$Schema newSchema() {
-		throw new YCFMustOverrideException( getClass(), "newSchema" );
+		throw new CFMustOverrideException( getClass(), "newSchema" );
 	}
 </GenRule>
 
 	<GenRule GenDef="Object" Name="implBuffSchemaNewSchema">
 	public I$poptop SchemaDef SchemaName$Schema newSchema() {
-		throw new YCFMustOverrideException( getClass(), "newSchema" );
+		throw new CFMustOverrideException( getClass(), "newSchema" );
 	}
 </GenRule>
 
@@ -441,10 +441,10 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
 	public short next$Name$() {
-		throw new YCFMustOverrideException(getClass(), "next$Name$");
+		throw new CFMustOverrideException(getClass(), "next$Name$");
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id32Gen" Name="implBuffNextIdGen">
@@ -453,10 +453,10 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
 	public int next$Name$() {
-		throw new YCFMustOverrideException(getClass(), "next$Name$");
+		throw new CFMustOverrideException(getClass(), "next$Name$");
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Id64Gen" Name="implBuffNextIdGen">
@@ -465,10 +465,10 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
 	public long next$Name$() {
-		throw new YCFMustOverrideException(getClass(), "next$Name$");
+		throw new CFMustOverrideException(getClass(), "next$Name$");
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="UuidGen" Name="implBuffNextIdGen">
@@ -477,10 +477,10 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
 	public UUID next$Name$() {
-		throw new YCFMustOverrideException(getClass(), "next$Name$");
+		throw new CFMustOverrideException(getClass(), "next$Name$");
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="Uuid6Gen" Name="implBuffNextIdGen">
@@ -489,10 +489,10 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
-	public IYCFUuid6 next$Name$() {
-		throw new YCFMustOverrideException(getClass(), "next$Name$");
+	public ICFUuid6 next$Name$() {
+		throw new CFMustOverrideException(getClass(), "next$Name$");
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash128Gen" Name="implBuffNextIdGen">
@@ -501,10 +501,10 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
-	public YCFDbKeyHash128 next$Name$() {
-		return( new YCFDbKeyHash128(0) );
+	public CFDbKeyHash128 next$Name$() {
+		return( new CFDbKeyHash128(0) );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash160Gen" Name="implBuffNextIdGen">
@@ -513,10 +513,10 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
-	public YCFDbKeyHash160 next$Name$() {
-		return( new YCFDbKeyHash160(0) );
+	public CFDbKeyHash160 next$Name$() {
+		return( new CFDbKeyHash160(0) );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash224Gen" Name="implBuffNextIdGen">
@@ -525,10 +525,10 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
-	public YCFDbKeyHash224 next$Name$() {
-		return( new YCFDbKeyHash224(0) );
+	public CFDbKeyHash224 next$Name$() {
+		return( new CFDbKeyHash224(0) );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash256Gen" Name="implBuffNextIdGen">
@@ -537,10 +537,10 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
-	public YCFDbKeyHash256 next$Name$() {
-		return( new YCFDbKeyHash256(0) );
+	public CFDbKeyHash256 next$Name$() {
+		return( new CFDbKeyHash256(0) );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash384Gen" Name="implBuffNextIdGen">
@@ -549,10 +549,10 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
-	public YCFDbKeyHash384 next$Name$() {
-		return( new YCFDbKeyHash384(0) );
+	public CFDbKeyHash384 next$Name$() {
+		return( new CFDbKeyHash384(0) );
 	}
 </GenRule>
 	<GenRule ScopeDef="SchemaDef" GenDef="DbKeyHash512Gen" Name="implBuffNextIdGen">
@@ -561,10 +561,10 @@ $poptop SchemaDef iterate SchemaTables( each initSchemaBuffTableTableMember )$
 	 *
 	 *	@return	The next $Name$ identifier.
 	 *
-	 *	@throws YCFNotSupportedException thrown by client-side implementations.
+	 *	@throws CFNotSupportedException thrown by client-side implementations.
 	 */
-	public YCFDbKeyHash512 next$Name$() {
-		return( new YCFDbKeyHash512(0) );
+	public CFDbKeyHash512 next$Name$() {
+		return( new CFDbKeyHash512(0) );
 	}
 </GenRule>
 

@@ -54,7 +54,7 @@ import server.markhome.ycf.*;$iterate SchemaRefs( each importJavaPackageSchemaNa
 
 public class $SchemaName$SaxLdr
 {
-	protected IYCFLibMessageLog log = null;
+	protected ICFLibMessageLog log = null;
 	protected $SchemaName$SaxLoader saxLoader = null;
 	protected String clusterName = "system";
 	protected I$SecSchemaName$ClusterObj clusterObj = null;
@@ -100,7 +100,7 @@ $implSchemaSaxLdrEvalRemaining$
 		final String S_ProcName = "setClusterName";
 		I$SchemaName$SchemaObj schema = saxLoader.getSchemaObj();
 		if( value == null ) {
-			throw new YCFLibNullArgumentException( getClass(),
+			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
 				1,
 				"value" );
@@ -109,14 +109,14 @@ $implSchemaSaxLdrEvalRemaining$
 			try {
 				I$SecSchemaName$SysClusterObj sysCluster = schema.getSysClusterTableObj().readSysClusterByIdIdx( 1 );
 				if( sysCluster == null ) {
-					throw new YCFLibNullArgumentException( getClass(),
+					throw new CFLibNullArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"sysCluster" );
 				}
 				I$SecSchemaName$ClusterObj useCluster = sysCluster.getRequiredContainerCluster();
 				if( useCluster == null ) {
-					throw new YCFLibNullArgumentException( getClass(),
+					throw new CFLibNullArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"sysCluster.containerCluster" );
@@ -135,7 +135,7 @@ $implSchemaSaxLdrEvalRemaining$
 			try {
 				I$SecSchemaName$ClusterObj useCluster = schema.getClusterTableObj().readClusterByUDomNameIdx( "system" );
 				if( useCluster == null ) {
-					throw new YCFLibNullArgumentException( getClass(),
+					throw new CFLibNullArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"readClusterByUDomName-system" );
@@ -151,10 +151,10 @@ $implSchemaSaxLdrEvalRemaining$
 			}
 		}
 		else {
-			throw new YCFLibUsageException( getClass(),
+			throw new CFLibUsageException( getClass(),
 				S_ProcName,
-				Inz.x("ycflib.xml.YCFLibXmlUtil.XmlExpectedDefaultOrSystem"),
-				Inz.s("ycflib.xml.YCFLibXmlUtil.XmlExpectedDefaultOrSystem"));
+				Inz.x("ycflib.xml.CFLibXmlUtil.XmlExpectedDefaultOrSystem"),
+				Inz.s("ycflib.xml.CFLibXmlUtil.XmlExpectedDefaultOrSystem"));
 		}
 	}
 </GenRule>
@@ -172,14 +172,14 @@ $implSchemaSaxLdrEvalRemaining$
 				try {
 					I$SecSchemaName$SysClusterObj sysCluster = schema.getSysClusterTableObj().readSysClusterByIdIdx( 1 );
 					if( sysCluster == null ) {
-						throw new YCFLibNullArgumentException( getClass(),
+						throw new CFLibNullArgumentException( getClass(),
 							S_ProcName,
 							0,
 							"sysCluster" );
 					}
 					I$SecSchemaName$ClusterObj useCluster = sysCluster.getRequiredContainerCluster();
 					if( useCluster == null ) {
-						throw new YCFLibNullArgumentException( getClass(),
+						throw new CFLibNullArgumentException( getClass(),
 							S_ProcName,
 							0,
 							"sysCluster.containerCluster" );
@@ -197,7 +197,7 @@ $implSchemaSaxLdrEvalRemaining$
 				try {
 					I$SecSchemaName$ClusterObj useCluster = schema.getClusterTableObj().readClusterByUDomNameIdx( "system" );
 					if( useCluster == null ) {
-						throw new YCFLibNullArgumentException( getClass(),
+						throw new CFLibNullArgumentException( getClass(),
 							S_ProcName,
 							0,
 							"readClusterByUDomName-system" );
@@ -213,7 +213,7 @@ $implSchemaSaxLdrEvalRemaining$
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrClusterAccessorsPart06">
 		if( clusterObj == null ) {
-			throw new YCFLibNullArgumentException( getClass(),
+			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
 				0,
 				"clusterObj" );
@@ -230,7 +230,7 @@ $implSchemaSaxLdrEvalRemaining$
 		final String S_ProcName = "setTenantName";
 		I$SchemaName$SchemaObj schema = saxLoader.getSchemaObj();
 		if( value == null ) {
-			throw new YCFLibNullArgumentException( getClass(),
+			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
 				1,
 				"value" );
@@ -240,7 +240,7 @@ $implSchemaSaxLdrEvalRemaining$
 				I$SecSchemaName$TenantObj useTenant = schema.getTenantTableObj().readTenantByUNameIdx( clusterObj.getRequiredId(),
 					"system" );
 				if( useTenant == null ) {
-					throw new YCFLibNullArgumentException( getClass(),
+					throw new CFLibNullArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"readTenantByUNameIdx-" + clusterObj.getObjName() + "-system" );
@@ -257,16 +257,16 @@ $implSchemaSaxLdrEvalRemaining$
 		}
 		else {
 			if( clusterObj == null ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					0,
 					"clusterObj" );
 			}
 			if( clusterName.equals( "system" ) ) {
-				throw new YCFLibUsageException( getClass(),
+				throw new CFLibUsageException( getClass(),
 					S_ProcName,
-					String.format(Inz.x("ycflib.xml.YCFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName),
-					String.format(Inz.s("ycflib.xml.YCFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName) );
+					String.format(Inz.x("ycflib.xml.CFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName),
+					String.format(Inz.s("ycflib.xml.CFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName) );
 			}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrTenantAccessorsPart03">
@@ -274,7 +274,7 @@ $implSchemaSaxLdrEvalRemaining$
 				I$SecSchemaName$TenantObj useTenant = schema.getTenantTableObj().readTenantByUNameIdx( clusterObj.getRequiredId(),
 					value );
 				if( useTenant == null ) {
-					throw new YCFLibNullArgumentException( getClass(),
+					throw new CFLibNullArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"readTenantByUNameIdx-" + clusterObj.getObjName() + "-" + value );
@@ -302,7 +302,7 @@ $implSchemaSaxLdrEvalRemaining$
 		if( tenantObj == null ) {
 			I$SchemaName$SchemaObj schema = saxLoader.getSchemaObj();
 			if( tenantName == null ) {
-				throw new YCFLibNullArgumentException( getClass(),
+				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
 					1,
 					"value" );
@@ -312,7 +312,7 @@ $implSchemaSaxLdrEvalRemaining$
 					I$SecSchemaName$TenantObj useTenant = schema.getTenantTableObj().readTenantByUNameIdx( clusterObj.getRequiredId(),
 						"system" );
 					if( useTenant == null ) {
-						throw new YCFLibNullArgumentException( getClass(),
+						throw new CFLibNullArgumentException( getClass(),
 							S_ProcName,
 							0,
 							"readTenantByUNameIdx-" + clusterObj.getObjName() + "-system" );
@@ -328,16 +328,16 @@ $implSchemaSaxLdrEvalRemaining$
 			}
 			else {
 				if( clusterObj == null ) {
-					throw new YCFLibNullArgumentException( getClass(),
+					throw new CFLibNullArgumentException( getClass(),
 						S_ProcName,
 						0,
 						"clusterObj" );
 				}
 				if( clusterName.equals( "system" ) ) {
-					throw new YCFLibUsageException( getClass(),
+					throw new CFLibUsageException( getClass(),
 						S_ProcName,
-						String.format(Inz.x("ycflib.xml.YCFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName),
-						String.format(Inz.s("ycflib.xml.YCFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName) );
+						String.format(Inz.x("ycflib.xml.CFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName),
+						String.format(Inz.s("ycflib.xml.CFLibXmlUtil.XmlOnlyTenantSystemAllowed"), tenantName) );
 				}</GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrTenantAccessorsPart07">
@@ -345,7 +345,7 @@ $implSchemaSaxLdrEvalRemaining$
 					I$SecSchemaName$TenantObj useTenant = schema.getTenantTableObj().readTenantByUNameIdx( clusterObj.getRequiredId(),
 						tenantName );
 					if( useTenant == null ) {
-						throw new YCFLibNullArgumentException( getClass(),
+						throw new CFLibNullArgumentException( getClass(),
 							S_ProcName,
 							0,
 							"readTenantByUNameIdx-" + clusterObj.getObjName() + "-" + tenantName );
@@ -361,7 +361,7 @@ $implSchemaSaxLdrEvalRemaining$
 			}
 		}
 		if( tenantObj == null ) {
-			throw new YCFLibNullArgumentException( getClass(),
+			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
 				0,
 				"tenantObj-" + tenantName );
@@ -431,7 +431,7 @@ $implSchemaSaxLdrEvalRemaining$
 </GenRule>
 
 	<GenRule GenDef="SchemaDef" Name="implSchemaSaxLdrConstructorLog">
-	public $SchemaName$SaxLdr( IYCFLibMessageLog messageLog ) {
+	public $SchemaName$SaxLdr( ICFLibMessageLog messageLog ) {
 		log = messageLog;
 		getSaxLoader();
 	}

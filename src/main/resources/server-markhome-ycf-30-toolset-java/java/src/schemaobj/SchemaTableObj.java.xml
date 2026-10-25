@@ -50,7 +50,7 @@ import java.sql.*;
 import java.text.*;
 import java.time.*;
 import java.util.*;
-import org.apache.commons.codec.binaryYCFCore64;
+import org.apache.commons.codec.binaryCFCore64;
 import org.apache.commons.text.StringEscapeUtils;
 import server.markhome.ycf.*;
 import server.markhome.ycf.dbutil.*;
@@ -123,7 +123,7 @@ $switch HasDefSchema yes empty default implSetRuntimeClassCodeViaLocalArg$$implS
 	 */
 	static void setRuntimeClassCode(int argNewClassCode ) {
 		if (argNewClassCode &lt;= 0) {
-			throw new YCFArgumentUnderflowException($DefSchemaName$$TableName$TableObj.class, "setRuntimeClassCode", 1, "argNewClassCode", argNewClassCode, 1);
+			throw new CFArgumentUnderflowException($DefSchemaName$$TableName$TableObj.class, "setRuntimeClassCode", 1, "argNewClassCode", argNewClassCode, 1);
 		}
 		runtimeClassCode = argNewClassCode;
 	}
@@ -167,7 +167,7 @@ $switch HasDefSchema yes empty default implSetRuntimeClassCodeViaLocalArg$$implS
 			prior$Name$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableObjPageByIndex"
-		>$switch HasSuperClassRelation yes implTableObjPageByInhIndex default implTableObjPageBYCFCoreIndex$</GenRule>
+		>$switch HasSuperClassRelation yes implTableObjPageByInhIndex default implTableObjPageBCFCoreIndex$</GenRule>
 
 	<GenRule GenDef="Table" Name="implTableObjPageBySubIndex"
 		>$switch HasSuperClassRelation yes implTableObjPageByInhIndex default empty$$iterate Index( each implTableObjPageByThisNonPrimaryIndex )$</GenRule>
@@ -178,7 +178,7 @@ $switch HasDefSchema yes empty default implSetRuntimeClassCodeViaLocalArg$$implS
 	<GenRule GenDef="Table" Name="implTableObjPageByInhIndex"
 		>$reference SuperClassRelation reference ToTable implTableObjPageBySubIndex$</GenRule>
 
-	<GenRule GenDef="Table" Name="implTableObjPageBYCFCoreIndex"
+	<GenRule GenDef="Table" Name="implTableObjPageBCFCoreIndex"
 		>$iterate Index( each implTableObjPageByThisNonPrimaryIndex )$</GenRule>
 
 	<GenRule GenDef="Index" Name="ifdup_implTableObjPageByIndex"
@@ -215,7 +215,7 @@ $switch HasDefSchema yes empty default implSetRuntimeClassCodeViaLocalArg$$implS
 			arr[idx++] = valIter.next();
 		}
 		if( idx &lt; len ) {
-			throw new YCFArgumentUnderflowException( getClass(),
+			throw new CFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"idx",
@@ -223,7 +223,7 @@ $switch HasDefSchema yes empty default implSetRuntimeClassCodeViaLocalArg$$implS
 				len );
 		}
 		else if( valIter.hasNext() ) {
-			throw new YCFArgumentOverflowException( getClass(),
+			throw new CFArgumentOverflowException( getClass(),
 					S_ProcName,
 					0,
 					"idx",
@@ -598,8 +598,8 @@ $switch HasSubClasses yes implConstructByClassCodeIterSubClasses default empty$<
 		>$reference ToTable HasSubClasses$</GenRule>
 
 	<GenRule GenDef="Table" Name="SchemaTableObjPKeyType"
-		>$switch HasSuperClassRelation yes SchemaTableObYCFCorePKeyT default SchemaTableObjPKeyT$</GenRule>
-	<GenRule GenDef="Table" Name="SchemaTableObYCFCorePKeyT"
+		>$switch HasSuperClassRelation yes SchemaTableObCFCorePKeyT default SchemaTableObjPKeyT$</GenRule>
+	<GenRule GenDef="Table" Name="SchemaTableObCFCorePKeyT"
 		>$reference BaseClass SchemaTableObjPKeyT$</GenRule>
 	<GenRule GenDef="Table" Name="SchemaTableObjPKeyT"
 		>I$SchemaName$$TableName$PKey</GenRule>
@@ -623,7 +623,7 @@ $switch HasSubClasses yes implConstructByClassCodeIterSubClasses default empty$<
 			 */
 
 			// Detach object from alternate and duplicate indexes, leave PKey alone
-$implTableObjIndexDetachFromIndexes$$switch HasSuperClassRelation yes implRealiseObjInvokYCFCore default implRealiseObjReplaceRec$
+$implTableObjIndexDetachFromIndexes$$switch HasSuperClassRelation yes implRealiseObjInvokCFCore default implRealiseObjReplaceRec$
 			// Attach new object to alternate and duplicate indexes -- PKey stay stable
 $implTableObjIndexAddToIndexes$
 			if( all$TableName$ != null ) {
@@ -632,7 +632,7 @@ $implTableObjIndexAddToIndexes$
 		}
 		else {
 			keepObj = obj;
-$switch HasSuperClassRelation yes implRealiseObjNewInvokYCFCore default empty$$switch HasSuperClassRelation no implRealiseObjSetIsNewFalse default empty$
+$switch HasSuperClassRelation yes implRealiseObjNewInvokCFCore default empty$$switch HasSuperClassRelation no implRealiseObjSetIsNewFalse default empty$
 			// Attach new object to PKey, all, alternate, and duplicate indexes
 			members.put( keepObj.getPKey(), keepObj );
 			if( all$TableName$ != null ) {
@@ -790,14 +790,14 @@ $implTableObjIndexAddToIndexes$
 >			keepObj.setIsNew( false );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implRealiseObjInvokYCFCore"
+	<GenRule GenDef="Table" Name="implRealiseObjInvokCFCore"
 >			// Keep passing the new object because it's the one with the record
 			// that the base table needs to copy to the existing object from
 			// the cache.
 			keepObj = (I$DefSchemaName$$TableName$Obj)schema.get$reference SuperClassRelation reference ToTable TableName$TableObj().realise$reference SuperClassRelation reference ToTable TableName$( Obj );
 </GenRule>
 
-	<GenRule GenDef="Table" Name="implRealiseObjNewInvokYCFCore"
+	<GenRule GenDef="Table" Name="implRealiseObjNewInvokCFCore"
 >			keepObj = (I$DefSchemaName$$TableName$Obj)schema.get$reference SuperClassRelation reference ToTable TableName$TableObj().realise$reference SuperClassRelation reference ToTable TableName$( keepObj );
 </GenRule>
 
@@ -930,7 +930,7 @@ $implTableObjIndexAddToIndexes$
 			arr[idx++] = valIter.next();
 		}
 		if( idx &lt; len ) {
-			throw new YCFArgumentUnderflowException( getClass(),
+			throw new CFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"idx",
@@ -938,7 +938,7 @@ $implTableObjIndexAddToIndexes$
 				len );
 		}
 		else if( valIter.hasNext() ) {
-			throw new YCFArgumentOverflowException( getClass(),
+			throw new CFArgumentOverflowException( getClass(),
 					S_ProcName,
 					0,
 					"idx",
@@ -1037,7 +1037,7 @@ $implReadAllObjComparator$
 			locked = (I$DefSchemaName$$TableName$Obj)locked.realise();
 		}
 		else {
-			throw new YCFCollisionDetectedException( getClass(), "lock$TableName$", pkey );
+			throw new CFCollisionDetectedException( getClass(), "lock$TableName$", pkey );
 		}
 		return( locked );
 	}
@@ -1219,7 +1219,7 @@ $implReadAllObjComparator$
 			arr[idx++] = valIter.next();
 		}
 		if( idx &lt; len ) {
-			throw new YCFArgumentUnderflowException( getClass(),
+			throw new CFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"idx",
@@ -1227,7 +1227,7 @@ $implReadAllObjComparator$
 				len );
 		}
 		else if( valIter.hasNext() ) {
-			throw new YCFArgumentOverflowException( getClass(),
+			throw new CFArgumentOverflowException( getClass(),
 					S_ProcName,
 					0,
 					"idx",
@@ -1370,7 +1370,7 @@ $implReadObjByDuplicateIndexComparator$$implReadObjByDuplicateIndexReturnSortedL
 			arr[idx++] = valIter.next();
 		}
 		if( idx &lt; len ) {
-			throw new YCFArgumentUnderflowException( getClass(),
+			throw new CFArgumentUnderflowException( getClass(),
 				S_ProcName,
 				0,
 				"idx",
@@ -1378,7 +1378,7 @@ $implReadObjByDuplicateIndexComparator$$implReadObjByDuplicateIndexReturnSortedL
 				len );
 		}
 		else if( valIter.hasNext() ) {
-			throw new YCFArgumentOverflowException( getClass(),
+			throw new CFArgumentOverflowException( getClass(),
 					S_ProcName,
 					0,
 					"idx",
@@ -1449,7 +1449,7 @@ $implReadAllObjComparator$
 	public I$DefSchemaName$$TableName$Obj moveUp$TableName$( I$DefSchemaName$$TableName$Obj Obj ) {
 		I$DefSchemaName$$TableName$Obj obj = null;
 		if( null != Obj.getEdit() ) {
-			throw new YCFCannotMoveEditedObjectException( getClass(),	"moveUp$TableName$" );
+			throw new CFCannotMoveEditedObjectException( getClass(),	"moveUp$TableName$" );
 		}
 		I$DefSchemaName$$TableName$ rec = schema.get$DefSchemaName$BackingStore().getTable$TableName$().moveRecUp( null$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implMoveRecPassCommaPKeyArg )$,
 			Obj.getRec().getRequiredRevision() );
@@ -1478,7 +1478,7 @@ $implReadAllObjComparator$
 	public I$DefSchemaName$$TableName$Obj moveDown$TableName$( I$DefSchemaName$$TableName$Obj Obj ) {
 		I$DefSchemaName$$TableName$Obj obj = null;
 		if( null != Obj.getEdit() ) {
-			throw new YCFCannotMoveEditedObjectException( getClass(),	"moveDown$TableName$" );
+			throw new CFCannotMoveEditedObjectException( getClass(),	"moveDown$TableName$" );
 		}
 		I$DefSchemaName$$TableName$ rec = schema.get$DefSchemaName$BackingStore().getTable$TableName$().moveRecDown( null$reference BaseClass reference PrimaryKeyIndex iterate Columns( each implMoveRecPassCommaPKeyArg )$,
 			Obj.getRec().getRequiredRevision() );
@@ -1800,7 +1800,7 @@ $implDeleteObjByDuplicateIndexPart1$
 				arr[idx++] = valIter.next();
 			}
 			if( idx &lt; len ) {
-				throw new YCFArgumentUnderflowException( getClass(),
+				throw new CFArgumentUnderflowException( getClass(),
 					S_ProcName,
 					0,
 					"idx",
@@ -1808,7 +1808,7 @@ $implDeleteObjByDuplicateIndexPart1$
 					len );
 			}
 			else if( valIter.hasNext() ) {
-				throw new YCFArgumentOverflowException( getClass(),
+				throw new CFArgumentOverflowException( getClass(),
 						S_ProcName,
 						0,
 						"idx",
@@ -1977,7 +1977,7 @@ $implDeleteObjByDuplicateIndexPart1$
 					arr[idx++] = valIter.next();
 				}
 				if( idx &lt; len ) {
-					throw new YCFArgumentUnderflowException( getClass(),
+					throw new CFArgumentUnderflowException( getClass(),
 						S_ProcName,
 						0,
 						"idx",
@@ -1985,7 +1985,7 @@ $implDeleteObjByDuplicateIndexPart1$
 						len );
 				}
 				else if( valIter.hasNext() ) {
-					throw new YCFArgumentOverflowException( getClass(),
+					throw new CFArgumentOverflowException( getClass(),
 							S_ProcName,
 							0,
 							"idx",
@@ -2077,7 +2077,7 @@ $implDeleteObjByDuplicateIndexPart1$
 					arr[idx++] = valIter.next();
 				}
 				if( idx &lt; len ) {
-					throw new YCFArgumentUnderflowException( getClass(),
+					throw new CFArgumentUnderflowException( getClass(),
 						S_ProcName,
 						0,
 						"idx",
@@ -2085,7 +2085,7 @@ $implDeleteObjByDuplicateIndexPart1$
 						len );
 				}
 				else if( valIter.hasNext() ) {
-					throw new YCFArgumentOverflowException( getClass(),
+					throw new CFArgumentOverflowException( getClass(),
 							S_ProcName,
 							0,
 							"idx",
@@ -2308,12 +2308,12 @@ $switch HasSuperClassRelation yes implReallyDeepDisposeTableInvokeSuper default 
 		>$implReallyDeleteTableDelDeps$</GenRule>
 
 	<GenRule GenDef="Table" Name="implReallyDeleteTableDelDeps"
-		>$switch HasSuperClassRelation yes implReallyDeepDisposeTableInhDelDeps default implReallyDeepDisposeTablYCFCoreDelDeps$</GenRule>
+		>$switch HasSuperClassRelation yes implReallyDeepDisposeTableInhDelDeps default implReallyDeepDisposeTablCFCoreDelDeps$</GenRule>
 
 	<GenRule GenDef="Table" Name="implReallyDeepDisposeTableInhDelDeps"
 		>$reference SuperClassRelation reference ToTable implReallyDeleteTableDelDeps$$iterate ReverseDelDeps( each implReallyDeepDisposeTableDelDep empty empty )$</GenRule>
 
-	<GenRule GenDef="Table" Name="implReallyDeepDisposeTablYCFCoreDelDeps"
+	<GenRule GenDef="Table" Name="implReallyDeepDisposeTablCFCoreDelDeps"
 		>$iterate ReverseDelDeps( each implReallyDeepDisposeTableDelDep empty empty )$</GenRule>
 
 	<GenRule GenDef="DelTopDep" Name="implReallyDeepDisposeTableDelDep"
