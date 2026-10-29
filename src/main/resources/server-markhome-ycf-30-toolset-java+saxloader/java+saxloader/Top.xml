@@ -46,20 +46,7 @@
 		>$reference RelationDef reference ToTable HasLookupIndex$</GenRule>
 
 	<GenRule ScopeDef="MinorVersion" GenDef="SchemaDef" Name="schemaFiles"
-		>$validatePageData$$fileSchemaSaxLoaderGitIgnore$$fileSchemaSaxRamLdrGitIgnore$$fileSchemaJavaSaxLoaderPomXml$$fileSchemaJavaSaxRamLdrPomXml$$fileSchemaSaxLoaderJava$$fileSchemaSaxLdrJava$$iterate SchemaTables( each tableFiles )$$fileSchemaStructuredXsd$$iterate SchemaRefs( each schemaImportedStructuredXsdFiles empty empty )$$fileSchemaSecInitClusterSaxLoaderFile$$fileSchemaSecInitTenantSaxLoaderFile$$fileSchemaSaxRamLdrJava$</GenRule>
-
-	<GenRule GenDef="SchemaDef" Name="validatePageData"
-		>$iterate SchemaTables( each validatePageData )$</GenRule>
-	<GenRule GenDef="Table" Name="validatePageData"
-		>$switch InheritsPageData yes checkPageDataNoSubclasses default empty$</GenRule>
-	<GenRule GenDef="Table" Name="checkPageDataNoSubclasses"
-		>$switch HasSubClasses no checkPageDataNormalizedKey default FailAssertPageDataNotAllowedForTablesWithSubclasses$</GenRule>
-	<GenRule GenDef="Table" Name="checkPageDataNormalizedKey"
-		>$reference BaseClass reference PrimaryKeyIndex checkPageDataNormalizedKey$</GenRule>
-	<GenRule GenDef="Index" Name="checkPageDataNormalizedKey"
-		>$iterate Columns( each checkPageDataNormalizedKey )$</GenRule>
-	<GenRule GenDef="IndexCol" Name="checkPageDataNormalizedKey"
-		>$switch IsNullable no empty default FailAssertPageDataNotAllowedForPrimaryKeyWithOptionalColumns$</GenRule>
+		>$fileSchemaSaxLoaderGitIgnore$$fileSchemaSaxRamLdrGitIgnore$$fileSchemaJavaSaxLoaderPomXml$$fileSchemaJavaSaxRamLdrPomXml$$fileSchemaSaxLoaderJava$$fileSchemaSaxLdrJava$$iterate SchemaTables( each tableFiles )$$fileSchemaStructuredXsd$$iterate SchemaRefs( each schemaImportedStructuredXsdFiles empty empty )$$fileSchemaSecInitClusterSaxLoaderFile$$fileSchemaSecInitTenantSaxLoaderFile$$fileSchemaSaxRamLdrJava$</GenRule>
 
 	<GenRule GenDef="SchemaRef" Name="schemaImportedStructuredXsdFiles"
 		>$reference RefSchema fileSchemaStructuredXsd$</GenRule>
