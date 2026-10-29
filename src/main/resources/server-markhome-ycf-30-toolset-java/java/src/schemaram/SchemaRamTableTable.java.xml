@@ -71,9 +71,6 @@ public class $SchemaName$Ram$TableName$Table
 $implConstructRamTableTable$$moreRamTableMethods$$JavaRamTableImplementation$}
 </GenFile>
 
-	<GenRule GenDef="Index" Name="PageData"
-		>$poptop Table PageData$</GenRule>
-
 	<GenRule GenDef="ServerProc" Name="implServerMethod"
 		>$switch IsInstanceMethod yes implInstServerProc default implClassServerProc$</GenRule>
 
@@ -128,7 +125,7 @@ $JavaMethodBody$	}
 </GenRule>
 
 	<GenRule GenDef="Table" Name="moreRamTableMethods"
-		>$switch HasSuperClassRelation yes invokCFCoreEnsureRec default implRamTableEnsureRec$$implRamCreateTable$$implRamReadTableDerivedByPKey$$implRamLockTableDerivedByPKey$$implRamReadAllTableDerived$$implRamReadTableDerivedByIndexes$$implRamReadTableRecByPKey$$implRamLockTableRecByPKey$$implRamReadAllTableRec$<!--$switch InheritsPageData yes implRamPageAllTableRec default empty$-->$implRamReadTableRecByIndexes$<!--$switch InheritsPageData yes implRamPageTableRecByIndexes default empty$-->$switch HasChain yes implRamMoveUpTableRec default empty$$switch HasChain yes implRamMoveDownTableRec default empty$$implRamUpdateTable$$implRamDeleteTable$$iterate ServerMethods( each implServerMethod empty empty )$</GenRule>
+		>$switch HasSuperClassRelation yes invokCFCoreEnsureRec default implRamTableEnsureRec$$implRamCreateTable$$implRamReadTableDerivedByPKey$$implRamLockTableDerivedByPKey$$implRamReadAllTableDerived$$implRamReadTableDerivedByIndexes$$implRamReadTableRecByPKey$$implRamLockTableRecByPKey$$implRamReadAllTableRec$$implRamReadTableRecByIndexes$$switch HasChain yes implRamMoveUpTableRec default empty$$switch HasChain yes implRamMoveDownTableRec default empty$$implRamUpdateTable$$implRamDeleteTable$$iterate ServerMethods( each implServerMethod empty empty )$</GenRule>
 
 	<GenRule GenDef="Table" Name="invokCFCoreEnsureRec">
 	public $reference BaseClass DefSchemaName$Buff$reference BaseClass TableName$ ensureRec(I$reference BaseClass DefSchemaName$$reference BaseClass TableName$ rec) {
@@ -537,10 +534,7 @@ $reference Chain reference NextRel implRamMoveSetNextCur$
 			yes empty
 			default maybe_implRamPageTableRecByDuplicateIndex$</GenRule>
 
-	<GenRule GenDef="Index" Name="maybe_implRamPageTableRecByDuplicateIndex"
-		>$switch PageData
-			yes implRamPageTableRecByDuplicateIndex
-			default empty$</GenRule>
+	<GenRule GenDef="Index" Name="maybe_implRamPageTableRecByDuplicateIndex"></GenRule>
 
 	<GenRule GenDef="Table" Name="implRamReadTableDerivedByPKey">$switch IsPrimaryIndexKeyAtomic yes implRamReadTableDerivedByAtomicPKey default implRamReadTableDerivedByCompositePKey$</GenRule>
 	<GenRule GenDef="Table" Name="implRamReadTableDerivedByAtomicPKey">
@@ -945,9 +939,6 @@ $iterate Columns( each implRamReadTableSetKeyAttr )$
 
 	<GenRule GenDef="Index" Name="implRamPageTableRecByNonPrimaryIndex"
 		>$switch IsPrimaryIndex yes empty default maybe_implRamPageTableRecByIndex$</GenRule>
-
-	<GenRule GenDef="Index" Name="maybe_pagedata_implRamPageTableRecByIndex"
-		>$switch InheritsPageData yes maybe_implRamPageTableRecByIndex default empty$</GenRule>
 
 	<GenRule GenDef="Index" Name="maybe_implRamPageTableRecByIndex"
 		>$switch IsUnique yes empty default implRamPageTableRecByDuplicateIndex$</GenRule>

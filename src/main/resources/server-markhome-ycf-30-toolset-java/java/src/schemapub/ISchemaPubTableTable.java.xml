@@ -66,14 +66,9 @@ public interface I$SchemaName$Pub$TableName$Table$iterate TableRefs( first exten
 $declPubCreateTable$
 $declPubUpdateTable$
 $declPubDeleteTable$
-$declPubReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declPubReadTableDerivedByPKeyArgs$$declPubLockTableDerivedByPKey$$declPubReadAllTableDerived$$declPubReadTableDerivedByIndexes$$declPubReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declPubReadTableRecByPKeyArgs$$declPubLockTableRecByPKey$$declPubReadAllTableRec$$switch InheritsPubPageData yes declPubPageAllTableRec default empty$$declPubReadTableRecByIndexes$$switch InheritsPubPageData yes declPubPageTableRecByIndexes default empty$$switch HasChain yes declPubMoveUpTableRec default empty$$switch HasChain yes declPubMoveDownTableRec default empty$$iterate ServerMethods( each declPubServerMethod empty empty )$$tabletweak CafePubTableTableInterface$}
+$declPubReadTableDerivedByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declPubReadTableDerivedByPKeyArgs$$declPubLockTableDerivedByPKey$$declPubReadAllTableDerived$$declPubReadTableDerivedByIndexes$$declPubReadTableRecByPKey$$switch IsPrimaryIndexKeyAtomic yes empty default declPubReadTableRecByPKeyArgs$$declPubLockTableRecByPKey$$declPubReadAllTableRec$$declPubReadTableRecByIndexes$$switch HasChain yes declPubMoveUpTableRec default empty$$switch HasChain yes declPubMoveDownTableRec default empty$$iterate ServerMethods( each declPubServerMethod empty empty )$$tabletweak CafePubTableTableInterface$}
 </GenFile>
 
-	<GenRule GenDef="Table" Name="InheritsPubPageData">$switch IsPublic yes reallyInheritsPubPageData default no$</GenRule>
-	<GenRule GenDef="Table" Name="reallyInheritsPubPageData">$switch PageData yes yes default maybePubSuperPageData$</GenRule>
-	<GenRule GenDef="Table" Name="maybePubSuperPageData">$switch HasSuperClassRelation yes superPubPageData default no$</GenRule>
-	<GenRule GenDef="Table" Name="superPubPageData">$reference SuperClassRelation reference ToTable InheritsPubPageData$</GenRule>
-	
 	<GenRule GenDef="Table" Name="extendsPubJavaSchemaTableNameTable">$switch IsPublic yes reallyExtendsPubJavaSchemaTableName default empty$</GenRule>
 	<GenRule GenDef="Table" Name="reallyExtendsPubJavaSchemaTableNameTable">
 extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
@@ -354,8 +349,7 @@ extends I$reference SchemaDef SchemaName$Pub$TableName$Table</GenRule>
 		>$switch IsPrimaryIndex yes empty default maybe_declPubPageTableRecByIndex$</GenRule>
 
 	<GenRule GenDef="Index" Name="maybe_pagedata_declPubPageTableRecByIndex">$switch IsPublic yes reallymaybe_pagedata_declPubPageTableRecByIndex default empty$</GenRule>
-	<GenRule GenDef="Index" Name="reallymaybe_pagedata_declPubPageTableRecByIndex"
-		>$switch InheritsPubPageData yes maybe_declPubPageTableRecByIndex default empty$</GenRule>
+	<GenRule GenDef="Index" Name="reallymaybe_pagedata_declPubPageTableRecByIndex"></GenRule>
 
 	<GenRule GenDef="Index" Name="maybe_declPubPageTableRecByIndex">$switch IsPublic yes reallymaybe_declPubPageTableRecByIndex default empty$</GenRule>
 	<GenRule GenDef="Index" Name="reallymaybe_declPubPageTableRecByIndex"
