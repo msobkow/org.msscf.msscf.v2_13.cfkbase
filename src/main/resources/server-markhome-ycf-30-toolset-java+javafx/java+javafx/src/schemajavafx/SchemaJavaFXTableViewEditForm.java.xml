@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- *	server.markhome.ycf-cfkbase - Yorkton Code Fractal Generation Knowledge Base
+ *	server.markhome.ycf-ycfkbase - Yorkton Code Fractal Knowledge Base
  *
  *	Copyright 2016-2026 Mark Stephen Sobkow (mark.sobkow@gmail.com)
  *
@@ -21,10 +21,10 @@
  *	SPDX-License-Identifier: GPL-3.0
  * -->
 <RuleSet
-		xmlns="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+		xmlns="http://cf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:xs="http://www.w3.org/2001/XMLSchema"
-		xsi:schemaLocation="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+		xsi:schemaLocation="http://cf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://cf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java+javafx"
 	Name="src/schemajavafx/SchemaJavaFXTableViewEditForm.java"
 	Revision="3.0"
@@ -34,7 +34,7 @@
 		GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
-		BasePackageName="$reference ManufacturingSchema lower JavaPackageName$/$reference ManufacturingSchema lower SchemaName$-javafx/src/main/java"
+		BasePackageName="$TopProjectDomainName$/$TopProjectMfgVersion$/$SchemaProjectName$-javafx/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$javafx"
 		ExpansionClassName="$SchemaName$JavaFX$TableName$TableViewEditFormJava"
 		ExpansionKeyName="$SchemaName$JavaFX$TableName$TableViewEditFormJava"
@@ -49,10 +49,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import server.markhome.ycf.*;
-import server.markhome.ycf.dbutil.*;
-import server.markhome.ycf.Inz;
-import server.markhome.ycf.javafx.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$
+import server.markhome.cf.*;
+import server.markhome.cf.dbutil.*;
+import server.markhome.cf.Inz;
+import server.markhome.cf.javafx.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$
 
 /**
  *	$SchemaName$JavaFX$TableName$ViewEditForm JavaFX View/Edit Form implementation
@@ -64,7 +64,7 @@ implements I$DefSchemaName$JavaFX$TableName$PaneCommon,
 	ICFForm
 {
 	public static String S_FormName = "View/Edit $EffLabel$";
-	protected ICFFormManager ycfFormManager = null;
+	protected ICFFormManager cfFormManager = null;
 	protected I$SchemaName$JavaFXSchema javafxSchema = null;
 	protected ICFFormClosedCallback formClosedCallback = null;
 	protected boolean dataChanged = false;
@@ -97,9 +97,9 @@ $implConstructJavaFXTableViewEditForm$$implGetSetCFFormManager$$implSchemaJavaFX
 				}
 			}
 		}
-		if( ycfFormManager != null ) {
-			if( ycfFormManager.getCurrentForm() == this ) {
-				ycfFormManager.closeCurrentForm();
+		if( cfFormManager != null ) {
+			if( cfFormManager.getCurrentForm() == this ) {
+				cfFormManager.closeCurrentForm();
 			}
 		}
 		if( formClosedCallback != null ) {
@@ -207,7 +207,7 @@ $implConstructJavaFXTableViewEditForm$$implGetSetCFFormManager$$implSchemaJavaFX
 				1,
 				"formManager" );
 		}
-		ycfFormManager = formManager;
+		cfFormManager = formManager;
 		formClosedCallback = closeCallback;
 		if( argSchema == null ) {
 			throw new CFLibNullArgumentException( getClass(),
@@ -223,7 +223,7 @@ $implConstructJavaFXTableViewEditForm$$implGetSetCFFormManager$$implSchemaJavaFX
 			argFocus = (I$SchemaName$$TableName$Obj)argFocus.read( true );
 			javaFXFocus = argFocus;
 		}
-		javafxViewEditPane = argSchema.get$TableName$Factory().newViewEditPane( ycfFormManager, argFocus );
+		javafxViewEditPane = argSchema.get$TableName$Factory().newViewEditPane( cfFormManager, argFocus );
 
 		if( cameFromAdd ) {
 			dataChanged = true;
@@ -294,8 +294,8 @@ $implConstructJavaFXTableViewEditForm$$implGetSetCFFormManager$$implSchemaJavaFX
 							else {
 								throw new CFLibUsageException( getClass(),
 									S_ProcName,
-									Inz.x("ycflibjavafx.common.CannotBeginEditAlreadyEditing"),
-									Inz.s("ycflibjavafx.common.CannotBeginEditAlreadyEditing") );
+									Inz.x("cflibjavafx.common.CannotBeginEditAlreadyEditing"),
+									Inz.s("cflibjavafx.common.CannotBeginEditAlreadyEditing") );
 							}
 						}
 					}
@@ -378,7 +378,7 @@ $implConstructJavaFXTableViewEditForm$$implGetSetCFFormManager$$implSchemaJavaFX
 								}
 							}
 						}
-						ycfFormManager.closeCurrentForm();
+						cfFormManager.closeCurrentForm();
 						if( formClosedCallback != null ) {
 							if( dataChanged ) {
 								focus = getJavaFXFocusAs$TableName$();
@@ -431,7 +431,7 @@ $implConstructJavaFXTableViewEditForm$$implGetSetCFFormManager$$implSchemaJavaFX
 								0,
 								"focus" );
 						}
-						ycfFormManager.closeCurrentForm();
+						cfFormManager.closeCurrentForm();
 						if( formClosedCallback != null ) {
 							focus = getJavaFXFocusAs$TableName$();
 							formClosedCallback.formClosed( focus );

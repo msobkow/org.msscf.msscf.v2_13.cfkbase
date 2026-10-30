@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- *	server.markhome.ycf-cfkbase - Yorkton Code Fractal Generation Knowledge Base
+ *	server.markhome.ycf-ycfkbase - Yorkton Code Fractal Knowledge Base
  *
  *	Copyright 2016-2026 Mark Stephen Sobkow (mark.sobkow@gmail.com)
  *
@@ -21,10 +21,10 @@
  *	SPDX-License-Identifier: GPL-3.0
  * -->
 <RuleSet
-		xmlns="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+		xmlns="http://cf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:xs="http://www.w3.org/2001/XMLSchema"
-		xsi:schemaLocation="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+		xsi:schemaLocation="http://cf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://cf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java+javafx"
 	Name="src/schemajavafx/SchemaJavaFXTableViewEditPane.java"
 	Revision="3.0"
@@ -34,7 +34,7 @@
 		GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
-		BasePackageName="$reference ManufacturingSchema lower JavaPackageName$/$reference ManufacturingSchema lower SchemaName$-javafx/src/main/java"
+		BasePackageName="$TopProjectDomainName$/$TopProjectMfgVersion$/$SchemaProjectName$-javafx/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$javafx"
 		ExpansionClassName="$SchemaName$JavaFX$TableName$TableViewEditPaneJava"
 		ExpansionKeyName="$SchemaName$JavaFX$TableName$TableViewEditPaneJava"
@@ -52,10 +52,10 @@ import java.util.*;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import server.markhome.ycf.*;
-import server.markhome.ycf.dbutil.*;
-import server.markhome.ycf.Inz;
-import server.markhome.ycf.javafx.*;
+import server.markhome.cf.*;
+import server.markhome.cf.dbutil.*;
+import server.markhome.cf.Inz;
+import server.markhome.cf.javafx.*;
 import org.apache.commons.codec.binaryCFCore64;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$
 
 /**
@@ -66,7 +66,7 @@ public class $SchemaName$JavaFX$TableName$ViewEditPane
 extends CFSplitPane
 implements I$DefSchemaName$JavaFX$TableName$PaneCommon
 {
-	protected ICFFormManager ycfFormManager = null;
+	protected ICFFormManager cfFormManager = null;
 	protected I$SchemaName$JavaFXSchema javafxSchema = null;
 	protected ScrollPane attrScrollPane = null;
 	protected CFGridPane attrPane = null;$switch HasEltTabs yes declJavaFXTableViewEditPaneEltTabPane default empty$
@@ -166,7 +166,7 @@ $implConstructJavaFXTableViewEditPane$$implGetSetCFFormManager$$implGetJavaFXSch
 				1,
 				"formManager" );
 		}
-		ycfFormManager = formManager;
+		cfFormManager = formManager;
 		if( argSchema == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -177,7 +177,7 @@ $implConstructJavaFXTableViewEditPane$$implGetSetCFFormManager$$implGetJavaFXSch
 		// conditions of the runtime change.
 		javafxSchema = argSchema;
 		setJavaFXFocus( argFocus );
-		attrPane = argSchema.get$TableName$Factory().newAttrPane( ycfFormManager, argFocus );
+		attrPane = argSchema.get$TableName$Factory().newAttrPane( cfFormManager, argFocus );
 		attrScrollPane = new ScrollPane();
 		attrScrollPane.setFitToWidth( true );
 		attrScrollPane.setHbarPolicy( ScrollBarPolicy.NEVER );
@@ -189,7 +189,7 @@ $implConstructJavaFXTableViewEditPane$$implGetSetCFFormManager$$implGetJavaFXSch
 </GenRule>
 
 	<GenRule GenDef="Table" Name="implConstructJavaFXTableViewEditPaneInstantiateEltTabPane">
-		eltTabPane = argSchema.get$TableName$Factory().newEltTabPane( ycfFormManager, argFocus );</GenRule>
+		eltTabPane = argSchema.get$TableName$Factory().newEltTabPane( cfFormManager, argFocus );</GenRule>
 
 	<GenRule GenDef="Table" Name="implConstructJavaFXTableViewEditPaneAddEltTabPane">
 		getItems().add( eltTabPane );</GenRule>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- *	server.markhome.ycf-cfkbase - Yorkton Code Fractal Generation Knowledge Base
+ *	server.markhome.ycf-ycfkbase - Yorkton Code Fractal Knowledge Base
  *
  *	Copyright 2016-2026 Mark Stephen Sobkow (mark.sobkow@gmail.com)
  *
@@ -21,10 +21,10 @@
  *	SPDX-License-Identifier: GPL-3.0
  * -->
 <RuleSet
-		xmlns="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+		xmlns="http://cf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:xs="http://www.w3.org/2001/XMLSchema"
-		xsi:schemaLocation="http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd http://ycf.markhome.server/mssycf/2.0.13/xsd/ycfgenkb-2.13-ruleset.xsd"
+		xsi:schemaLocation="http://cf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd http://cf.markhome.server/msscf/2.0.13/xsd/cfgenkb-2.13-ruleset.xsd"
 	ToolSet="java+javafx"
 	Name="src/schemajavafx/SchemaJavaFXTableAskDeleteForm.java"
 	Revision="3.0"
@@ -34,7 +34,7 @@
 		GenerateOnce="false"
 		ModuleName="$reference ManufacturingSchema lower JavaPackage$"
 		SourceBundle="java"
-		BasePackageName="$reference ManufacturingSchema lower JavaPackageName$/$reference ManufacturingSchema lower SchemaName$-javafx/src/main/java"
+		BasePackageName="$TopProjectDomainName$/$TopProjectMfgVersion$/$SchemaProjectName$-javafx/src/main/java"
 		SubPackageName="$reference ManufacturingSchema lower JavaPackage$.$reference ManufacturingSchema lower SchemaName$javafx"
 		ExpansionClassName="$SchemaName$JavaFX$TableName$TableAskDeleteFormJava"
 		ExpansionKeyName="$SchemaName$JavaFX$TableName$TableAskDeleteFormJava"
@@ -52,10 +52,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import server.markhome.ycf.*;
-import server.markhome.ycf.dbutil.*;
-import server.markhome.ycf.Inz;
-import server.markhome.ycf.javafx.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$
+import server.markhome.cf.*;
+import server.markhome.cf.dbutil.*;
+import server.markhome.cf.Inz;
+import server.markhome.cf.javafx.*;$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaName empty empty )$$poptop SchemaDef importJavaPackageSchemaName$$poptop SchemaDef iterate SchemaRefs( each importJavaPackageSchemaNameObj empty empty )$$poptop SchemaDef importJavaPackageSchemaNameObj$
 
 /**
  *	$SchemaName$JavaFX$TableName$AskDeleteForm JavaFX Ask Delete Pane implementation
@@ -67,7 +67,7 @@ implements I$DefSchemaName$JavaFX$TableName$PaneCommon,
 	ICFForm
 {
 	public static String S_FormName = "Ask Delete $EffLabel$";
-	protected ICFFormManager ycfFormManager = null;
+	protected ICFFormManager cfFormManager = null;
 	protected I$SchemaName$JavaFXSchema javafxSchema = null;
 	protected ICFDeleteCallback deleteCallback = null;
 	protected CFTextArea textAreaMessage = null;
@@ -82,9 +82,9 @@ $implConstructJavaFXTableAskDeleteForm$$implGetSetCFFormManager$$implGetJavaFXSc
 	<GenRule GenDef="Table" Name="implSchemaJavaFXTableAskDeleteFormForceCancelAndClose">
 	public void forceCancelAndClose() {
 		I$DefSchemaName$$TableName$Obj focus = getJavaFXFocusAs$TableName$();
-		if( ycfFormManager != null ) {
-			if( ycfFormManager.getCurrentForm() == this ) {
-				ycfFormManager.closeCurrentForm();
+		if( cfFormManager != null ) {
+			if( cfFormManager.getCurrentForm() == this ) {
+				cfFormManager.closeCurrentForm();
 			}
 		}
 		if( deleteCallback != null ) {
@@ -133,8 +133,8 @@ $implConstructJavaFXTableAskDeleteForm$$implGetSetCFFormManager$$implGetJavaFXSc
 		{
 			throw new CFLibUsageException( getClass(),
 				S_ProcName,
-				Inz.x("ycflibjavafx.common.AskDeleteFormModes"),
-				Inz.s("ycflibjavafx.common.AskDeleteFormModes") );
+				Inz.x("cflibjavafx.common.AskDeleteFormModes"),
+				Inz.s("cflibjavafx.common.AskDeleteFormModes") );
 		}
 		super.setPaneMode( value );
 		if( attrPane != null ) {
@@ -153,7 +153,7 @@ $implConstructJavaFXTableAskDeleteForm$$implGetSetCFFormManager$$implGetJavaFXSc
 				1,
 				"formManager" );
 		}
-		ycfFormManager = formManager;
+		cfFormManager = formManager;
 		if( argSchema == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -170,7 +170,7 @@ $implConstructJavaFXTableAskDeleteForm$$implGetSetCFFormManager$$implGetJavaFXSc
 		textAreaMessage.setText( "Are you sure you want to delete this $EffLabel$?" );
 		hboxButtons = new CFHBox( 10 );$implConstructJavaFXTableAskDeleteFormButtonOk$$implConstructJavaFXTableAskDeleteFormButtonCancel$
 		hboxButtons.getChildren().addAll( buttonOk, buttonCancel );
-		attrPane = argSchema.get$TableName$Factory().newAttrPane( ycfFormManager, argFocus );
+		attrPane = argSchema.get$TableName$Factory().newAttrPane( cfFormManager, argFocus );
 		scrollPane = new ScrollPane();
 		scrollPane.setFitToWidth( true );
 		scrollPane.setHbarPolicy( ScrollBarPolicy.NEVER );
@@ -194,7 +194,7 @@ $implConstructJavaFXTableAskDeleteForm$$implGetSetCFFormManager$$implGetJavaFXSc
 					I$DefSchemaName$$TableName$EditObj editObj = (I$DefSchemaName$$TableName$EditObj)obj.beginEdit();
 					editObj.deleteInstance();
 					editObj = null;
-					ycfFormManager.closeCurrentForm();
+					cfFormManager.closeCurrentForm();
 					if( deleteCallback != null ) {
 						deleteCallback.formClosed( null );
 						deleteCallback.deleted( obj );
@@ -214,7 +214,7 @@ $implConstructJavaFXTableAskDeleteForm$$implGetSetCFFormManager$$implGetJavaFXSc
 			@Override public void handle( ActionEvent e ) {
 				final String S_ProcName = "actionCancelPerformed";
 				try {
-					ycfFormManager.closeCurrentForm();
+					cfFormManager.closeCurrentForm();
 					if( deleteCallback != null ) {
 						deleteCallback.formClosed( null );
 					}
